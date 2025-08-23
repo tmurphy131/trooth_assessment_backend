@@ -1,0 +1,15 @@
+{
+    "folders": [
+        {
+            "name": "Backend",
+            "path": "/Users/tmoney/Documents/ONLY BLV/trooth_backend"
+        },
+        {
+            "name": "Frontend", 
+            "path": "/Users/tmoney/Documents/ONLY BLV/flutter_trooth_assessment"
+        }
+    ],
+    "settings": {
+        "copilot.enable": true
+    }
+}
