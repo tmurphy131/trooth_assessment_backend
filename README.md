@@ -5,148 +5,146 @@ This is the backend for the **T[root]H Assessment** app — a spiritual mentorsh
 It provides a RESTful API built with **FastAPI**, backed by a **PostgreSQL database**, and includes support for:
 - Spiritual assessments (created by admins)
 - Mentor/apprentice relationships
-- Firebase authentication
-- AI-based assessment scoring (via OpenAI)
-- Email notifications (SendGrid)
+# T[root]H Assessment API
 
----
+Backend for the T[root]H Assessment platform — a FastAPI service that powers assessments, mentor/apprentice workflows, Firebase auth, OpenAI scoring, and email notifications.
 
-## 🔧 Tech Stack
+Quick pointers
+- Language: Python 3.11+
+- Framework: FastAPI
+- DB: PostgreSQL (SQLAlchemy + Alembic)
+- Auth: Firebase Admin SDK
+- Integrations: SendGrid, OpenAI
+- Container: Docker (Cloud Run deployment documented)
 
-- **Python 3.11+**
-- **FastAPI** — web framework
-- **SQLAlchemy** — ORM
-- **Alembic** — DB migrations
-- **PostgreSQL** — database
-- **Pydantic v2** — schema validation
-- **Firebase Admin SDK** — auth provider
-- **SendGrid** — email service
-- **OpenAI** — AI scoring
-- **Docker** — optional containerization
+Important files
+- `app/` — application code (routes, models, services)
+- `tests/` — unit/integration tests
+- `alembic/` — DB migrations
+- `Dockerfile`, `entrypoint.sh` — container startup
+- `DEPLOYMENT.md` — deployment commands and troubleshooting (detailed)
 
----
+Getting started (local)
+1. Clone and create venv
 
-## 🚀 Getting Started
-
-### 1. Clone the Repo
 ```bash
 git clone https://github.com/tmurphy131/trooth_backend.git
 cd trooth_backend
-```
-
-### 2. Create and activate a virtual environment
-```bash
 python -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Install dependencies
+2. Install
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Set environment variables
-Create a `.env` file (or export these directly):
+3. Run migrations (Postgres required)
 
-```env
-DATABASE_URL=postgresql://user:password@localhost:5432/trooth
-OPENAI_API_KEY=sk-...
-SENDGRID_API_KEY=SG-...
-FIREBASE_CREDENTIALS=./firebase_key.json
-```
-
----
-
-## 🗃️ Database Setup
-
-### Run Migrations
 ```bash
 alembic upgrade head
 ```
 
-### Create a new migration
-```bash
-alembic revision --autogenerate -m "describe change"
-```
-
----
-
-## 🧪 Running Tests
+4. Run tests
 
 ```bash
 pytest
 ```
 
-Tests are located in the `tests/` directory and use SQLite in-memory DB with monkeypatched Firebase logic.
+Environment variables
+- See `DEPLOYMENT.md` for production secrets. For local development you can use a `.env` with values like:
 
----
-
-## 🔐 Authentication
-
-Authentication is handled using Firebase ID tokens. You must include:
-
-```http
-Authorization: Bearer <firebase_token>
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/trooth
+OPENAI_API_KEY=sk-...
+SENDGRID_API_KEY=SG-...
+FIREBASE_CERT_PATH=./firebase_key.json
+ENV=development
 ```
 
-Routes are role-protected via:
-- `require_admin`
-- `require_mentor`
-- `require_apprentice`
+Deployment (short)
+- Full deployment steps and exact commands are in `DEPLOYMENT.md`.
+- Summary:
+	- Create required secrets in Secret Manager: `DATABASE_URL`, `FIREBASE_CERT_JSON`, `SENDGRID_API_KEY`, `OPENAI_API_KEY`.
+	- Grant the Cloud Run runtime service account `roles/secretmanager.secretAccessor` for those secrets.
+	- Build an amd64 image and push to `gcr.io/<PROJECT>/trooth-backend:latest` using `docker buildx`.
+	- Deploy to Cloud Run and map secrets via `--set-secrets`.
 
----
+Why the extra entrypoint logic?
+- The repo includes an `entrypoint.sh` that reads `FIREBASE_CERT_JSON` from Secret Manager (or accepts a mounted file) and writes it to `/secrets/firebase_key.json`. This supports running locally and in Cloud Run. For simplicity you may choose to mount the secret as a file in Cloud Run instead of fetching it in the entrypoint.
 
-## 🤖 AI Scoring
+CI workflow (overview)
+The recommended CI (GitHub Actions) pipeline runs on pushes and pull requests and performs:
 
-The assessment answers are scored using OpenAI's GPT-4 model via the `/score` service.
+- Lint + static checks (black, isort, ruff/mypy if configured)
+- Unit tests (pytest)
+- Build container image (docker/build-push-action) for linux/amd64
+- Optional smoke test: run the built image in the runner and curl `/health`
+- On `main` branch success: push image and deploy to Cloud Run (using a service account key stored in GitHub Secrets or the official Cloud Run deploy action)
 
-Make sure your `OPENAI_API_KEY` is valid and your usage quota is available.
+Why this flow?
+- It ensures code quality and catches syntax/runtime errors (like the earlier brittle python one-liner in `entrypoint.sh`) before deploying.
 
----
+Example GitHub Actions (minimal)
 
-## 📧 Email Notifications
+```yaml
+name: CI
 
-Emails (e.g. mentor notifications) are sent via SendGrid.
+on: [push, pull_request]
 
-You must set the `SENDGRID_API_KEY` and configure sender info inside `app/services/email.py`.
+jobs:
+	test_and_build:
+		runs-on: ubuntu-latest
+		steps:
+			- uses: actions/checkout@v4
+			- name: Setup Python
+				uses: actions/setup-python@v4
+				with:
+					python-version: '3.11'
+			- name: Install deps
+				run: |
+					python -m pip install --upgrade pip
+					pip install -r requirements.txt
+			- name: Run tests
+				run: pytest -q
+			- name: Build & push image (on main)
+				if: github.ref == 'refs/heads/main'
+				uses: docker/build-push-action@v4
+				with:
+					push: true
+					tags: gcr.io/${{ secrets.GCP_PROJECT }}/trooth-backend:latest
+					platforms: linux/amd64
 
----
-
-## 📂 Project Structure
+	deploy:
+		needs: test_and_build
+		if: github.ref == 'refs/heads/main'
+		runs-on: ubuntu-latest
+		steps:
+			- uses: actions/checkout@v4
+			- name: Configure gcloud
+				uses: google-github-actions/auth@v1
+				with:
+					credentials_json: ${{ secrets.GCP_SA_KEY }}
+			- name: Deploy to Cloud Run
+				uses: google-github-actions/deploy-cloudrun@v1
+				with:
+					service: trooth-backend
+					image: gcr.io/${{ secrets.GCP_PROJECT }}/trooth-backend:latest
+					region: us-east4
 
 ```
-app/
-├── main.py                  # FastAPI app entrypoint
-├── models/                  # SQLAlchemy ORM models
-├── routes/                  # Route modules per feature
-├── schemas/                 # Pydantic schemas
-├── services/                # Auth, scoring, email
-├── db/                      # DB setup and session
-tests/
-alembic/                     # DB migrations
-.env                        # Environment secrets
-```
 
----
+Notes on CI secrets and permissions
+- `GCP_SA_KEY` — a JSON service account key (stored in GitHub Secrets) with minimal roles: `roles/run.admin` (or google-github-actions workflow recommended roles) and `roles/secretmanager.secretAccessor` if you deploy with secret mounts. Prefer Workload Identity / Workload Identity Federation where possible instead of long-lived keys.
+- `GCP_PROJECT` — project id (set as a GitHub secret or organization variable).
 
-## 🛠 Deployment
+Helpful follow-ups
+- Consider mounting `FIREBASE_CERT_JSON` as a file in Cloud Run to remove runtime fetching logic.
+- Add a CI smoke test that runs the built image and queries `/health` before deployment.
 
-You can run locally or deploy using Docker (Dockerfile & docker-compose.yml provided):
+Contributing
+- PRs welcome. Run tests and linters locally before opening a PR.
 
-```bash
-docker-compose up --build
-```
-
-Make sure to externalize all secrets in a `.env` file and mount them properly.
-
----
-
-## 🙏 Contributing
-
-Pull requests are welcome. Please include tests and follow the existing code style (Black + isort).
-
----
-
-## 📄 License
-
-MIT License (c) 2024 tmurphy131
+License
+- MIT License (c) 2024 tmurphy131
