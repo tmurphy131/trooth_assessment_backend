@@ -11,6 +11,8 @@ sys.path.append(str(Path(__file__).parent))
 from sqlalchemy import text
 from app.db import engine, SessionLocal
 from app.models import *
+# Import helper to create master assessment if missing
+from setup_master_assessment import create_master_trooth_assessment
 import uuid
 
 def populate_trooth_assessment_questions():
@@ -502,11 +504,13 @@ def populate_trooth_assessment_questions():
         assessment = result.fetchone()
         
         if not assessment:
-            print("❌ Master Trooth Assessment not found!")
-            return
-        
-        master_assessment_id = assessment[0]
-        print(f"📋 Found Master Assessment: {master_assessment_id}")
+            # Master assessment missing — create it idempotently
+            print("🔄 Master Trooth Assessment not found, creating...")
+            master_assessment_id = create_master_trooth_assessment()
+        else:
+            master_assessment_id = assessment[0]
+
+        print(f"📋 Using Master Assessment: {master_assessment_id}")
         
         # Get category mappings
         categories = {}
@@ -515,6 +519,24 @@ def populate_trooth_assessment_questions():
             categories[row[1]] = row[0]
         
         print(f"📁 Found {len(categories)} categories: {list(categories.keys())}")
+
+        # Ensure all categories referenced by questions_data exist (idempotent)
+        required_categories = {q["category"] for q in questions_data}
+        missing_categories = required_categories - set(categories.keys())
+        if missing_categories:
+            print(f"🔍 Missing categories detected: {missing_categories}. Creating...")
+            for cat in missing_categories:
+                # Double-check if category exists (race-safe)
+                existing = conn.execute(text("SELECT id FROM categories WHERE name = :name"), {"name": cat}).fetchone()
+                if existing:
+                    categories[cat] = existing[0]
+                    continue
+                cat_id = str(uuid.uuid4())
+                conn.execute(text("INSERT INTO categories (id, name) VALUES (:id, :name)"), {"id": cat_id, "name": cat})
+                categories[cat] = cat_id
+                print(f"➕ Created missing category: {cat}")
+        else:
+            print("✅ All required categories present.")
         
         # Check if questions already exist
         result = conn.execute(text("""
