@@ -6,3 +6,7 @@ from .assessment_template import AssessmentTemplate
 from .assessment_answer import AssessmentAnswer
 from .category import Category
 from .question import Question
+from .assessment import Assessment
+from .assessment_score_history import AssessmentScoreHistory
+from .mentor_note import MentorNote
+from .notification import Notification

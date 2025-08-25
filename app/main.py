@@ -19,6 +19,7 @@ from app.routes import (
     user, assessment, mentor, invite, question, 
     templates, assessment_draft, admin_template, health, categories
 )
+from app.routes import mentor_notes, assessment_score_history
 from app.exceptions import (
     UnauthorizedException, ForbiddenException, 
     NotFoundException, ValidationException
@@ -74,6 +75,7 @@ if os.getenv("ENV") != "test":
 app.include_router(health.router, prefix="/health", tags=["Health"])
 app.include_router(user.router, prefix="/users", tags=["Users"])
 app.include_router(assessment.router, prefix="/assessments", tags=["Assessments"])
+app.include_router(assessment_score_history.router)
 app.include_router(mentor.router, prefix="/mentor", tags=["Mentor"])
 app.include_router(invite.router, prefix="/invitations", tags=["Invitations"])
 app.include_router(question.router, prefix="/question", tags=["Questions"])
@@ -81,6 +83,7 @@ app.include_router(templates.router, tags=["Templates"])
 app.include_router(assessment_draft.router, prefix="/assessment-drafts", tags=["Assessment Drafts"])
 app.include_router(admin_template.router, prefix="/admin", tags=["Admin"])
 app.include_router(categories.router, tags=["Categories"])
+app.include_router(mentor_notes.router)
 
 # Exception handlers
 @app.exception_handler(UnauthorizedException)

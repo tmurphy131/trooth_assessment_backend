@@ -20,3 +20,11 @@ class User(Base):
     
     # Relationship to templates created by this user
     created_templates = relationship("AssessmentTemplate", back_populates="creator")
+    # Notifications for this user
+    notifications = relationship("Notification", back_populates="user", cascade="all, delete-orphan")
+
+    # Mentor notes authored by this user (when user is a mentor)
+    mentor_notes = relationship("MentorNote", back_populates="mentor", cascade="all, delete-orphan")
+
+    # Assessments owned by this user (when user is an apprentice)
+    assessments = relationship("Assessment", back_populates="apprentice", cascade="all, delete-orphan")

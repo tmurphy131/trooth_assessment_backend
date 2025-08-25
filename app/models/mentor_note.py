@@ -7,7 +7,7 @@ import uuid
 class MentorNote(Base):
     __tablename__ = "mentor_notes"
 
-    id = Column(String, primary_key=True, default=str(uuid.uuid4()))
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     assessment_id = Column(String, ForeignKey("assessments.id"), nullable=False)
     mentor_id = Column(String, ForeignKey("users.id"), nullable=False)
     content = Column(Text, nullable=False)
@@ -16,4 +16,5 @@ class MentorNote(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
     assessment = relationship("Assessment", back_populates="mentor_notes")
-    mentor = relationship("User")
+    # link back to the User that authored the note
+    mentor = relationship("User", back_populates="mentor_notes")

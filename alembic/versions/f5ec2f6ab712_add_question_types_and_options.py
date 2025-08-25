@@ -26,9 +26,10 @@ def upgrade() -> None:
     questiontype_enum = sa.Enum('open_ended', 'multiple_choice', name='questiontype')
     questiontype_enum.create(op.get_bind())
     
-    # Create the UserRole enum
+    # Create the UserRole enum (use checkfirst to avoid duplicate-type errors when
+    # multiple migration branches are applied)
     userrole_enum = sa.Enum('apprentice', 'mentor', 'admin', name='userrole')
-    userrole_enum.create(op.get_bind())
+    userrole_enum.create(op.get_bind(), checkfirst=True)
     
     op.create_table('question_options',
     sa.Column('id', sa.String(), nullable=False),
