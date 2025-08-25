@@ -11,8 +11,7 @@ class Assessment(Base):
     apprentice_id = Column(String, ForeignKey("users.id"), nullable=False)
     # optional link to the template used to generate this assessment
     template_id = Column(String, ForeignKey("assessment_templates.id"), nullable=True)
-    # answers can be empty for tests; default to empty JSON object
-    answers = Column(JSON, nullable=True, default={})
+    answers = Column(JSON, nullable=False)
     scores = Column(JSON, nullable=True)
     recommendation = Column(String, nullable=True)
     category = Column(String, nullable=True)
