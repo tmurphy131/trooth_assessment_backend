@@ -11,6 +11,20 @@ UVICORN_CMD="uvicorn app.main:app --host 0.0.0.0 --port $PORT"
 
 mkdir -p "$SECRETS_DIR"
 
+# If the secret is provided by Cloud Run as an environment variable (via --set-secrets),
+# write it directly to the expected file. This avoids calling the Secret Manager API
+# at runtime when the env var is already available.
+if [ -n "${FIREBASE_CERT_JSON:-}" ]; then
+  echo "Writing FIREBASE_CERT_JSON env var to $FIREBASE_FILE"
+  printf '%s' "$FIREBASE_CERT_JSON" > "$FIREBASE_FILE"
+  chmod 600 "$FIREBASE_FILE" || true
+  if [ -d "/app" ]; then
+    cp "$FIREBASE_FILE" "/app/firebase_key.json" || true
+    chmod 600 "/app/firebase_key.json" || true
+  fi
+  export FIREBASE_CERT_PATH="$FIREBASE_FILE"
+fi
+
 # Try to get project id and access token from metadata server (works on Cloud Run / GCE / GKE)
 PROJECT_ID=""
 ACCESS_TOKEN=""
@@ -43,6 +57,12 @@ PY
 
   rm -f "$TMP_JSON"
   chmod 600 "$FIREBASE_FILE"
+  # Also place a copy at the app working dir so code that expects "firebase_key.json"
+  # (relative path) will find it. Cloud Run container WORKDIR is /app in our image.
+  if [ -d "/app" ]; then
+    cp "$FIREBASE_FILE" "/app/firebase_key.json" || true
+    chmod 600 "/app/firebase_key.json" || true
+  fi
   export FIREBASE_CERT_PATH="$FIREBASE_FILE"
 fi
 

@@ -38,7 +38,9 @@ def create_user(user: user_schema.UserCreate, db: Session = Depends(get_db), dec
     db.refresh(db_user)
 
     try:
-        auth.set_custom_user_claims(user.id, {"role": user.role})
+        # user is the input schema (UserCreate) and doesn't have an id yet.
+        # Use the persisted db_user's id and role when assigning Firebase claims.
+        auth.set_custom_user_claims(db_user.id, {"role": db_user.role})
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error assigning Firebase role: {str(e)}")
 

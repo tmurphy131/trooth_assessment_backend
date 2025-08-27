@@ -7,8 +7,6 @@ class RoleEnum(str, Enum):
     mentor = "mentor"
     admin = "admin"
 
-from pydantic import BaseModel, validator
-from typing import Optional
 from datetime import datetime
 from app.models.user import UserRole
 from app.core.security import SecurityMixin

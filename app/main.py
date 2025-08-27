@@ -32,12 +32,18 @@ load_dotenv()
 logger = setup_logging()
 
 # Create FastAPI app
+import os as _os
+
+# Allow exposing the interactive docs in development or when explicitly enabled
+# via the SHOW_DOCS environment variable (useful for temporary access on Cloud Run).
+_docs_enabled = settings.is_development or _os.getenv("SHOW_DOCS", "").lower() in ("1", "true", "yes")
+
 app = FastAPI(
     title="T[root]H Assessment API",
     description="Comprehensive spiritual assessment and mentoring platform",
     version="1.0.0",
-    docs_url="/docs" if settings.is_development else None,
-    redoc_url="/redoc" if settings.is_development else None,
+    docs_url="/docs" if _docs_enabled else None,
+    redoc_url="/redoc" if _docs_enabled else None,
 )
 
 # Add middleware in correct order (last added = first executed)

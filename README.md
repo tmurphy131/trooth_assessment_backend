@@ -143,6 +143,29 @@ Helpful follow-ups
 - Consider mounting `FIREBASE_CERT_JSON` as a file in Cloud Run to remove runtime fetching logic.
 - Add a CI smoke test that runs the built image and queries `/health` before deployment.
 
+Connecting to Cloud SQL locally (Cloud SQL Auth Proxy)
+
+If your Cloud SQL instance is not mounted as a unix socket (or you prefer TCP), use the Cloud SQL Auth Proxy to forward the instance to localhost.
+
+Example:
+
+```bash
+# Start the proxy (replace path and instance)
+./scripts/start_cloud_sql_proxy.sh /path/to/key.json trooth-prod:us-east4:app-pg 5432
+
+# Export DATABASE_URL for local backend
+export DATABASE_URL=postgresql://trooth:trooth@127.0.0.1:5432/trooth_db
+
+# Start the backend
+uvicorn app.main:app --reload
+```
+
+The helper script will log to `/tmp/csql-proxy.log` and write the pid to `/tmp/csql-proxy.pid`.
+
+Notes:
+- Use TCP forwarding (127.0.0.1:5432) to avoid socket path issues.
+- This is the fastest way to get a working local dev environment.
+
 Contributing
 - PRs welcome. Run tests and linters locally before opening a PR.
 
