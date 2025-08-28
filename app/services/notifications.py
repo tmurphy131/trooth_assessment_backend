@@ -1,6 +1,6 @@
 from app.models.notification import Notification
 from app.models.user import User
-from app.core.email import send_email  # or your actual mail util
+from app.services.email import send_email  # or your actual mail util
 from sqlalchemy.orm import Session
 
 def notify_user(db: Session, user: User, message: str, link: str = None, email_subject: str = None):
