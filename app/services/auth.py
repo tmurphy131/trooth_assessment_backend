@@ -53,6 +53,18 @@ def get_current_user(
         decoded_token = firebase_auth.verify_id_token(token)
         user_id = decoded_token["uid"]
         email = decoded_token["email"]
+        # Try to get full name from token
+        full_name = None
+        if "name" in decoded_token:
+            full_name = decoded_token["name"]
+        else:
+            # Try to build from given_name and family_name if available
+            given = decoded_token.get("given_name", "")
+            family = decoded_token.get("family_name", "")
+            if given or family:
+                full_name = (given + " " + family).strip()
+        # Try to get role from token (custom claim)
+        role_from_token = decoded_token.get("role")
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -73,13 +85,19 @@ def get_current_user(
     
     # If still not found, create a new user
     if not user:
-        # Default to apprentice role for new users
+        # Use role from token if present, else default to apprentice
         from app.models.user import User as UserModel, UserRole
+        if role_from_token == "mentor":
+            user_role = UserRole.mentor
+        elif role_from_token == "admin":
+            user_role = UserRole.admin
+        else:
+            user_role = UserRole.apprentice
         user = UserModel(
             id=user_id,
             email=email,
-            name=email.split('@')[0].title(),  # Use email prefix as name
-            role=UserRole.apprentice  # Default role
+            name=full_name if full_name else email.split('@')[0].title(),
+            role=user_role
         )
         db.add(user)
         db.commit()
