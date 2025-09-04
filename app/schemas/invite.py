@@ -17,6 +17,4 @@ class InviteOut(BaseModel):
     token: str
     expires_at: datetime
     accepted: bool
-    
-    class Config:
-        from_attributes = True
+    model_config = {'from_attributes': True}

@@ -5,7 +5,8 @@ from firebase_admin import auth as firebase_auth
 from app.db import get_db
 from app.models.user import User, UserRole
 from sqlalchemy.orm import Session
-import datetime
+from datetime import UTC, datetime
+from app.utils.datetime import utc_now
 from app.schemas.user import UserSchema
 
 security = HTTPBearer()
@@ -41,13 +42,21 @@ def get_current_user(
 ) -> User:
     
     token = credentials.credentials
-    # Test tokens for development
-    if token == "mock-mentor-token":
-        return User(id="mentor-1", name="Mentor One", email="mentor@example.com", role=UserRole.mentor, created_at=datetime.datetime.utcnow())
-    elif token == "mock-apprentice-token":
-        return User(id="apprentice-1", name="Apprentice One", email="apprentice@example.com", role=UserRole.apprentice, created_at=datetime.datetime.utcnow())
-    elif token == "mock-admin-token":
-        return User(id="admin-1", name="Admin One", email="admin@example.com", role=UserRole.admin, created_at=datetime.datetime.utcnow())
+    # Test tokens for development (ensure persistence so FK constraints pass)
+    mock_map = {
+        "mock-mentor-token": ("mentor-1", "Mentor One", "mentor@example.com", UserRole.mentor),
+        "mock-apprentice-token": ("apprentice-1", "Apprentice One", "apprentice@example.com", UserRole.apprentice),
+        "mock-admin-token": ("admin-1", "Admin One", "admin@example.com", UserRole.admin),
+    }
+    if token in mock_map:
+        uid, name, email, role = mock_map[token]
+        user = db.query(User).filter(User.id == uid).first()
+        if not user:
+            user = User(id=uid, name=name, email=email, role=role, created_at=utc_now())
+            db.add(user)
+            db.commit()
+            db.refresh(user)
+        return user
     
     try:
         decoded_token = firebase_auth.verify_id_token(token)
@@ -85,15 +94,13 @@ def get_current_user(
     
     # If still not found, create a new user
     if not user:
-        # Use role from token if present, else default to apprentice
-        from app.models.user import User as UserModel, UserRole
         if role_from_token == "mentor":
             user_role = UserRole.mentor
         elif role_from_token == "admin":
             user_role = UserRole.admin
         else:
             user_role = UserRole.apprentice
-        user = UserModel(
+        user = User(
             id=user_id,
             email=email,
             name=full_name if full_name else email.split('@')[0].title(),

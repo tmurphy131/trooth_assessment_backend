@@ -1,5 +1,6 @@
 import os
 import logging
+import json
 from typing import Dict, Optional, Tuple
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail, To, From, Subject, HtmlContent, PlainTextContent
@@ -37,12 +38,21 @@ def get_email_template_env():
     return env
 
 def get_sendgrid_client():
-    """Get SendGrid client if configured."""
+    """Get SendGrid client if configured and log diagnostics (without leaking key)."""
     api_key = os.getenv("SENDGRID_API_KEY")
-    if not api_key or api_key.startswith("your_"):
-        logger.warning("SendGrid API key not configured")
+    if not api_key:
+        logger.warning("[email] SENDGRID_API_KEY missing from environment")
         return None
-    return SendGridAPIClient(api_key)
+    redacted_len = len(api_key)
+    logger.debug(f"[email] SendGrid key loaded (length={redacted_len})")
+    if api_key.startswith("your_"):
+        logger.warning("[email] SENDGRID_API_KEY appears to be a placeholder (starts with 'your_')")
+        return None
+    try:
+        return SendGridAPIClient(api_key)
+    except Exception as e:
+        logger.error(f"[email] Failed to instantiate SendGrid client: {e}")
+        return None
 
 def render_assessment_completion_email(mentor_name: str, apprentice_name: str, 
                                      scores: dict, recommendations: dict) -> Tuple[str, str]:
@@ -154,18 +164,34 @@ T[root]H Assessment Team
     """
     return plain_text, plain_text
 
-def send_email(to_email: str, subject: str, html_content: str, 
+def send_email(to_email: str, subject: str, html_content: str,
                plain_content: str, from_email: str = None) -> bool:
-    """Send email using SendGrid."""
+    """Send email using SendGrid with deep diagnostic logging.
+
+    Logging levels:
+    - INFO: success
+    - WARNING: configuration issues / skipped send
+    - ERROR: failed send attempt with response diagnostics
+    """
+    diagnostics = {
+        "to": to_email,
+        "subject": subject,
+        "from_default": settings.email_from_address,
+        "env_has_key": bool(os.getenv('SENDGRID_API_KEY')),
+        "app_url": settings.app_url,
+    }
+
     client = get_sendgrid_client()
-    
     if not client:
-        logger.warning(f"Email not sent - SendGrid not configured. Would send to {to_email}: {subject}")
+        logger.warning(f"[email] Skipping send (client unavailable) diagnostics={diagnostics}")
         return False
-    
+
     try:
         from_email = from_email or settings.email_from_address
-        
+        if not from_email:
+            logger.error(f"[email] No from_email resolved; aborting send diagnostics={diagnostics}")
+            return False
+
         message = Mail(
             from_email=From(from_email, "T[root]H Assessment"),
             to_emails=To(to_email),
@@ -173,18 +199,29 @@ def send_email(to_email: str, subject: str, html_content: str,
             html_content=HtmlContent(html_content),
             plain_text_content=PlainTextContent(plain_content)
         )
-        
+
+        logger.debug(f"[email] Sending message payload_summary={{'to': to_email, 'subject': subject[:120], 'html_len': len(html_content), 'plain_len': len(plain_content)}}")
         response = client.send(message)
-        
-        if response.status_code in [200, 202]:
-            logger.info(f"Email sent successfully to {to_email}")
+
+        body_snippet = None
+        try:
+            if response.body:
+                raw = response.body.decode() if hasattr(response.body, 'decode') else str(response.body)
+                body_snippet = raw[:500]
+        except Exception as decode_err:
+            body_snippet = f"<decode_error {decode_err}>"
+
+        logger.debug(f"[email] Response status={getattr(response,'status_code',None)} headers={getattr(response,'headers',{})} body_snippet={body_snippet}")
+
+        if response.status_code in (200, 202):
+            logger.info(f"[email] Sent to={to_email} status={response.status_code}")
             return True
-        else:
-            logger.error(f"Failed to send email to {to_email}: {response.status_code}")
-            return False
-            
+
+        logger.error(f"[email] Failed send to={to_email} status={response.status_code} body_snippet={body_snippet}")
+        return False
+
     except Exception as e:
-        logger.error(f"Failed to send email to {to_email}: {e}")
+        logger.error(f"[email] Exception during send to={to_email}: {e}", exc_info=True)
         return False
 
 def send_assessment_email(to_email: str, mentor_name: str, apprentice_name: str, 

@@ -6,9 +6,7 @@ class QuestionOptionItem(BaseModel):
     text: str
     is_correct: bool
     order: int
-
-    class Config:
-        from_attributes = True
+    model_config = {'from_attributes': True}
 
 class QuestionItem(BaseModel):
     id: str
@@ -16,9 +14,7 @@ class QuestionItem(BaseModel):
     question_type: str  # Changed from 'type' to match the model
     options: List[QuestionOptionItem] = []
     category_id: Optional[str] = None
-
-    class Config:
-        from_attributes = True
+    model_config = {'from_attributes': True}
 
     @classmethod
     def from_question(cls, question):
@@ -60,13 +56,9 @@ class AssessmentDraftOut(BaseModel):
     last_question_id: Optional[str]
     is_submitted: bool
     questions: List[QuestionItem]
-
-    class Config:
-        from_attributes = True
+    model_config = {'from_attributes': True}
 
 class AssessmentAnswerOut(BaseModel):
     question_id: str
     answer_text: Optional[str]
-
-    class Config:
-        from_attributes = True
+    model_config = {'from_attributes': True}

@@ -10,6 +10,4 @@ class ApprenticeProfileOut(BaseModel):
     total_assessments: int
     average_score: Optional[float]
     last_submission: Optional[datetime]
-
-    class Config:
-        from_attributes = True
+    model_config = {'from_attributes': True}

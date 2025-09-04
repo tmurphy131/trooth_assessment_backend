@@ -1,4 +1,4 @@
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 from typing import Optional
 from enum import Enum
 
@@ -17,9 +17,9 @@ class UserBase(BaseModel, SecurityMixin):
 
 class UserCreate(UserBase):
     role: UserRole
-    
-    @validator('email')
-    def validate_email_format(cls, v):
+
+    @field_validator('email')
+    def validate_email_format(cls, v: str):
         import re
         pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         if not re.match(pattern, v):
@@ -31,15 +31,17 @@ class UserOut(UserBase):
     role: UserRole
     created_at: Optional[datetime]
 
-    class Config:
-        from_attributes = True
+    # Pydantic v2 style configuration
+    model_config = {
+        'from_attributes': True
+    }
 
 class UserUpdate(BaseModel, SecurityMixin):
     name: Optional[str] = None
     email: Optional[str] = None
-    
-    @validator('email')
-    def validate_email_format(cls, v):
+
+    @field_validator('email')
+    def validate_email_format(cls, v: str | None):
         if v is not None:
             import re
             pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
@@ -54,23 +56,6 @@ class UserSchema(BaseModel):
     email: str
     role: str
 
-    class Config:
-        from_attributes = True
-
-class UserOut(BaseModel):
-    id: str
-    name: str
-    email: str
-    role: str
-
-    class Config:
-        from_attributes = True
-
-class UserSchema(BaseModel):
-    id: str
-    name: str
-    email: str
-    role: str
-
-    class Config:
-        from_attributes = True
+    model_config = {
+        'from_attributes': True
+    }

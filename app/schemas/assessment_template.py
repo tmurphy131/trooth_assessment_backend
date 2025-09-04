@@ -20,9 +20,8 @@ class AssessmentTemplateOut(BaseModel):
     is_master_assessment: bool = False
     created_at: Optional[datetime] = None
     created_by: Optional[str] = None
-
-    class Config:
-        from_attributes = True
+    category_ids: List[str] = []  # populated at response time (from linked questions' categories if any)
+    model_config = {'from_attributes': True}
 
 class AddQuestionToTemplate(BaseModel):
     question_id: str
@@ -45,6 +44,4 @@ class TemplateWithFullQuestions(BaseModel):
     created_at: Optional[datetime] = None
     created_by: Optional[str] = None
     questions: List[QuestionOut]
-
-    class Config:
-        from_attributes = True
+    model_config = {'from_attributes': True}

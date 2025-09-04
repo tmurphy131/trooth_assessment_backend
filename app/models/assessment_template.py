@@ -18,6 +18,6 @@ class AssessmentTemplate(Base):
 
     # Relationship to User who created the template
     creator = relationship("User", back_populates="created_templates")
-    
+
     # Relationship to template questions
     questions = relationship("AssessmentTemplateQuestion", back_populates="template")

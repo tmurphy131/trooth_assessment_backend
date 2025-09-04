@@ -16,9 +16,7 @@ class QuestionOptionOut(BaseModel):
     option_text: str
     is_correct: bool
     order: int
-
-    class Config:
-        from_attributes = True
+    model_config = {'from_attributes': True}
 
 class CategoryCreate(BaseModel):
     name: str
@@ -26,9 +24,7 @@ class CategoryCreate(BaseModel):
 class CategoryOut(BaseModel):
     id: str
     name: str
-
-    class Config:
-        from_attributes = True
+    model_config = {'from_attributes': True}
 
 class QuestionCreate(BaseModel):
     text: str
@@ -42,9 +38,7 @@ class QuestionOut(BaseModel):
     question_type: QuestionType
     category_id: Optional[str] = None
     options: List[QuestionOptionOut] = []
-
-    class Config:
-        from_attributes = True
+    model_config = {'from_attributes': True}
 
 class QuestionUpdate(BaseModel):
     text: Optional[str] = None

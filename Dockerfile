@@ -48,6 +48,9 @@ WORKDIR /app
 # Copy application code
 COPY . .
 
+# Ensure migration helper script is executable
+RUN chmod +x run_migrations.sh || true
+
 # Copy entrypoint and make executable
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

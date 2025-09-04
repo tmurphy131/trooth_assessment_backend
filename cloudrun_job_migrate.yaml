@@ -1,0 +1,46 @@
+# Cloud Run Job definition for running Alembic migrations
+# Store this file in version control for reference; apply via:
+#   gcloud run jobs replace cloudrun_job_migrate.yaml --region us-east4
+# or create initially with:
+#   gcloud run jobs create trooth-migrate --image gcr.io/trooth-prod/trooth-backend:latest ... (see README section)
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  name: trooth-migrate
+  annotations:
+    run.googleapis.com/cloudsql-instances: trooth-prod:us-east4:app-pg
+spec:
+  template:
+    template:
+      spec:
+        serviceAccountName: trooth-run-sa@trooth-prod.iam.gserviceaccount.com
+        containers:
+        - image: gcr.io/trooth-prod/trooth-backend:latest
+          command: ["/bin/bash","run_migrations.sh"]
+          env:
+          - name: ENV
+            value: production
+          - name: SHOW_DOCS
+            value: "false"
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: DB_URL
+                key: latest
+          - name: FIREBASE_CERT_JSON
+            valueFrom:
+              secretKeyRef:
+                name: FIREBASE_CERT_JSON
+                key: latest
+          - name: SENDGRID_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: SENDGRID_API_KEY
+                key: latest
+          - name: OPENAI_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: OPENAI_API_KEY
+                key: latest
+    spec:
+      taskCount: 1

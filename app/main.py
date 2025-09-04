@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request
+from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import logging
@@ -19,7 +20,7 @@ from app.routes import (
     user, assessment, mentor, invite, question, 
     templates, assessment_draft, admin_template, health, categories
 )
-from app.routes import mentor_notes, assessment_score_history
+from app.routes import mentor_notes, assessment_score_history, agreements
 from app.exceptions import (
     UnauthorizedException, ForbiddenException, 
     NotFoundException, ValidationException
@@ -38,12 +39,66 @@ import os as _os
 # via the SHOW_DOCS environment variable (useful for temporary access on Cloud Run).
 _docs_enabled = settings.is_development or _os.getenv("SHOW_DOCS", "").lower() in ("1", "true", "yes")
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup logic
+    logger.info("=" * 50)
+    logger.info(f"🚀 T[root]H Assessment API starting up")
+    logger.info(f"📁 Environment: {settings.environment}")
+    logger.info(f"🌐 CORS origins: {settings.cors_origins}")
+    logger.info(f"⚡ Rate limiting: {'enabled' if settings.rate_limit_enabled else 'disabled'}")
+    logger.info(f"📊 SQL Debug: {'enabled' if settings.sql_debug else 'disabled'}")
+
+    from app.services.ai_scoring import get_openai_client
+    from app.services.email import get_sendgrid_client
+    openai_status = "✅ configured" if get_openai_client() else "❌ not configured (using mocks)"
+    email_status = "✅ configured" if get_sendgrid_client() else "❌ not configured (logging only)"
+    logger.info(f"🤖 OpenAI API: {openai_status}")
+    logger.info(f"📧 SendGrid Email: {email_status}")
+    logger.info("=" * 50)
+
+    # Seed agreement template (same logic moved from startup_event)
+    try:
+        from sqlalchemy.orm import Session
+        from app.db import SessionLocal
+        from app.models.agreement import AgreementTemplate
+        import uuid
+        session: Session = SessionLocal()
+        count = session.query(AgreementTemplate).count()
+        if count == 0:
+            logger.info("📝 Seeding initial agreement template (version 1)")
+            template_path = os.path.join(os.path.dirname(__file__), '..', 'MENTOR_AGREEMENT.md')
+            markdown_source = "Rooted Commitment Agreement"
+            try:
+                with open(template_path, 'r', encoding='utf-8') as f:
+                    markdown_source = f.read()[:20000]
+            except Exception as e:
+                logger.warning(f"Could not read MENTOR_AGREEMENT.md: {e}")
+            tpl = AgreementTemplate(
+                id=str(uuid.uuid4()),
+                version=1,
+                markdown_source=markdown_source,
+                is_active=True,
+                notes="Initial seeded version"
+            )
+            session.add(tpl)
+            session.commit()
+            logger.info("✅ Agreement template v1 seeded")
+        session.close()
+    except Exception as seed_err:
+        logger.error(f"Failed seeding agreement template: {seed_err}")
+
+    yield
+    # Shutdown logic
+    logger.info("🛑 T[root]H Assessment API shutting down gracefully")
+
 app = FastAPI(
     title="T[root]H Assessment API",
     description="Comprehensive spiritual assessment and mentoring platform",
     version="1.0.0",
     docs_url="/docs" if _docs_enabled else None,
     redoc_url="/redoc" if _docs_enabled else None,
+    lifespan=lifespan,
 )
 
 # Add middleware in correct order (last added = first executed)
@@ -90,6 +145,7 @@ app.include_router(assessment_draft.router, prefix="/assessment-drafts", tags=["
 app.include_router(admin_template.router, prefix="/admin", tags=["Admin"])
 app.include_router(categories.router, tags=["Categories"])
 app.include_router(mentor_notes.router)
+app.include_router(agreements.router, tags=["Agreements"]) 
 
 # Exception handlers
 @app.exception_handler(UnauthorizedException)
@@ -171,33 +227,6 @@ async def legacy_health_check():
     """Legacy health check endpoint."""
     return {"status": "healthy", "service": "trooth-assessment-api"}
 
-# Startup event
-@app.on_event("startup")
-async def startup_event():
-    """Application startup tasks."""
-    logger.info("=" * 50)
-    logger.info(f"🚀 T[root]H Assessment API starting up")
-    logger.info(f"📁 Environment: {settings.environment}")
-    logger.info(f"🌐 CORS origins: {settings.cors_origins}")
-    logger.info(f"⚡ Rate limiting: {'enabled' if settings.rate_limit_enabled else 'disabled'}")
-    logger.info(f"📊 SQL Debug: {'enabled' if settings.sql_debug else 'disabled'}")
-    
-    # Log service status
-    from app.services.ai_scoring import get_openai_client
-    from app.services.email import get_sendgrid_client
-    
-    openai_status = "✅ configured" if get_openai_client() else "❌ not configured (using mocks)"
-    email_status = "✅ configured" if get_sendgrid_client() else "❌ not configured (logging only)"
-    
-    logger.info(f"🤖 OpenAI API: {openai_status}")
-    logger.info(f"📧 SendGrid Email: {email_status}")
-    logger.info("=" * 50)
-
-# Shutdown event
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Application shutdown tasks."""
-    logger.info("🛑 T[root]H Assessment API shutting down gracefully")
 
 if __name__ == "__main__":
     import uvicorn

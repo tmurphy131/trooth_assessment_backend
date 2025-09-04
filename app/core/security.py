@@ -1,7 +1,7 @@
 """
 Enhanced security utilities and base schemas.
 """
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 from typing import Any, Dict, List, Optional
 import re
 import html
@@ -12,14 +12,14 @@ logger = logging.getLogger("app.security")
 class SecurityMixin:
     """Mixin class for security validation."""
     
-    @validator('*', pre=True)
+    @field_validator('*', mode='before')
     def strip_strings(cls, v):
         """Strip whitespace from all string fields."""
         if isinstance(v, str):
             return v.strip()
         return v
     
-    @validator('*')
+    @field_validator('*')
     def validate_no_scripts(cls, v):
         """Basic XSS protection for string fields."""
         if isinstance(v, str):
@@ -51,19 +51,19 @@ class PaginationParams(BaseModel):
     sort_by: Optional[str] = None
     sort_order: str = "desc"
     
-    @validator('page')
+    @field_validator('page')
     def validate_page(cls, v):
         if v < 1:
             raise ValueError("Page must be >= 1")
         return v
     
-    @validator('limit')
+    @field_validator('limit')
     def validate_limit(cls, v):
         if v < 1 or v > 100:
             raise ValueError("Limit must be between 1 and 100")
         return v
     
-    @validator('sort_order')
+    @field_validator('sort_order')
     def validate_sort_order(cls, v):
         if v.lower() not in ['asc', 'desc']:
             raise ValueError("Sort order must be 'asc' or 'desc'")

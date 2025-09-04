@@ -9,6 +9,7 @@ from app.db import Base, get_db
 from app.models.user import User, UserRole
 from app.models.mentor_apprentice import MentorApprentice
 from app.services.auth import get_current_user
+from app.models.user import UserRole
 import uuid
 from datetime import datetime, UTC
 import os
@@ -140,3 +141,34 @@ def db_session():
 @pytest.fixture
 def test_db(db_session):
     return db_session
+
+@pytest.fixture
+def auth_headers_factory(db_session):
+    """Factory to create auth headers for a given user object.
+    Optionally treat as admin for elevated endpoints.
+    """
+    def _make(user, is_admin: bool = False):
+        role = UserRole.admin if is_admin else user.role
+        token = f"mock-token-{user.id}-{role}"
+        # override dependency to return this user for duration of a single request isn't trivial here,
+        # tests relying on role-specific auth should instead patch globally prior to request; for now we just send header.
+        return {"Authorization": f"Bearer {token}"}
+    return _make
+
+# --- Email sending mock (autouse) ---
+@pytest.fixture(autouse=True)
+def mock_email_send(monkeypatch):
+    """Prevent real SendGrid network calls; always return True."""
+    try:
+        from app import services
+        from app.services import email as email_mod
+    except Exception:
+        yield
+        return
+    def _fake_send_notification_email(*args, **kwargs):
+        return True
+    def _fake_send_email(*args, **kwargs):
+        return True
+    monkeypatch.setattr(email_mod, 'send_notification_email', _fake_send_notification_email, raising=False)
+    monkeypatch.setattr(email_mod, 'send_email', _fake_send_email, raising=False)
+    yield
