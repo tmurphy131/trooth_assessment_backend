@@ -17,7 +17,7 @@ async def test_get_assessment_score_history(test_db, mock_mentor):
 
     # Create apprentice and assessment
     apprentice = User(id=apprentice_id, name="Apprentice", email="apprentice@example.com", role="apprentice")
-    assessment = Assessment(id=assessment_id, apprentice_id=apprentice_id, template_id="template-1")
+    assessment = Assessment(id=assessment_id, apprentice_id=apprentice_id, template_id="template-1", answers={})
 
     score_data = {
         "q1": {

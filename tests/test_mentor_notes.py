@@ -15,7 +15,7 @@ async def test_create_mentor_note(test_db, mock_mentor):
 
     # Set up mentor-apprentice relationship and an assessment
     apprentice = User(id=apprentice_id, name="Apprentice", email="apprentice@example.com", role="apprentice")
-    assessment = Assessment(id=assessment_id, apprentice_id=apprentice_id, template_id="template1")
+    assessment = Assessment(id=assessment_id, apprentice_id=apprentice_id, template_id="template1", answers={})
 
     test_db.add_all([
         apprentice,
@@ -49,7 +49,7 @@ async def test_get_mentor_notes(test_db, mock_mentor):
     note_id = str(uuid4())
 
     apprentice = User(id=apprentice_id, name="Apprentice2", email="a2@example.com", role="apprentice")
-    assessment = Assessment(id=assessment_id, apprentice_id=apprentice_id, template_id="templateX")
+    assessment = Assessment(id=assessment_id, apprentice_id=apprentice_id, template_id="templateX", answers={})
 
     note = MentorNote(
         id=note_id,
@@ -81,7 +81,7 @@ async def test_delete_mentor_note(test_db, mock_mentor):
     note_id = str(uuid4())
 
     apprentice = User(id=apprentice_id, name="Apprentice3", email="a3@example.com", role="apprentice")
-    assessment = Assessment(id=assessment_id, apprentice_id=apprentice_id, template_id="templateZ")
+    assessment = Assessment(id=assessment_id, apprentice_id=apprentice_id, template_id="templateZ", answers={})
     note = MentorNote(
         id=note_id,
         assessment_id=assessment_id,

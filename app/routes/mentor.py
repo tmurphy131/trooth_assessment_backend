@@ -15,6 +15,7 @@ from fastapi import Query
 from datetime import datetime
 from app.services.auth import get_current_user
 from app.exceptions import ForbiddenException, NotFoundException
+from pydantic import BaseModel
 
 router = APIRouter()
 
@@ -25,7 +26,7 @@ def list_apprentices(
 ):
     apprentices = (
         db.query(MentorApprentice)
-        .filter(MentorApprentice.mentor_id == current_user.id)
+        .filter(MentorApprentice.mentor_id == current_user.id, MentorApprentice.active.is_(True))
         .all()
     )
 
@@ -364,3 +365,116 @@ def get_apprentice_profile(
         average_score=round(average_score, 2) if average_score else None,
         last_submission=last_submission
     )
+
+class TerminationRequest(BaseModel):
+    reason: str
+
+@router.post("/apprentice/{apprentice_id}/terminate")
+def terminate_apprenticeship(
+    apprentice_id: str,
+    payload: TerminationRequest,
+    current_user: User = Depends(require_mentor),
+    db: Session = Depends(get_db)
+):
+    mapping = db.query(MentorApprentice).filter_by(
+        mentor_id=current_user.id, apprentice_id=apprentice_id
+    ).first()
+    if not mapping:
+        raise ForbiddenException("Not authorized or relationship not found")
+    if not mapping.active:
+        raise HTTPException(status_code=400, detail="Relationship already inactive")
+
+    # Deactivate relationship
+    mapping.active = False
+    db.add(mapping)
+    db.commit()
+
+    # Attempt to email apprentice (add richer debug logging similar to reinstatement path)
+    apprentice_user = db.query(UserModel).filter_by(id=apprentice_id).first()
+    if apprentice_user and apprentice_user.email:
+        import logging
+        log = logging.getLogger("app.email")
+        try:
+            from app.services.email import send_notification_email
+            subj = "Mentorship Terminated"
+            reason_clean = payload.reason.strip() if payload and payload.reason else "(no reason provided)"
+            msg = (
+                f"Your mentorship with {current_user.name or current_user.email} has been terminated. "
+                f"Reason: {reason_clean}"
+            )
+            log.debug(
+                "[termination] attempting send to=%s subject=%s msg_len=%d", 
+                apprentice_user.email, subj, len(msg)
+            )
+            ok = send_notification_email(apprentice_user.email, subj, msg)
+            if not ok:
+                log.warning("[termination] email send returned False to=%s", apprentice_user.email)
+            else:
+                log.info("[termination] email sent to=%s", apprentice_user.email)
+        except Exception as e:  # pragma: no cover (diagnostic path)
+            log.exception("[termination] exception while sending email to=%s err=%s", apprentice_user.email, e)
+
+    return {"status": "terminated", "apprentice_id": apprentice_id}
+
+
+@router.get("/inactive-apprentices", response_model=list[dict])
+def list_inactive_apprentices(
+    current_user: User = Depends(require_mentor),
+    db: Session = Depends(get_db)
+):
+    links = (db.query(MentorApprentice)
+             .filter(MentorApprentice.mentor_id == current_user.id, MentorApprentice.active.is_(False))
+             .all())
+    if not links:
+        return []
+    apprentice_ids = [l.apprentice_id for l in links]
+    users = db.query(UserModel).filter(UserModel.id.in_(apprentice_ids)).all()
+    return [
+        {"id": u.id, "name": u.name, "email": u.email}
+        for u in users
+    ]
+
+
+class ReinstateRequest(BaseModel):
+    reason: str | None = None
+
+
+@router.post("/apprentice/{apprentice_id}/reinstate")
+def reinstate_apprenticeship(
+    apprentice_id: str,
+    payload: ReinstateRequest = None,
+    current_user: User = Depends(require_mentor),
+    db: Session = Depends(get_db)
+):
+    mapping = db.query(MentorApprentice).filter_by(
+        mentor_id=current_user.id, apprentice_id=apprentice_id
+    ).first()
+    if not mapping:
+        raise ForbiddenException("Not authorized or relationship not found")
+    if mapping.active:
+        raise HTTPException(status_code=400, detail="Relationship already active")
+    mapping.active = True
+    db.add(mapping)
+    db.commit()
+
+    # Optional notification
+    apprentice_user = db.query(UserModel).filter_by(id=apprentice_id).first()
+    if apprentice_user and apprentice_user.email:
+        try:
+            from app.services.email import send_notification_email
+            msg = (
+                f"Your mentorship with {current_user.name or current_user.email} has been reinstated."
+            )
+            if payload and payload.reason:
+                msg += f" Note from mentor: {payload.reason.strip()}"
+            ok = send_notification_email(
+                apprentice_user.email,
+                "Mentorship Reinstated",
+                msg
+            )
+            if not ok:
+                import logging; logging.getLogger("app.email").warning("[reinstate] email send skipped/failed for %s", apprentice_user.email)
+        except Exception:
+            pass
+
+    return {"status": "reinstated", "apprentice_id": apprentice_id}
