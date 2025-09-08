@@ -1,10 +1,10 @@
 # 🌱 Rooted Commitment  
 *A Spiritual Mentorship Agreement*  
 
-**Mentor:** _____________________  
-**Apprentice:** _____________________  
-**Start Date:** _____________________  
-**Parent/Guardian (if under 18):** _____________________  
+**Mentor:** {mentor_name}  
+**Apprentice:** {apprentice_name}  
+**Start Date:** {start_date}  
+**Parent/Guardian (if under 18):** {parent_name}  
 
 ---
 
@@ -19,8 +19,8 @@ This mentorship is about helping you grow in your faith, know God’s Word bette
 ## 1. Meeting Rhythm & Commitment  
 **We agree to:**  
 - Meet on a **regular schedule** set by the mentor (weekly, bi-weekly, monthly, or as agreed upon)  
-- Meeting length: **_____ minutes**  
-- Meeting location: _____________________  
+- Meeting length: **{meeting_duration} minutes**  
+- Meeting location: {meeting_location}  
 - Notify each other at least **24 hours ahead** if rescheduling is needed  
 - Absences should be kept to a minimum. Repeated missed meetings without valid reasons may lead to reevaluating or ending the mentorship.  
 

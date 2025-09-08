@@ -1,13 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta, UTC
+import re
 from app.utils.datetime import utc_now
 import hashlib
 
 from app.db import get_db
 from app.schemas.agreement import (
     AgreementCreate, AgreementOut, AgreementSubmit, AgreementSign,
-    AgreementTemplateCreate, AgreementTemplateOut, ParentTokenResend
+    AgreementTemplateCreate, AgreementTemplateOut, ParentTokenResend,
+    AgreementFieldsUpdate,
 )
 from app.models.agreement import Agreement, AgreementTemplate, AgreementToken
 from app.models.user import User, UserRole
@@ -33,14 +36,53 @@ VALID_STATUSES = {"draft","awaiting_apprentice","awaiting_parent","fully_signed"
 
 # Utility
 
-def _render_content(template_md: str, fields: dict, mentor_name: str, apprentice_email: str) -> str:
+def _render_content(template_md: str, fields: dict, mentor_name: str, apprentice_email: str, apprentice_name: str | None = None) -> str:
+    """Render markdown by replacing {{token}} placeholders.
+
+    Supports tokens with or without surrounding whitespace, e.g. {{meeting_location}} or {{ meeting_location }}.
+    """
     content = template_md
-    tokens = {**fields, "mentor_name": mentor_name, "apprentice_name": apprentice_email.split('@')[0]}
+    # Base tokens provided (prefer explicit apprentice_name, then field, then email local part)
+    tokens = {**fields, "mentor_name": mentor_name, "apprentice_name": (apprentice_name or fields.get('apprentice_name') or apprentice_email.split('@')[0])}
+    # Discover any moustache placeholders present that were not supplied; fill with 'TBD'
+    discovered = set(re.findall(r"{{\s*([a-zA-Z0-9_]+)\s*}}", template_md))
+    for name in discovered:
+        if name not in tokens:
+            tokens[name] = 'TBD'
     for k, v in tokens.items():
-        content = content.replace(f"{{{{{k}}}}}", str(v) if v is not None else "")
+        pattern = re.compile(r"{{\s*" + re.escape(k) + r"\s*}}")
+        content = pattern.sub(str(v) if v is not None else "", content)
+
+    # Also support single-brace tokens like {mentor_name}
+    def replace_single_brace(m):
+        key = m.group(1)
+        if key in tokens and tokens[key] is not None:
+            return str(tokens[key])
+        # Map alternate names
+        alt_map = {
+            'meeting_duration': fields.get('meeting_duration_minutes'),
+            'parent_name': fields.get('parent_name') or fields.get('parent_signature_name') or fields.get('parent_email'),
+            'start_date': fields.get('start_date'),
+        }
+        if key in alt_map and alt_map[key] is not None:
+            return str(alt_map[key])
+        return ''
+    content = re.sub(r"{([a-zA-Z0-9_]+)}", replace_single_brace, content)
+
+    # Legacy underscore placeholder logic removed (tokens now explicit in template).
+    # Append Additional Notes section if provided and not already present
+    if fields.get('additional_notes'):
+        if 'Additional Notes' not in content and 'additional_notes' not in content:
+            content += f"\n\n### Additional Notes\n{fields.get('additional_notes')}\n"
+
     return content
 
 def _frontend_sign_url(token: str, token_type: str) -> str:
+    """Return the pretty frontend sign URL (handled by Flutter deep link).
+
+    Frontend screen: /agreements/sign/<type>/<token>
+    API calls still use /agreements/public/<token> endpoints under the hood.
+    """
     base = settings.app_url.rstrip('/') if settings.app_url else 'http://localhost:3000'
     return f"{base}/agreements/sign/{token_type}/{token}"
 
@@ -88,19 +130,36 @@ def create_agreement(payload: AgreementCreate, db: Session = Depends(get_db), me
     if not tpl.is_active:
         raise HTTPException(status_code=400, detail="Template version inactive")
 
+    # Pre-render draft so mentor can preview before submit
+    fields_dict = payload.fields.model_dump()
+    # Include parent_email for token substitution if provided
+    if payload.parent_email:
+        fields_dict['parent_email'] = payload.parent_email
+    rendered = _render_content(
+        tpl.markdown_source,
+        fields_dict,
+        mentor_name=mentor.name or mentor.email,
+        apprentice_email=payload.apprentice_email,
+    apprentice_name=payload.apprentice_name,
+    )
     agreement = Agreement(
         template_version=tpl.version,
         mentor_id=mentor.id,
         apprentice_email=payload.apprentice_email,
+        apprentice_name=payload.apprentice_name,
         status='draft',
         apprentice_is_minor=payload.apprentice_is_minor,
         parent_required=payload.parent_required,
         parent_email=payload.parent_email,
-    fields_json=payload.fields.model_dump(),
+        fields_json=fields_dict,
+        content_rendered=rendered,
     )
     db.add(agreement)
     db.commit()
     db.refresh(agreement)
+    # Attach transient names for client rendering (not persisted columns)
+    agreement.__dict__["mentor_name"] = mentor.name or mentor.email
+    agreement.__dict__["apprentice_name"] = payload.apprentice_name or payload.apprentice_email.split('@')[0]
     return agreement
 
 @router.post("/{agreement_id}/submit", response_model=AgreementOut)
@@ -121,7 +180,7 @@ def submit_agreement(agreement_id: str, db: Session = Depends(get_db), mentor: U
         if not fields.get(req):
             raise HTTPException(status_code=400, detail=f"Missing required field: {req}")
 
-    ag.content_rendered = _render_content(tpl.markdown_source, fields, mentor_name=mentor.name or mentor.email, apprentice_email=ag.apprentice_email)
+    ag.content_rendered = _render_content(tpl.markdown_source, fields, mentor_name=mentor.name or mentor.email, apprentice_email=ag.apprentice_email, apprentice_name=ag.apprentice_name)
     ag.content_hash = hashlib.sha256(ag.content_rendered.encode()).hexdigest()
     ag.status = 'awaiting_apprentice'
 
@@ -151,6 +210,31 @@ def submit_agreement(agreement_id: str, db: Session = Depends(get_db), mentor: U
         pass
     return ag
 
+@router.patch("/{agreement_id}/fields", response_model=AgreementOut)
+def update_draft_fields(agreement_id: str, payload: AgreementFieldsUpdate, db: Session = Depends(get_db), mentor: User = Depends(require_mentor)):
+    ag = db.query(Agreement).filter_by(id=agreement_id, mentor_id=mentor.id).first()
+    if not ag:
+        raise HTTPException(status_code=404, detail="Agreement not found")
+    if ag.status != 'draft':
+        raise HTTPException(status_code=409, detail="Can only edit fields while in draft")
+    # Merge provided fields
+    existing = ag.fields_json or {}
+    updates = payload.model_dump(exclude_none=True)
+    if not updates:
+        return ag
+    existing.update(updates)
+    ag.fields_json = existing
+    # Re-render preview immediately
+    tpl = db.query(AgreementTemplate).filter_by(version=ag.template_version).first()
+    if tpl:
+        # Inject parent_email for rendering if not already present
+        if ag.parent_email and 'parent_email' not in existing:
+            existing['parent_email'] = ag.parent_email
+    ag.content_rendered = _render_content(tpl.markdown_source, existing, mentor_name=mentor.name or mentor.email, apprentice_email=ag.apprentice_email, apprentice_name=ag.apprentice_name)
+    db.commit()
+    db.refresh(ag)
+    return ag
+
 @router.get("/{agreement_id}", response_model=AgreementOut)
 def get_agreement(agreement_id: str, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
     ag = db.query(Agreement).filter_by(id=agreement_id).first()
@@ -162,6 +246,23 @@ def get_agreement(agreement_id: str, db: Session = Depends(get_db), user: User =
         # match by email or id if available
         if ag.apprentice_id != user.id and ag.apprentice_email != user.email:
             raise HTTPException(status_code=403, detail="Forbidden")
+    # Always (re)render draft so latest substitution & heuristic fills show
+    if ag.status == 'draft':
+        tpl = db.query(AgreementTemplate).filter_by(version=ag.template_version).first()
+        if tpl:
+            try:
+                fields = ag.fields_json or {}
+                if ag.parent_email and 'parent_email' not in fields:
+                    fields['parent_email'] = ag.parent_email
+                ag.content_rendered = _render_content(tpl.markdown_source, fields, mentor_name=user.name or user.email, apprentice_email=ag.apprentice_email, apprentice_name=ag.apprentice_name)
+                db.commit()
+            except Exception:
+                db.rollback()
+    # Enrich with derived names for frontend convenience
+    mentor_user = db.query(User).filter_by(id=ag.mentor_id).first()
+    if mentor_user:
+        ag.__dict__["mentor_name"] = mentor_user.name or mentor_user.email
+    ag.__dict__["apprentice_name"] = ag.apprentice_name or ag.apprentice_email.split('@')[0]
     return ag
 
 # Signing
@@ -466,3 +567,154 @@ def _activate_relationship(db: Session, ag: Agreement):
         return
     rel = MentorApprentice(mentor_id=ag.mentor_id, apprentice_id=ag.apprentice_id, active=True)
     db.add(rel)
+
+# ---------------------------------------------------------------------------
+# Simple HTML signing page to support pretty email links without separate web app
+# ---------------------------------------------------------------------------
+@router.get("/sign/{token_type}/{token}", response_class=HTMLResponse, include_in_schema=False)
+def sign_html(token_type: str, token: str, db: Session = Depends(get_db)):
+        # Validate token
+        at = db.query(AgreementToken).filter_by(token=token).first()
+        if not at:
+                return HTMLResponse(f"<h3>Agreement Link Invalid</h3><p>The signing link is not valid or has expired.</p>", status_code=404)
+        ag = db.query(Agreement).filter_by(id=at.agreement_id).first()
+        if not ag:
+                return HTMLResponse(f"<h3>Agreement Missing</h3><p>The referenced agreement no longer exists.</p>", status_code=404)
+
+        # Basic status messaging
+        status_msg = f"Current Status: {ag.status}" if ag.status else ""
+        disabled = False
+        can_sign = False
+        if at.token_type == 'apprentice':
+                can_sign = ag.status in ('awaiting_apprentice','awaiting_parent') and not ag.apprentice_signed_at
+        elif at.token_type == 'parent':
+                can_sign = ag.status == 'awaiting_parent' and not ag.parent_signed_at
+        else:
+                disabled = True
+
+        if not can_sign:
+                disabled = True
+
+        # Build a rendered HTML snippet of the agreement content with field values injected.
+        rendered_html_section = ''
+        # If original template markdown is available, prefer re-render so missing tokens are filled.
+        tpl = db.query(AgreementTemplate).filter_by(version=ag.template_version).first()
+        src = ag.content_rendered or ''
+        if tpl and ag.fields_json:
+            # Re-render using latest field data to ensure placeholders replaced.
+            try:
+                mentor_user = db.query(User).filter_by(id=ag.mentor_id).first()
+                mentor_name = (mentor_user.name if mentor_user and mentor_user.name else (mentor_user.email if mentor_user else 'Mentor'))
+                src = _render_content(tpl.markdown_source, ag.fields_json or {}, mentor_name=mentor_name, apprentice_email=ag.apprentice_email, apprentice_name=ag.apprentice_name)
+            except Exception:
+                pass
+        if src:
+            try:
+                import markdown  # type: ignore
+                rendered_html_section = markdown.markdown(src)
+            except Exception:
+                # Very small naive markdown replacements (headers + bold/italics + line breaks)
+                import html
+                esc = html.escape(src)
+                # headers
+                esc = re.sub(r'^### (.*)$', r'<h3>\1</h3>', esc, flags=re.MULTILINE)
+                esc = re.sub(r'^## (.*)$', r'<h2>\1</h2>', esc, flags=re.MULTILINE)
+                esc = re.sub(r'^# (.*)$', r'<h1>\1</h1>', esc, flags=re.MULTILINE)
+                # bold / italic
+                esc = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', esc)
+                esc = re.sub(r'\*([^*]+)\*', r'<em>\1</em>', esc)
+                esc = esc.replace('\n\n', '<br><br>')
+                rendered_html_section = f"<div>{esc}</div>"
+        if not rendered_html_section and ag.content_rendered:
+            esc = ag.content_rendered.replace('<','&lt;').replace('>','&gt;')
+            rendered_html_section = f"<pre style='white-space:pre-wrap'>{esc}</pre>"
+        # Determine if we still have any unreplaced tokens; if so provide a fallback Field Values list.
+        fields_display = ''
+        try:
+            unreplaced = re.findall(r"{{\s*[a-zA-Z0-9_]+\s*}}", src)
+            if unreplaced and ag.fields_json:
+                parts = []
+                for k,v in ag.fields_json.items():
+                    parts.append(f"<li><code>{k}</code>: {v}</li>")
+                fields_display = '<div style="margin-top:16px;"><strong style="font-size:13px;">Field Values</strong><ul style="margin:6px 0 0; padding-left:18px;">' + ''.join(parts) + '</ul></div>'
+        except Exception:
+            pass
+        html = f"""
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Mentorship Agreement Sign</title>
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
+    <style>
+        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background:#101317; color:#eee; margin:0; padding:20px; }}
+        h1 {{ font-size:20px; margin:0 0 12px; }}
+        .card {{ background:#1c2128; border:1px solid #2a313a; border-radius:8px; padding:20px; max-width:640px; box-shadow:0 2px 4px rgba(0,0,0,.4); }}
+        label {{ display:block; font-size:14px; margin-bottom:6px; }}
+        input[type=text] {{ width:100%; padding:10px 12px; border-radius:6px; border:1px solid #39424d; background:#0f1419; color:#eee; font-size:15px; }}
+        button {{ background:#f6c344; color:#000; border:none; padding:12px 20px; border-radius:6px; font-weight:600; cursor:pointer; font-size:15px; }}
+        button[disabled] {{ opacity:.5; cursor:not-allowed; }}
+        .status {{ font-size:13px; color:#aaa; margin:8px 0 16px; }}
+        .msg {{ margin-top:16px; font-size:14px; }}
+        .error {{ color:#ff6b6b; }}
+                pre {{ white-space:pre-wrap; background:#0f1419; padding:12px; border-radius:6px; font-size:13px; line-height:1.35; }}
+                .agreement-html h1,.agreement-html h2,.agreement-html h3 {{ color:#f6c344; }}
+                .agreement-html p, .agreement-html li {{ line-height:1.4; }}
+    </style>
+</head>
+<body>
+    <div class='card'>
+        <h1>Mentorship Agreement</h1>
+        <div class='status'>{status_msg}</div>
+        <p>Agreement ID: {ag.id}</p>
+        <p>Apprentice Email: {ag.apprentice_email}</p>
+        {f'<p>Parent Email: {ag.parent_email}</p>' if ag.parent_email else ''}
+        {'<p><em>This agreement is no longer signable with this link.</em></p>' if disabled else ''}
+                <details open>
+                    <summary style="cursor:pointer;margin:8px 0 12px;">Agreement Preview</summary>
+                    <div class='agreement-html' style='margin-top:8px;'>{rendered_html_section or '<em>No content rendered.</em>'}{fields_display}</div>
+                </details>
+        <form id='signForm' onsubmit='return false;' style='margin-top:12px;'>
+            <label>Type Full Name to Sign</label>
+            <input id='typedName' type='text' placeholder='Full Name' {'disabled' if disabled else ''} />
+            <div style='margin-top:12px;'>
+                <button id='signBtn' {'disabled' if disabled else ''}>{'Cannot Sign' if disabled else 'Sign Agreement'}</button>
+            </div>
+            <div class='msg' id='msg'></div>
+        </form>
+    </div>
+    <script>
+        const btn = document.getElementById('signBtn');
+        const input = document.getElementById('typedName');
+        const msg = document.getElementById('msg');
+        const form = document.getElementById('signForm');
+        form?.addEventListener('submit', async () => {{
+            if (btn.disabled) return;
+            const name = input.value.trim();
+            if (!name) {{ msg.textContent = 'Name required'; msg.className='msg error'; return; }}
+            btn.disabled = true; msg.textContent = 'Signing...'; msg.className='msg';
+            try {{
+                const res = await fetch('/agreements/public/{token}/sign', {{
+                    method: 'POST', headers: {{ 'Content-Type': 'application/json' }}, body: JSON.stringify({{ typed_name: name }})
+                }});
+                const data = await res.json();
+                if (res.ok) {{
+                    msg.textContent = 'Signed successfully. Status: ' + data.status;
+                    msg.className='msg';
+                    btn.disabled = true;
+                }} else {{
+                    msg.textContent = 'Failed: ' + (data.detail || res.status);
+                    msg.className='msg error';
+                    btn.disabled = false;
+                }}
+            }} catch (e) {{
+                msg.textContent = 'Network error: ' + e;
+                msg.className='msg error';
+                btn.disabled = false;
+            }}
+        }});
+    </script>
+</body>
+</html>
+"""
+        return HTMLResponse(html)
