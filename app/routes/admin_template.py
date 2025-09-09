@@ -16,9 +16,13 @@ from app.schemas.user import UserOut
 
 router = APIRouter(prefix="/templates", tags=["Admin Templates"])
 
+# Compatibility router to support older path prefix used in tests:
+# /admin/assessment-templates/{template_id}/clone
+compat_router = APIRouter(prefix="/assessment-templates", tags=["Admin Templates (compat)"])
+
 @router.post("", response_model=AssessmentTemplateOut)
 def create_template(data: AssessmentTemplateCreate, db: Session = Depends(get_db), current_user = Depends(require_mentor_or_admin)):
-    template_data = data.dict()
+    template_data = data.model_dump()
     template_data['created_by'] = current_user.id
     template = AssessmentTemplate(**template_data)
     db.add(template)
@@ -60,7 +64,7 @@ def update_template(
         raise HTTPException(status_code=403, detail="You can only edit your own templates")
     
     # Update only provided fields
-    update_data = data.dict(exclude_unset=True)
+    update_data = data.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         setattr(template, field, value)
     
@@ -298,6 +302,17 @@ def clone_assessment_template(
         if cat_id:
             category_ids = [cat_id]
     return {**AssessmentTemplateOut.model_validate(new_template).model_dump(), "category_ids": category_ids}
+
+# Expose a compatibility endpoint to satisfy tests expecting
+# POST /admin/assessment-templates/{template_id}/clone
+@compat_router.post("/{template_id}/clone", response_model=AssessmentTemplateOut)
+def clone_assessment_template_compat(
+    template_id: str,
+    db: Session = Depends(get_db),
+    current_user: UserOut = Depends(require_mentor_or_admin)
+):
+    # Delegate to the primary implementation
+    return clone_assessment_template(template_id, db, current_user)
 
 @router.post("/{template_id}/publish", response_model=AssessmentTemplateOut)
 def publish_template(
