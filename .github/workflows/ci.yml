@@ -17,7 +17,7 @@ concurrency:
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT }}
   REGION: us-east4
-  IMAGE_URI: gcr.io/${{ env.PROJECT_ID }}/trooth-backend:latest
+  IMAGE_NAME: trooth-backend
   SERVICE: trooth-backend
   RUNTIME_SA: ${{ secrets.GCP_RUNTIME_SA_EMAIL }}
   MIGRATE_JOB: trooth-migrate
@@ -98,6 +98,18 @@ jobs:
         with:
           project_id: ${{ env.PROJECT_ID }}
 
+      - name: Validate project and export IMAGE_URI
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${PROJECT_ID:-}" ]; then
+            echo "::error::PROJECT_ID is not set. Configure the GCP_PROJECT repository secret." && exit 1
+          fi
+          if [ -z "${IMAGE_NAME:-}" ]; then
+            echo "::error::IMAGE_NAME is not set." && exit 1
+          fi
+          echo "IMAGE_URI=gcr.io/${PROJECT_ID}/${IMAGE_NAME}:latest" >> "$GITHUB_ENV"
+
       - name: Detect new Alembic migration files
         id: detect_migrations
         shell: bash
@@ -117,18 +129,18 @@ jobs:
 
       - name: Build with Cloud Build (push to GCR)
         run: |
-          gcloud builds submit --tag "${{ env.IMAGE_URI }}" .
+          gcloud builds submit --tag "$IMAGE_URI" .
 
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy "${{ env.SERVICE }}" \
-            --image "${{ env.IMAGE_URI }}" \
+            --image "$IMAGE_URI" \
             --region "${{ env.REGION }}" \
             --platform managed \
             --service-account "${{ env.RUNTIME_SA }}" \
             --set-env-vars "ENV=production,SHOW_DOCS=true,EMAIL_FROM_ADDRESS=admin@onlyblv.com,APP_URL=https://trooth-assessment-dev.onlyblv.com" \
             --set-secrets "DATABASE_URL=DB_URL:latest,FIREBASE_CERT_JSON=FIREBASE_CERT_JSON:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,OPENAI_API_KEY=OPENAI_API_KEY:latest" \
-            --add-cloudsql-instances "${{ env.PROJECT_ID }}:us-east4:app-pg" \
+            --add-cloudsql-instances "${PROJECT_ID}:us-east4:app-pg" \
             --allow-unauthenticated \
             --quiet
 
