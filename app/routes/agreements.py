@@ -491,6 +491,21 @@ def resend_parent_token(agreement_id: str, body: ParentTokenResend, db: Session 
         pass
     return ag
 
+# Public success pages (static) — must come before dynamic /public/{token}
+@router.get("/public/signed-success", response_class=HTMLResponse, include_in_schema=False)
+def public_signed_success(request: Request):
+    return jinja_templates.TemplateResponse(
+        "agreements/signed_success.html",
+        {"request": request, "title": "Agreement Signed", "logo_url": settings.logo_url},
+    )
+
+@router.get("/public/parent-signed-success", response_class=HTMLResponse, include_in_schema=False)
+def public_parent_signed_success(request: Request):
+    return jinja_templates.TemplateResponse(
+        "agreements/parent_signed_success.html",
+        {"request": request, "title": "Parent Signature Received", "logo_url": settings.logo_url},
+    )
+
 # Public token-based endpoints (simplified placeholder implementation)
 @router.get("/public/{token}", response_model=AgreementOut)
 def public_view(token: str, db: Session = Depends(get_db)):
@@ -668,6 +683,8 @@ def sign_html(token_type: str, token: str, request: Request, db: Session = Depen
         except Exception:
             pass
         title = f"Mentorship Agreement"
+        # Use public paths with an extra segment to avoid collision with dynamic routes like /{agreement_id}
+        success_path = "/agreements/public/parent-signed-success" if token_type == 'parent' else "/agreements/public/signed-success"
         return jinja_templates.TemplateResponse(
             "agreements/sign.html",
             {
@@ -678,7 +695,7 @@ def sign_html(token_type: str, token: str, request: Request, db: Session = Depen
                 "token": token,
                 "content_html": rendered_html_section or "<em>No content rendered.</em>",
                 "logo_url": settings.logo_url,
-                "success_path": "/agreements/parent-signed-success" if token_type == 'parent' else "/agreements/signed-success",
+                "success_path": success_path,
             },
         )
 
@@ -691,6 +708,21 @@ def signed_success(request: Request):
 
 @router.get("/parent-signed-success", response_class=HTMLResponse, include_in_schema=False)
 def parent_signed_success(request: Request):
+    return jinja_templates.TemplateResponse(
+        "agreements/parent_signed_success.html",
+        {"request": request, "title": "Parent Signature Received", "logo_url": settings.logo_url},
+    )
+
+# Public, non-ambiguous success URLs used by the HTML sign page redirect
+@router.get("/public/signed-success", response_class=HTMLResponse, include_in_schema=False)
+def public_signed_success(request: Request):
+    return jinja_templates.TemplateResponse(
+        "agreements/signed_success.html",
+        {"request": request, "title": "Agreement Signed", "logo_url": settings.logo_url},
+    )
+
+@router.get("/public/parent-signed-success", response_class=HTMLResponse, include_in_schema=False)
+def public_parent_signed_success(request: Request):
     return jinja_templates.TemplateResponse(
         "agreements/parent_signed_success.html",
         {"request": request, "title": "Parent Signature Received", "logo_url": settings.logo_url},
