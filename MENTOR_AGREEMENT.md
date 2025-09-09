@@ -6,7 +6,6 @@
 **Start Date:** {start_date}  
 **Parent/Guardian (if under 18):** {parent_name}  
 
----
 
 ## Purpose  
 This mentorship is about helping you grow in your faith, know God’s Word better, and live out your relationship with Him in everyday life. We’ll meet regularly, study Scripture, and have honest conversations about following Jesus.  
@@ -14,7 +13,6 @@ This mentorship is about helping you grow in your faith, know God’s Word bette
 > *“So then, just as you received Christ Jesus as Lord, continue to live your lives in him, **rooted and built up in him**, strengthened in the faith as you were taught, and overflowing with thankfulness.”*  
 > — Colossians 2:6–7  
 
----
 
 ## 1. Meeting Rhythm & Commitment  
 **We agree to:**  
@@ -28,7 +26,6 @@ This mentorship is about helping you grow in your faith, know God’s Word bette
 - Show up on time and ready to focus  
 - Be present — no scrolling, texting, or distractions unless we’re using a phone for study  
 
----
 
 ## 2. Scripture Engagement  
 **What this looks like:**  
@@ -43,7 +40,6 @@ This mentorship is about helping you grow in your faith, know God’s Word bette
 - Read the Scripture (even if you don’t fully understand it yet)  
 - Be willing to talk about your questions, thoughts, or doubts  
 
----
 
 ## 3. Growth Goals  
 **Together we will:**  
@@ -55,7 +51,6 @@ This mentorship is about helping you grow in your faith, know God’s Word bette
 **Apprentice’s part:**  
 - Take responsibility for your spiritual growth — the mentor can guide, but you must do the work  
 
----
 
 ## 4. Accountability & Honesty  
 **What this means:**  
@@ -67,7 +62,6 @@ This mentorship is about helping you grow in your faith, know God’s Word bette
 **Apprentice’s part:**  
 - Don’t just say what you think your mentor wants to hear — be yourself and be truthful  
 
----
 
 ## 5. How We Treat Each Other  
 **During our time together:**  
@@ -80,7 +74,7 @@ This mentorship is about helping you grow in your faith, know God’s Word bette
 - Contact your mentor appropriately (text for quick questions, but not late at night)  
 - Remember your mentor is here as your guide, not your peer — keep it encouraging and appropriate  
 
----
+
 
 ## 6. Boundaries That Keep Us Safe & Healthy  
 
@@ -104,7 +98,7 @@ This mentorship is about helping you grow in your faith, know God’s Word bette
 - Parents or leaders will be contacted if there’s concern for safety (self-harm, abuse, illegal activity, danger)  
 - Mentor will tell you first when possible, unless there’s immediate danger  
 
----
+
 
 ## 7. When Mentorship May End  
 It could end if:  
@@ -120,7 +114,7 @@ It could end if:
 - Allow time to work on the issues  
 - Try to figure out what’s not working  
 
----
+
 
 ## 8. Our Commitments  
 
@@ -138,13 +132,13 @@ It could end if:
 - Follow through on commitments  
 - Speak up about concerns  
 
----
+
 
 ## 9. Check-Ins  
 - Every few months, review what’s working well and what could be better  
 - Either of us can suggest changes if needed  
 
----
+
 
 ## 10. Parent/Guardian Involvement  
 - **Required only for apprentices age 17 or younger**  
@@ -152,14 +146,11 @@ It could end if:
 - Parents can reach out to the mentor with questions  
 - Parents will be informed of any safety concerns  
 
----
+
 
 ## Agreement  
 We enter this mentorship knowing that God calls us to walk alongside one another in faith, encourage each other, and point each other toward Christ.  
 
 > *“Therefore encourage one another and build each other up, just as in fact you are doing.”*  
 > — 1 Thessalonians 5:11  
-
-**Apprentice Signature:** _________________________ Date: _________  
-**Mentor Signature:** _________________________ Date: _________  
-**Parent/Guardian Signature (if under 18):** _________________________ Date: _________  
+ 

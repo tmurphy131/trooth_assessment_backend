@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/static/css/agreements.css" />
+  <style>
+    body { background:#101317; color:#eef2ff; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin:0; }
+    .container { max-width: 720px; margin: 0 auto; padding: 20px; }
+    .card { background:#1c2128; border:1px solid #2a313a; border-radius: 12px; padding: 24px; text-align:center; }
+    h1 { color:#7CFC8A; }
+    p { color:#c9d1d9; }
+    .btn { background:#f6c344;color:#000;border:none;padding:10px 16px;border-radius:8px;font-weight:600; cursor:pointer; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <img src="{{ logo_url }}" alt="Logo" style="height:28px; margin-bottom:12px;" />
+      <h1>Agreement Signed</h1>
+      <p>Thanks! Your mentorship agreement has been signed successfully.</p>
+      <p>You may close this page. A copy has been recorded for your mentor.</p>
+      <div style="margin-top:16px;">
+        <a class="btn" href="/">Return to App</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

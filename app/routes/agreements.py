@@ -1,10 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import HTMLResponse
+from fastapi import Request
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta, UTC
 import re
 from app.utils.datetime import utc_now
 import hashlib
+import uuid
 
 from app.db import get_db
 from app.schemas.agreement import (
@@ -27,9 +30,13 @@ _PARENT_RESEND_TRACK: dict[str, list[float]] = {}
 MAX_RESENDS_PER_HOUR = 3
 RESEND_WINDOW_SECONDS = 3600
 from app.core.settings import settings
-from app.services.auth import get_current_user, require_mentor, require_mentor_or_admin, require_admin
+from app.services.markdown_renderer import render_markdown
+from app.services.auth import get_current_user, require_mentor, require_mentor_or_admin, require_admin, require_apprentice
 
 router = APIRouter(prefix="/agreements", tags=["Agreements"])
+
+# Local Jinja templates env to avoid circular import with app.main
+jinja_templates = Jinja2Templates(directory="app/templates")
 
 SIGN_WINDOW_DAYS = 7
 VALID_STATUSES = {"draft","awaiting_apprentice","awaiting_parent","fully_signed","revoked","expired"}
@@ -121,6 +128,27 @@ def list_agreements(skip: int = 0, limit: int = 50, db: Session = Depends(get_db
             .all())
     return q
 
+# List agreements for current apprentice
+@router.get("/my", response_model=list[AgreementOut])
+def list_my_agreements(skip: int = 0, limit: int = 50, db: Session = Depends(get_db), apprentice: User = Depends(require_apprentice)):
+    if limit > 100:
+        limit = 100
+    q = (
+        db.query(Agreement)
+        .filter((Agreement.apprentice_id == apprentice.id) | (Agreement.apprentice_email == apprentice.email))
+        .order_by(Agreement.created_at.desc())
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+    # Enrich with mentor_name/apprentice_name for convenience
+    for ag in q:
+        mentor_user = db.query(User).filter_by(id=ag.mentor_id).first()
+        if mentor_user:
+            ag.__dict__["mentor_name"] = mentor_user.name or mentor_user.email
+        ag.__dict__["apprentice_name"] = ag.apprentice_name or (ag.apprentice_email.split('@')[0] if ag.apprentice_email else None)
+    return q
+
 # Agreement Creation
 @router.post("", response_model=AgreementOut)
 def create_agreement(payload: AgreementCreate, db: Session = Depends(get_db), mentor: User = Depends(require_mentor)):
@@ -186,9 +214,10 @@ def submit_agreement(agreement_id: str, db: Session = Depends(get_db), mentor: U
 
     # Create apprentice token
     apprentice_token = AgreementToken(
+        token=str(uuid.uuid4()),
         agreement_id=ag.id,
         token_type='apprentice',
-    expires_at=utc_now() + timedelta(days=SIGN_WINDOW_DAYS)
+        expires_at=utc_now() + timedelta(days=SIGN_WINDOW_DAYS)
     )
     db.add(apprentice_token)
     db.commit()
@@ -291,6 +320,7 @@ def apprentice_sign(agreement_id: str, body: AgreementSign, db: Session = Depend
             existing_parent = db.query(AgreementToken).filter_by(agreement_id=ag.id, token_type='parent', used_at=None).first()
             if not existing_parent:
                 parent_token = AgreementToken(
+                    token=str(uuid.uuid4()),
                     agreement_id=ag.id,
                     token_type='parent',
                     expires_at=utc_now() + timedelta(days=SIGN_WINDOW_DAYS)
@@ -434,6 +464,7 @@ def resend_parent_token(agreement_id: str, body: ParentTokenResend, db: Session 
         t.used_at = utc_now()
 
     new_token = AgreementToken(
+        token=str(uuid.uuid4()),
         agreement_id=ag.id,
         token_type='parent',
         expires_at=utc_now() + timedelta(days=SIGN_WINDOW_DAYS)
@@ -502,6 +533,7 @@ def public_sign(token: str, body: AgreementSign, db: Session = Depends(get_db)):
             existing_parent = db.query(AgreementToken).filter_by(agreement_id=ag.id, token_type='parent', used_at=None).first()
             if not existing_parent:
                 pt = AgreementToken(
+                    token=str(uuid.uuid4()),
                     agreement_id=ag.id,
                     token_type='parent',
                     expires_at=utc_now() + timedelta(days=SIGN_WINDOW_DAYS)
@@ -509,11 +541,16 @@ def public_sign(token: str, body: AgreementSign, db: Session = Depends(get_db)):
                 db.add(pt)
                 try:
                     if ag.parent_email:
-                        send_notification_email(
+                        # Use unified templated email for parent invite
+                        send_agreement_email(
+                            AgreementEmailEvent.PARENT_INVITE,
                             to_email=ag.parent_email,
-                            subject="Mentorship Agreement Parent Signature Needed",
-                            message="Please review and sign the mentorship agreement.",
-                            action_url=_frontend_sign_url(pt.token, 'parent')
+                            context={
+                                'agreement_id': ag.id,
+                                'apprentice_email': ag.apprentice_email,
+                                'parent_email': ag.parent_email,
+                                'action_url': _frontend_sign_url(pt.token, 'parent')
+                            }
                         )
                 except Exception:
                     pass
@@ -572,7 +609,7 @@ def _activate_relationship(db: Session, ag: Agreement):
 # Simple HTML signing page to support pretty email links without separate web app
 # ---------------------------------------------------------------------------
 @router.get("/sign/{token_type}/{token}", response_class=HTMLResponse, include_in_schema=False)
-def sign_html(token_type: str, token: str, db: Session = Depends(get_db)):
+def sign_html(token_type: str, token: str, request: Request, db: Session = Depends(get_db)):
         # Validate token
         at = db.query(AgreementToken).filter_by(token=token).first()
         if not at:
@@ -605,29 +642,20 @@ def sign_html(token_type: str, token: str, db: Session = Depends(get_db)):
             try:
                 mentor_user = db.query(User).filter_by(id=ag.mentor_id).first()
                 mentor_name = (mentor_user.name if mentor_user and mentor_user.name else (mentor_user.email if mentor_user else 'Mentor'))
+                # attach for template convenience
+                ag.__dict__["mentor_name"] = mentor_name
                 src = _render_content(tpl.markdown_source, ag.fields_json or {}, mentor_name=mentor_name, apprentice_email=ag.apprentice_email, apprentice_name=ag.apprentice_name)
             except Exception:
                 pass
+        # Ensure mentor_name exists for header even if we didn't re-render
+        if "mentor_name" not in ag.__dict__:
+            mentor_user = db.query(User).filter_by(id=ag.mentor_id).first()
+            ag.__dict__["mentor_name"] = (mentor_user.name if mentor_user and mentor_user.name else (mentor_user.email if mentor_user else 'Mentor'))
         if src:
             try:
-                import markdown  # type: ignore
-                rendered_html_section = markdown.markdown(src)
+                rendered_html_section = render_markdown(src)
             except Exception:
-                # Very small naive markdown replacements (headers + bold/italics + line breaks)
-                import html
-                esc = html.escape(src)
-                # headers
-                esc = re.sub(r'^### (.*)$', r'<h3>\1</h3>', esc, flags=re.MULTILINE)
-                esc = re.sub(r'^## (.*)$', r'<h2>\1</h2>', esc, flags=re.MULTILINE)
-                esc = re.sub(r'^# (.*)$', r'<h1>\1</h1>', esc, flags=re.MULTILINE)
-                # bold / italic
-                esc = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', esc)
-                esc = re.sub(r'\*([^*]+)\*', r'<em>\1</em>', esc)
-                esc = esc.replace('\n\n', '<br><br>')
-                rendered_html_section = f"<div>{esc}</div>"
-        if not rendered_html_section and ag.content_rendered:
-            esc = ag.content_rendered.replace('<','&lt;').replace('>','&gt;')
-            rendered_html_section = f"<pre style='white-space:pre-wrap'>{esc}</pre>"
+                rendered_html_section = f"<pre style='white-space:pre-wrap'>{src.replace('<','&lt;').replace('>','&gt;')}</pre>"
         # Determine if we still have any unreplaced tokens; if so provide a fallback Field Values list.
         fields_display = ''
         try:
@@ -639,82 +667,31 @@ def sign_html(token_type: str, token: str, db: Session = Depends(get_db)):
                 fields_display = '<div style="margin-top:16px;"><strong style="font-size:13px;">Field Values</strong><ul style="margin:6px 0 0; padding-left:18px;">' + ''.join(parts) + '</ul></div>'
         except Exception:
             pass
-        html = f"""
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset='UTF-8'>
-    <title>Mentorship Agreement Sign</title>
-    <meta name='viewport' content='width=device-width,initial-scale=1'>
-    <style>
-        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background:#101317; color:#eee; margin:0; padding:20px; }}
-        h1 {{ font-size:20px; margin:0 0 12px; }}
-        .card {{ background:#1c2128; border:1px solid #2a313a; border-radius:8px; padding:20px; max-width:640px; box-shadow:0 2px 4px rgba(0,0,0,.4); }}
-        label {{ display:block; font-size:14px; margin-bottom:6px; }}
-        input[type=text] {{ width:100%; padding:10px 12px; border-radius:6px; border:1px solid #39424d; background:#0f1419; color:#eee; font-size:15px; }}
-        button {{ background:#f6c344; color:#000; border:none; padding:12px 20px; border-radius:6px; font-weight:600; cursor:pointer; font-size:15px; }}
-        button[disabled] {{ opacity:.5; cursor:not-allowed; }}
-        .status {{ font-size:13px; color:#aaa; margin:8px 0 16px; }}
-        .msg {{ margin-top:16px; font-size:14px; }}
-        .error {{ color:#ff6b6b; }}
-                pre {{ white-space:pre-wrap; background:#0f1419; padding:12px; border-radius:6px; font-size:13px; line-height:1.35; }}
-                .agreement-html h1,.agreement-html h2,.agreement-html h3 {{ color:#f6c344; }}
-                .agreement-html p, .agreement-html li {{ line-height:1.4; }}
-    </style>
-</head>
-<body>
-    <div class='card'>
-        <h1>Mentorship Agreement</h1>
-        <div class='status'>{status_msg}</div>
-        <p>Agreement ID: {ag.id}</p>
-        <p>Apprentice Email: {ag.apprentice_email}</p>
-        {f'<p>Parent Email: {ag.parent_email}</p>' if ag.parent_email else ''}
-        {'<p><em>This agreement is no longer signable with this link.</em></p>' if disabled else ''}
-                <details open>
-                    <summary style="cursor:pointer;margin:8px 0 12px;">Agreement Preview</summary>
-                    <div class='agreement-html' style='margin-top:8px;'>{rendered_html_section or '<em>No content rendered.</em>'}{fields_display}</div>
-                </details>
-        <form id='signForm' onsubmit='return false;' style='margin-top:12px;'>
-            <label>Type Full Name to Sign</label>
-            <input id='typedName' type='text' placeholder='Full Name' {'disabled' if disabled else ''} />
-            <div style='margin-top:12px;'>
-                <button id='signBtn' {'disabled' if disabled else ''}>{'Cannot Sign' if disabled else 'Sign Agreement'}</button>
-            </div>
-            <div class='msg' id='msg'></div>
-        </form>
-    </div>
-    <script>
-        const btn = document.getElementById('signBtn');
-        const input = document.getElementById('typedName');
-        const msg = document.getElementById('msg');
-        const form = document.getElementById('signForm');
-        form?.addEventListener('submit', async () => {{
-            if (btn.disabled) return;
-            const name = input.value.trim();
-            if (!name) {{ msg.textContent = 'Name required'; msg.className='msg error'; return; }}
-            btn.disabled = true; msg.textContent = 'Signing...'; msg.className='msg';
-            try {{
-                const res = await fetch('/agreements/public/{token}/sign', {{
-                    method: 'POST', headers: {{ 'Content-Type': 'application/json' }}, body: JSON.stringify({{ typed_name: name }})
-                }});
-                const data = await res.json();
-                if (res.ok) {{
-                    msg.textContent = 'Signed successfully. Status: ' + data.status;
-                    msg.className='msg';
-                    btn.disabled = true;
-                }} else {{
-                    msg.textContent = 'Failed: ' + (data.detail || res.status);
-                    msg.className='msg error';
-                    btn.disabled = false;
-                }}
-            }} catch (e) {{
-                msg.textContent = 'Network error: ' + e;
-                msg.className='msg error';
-                btn.disabled = false;
-            }}
-        }});
-    </script>
-</body>
-</html>
-"""
-        return HTMLResponse(html)
+        title = f"Mentorship Agreement"
+        return jinja_templates.TemplateResponse(
+            "agreements/sign.html",
+            {
+                "request": request,
+                "title": title,
+                "agreement": ag,
+                "token_type": token_type,
+                "token": token,
+                "content_html": rendered_html_section or "<em>No content rendered.</em>",
+                "logo_url": settings.logo_url,
+                "success_path": "/agreements/parent-signed-success" if token_type == 'parent' else "/agreements/signed-success",
+            },
+        )
+
+@router.get("/signed-success", response_class=HTMLResponse, include_in_schema=False)
+def signed_success(request: Request):
+    return jinja_templates.TemplateResponse(
+        "agreements/signed_success.html",
+        {"request": request, "title": "Agreement Signed", "logo_url": settings.logo_url},
+    )
+
+@router.get("/parent-signed-success", response_class=HTMLResponse, include_in_schema=False)
+def parent_signed_success(request: Request):
+    return jinja_templates.TemplateResponse(
+        "agreements/parent_signed_success.html",
+        {"request": request, "title": "Parent Signature Received", "logo_url": settings.logo_url},
+    )
