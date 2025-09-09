@@ -17,7 +17,7 @@ concurrency:
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT }}
   REGION: us-east4
-  IMAGE_URI: gcr.io/${{ secrets.GCP_PROJECT }}/trooth-backend:latest
+  IMAGE_URI: gcr.io/${{ env.PROJECT_ID }}/trooth-backend:latest
   SERVICE: trooth-backend
   RUNTIME_SA: ${{ secrets.GCP_RUNTIME_SA_EMAIL }}
   MIGRATE_JOB: trooth-migrate
@@ -128,7 +128,7 @@ jobs:
             --service-account "${{ env.RUNTIME_SA }}" \
             --set-env-vars "ENV=production,SHOW_DOCS=true,EMAIL_FROM_ADDRESS=admin@onlyblv.com,APP_URL=https://trooth-assessment-dev.onlyblv.com" \
             --set-secrets "DATABASE_URL=DB_URL:latest,FIREBASE_CERT_JSON=FIREBASE_CERT_JSON:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,OPENAI_API_KEY=OPENAI_API_KEY:latest" \
-            --add-cloudsql-instances trooth-prod:us-east4:app-pg \
+            --add-cloudsql-instances "${{ env.PROJECT_ID }}:us-east4:app-pg" \
             --allow-unauthenticated \
             --quiet
 
