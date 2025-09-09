@@ -49,7 +49,7 @@ jobs:
     needs: test
     if: >-
       (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
-      (github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main')
+      (github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
     outputs:
       migrate_needed: ${{ steps.detect_migrations.outputs.migrate_needed }}
@@ -59,11 +59,39 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Determine auth method
+        id: auth_check
+        shell: bash
+        run: |
+          set -euo pipefail
+          has_wif=false
+          if [ -n "${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}" ] && [ -n "${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}" ]; then
+            has_wif=true
+          fi
+          has_key=false
+          if [ -n "${{ secrets.GCP_SA_KEY }}" ]; then
+            has_key=true
+          fi
+          echo "has_wif=${has_wif}" >> "$GITHUB_OUTPUT"
+          echo "has_key=${has_key}" >> "$GITHUB_OUTPUT"
+
       - name: Auth to Google Cloud (OIDC)
+        if: steps.auth_check.outputs.has_wif == 'true'
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Auth to Google Cloud (JSON key fallback)
+        if: steps.auth_check.outputs.has_wif != 'true' && steps.auth_check.outputs.has_key == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Fail if no auth secrets configured
+        if: steps.auth_check.outputs.has_wif != 'true' && steps.auth_check.outputs.has_key != 'true'
+        run: |
+          echo "::error::No Google Cloud auth configured. Set either GCP_WORKLOAD_IDENTITY_PROVIDER + GCP_SERVICE_ACCOUNT_EMAIL for OIDC, or GCP_SA_KEY for JSON key auth." && exit 1
 
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
