@@ -1,0 +1,106 @@
+name: Backend Build & Deploy
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "app/**"
+      - "alembic/**"
+      - "requirements.txt"
+      - "Dockerfile"
+      - ".github/workflows/backend-deploy.yml"
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: us-east4
+  IMAGE_NAME: trooth-backend
+  IMAGE_URI: gcr.io/${{ secrets.GCP_PROJECT_ID }}/trooth-backend:latest
+  SERVICE: trooth-backend
+  RUNTIME_SA: ${{ secrets.GCP_RUNTIME_SA_EMAIL }}
+  MIGRATE_JOB: trooth-migrate
+
+jobs:
+  deploy:
+    name: Build & Deploy to Cloud Run
+    runs-on: ubuntu-latest
+    outputs:
+      migrate_needed: ${{ steps.detect_migrations.outputs.migrate_needed }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for git diff
+
+      - name: Auth to Google Cloud (OIDC)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+
+      - name: Detect new Alembic migration files
+        id: detect_migrations
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Handle first-commit-on-branch gracefully
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            DIFF=$(git diff --name-status HEAD^ HEAD -- 'alembic/versions/**/*.py' 'alembic/versions/*.py' || true)
+          else
+            DIFF=$(git diff --name-status HEAD -- 'alembic/versions/**/*.py' 'alembic/versions/*.py' || true)
+          fi
+          echo "Changed migration files:\n$DIFF"
+          if echo "$DIFF" | grep -E '^A\s' >/dev/null; then
+            echo "migrate_needed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "migrate_needed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build with Cloud Build (push to GCR)
+        run: |
+          gcloud builds submit --tag "${{ env.IMAGE_URI }}" .
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy "${{ env.SERVICE }}" \
+            --image "${{ env.IMAGE_URI }}" \
+            --region "${{ env.REGION }}" \
+            --platform managed \
+            --service-account "${{ env.RUNTIME_SA }}" \
+            --set-env-vars "ENV=production,SHOW_DOCS=true,EMAIL_FROM_ADDRESS=admin@onlyblv.com,APP_URL=https://trooth-assessment-dev.onlyblv.com" \
+            --set-secrets "DATABASE_URL=DB_URL:latest,FIREBASE_CERT_JSON=FIREBASE_CERT_JSON:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,OPENAI_API_KEY=OPENAI_API_KEY:latest" \
+            --add-cloudsql-instances trooth-prod:us-east4:app-pg \
+            --allow-unauthenticated \
+            --quiet
+
+  migrate:
+    name: Run DB Migrations (conditional)
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: needs.deploy.outputs.migrate_needed == 'true'
+    steps:
+      - name: Auth to Google Cloud (OIDC)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+
+      - name: Execute Cloud Run Job for migrations
+        run: |
+          gcloud run jobs execute "${{ env.MIGRATE_JOB }}" \
+            --region "${{ env.REGION }}" \
+            --wait \
+            --task-timeout=1200s
