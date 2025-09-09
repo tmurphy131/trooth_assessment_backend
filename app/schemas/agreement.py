@@ -42,6 +42,7 @@ class AgreementFieldValues(BaseModel):
 class AgreementCreate(BaseModel):
     template_version: int
     apprentice_email: EmailStr
+    apprentice_name: Optional[str] = None
     apprentice_is_minor: bool = False
     parent_required: bool = False
     parent_email: Optional[EmailStr] = None
@@ -62,6 +63,7 @@ class AgreementOut(BaseModel):
     mentor_id: str
     apprentice_id: Optional[str]
     apprentice_email: str
+    apprentice_name: Optional[str] = None
     status: str
     apprentice_is_minor: bool
     parent_required: bool
@@ -75,6 +77,8 @@ class AgreementOut(BaseModel):
     parent_signed_at: Optional[datetime]
     created_at: datetime
     activated_at: Optional[datetime]
+    mentor_name: Optional[str] = None
+    apprentice_name: Optional[str] = None
 
     model_config = {
         'from_attributes': True
@@ -88,3 +92,19 @@ class AgreementSign(BaseModel):
 
 class ParentTokenResend(BaseModel):
     reason: Optional[str] = Field(None, max_length=300)
+
+class AgreementFieldsUpdate(BaseModel):
+    """Partial update of draft fields for preview regeneration."""
+    meeting_location: Optional[str] = None
+    meeting_duration_minutes: Optional[int] = None
+    meeting_day: Optional[str] = None
+    meeting_time: Optional[str] = None
+    meeting_frequency: Optional[str] = None
+    start_date: Optional[str] = None
+    additional_notes: Optional[str] = None
+
+    @field_validator('meeting_duration_minutes')
+    def duration_positive(cls, v):
+        if v is not None and v <= 0:
+            raise ValueError('meeting_duration_minutes must be > 0')
+        return v

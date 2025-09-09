@@ -44,3 +44,7 @@ flake8>=6.0.0
 
 # Monitoring & Logging
 structlog>=23.2.0
+
+# Markdown rendering for agreements
+markdown>=3.6
+bleach>=6.1

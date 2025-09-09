@@ -113,10 +113,11 @@ def get_current_user(
     return user
 
 def require_mentor(user: User = Depends(get_current_user)) -> User:
-    if user.role != UserRole.mentor:
+    # Treat admin as having mentor capabilities
+    if user.role not in {UserRole.mentor, UserRole.admin}:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Mentor access required"
+            detail="Mentor (or admin) access required"
         )
     return user
 

@@ -1,4 +1,6 @@
 from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -101,6 +103,9 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Jinja templates (avoid clashing with routes.templates module)
+jinja_templates = Jinja2Templates(directory="app/templates")
+
 # Add middleware in correct order (last added = first executed)
 app.add_middleware(LoggingMiddleware)
 
@@ -146,6 +151,26 @@ app.include_router(admin_template.router, prefix="/admin", tags=["Admin"])
 app.include_router(categories.router, tags=["Categories"])
 app.include_router(mentor_notes.router)
 app.include_router(agreements.router, tags=["Agreements"]) 
+
+# Static assets (logo etc.) – map /assets to ./assets if present
+_assets_dir = os.path.join(os.path.dirname(__file__), '..', 'assets')
+try:
+    if os.path.isdir(os.path.abspath(_assets_dir)):
+        app.mount("/assets", StaticFiles(directory=os.path.abspath(_assets_dir)), name="assets")
+        logger.info(f"📎 Static assets mounted at /assets from {_assets_dir}")
+    else:
+        logger.warning(f"/assets directory not found at {_assets_dir}; logo references may 404 (settings.logo_url={settings.logo_url})")
+except Exception as e:
+    logger.error(f"Failed to mount /assets static directory: {e}")
+
+# Public static for HTML signing page (CSS)
+_static_dir = os.path.join(os.path.dirname(__file__), '..', 'static')
+try:
+    if os.path.isdir(os.path.abspath(_static_dir)):
+        app.mount("/static", StaticFiles(directory=os.path.abspath(_static_dir)), name="static")
+        logger.info(f"🎨 Public static mounted at /static from {_static_dir}")
+except Exception as e:
+    logger.error(f"Failed to mount /static directory: {e}")
 
 # Exception handlers
 @app.exception_handler(UnauthorizedException)

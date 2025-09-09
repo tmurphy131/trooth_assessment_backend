@@ -22,6 +22,7 @@ class Agreement(Base):
     mentor_id = Column(String, ForeignKey('users.id'), nullable=False)
     apprentice_id = Column(String, ForeignKey('users.id'), nullable=True)
     apprentice_email = Column(String, nullable=False)
+    apprentice_name = Column(String, nullable=True)
     status = Column(String, nullable=False, default='draft')
     apprentice_is_minor = Column(Boolean, default=False, nullable=False)
     parent_required = Column(Boolean, default=False, nullable=False)

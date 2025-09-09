@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title }}</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/agreements.css" />
+  <style>
+    /* Fallback minimal styles if static not mounted */
+    body { background:#101317; color:#eef2ff; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin:0; }
+    .container { max-width: 920px; margin: 0 auto; padding: 16px; }
+    .card { background:#1c2128; border:1px solid #2a313a; border-radius: 12px; padding: 20px; }
+    .brand { display:flex; align-items:center; gap: 12px; }
+    .brand img { height:28px; }
+    h1,h2,h3 { color:#f6c344; }
+    .msg { margin-top: 10px; padding: 10px 12px; border-radius: 8px; border: 1px solid #39424d; background:#0f1419; }
+  /* Hide header permalinks (pilcrow) if present */
+  .agreement-html .headerlink { display:none !important; }
+  </style>
+  <script>
+  const successPath = '{{ success_path }}';
+    function submitSign(ev){
+      ev.preventDefault();
+      const input = document.getElementById('sigName');
+      const name = (input.value||'').trim();
+      const msg = document.getElementById('signMsg');
+      if(!name){ msg.textContent='Please enter your full name.'; msg.className='msg'; return; }
+      fetch('/agreements/public/{{ token }}/sign', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ typed_name: name }) })
+        .then(r=>r.json().then(b=>({ok:r.ok,body:b})))
+    .then(({ok,body})=>{ if(ok){ msg.textContent='Signed successfully.'; setTimeout(()=>{ window.location.href = successPath; }, 700); } else { msg.textContent=body.detail||'Signing failed.'; } })
+        .catch(()=>{ msg.textContent='Network error'; });
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header class="card brand" style="margin-top:12px;">
+  <img src="{{ logo_url }}" alt="Logo" />
+      <div>
+        <h1 style="margin:0;">Mentorship Agreement</h1>
+        <div style="color:#a3b2d6;">Mentor: {{ agreement.mentor_name or '—' }} • Apprentice: {{ agreement.apprentice_name or agreement.apprentice_email }}</div>
+      </div>
+      <div class="page-actions" style="margin-left:auto;">
+        <button onclick="window.print()" title="Print or Save as PDF" style="background:#f6c344;color:#000;border:none;padding:10px 14px;border-radius:8px;font-weight:600;">Print / Save PDF</button>
+      </div>
+    </header>
+
+    <main class="card" style="margin-top:16px;">
+      <article class="agreement-html">{{ content_html | safe }}</article>
+
+      {% if token_type in ['apprentice','parent'] and agreement.status in ['awaiting_apprentice','awaiting_parent'] %}
+      <section style="margin-top:16px;">
+        <h3>Sign</h3>
+        <form onsubmit="submitSign(event)">
+          <label for="sigName">Type your full name</label>
+          <input id="sigName" type="text" placeholder="Full name" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid #39424d;background:#0f1419;color:#fff;" />
+          <div style="margin-top:10px;"><button style="background:#f6c344;color:#000;border:none;padding:10px 16px;border-radius:8px;font-weight:600;">Sign Agreement</button></div>
+          <div id="signMsg" class="msg"></div>
+        </form>
+      </section>
+      {% else %}
+      <section class="msg" style="margin-top:16px;">This agreement is {{ agreement.status.replace('_',' ') }}.</section>
+      {% endif %}
+    </main>
+    <footer class="page-footer" style="margin-top:12px;text-align:right;">
+      <button onclick="window.print()" title="Print or Save as PDF" style="background:#f6c344;color:#000;border:none;padding:10px 14px;border-radius:8px;font-weight:600;">Print / Save PDF</button>
+    </footer>
+  </div>
+</body>
+</html>
