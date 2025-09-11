@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision = '20250911_add_mentor_profiles'
-down_revision = 'f5ec2f6ab712_add_question_types_and_options'
+down_revision = 'f5ec2f6ab712'
 branch_labels = None
 depends_on = None
 
