@@ -23,6 +23,9 @@ from app.routes import (
     templates, assessment_draft, admin_template, health, categories
 )
 from app.routes import mentor_notes, assessment_score_history, agreements
+from app.routes import mentor_profile
+from app.routes import apprentice
+from app.routes import mentor_resources, apprentice_resources
 from app.exceptions import (
     UnauthorizedException, ForbiddenException, 
     NotFoundException, ValidationException
@@ -157,6 +160,10 @@ except Exception as _e:
 app.include_router(categories.router, tags=["Categories"])
 app.include_router(mentor_notes.router)
 app.include_router(agreements.router, tags=["Agreements"]) 
+app.include_router(mentor_profile.router)
+app.include_router(mentor_resources.router)
+app.include_router(apprentice_resources.router)
+app.include_router(apprentice.router)
 
 # Static assets (logo etc.) – map /assets to ./assets if present
 _assets_dir = os.path.join(os.path.dirname(__file__), '..', 'assets')

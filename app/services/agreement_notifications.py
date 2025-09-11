@@ -14,6 +14,9 @@ class AgreementEmailEvent(str, Enum):
     APPRENTICE_INVITE = "apprentice_invite"
     PARENT_INVITE = "parent_invite"
     PARENT_RESEND = "parent_resend"
+    PARENT_RESEND_REQUEST = "parent_resend_request"
+    RESCHEDULE_REQUEST = "reschedule_request"
+    RESCHEDULE_RESPONSE = "reschedule_response"
     FULLY_SIGNED = "fully_signed"
     REVOKED = "revoked"
 
@@ -21,6 +24,9 @@ SUBJECTS: Dict[AgreementEmailEvent, str] = {
     AgreementEmailEvent.APPRENTICE_INVITE: "Mentorship Agreement: Please Review and Sign",
     AgreementEmailEvent.PARENT_INVITE: "Parent Signature Requested: Mentorship Agreement",
     AgreementEmailEvent.PARENT_RESEND: "Reminder: Parent Signature Needed",
+    AgreementEmailEvent.PARENT_RESEND_REQUEST: "Apprentice requested parent signature resend",
+    AgreementEmailEvent.RESCHEDULE_REQUEST: "Meeting reschedule requested",
+    AgreementEmailEvent.RESCHEDULE_RESPONSE: "Mentor responded to reschedule request",
     AgreementEmailEvent.FULLY_SIGNED: "Mentorship Agreement Fully Signed",
     AgreementEmailEvent.REVOKED: "Mentorship Agreement Revoked",
 }
@@ -29,6 +35,9 @@ TEMPLATE_MAP: Dict[AgreementEmailEvent, str] = {
     AgreementEmailEvent.APPRENTICE_INVITE: "agreements/apprentice_invite.html",
     AgreementEmailEvent.PARENT_INVITE: "agreements/parent_invite.html",
     AgreementEmailEvent.PARENT_RESEND: "agreements/parent_resend.html",
+    AgreementEmailEvent.PARENT_RESEND_REQUEST: "agreements/parent_resend_request.html",
+    AgreementEmailEvent.RESCHEDULE_REQUEST: "agreements/reschedule_request.html",
+    AgreementEmailEvent.RESCHEDULE_RESPONSE: "agreements/reschedule_response.html",
     AgreementEmailEvent.FULLY_SIGNED: "agreements/fully_signed.html",
     AgreementEmailEvent.REVOKED: "agreements/revoked.html",
 }
@@ -60,10 +69,34 @@ def render_agreement_email(event: AgreementEmailEvent, context: Dict[str, Any]) 
             html_lines.append("<p>A parent/guardian signature is requested for a mentorship agreement.</p>")
         elif event == AgreementEmailEvent.PARENT_RESEND:
             html_lines.append("<p>This is a reminder to review and sign the mentorship agreement.</p>")
+        elif event == AgreementEmailEvent.PARENT_RESEND_REQUEST:
+            html_lines.append("<p>The apprentice has requested that you resend the parent/guardian signature link.</p>")
+            if context.get('parent_email'):
+                html_lines.append(f"<p>Parent Email on file: {context.get('parent_email')}</p>")
         elif event == AgreementEmailEvent.FULLY_SIGNED:
             html_lines.append("<p>The mentorship agreement is now fully signed and active.</p>")
         elif event == AgreementEmailEvent.REVOKED:
             html_lines.append("<p>The mentorship agreement has been revoked.</p>")
+        elif event == AgreementEmailEvent.RESCHEDULE_REQUEST:
+            html_lines.append("<p>The apprentice has requested to reschedule the meeting.</p>")
+            reason = context.get('reason')
+            if reason:
+                html_lines.append(f"<p><strong>Reason:</strong> {reason}</p>")
+            proposals = context.get('proposals') or []
+            if proposals:
+                items = ''.join(f"<li>{p}</li>" for p in proposals)
+                html_lines.append(f"<p><strong>Proposed Times:</strong><ul>{items}</ul></p>")
+        elif event == AgreementEmailEvent.RESCHEDULE_RESPONSE:
+            html_lines.append("<p>The mentor responded to your reschedule request.</p>")
+            decision = context.get('decision')
+            if decision:
+                html_lines.append(f"<p><strong>Decision:</strong> {decision}</p>")
+            selected_time = context.get('selected_time')
+            if selected_time:
+                html_lines.append(f"<p><strong>Selected time:</strong> {selected_time}</p>")
+            note = context.get('note')
+            if note:
+                html_lines.append(f"<p><strong>Note:</strong> {note}</p>")
         action_url = context.get('action_url')
         if action_url:
             html_lines.append(f"<p><a href='{action_url}'>Open Agreement</a></p>")

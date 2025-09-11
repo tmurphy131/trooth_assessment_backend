@@ -1,115 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apprentice Invitation - T[root]H</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-        }
-        .container {
-            background: white;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #28a745;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #28a745;
-            margin-bottom: 10px;
-        }
-        .invitation-card {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            border-radius: 8px;
-            padding: 25px;
-            text-align: center;
-            margin: 20px 0;
-        }
-        .btn {
-            display: inline-block;
-            background: #28a745;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            margin: 20px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .btn:hover {
-            background: #218838;
-        }
-        .info-section {
-            background: #f8f9fa;
-            border-radius: 6px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #dee2e6;
-            color: #6c757d;
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">T[root]H Assessment</div>
-            <h1>You're Invited to Begin Your Spiritual Journey</h1>
-        </div>
-
-        <p>Dear {{ apprentice_name }},</p>
-        
-        <div class="invitation-card">
-            <h2>Welcome to Your Discipleship Journey!</h2>
-            <p>{{ mentor_name }} has invited you to begin a structured assessment and mentoring relationship through the T[root]H platform.</p>
-        </div>
-
-        <div class="info-section">
-            <h3>What is T[root]H Assessment?</h3>
-            <p>T[root]H is a comprehensive spiritual assessment tool designed to help you and your mentor understand your current spiritual growth and identify areas for development. Through thoughtful questions and AI-assisted analysis, we provide insights to guide your discipleship journey.</p>
-        </div>
-
-        <div class="info-section">
-            <h3>What to Expect</h3>
-            <ul>
-                <li><strong>Assessment Questions:</strong> Thoughtful questions about various aspects of spiritual life</li>
-                <li><strong>Personal Growth Insights:</strong> Detailed feedback on your spiritual maturity</li>
-                <li><strong>Mentoring Support:</strong> Ongoing guidance from {{ mentor_name }}</li>
-                <li><strong>Progress Tracking:</strong> Monitor your growth over time</li>
-            </ul>
-        </div>
-
-        <div style="text-align: center;">
-            <a href="{{ app_url }}/accept-invitation?token={{ token }}" class="btn">Accept Invitation & Start Assessment</a>
-        </div>
-
-        <p>This invitation will expire in 7 days. If you have any questions, please reach out to {{ mentor_name }} directly.</p>
-
-        <div class="footer">
-            <p>This invitation was sent through the T[root]H Assessment platform.</p>
-            <p>If you didn't expect this invitation, you can safely ignore this email.</p>
-            <p>© 2025 T[root]H Assessment. All rights reserved.</p>
-        </div>
+{% extends "_base.html" %}
+{% block title %}Invitation - T[root]H{% endblock %}
+{% block content %}
+    <h2 style="margin-top:0;">You're Invited to Begin Your Spiritual Journey</h2>
+    <p>Dear {{ apprentice_name }},</p>
+    <div style="background:linear-gradient(135deg,#28A745,#20c997);color:#fff;border-radius:10px;padding:26px 24px;text-align:center;margin:24px 0 30px;">
+        <h3 style="margin:0 0 10px;font-size:22px;">Welcome to Your Discipleship Journey!</h3>
+        <p style="margin:0;">{{ mentor_name }} has invited you to begin a structured assessment and mentoring relationship through the T[root]H platform.</p>
     </div>
-</body>
-</html>
+    <h3 style="margin-bottom:10px;">What is T[root]H Assessment?</h3>
+    <p>T[root]H is a comprehensive spiritual assessment tool that helps you and your mentor understand your current spiritual growth and identify areas for development.</p>
+    <h3 style="margin:30px 0 12px;">What to Expect</h3>
+    <ul style="margin:0 0 24px;">
+        <li><strong>Assessment Questions:</strong> Thoughtful prompts on spiritual life</li>
+        <li><strong>Personal Growth Insights:</strong> AI-assisted feedback</li>
+        <li><strong>Mentoring Support:</strong> Ongoing guidance from {{ mentor_name }}</li>
+        <li><strong>Progress Tracking:</strong> Monitor growth over time</li>
+    </ul>
+    <div class="btn-row">
+        <a class="brand-btn" href="{{ app_url }}/accept-invitation?token={{ token }}">Accept Invitation & Start</a>
+    </div>
+    <p class="muted">This invitation expires in 7 days.</p>
+{% endblock %}

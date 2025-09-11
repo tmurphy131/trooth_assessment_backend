@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.schemas import user as user_schema
+from app.schemas.user import UserCreate, UserOut
 from app.models import user as user_model
 from app.db import get_db
 from app.services.auth import verify_token, require_roles
@@ -26,8 +26,8 @@ def assign_apprentice(mentor_id: str, apprentice_id: str, db: Session = Depends(
     db.commit()
     return {"message": "Apprentice assigned successfully"}
 
-@router.post("/", response_model=user_schema.UserOut)
-def create_user(user: user_schema.UserCreate, db: Session = Depends(get_db), decoded_token=Depends(verify_token)):
+@router.post("/", response_model=UserOut)
+def create_user(user: UserCreate, db: Session = Depends(get_db), decoded_token=Depends(verify_token)):
     existing_user = db.query(User).filter(User.email == user.email).first()
     if existing_user:
         return existing_user
