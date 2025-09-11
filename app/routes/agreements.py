@@ -8,12 +8,14 @@ import re
 from app.utils.datetime import utc_now
 import hashlib
 import uuid
+from app.models.notification import Notification
 
 from app.db import get_db
 from app.schemas.agreement import (
     AgreementCreate, AgreementOut, AgreementSubmit, AgreementSign,
     AgreementTemplateCreate, AgreementTemplateOut, ParentTokenResend,
-    AgreementFieldsUpdate,
+    AgreementFieldsUpdate, MeetingRescheduleRequest,
+    RescheduleResponse,
 )
 from app.models.agreement import Agreement, AgreementTemplate, AgreementToken
 from app.models.user import User, UserRole
@@ -491,6 +493,209 @@ def resend_parent_token(agreement_id: str, body: ParentTokenResend, db: Session 
         pass
     return ag
 
+# Apprentice-side request to mentor to resend parent link (no token generation here)
+_APPRENTICE_RESEND_REQUEST_TRACK: dict[str, list[float]] = {}
+@router.post("/{agreement_id}/request-resend-parent", response_model=AgreementOut)
+def request_resend_parent(agreement_id: str, body: ParentTokenResend | None = None, db: Session = Depends(get_db), apprentice: User = Depends(require_apprentice)):
+    ag = db.query(Agreement).filter_by(id=agreement_id).first()
+    if not ag:
+        raise HTTPException(status_code=404, detail="Not found")
+    # Ensure apprentice belongs to this agreement (by id or email)
+    if ag.apprentice_id != apprentice.id and ag.apprentice_email != apprentice.email:
+        raise HTTPException(status_code=403, detail="Forbidden")
+    if not ag.parent_required or ag.status != 'awaiting_parent':
+        raise HTTPException(status_code=409, detail="Not awaiting parent signature")
+    # Soft rate limit per agreement to avoid spam (3/hour)
+    now_ts = time.time()
+    history = _APPRENTICE_RESEND_REQUEST_TRACK.get(ag.id, [])
+    history = [t for t in history if now_ts - t < RESEND_WINDOW_SECONDS]
+    if len(history) >= MAX_RESENDS_PER_HOUR:
+        raise HTTPException(status_code=429, detail="Too many requests; try later")
+    history.append(now_ts)
+    _APPRENTICE_RESEND_REQUEST_TRACK[ag.id] = history
+
+    # Notify mentor via email; mentor can use their UI action to resend actual parent token
+    mentor_user = db.query(User).filter_by(id=ag.mentor_id).first()
+    mentor_email = mentor_user.email if mentor_user and mentor_user.email else None
+    try:
+        if mentor_email:
+            send_agreement_email(
+                AgreementEmailEvent.PARENT_RESEND_REQUEST,
+                to_email=mentor_email,
+                context={
+                    'agreement_id': ag.id,
+                    'apprentice_email': ag.apprentice_email,
+                    'parent_email': ag.parent_email,
+                }
+            )
+    except Exception:
+        pass
+    return ag
+
+@router.post("/{agreement_id}/request-reschedule", response_model=AgreementOut)
+def request_reschedule(agreement_id: str, body: MeetingRescheduleRequest, db: Session = Depends(get_db), apprentice: User = Depends(require_apprentice)):
+    ag = db.query(Agreement).filter_by(id=agreement_id).first()
+    if not ag:
+        raise HTTPException(status_code=404, detail="Not found")
+    if ag.apprentice_id != apprentice.id and ag.apprentice_email != apprentice.email:
+        raise HTTPException(status_code=403, detail="Forbidden")
+    if ag.status not in ("awaiting_apprentice", "awaiting_parent", "fully_signed"):
+        raise HTTPException(status_code=409, detail="Inactive agreement")
+    mentor_user = db.query(User).filter_by(id=ag.mentor_id).first()
+    mentor_email = mentor_user.email if mentor_user and mentor_user.email else None
+    try:
+        if mentor_email:
+            send_agreement_email(
+                AgreementEmailEvent.RESCHEDULE_REQUEST,
+                to_email=mentor_email,
+                context={
+                    'agreement_id': ag.id,
+                    'apprentice_email': ag.apprentice_email,
+                    'reason': body.reason,
+                    'proposals': body.proposals,
+                }
+            )
+        # Also record a notification for mentor
+        note_msg = "Meeting reschedule requested"
+        parts = []
+        if body.reason: parts.append(f"Reason: {body.reason}")
+        if body.proposals: parts.append("Proposals: " + ", ".join(body.proposals))
+        if parts:
+            note_msg += " — " + " | ".join(parts)
+        notif = Notification(
+            user_id=ag.mentor_id,
+            message=note_msg,
+            link=f"/agreements/{ag.id}",
+        )
+        db.add(notif)
+        db.commit()
+    except Exception:
+        pass
+    return ag
+
+@router.post("/{agreement_id}/reschedule/respond", response_model=AgreementOut)
+def respond_reschedule(agreement_id: str, body: RescheduleResponse, db: Session = Depends(get_db), mentor: User = Depends(require_mentor)):
+    ag = db.query(Agreement).filter_by(id=agreement_id).first()
+    if not ag:
+        raise HTTPException(status_code=404, detail="Not found")
+    if ag.mentor_id != mentor.id:
+        raise HTTPException(status_code=403, detail="Forbidden")
+    if ag.status not in ("awaiting_apprentice", "awaiting_parent", "fully_signed"):
+        raise HTTPException(status_code=409, detail="Inactive agreement")
+    updated_meeting = False
+    if body.decision == 'accepted' and body.selected_time:
+        import re, datetime as _dt, hashlib
+        fields = ag.fields_json or {}
+        sel = body.selected_time.strip()
+        weekday_map = {
+            'mon': 'Monday','monday':'Monday','tue':'Tuesday','tues':'Tuesday','tuesday':'Tuesday',
+            'wed':'Wednesday','weds':'Wednesday','wednesday':'Wednesday','thu':'Thursday','thur':'Thursday','thurs':'Thursday','thursday':'Thursday',
+            'fri':'Friday','friday':'Friday','sat':'Saturday','saturday':'Saturday','sun':'Sunday','sunday':'Sunday'
+        }
+        def _normalize_time(raw: str):
+            raw_l = raw.lower().strip()
+            m24 = re.fullmatch(r'([01]?\d|2[0-3]):([0-5]\d)', raw_l)
+            if m24:
+                return f"{int(m24.group(1)):02d}:{int(m24.group(2)):02d}"
+            mam = re.fullmatch(r'(\d{1,2}):([0-5]\d)\s*([ap]m)', raw_l)
+            if mam:
+                h = int(mam.group(1)); mi = int(mam.group(2)); ap = mam.group(3)
+                if ap == 'pm' and h < 12: h += 12
+                if ap == 'am' and h == 12: h = 0
+                return f"{h:02d}:{mi:02d}"
+            mam2 = re.fullmatch(r'(\d{1,2})\s*([ap]m)', raw_l)
+            if mam2:
+                h = int(mam2.group(1)); ap = mam2.group(2)
+                if ap == 'pm' and h < 12: h += 12
+                if ap == 'am' and h == 12: h = 0
+                return f"{h:02d}:00"
+            return None
+        try:
+            date_iso = re.search(r'\b(\d{4}-\d{2}-\d{2})\b', sel)
+            date_us  = re.search(r'\b(\d{1,2}/\d{1,2}/\d{4})\b', sel)
+            parsed_date = None
+            if date_iso:
+                try: parsed_date = _dt.datetime.strptime(date_iso.group(1), "%Y-%m-%d").date()
+                except Exception: pass
+            elif date_us:
+                try: parsed_date = _dt.datetime.strptime(date_us.group(1), "%m/%d/%Y").date()
+                except Exception: pass
+            tokens = [t.strip(',') for t in sel.split()]
+            weekday_found = None
+            for t in tokens:
+                low = t.lower()
+                if low in weekday_map:
+                    weekday_found = weekday_map[low]; break
+            time_patterns = re.findall(r'\b\d{1,2}:\d{2}\s*(?:[ap]m)?\b|\b\d{1,2}\s*[ap]m\b', sel, flags=re.IGNORECASE)
+            normalized_time = _normalize_time(time_patterns[0]) if time_patterns else None
+            if parsed_date:
+                fields['start_date'] = parsed_date.isoformat()
+                fields['meeting_day'] = parsed_date.strftime('%A')
+                updated_meeting = True
+            elif weekday_found:
+                fields['meeting_day'] = weekday_found
+                updated_meeting = True
+            if normalized_time:
+                fields['meeting_time'] = normalized_time
+                updated_meeting = True
+            else:
+                fields.setdefault('meeting_time', sel)
+            fields['last_reschedule_raw'] = sel
+            if updated_meeting:
+                ag.fields_json = fields
+                tpl = db.query(AgreementTemplate).filter_by(version=ag.template_version).first()
+                if tpl:
+                    try:
+                        ag.content_rendered = _render_content(
+                            tpl.markdown_source,
+                            fields,
+                            mentor_name=mentor.name or mentor.email,
+                            apprentice_email=ag.apprentice_email,
+                            apprentice_name=ag.apprentice_name
+                        )
+                        ag.content_hash = hashlib.sha256(ag.content_rendered.encode()).hexdigest()
+                    except Exception:
+                        pass
+                db.add(ag)
+                db.commit()
+                db.refresh(ag)
+        except Exception:
+            db.rollback()
+            # continue silently
+
+    # Notify apprentice of the response
+    try:
+        apprentice_email = ag.apprentice_email
+        send_agreement_email(
+            AgreementEmailEvent.RESCHEDULE_RESPONSE,
+            to_email=apprentice_email,
+            context={
+                'agreement_id': ag.id,
+                'decision': body.decision,
+                'selected_time': body.selected_time,
+                'note': body.note,
+            }
+        )
+    except Exception:
+        pass
+
+    # Mark related notifications as read
+    try:
+        notes = db.query(Notification).filter_by(user_id=mentor.id).all()
+        for n in notes:
+            if n.link and agreement_id in n.link:
+                n.is_read = True
+                db.add(n)
+        db.commit()
+    except Exception:
+        pass
+
+    # Attach convenience names
+    mentor_user = db.query(User).filter_by(id=ag.mentor_id).first()
+    if mentor_user:
+        ag.__dict__["mentor_name"] = mentor_user.name or mentor_user.email
+    ag.__dict__["apprentice_name"] = ag.apprentice_name or (ag.apprentice_email.split('@')[0] if ag.apprentice_email else None)
+    return ag
 # Public token-based endpoints (simplified placeholder implementation)
 @router.get("/public/{token}", response_model=AgreementOut)
 def public_view(token: str, db: Session = Depends(get_db)):

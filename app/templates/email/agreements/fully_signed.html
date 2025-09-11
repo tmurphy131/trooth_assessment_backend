@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html><body style="font-family:Arial,sans-serif;background:#ffffff;color:#222;">
-<div style="max-width:620px;margin:0 auto;padding:20px;">
-  <div style="text-align:center;margin-bottom:25px;">
-    <img src="{{ logo_url }}" alt="T[root]H" style="max-width:180px;"/>
-  </div>
-  <h2 style="color:#0a4d8c;">Agreement Fully Signed</h2>
+{% extends "_base.html" %}
+{% block title %}Agreement Fully Signed{% endblock %}
+{% block content %}
+  <h2>Agreement Fully Signed</h2>
   <p>The mentorship agreement (ID {{ agreement_id }}) is now fully executed and active.</p>
   <p>Mentee: {{ apprentice_email }}<br/>Mentor: {{ mentor_name or mentor_email }}</p>
-  {% if action_url %}<p style="text-align:center;margin:30px 0;">
-    <a href="{{ action_url }}" style="background:#0a4d8c;color:#fff;padding:12px 22px;text-decoration:none;border-radius:4px;">View Agreement</a>
-  </p>{% endif %}
-  <p style="font-size:13px;color:#666;">Thank you for completing the process.</p>
-  <hr style="border:none;border-top:1px solid #eee;margin:32px 0;"/>
-  <p style="font-size:12px;color:#888;">T[root]H Assessment</p>
-</div>
-</body></html>
+  {% if action_url %}<div class="btn-row"><a class="brand-btn" href="{{ action_url }}">View Agreement</a></div>{% endif %}
+  <p class="muted">Thank you for completing the process.</p>
+{% endblock %}

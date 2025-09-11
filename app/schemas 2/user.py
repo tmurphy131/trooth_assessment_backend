@@ -1,14 +1,15 @@
 from pydantic import BaseModel, field_validator
 from typing import Optional
 from enum import Enum
-from datetime import datetime
-from app.models.user import UserRole
-from app.core.security import SecurityMixin
 
 class RoleEnum(str, Enum):
     apprentice = "apprentice"
     mentor = "mentor"
     admin = "admin"
+
+from datetime import datetime
+from app.models.user import UserRole
+from app.core.security import SecurityMixin
 
 class UserBase(BaseModel, SecurityMixin):
     name: str
@@ -30,6 +31,7 @@ class UserOut(UserBase):
     role: UserRole
     created_at: Optional[datetime]
 
+    # Pydantic v2 style configuration
     model_config = {
         'from_attributes': True
     }

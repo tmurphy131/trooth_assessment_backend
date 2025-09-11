@@ -4,6 +4,7 @@ from sqlalchemy import func
 from app.services.auth import require_mentor
 from app.db import get_db
 from app.models.user import User
+from app.models.notification import Notification
 from app.models.mentor_apprentice import MentorApprentice
 from app.models.assessment_draft import AssessmentDraft
 from app.models.question import Question
@@ -18,6 +19,95 @@ from app.exceptions import ForbiddenException, NotFoundException
 from pydantic import BaseModel
 
 router = APIRouter()
+@router.get("/notifications", response_model=list[dict])
+def list_notifications(
+    current_user: User = Depends(require_mentor),
+    db: Session = Depends(get_db)
+):
+    """Return active (unread) notifications for the mentor.
+
+    Hybrid model: actionable items stay here until acted on (e.g. reschedule response),
+    after which they're marked read and therefore disappear from this list and
+    appear in /notifications/history.
+    """
+    notes = (
+        db.query(Notification)
+        .filter(Notification.user_id == current_user.id, Notification.is_read.is_(False))
+        .order_by(Notification.created_at.desc())
+        .limit(100)
+        .all()
+    )
+    return [
+        {
+            "id": n.id,
+            "message": n.message,
+            "link": n.link,
+            "is_read": n.is_read,
+            "created_at": n.created_at.isoformat() if n.created_at else None,
+        } for n in notes
+    ]
+
+@router.get("/notifications/history", response_model=list[dict])
+def list_notifications_history(
+    current_user: User = Depends(require_mentor),
+    db: Session = Depends(get_db)
+):
+    """Return historical (read) notifications for the mentor."""
+    notes = (
+        db.query(Notification)
+        .filter(Notification.user_id == current_user.id, Notification.is_read.is_(True))
+        .order_by(Notification.created_at.desc())
+        .limit(100)
+        .all()
+    )
+    return [
+        {
+            "id": n.id,
+            "message": n.message,
+            "link": n.link,
+            "is_read": n.is_read,
+            "created_at": n.created_at.isoformat() if n.created_at else None,
+        } for n in notes
+    ]
+
+@router.post("/notifications/{notification_id}/dismiss", response_model=dict)
+def dismiss_notification(
+    notification_id: str,
+    current_user: User = Depends(require_mentor),
+    db: Session = Depends(get_db)
+):
+    """Manually mark a single notification as read (dismiss)."""
+    notif = db.query(Notification).filter_by(id=notification_id, user_id=current_user.id).first()
+    if not notif:
+        raise HTTPException(status_code=404, detail="Notification not found")
+    if not notif.is_read:
+        notif.is_read = True
+        db.add(notif)
+        db.commit()
+        db.refresh(notif)
+    return {
+        "id": notif.id,
+        "message": notif.message,
+        "link": notif.link,
+        "is_read": notif.is_read,
+        "created_at": notif.created_at.isoformat() if notif.created_at else None,
+    }
+
+@router.post("/notifications/dismiss-all", response_model=dict)
+def dismiss_all_notifications(
+    current_user: User = Depends(require_mentor),
+    db: Session = Depends(get_db)
+):
+    """Bulk mark all unread notifications as read."""
+    notes = db.query(Notification).filter_by(user_id=current_user.id, is_read=False).all()
+    count = 0
+    for n in notes:
+        n.is_read = True
+        db.add(n)
+        count += 1
+    if count:
+        db.commit()
+    return {"dismissed": count}
 
 @router.get("/my-apprentices", response_model=list[dict])
 def list_apprentices(

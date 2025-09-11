@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+{% block title %}Meeting Reschedule Requested{% endblock %}
+{% block content %}
+  <h2>Meeting Reschedule Requested</h2>
+  <p>The apprentice has requested to reschedule the mentoring meeting.</p>
+  {% if reason %}<p><strong>Reason:</strong> {{ reason }}</p>{% endif %}
+  {% if proposals %}
+    <p><strong>Proposed Times:</strong></p>
+    <ul>
+      {% for p in proposals %}<li>{{ p }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+  {% if action_url %}<div class="btn-row"><a class="brand-btn" href="{{ action_url }}">View Agreement</a></div>{% endif %}
+  <p class="muted">Respond in the platform to confirm, decline, or propose an alternative.</p>
+{% endblock %}

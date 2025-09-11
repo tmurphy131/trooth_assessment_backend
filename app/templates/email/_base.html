@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}T[root]H Notification{% endblock %}</title>
+  <style>
+  body { margin:0; padding:0; background:#F5F7FA; font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif; color:#222; -webkit-font-smoothing:antialiased; }
+    a { text-decoration:none; }
+  .container { max-width:640px; margin:0 auto; padding:32px 20px; }
+  .card { background:#ffffff; border:1px solid #E2E8F0; border-radius:10px; padding:32px 34px; box-shadow:0 4px 18px rgba(0,0,0,0.05); }
+    .logo-bar { text-align:center; margin-bottom:28px; }
+    .logo-bar img { max-width:180px; height:auto; display:inline-block; }
+  .brand-title { font-size:22px; font-weight:600; color:#0A4D8C; letter-spacing:.5px; }
+  h1,h2,h3 { font-weight:600; color:#0A4D8C; margin-top:0; }
+    h2 { font-size:22px; }
+    p { line-height:1.55; }
+    .btn-row { text-align:center; margin:30px 0; }
+  .brand-btn { background:#0A4D8C; color:#fff !important; padding:14px 26px; border-radius:6px; font-weight:600; font-size:15px; display:inline-block; box-shadow:0 2px 6px rgba(0,0,0,0.15); }
+    .brand-btn:hover { background:#083b69; }
+  .accent-badge { display:inline-block; background:#28A745; color:#fff; padding:4px 10px; border-radius:12px; font-size:12px; font-weight:600; letter-spacing:.5px; }
+    .muted { color:#666; font-size:13px; }
+    .footer { text-align:center; margin-top:36px; font-size:12px; color:#777; line-height:1.4; }
+  .divider { border:none; border-top:1px solid #E2E8F0; margin:38px 0 30px; }
+    ul { padding-left:20px; }
+    .pill { background:#EEF4FA; color:#335; padding:4px 10px; font-size:12px; border-radius:14px; display:inline-block; margin:4px 4px 0 0; }
+  .danger { color:#A30000; }
+  @media (prefers-color-scheme: dark) { body { background:#101418; color:#ddd; } .card { background:#1C2430; border-color:#2C3A49; } .footer { color:#999; } .divider { border-top-color:#2C3A49; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="logo-bar">
+        {% if logo_url %}
+          <img src="{{ logo_url }}" alt="T[root]H Logo" />
+        {% else %}
+          <div class="brand-title">T[root]H Assessment</div>
+        {% endif %}
+      </div>
+      {% block preheader %}{% endblock %}
+      {% block content %}{% endblock %}
+      <hr class="divider" />
+      <div class="footer">
+        <p>T[root]H Assessment &mdash; Empowering intentional spiritual growth.</p>
+        <p>&copy; {{ 'now'|strftime('%Y') }} T[root]H Assessment. All rights reserved.</p>
+        <p class="muted">If you didn’t expect this email you can safely ignore it.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

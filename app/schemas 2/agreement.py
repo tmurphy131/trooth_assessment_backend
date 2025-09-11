@@ -111,17 +111,9 @@ class AgreementFieldsUpdate(BaseModel):
 class MeetingRescheduleRequest(BaseModel):
     reason: Optional[str] = Field(None, max_length=500)
     proposals: Optional[List[str]] = Field(default=None)
-    # Request model only. Response from mentor is separate schema below.
 
-class RescheduleResponse(BaseModel):
-    """Mentor response to a meeting reschedule request.
-
-    decision: accepted | declined | proposed
-    If decision == accepted -> selected_time SHOULD be provided.
-    If decision == proposed -> selected_time MAY provide a single preferred time.
-    note: optional free-form clarification.
-    """
-    decision: str  # accepted | declined | proposed
-    selected_time: Optional[str] = None
-    note: Optional[str] = None
+    class RescheduleResponse(BaseModel):
+        decision: str  # accepted | declined | proposed
+        selected_time: Optional[str] = None
+        note: Optional[str] = None
 
