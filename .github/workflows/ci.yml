@@ -2,8 +2,25 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "**" ]
   pull_request:
+    branches: [ "**" ]
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT }}
+  REGION: us-east4
+  IMAGE_NAME: trooth-backend
+  SERVICE: trooth-backend
+  RUNTIME_SA: ${{ secrets.GCP_RUNTIME_SA_EMAIL }}
+  MIGRATE_JOB: trooth-migrate
 
 jobs:
   test:
@@ -11,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: Cache pip
@@ -19,6 +36,8 @@ jobs:
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -26,46 +45,122 @@ jobs:
       - name: Run tests
         run: pytest -q
 
-  build_and_push:
+  build_deploy:
     needs: test
-    if: github.ref == 'refs/heads/main'
+    if: >-
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
+    outputs:
+      migrate_needed: ${{ steps.detect_migrations.outputs.migrate_needed }}
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Login to GCR
-        uses: docker/login-action@v2
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          registry: gcr.io
-          username: _json_key
-          password: ${{ secrets.GCP_SA_KEY }}
-      - name: Build and push image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: |
-            gcr.io/${{ secrets.GCP_PROJECT }}/trooth-backend:latest
-            gcr.io/${{ secrets.GCP_PROJECT }}/trooth-backend:${{ github.sha }}
-          platforms: linux/amd64
+          fetch-depth: 0
 
-  deploy:
-    needs: build_and_push
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Authenticate to GCP
-        uses: google-github-actions/auth@v1
+      - name: Determine auth method
+        id: auth_check
+        shell: bash
+        run: |
+          set -euo pipefail
+          has_wif=false
+          if [ -n "${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}" ] && [ -n "${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}" ]; then
+            has_wif=true
+          fi
+          has_key=false
+          if [ -n "${{ secrets.GCP_SA_KEY }}" ]; then
+            has_key=true
+          fi
+          echo "has_wif=${has_wif}" >> "$GITHUB_OUTPUT"
+          echo "has_key=${has_key}" >> "$GITHUB_OUTPUT"
+
+      - name: Auth to Google Cloud (OIDC)
+        if: steps.auth_check.outputs.has_wif == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Auth to Google Cloud (JSON key fallback)
+        if: steps.auth_check.outputs.has_wif != 'true' && steps.auth_check.outputs.has_key == 'true'
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
-      - name: Deploy to Cloud Run
-        uses: google-github-actions/deploy-cloudrun@v1
+
+      - name: Fail if no auth secrets configured
+        if: steps.auth_check.outputs.has_wif != 'true' && steps.auth_check.outputs.has_key != 'true'
+        run: |
+          echo "::error::No Google Cloud auth configured. Set either GCP_WORKLOAD_IDENTITY_PROVIDER + GCP_SERVICE_ACCOUNT_EMAIL for OIDC, or GCP_SA_KEY for JSON key auth." && exit 1
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
         with:
-          service: trooth-backend
-          image: gcr.io/${{ secrets.GCP_PROJECT }}/trooth-backend:latest
-          region: us-east4
-          project_id: ${{ secrets.GCP_PROJECT }}
+          project_id: ${{ env.PROJECT_ID }}
+
+      - name: Validate project and export IMAGE_URI
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${PROJECT_ID:-}" ]; then
+            echo "::error::PROJECT_ID is not set. Configure the GCP_PROJECT repository secret." && exit 1
+          fi
+          if [ -z "${IMAGE_NAME:-}" ]; then
+            echo "::error::IMAGE_NAME is not set." && exit 1
+          fi
+          echo "IMAGE_URI=gcr.io/${PROJECT_ID}/${IMAGE_NAME}:latest" >> "$GITHUB_ENV"
+
+      - name: Detect new Alembic migration files
+        id: detect_migrations
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            DIFF=$(git diff --name-status HEAD^ HEAD -- 'alembic/versions/**/*.py' 'alembic/versions/*.py' || true)
+          else
+            DIFF=$(git diff --name-status HEAD -- 'alembic/versions/**/*.py' 'alembic/versions/*.py' || true)
+          fi
+          echo "Changed migration files:\n$DIFF"
+          if echo "$DIFF" | grep -E '^A\s' >/dev/null; then
+            echo "migrate_needed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "migrate_needed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build with Cloud Build (push to GCR)
+        run: |
+          gcloud builds submit --tag "$IMAGE_URI" .
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy "${{ env.SERVICE }}" \
+            --image "$IMAGE_URI" \
+            --region "${{ env.REGION }}" \
+            --platform managed \
+            --service-account "${{ env.RUNTIME_SA }}" \
+            --set-env-vars "ENV=production,SHOW_DOCS=true,EMAIL_FROM_ADDRESS=admin@onlyblv.com,APP_URL=https://trooth-assessment-dev.onlyblv.com" \
+            --set-secrets "DATABASE_URL=DB_URL:latest,FIREBASE_CERT_JSON=FIREBASE_CERT_JSON:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,OPENAI_API_KEY=OPENAI_API_KEY:latest" \
+            --add-cloudsql-instances "${PROJECT_ID}:us-east4:app-pg" \
+            --allow-unauthenticated \
+            --quiet
+
+  migrate:
+    needs: build_deploy
+    if: needs.build_deploy.outputs.migrate_needed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auth to Google Cloud (OIDC)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+      - name: Execute Cloud Run Job for migrations
+        run: |
+          gcloud run jobs execute "${{ env.MIGRATE_JOB }}" \
+            --region "${{ env.REGION }}" \
+            --wait \
+            --task-timeout=1200s

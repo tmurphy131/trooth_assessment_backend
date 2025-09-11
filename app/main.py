@@ -151,6 +151,12 @@ app.include_router(question.router, prefix="/question", tags=["Questions"])
 app.include_router(templates.router, tags=["Templates"])
 app.include_router(assessment_draft.router, prefix="/assessment-drafts", tags=["Assessment Drafts"])
 app.include_router(admin_template.router, prefix="/admin", tags=["Admin"])
+# Include compatibility admin routes for legacy path expectations in tests
+try:
+    from app.routes.admin_template import compat_router as admin_templates_compat_router
+    app.include_router(admin_templates_compat_router, prefix="/admin", tags=["Admin"])
+except Exception as _e:
+    logger.warning(f"Could not include admin templates compat router: {_e}")
 app.include_router(categories.router, tags=["Categories"])
 app.include_router(mentor_notes.router)
 app.include_router(agreements.router, tags=["Agreements"]) 

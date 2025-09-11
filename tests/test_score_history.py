@@ -3,7 +3,7 @@ from uuid import uuid4
 from app.models import User, Assessment, AssessmentScoreHistory
 from app.main import app
 from fastapi.testclient import TestClient
-from datetime import datetime
+from datetime import datetime, UTC
 import json
 
 client = TestClient(app)
@@ -35,7 +35,7 @@ async def test_get_assessment_score_history(test_db, mock_mentor):
         model_used="gpt-4",
         triggered_by="mentor",
         notes="Test entry",
-        scored_at=datetime.utcnow()
+    scored_at=datetime.now(UTC)
     )
 
     test_db.add_all([apprentice, assessment, history])

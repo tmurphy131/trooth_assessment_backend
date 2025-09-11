@@ -113,8 +113,9 @@ def get_current_user(
     return user
 
 def require_mentor(user: User = Depends(get_current_user)) -> User:
-    # Treat admin as having mentor capabilities
-    if user.role not in {UserRole.mentor, UserRole.admin}:
+    # Treat admin as having mentor capabilities; accept enum or string roles
+    role_val = user.role.value if hasattr(user.role, 'value') else str(user.role)
+    if role_val not in {UserRole.mentor.value, UserRole.admin.value}:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Mentor (or admin) access required"
@@ -122,7 +123,8 @@ def require_mentor(user: User = Depends(get_current_user)) -> User:
     return user
 
 def require_apprentice(user: User = Depends(get_current_user)) -> User:
-    if user.role != UserRole.apprentice:
+    role_val = user.role.value if hasattr(user.role, 'value') else str(user.role)
+    if role_val != UserRole.apprentice.value:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Apprentice access required"
@@ -130,7 +132,8 @@ def require_apprentice(user: User = Depends(get_current_user)) -> User:
     return user
 
 def require_admin(user: User = Depends(get_current_user)) -> User:
-    if user.role != UserRole.admin:
+    role_val = user.role.value if hasattr(user.role, 'value') else str(user.role)
+    if role_val != UserRole.admin.value:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Admin privileges required"
@@ -138,7 +141,8 @@ def require_admin(user: User = Depends(get_current_user)) -> User:
     return user
 
 def require_mentor_or_admin(user: User = Depends(get_current_user)) -> User:
-    if user.role not in {UserRole.mentor, UserRole.admin}:
+    role_val = user.role.value if hasattr(user.role, 'value') else str(user.role)
+    if role_val not in {UserRole.mentor.value, UserRole.admin.value}:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Mentors or admins only"

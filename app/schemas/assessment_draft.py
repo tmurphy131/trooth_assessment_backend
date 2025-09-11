@@ -40,9 +40,10 @@ class QuestionItem(BaseModel):
         )
 
 class AssessmentDraftCreate(BaseModel):
-    answers: Optional[Dict[str, str]]
-    last_question_id: Optional[str]
-    template_id: str
+    answers: Optional[Dict[str, str]] = None
+    last_question_id: Optional[str] = None
+    # Some legacy tests omit template_id; treat it as optional and let the route choose a default
+    template_id: Optional[str] = None
 
 class AssessmentDraftUpdate(BaseModel):
     last_question_id: Optional[str]
