@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.schemas.user import UserCreate, UserOut
 from app.models import user as user_model
 from app.db import get_db
-from app.services.auth import verify_token, require_roles
+from app.services.auth import verify_token, require_roles, get_current_user
 from firebase_admin import auth
 from app.models.mentor_apprentice import MentorApprentice
 from app.models.user import User
@@ -45,6 +45,18 @@ def create_user(user: UserCreate, db: Session = Depends(get_db), decoded_token=D
         raise HTTPException(status_code=500, detail=f"Error assigning Firebase role: {str(e)}")
 
     return db_user
+
+@router.get("/{user_id}", response_model=UserOut)
+def get_user_by_id(user_id: str, db: Session = Depends(get_db), decoded_token=Depends(verify_token)):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
+
+@router.get("/me", response_model=UserOut)
+def get_me(current_user: User = Depends(get_current_user)):
+    # get_current_user handles token verification & user retrieval
+    return current_user
 
 @router.get("/admin-only")
 def test_admin_only(decoded_token=Depends(require_roles(["admin"]))):
