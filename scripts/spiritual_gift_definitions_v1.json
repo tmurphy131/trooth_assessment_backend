@@ -1,0 +1,194 @@
+[
+  {
+    "gift_slug": "leadership",
+    "display_name": "Leadership",
+    "short_summary": "Ability to cast vision and guide a group toward God-honoring goals.",
+    "full_definition": "The spiritual capacity to influence, motivate, and direct people toward the fulfillment of God’s purposes with clarity, integrity, and steady faith.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "pastor_shepherd",
+    "display_name": "Pastor / Shepherd",
+    "short_summary": "Care for and nurture spiritual growth of others.",
+    "full_definition": "A God-given desire and grace to provide ongoing spiritual encouragement, protection, guidance, and nurturing for a group of believers.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "discernment",
+    "display_name": "Discernment",
+    "short_summary": "Recognize truth versus error or deception.",
+    "full_definition": "The Spirit-enabled ability to distinguish between truth and falsehood, authentic and counterfeit spiritual influences, motives, or teachings.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "exhortation",
+    "display_name": "Exhortation",
+    "short_summary": "Encourage, strengthen, and motivate others.",
+    "full_definition": "Capacity to come alongside individuals offering counsel, comfort, correction, and motivational support toward Christlike maturity.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "hospitality",
+    "display_name": "Hospitality",
+    "short_summary": "Create welcoming spaces that reflect God’s love.",
+    "full_definition": "A Spirit-empowered openness and warmth that makes others—strangers or believers—feel accepted, safe, and valued within Christian community.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "prophecy",
+    "display_name": "Prophecy",
+    "short_summary": "Boldly declare truth for building up.",
+    "full_definition": "Ability to communicate timely, God-aligned truth that convicts, encourages, or guides, always consistent with Scripture.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "knowledge",
+    "display_name": "Knowledge",
+    "short_summary": "Understand and synthesize Biblical truth.",
+    "full_definition": "A Spirit-enabled grasp of the depth, coherence, and interconnections of God’s revelation that aids teaching and application.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "miracles",
+    "display_name": "Miracles",
+    "short_summary": "God works unusually through your prayers or actions.",
+    "full_definition": "Occurrences beyond natural explanation that God initiates in response to faith, often validating the gospel or strengthening believers.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "healing",
+    "display_name": "Healing",
+    "short_summary": "God restores through your intercession or presence.",
+    "full_definition": "Channels God’s compassionate power for physical, emotional, or spiritual restoration, pointing people to Christ the Healer.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "helps",
+    "display_name": "Helps",
+    "short_summary": "Joyfully assist to free others for their ministry focus.",
+    "full_definition": "Consistent willingness and capacity to support others with practical service that enhances the effectiveness of kingdom work.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "mercy",
+    "display_name": "Mercy",
+    "short_summary": "Deep empathy and compassionate action toward the hurting.",
+    "full_definition": "Spirit-driven sensitivity to suffering with tangible expressions of comfort, hope, and redemptive presence.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "evangelism",
+    "display_name": "Evangelism",
+    "short_summary": "Communicate the gospel clearly and compellingly.",
+    "full_definition": "Effectiveness and zeal in sharing the good news so that others understand their need for Christ and respond in faith.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "faith",
+    "display_name": "Faith",
+    "short_summary": "Unusual confidence in God’s promises and power.",
+    "full_definition": "Persistent trust that God will accomplish what He reveals despite obstacles, inspiring others to rely on Him boldly.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "teaching",
+    "display_name": "Teaching",
+    "short_summary": "Explain and apply Scripture with clarity.",
+    "full_definition": "Capacity to interpret, organize, and communicate biblical truth accurately so learners grow in knowledge and obedience.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "wisdom",
+    "display_name": "Wisdom",
+    "short_summary": "Apply truth to complex real-life choices.",
+    "full_definition": "Spirit-enabled insight that discerns God-honoring courses of action in ambiguous or multi-factor situations.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "intercession",
+    "display_name": "Intercession",
+    "short_summary": "Persistent, focused prayer on behalf of others.",
+    "full_definition": "A sustained burden and perseverance in prayer that aligns with God’s heart and sees strategic breakthroughs.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "service",
+    "display_name": "Service",
+    "short_summary": "Meet practical needs with reliability and humility.",
+    "full_definition": "Spirit-prompted readiness to identify and fulfill essential tasks that sustain and strengthen gospel ministry.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "tongues_interpretation",
+    "display_name": "Tongues & Interpretation",
+    "short_summary": "Spirit-led utterance and/or interpretation that edifies.",
+    "full_definition": "Expression of prayer or praise in languages unknown to the speaker with orderly interpretation for the body’s strengthening (where practiced).",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "giving",
+    "display_name": "Giving",
+    "short_summary": "Cheerfully and sacrificially resource kingdom work.",
+    "full_definition": "Spirit-enabled motivation to release material resources with unusual generosity, strategic focus, and joy.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "missionary",
+    "display_name": "Missionary",
+    "short_summary": "Cross cultural or contextual boundaries for the gospel.",
+    "full_definition": "Capacity and zeal to adapt, incarnate, and persist in unfamiliar contexts to establish or strengthen gospel witness.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "apostleship",
+    "display_name": "Apostleship",
+    "short_summary": "Pioneer, architect, or extend new gospel works.",
+    "full_definition": "Vision and endurance to initiate, establish, or expand missional structures or communities where foundation is weak or absent.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "craftsmanship",
+    "display_name": "Craftsmanship",
+    "short_summary": "Skillfully build or create tangible ministry assets.",
+    "full_definition": "Artistic or technical ability applied to produce, repair, or enhance physical or digital tools that support ministry impact.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "administration",
+    "display_name": "Administration",
+    "short_summary": "Organize, systematize, and coordinate effectively.",
+    "full_definition": "Spirit-enabled structuring of processes, people, and resources so that mission objectives are pursued with clarity and efficiency.",
+    "version": 1,
+    "locale": "en"
+  },
+  {
+    "gift_slug": "music_worship",
+    "display_name": "Music / Worship",
+    "short_summary": "Lead others into authentic, God-focused worship.",
+    "full_definition": "Capacity to combine musical, lyrical, or production gifting with spiritual sensitivity to help people encounter and glorify God.",
+    "version": 1,
+    "locale": "en"
+  }
+]

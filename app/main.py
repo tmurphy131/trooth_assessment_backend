@@ -26,6 +26,7 @@ from app.routes import mentor_notes, assessment_score_history, agreements
 from app.routes import mentor_profile
 from app.routes import apprentice
 from app.routes import mentor_resources, apprentice_resources
+from app.routes import spiritual_gifts
 from app.exceptions import (
     UnauthorizedException, ForbiddenException, 
     NotFoundException, ValidationException
@@ -164,6 +165,7 @@ app.include_router(mentor_profile.router)
 app.include_router(mentor_resources.router)
 app.include_router(apprentice_resources.router)
 app.include_router(apprentice.router)
+app.include_router(spiritual_gifts.router)
 
 # Static assets (logo etc.) – map /assets to ./assets if present
 _assets_dir = os.path.join(os.path.dirname(__file__), '..', 'assets')

@@ -3,7 +3,7 @@ import logging
 import json
 from typing import Dict, Optional, Tuple
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail, To, From, Subject, HtmlContent, PlainTextContent
+from sendgrid.helpers.mail import Mail, To, From, Subject, HtmlContent, PlainTextContent, Attachment, FileContent, FileName, FileType, Disposition
 from datetime import datetime
 
 try:
@@ -172,7 +172,8 @@ T[root]H Assessment Team
     return plain_text, plain_text
 
 def send_email(to_email: str, subject: str, html_content: str,
-               plain_content: str, from_email: str = None) -> bool:
+               plain_content: str, from_email: str = None,
+               attachments: list[dict] | None = None) -> bool:
     """Send email using SendGrid with deep diagnostic logging.
 
     Logging levels:
@@ -216,6 +217,22 @@ def send_email(to_email: str, subject: str, html_content: str,
             html_content=HtmlContent(html_content),
             plain_text_content=PlainTextContent(plain_content)
         )
+        if attachments:
+            import base64
+            for att in attachments:
+                try:
+                    data_b64 = att.get("data_b64") or (base64.b64encode(att["data"]).decode() if att.get("data") else None)
+                    if not data_b64:
+                        continue
+                    a = Attachment(
+                        FileContent(data_b64),
+                        FileName(att.get("filename", "attachment.bin")),
+                        FileType(att.get("mime_type", "application/octet-stream")),
+                        Disposition("attachment")
+                    )
+                    message.attachment = a if not getattr(message, 'attachments', None) else message.attachments.append(a)
+                except Exception:  # pragma: no cover
+                    pass
         try:
             client.send(message)
             return True
@@ -235,6 +252,25 @@ def send_email(to_email: str, subject: str, html_content: str,
             html_content=HtmlContent(html_content),
             plain_text_content=PlainTextContent(plain_content)
         )
+        # Attachments
+        if attachments:
+            for att in attachments:
+                try:
+                    data_b64 = att.get("data_b64")
+                    if not data_b64 and att.get("data") is not None:
+                        import base64
+                        data_b64 = base64.b64encode(att["data"]).decode()
+                    if not data_b64:
+                        continue
+                    a = Attachment(
+                        FileContent(data_b64),
+                        FileName(att.get("filename", "attachment.bin")),
+                        FileType(att.get("mime_type", "application/octet-stream")),
+                        Disposition("attachment")
+                    )
+                    message.attachment = a if not getattr(message, 'attachments', None) else message.attachments.append(a)  # noqa: E501
+                except Exception as e:  # pragma: no cover
+                    logger.error(f"[email] Failed to add attachment {att.get('filename')}: {e}")
 
         logger.debug(f"[email] Sending message payload_summary={{'to': to_email, 'subject': subject[:120], 'html_len': len(html_content), 'plain_len': len(plain_content)}}")
         response = client.send(message)

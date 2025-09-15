@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, ForeignKey, DateTime, Boolean, Float
+from sqlalchemy import Column, String, ForeignKey, DateTime, Boolean, Float, Integer
 from sqlalchemy.orm import relationship
 from app.db import Base
 from datetime import datetime
@@ -15,6 +15,8 @@ class AssessmentTemplate(Base):
     is_master_assessment = Column(Boolean, default=False)  # True for the main Trooth Assessment
     created_by = Column(String, ForeignKey("users.id"), nullable=True)  # Allow null for existing records
     created_at = Column(DateTime, default=datetime.utcnow)
+    # Explicit version for versioned assessments (e.g., spiritual gifts). Null for legacy rows.
+    version = Column(Integer, nullable=True)
 
     # Relationship to User who created the template
     creator = relationship("User", back_populates="created_templates")
