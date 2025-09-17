@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session, selectinload, joinedload
 from app.schemas import assessment as assessment_schema
-from app.db import get_db
+from app.db import get_db, SessionLocal
 from sqlalchemy import func
 from app.models.assessment_draft import AssessmentDraft
 from app.schemas.assessment_draft import AssessmentDraftCreate, AssessmentDraftOut
@@ -9,8 +9,8 @@ from app.services.auth import get_current_user, require_apprentice, require_ment
 from app.models.user import User, UserRole
 from app.models.question import Question
 import uuid
-from app.services.ai_scoring import score_assessment, score_assessment_with_questions
-from app.services.email import send_assessment_email
+from app.services.ai_scoring import score_assessment
+from app.services.email import send_assessment_email, send_notification_email
 from app.models.assessment_answer import AssessmentAnswer
 import logging
 import os
@@ -28,6 +28,164 @@ from app.models.assessment import Assessment
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+# --- Background processing helper -------------------------------------------------
+import asyncio
+from datetime import datetime
+
+async def _process_assessment_background(assessment_id: str):
+    """Compute AI scores and email mentor in the background.
+
+    Runs using a separate DB session to avoid tying up the request transaction.
+    Sends a failure alert email on any unhandled exception.
+    """
+    # Run the heavy work in a thread to avoid blocking the event loop (SQLAlchemy + OpenAI calls)
+    def _worker():
+        session = SessionLocal()
+        try:
+            # Import locally to avoid circulars
+            from app.models.assessment import Assessment as _Assessment
+            from app.models.user import User as _User
+            from app.models.mentor_apprentice import MentorApprentice as _MA
+            from app.models.assessment_template_question import AssessmentTemplateQuestion as _ATQ
+            from app.models.question import Question as _Question
+            from app.models.category import Category as _Category
+            from app.services.ai_scoring import score_assessment_by_category as _score_cat
+
+            assess = session.query(_Assessment).filter_by(id=assessment_id).first()
+            if not assess:
+                logger.error(f"Background worker: assessment {assessment_id} not found")
+                return
+
+            # Build questions list for AI from the template linkage
+            questions = []
+            if assess.template_id:
+                tqs = (
+                    session.query(_ATQ)
+                    .join(_Question, _ATQ.question_id == _Question.id)
+                    .filter(_ATQ.template_id == assess.template_id)
+                    .order_by(_ATQ.order)
+                    .all()
+                )
+                for tq in tqs:
+                    cat_name = None
+                    if getattr(tq.question, 'category_id', None):
+                        cat = session.query(_Category).filter_by(id=tq.question.category_id).first()
+                        cat_name = cat.name if cat else None
+                    # Build options metadata for MC
+                    opts = []
+                    try:
+                        for opt in (tq.question.options or []):
+                            opts.append({
+                                'text': getattr(opt, 'option_text', None),
+                                'is_correct': bool(getattr(opt, 'is_correct', False)),
+                            })
+                    except Exception:
+                        pass
+                    qtype = None
+                    try:
+                        qtype = getattr(tq.question, 'question_type', None)
+                        qtype = qtype.value if hasattr(qtype, 'value') else qtype
+                    except Exception:
+                        qtype = None
+                    questions.append({
+                        'id': str(tq.question.id),
+                        'text': tq.question.text,
+                        'category': cat_name or 'General Assessment',
+                        'question_type': qtype,
+                        'options': opts,
+                    })
+
+            # Fall back: if no template questions, synthesize from answer keys
+            if not questions:
+                questions = [
+                    { 'id': k, 'text': f'Question {k}', 'category': 'General Assessment' }
+                    for k in (assess.answers or {}).keys()
+                ]
+
+            # Run async scoring in this worker thread
+            loop = asyncio.new_event_loop()
+            try:
+                asyncio.set_event_loop(loop)
+                scoring = loop.run_until_complete(_score_cat(assess.answers or {}, questions))
+            finally:
+                try:
+                    loop.close()
+                except Exception:
+                    pass
+
+            # Update assessment with scores and recommendation
+            assess.scores = scoring
+            assess.recommendation = scoring.get('summary_recommendation')
+            assess.status = "done"
+            session.commit()
+            logger.info(f"Background worker: scores saved for assessment {assessment_id}")
+
+            # Email mentor notification
+            apprentice = session.query(_User).filter_by(id=assess.apprentice_id).first()
+            apprentice_name = getattr(apprentice, 'name', None) or 'Apprentice'
+            rel = session.query(_MA).filter_by(apprentice_id=assess.apprentice_id).first()
+            if rel:
+                mentor = session.query(_User).filter_by(id=rel.mentor_id).first()
+                if mentor and mentor.email:
+                    # Prepare details from category scores for legacy email helper
+                    details = {}
+                    for cat, sc in (scoring.get('category_scores') or {}).items():
+                        details[cat] = {'score': sc, 'feedback': ''}
+                    try:
+                        status = send_assessment_email(
+                            to_email=mentor.email,
+                            apprentice_name=apprentice_name,
+                            assessment_title='Assessment Completed',
+                            score=scoring.get('overall_score'),
+                            feedback_summary=scoring.get('summary_recommendation'),
+                            details=details,
+                            mentor_name=mentor.name or 'Mentor',
+                        )
+                        logger.info(f"Background worker: mentor email status={status} to {mentor.email}")
+                    except Exception as _e:
+                        logger.error(f"Background worker: failed to send mentor email: {_e}")
+                else:
+                    logger.warning("Background worker: mentor not found or email missing")
+            else:
+                logger.info("Background worker: no mentor relationship found; skipping mentor email")
+
+        except Exception as e:
+            logger.error(f"Background worker error for assessment {assessment_id}: {e}", exc_info=True)
+            # Send failure alert
+            try:
+                msg = (
+                    f"Assessment scoring failed.\n"
+                    f"assessment_id={assessment_id}\n"
+                    f"time={datetime.utcnow().isoformat()}Z\n"
+                    f"error={e}"
+                )
+                send_notification_email(
+                    to_email="tay.murphy88@gmail.com",
+                    subject="[Alert] Assessment scoring failed",
+                    message=msg,
+                )
+            except Exception:
+                pass
+                try:
+                    # Mark assessment as error for polling UX
+                    session = SessionLocal()
+                    from app.models.assessment import Assessment as _Assessment
+                    a = session.query(_Assessment).filter_by(id=assessment_id).first()
+                    if a:
+                        a.status = "error"
+                        session.commit()
+                except Exception:
+                    pass
+        finally:
+            try:
+                session.close()
+            except Exception:
+                pass
+
+    # Execute in default executor
+    loop = asyncio.get_event_loop()
+    await loop.run_in_executor(None, _worker)
 
 @router.post("", response_model=AssessmentDraftOut)
 @router.post("/", response_model=AssessmentDraftOut)
@@ -508,109 +666,63 @@ async def submit_draft(
     logger.info(f"Found draft {draft.id} for submission")
 
     try:
-        # Score via AI
-        logger.info("Starting AI scoring...")
-        
-        # Get the actual questions for proper scoring
-        template_questions = db.query(AssessmentTemplateQuestion)\
-            .join(Question)\
-            .filter(AssessmentTemplateQuestion.template_id == draft.template_id)\
-            .order_by(AssessmentTemplateQuestion.order)\
-            .all()
-        
-        # Create proper question data for AI scoring
-        questions_for_ai = []
-        for tq in template_questions:
-            # Get category name through the relationship
-            category_name = None
-            if tq.question.category_id:
-                category = db.query(Category).filter_by(id=tq.question.category_id).first()
-                category_name = category.name if category else None
-            
-            questions_for_ai.append({
-                'id': str(tq.question.id),
-                'text': tq.question.text,
-                'category': category_name or 'General Assessment'
-            })
-        
-        # Use the enhanced scoring function with real questions
-        if questions_for_ai:
-            # Get full detailed results from AI scoring
-            from app.services.ai_scoring import score_assessment_by_category
-            scoring_result = await score_assessment_by_category(draft.answers, questions_for_ai)
-            score = scoring_result['overall_score']
-            recommendation = scoring_result['summary_recommendation']
-            detailed_scores = scoring_result  # Save full detailed results
-        else:
-            # Fallback for sample questions
-            score, recommendation = score_assessment(draft.answers)
-            detailed_scores = {"overall_score": score}
-            
-        logger.info(f"AI scoring completed: score={score}, recommendation length={len(recommendation)}")
-    except Exception as e:
-        logger.error(f"AI scoring failed: {e}")
-        # Use fallback values
-        score, recommendation = 7.0, "Assessment completed. Continue growing in spiritual disciplines."
-        detailed_scores = {"overall_score": score}
+        # Persist normalized answers into assessment_answers (durable log)
+        try:
+            # Clear any prior rows for this draft id (safety)
+            db.query(AssessmentAnswer).filter_by(assessment_id=draft.id).delete()
+            for q_id, ans_text in (draft.answers or {}).items():
+                db.add(AssessmentAnswer(
+                    assessment_id=draft.id,
+                    question_id=str(q_id),
+                    answer_text=str(ans_text) if ans_text is not None else None,
+                ))
+        except Exception as _e:
+            logger.error(f"Failed to persist assessment_answers for draft {draft.id}: {_e}")
 
-    try:
-        # Save as new Assessment
-        logger.info("Creating assessment record...")
+        # Create Assessment record with no scores yet
+        logger.info("Creating assessment record (async scoring will follow)...")
         assessment = Assessment(
             id=str(uuid.uuid4()),
             apprentice_id=current_user.id,
+            template_id=draft.template_id,
             answers=draft.answers,
-            scores=detailed_scores,  # Save full detailed scoring results
-            recommendation=recommendation
+            scores=None,
+            recommendation=None,
+            status="processing",
         )
         db.add(assessment)
-        logger.info(f"Assessment record created: {assessment.id}")
 
         # Mark draft as submitted
         draft.is_submitted = True
         db.commit()
-        logger.info("Database transaction committed")
+        db.refresh(assessment)
+        logger.info(f"Submit: committed assessment {assessment.id}; enqueuing background scoring task")
 
-        # Send email to mentor
-        logger.info("Sending email notification...")
+        # Enqueue background processing AFTER commit
         try:
-            # Get apprentice details
-            apprentice = db.query(User).filter_by(id=current_user.id).first()
-            apprentice_name = apprentice.name if apprentice else "Unknown"
-            
-            # Get mentor details (find mentor for this apprentice)
-            mentor_relationship = db.query(MentorApprentice).filter_by(apprentice_id=current_user.id).first()
-            if mentor_relationship:
-                mentor = db.query(User).filter_by(id=mentor_relationship.mentor_id).first()
-                if mentor and mentor.email:
-                    send_assessment_email(
-                        to_email=mentor.email,
-                        mentor_name=mentor.name or "Mentor",
-                        apprentice_name=apprentice_name,
-                        scores=assessment.scores or {"overall_score": score},
-                        recommendations={"overall": assessment.recommendation or "Continue your spiritual growth journey."}
-                    )
-                    logger.info(f"Email notification sent to mentor: {mentor.email}")
-                else:
-                    logger.warning("Mentor not found or has no email address")
-            else:
-                logger.warning("No mentor relationship found for apprentice")
-        except Exception as email_error:
-            logger.error(f"Failed to send email notification: {email_error}")
-            # Don't fail the submission if email fails
-        
-        logger.info("Email notification sent successfully")
+            asyncio.create_task(_process_assessment_background(assessment.id))
+        except Exception as _e:
+            logger.error(f"Failed to enqueue background task for assessment {assessment.id}: {_e}")
+            # Send alert so we don't silently drop processing
+            send_notification_email(
+                to_email="tay.murphy88@gmail.com",
+                subject="[Alert] Failed to enqueue assessment processing",
+                message=f"Assessment {assessment.id} could not be enqueued: {_e}",
+            )
 
-        # Return properly formatted response with apprentice name
+        # Prepare apprentice display name for response
+        apprentice = db.query(User).filter_by(id=current_user.id).first()
+        apprentice_name = apprentice.name if apprentice else "Unknown"
+
+        # Return immediately so UI can proceed; scores will populate later
         return assessment_schema.AssessmentOut(
             id=assessment.id,
             apprentice_id=assessment.apprentice_id,
             apprentice_name=apprentice_name,
             answers=assessment.answers,
             scores=assessment.scores,
-            created_at=assessment.created_at
+            created_at=assessment.created_at,
         )
-        
     except Exception as e:
         logger.error(f"Assessment submission failed: {e}")
         db.rollback()

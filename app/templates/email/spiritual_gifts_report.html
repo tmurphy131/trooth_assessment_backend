@@ -1,0 +1,107 @@
+{#
+  Spiritual Gifts Report Email Template
+  Uses inline CSS for broad email client compatibility.
+  Brand colors pulled from app (primary: #FFC107 (amber), dark bg sections: #121212, accent: #2F4B7C from PDF code).
+#}
+<!DOCTYPE html>
+<html lang="en" style="margin:0;padding:0;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Spiritual Gifts Report</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { margin:0; padding:0; background:#0f0f0f; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    table { border-collapse: collapse; }
+    .wrapper { width:100%; background:#0f0f0f; padding:24px 0; }
+    .container { max-width:640px; margin:0 auto; background:#1c1c1c; border:1px solid #2a2a2a; border-radius:14px; overflow:hidden; }
+    .header { background:linear-gradient(90deg,#2F4B7C,#2F4B7C 60%, #233753); padding:28px 32px; }
+    .header h1 { margin:0; font-size:22px; line-height:1.3; color:#fff; font-weight:600; }
+    .badge { display:inline-block; background:#FFC107; color:#000; font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px; letter-spacing:.5px; }
+    .section { padding:28px 32px 8px; }
+    .section h2 { margin:0 0 12px; font-size:18px; color:#FFC107; font-weight:600; }
+    .muted { color:#b5b5b5; font-size:14px; line-height:1.5; margin:4px 0 18px; }
+    .top-gifts-grid { width:100%; }
+    .gift-card { width:100%; background:#242424; border:1px solid #333; border-radius:12px; padding:14px 16px; }
+    .gift-card h3 { margin:0 0 6px; font-size:15px; color:#fff; font-weight:600; }
+    .score-pill { background:#FFC107; color:#000; font-weight:600; font-size:12px; padding:3px 10px; border-radius:999px; }
+    .summary { color:#d4d4d4; font-size:13px; margin:8px 0 0; line-height:1.5; }
+    .spacer { height:24px; }
+    .all-scores-table { width:100%; margin:0; border:1px solid #2d2d2d; background:#202020; border-radius:10px; overflow:hidden; }
+    .all-scores-table th { background:#2F4B7C; color:#fff; font-size:12px; padding:10px 12px; text-align:left; letter-spacing:.5px; }
+    .all-scores-table td { padding:9px 12px; font-size:13px; color:#e0e0e0; border-top:1px solid #2d2d2d; }
+    .all-scores-table tr:nth-child(even) td { background:#262626; }
+    .definitions { margin-top:8px; }
+    .def-block { margin:0 0 18px; padding:14px 16px 12px; background:#242424; border:1px solid #333; border-radius:12px; }
+    .def-block h4 { margin:0 0 8px; font-size:14px; color:#FFC107; letter-spacing:.5px; text-transform:uppercase; }
+    .def-block p { margin:0; font-size:13px; color:#d7d7d7; line-height:1.5; }
+    .cta { text-align:center; padding:8px 32px 36px; }
+    .cta a { display:inline-block; background:#FFC107; color:#000 !important; text-decoration:none; font-weight:600; font-size:14px; padding:14px 28px; border-radius:10px; }
+    .footer { padding:22px 32px 32px; text-align:center; }
+    .footer p { margin:4px 0; font-size:11px; color:#666; }
+    @media (max-width:600px) {
+      .section, .header, .cta, .footer { padding-left:20px; padding-right:20px; }
+      .gift-col { display:block; width:100% !important; margin:0 0 12px !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <div class="header">
+        <span class="badge">v{{ version }}</span>
+        <h1>Spiritual Gifts Report</h1>
+      </div>
+      <div class="section">
+        <p class="muted">Hello {{ apprentice_name or 'Apprentice' }},</p>
+        <p class="muted" style="margin-top:-4px;">Below is a personalized snapshot of your spiritual gifts profile. Your top gifts highlight areas where you can immediately serve and encourage others.</p>
+      </div>
+      <div class="section" style="padding-top:4px;">
+        <h2>Top Gifts</h2>
+        <table role="presentation" class="top-gifts-grid" cellpadding="0" cellspacing="0">
+          <tr>
+          {% for g in top_gifts %}
+            <td class="gift-col" style="width:33.333%; vertical-align:top; padding:0 8px 16px;">
+              <div class="gift-card">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+                  <h3 style="flex:1;">{{ g.gift }}</h3>
+                  <span class="score-pill">{{ g.score }}</span>
+                </div>
+                {% if g.summary %}<p class="summary">{{ g.summary }}</p>{% endif %}
+              </div>
+            </td>
+          {% endfor %}
+          </tr>
+        </table>
+      </div>
+      <div class="section" style="padding-top:8px;">
+        <h2>All Gifts (Ordered)</h2>
+        <table class="all-scores-table" cellpadding="0" cellspacing="0" role="table" aria-label="All Spiritual Gifts Scores">
+          <thead><tr><th>Gift</th><th style="width:90px;">Score</th></tr></thead>
+          <tbody>
+          {% for g in all_scores %}
+            <tr><td>{{ g.gift }}</td><td>{{ g.score }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="section definitions">
+        <h2>Gift Definitions</h2>
+        {% for d in definitions %}
+          <div class="def-block">
+            <h4>{{ d.display_name }}</h4>
+            <p>{{ d.full_definition }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="cta">
+        <a href="{{ app_url }}" target="_blank" rel="noopener">View Full Report & Continue Growth</a>
+      </div>
+      <div class="footer">
+        <p>T[root]H Assessment • {{ app_url }}</p>
+        <p>&copy; {{ 'now' | strftime('%Y') }} T[root]H. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

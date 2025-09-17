@@ -4,14 +4,15 @@ Standard JSON-ish single-line logs so they are easy to index.
 """
 from __future__ import annotations
 import logging
-from datetime import datetime
+from datetime import datetime, UTC
 from typing import Optional, Any
 
 _logger = logging.getLogger("app.audit")
 
 
 def _emit(event: str, user_id: Optional[str] = None, **data: Any):
-    payload = {"ts": datetime.utcnow().isoformat() + "Z", "event": event}
+    now = datetime.now(UTC)
+    payload = {"ts": now.isoformat().replace("+00:00", "Z"), "event": event}
     if user_id:
         payload["user_id"] = user_id
     payload.update(data)

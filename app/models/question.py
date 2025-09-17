@@ -13,7 +13,7 @@ class Question(Base):
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     # Stable, human-readable immutable business key (e.g., Q01..Q72 for spiritual gifts)
-    question_code = Column(String(32), unique=True, nullable=False)
+    question_code = Column(String(32), unique=True, nullable=True)
     text = Column(Text, nullable=False)
     question_type = Column(Enum(QuestionType), nullable=False, default=QuestionType.open_ended)
     category_id = Column(ForeignKey("categories.id"))

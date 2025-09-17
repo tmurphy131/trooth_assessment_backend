@@ -16,6 +16,9 @@ class Assessment(Base):
     recommendation = Column(String, nullable=True)
     category = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
+    # Polling helpers
+    status = Column(String, default="processing")  # processing | done | error
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     # Relationship for score history entries
     score_history = relationship("AssessmentScoreHistory", back_populates="assessment", cascade="all, delete-orphan")
     # Relationship for mentor notes

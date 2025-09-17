@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
+from uuid import UUID
 from sqlalchemy.orm import Session
 from typing import List
 from app.db import get_db
@@ -13,13 +14,13 @@ router = APIRouter()
 
 @router.get("/assessments/{assessment_id}/history", response_model=List[AssessmentScoreHistoryOut])
 def get_assessment_score_history(
-    assessment_id: str,
+    assessment_id: UUID,
     db: Session = Depends(get_db),
     current_user: UserSchema = Depends(get_current_user)
 ):
     history = (
         db.query(AssessmentScoreHistory)
-        .filter(AssessmentScoreHistory.assessment_id == assessment_id)
+        .filter(AssessmentScoreHistory.assessment_id == str(assessment_id))
         .order_by(AssessmentScoreHistory.scored_at.desc())
         .all()
     )
@@ -31,13 +32,13 @@ def get_assessment_score_history(
 
 @router.get("/users/{apprentice_id}/score-history", response_model=List[AssessmentScoreHistoryOut])
 def get_score_history_for_apprentice(
-    apprentice_id: str,
+    apprentice_id: UUID,
     db: Session = Depends(get_db),
     current_user: UserSchema = Depends(require_mentor_or_admin)
 ):
     history = (
         db.query(AssessmentScoreHistory)
-        .filter(AssessmentScoreHistory.apprentice_id == apprentice_id)
+        .filter(AssessmentScoreHistory.apprentice_id == str(apprentice_id))
         .order_by(AssessmentScoreHistory.scored_at.desc())
         .all()
     )

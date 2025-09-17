@@ -7,7 +7,7 @@ Design allows swapping in a real engine later.
 """
 from __future__ import annotations
 from typing import List, Dict, Optional
-from datetime import datetime
+from datetime import datetime, UTC
 import logging
 
 logger = logging.getLogger("app.gifts_report")
@@ -33,7 +33,8 @@ def _compose_sections(apprentice_name: Optional[str], version: int, scores: Dict
     header_name = apprentice_name or "Apprentice"
     lines.append(f"Spiritual Gifts Assessment Report (v{version})")
     lines.append(f"Apprentice: {header_name}")
-    lines.append(f"Generated: {datetime.utcnow().isoformat()}Z")
+    # Use timezone-aware UTC timestamp with Z suffix
+    lines.append(f"Generated: {datetime.now(UTC).isoformat().replace('+00:00','Z')}")
     lines.append("")
     lines.append("Top Gifts (Truncated):")
     for g in top_trunc:
@@ -162,7 +163,7 @@ def generate_pdf(apprentice_name: Optional[str], version: int, scores: Dict, def
         # Metadata block
         meta_lines = [
             f"Apprentice: {apprentice_name or 'Apprentice'}",
-            f"Generated: {datetime.utcnow().isoformat()}Z",
+            f"Generated: {datetime.now(UTC).isoformat().replace('+00:00','Z')}",
             f"Version: {version}",
         ]
         c.setFillColor(light_accent)
@@ -251,7 +252,7 @@ def generate_html(apprentice_name: Optional[str], version: int, scores: Dict, de
     top_expanded = scores.get("top_gifts_expanded", [])
     all_scores = scores.get("all_scores", [])
     head = f"<h1>Spiritual Gifts Assessment Report (v{version})</h1>"
-    meta = f"<p>Apprentice: {esc(apprentice_name or 'Apprentice')}</p><p>Generated: {esc(datetime.utcnow().isoformat())}Z</p>"
+    meta = f"<p>Apprentice: {esc(apprentice_name or 'Apprentice')}</p><p>Generated: {esc(datetime.now(UTC).isoformat().replace('+00:00','Z'))}</p>"
     # Summaries map
     summaries = {d.get('display_name'): d.get('short_summary') for d in definitions.values() if d.get('short_summary')}
     def ul(items, include_summary=False):

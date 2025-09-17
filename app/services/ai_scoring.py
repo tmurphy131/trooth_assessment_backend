@@ -34,26 +34,88 @@ def get_openai_client():
         return None
     return OpenAI(api_key=api_key)
 
+def _strip_code_fences(s: str) -> str:
+    """Remove markdown-style code fences from a string if present."""
+    if not isinstance(s, str):
+        return s
+    s = s.strip()
+    if s.startswith("```"):
+        # Remove first fence line and trailing fence if exists
+        s = re.sub(r"^```[a-zA-Z0-9_-]*\n", "", s)
+        s = re.sub(r"\n```\s*$", "", s)
+    return s
+
+def _parse_json_lenient(content: str) -> dict:
+    """Try multiple strategies to obtain a JSON object from model content."""
+    if not content:
+        raise json.JSONDecodeError("empty content", content, 0)
+    text = _strip_code_fences(content)
+    # Direct parse
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+    # Extract the largest {...} block
+    try:
+        start = text.find('{')
+        end = text.rfind('}')
+        if start != -1 and end != -1 and end > start:
+            return json.loads(text[start:end+1])
+    except Exception:
+        pass
+    # Try to fix common trailing commas
+    try:
+        fixed = re.sub(r",\s*([}\]])", r"\1", text)
+        return json.loads(fixed)
+    except Exception as e:
+        raise json.JSONDecodeError(f"Could not parse JSON after lenient attempts: {e}", text, 0)
+
+def _retry(callable_fn, *, retries: int = 3, base_delay: float = 0.6, factor: float = 2.0, retry_on: Tuple[type, ...] = (Exception,)):
+    """Simple capped exponential backoff retry helper."""
+    import time
+    last = None
+    delay = base_delay
+    for attempt in range(retries):
+        try:
+            if attempt > 0:
+                logger.info(f"[ai] retry attempt {attempt+1}/{retries}")
+            return callable_fn()
+        except retry_on as e:  # pragma: no cover
+            last = e
+            # Check for common rate limit indicators
+            msg = str(e).lower()
+            if "rate limit" not in msg and "429" not in msg and "quota" not in msg and attempt == retries - 1:
+                break
+            time.sleep(delay)
+            delay *= factor
+    if last:
+        raise last
+
 def score_category_with_feedback(client, category: str, qa_pairs: List[Dict]) -> tuple:
     """Score a category and return detailed question feedback."""
     prompt = f"""
 You are an AI assistant evaluating spiritual assessment responses in the category: {category}.
 
-Please evaluate the following questions and answers on a scale of 1-10, where:
-- 1-3: Major concerns, significant gaps
-- 4-6: Some concerns, areas needing development  
-- 7-8: Good understanding, minor improvements possible
-- 9-10: Excellent understanding and application
+Instructions:
+- Score this category once from 1-10 based on the set of answers as a whole.
+- Treat multiple-choice questions as FACT: they have one or more correct options — mark each as correct/incorrect.
+- Treat open-ended questions as OPINION/EXPERIENCE: do not mark correct/incorrect; provide brief qualitative feedback.
+- Output JSON ONLY with keys: score (int), recommendation (string), question_feedback (array of objects).
+    Each feedback object must include: question (text), answer (text), correct (boolean for MC, null for open-ended), explanation (string; brief correction for incorrect MC, brief note for open-ended).
 
-For each question-answer pair, determine if it's based on:
-- FACT: Requires specific knowledge or correct understanding (provide explanations for incorrect answers)
-- OPINION/EXPERIENCE: Personal views or life experiences (no right/wrong explanation needed)
-
-Questions and Answers:
+Questions and Answers (grouped for a single call for this category):
 """
     
     for i, qa in enumerate(qa_pairs, 1):
+        # include type and options for MC questions to enable correctness evaluation
+        qtype = qa.get('question_type') or qa.get('type') or ''
         prompt += f"\n{i}. Question: {qa['question']}\n   Answer: {qa['answer']}\n"
+        if qtype == 'multiple_choice':
+            opts = qa.get('options') or []
+            if opts:
+                prompt += "   Options (is_correct in parentheses):\n"
+                for j, opt in enumerate(opts, 1):
+                    prompt += f"     - {j}) {opt.get('text')} (correct: {bool(opt.get('is_correct'))})\n"
     
     prompt += """
 Return a JSON response with:
@@ -74,23 +136,30 @@ Return a JSON response with:
     try:
         logger.info(f"Scoring category: {category}")
         logger.info(f"Making OpenAI API call...")
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You are an expert spiritual mentor and assessor. Focus on providing educational feedback for incorrect factual answers."},
-                {"role": "user", "content": prompt}
-            ],
-            max_tokens=1500,
-            temperature=0.3
-        )
+        import time as _t
+        start_ts = _t.time()
+        def _api_call():
+            return client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {"role": "system", "content": "You are an expert spiritual mentor and assessor. Focus on educational feedback and JSON-only output."},
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=1500,
+                temperature=0.3,
+                response_format={"type": "json_object"}
+            )
+        response = _retry(_api_call)
+        dur = _t.time() - start_ts
+        logger.info(f"[ai] category call duration for '{category}': {dur:.2f}s")
         logger.info(f"OpenAI API call completed successfully")
         
-        content = response.choices[0].message.content.strip()
+        content = (response.choices[0].message.content or "").strip()
         logger.info(f"Raw AI response for {category}: {content[:200]}...")
         
         # Parse JSON response
         try:
-            parsed = json.loads(content)
+            parsed = _parse_json_lenient(content)
             score = int(parsed.get('score', 7))
             recommendation = parsed.get('recommendation', f"Continue developing your {category.lower()} practices.")
             feedback = parsed.get('question_feedback', [])
@@ -141,16 +210,22 @@ Return a JSON response with:
             }
         ]
 
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=messages,
-            temperature=0.7,
-            max_tokens=1000  # Increased for detailed feedback
-        )
+        start_ts2 = _t.time()
+        def _api_call2():
+            return client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=messages,
+                temperature=0.7,
+                max_tokens=1000,
+                response_format={"type": "json_object"}
+            )
+        response = _retry(_api_call2)
+        dur2 = _t.time() - start_ts2
+        logger.info(f"[ai] secondary call duration for '{category}': {dur2:.2f}s")
 
         result_text = response.choices[0].message.content
         logger.info(f"OpenAI response for {category}: {result_text}")
-        result = json.loads(result_text)
+        result = _parse_json_lenient(result_text)
         score = float(result.get("score", 7.0))
         recommendation = result.get("recommendation", "Continue growing.")
         
