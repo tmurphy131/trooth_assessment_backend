@@ -18,25 +18,26 @@ def get_published_templates(
     
     if current_user.role == UserRole.apprentice:
         # For apprentices: Get the master assessment + templates from assigned mentors
+        # plus globally-published templates (created_by is NULL) to allow org-wide/admin templates.
         mentor_relationships = db.query(MentorApprentice).filter(
             MentorApprentice.apprentice_id == current_user.id
         ).all()
-        
+
         mentor_ids = [rel.mentor_id for rel in mentor_relationships] if mentor_relationships else []
-        
+
         # Build query conditions using OR logic
         query_conditions = []
-        
+
         # Always include master assessment
         query_conditions.append(AssessmentTemplate.is_master_assessment == True)
-        
+
         # Include mentor-created assessments if apprentice has mentors
         if mentor_ids:
             query_conditions.append(
-                (AssessmentTemplate.created_by.in_(mentor_ids)) & 
+                (AssessmentTemplate.created_by.in_(mentor_ids)) &
                 (AssessmentTemplate.is_master_assessment == False)
             )
-        
+
         from sqlalchemy import or_
         templates = (
             db.query(AssessmentTemplate)

@@ -26,6 +26,9 @@ from app.routes import mentor_notes, assessment_score_history, agreements
 from app.routes import mentor_profile
 from app.routes import apprentice
 from app.routes import mentor_resources, apprentice_resources
+from app.routes import spiritual_gifts
+from app.routes import generic_assessments
+from app.routes import master_trooth
 from app.exceptions import (
     UnauthorizedException, ForbiddenException, 
     NotFoundException, ValidationException
@@ -144,7 +147,6 @@ if os.getenv("ENV") != "test":
 app.include_router(health.router, prefix="/health", tags=["Health"])
 app.include_router(user.router, prefix="/users", tags=["Users"])
 app.include_router(assessment.router, prefix="/assessments", tags=["Assessments"])
-app.include_router(assessment_score_history.router)
 app.include_router(mentor.router, prefix="/mentor", tags=["Mentor"])
 app.include_router(invite.router, prefix="/invitations", tags=["Invitations"])
 app.include_router(question.router, prefix="/question", tags=["Questions"])
@@ -164,6 +166,10 @@ app.include_router(mentor_profile.router)
 app.include_router(mentor_resources.router)
 app.include_router(apprentice_resources.router)
 app.include_router(apprentice.router)
+app.include_router(spiritual_gifts.router)
+app.include_router(master_trooth.router)
+app.include_router(assessment_score_history.router)
+app.include_router(generic_assessments.router)
 
 # Static assets (logo etc.) – map /assets to ./assets if present
 _assets_dir = os.path.join(os.path.dirname(__file__), '..', 'assets')

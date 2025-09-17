@@ -123,6 +123,36 @@ def list_assessments(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.get("/{assessment_id}/status")
+def check_assessment_status(
+    assessment_id: str,
+    db: Session = Depends(get_db),
+    decoded_token=Depends(verify_token)
+):
+    """Lightweight status endpoint for client polling."""
+    try:
+        user_id = decoded_token["uid"]
+        a = db.query(assessment_model.Assessment).filter_by(id=assessment_id).first()
+        if not a:
+            raise NotFoundException("Assessment not found.")
+        # authorization: user is apprentice or mentor of apprentice
+        mentor_rel = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id, apprentice_id=a.apprentice_id).first()
+        is_apprentice = (user_id == a.apprentice_id)
+        if not (mentor_rel or is_apprentice):
+            raise ForbiddenException("Not allowed.")
+        scores = a.scores or {}
+        overall = scores.get('overall_score') if isinstance(scores, dict) else None
+        return {
+            "id": a.id,
+            "status": getattr(a, 'status', None) or ("done" if a.scores else "processing"),
+            "has_scores": bool(a.scores),
+            "overall_score": overall,
+            "updated_at": getattr(a, 'updated_at', None) or a.created_at,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.get("/{assessment_id}", response_model=assessment_schema.AssessmentOut)
 def get_assessment(
     assessment_id: str,

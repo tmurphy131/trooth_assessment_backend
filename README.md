@@ -169,5 +169,104 @@ Notes:
 Contributing
 - PRs welcome. Run tests and linters locally before opening a PR.
 
+Spiritual Gifts Assessment Seeding
+To create (or ensure) the Spiritual Gifts Assessment template and its 72 questions locally run:
+
+```bash
+python -m scripts.seed_spiritual_gifts
+```
+
+The script is idempotent and safe to re-run. It will create a published template named "Spiritual Gifts Assessment" if it does not exist and link all questions in order.
+
+### Seeding Spiritual Gift Definitions
+
+The Spiritual Gifts assessment uses versioned gift definition rows stored in `spiritual_gift_definitions`.
+
+Seed (idempotent) version 1 definitions and publish the template:
+
+```
+python scripts/seed_spiritual_gifts.py --version 1 --file scripts/spiritual_gift_definitions_v1.json --publish
+```
+
+Options:
+- `--replace`  Remove existing rows for that version before inserting.
+- `--url`      Explicit DB URL (defaults to `DATABASE_URL` env var).
+- `--publish`  Creates a published `assessment_templates` row if absent.
+
+Example with explicit database URL:
+
+```
+DATABASE_URL=postgresql://user:pass@host:5432/db python scripts/seed_spiritual_gifts.py \
+	--version 1 \
+	--file scripts/spiritual_gift_definitions_v1.json \
+	--publish
+```
+
+Re-seed (overwrite) version 1:
+```
+python scripts/seed_spiritual_gifts.py --version 1 --file scripts/spiritual_gift_definitions_v1.json --replace --publish
+```
+
+To introduce a new version (e.g. 2):
+1. Copy JSON file, update `version` values to 2.
+2. Run seeder for version 2 with `--publish` (both versions can coexist; highest version is selected when submitting assessments).
+
+### Running the Spiritual Gift Definition Seeder as a Cloud Run Job
+
+In production you can execute the seeding script with a one-off **Cloud Run Job** using the same container image you deploy for the API.
+
+Helper script:
+
+```
+scripts/create_and_run_spiritual_gifts_seed_job.sh --image gcr.io/<PROJECT>/trooth-backend:latest \
+	--region us-east4 \
+	--version 1 \
+	--json-file scripts/spiritual_gift_definitions_v1.json \
+	--publish
+```
+
+Prerequisites:
+- Image `gcr.io/<PROJECT>/trooth-backend:latest` already built & pushed.
+- The service account used to run the job has: `roles/run.admin`, `roles/artifactregistry.reader`, `roles/cloudsql.client`, `roles/secretmanager.secretAccessor` (if using secrets), and DB user permissions.
+- `DATABASE_URL` passed either as a plain env var (`--set-env-vars`) or via Secret Manager mapping.
+
+Manual gcloud example (without helper script):
+
+```
+gcloud run jobs create seed-spiritual-gifts-v1 \
+	--image gcr.io/<PROJECT>/trooth-backend:latest \
+	--region us-east4 \
+	--command python \
+	--args scripts/seed_spiritual_gifts.py,--version,1,--file,scripts/spiritual_gift_definitions_v1.json,--publish \
+	--set-env-vars DATABASE_URL=postgresql://USER:PASSWORD@/trooth_db?host=/cloudsql/<PROJECT>:us-east4:app-pg \
+	--max-retries=1
+
+gcloud run jobs execute seed-spiritual-gifts-v1 --region us-east4
+```
+
+View logs:
+```
+gcloud logs read --region us-east4 run.googleapis.com/job.execution.job_name=seed-spiritual-gifts-v1 --limit=100
+```
+
+Re-run with updated JSON (replace existing rows):
+```
+gcloud run jobs delete seed-spiritual-gifts-v1 --region us-east4 --quiet
+gcloud run jobs create seed-spiritual-gifts-v1 \
+	--image gcr.io/<PROJECT>/trooth-backend:latest \
+	--region us-east4 \
+	--command python \
+	--args scripts/seed_spiritual_gifts.py,--version,1,--file,scripts/spiritual_gift_definitions_v1.json,--replace,--publish \
+	--set-env-vars DATABASE_URL=postgresql://USER:PASSWORD@/trooth_db?host=/cloudsql/<PROJECT>:us-east4:app-pg
+gcloud run jobs execute seed-spiritual-gifts-v1 --region us-east4
+```
+
+If using Secret Manager for DATABASE_URL instead of inline env, add:
+```
+	--set-secrets DATABASE_URL=projects/<PROJECT_NUMBER>/secrets/DATABASE_URL:latest
+```
+
+The helper script auto-deletes & recreates the job to keep arguments in sync.
+
 License
 - MIT License (c) 2024 tmurphy131

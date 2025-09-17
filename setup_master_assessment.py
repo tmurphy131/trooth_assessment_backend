@@ -32,14 +32,25 @@ def create_master_trooth_assessment():
         # Create the master Trooth Assessment
         trooth_assessment_id = str(uuid.uuid4())
         conn.execute(text("""
-            INSERT INTO assessment_templates (id, name, description, is_published, is_master_assessment, created_at)
-            VALUES (:id, :name, :description, :is_published, :is_master_assessment, NOW())
+            INSERT INTO assessment_templates (
+                id, name, description, is_published, is_master_assessment, created_at,
+                key, version, scoring_strategy, report_template, pdf_renderer
+            )
+            VALUES (
+                :id, :name, :description, :is_published, :is_master_assessment, NOW(),
+                :key, :version, :scoring_strategy, :report_template, :pdf_renderer
+            )
         """), {
             "id": trooth_assessment_id,
             "name": "Master Trooth Assessment",
             "description": "The official comprehensive spiritual assessment for all apprentices. Covers 7 key areas: Spiritual Growth, Prayer Life, Bible Study, Community & Fellowship, Service & Ministry, Discipleship, and Faith Practice.",
             "is_published": True,
-            "is_master_assessment": True
+            "is_master_assessment": True,
+            "key": "master_trooth_v1",
+            "version": 1,
+            "scoring_strategy": "ai_master",
+            "report_template": "master_trooth_report.html",
+            "pdf_renderer": "master_trooth"
         })
         
         print("✅ Created Master Trooth Assessment")

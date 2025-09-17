@@ -3,6 +3,7 @@ from .mentor_apprentice import MentorApprentice
 from .apprentice_invitation import ApprenticeInvitation
 from .assessment_draft import AssessmentDraft
 from .assessment_template import AssessmentTemplate
+from .assessment_template_question import AssessmentTemplateQuestion
 from .assessment_answer import AssessmentAnswer
 from .category import Category
 from .question import Question
@@ -10,3 +11,5 @@ from .assessment import Assessment
 from .assessment_score_history import AssessmentScoreHistory
 from .mentor_note import MentorNote
 from .notification import Notification
+from .spiritual_gift_definition import SpiritualGiftDefinition
+from .email_send_event import EmailSendEvent

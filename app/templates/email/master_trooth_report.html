@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Master T[root]H Assessment Report</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; background:#f6f7fb; margin:0; padding:24px; color:#1f2937; }
+    .container { max-width: 720px; margin: 0 auto; background:#ffffff; border-radius:12px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); overflow:hidden; }
+    .header { background: linear-gradient(135deg, #0A4D8C 0%, #2563eb 100%); color:#fff; padding:24px 24px; display:flex; align-items:center; }
+    .brand { font-weight:700; font-size:20px; letter-spacing:0.3px; }
+    .pill { background: rgba(255,255,255,0.16); border:1px solid rgba(255,255,255,0.35); border-radius:24px; padding:6px 12px; font-size:12px; margin-left:auto; }
+    h1 { margin:0 0 8px 0; font-size:22px; color:#0b1220; }
+    .section { padding:24px; border-top:1px solid #eef2f7; }
+    .meta { color:#6b7280; font-size:14px; }
+    .score { font-size:42px; font-weight:800; color:#10b981; }
+    .chip { display:inline-block; background:#f3f4f6; border:1px solid #e5e7eb; color:#111827; border-radius:999px; padding:6px 10px; font-size:12px; margin:4px 6px 0 0; }
+    table { width:100%; border-collapse: collapse; margin-top:12px; }
+    th, td { text-align:left; padding:10px 12px; }
+    th { background:#0A4D8C; color:#fff; font-weight:600; font-size:13px; }
+    tr:nth-child(even) td { background:#f9fafb; }
+    .cta { margin-top:20px; }
+    .btn { display:inline-block; background:#0A4D8C; color:#fff !important; text-decoration:none; padding:10px 16px; font-weight:600; border-radius:8px; }
+    .footer { padding:18px 24px; color:#6b7280; font-size:12px; text-align:center; }
+  </style>
+  <base target="_blank">
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light">
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">T[root]H</div>
+      <div class="pill">Master Assessment</div>
+    </div>
+    <div class="section">
+      <h1>Master Assessment Report</h1>
+      <div class="meta">{{ apprentice_name or 'Apprentice' }} • Completed • v{{ version }}</div>
+    </div>
+    <div class="section">
+      <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:14px; color:#6b7280;">Overall Score</div>
+          <div class="score">{{ overall_score }}</div>
+        </div>
+        <div style="flex:1; min-width:220px;">
+          <div style="font-size:14px; color:#6b7280; margin-bottom:6px;">Top Categories</div>
+          <div>
+            {% for c in top3 %}
+              <span class="chip">{{ c.category }} • {{ c.score }}</span>
+            {% else %}
+              <span class="meta">No category breakdown available.</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% if summary_recommendation %}
+      <div style="margin-top:12px; color:#374151;">{{ summary_recommendation }}</div>
+      {% endif %}
+    </div>
+    <div class="section">
+      <div style="font-size:14px; color:#6b7280;">Category Scores</div>
+      <table>
+        <thead><tr><th>Category</th><th>Score</th></tr></thead>
+        <tbody>
+          {% for name, score in category_scores.items() %}
+          <tr><td>{{ name }}</td><td>{{ score }}</td></tr>
+          {% else %}
+          <tr><td colspan="2" class="meta">No categories scored.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="cta"><a class="btn" href="{{ app_url or '#' }}">Open in app</a></div>
+    </div>
+    <div class="footer">T[root]H • View full report in the app: {{ app_url }}</div>
+  </div>
+</body>
+</html>
