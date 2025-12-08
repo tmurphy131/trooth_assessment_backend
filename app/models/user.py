@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, DateTime, Enum
+from sqlalchemy import Column, String, DateTime, Enum, Integer
 from sqlalchemy.orm import relationship
 import enum
 from datetime import datetime
@@ -17,6 +17,8 @@ class User(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     role = Column(Enum(UserRole), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
+    # Historical context (Phase 2)
+    assessment_count = Column(Integer, nullable=True, default=0)  # Denormalized count for quick access
     
     # Relationship to templates created by this user
     created_templates = relationship("AssessmentTemplate", back_populates="creator")

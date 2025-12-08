@@ -103,11 +103,26 @@ async def _process_assessment_background(assessment_id: str):
                     for k in (assess.answers or {}).keys()
                 ]
 
-            # Run async scoring in this worker thread
+            # PHASE 2: Fetch previous assessments for historical context
+            previous_assessments = []
+            try:
+                if assess.previous_assessment_id:
+                    prev = session.query(_Assessment).filter_by(id=assess.previous_assessment_id).first()
+                    if prev and prev.scores:
+                        previous_assessments.append({
+                            'id': prev.id,
+                            'created_at': str(prev.created_at) if prev.created_at else None,
+                            'scores': prev.scores,
+                        })
+                        logger.info(f"[historical] Added previous assessment {prev.id} for AI context")
+            except Exception as e:
+                logger.warning(f"[historical] Failed to fetch previous assessment: {e}")
+
+            # Run async scoring in this worker thread with historical context
             loop = asyncio.new_event_loop()
             try:
                 asyncio.set_event_loop(loop)
-                scoring = loop.run_until_complete(_score_cat(assess.answers or {}, questions))
+                scoring = loop.run_until_complete(_score_cat(assess.answers or {}, questions, previous_assessments))
             finally:
                 try:
                     loop.close()
@@ -116,6 +131,17 @@ async def _process_assessment_background(assessment_id: str):
 
             # Update assessment with scores and recommendation
             assess.scores = scoring
+            # Persist mentor report v2 blob if present
+            try:
+                assess.mentor_report_v2 = scoring.get('mentor_blob_v2')
+            except Exception:
+                pass
+            try:
+                # Persist v2 mentor report blob if present
+                if isinstance(scoring, dict) and scoring.get('mentor_blob_v2'):
+                    assess.mentor_report_v2 = scoring.get('mentor_blob_v2')
+            except Exception:
+                pass
             assess.recommendation = scoring.get('summary_recommendation')
             assess.status = "done"
             session.commit()
@@ -128,21 +154,52 @@ async def _process_assessment_background(assessment_id: str):
             if rel:
                 mentor = session.query(_User).filter_by(id=rel.mentor_id).first()
                 if mentor and mentor.email:
-                    # Prepare details from category scores for legacy email helper
-                    details = {}
-                    for cat, sc in (scoring.get('category_scores') or {}).items():
-                        details[cat] = {'score': sc, 'feedback': ''}
+                    # Prefer v2 mentor report email if mentor_report_v2 blob is present
                     try:
-                        status = send_assessment_email(
-                            to_email=mentor.email,
-                            apprentice_name=apprentice_name,
-                            assessment_title='Assessment Completed',
-                            score=scoring.get('overall_score'),
-                            feedback_summary=scoring.get('summary_recommendation'),
-                            details=details,
-                            mentor_name=mentor.name or 'Mentor',
-                        )
-                        logger.info(f"Background worker: mentor email status={status} to {mentor.email}")
+                        v2_blob = assess.mentor_report_v2 or (scoring.get('mentor_blob_v2') if isinstance(scoring, dict) else None)
+                    except Exception:
+                        v2_blob = None
+                    try:
+                        if v2_blob:
+                            # Build context and render v2 email (HTML + plain)
+                            from app.services.master_trooth_report import build_report_context
+                            from app.services.email import render_mentor_report_v2_email, send_email as _send_email
+                            # Resolve template display name if available
+                            template_name = None
+                            try:
+                                from app.models.assessment_template import AssessmentTemplate as _Tpl
+                                if assess.template_id:
+                                    tpl = session.query(_Tpl).filter_by(id=assess.template_id).first()
+                                    template_name = getattr(tpl, 'name', None)
+                            except Exception:
+                                template_name = None
+                            assessment_ctx = {
+                                'apprentice': {'id': assess.apprentice_id, 'name': apprentice_name},
+                                'template_id': assess.template_id,
+                                'created_at': getattr(assess, 'created_at', None),
+                            }
+                            context = build_report_context(assessment_ctx, assess.scores or {}, v2_blob)
+                            html, plain = render_mentor_report_v2_email(context)
+                            subject = f"{template_name or 'Assessment'} Report — {apprentice_name} — {datetime.utcnow().date()}"
+                            ok = _send_email(mentor.email, subject, html, plain)
+                            logger.info(f"Background worker: sent v2 mentor report email ok={ok} to {mentor.email}")
+                        else:
+                            # Legacy email helper for environments without v2 blob
+                            # Prepare details from category scores for legacy email helper
+                            details = {}
+                            for cat, sc in (scoring.get('category_scores') or {}).items():
+                                details[cat] = {'score': sc, 'feedback': ''}
+                            from app.services.email import send_assessment_email as _legacy_send
+                            status = _legacy_send(
+                                to_email=mentor.email,
+                                apprentice_name=apprentice_name,
+                                assessment_title='Assessment Completed',
+                                score=scoring.get('overall_score'),
+                                feedback_summary=scoring.get('summary_recommendation'),
+                                details=details,
+                                mentor_name=mentor.name or 'Mentor',
+                            )
+                            logger.info(f"Background worker: mentor email (legacy) status={status} to {mentor.email}")
                     except Exception as _e:
                         logger.error(f"Background worker: failed to send mentor email: {_e}")
                 else:
@@ -643,6 +700,8 @@ def delete_draft(
 
 @router.post("/submit", response_model=assessment_schema.AssessmentOut)
 async def submit_draft(
+    draft_id: str | None = None,
+    template_id: str | None = None,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -651,10 +710,35 @@ async def submit_draft(
     if current_user.role != UserRole.apprentice:
         raise ForbiddenException("Only apprentices can submit assessments")
 
-    draft = db.query(AssessmentDraft).filter_by(
-        apprentice_id=current_user.id,
-        is_submitted=False
-    ).first()
+    # Pick the correct draft to submit, with priority:
+    # 1) explicit draft_id
+    # 2) explicit template_id (unsubmitted)
+    # 3) most recently updated unsubmitted draft for this apprentice
+    draft = None
+    if draft_id:
+        draft = db.query(AssessmentDraft).filter(
+            AssessmentDraft.id == draft_id,
+            AssessmentDraft.apprentice_id == current_user.id,
+            AssessmentDraft.is_submitted == False,
+        ).first()
+        if not draft:
+            raise NotFoundException("Draft not found or already submitted")
+    elif template_id:
+        draft = (
+            db.query(AssessmentDraft)
+            .filter(
+                AssessmentDraft.apprentice_id == current_user.id,
+                AssessmentDraft.template_id == template_id,
+                AssessmentDraft.is_submitted == False,
+            )
+            .order_by(AssessmentDraft.updated_at.desc())
+            .first()
+        )
+    else:
+        draft = db.query(AssessmentDraft).filter(
+            AssessmentDraft.apprentice_id == current_user.id,
+            AssessmentDraft.is_submitted == False,
+        ).order_by(AssessmentDraft.updated_at.desc()).first()
 
     if not draft:
         logger.warning(f"No unsubmitted draft found for user: {current_user.id}")
@@ -679,24 +763,98 @@ async def submit_draft(
         except Exception as _e:
             logger.error(f"Failed to persist assessment_answers for draft {draft.id}: {_e}")
 
-        # Create Assessment record with no scores yet
-        logger.info("Creating assessment record (async scoring will follow)...")
+        # PROGRESSIVE ENHANCEMENT: Generate baseline score instantly
+        from app.services.ai_scoring import generate_baseline_score
+        baseline_scores = None
+        try:
+            # Build questions list for baseline scoring (same pattern as background worker)
+            questions = []
+            if draft.template_id:
+                tqs = (
+                    db.query(AssessmentTemplateQuestion)
+                    .join(Question, AssessmentTemplateQuestion.question_id == Question.id)
+                    .filter(AssessmentTemplateQuestion.template_id == draft.template_id)
+                    .order_by(AssessmentTemplateQuestion.order)
+                    .all()
+                )
+                for tq in tqs:
+                    cat_name = None
+                    if getattr(tq.question, 'category_id', None):
+                        cat = db.query(Category).filter_by(id=tq.question.category_id).first()
+                        cat_name = cat.name if cat else None
+                    opts = []
+                    try:
+                        for opt in (tq.question.options or []):
+                            opts.append({
+                                'text': getattr(opt, 'option_text', None),
+                                'is_correct': bool(getattr(opt, 'is_correct', False)),
+                            })
+                    except Exception:
+                        pass
+                    qtype = None
+                    try:
+                        qtype = getattr(tq.question, 'question_type', None)
+                        qtype = qtype.value if hasattr(qtype, 'value') else qtype
+                    except Exception:
+                        qtype = None
+                    questions.append({
+                        'id': str(tq.question.id),
+                        'text': tq.question.text,
+                        'category': cat_name or 'General Assessment',
+                        'question_type': qtype,
+                        'options': opts,
+                    })
+            
+            if questions:
+                baseline_scores = generate_baseline_score(draft.answers or {}, questions)
+                logger.info(f"[progressive] Generated baseline score: {baseline_scores.get('overall_score')}%")
+        except Exception as e:
+            logger.warning(f"[progressive] Baseline scoring failed, will use processing status: {e}")
+
+        # HISTORICAL CONTEXT: Find previous assessment for this apprentice + template (Phase 2)
+        previous_assessment = None
+        try:
+            previous_assessment = db.query(Assessment).filter(
+                Assessment.apprentice_id == current_user.id,
+                Assessment.template_id == draft.template_id,
+                Assessment.status == "done"
+            ).order_by(Assessment.created_at.desc()).first()
+            if previous_assessment:
+                logger.info(f"[historical] Found previous assessment {previous_assessment.id} for context")
+        except Exception as e:
+            logger.warning(f"[historical] Failed to find previous assessment: {e}")
+
+        # Create Assessment record with baseline scores (or None if baseline failed)
+        logger.info("Creating assessment record with baseline scores (full AI scoring will follow)...")
         assessment = Assessment(
             id=str(uuid.uuid4()),
             apprentice_id=current_user.id,
             template_id=draft.template_id,
             answers=draft.answers,
-            scores=None,
-            recommendation=None,
-            status="processing",
+            scores=baseline_scores if baseline_scores else None,
+            recommendation=baseline_scores.get('summary_recommendation') if baseline_scores else None,
+            status="processing",  # Will be updated to "done" after AI enrichment
+            previous_assessment_id=previous_assessment.id if previous_assessment else None,
         )
+        # Store baseline mentor_report_v2 if generated
+        if baseline_scores and baseline_scores.get('mentor_blob_v2'):
+            assessment.mentor_report_v2 = baseline_scores.get('mentor_blob_v2')
+        
         db.add(assessment)
 
         # Mark draft as submitted
         draft.is_submitted = True
+        
+        # Increment user assessment_count (Phase 2)
+        try:
+            current_user.assessment_count = (current_user.assessment_count or 0) + 1
+            logger.info(f"[historical] Incremented assessment_count to {current_user.assessment_count} for user {current_user.id}")
+        except Exception as e:
+            logger.warning(f"[historical] Failed to increment assessment_count: {e}")
+        
         db.commit()
         db.refresh(assessment)
-        logger.info(f"Submit: committed assessment {assessment.id}; enqueuing background scoring task")
+        logger.info(f"Submit: committed assessment {assessment.id} with baseline scores; enqueuing background AI enrichment")
 
         # Enqueue background processing AFTER commit
         try:
@@ -714,13 +872,14 @@ async def submit_draft(
         apprentice = db.query(User).filter_by(id=current_user.id).first()
         apprentice_name = apprentice.name if apprentice else "Unknown"
 
-        # Return immediately so UI can proceed; scores will populate later
+        # Return immediately with baseline scores (if generated) so UI shows instant feedback
+        # Full AI-enriched scores will populate via background task and can be polled by frontend
         return assessment_schema.AssessmentOut(
             id=assessment.id,
             apprentice_id=assessment.apprentice_id,
             apprentice_name=apprentice_name,
             answers=assessment.answers,
-            scores=assessment.scores,
+            scores=assessment.scores,  # Contains baseline scores or None
             created_at=assessment.created_at,
         )
     except Exception as e:

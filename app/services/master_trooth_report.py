@@ -1,11 +1,16 @@
-"""Master Trooth report generation utilities (PDF/HTML).
+"""Master Trooth report generation utilities (PDF/HTML) for v2 mentor report.
 
-Uses ReportLab if available; otherwise produces simple bytes/HTML for tests and emails.
+Adds a builder that maps mentor_blob_v2 + classic scores into the new email/print templates.
+Falls back to simple HTML/PDF if templates are unavailable.
 """
 from __future__ import annotations
 from typing import Dict, List, Optional
 from datetime import datetime
 import logging
+import os
+from typing import Any
+import re
+from app.core.settings import settings
 
 logger = logging.getLogger("app.master_report")
 
@@ -80,3 +85,441 @@ def generate_html(apprentice_name: Optional[str], scores: Dict) -> str:
     lines.append("<h3>All Categories</h3>")
     lines.append("<ul>" + "".join([f"<li>{k}: {v}</li>" for k, v in cat_scores.items()]) + "</ul>")
     return "\n".join(lines)
+
+
+# ------------------------- v2 report rendering -------------------------
+
+def build_report_context(assessment: Dict[str, Any] | None, scores: Dict, mentor_blob: Dict) -> Dict[str, Any]:
+    """Map stored structures into template-ready context.
+
+    Expects mentor_blob to follow MentorBlobV2 contract.
+    """
+    apprentice_name = None
+    submitted_date = None
+    template_version = None
+    try:
+        if assessment:
+            apprentice_name = (assessment.get('apprentice') or {}).get('name') or None
+            submitted_date = assessment.get('created_at') or assessment.get('submitted_at')
+            template_version = (assessment.get('template') or {}).get('name') or (assessment.get('template_id') or 'Master v2')
+    except Exception:
+        pass
+
+    snapshot = mentor_blob.get('snapshot') or {}
+    overall_mc_percent = snapshot.get('overall_mc_percent') or 0
+    knowledge_band = snapshot.get('knowledge_band') or ''
+    top_strengths = snapshot.get('top_strengths') or []
+    top_gaps = snapshot.get('top_gaps') or []
+
+    # Category Scores: map from classic category_scores to rows with levels if available
+    cat_scores = scores.get('category_scores') or {}
+    categories = []
+    for name, val in cat_scores.items():
+        level = None
+        # try to infer from open_ended_insights entries
+        for ins in mentor_blob.get('open_ended_insights', []):
+            if str(ins.get('category')).lower() == str(name).lower():
+                level = ins.get('level')
+                break
+        categories.append({
+            'name': name,
+            'score': int(val),
+            'score_percent': max(0, min(100, int(round((int(val) / 10.0) * 100)))),
+            'level': level or '-',
+        })
+
+    knowledge = mentor_blob.get('biblical_knowledge') or {}
+    knowledge_topics = []
+    for t in knowledge.get('topic_breakdown', []) or []:
+        try:
+            correct = int(t.get('correct', 0))
+            total = int(t.get('total', 0))
+            percent = round((correct / total * 100.0), 1) if total else 0.0
+        except Exception:
+            correct, total, percent = 0, 0, 0.0
+        knowledge_topics.append({
+            'topic': t.get('topic'),
+            'correct': correct,
+            'total': total,
+            'percent': percent,
+            'note': t.get('note') or ''
+        })
+
+    open_insights = mentor_blob.get('open_ended_insights') or []
+    flags = mentor_blob.get('flags') or {'red': [], 'yellow': [], 'green': []}
+    four_week = mentor_blob.get('four_week_plan') or {'rhythm': [], 'checkpoints': []}
+    starters = mentor_blob.get('conversation_starters') or []
+    resources = mentor_blob.get('recommended_resources') or []
+
+    overall_open_level = '-'
+    # derive overall open level by majority
+    levels = [i.get('level') for i in open_insights if i.get('level')]
+    if levels:
+        # naive majority heuristic
+        from collections import Counter
+        overall_open_level = Counter(levels).most_common(1)[0][0]
+
+    # Derive MC totals/correct from mentor_blob if present
+    mc_total = None
+    mc_correct = None
+    try:
+        mc_total = (mentor_blob.get('biblical_knowledge') or {}).get('total_questions')
+        mc_correct = (mentor_blob.get('biblical_knowledge') or {}).get('correct_count')
+        # If not present, sum from topic breakdown
+        if mc_total is None or mc_correct is None:
+            mc_total = sum([int(t.get('total', 0)) for t in knowledge_topics])
+            mc_correct = sum([int(t.get('correct', 0)) for t in knowledge_topics])
+    except Exception:
+        pass
+
+    # Calculate trend notes from historical data (Phase 2)
+    trend_note = None
+    try:
+        if assessment and assessment.get('previous_assessment_id'):
+            # Extract trend from historical_summary if available
+            hist_summary = assessment.get('historical_summary') or {}
+            if hist_summary.get('trend'):
+                trend_note = hist_summary['trend']
+            else:
+                # Calculate basic trend: compare current vs previous overall score
+                prev_score = hist_summary.get('previous_overall_score')
+                curr_score = scores.get('overall_score')
+                if prev_score is not None and curr_score is not None:
+                    diff = curr_score - prev_score
+                    if diff > 5:
+                        trend_note = f"📈 Significant improvement (+{diff} points)"
+                    elif diff > 0:
+                        trend_note = f"📈 Steady growth (+{diff} points)"
+                    elif diff == 0:
+                        trend_note = "➡️ Consistent performance"
+                    elif diff > -5:
+                        trend_note = f"📉 Slight decline ({diff} points)"
+                    else:
+                        trend_note = f"📉 Needs attention ({diff} points)"
+    except Exception as e:
+        logger.warning(f"Failed to calculate trend: {e}")
+
+    # Extract priority action from open_ended_insights (first with mentor_moves)
+    priority_action = None
+    for insight in open_insights:
+        if insight.get('mentor_moves'):
+            priority_action = {
+                'title': f"Focus on {insight.get('category', 'growth')}",
+                'description': insight.get('mentor_moves', [])[0] if insight.get('mentor_moves') else '',
+                'steps': insight.get('mentor_moves', []),
+                'scripture': insight.get('scripture_anchor', '')
+            }
+            break
+
+    ctx = {
+        'apprentice_name': apprentice_name or 'Apprentice',
+        'submitted_date': submitted_date or '',
+        'template_version': template_version or 'Master v2',
+        'overall_score': scores.get('overall_score', 7),
+        'category_scores': cat_scores,
+        'top3': scores.get('top3', []),
+        'version': scores.get('version', 'master_v1'),
+        'summary_recommendation': scores.get('summary_recommendation', ''),
+        'overall_mc_percent': overall_mc_percent,
+        'knowledge_band': knowledge_band,
+        'overall_level': scores.get('overall_score', 7),
+        'overall_open_level': overall_open_level,
+        'categories': categories,
+        'top_strengths': top_strengths,
+        'top_gaps': top_gaps,
+        'mc': {
+            'total_questions': mc_total,
+            'correct_count': mc_correct,
+        },
+        'knowledge_topics': knowledge_topics,
+        'open_insights': open_insights,
+        'flags': flags,
+        'four_week': four_week,
+        'starters': starters,
+        'resources': resources,
+        'mentor_blob_v2': mentor_blob,  # Pass entire blob for template access
+        'priority_action': priority_action,
+        'trend_note': trend_note,
+        'app_url': getattr(settings, 'app_url', ''),
+    }
+    return ctx
+
+
+def _load_email_template_text() -> str | None:
+    """Load mentor_report_email_template.html from common locations.
+
+    This template uses a simple placeholder syntax with {var} and {#each list}...{/each}.
+    """
+    backend_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+    candidates = [
+        os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '../templates/email')), 'mentor_report_email_template.html'),
+        os.path.join(backend_root, 'mentor_report_email_template.html'),
+    ]
+    for p in candidates:
+        try:
+            if os.path.exists(p):
+                with open(p, 'r', encoding='utf-8') as f:
+                    return f.read()
+        except Exception:
+            continue
+    return None
+
+
+def _render_template_simple(tpl: str, context: Dict[str, Any]) -> str:
+    """Very small, non-Jinja renderer for the provided email template.
+
+    Supports:
+    - {var} variable replacement from context
+    - {#each list} ... {/each} loops, where inside the block {this} refers to the item
+      and {key} pulls from dict item keys. Nested {#each} is supported for one level.
+    """
+    def replace_vars(s: str, scope: dict) -> str:
+        def _sub(m: re.Match):
+            key = m.group(1)
+            return str(scope.get(key, context.get(key, '')))
+        return re.sub(r"\{([a-zA-Z0-9_\.]+)\}", _sub, s)
+
+    # Handle {#each path} blocks
+    def render_block(text: str, scope: dict) -> str:
+        pattern = re.compile(r"\{#each\s+([a-zA-Z0-9_\.]+)\}(.*?)\{/each\}", re.DOTALL)
+        while True:
+            m = pattern.search(text)
+            if not m:
+                break
+            path, block = m.group(1), m.group(2)
+            # Resolve list from scope or root context
+            parts = path.split('.')
+            arr = scope
+            for p in parts:
+                arr = arr.get(p) if isinstance(arr, dict) else None
+                if arr is None:
+                    break
+            if arr is None:
+                arr = context
+                for p in parts:
+                    arr = arr.get(p) if isinstance(arr, dict) else None
+                    if arr is None:
+                        break
+            rendered = ''
+            if isinstance(arr, list):
+                for item in arr:
+                    if isinstance(item, dict):
+                        local = {**scope, **item, 'this': item}
+                    else:
+                        local = {**scope, 'this': item}
+                    seg = replace_vars(block, local)
+                    # Recurse to support nested each
+                    seg = render_block(seg, local)
+                    rendered += seg
+            text = text[:m.start()] + rendered + text[m.end():]
+        return replace_vars(text, scope)
+
+    return render_block(tpl, {})
+
+
+def render_email_v2(context: Dict[str, Any]) -> str:
+    tpl = _load_email_template_text()
+    if tpl:
+        try:
+            return _render_template_simple(tpl, context)
+        except Exception as e:
+            logger.error(f"Failed to render simple email template: {e}")
+    # Fallback minimal HTML
+    return f"<div><h1>T[root]H Mentor Report</h1><p>Apprentice: {context.get('apprentice_name')}</p><p>Overall: {context.get('overall_level')}</p></div>"
+
+
+def render_markdown_print_v2(context: Dict[str, Any]) -> str:
+    try:
+        from jinja2 import Environment, FileSystemLoader
+    except Exception:
+        # very small fallback
+        return f"# T[root]H Mentor Report\n\nApprentice: {context.get('apprentice_name')}\n"
+    # Search both app/templates/print and backend root where v2 print template may live
+    print_dir = os.path.join(os.path.dirname(__file__), '../templates/print')
+    backend_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+    env = Environment(loader=FileSystemLoader([os.path.abspath(print_dir), backend_root]))
+    try:
+        template = env.get_template('mentor_report_print_template.md')
+        return template.render(**context)
+    except Exception as e:
+        logger.error(f"Failed to render mentor_report_print_template.md: {e}")
+        return f"# T[root]H Mentor Report\n\nApprentice: {context.get('apprentice_name')}\n"
+
+
+def render_pdf_v2(context: Dict[str, Any]) -> bytes:
+    """Convert Markdown to PDF via ReportLab fallback by first building a simple PDF.
+
+    NOTE: We keep ReportLab fallback; if you prefer Pandoc/wkhtmltopdf, wire here.
+    """
+    md_text = render_markdown_print_v2(context)
+    # Render a more polished PDF using ReportLab Platypus with simple Markdown parsing
+    if _HAS_REPORTLAB:
+        try:
+            import io
+            from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
+            from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+            from reportlab.lib.enums import TA_CENTER
+
+            buf = io.BytesIO()
+            doc = SimpleDocTemplate(
+                buf,
+                pagesize=letter,
+                leftMargin=40,
+                rightMargin=40,
+                topMargin=60,
+                bottomMargin=60,
+            )
+
+            styles = getSampleStyleSheet()
+            # Customize a few styles for headings and body
+            h1 = ParagraphStyle(
+                name="Heading1Custom",
+                parent=styles["Heading1"],
+                fontName="Helvetica-Bold",
+                fontSize=18,
+                leading=22,
+                spaceBefore=6,
+                spaceAfter=8,
+                alignment=TA_CENTER,
+            )
+            h2 = ParagraphStyle(
+                name="Heading2Custom",
+                parent=styles["Heading2"],
+                fontName="Helvetica-Bold",
+                fontSize=14,
+                leading=18,
+                spaceBefore=10,
+                spaceAfter=6,
+            )
+            h3 = ParagraphStyle(
+                name="Heading3Custom",
+                parent=styles["Heading3"],
+                fontName="Helvetica-Bold",
+                fontSize=12,
+                leading=16,
+                spaceBefore=8,
+                spaceAfter=4,
+            )
+            body = ParagraphStyle(
+                name="BodyCustom",
+                parent=styles["BodyText"],
+                fontName="Helvetica",
+                fontSize=10.5,
+                leading=14,
+                spaceBefore=2,
+                spaceAfter=6,
+            )
+
+            story = []
+
+            # Title
+            title_text = f"T[root]H Mentor Report — {context.get('apprentice_name') or ''}"
+            story.append(Paragraph(title_text, h1))
+            story.append(Spacer(1, 8))
+
+            # Minimal Markdown-to-Flowables: support headings, paragraphs, and lists
+            lines = md_text.splitlines()
+            buffer_para: list[str] = []
+            list_buffer: list[tuple[str, str]] = []  # (type, text) where type in {"bullet","number"}
+
+            def flush_paragraph():
+                nonlocal buffer_para
+                if buffer_para:
+                    para_text = " ".join([l.strip() for l in buffer_para]).strip()
+                    if para_text:
+                        story.append(Paragraph(para_text, body))
+                        story.append(Spacer(1, 4))
+                buffer_para = []
+
+            def flush_list():
+                nonlocal list_buffer
+                if list_buffer:
+                    # Group into a single list flowable
+                    li = []
+                    bulletType = "bullet" if any(t == "bullet" for t, _ in list_buffer) else "1"
+                    for t, txt in list_buffer:
+                        li.append(ListItem(Paragraph(txt.strip(), body)))
+                    story.append(ListFlowable(li, bulletType=bulletType, start='1'))
+                    story.append(Spacer(1, 6))
+                list_buffer = []
+
+            import re as _re
+            bullet_re = _re.compile(r"^\s*[-\*\+]\s+")
+            number_re = _re.compile(r"^\s*\d+[\.)]\s+")
+
+            for raw in lines:
+                line = raw.rstrip("\n")
+                if not line.strip():
+                    flush_paragraph()
+                    flush_list()
+                    continue
+
+                # Headings
+                if line.startswith("### "):
+                    flush_paragraph(); flush_list()
+                    story.append(Paragraph(line[4:].strip(), h3))
+                    continue
+                if line.startswith("## "):
+                    flush_paragraph(); flush_list()
+                    story.append(Paragraph(line[3:].strip(), h2))
+                    continue
+                if line.startswith("# "):
+                    flush_paragraph(); flush_list()
+                    story.append(Paragraph(line[2:].strip(), h1))
+                    continue
+
+                # Lists
+                if bullet_re.match(line):
+                    flush_paragraph()
+                    text = bullet_re.sub("", line)
+                    list_buffer.append(("bullet", text))
+                    continue
+                if number_re.match(line):
+                    flush_paragraph()
+                    text = number_re.sub("", line)
+                    list_buffer.append(("number", text))
+                    continue
+
+                # Otherwise accumulate in paragraph buffer
+                buffer_para.append(line)
+
+            # Flush any remaining buffers
+            flush_paragraph()
+            flush_list()
+
+            doc.build(story)
+            buf.seek(0)
+            return buf.read()
+        except Exception as e:
+            logger.error(f"Failed to render PDF via Platypus: {e}")
+            # fall back to very simple canvas drawing if Platypus fails
+            try:
+                import io
+                buf = io.BytesIO()
+                c = canvas.Canvas(buf, pagesize=letter)
+                width, height = letter
+                c.setFont('Helvetica-Bold', 16)
+                c.drawString(40, height-60, f"T[root]H Mentor Report - {context.get('apprentice_name')}")
+                c.setFont('Helvetica', 10)
+                y = height - 90
+                for line in md_text.splitlines():
+                    if not line.strip():
+                        y -= 8
+                        continue
+                    # strip common markdown markers for readability
+                    clean = line.lstrip('#').lstrip(' ').lstrip('-*+ ').strip()
+                    c.drawString(40, y, clean[:120])
+                    y -= 14
+                    if y < 80:
+                        c.showPage()
+                        c.setFont('Helvetica', 10)
+                        y = height - 60
+                c.showPage()
+                c.save()
+                buf.seek(0)
+                return buf.read()
+            except Exception:
+                pass
+
+    # Basic bytes fallback when ReportLab is not available
+    return md_text.encode('utf-8')
