@@ -77,6 +77,7 @@ async def _process_assessment_background(assessment_id: str):
                     try:
                         for opt in (tq.question.options or []):
                             opts.append({
+                                'id': str(opt.id) if hasattr(opt, 'id') and opt.id else None,
                                 'text': getattr(opt, 'option_text', None),
                                 'is_correct': bool(getattr(opt, 'is_correct', False)),
                             })
@@ -786,6 +787,7 @@ async def submit_draft(
                     try:
                         for opt in (tq.question.options or []):
                             opts.append({
+                                'id': str(opt.id) if hasattr(opt, 'id') and opt.id else None,
                                 'text': getattr(opt, 'option_text', None),
                                 'is_correct': bool(getattr(opt, 'is_correct', False)),
                             })

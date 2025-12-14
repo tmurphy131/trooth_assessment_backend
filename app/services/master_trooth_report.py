@@ -92,7 +92,7 @@ def generate_html(apprentice_name: Optional[str], scores: Dict) -> str:
 def build_report_context(assessment: Dict[str, Any] | None, scores: Dict, mentor_blob: Dict) -> Dict[str, Any]:
     """Map stored structures into template-ready context.
 
-    Expects mentor_blob to follow MentorBlobV2 contract.
+    Supports both v2.0 (snapshot-based) and v2.1 (health_score-based) mentor_blob formats.
     """
     apprentice_name = None
     submitted_date = None
@@ -105,19 +105,128 @@ def build_report_context(assessment: Dict[str, Any] | None, scores: Dict, mentor
     except Exception:
         pass
 
-    snapshot = mentor_blob.get('snapshot') or {}
-    overall_mc_percent = snapshot.get('overall_mc_percent') or 0
-    knowledge_band = snapshot.get('knowledge_band') or ''
-    top_strengths = snapshot.get('top_strengths') or []
-    top_gaps = snapshot.get('top_gaps') or []
+    # Detect v2.1 format (has health_score at top level) vs v2.0 (has snapshot)
+    is_v21 = 'health_score' in mentor_blob
+    
+    if is_v21:
+        # v2.1 format from ai_prompt_master_assessment_v2_optimized.txt
+        overall_mc_percent = mentor_blob.get('biblical_knowledge', {}).get('percent', 0)
+        knowledge_band = mentor_blob.get('health_band', '')
+        top_strengths = mentor_blob.get('strengths', [])
+        top_gaps = mentor_blob.get('gaps', [])
+        
+        # Map v2.1 insights to open_insights format for template compatibility
+        open_insights = []
+        for ins in mentor_blob.get('insights', []):
+            open_insights.append({
+                'category': ins.get('category', ''),
+                'level': ins.get('level', '-'),
+                'evidence': ins.get('evidence', ''),
+                'discernment': ins.get('evidence', ''),  # v2.1 uses evidence field
+                'scripture_anchor': '',  # v2.1 doesn't have this per-insight
+                'mentor_moves': [ins.get('next_step', '')] if ins.get('next_step') else []
+            })
+        
+        # v2.1 biblical_knowledge has percent and weak_topics, not topic_breakdown
+        knowledge_topics = []
+        for topic in mentor_blob.get('biblical_knowledge', {}).get('weak_topics', []):
+            knowledge_topics.append({
+                'topic': topic,
+                'correct': 0,
+                'total': 0,
+                'percent': 0,
+                'note': 'Needs improvement'
+            })
+        
+        # Priority action from v2.1 format
+        pa = mentor_blob.get('priority_action')
+        priority_action = None
+        if pa:
+            priority_action = {
+                'title': pa.get('title', ''),
+                'description': (pa.get('steps') or [''])[0] if pa.get('steps') else '',
+                'steps': pa.get('steps', []),
+                'scripture': pa.get('scripture', '')
+            }
+        
+        flags = mentor_blob.get('flags', {'red': [], 'yellow': [], 'green': []})
+        # v2.1 doesn't have four_week_plan, create empty one
+        four_week = {'rhythm': [], 'checkpoints': []}
+        starters = mentor_blob.get('conversation_starters', [])
+        resources = mentor_blob.get('recommended_resources', [])
+        
+        overall_open_level = knowledge_band  # Use health_band as overall level
+        mc_total = None
+        mc_correct = None
+        
+    else:
+        # v2.0 format (legacy)
+        snapshot = mentor_blob.get('snapshot') or {}
+        overall_mc_percent = snapshot.get('overall_mc_percent') or 0
+        knowledge_band = snapshot.get('knowledge_band') or ''
+        top_strengths = snapshot.get('top_strengths') or []
+        top_gaps = snapshot.get('top_gaps') or []
+
+        knowledge = mentor_blob.get('biblical_knowledge') or {}
+        knowledge_topics = []
+        for t in knowledge.get('topic_breakdown', []) or []:
+            try:
+                correct = int(t.get('correct', 0))
+                total = int(t.get('total', 0))
+                percent = round((correct / total * 100.0), 1) if total else 0.0
+            except Exception:
+                correct, total, percent = 0, 0, 0.0
+            knowledge_topics.append({
+                'topic': t.get('topic'),
+                'correct': correct,
+                'total': total,
+                'percent': percent,
+                'note': t.get('note') or ''
+            })
+
+        open_insights = mentor_blob.get('open_ended_insights') or []
+        flags = mentor_blob.get('flags') or {'red': [], 'yellow': [], 'green': []}
+        four_week = mentor_blob.get('four_week_plan') or {'rhythm': [], 'checkpoints': []}
+        starters = mentor_blob.get('conversation_starters') or []
+        resources = mentor_blob.get('recommended_resources') or []
+
+        overall_open_level = '-'
+        levels = [i.get('level') for i in open_insights if i.get('level')]
+        if levels:
+            from collections import Counter
+            overall_open_level = Counter(levels).most_common(1)[0][0]
+
+        # Derive MC totals/correct from mentor_blob if present
+        mc_total = None
+        mc_correct = None
+        try:
+            mc_total = (mentor_blob.get('biblical_knowledge') or {}).get('total_questions')
+            mc_correct = (mentor_blob.get('biblical_knowledge') or {}).get('correct_count')
+            if mc_total is None or mc_correct is None:
+                mc_total = sum([int(t.get('total', 0)) for t in knowledge_topics])
+                mc_correct = sum([int(t.get('correct', 0)) for t in knowledge_topics])
+        except Exception:
+            pass
+        
+        # Extract priority action from open_ended_insights (first with mentor_moves)
+        priority_action = None
+        for insight in open_insights:
+            if insight.get('mentor_moves'):
+                priority_action = {
+                    'title': f"Focus on {insight.get('category', 'growth')}",
+                    'description': insight.get('mentor_moves', [])[0] if insight.get('mentor_moves') else '',
+                    'steps': insight.get('mentor_moves', []),
+                    'scripture': insight.get('scripture_anchor', '')
+                }
+                break
 
     # Category Scores: map from classic category_scores to rows with levels if available
     cat_scores = scores.get('category_scores') or {}
     categories = []
     for name, val in cat_scores.items():
         level = None
-        # try to infer from open_ended_insights entries
-        for ins in mentor_blob.get('open_ended_insights', []):
+        # try to infer from open_insights entries
+        for ins in open_insights:
             if str(ins.get('category')).lower() == str(name).lower():
                 level = ins.get('level')
                 break
@@ -128,60 +237,14 @@ def build_report_context(assessment: Dict[str, Any] | None, scores: Dict, mentor
             'level': level or '-',
         })
 
-    knowledge = mentor_blob.get('biblical_knowledge') or {}
-    knowledge_topics = []
-    for t in knowledge.get('topic_breakdown', []) or []:
-        try:
-            correct = int(t.get('correct', 0))
-            total = int(t.get('total', 0))
-            percent = round((correct / total * 100.0), 1) if total else 0.0
-        except Exception:
-            correct, total, percent = 0, 0, 0.0
-        knowledge_topics.append({
-            'topic': t.get('topic'),
-            'correct': correct,
-            'total': total,
-            'percent': percent,
-            'note': t.get('note') or ''
-        })
-
-    open_insights = mentor_blob.get('open_ended_insights') or []
-    flags = mentor_blob.get('flags') or {'red': [], 'yellow': [], 'green': []}
-    four_week = mentor_blob.get('four_week_plan') or {'rhythm': [], 'checkpoints': []}
-    starters = mentor_blob.get('conversation_starters') or []
-    resources = mentor_blob.get('recommended_resources') or []
-
-    overall_open_level = '-'
-    # derive overall open level by majority
-    levels = [i.get('level') for i in open_insights if i.get('level')]
-    if levels:
-        # naive majority heuristic
-        from collections import Counter
-        overall_open_level = Counter(levels).most_common(1)[0][0]
-
-    # Derive MC totals/correct from mentor_blob if present
-    mc_total = None
-    mc_correct = None
-    try:
-        mc_total = (mentor_blob.get('biblical_knowledge') or {}).get('total_questions')
-        mc_correct = (mentor_blob.get('biblical_knowledge') or {}).get('correct_count')
-        # If not present, sum from topic breakdown
-        if mc_total is None or mc_correct is None:
-            mc_total = sum([int(t.get('total', 0)) for t in knowledge_topics])
-            mc_correct = sum([int(t.get('correct', 0)) for t in knowledge_topics])
-    except Exception:
-        pass
-
     # Calculate trend notes from historical data (Phase 2)
     trend_note = None
     try:
         if assessment and assessment.get('previous_assessment_id'):
-            # Extract trend from historical_summary if available
             hist_summary = assessment.get('historical_summary') or {}
             if hist_summary.get('trend'):
                 trend_note = hist_summary['trend']
             else:
-                # Calculate basic trend: compare current vs previous overall score
                 prev_score = hist_summary.get('previous_overall_score')
                 curr_score = scores.get('overall_score')
                 if prev_score is not None and curr_score is not None:
@@ -198,18 +261,6 @@ def build_report_context(assessment: Dict[str, Any] | None, scores: Dict, mentor
                         trend_note = f"📉 Needs attention ({diff} points)"
     except Exception as e:
         logger.warning(f"Failed to calculate trend: {e}")
-
-    # Extract priority action from open_ended_insights (first with mentor_moves)
-    priority_action = None
-    for insight in open_insights:
-        if insight.get('mentor_moves'):
-            priority_action = {
-                'title': f"Focus on {insight.get('category', 'growth')}",
-                'description': insight.get('mentor_moves', [])[0] if insight.get('mentor_moves') else '',
-                'steps': insight.get('mentor_moves', []),
-                'scripture': insight.get('scripture_anchor', '')
-            }
-            break
 
     ctx = {
         'apprentice_name': apprentice_name or 'Apprentice',

@@ -74,5 +74,8 @@ def test_llm_invalid_json_fallback(monkeypatch):
     questions = [{"id": "Q1", "text": "Q1?", "category": "A", "question_type": "multiple_choice", "options": [{"text": "Yes", "is_correct": True}]}]
     result = asyncio.get_event_loop().run_until_complete(_score_with(answers, questions))
     blob = result.get("mentor_blob_v2") or {}
-    assert blob.get("snapshot") is not None
-    assert isinstance(blob.get("biblical_knowledge", {}).get("topic_breakdown"), list)
+    # v2.1 format has health_score/health_band instead of snapshot
+    assert blob.get("health_score") is not None or blob.get("snapshot") is not None
+    # v2.1 format has biblical_knowledge.percent instead of topic_breakdown
+    bk = blob.get("biblical_knowledge", {})
+    assert "percent" in bk or "topic_breakdown" in bk

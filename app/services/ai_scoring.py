@@ -96,7 +96,7 @@ def _retry(callable_fn, *, retries: int = 3, base_delay: float = 0.6, factor: fl
 
 
 # ------------------------------
-# Mentor report (v2) schema
+# Mentor report (v2) schema - matches ai_prompt_master_assessment_v2_optimized.txt
 # ------------------------------
 
 class _TopicBreakdownItem(BaseModel):
@@ -106,29 +106,45 @@ class _TopicBreakdownItem(BaseModel):
     note: Optional[str] = None
 
 
-class _BiblicalKnowledge(BaseModel):
-    summary: str
-    topic_breakdown: list[_TopicBreakdownItem]
-    study_targets: list[str] = []
+class _BiblicalKnowledgeV2(BaseModel):
+    """v2.1 format: percent and weak_topics"""
+    percent: float
+    weak_topics: list[str] = []
 
 
-class _OpenEndedInsight(BaseModel):
+class _InsightV2(BaseModel):
+    """v2.1 format: category, level, observation, next_step"""
     category: str
     level: str
-    evidence: str
-    discernment: str
-    scripture_anchor: str
-    mentor_moves: list[str]
+    observation: str  # renamed from 'evidence' in optimized prompt
+    next_step: str
+
+
+class _PriorityAction(BaseModel):
+    title: str
+    description: str = ""  # NEW in optimized prompt: explains WHY this is important
+    steps: list[str]
+    scripture: str = ""
+
+
+class _ResourceV2(BaseModel):
+    title: str
+    why: str
+    type: str = "book"
 
 
 class MentorBlobV2(BaseModel):
-    snapshot: dict
-    biblical_knowledge: _BiblicalKnowledge
-    open_ended_insights: list[_OpenEndedInsight]
+    """v2.1 format from ai_prompt_master_assessment_v2_optimized.txt"""
+    health_score: int
+    health_band: str
+    strengths: list[str] = []
+    gaps: list[str] = []
+    priority_action: Optional[_PriorityAction] = None
+    biblical_knowledge: _BiblicalKnowledgeV2
+    insights: list[_InsightV2] = []
     flags: dict
-    four_week_plan: dict
-    conversation_starters: list[str]
-    recommended_resources: list[dict]
+    conversation_starters: list[str] = []
+    recommended_resources: list[_ResourceV2] = []
 
 
 def _knowledge_band(percent: float) -> str:
@@ -140,28 +156,34 @@ def _knowledge_band(percent: float) -> str:
     return "Significant Study"
 
 
+def _health_band(score: int) -> str:
+    """v2.1 health band calculation"""
+    if score >= 85: return "Flourishing"
+    if score >= 70: return "Maturing"
+    if score >= 55: return "Stable"
+    if score >= 40: return "Developing"
+    return "Beginning"
+
+
 def _safe_minimal_blob(overall_percent: float, by_topic: list[dict]) -> dict:
+    """Return minimal v2.1 structure that matches ai_prompt_master_assessment_v2_optimized.txt"""
+    score = int(overall_percent)
     return {
-        "snapshot": {
-            "overall_mc_percent": round(overall_percent, 1),
-            "knowledge_band": _knowledge_band(overall_percent),
-            "top_strengths": [],
-            "top_gaps": [],
-        },
+        "health_score": score,
+        "health_band": _health_band(score),
+        "strengths": [],
+        "gaps": [],
+        "priority_action": None,
         "biblical_knowledge": {
-            "summary": "Biblical knowledge snapshot generated without LLM.",
-            "topic_breakdown": [
-                {"topic": t.get("topic"), "correct": int(t.get("correct", 0)), "total": int(t.get("total", 0)), "note": ""}
-                for t in by_topic
-            ],
-            "study_targets": [],
+            "percent": round(overall_percent, 1),
+            "weak_topics": [t.get("topic") for t in by_topic if t.get("correct", 0) / max(t.get("total", 1), 1) < 0.6],
         },
-        "open_ended_insights": [],
+        "insights": [],
         "flags": {"red": [], "yellow": [], "green": []},
-        "four_week_plan": {"rhythm": [], "checkpoints": []},
         "conversation_starters": [],
         "recommended_resources": [],
     }
+
 
 
 def _build_v2_prompt_input(apprentice: dict | None, assessment_id: str, template_id: Optional[str], submitted_at: Optional[str], answers: Dict[str, str], questions: list[dict], previous_assessments: List[dict] = None) -> tuple[dict, dict]:
@@ -193,10 +215,19 @@ def _build_v2_prompt_input(apprentice: dict | None, assessment_id: str, template
             total_mc += 1
             matched_option = None
             for opt in (q.get('options') or []):
-                if str(opt.get('text', '')).strip().lower() == str(ans).strip().lower():
+                # Match by option ID (UUID) OR by option text (legacy)
+                opt_id = str(opt.get('id', '')).strip()
+                opt_text = str(opt.get('text', '')).strip().lower()
+                ans_str = str(ans).strip()
+                if opt_id and opt_id == ans_str:
+                    matched_option = opt
+                    break
+                elif opt_text == ans_str.lower():
                     matched_option = opt
                     break
             is_correct = bool(matched_option.get('is_correct')) if matched_option else False
+            # Resolve the actual answer text (for sending to AI and wrong_items)
+            apprentice_answer_text = matched_option.get('text', ans) if matched_option else ans
             if is_correct:
                 correct_mc += 1
             else:
@@ -206,7 +237,7 @@ def _build_v2_prompt_input(apprentice: dict | None, assessment_id: str, template
                     'question_id': str(qid),
                     'question_text': q.get('text'),
                     'correct_answer': (correct_opt or {}).get('text'),
-                    'apprentice_answer': ans,
+                    'apprentice_answer': apprentice_answer_text,
                     'topic': topic,
                 })
             # accumulate by topic
@@ -375,7 +406,7 @@ def score_category_with_feedback(client, category: str, qa_pairs: List[Dict]) ->
                     {"role": "system", "content": "You are an expert spiritual mentor and assessor. Output pure JSON."},
                     {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)}
                 ],
-                max_tokens=1200,
+                max_tokens=2500,  # Increased from 1200 to avoid truncated JSON responses
                 temperature=0.2,
                 response_format={"type": "json_object"}
             )
@@ -508,10 +539,23 @@ async def score_assessment_by_category(answers: Dict[str, str],
             logger.info(f"Question {answer_key}: category='{category}', text='{question.get('text', 'N/A')[:50]}...'")
             if category not in categorized_answers:
                 categorized_answers[category] = []
+            
+            # For MC questions, resolve the answer from UUID to actual text
+            resolved_answer = answer_text
+            q_type = (question.get('question_type') or '').lower()
+            if q_type == 'multiple_choice' and question.get('options'):
+                # Try to find the option by ID (UUID) and get its text
+                for opt in question.get('options', []):
+                    opt_id = str(opt.get('id', '')).strip()
+                    if opt_id and opt_id == str(answer_text).strip():
+                        resolved_answer = opt.get('text', answer_text)
+                        logger.info(f"  Resolved MC answer: {answer_text[:8]}... -> '{resolved_answer}'")
+                        break
+            
             # Include type/options so the category scorer can objectively grade MC using is_correct
             qa_item = {
                 'question': question.get('text'),
-                'answer': answer_text,
+                'answer': resolved_answer,
                 'question_id': answer_key,
             }
             if 'question_type' in question:
@@ -650,63 +694,53 @@ def generate_baseline_score(answers: dict, questions: list) -> dict:
     for q in mc_questions:
         q_id = str(q['id'])
         answer = answers.get(q_id, '')
-        # Check if answer matches any correct option
+        # Check if answer matches any correct option (by ID or by text)
         for opt in q.get('options', []):
-            if opt.get('is_correct') and str(answer).strip().lower() == str(opt.get('text', '')).strip().lower():
-                mc_correct += 1
-                break
+            if opt.get('is_correct'):
+                opt_id = str(opt.get('id', '')).strip()
+                opt_text = str(opt.get('text', '')).strip().lower()
+                ans_str = str(answer).strip()
+                # Match by option ID (UUID) or by option text (legacy)
+                if (opt_id and opt_id == ans_str) or (opt_text == ans_str.lower()):
+                    mc_correct += 1
+                    break
     
     mc_percent = int((mc_correct / mc_total * 100)) if mc_total > 0 else 0
-    
-    # Determine knowledge band
-    if mc_percent >= 80:
-        knowledge_band = "Strong Foundation"
-    elif mc_percent >= 60:
-        knowledge_band = "Growing Understanding"
-    else:
-        knowledge_band = "Beginning Journey"
     
     # Check open-ended completeness
     open_completed = sum(1 for q in open_questions if answers.get(str(q['id']), '').strip())
     open_total = len(open_questions)
     
-    # Build minimal baseline mentor_blob_v2
+    # Build minimal baseline mentor_blob_v2 (v2.1 format)
+    health_score = mc_percent  # baseline uses MC percent as initial health score
     baseline_blob = {
-        "version": "master_v1",
-        "snapshot": {
-            "overall_mc_percent": mc_percent,
-            "knowledge_band": knowledge_band,
-            "top_strengths": ["Completed assessment", "Engaged with questions"],
-            "top_gaps": ["Awaiting detailed AI analysis"],
-            "urgent_flag": False,
-            "flag_color": "green" if mc_percent >= 70 else "yellow" if mc_percent >= 50 else "red"
-        },
+        "health_score": health_score,
+        "health_band": _health_band(health_score),
+        "strengths": ["Completed assessment", "Engaged with questions"],
+        "gaps": ["Awaiting detailed AI analysis"],
+        "priority_action": None,
         "biblical_knowledge": {
-            "mc_score": mc_correct,
-            "mc_total": mc_total,
-            "mc_percent": mc_percent,
-            "knowledge_band": knowledge_band,
-            "topic_breakdown": []
+            "percent": mc_percent,
+            "weak_topics": [],  # Will be populated after AI analysis
         },
-        "open_ended_insights": [
+        "insights": [
             {
-                "category": "General",
+                "category": "Assessment",
                 "level": "Baseline",
-                "summary": f"Answered {open_completed}/{open_total} open-ended questions. Full analysis pending.",
-                "evidence": [],
-                "next_steps": ["AI analysis in progress..."]
+                "evidence": f"Answered {open_completed}/{open_total} open-ended questions. Full analysis pending.",
+                "next_step": "AI analysis in progress..."
             }
         ],
-        "four_week_plan": {
-            "rhythm": ["Review biblical knowledge gaps", "Complete any pending questions"],
-            "checkpoints": ["Follow up after AI analysis completes"]
+        "flags": {
+            "red": [],
+            "yellow": [] if mc_percent >= 50 else ["Low biblical knowledge score"],
+            "green": ["Completed full assessment"]
         },
         "conversation_starters": [
             "What motivated you to complete this assessment?",
             "Which questions were most challenging for you?"
         ],
         "recommended_resources": [],
-        "top3": ["Biblical Knowledge", "Assessment Completion", "Engagement"]
     }
     
     return {
@@ -716,4 +750,5 @@ def generate_baseline_score(answers: dict, questions: list) -> dict:
         "status": "baseline",
         "model": "baseline_heuristic_v1"
     }
+
 

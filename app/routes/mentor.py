@@ -719,6 +719,7 @@ def get_simplified_mentor_report(
     - insights: [{category, level, observation, next_step}]
     - conversation_starters: list[str]
     - trend_note: str | null (Phase 2 historical context)
+    - mc_percent: float (for backward compatibility)
     """
     from app.models.assessment import Assessment
     
@@ -740,59 +741,105 @@ def get_simplified_mentor_report(
     mentor_blob = assessment.mentor_report_v2 or {}
     scores = assessment.scores or {}
     
-    snapshot = mentor_blob.get('snapshot') or {}
-    health_score = int(snapshot.get('overall_mc_percent', 0))
-    health_band = snapshot.get('knowledge_band', 'Unknown')
-    strengths = snapshot.get('top_strengths', [])[:3]  # Top 3 only
-    gaps = snapshot.get('top_gaps', [])[:3]  # Top 3 only
+    # Detect v2.1 format (has health_score at top level) vs legacy format (has snapshot)
+    is_v21 = 'health_score' in mentor_blob
     
-    # Priority action from insights
-    priority_action = None
-    insights_raw = mentor_blob.get('open_ended_insights', [])
-    for insight in insights_raw:
-        if insight.get('mentor_moves'):
+    if is_v21:
+        # v2.1 format (from ai_prompt_master_assessment_v2_optimized.txt)
+        health_score = int(mentor_blob.get('health_score', 0))
+        health_band = mentor_blob.get('health_band', 'Unknown')
+        strengths = (mentor_blob.get('strengths') or [])[:3]
+        gaps = (mentor_blob.get('gaps') or [])[:3]
+        
+        # Priority action from v2.1 format
+        pa = mentor_blob.get('priority_action')
+        priority_action = None
+        if pa:
             priority_action = {
-                'title': f"Focus on {insight.get('category', 'growth')}",
-                'description': insight.get('mentor_moves', [])[0] if insight.get('mentor_moves') else '',
-                'scripture': insight.get('scripture_anchor', '')
+                'title': pa.get('title', ''),
+                'description': (pa.get('steps') or [''])[0] if pa.get('steps') else '',
+                'scripture': pa.get('scripture', '')
             }
-            break
-    
-    # Flags
-    flags = mentor_blob.get('flags', {'red': [], 'yellow': [], 'green': []})
-    
-    # Biblical knowledge
-    biblical_knowledge = None
-    knowledge = mentor_blob.get('biblical_knowledge', {})
-    if knowledge:
-        topics = []
-        for t in (knowledge.get('topic_breakdown', []) or [])[:5]:  # Top 5 topics
-            correct = int(t.get('correct', 0))
-            total = int(t.get('total', 0))
-            percent = round((correct / total * 100.0), 1) if total else 0.0
-            topics.append({
-                'topic': t.get('topic', 'Unknown'),
-                'correct': correct,
-                'total': total,
-                'percent': percent
-            })
+        
+        # Flags
+        flags = mentor_blob.get('flags', {'red': [], 'yellow': [], 'green': []})
+        
+        # Biblical knowledge v2.1
+        bk = mentor_blob.get('biblical_knowledge', {})
+        mc_percent = bk.get('percent', 0.0)
         biblical_knowledge = {
-            'percent': health_score,
-            'topics': topics
+            'percent': mc_percent,
+            'topics': [],  # v2.1 only has weak_topics, not full breakdown
+            'weak_topics': bk.get('weak_topics', [])
         }
-    
-    # Insights (simplified structure for mobile)
-    insights = []
-    for ins in insights_raw[:5]:  # Top 5 insights
-        insights.append({
-            'category': ins.get('category', 'General'),
-            'level': ins.get('level', '-'),
-            'observation': ins.get('discernment', ins.get('observation', '')),
-            'next_step': ins.get('mentor_moves', [])[0] if ins.get('mentor_moves') else ''
-        })
-    
-    # Conversation starters
-    conversation_starters = mentor_blob.get('conversation_starters', [])[:3]  # Top 3
+        
+        # Insights v2.1 format - try 'observation' first (new), fall back to 'evidence' (old)
+        insights = []
+        for ins in (mentor_blob.get('insights') or [])[:5]:
+            insights.append({
+                'category': ins.get('category', 'General'),
+                'level': ins.get('level', '-'),
+                'observation': ins.get('observation', ins.get('evidence', '')),
+                'next_step': ins.get('next_step', '')
+            })
+        
+        conversation_starters = (mentor_blob.get('conversation_starters') or [])[:3]
+        
+    else:
+        # Legacy format (snapshot, open_ended_insights, etc.)
+        snapshot = mentor_blob.get('snapshot') or {}
+        health_score = int(snapshot.get('overall_mc_percent', 0))
+        health_band = snapshot.get('knowledge_band', 'Unknown')
+        strengths = snapshot.get('top_strengths', [])[:3]
+        gaps = snapshot.get('top_gaps', [])[:3]
+        
+        # Priority action from insights
+        priority_action = None
+        insights_raw = mentor_blob.get('open_ended_insights', [])
+        for insight in insights_raw:
+            if insight.get('mentor_moves'):
+                priority_action = {
+                    'title': f"Focus on {insight.get('category', 'growth')}",
+                    'description': insight.get('mentor_moves', [])[0] if insight.get('mentor_moves') else '',
+                    'scripture': insight.get('scripture_anchor', '')
+                }
+                break
+        
+        # Flags
+        flags = mentor_blob.get('flags', {'red': [], 'yellow': [], 'green': []})
+        
+        # Biblical knowledge
+        biblical_knowledge = None
+        knowledge = mentor_blob.get('biblical_knowledge', {})
+        mc_percent = knowledge.get('mc_percent', 0.0)
+        if knowledge:
+            topics = []
+            for t in (knowledge.get('topic_breakdown', []) or [])[:5]:
+                correct = int(t.get('correct', 0))
+                total = int(t.get('total', 0))
+                percent = round((correct / total * 100.0), 1) if total else 0.0
+                topics.append({
+                    'topic': t.get('topic', 'Unknown'),
+                    'correct': correct,
+                    'total': total,
+                    'percent': percent
+                })
+            biblical_knowledge = {
+                'percent': health_score,
+                'topics': topics
+            }
+        
+        # Insights (simplified structure for mobile)
+        insights = []
+        for ins in (mentor_blob.get('open_ended_insights') or [])[:5]:
+            insights.append({
+                'category': ins.get('category', 'General'),
+                'level': ins.get('level', '-'),
+                'observation': ins.get('discernment', ins.get('observation', '')),
+                'next_step': ins.get('mentor_moves', [])[0] if ins.get('mentor_moves') else ''
+            })
+        
+        conversation_starters = mentor_blob.get('conversation_starters', [])[:3]
     
     # Trend note (Phase 2)
     trend_note = None
@@ -825,8 +872,9 @@ def get_simplified_mentor_report(
         'priority_action': priority_action,
         'flags': flags,
         'biblical_knowledge': biblical_knowledge,
+        'mc_percent': mc_percent,  # Added for backward compatibility
         'insights': insights,
         'conversation_starters': conversation_starters,
         'trend_note': trend_note,
-        'full_report_url': f"/mentor/assessment/{assessment_id}"  # Link to full detail view
+        'full_report_url': f"/mentor/assessment/{assessment_id}"
     }
