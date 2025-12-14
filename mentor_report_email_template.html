@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>T[root]H Mentor Report</title>
+  <style>
+    body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background:#f7f7f9; margin:0; padding:24px; }
+    .card { max-width:720px; margin:0 auto; background:#fff; border-radius:16px; padding:24px; box-shadow: 0 8px 24px rgba(0,0,0,.08);}
+    .muted { color:#6b7280; }
+    .h1 { font-size:22px; margin:0 0 8px; }
+    .h2 { font-size:16px; margin:24px 0 8px; }
+    .pill { display:inline-block; padding:4px 10px; border-radius:999px; background:#eef2ff; color:#3730a3; font-weight:600; font-size:12px; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .bar { height:10px; border-radius:8px; background:#eef2f7; overflow:hidden; }
+    .bar > div { height:100%; background:#111827; }
+    .kpi { display:flex; align-items:center; gap:12px; padding:12px; border:1px solid #e5e7eb; border-radius:12px; }
+    .kpi .num { font-size:22px; font-weight:800; }
+    .divider { height:1px; background:#e5e7eb; margin:24px 0; }
+    .list { margin:8px 0; padding-left:16px; }
+    .list li { margin:6px 0; }
+    .foot { font-size:12px; color:#9ca3af; margin-top:24px; }
+    .badge { font-weight:700; padding:2px 8px; border-radius:8px; background:#ecfeff; color:#155e75; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="pill">T[root]H Mentor Report</div>
+    <h1 class="h1">Apprentice: {apprentice_name}</h1>
+    <div class="muted">Submitted: {submitted_date} · Template: {template_version}</div>
+
+    <div class="grid" style="margin-top:16px;">
+      <div class="kpi">
+        <div class="num">{overall_mc_percent}%</div>
+        <div>
+          <div class="muted">Biblical Knowledge</div>
+          <div class="badge">{knowledge_band}</div>
+        </div>
+      </div>
+      <div class="kpi">
+        <div class="num">{overall_level}</div>
+        <div>
+          <div class="muted">Spiritual Life (Open-ended)</div>
+          <div class="badge">{overall_open_level}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="h2">Category Scores</div>
+    <!-- Repeat for each category -->
+    <div>
+      {#each categories}
+      <div style="margin:10px 0;">
+        <div style="display:flex; justify-content:space-between; font-weight:600;">
+          <span>{name}</span><span>{score}/10</span>
+        </div>
+        <div class="bar"><div style="width: {score_percent}%;"></div></div>
+        <div class="muted" style="margin-top:6px;">Level: {level}</div>
+      </div>
+      {/each}
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="grid">
+      <div>
+        <div class="h2">Top Strengths</div>
+        <ul class="list">
+          {#each top_strengths}<li>{this}</li>{/each}
+        </ul>
+      </div>
+      <div>
+        <div class="h2">Top Gaps</div>
+        <ul class="list">
+          {#each top_gaps}<li>{this}</li>{/each}
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="h2">Knowledge Breakdown</div>
+    <ul class="list">
+      {#each knowledge_topics}
+        <li><strong>{topic}</strong>: {correct} / {total} ({percent}%) — {note}</li>
+      {/each}
+    </ul>
+
+    <div class="divider"></div>
+
+    <div class="h2">Open‑Ended Insights</div>
+    <!-- Repeat per category insight -->
+    {#each open_insights}
+      <div style="margin:10px 0;">
+        <strong>{category}</strong> — Level: {level}<br/>
+        <span class="muted">Evidence:</span> {evidence}<br/>
+        <span class="muted">Discernment:</span> {discernment}<br/>
+        <span class="muted">Scripture:</span> {scripture_anchor}<br/>
+        <span class="muted">Mentor moves:</span>
+        <ul class="list">
+          {#each mentor_moves}<li>{this}</li>{/each}
+        </ul>
+      </div>
+    {/each}
+
+    <div class="divider"></div>
+
+    <div class="grid">
+      <div>
+        <div class="h2">Four‑Week Plan</div>
+        <ul class="list">{#each four_week.rhythm}<li>{this}</li>{/each}</ul>
+      </div>
+      <div>
+        <div class="h2">Checkpoints</div>
+        <ul class="list">{#each four_week.checkpoints}<li>{this}</li>{/each}</ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="h2">Conversation Starters</div>
+    <ul class="list">{#each starters}<li>{this}</li>{/each}</ul>
+
+    <div class="divider"></div>
+
+    <div class="h2">Recommended Resources</div>
+    <ul class="list">
+      {#each resources}<li><strong>{title}</strong> — {why} <span class="muted">({type})</span></li>{/each}
+    </ul>
+
+    <div class="foot">© 2025 T[root]H Assessment</div>
+  </div>
+</body>
+</html>

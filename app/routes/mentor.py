@@ -175,7 +175,9 @@ def get_apprentice_draft(
     )
 
 from app.models.assessment import Assessment
-from app.schemas.assessment import AssessmentOut
+from app.schemas.assessment import AssessmentOut, MentorQuestionItemOut, AssessmentDetailOut, ApprenticeRefOut
+import json
+from app.models.user import User as UserModel
 
 
 @router.get("/apprentice/{apprentice_id}/submitted-assessments", response_model=list[AssessmentOut])
@@ -207,9 +209,33 @@ def get_submitted_assessments_for_apprentice(
         query = query.filter(Assessment.created_at <= end_date)
 
     assessments = query.order_by(Assessment.created_at.desc()).offset(skip).limit(limit).all()
-    return assessments
+    # Build response models with apprentice_name populated
+    result: list[AssessmentOut] = []
+    # Preload apprentice to reduce per-row lookups
+    apprentice = db.query(UserModel).filter(UserModel.id == apprentice_id).first()
+    apprentice_name = (apprentice.name if apprentice and apprentice.name else (apprentice.email if apprentice else None)) or "Unknown"
+    for a in assessments:
+        # Resolve human-friendly template name if available
+        template_name = None
+        try:
+            if getattr(a, 'template', None) is not None:
+                template_name = getattr(a.template, 'name', None)
+        except Exception:
+            template_name = None
+        result.append(AssessmentOut(
+            id=a.id,
+            apprentice_id=a.apprentice_id,
+            apprentice_name=apprentice_name,
+            template_id=getattr(a, 'template_id', None),
+            template_name=template_name,
+            category=getattr(a, 'category', None),
+            answers=a.answers or {},
+            scores=a.scores or {},
+            created_at=a.created_at,
+        ))
+    return result
 
-@router.get("/assessment/{assessment_id}", response_model=AssessmentOut)
+@router.get("/assessment/{assessment_id}", response_model=AssessmentDetailOut)
 def get_assessment_detail(
     assessment_id: str,
     current_user: User = Depends(require_mentor),
@@ -226,8 +252,81 @@ def get_assessment_detail(
     ).first()
     if not mapping:
         raise ForbiddenException("Not authorized to view this assessment")
+    # Resolve apprentice name
+    apprentice = db.query(UserModel).filter(UserModel.id == assessment.apprentice_id).first()
+    apprentice_name = (apprentice.name if apprentice and apprentice.name else (apprentice.email if apprentice else None)) or "Unknown"
+    # Build and return payload
+    # Build enriched questions list from template (if available)
+    enriched_questions: list[MentorQuestionItemOut] = []
+    try:
+        if getattr(assessment, 'template_id', None):
+            links = db.query(AssessmentTemplateQuestion).join(Question, AssessmentTemplateQuestion.question_id == Question.id)\
+                .filter(AssessmentTemplateQuestion.template_id == assessment.template_id)\
+                .order_by(AssessmentTemplateQuestion.order).all()
+            answers = assessment.answers or {}
+            for link in links:
+                q = link.question
+                options = []
+                if getattr(q, 'options', None):
+                    # Sort by order if present
+                    sorted_opts = sorted(q.options, key=lambda x: getattr(x, 'order', 0))
+                    for opt in sorted_opts:
+                        options.append({
+                            'id': str(getattr(opt, 'id', '')),
+                            'text': getattr(opt, 'option_text', ''),
+                            'is_correct': bool(getattr(opt, 'is_correct', False)),
+                            'order': int(getattr(opt, 'order', 0)),
+                        })
+                # Map apprentice answer by question id key
+                key_candidates = [str(q.id), getattr(q, 'code', None)]
+                key_candidates = [k for k in key_candidates if k]
+                apprentice_answer = None
+                chosen_option_id = None
+                for k in key_candidates:
+                    if k in answers:
+                        v = answers[k]
+                        apprentice_answer = v if isinstance(v, str) else (json.dumps(v) if v is not None else None)
+                        # If value matches option id or option text, set chosen_option_id
+                        if isinstance(v, str) and any(o.get('id') == v for o in options):
+                            chosen_option_id = v
+                        break
+                enriched_questions.append(MentorQuestionItemOut(
+                    id=str(q.id),
+                    text=q.text,
+                    question_type=q.question_type.value,
+                    options=[o for o in options],
+                    category_id=str(q.category_id) if q.category_id else None,
+                    apprentice_answer=apprentice_answer,
+                    chosen_option_id=chosen_option_id,
+                ))
+    except Exception:
+        enriched_questions = []
 
-    return assessment
+    # Resolve human-friendly template name for detail too
+    template_name = None
+    try:
+        if getattr(assessment, 'template', None) is not None:
+            template_name = getattr(assessment.template, 'name', None)
+    except Exception:
+        template_name = None
+
+    payload = AssessmentDetailOut(
+        id=assessment.id,
+        apprentice_id=assessment.apprentice_id,
+        apprentice_name=apprentice_name,
+        template_id=getattr(assessment, 'template_id', None),
+        template_name=template_name,
+        category=getattr(assessment, 'category', None),
+        answers=assessment.answers or {},
+        scores=assessment.scores or {},
+        mentor_report_v2=getattr(assessment, 'mentor_report_v2', None),
+        created_at=assessment.created_at,
+    )
+    if enriched_questions:
+        payload.questions = enriched_questions
+        payload.apprentice = ApprenticeRefOut(id=assessment.apprentice_id, name=apprentice_name)
+        payload.submitted_at = getattr(assessment, 'created_at', None)
+    return payload
 
 from app.models.assessment_draft import AssessmentDraft
 from app.models.user import User
@@ -596,3 +695,186 @@ def reinstate_apprenticeship(
             pass
 
     return {"status": "reinstated", "apprentice_id": apprentice_id}
+
+
+@router.get("/reports/{assessment_id}/simplified", response_model=dict)
+def get_simplified_mentor_report(
+    assessment_id: str,
+    current_user: User = Depends(require_mentor),
+    db: Session = Depends(get_db)
+):
+    """GET /mentor/reports/{assessment_id}/simplified
+    
+    Phase 2: Returns a condensed report structure optimized for mobile UI.
+    Three-tier progressive disclosure: essential data, expandable sections, full details link.
+    
+    Response structure matches MentorReportSimplifiedScreen expectations:
+    - health_score: int (0-100)
+    - health_band: str (e.g., "Maturing", "Growing", "Excellent")
+    - strengths: list[str] (top 3)
+    - gaps: list[str] (top 3)
+    - priority_action: {title, description, scripture}
+    - flags: {red: [], yellow: [], green: []}
+    - biblical_knowledge: {percent: float, topics: [{topic, correct, total}]}
+    - insights: [{category, level, observation, next_step}]
+    - conversation_starters: list[str]
+    - trend_note: str | null (Phase 2 historical context)
+    - mc_percent: float (for backward compatibility)
+    """
+    from app.models.assessment import Assessment
+    
+    # Fetch assessment
+    assessment = db.query(Assessment).filter(Assessment.id == assessment_id).first()
+    if not assessment:
+        raise NotFoundException(f"Assessment {assessment_id} not found")
+    
+    # Verify mentor has access to this apprentice
+    rel = db.query(MentorApprentice).filter(
+        MentorApprentice.mentor_id == current_user.id,
+        MentorApprentice.apprentice_id == assessment.apprentice_id,
+        MentorApprentice.active == True
+    ).first()
+    if not rel:
+        raise ForbiddenException("Not authorized to view this assessment")
+    
+    # Extract mentor_report_v2 blob
+    mentor_blob = assessment.mentor_report_v2 or {}
+    scores = assessment.scores or {}
+    
+    # Detect v2.1 format (has health_score at top level) vs legacy format (has snapshot)
+    is_v21 = 'health_score' in mentor_blob
+    
+    if is_v21:
+        # v2.1 format (from ai_prompt_master_assessment_v2_optimized.txt)
+        health_score = int(mentor_blob.get('health_score', 0))
+        health_band = mentor_blob.get('health_band', 'Unknown')
+        strengths = (mentor_blob.get('strengths') or [])[:3]
+        gaps = (mentor_blob.get('gaps') or [])[:3]
+        
+        # Priority action from v2.1 format
+        pa = mentor_blob.get('priority_action')
+        priority_action = None
+        if pa:
+            priority_action = {
+                'title': pa.get('title', ''),
+                'description': (pa.get('steps') or [''])[0] if pa.get('steps') else '',
+                'scripture': pa.get('scripture', '')
+            }
+        
+        # Flags
+        flags = mentor_blob.get('flags', {'red': [], 'yellow': [], 'green': []})
+        
+        # Biblical knowledge v2.1
+        bk = mentor_blob.get('biblical_knowledge', {})
+        mc_percent = bk.get('percent', 0.0)
+        biblical_knowledge = {
+            'percent': mc_percent,
+            'topics': [],  # v2.1 only has weak_topics, not full breakdown
+            'weak_topics': bk.get('weak_topics', [])
+        }
+        
+        # Insights v2.1 format - try 'observation' first (new), fall back to 'evidence' (old)
+        insights = []
+        for ins in (mentor_blob.get('insights') or [])[:5]:
+            insights.append({
+                'category': ins.get('category', 'General'),
+                'level': ins.get('level', '-'),
+                'observation': ins.get('observation', ins.get('evidence', '')),
+                'next_step': ins.get('next_step', '')
+            })
+        
+        conversation_starters = (mentor_blob.get('conversation_starters') or [])[:3]
+        
+    else:
+        # Legacy format (snapshot, open_ended_insights, etc.)
+        snapshot = mentor_blob.get('snapshot') or {}
+        health_score = int(snapshot.get('overall_mc_percent', 0))
+        health_band = snapshot.get('knowledge_band', 'Unknown')
+        strengths = snapshot.get('top_strengths', [])[:3]
+        gaps = snapshot.get('top_gaps', [])[:3]
+        
+        # Priority action from insights
+        priority_action = None
+        insights_raw = mentor_blob.get('open_ended_insights', [])
+        for insight in insights_raw:
+            if insight.get('mentor_moves'):
+                priority_action = {
+                    'title': f"Focus on {insight.get('category', 'growth')}",
+                    'description': insight.get('mentor_moves', [])[0] if insight.get('mentor_moves') else '',
+                    'scripture': insight.get('scripture_anchor', '')
+                }
+                break
+        
+        # Flags
+        flags = mentor_blob.get('flags', {'red': [], 'yellow': [], 'green': []})
+        
+        # Biblical knowledge
+        biblical_knowledge = None
+        knowledge = mentor_blob.get('biblical_knowledge', {})
+        mc_percent = knowledge.get('mc_percent', 0.0)
+        if knowledge:
+            topics = []
+            for t in (knowledge.get('topic_breakdown', []) or [])[:5]:
+                correct = int(t.get('correct', 0))
+                total = int(t.get('total', 0))
+                percent = round((correct / total * 100.0), 1) if total else 0.0
+                topics.append({
+                    'topic': t.get('topic', 'Unknown'),
+                    'correct': correct,
+                    'total': total,
+                    'percent': percent
+                })
+            biblical_knowledge = {
+                'percent': health_score,
+                'topics': topics
+            }
+        
+        # Insights (simplified structure for mobile)
+        insights = []
+        for ins in (mentor_blob.get('open_ended_insights') or [])[:5]:
+            insights.append({
+                'category': ins.get('category', 'General'),
+                'level': ins.get('level', '-'),
+                'observation': ins.get('discernment', ins.get('observation', '')),
+                'next_step': ins.get('mentor_moves', [])[0] if ins.get('mentor_moves') else ''
+            })
+        
+        conversation_starters = mentor_blob.get('conversation_starters', [])[:3]
+    
+    # Trend note (Phase 2)
+    trend_note = None
+    try:
+        if assessment.previous_assessment_id:
+            from app.models.assessment import Assessment as PrevAssessment
+            prev = db.query(PrevAssessment).filter(PrevAssessment.id == assessment.previous_assessment_id).first()
+            if prev and prev.scores:
+                prev_score = prev.scores.get('overall_score', 0)
+                curr_score = scores.get('overall_score', 0)
+                diff = curr_score - prev_score
+                if diff > 5:
+                    trend_note = f"📈 Significant improvement (+{diff} points)"
+                elif diff > 0:
+                    trend_note = f"📈 Steady growth (+{diff} points)"
+                elif diff == 0:
+                    trend_note = "➡️ Consistent performance"
+                elif diff > -5:
+                    trend_note = f"📉 Slight decline ({diff} points)"
+                else:
+                    trend_note = f"📉 Needs attention ({diff} points)"
+    except Exception:
+        pass
+    
+    return {
+        'health_score': health_score,
+        'health_band': health_band,
+        'strengths': strengths,
+        'gaps': gaps,
+        'priority_action': priority_action,
+        'flags': flags,
+        'biblical_knowledge': biblical_knowledge,
+        'mc_percent': mc_percent,  # Added for backward compatibility
+        'insights': insights,
+        'conversation_starters': conversation_starters,
+        'trend_note': trend_note,
+        'full_report_url': f"/mentor/assessment/{assessment_id}"
+    }

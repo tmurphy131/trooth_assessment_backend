@@ -44,6 +44,11 @@ class Settings:
         self.cache_ttl = int(os.getenv("CACHE_TTL", "300"))
         self.sql_debug = self._parse_bool(os.getenv("SQL_DEBUG", "false"))
 
+        # Feature flags
+        self.use_simplified_report = self._parse_bool(
+            os.getenv("USE_SIMPLIFIED_REPORT", "false")
+        )
+
     def _parse_cors_origins(self, v: str) -> List[str]:
         if v == "*":
             return ["*"]

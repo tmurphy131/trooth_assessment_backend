@@ -16,9 +16,14 @@ def create_resource(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_mentor)
 ):
+    # Treat a special apprentice_id value of "__ALL__" (or "ALL") as a global resource for this mentor
+    # stored with apprentice_id=None. Apprentice listing will include these for linked apprentices.
+    app_id = payload.apprentice_id
+    if isinstance(app_id, str) and app_id.strip().upper() in {"__ALL__", "ALL"}:
+        app_id = None
     mr = MentorResource(
         mentor_id=current_user.id,
-        apprentice_id=payload.apprentice_id,
+        apprentice_id=app_id,
         title=payload.title,
         description=payload.description,
         link_url=str(payload.link_url) if payload.link_url else None,

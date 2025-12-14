@@ -53,4 +53,7 @@ async def score_master_assessment(answers: Dict[str, str], questions: List[dict]
         "summary_recommendation": result.get("summary_recommendation") or "Keep pursuing growth across key disciplines.",
         "top3": _extract_top3(category_scores),
     }
+    # Pass through mentor_blob_v2 if available
+    if isinstance(result, dict) and result.get("mentor_blob_v2"):
+        enriched["mentor_blob_v2"] = result["mentor_blob_v2"]
     return enriched

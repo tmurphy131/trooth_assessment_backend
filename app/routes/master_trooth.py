@@ -12,7 +12,7 @@ from app.models.mentor_apprentice import MentorApprentice
 from app.services.auth import get_current_user
 from app.services.ai_scoring_master import score_master_assessment
 from app.services.email import send_email, render_master_trooth_email
-from app.services.master_trooth_report import generate_pdf, generate_html
+from app.services.master_trooth_report import generate_pdf, generate_html, build_report_context, render_email_v2, render_pdf_v2
 from app.core.settings import settings
 from app.services.audit import log_assessment_submit, log_assessment_view, log_email_send
 from app.models.email_send_event import EmailSendEvent
@@ -50,6 +50,7 @@ async def submit_master_assessment(body: dict, db: Session = Depends(get_db), cu
         apprentice_id=current_user.id,
         answers=answers,
         scores=scores,
+        mentor_report_v2=scores.get("mentor_blob_v2"),
         category="master_trooth",
     )
     db.add(assessment)
@@ -209,10 +210,27 @@ def email_master(body: dict, db: Session = Depends(get_db), current_user: User =
     )
     if not a:
         raise HTTPException(status_code=404, detail="Assessment not found")
-    html, plain = render_master_trooth_email(getattr(current_user, 'name', None), a.scores or {}, settings.app_url)
+    # Prefer v2 mentor report if available
+    if a.mentor_report_v2:
+        context = build_report_context(
+            {
+                'apprentice': {'id': a.apprentice_id, 'name': getattr(current_user, 'name', None) or getattr(current_user, 'email', 'Apprentice')},
+                'template_id': a.template_id,
+                'created_at': getattr(a, 'created_at', None),
+            },
+            a.scores or {},
+            a.mentor_report_v2 or {}
+        )
+        html = render_email_v2(context)
+        plain = f"T[root]H Mentor Report\nApprentice: {context.get('apprentice_name')}\nKnowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})\nView: {settings.app_url}"
+    else:
+        html, plain = render_master_trooth_email(getattr(current_user, 'name', None), a.scores or {}, settings.app_url)
     attachments = None
     if include_pdf:
-        pdf = generate_pdf(getattr(current_user, 'name', None), a.scores or {})
+        if a.mentor_report_v2:
+            pdf = render_pdf_v2(context)
+        else:
+            pdf = generate_pdf(getattr(current_user, 'name', None), a.scores or {})
         safe_name = (getattr(current_user, 'name', 'Apprentice') or 'Apprentice').lower().replace(' ', '_')
         today = datetime.now(UTC).strftime('%Y%m%d')
         attachments = [{
@@ -266,10 +284,29 @@ def mentor_email_master(apprentice_id: str, body: dict, db: Session = Depends(ge
     )
     if not a:
         raise HTTPException(status_code=404, detail="Assessment not found")
-    html, plain = render_master_trooth_email(None, a.scores or {}, settings.app_url)
+    # Resolve apprentice display name/email for template context
+    apprentice_user = db.query(User).filter(User.id == apprentice_id).first()
+    apprentice_display = getattr(apprentice_user, 'name', None) or getattr(apprentice_user, 'email', 'Apprentice')
+    if a.mentor_report_v2:
+        context = build_report_context(
+            {
+                'apprentice': {'id': a.apprentice_id, 'name': apprentice_display},
+                'template_id': a.template_id,
+                'created_at': getattr(a, 'created_at', None),
+            },
+            a.scores or {},
+            a.mentor_report_v2 or {}
+        )
+        html = render_email_v2(context)
+        plain = f"T[root]H Mentor Report\nApprentice: {context.get('apprentice_name')}\nKnowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})\nView: {settings.app_url}"
+    else:
+        html, plain = render_master_trooth_email(None, a.scores or {}, settings.app_url)
     attachments = None
     if include_pdf:
-        pdf = generate_pdf(None, a.scores or {})
+        if a.mentor_report_v2:
+            pdf = render_pdf_v2(context)
+        else:
+            pdf = generate_pdf(None, a.scores or {})
         today = datetime.now(UTC).strftime('%Y%m%d')
         attachments = [{
             "filename": f"master_report_{apprentice_id}_{today}.pdf",

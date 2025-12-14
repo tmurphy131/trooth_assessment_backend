@@ -37,6 +37,33 @@ def get_email_template_env():
     env.filters['strftime'] = strftime_filter
     return env
 
+def render_mentor_report_v2_email(context: dict) -> tuple[str, str]:
+    """Render the v2 mentor report email using the new template.
+
+    Returns (html, plain) and guarantees no raw open-ended answers are present
+    by relying only on the synthesized context built from mentor_blob.
+    """
+    env = get_email_template_env()
+    html_content = None
+    if env and JINJA2_AVAILABLE:
+        try:
+            template = env.get_template('mentor_report_email_template.html')
+            html_content = template.render(**context)
+        except Exception as e:
+            logger.error(f"Failed to render mentor_report_email_template.html: {e}")
+            html_content = None
+    if not html_content:
+        # Minimal fallback
+        html_content = f"<div><h1>T[root]H Mentor Report</h1><p>Apprentice: {context.get('apprentice_name')}</p><p>Overall: {context.get('overall_level')}</p></div>"
+    # Plain text
+    plain_lines = [
+        "T[root]H Mentor Report",
+        f"Apprentice: {context.get('apprentice_name')}",
+        f"Biblical Knowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})",
+        f"Overall Level: {context.get('overall_open_level')}",
+    ]
+    return html_content, "\n".join(plain_lines)
+
 def render_generic_assessment_email(title: str, apprentice_name: str | None, scores: dict) -> tuple[str, str]:
     """Render a generic assessment report email using Jinja2 template.
 
