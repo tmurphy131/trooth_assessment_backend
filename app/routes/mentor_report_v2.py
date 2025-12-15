@@ -65,14 +65,27 @@ def get_mentor_report_v2_pdf(
     mentor_blob = a.mentor_report_v2 or {}
     scores = a.scores or {}
     apprentice = db.query(user_model.User).filter_by(id=a.apprentice_id).first()
+    apprentice_name = getattr(apprentice, 'name', None) or getattr(apprentice, 'email', 'Apprentice')
     assessment_ctx = {
-        'apprentice': {'id': a.apprentice_id, 'name': getattr(apprentice, 'name', None) or getattr(apprentice, 'email', 'Apprentice')},
+        'apprentice': {'id': a.apprentice_id, 'name': apprentice_name},
         'template_id': a.template_id,
         'created_at': getattr(a, 'created_at', None),
     }
     context = build_report_context(assessment_ctx, scores, mentor_blob)
     pdf_bytes = render_pdf_v2(context)
-    return Response(content=pdf_bytes, media_type="application/pdf")
+    
+    # Add content-disposition header for better download handling
+    safe_name = apprentice_name.lower().replace(' ', '_')
+    filename = f"mentor_report_{safe_name}_{assessment_id[:8]}.pdf"
+    
+    return Response(
+        content=pdf_bytes, 
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": f"attachment; filename={filename}",
+            "Content-Length": str(len(pdf_bytes))
+        }
+    )
 
 
 @router.post("/assessments/{assessment_id}/email-report")

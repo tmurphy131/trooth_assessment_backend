@@ -529,21 +529,34 @@ def get_apprentice_profile(
     if not apprentice:
         raise NotFoundException("Apprentice not found")
 
-    # Fetch stats
-    total_assessments = db.query(AssessmentDraft).filter_by(
-        apprentice_id=apprentice_id,
-        is_submitted=True
-    ).count()
+    # Fetch stats from completed Assessments (not drafts)
+    from app.models.assessment import Assessment
+    
+    total_assessments = db.query(Assessment).filter_by(
+        apprentice_id=apprentice_id
+    ).filter(Assessment.status == "done").count()
 
-    average_score = db.query(func.avg(AssessmentDraft.score)).filter_by(
-        apprentice_id=apprentice_id,
-        is_submitted=True
-    ).scalar()
+    # Calculate average score from mentor_report_v2.health_score or scores.overall_score
+    completed_assessments = db.query(Assessment).filter_by(
+        apprentice_id=apprentice_id
+    ).filter(Assessment.status == "done").all()
+    
+    average_score = None
+    if completed_assessments:
+        scores = []
+        for a in completed_assessments:
+            # Try v2.1 format first (health_score in mentor_report_v2)
+            if a.mentor_report_v2 and 'health_score' in a.mentor_report_v2:
+                scores.append(a.mentor_report_v2['health_score'])
+            # Fall back to scores.overall_score
+            elif a.scores and 'overall_score' in a.scores:
+                scores.append(a.scores['overall_score'])
+        if scores:
+            average_score = sum(scores) / len(scores)
 
-    last_submission = db.query(func.max(AssessmentDraft.updated_at)).filter_by(
-        apprentice_id=apprentice_id,
-        is_submitted=True
-    ).scalar()
+    last_submission = db.query(func.max(Assessment.created_at)).filter_by(
+        apprentice_id=apprentice_id
+    ).filter(Assessment.status == "done").scalar()
 
     return ApprenticeProfileOut(
         id=apprentice.id,
