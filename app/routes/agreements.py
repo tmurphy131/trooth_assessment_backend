@@ -358,7 +358,38 @@ def apprentice_sign(agreement_id: str, body: AgreementSign, request: Request, db
 
     db.commit()
     db.refresh(ag)
-    # Notify mentor if fully signed
+    
+    # ──────────────────────────────────────────────────────────────────
+    # NOTIFY MENTOR: Apprentice signed the mentorship agreement
+    # ──────────────────────────────────────────────────────────────────
+    try:
+        apprentice_name = ag.apprentice_name or ag.apprentice_email.split('@')[0]
+        if ag.status == 'fully_signed':
+            # Agreement is complete - notify mentor
+            notif = Notification(
+                user_id=ag.mentor_id,
+                message=f"{apprentice_name} has signed the mentorship agreement — Agreement is now active!",
+                link=f"/agreements/{ag.id}",
+                is_read=False
+            )
+            db.add(notif)
+            db.commit()
+        elif ag.status == 'awaiting_parent':
+            # Apprentice signed but awaiting parent - notify mentor of progress
+            notif = Notification(
+                user_id=ag.mentor_id,
+                message=f"{apprentice_name} has signed the mentorship agreement — Awaiting parent signature",
+                link=f"/agreements/{ag.id}",
+                is_read=False
+            )
+            db.add(notif)
+            db.commit()
+    except Exception as e:
+        # Log but don't fail the signing
+        import logging
+        logging.getLogger(__name__).warning(f"Failed to create mentor notification for agreement signing: {e}")
+    
+    # Notify mentor if fully signed (email)
     if ag.status == 'fully_signed':
         try:
             mentor_user = db.query(User).filter_by(id=ag.mentor_id).first()
@@ -397,7 +428,25 @@ def parent_sign(agreement_id: str, body: AgreementSign, db: Session = Depends(ge
 
     db.commit()
     db.refresh(ag)
-    # Notify mentor/apprentice
+    
+    # ──────────────────────────────────────────────────────────────────
+    # NOTIFY MENTOR: Parent signed - agreement is now fully active
+    # ──────────────────────────────────────────────────────────────────
+    try:
+        apprentice_name = ag.apprentice_name or ag.apprentice_email.split('@')[0]
+        notif = Notification(
+            user_id=ag.mentor_id,
+            message=f"Parent/guardian has signed the mentorship agreement for {apprentice_name} — Agreement is now active!",
+            link=f"/agreements/{ag.id}",
+            is_read=False
+        )
+        db.add(notif)
+        db.commit()
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"Failed to create mentor notification for parent signing: {e}")
+    
+    # Notify mentor/apprentice (email)
     try:
         send_agreement_email(
             AgreementEmailEvent.FULLY_SIGNED,

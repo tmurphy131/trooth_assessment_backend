@@ -24,6 +24,7 @@ from app.models.category import Category
 from app.schemas.assessment_draft import QuestionItem
 from app.schemas.assessment_draft import AssessmentDraftUpdate
 from app.models.assessment import Assessment
+from app.models.notification import Notification
 
 logger = logging.getLogger(__name__)
 
@@ -857,6 +858,38 @@ async def submit_draft(
         db.commit()
         db.refresh(assessment)
         logger.info(f"Submit: committed assessment {assessment.id} with baseline scores; enqueuing background AI enrichment")
+
+        # ──────────────────────────────────────────────────────────────────
+        # NOTIFY MENTOR(S): Apprentice completed an assessment
+        # ──────────────────────────────────────────────────────────────────
+        try:
+            apprentice_user = db.query(User).filter_by(id=current_user.id).first()
+            apprentice_display = apprentice_user.name if apprentice_user and apprentice_user.name else (apprentice_user.email if apprentice_user else "An apprentice")
+            template = db.query(AssessmentTemplate).filter_by(id=draft.template_id).first()
+            template_name = template.name if template else "an assessment"
+            
+            # Find all active mentors for this apprentice
+            mentor_links = db.query(MentorApprentice).filter(
+                MentorApprentice.apprentice_id == current_user.id,
+                MentorApprentice.active == True
+            ).all()
+            
+            for link in mentor_links:
+                notif = Notification(
+                    user_id=link.mentor_id,
+                    message=f"{apprentice_display} completed {template_name}",
+                    link=f"/assessments/{assessment.id}",
+                    is_read=False
+                )
+                db.add(notif)
+            
+            if mentor_links:
+                db.commit()
+                logger.info(f"[notifications] Notified {len(mentor_links)} mentor(s) about assessment completion")
+        except Exception as e:
+            logger.warning(f"[notifications] Failed to notify mentor(s) about assessment: {e}")
+            # Don't fail the submission just because notification failed
+            db.rollback()
 
         # Enqueue background processing AFTER commit
         try:

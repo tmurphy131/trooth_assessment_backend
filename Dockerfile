@@ -51,9 +51,9 @@ COPY . .
 # Ensure migration helper script is executable
 RUN chmod +x run_migrations.sh || true
 
-# Copy entrypoint and make executable
+# Copy entrypoint and make executable (must be done before switching user)
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod 755 /entrypoint.sh && chown appuser:appuser /entrypoint.sh
 
 # Create logs and secrets directories and set permissions
 RUN mkdir -p logs /secrets && \
