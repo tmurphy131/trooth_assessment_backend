@@ -116,13 +116,15 @@ def build_report_context(assessment: Dict[str, Any] | None, scores: Dict, mentor
         top_gaps = mentor_blob.get('gaps', [])
         
         # Map v2.1 insights to open_insights format for template compatibility
+        # Note: v2.1 uses 'observation' field instead of 'evidence'
         open_insights = []
         for ins in mentor_blob.get('insights', []):
+            obs = ins.get('observation', ins.get('evidence', ''))  # Try observation first, fall back to evidence
             open_insights.append({
                 'category': ins.get('category', ''),
                 'level': ins.get('level', '-'),
-                'evidence': ins.get('evidence', ''),
-                'discernment': ins.get('evidence', ''),  # v2.1 uses evidence field
+                'evidence': obs,
+                'discernment': obs,
                 'scripture_anchor': '',  # v2.1 doesn't have this per-insight
                 'mentor_moves': [ins.get('next_step', '')] if ins.get('next_step') else []
             })
@@ -369,14 +371,49 @@ def _render_template_simple(tpl: str, context: Dict[str, Any]) -> str:
 
 
 def render_email_v2(context: Dict[str, Any]) -> str:
-    tpl = _load_email_template_text()
-    if tpl:
-        try:
-            return _render_template_simple(tpl, context)
-        except Exception as e:
-            logger.error(f"Failed to render simple email template: {e}")
-    # Fallback minimal HTML
-    return f"<div><h1>T[root]H Mentor Report</h1><p>Apprentice: {context.get('apprentice_name')}</p><p>Overall: {context.get('overall_level')}</p></div>"
+    """Render the mentor report email using Jinja2 template."""
+    try:
+        from jinja2 import Environment, FileSystemLoader
+    except ImportError:
+        logger.error("Jinja2 not available for email rendering")
+        return f"<div><h1>T[root]H Mentor Report</h1><p>Apprentice: {context.get('apprentice_name')}</p></div>"
+    
+    # Load template from email templates directory
+    email_dir = os.path.join(os.path.dirname(__file__), '../templates/email')
+    backend_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+    
+    env = Environment(loader=FileSystemLoader([os.path.abspath(email_dir), backend_root]))
+    
+    # Add custom filters
+    from datetime import datetime
+    def strftime_filter(value, format_string='%Y'):
+        """Custom strftime filter for Jinja2."""
+        if value == 'now':
+            return datetime.now().strftime(format_string)
+        elif isinstance(value, datetime):
+            return value.strftime(format_string)
+        elif isinstance(value, str):
+            try:
+                dt = datetime.fromisoformat(value.replace('Z', '+00:00'))
+                return dt.strftime(format_string)
+            except Exception:
+                return value
+        return str(value)
+    
+    env.filters['strftime'] = strftime_filter
+    
+    try:
+        template = env.get_template('mentor_report_email_template.html')
+        return template.render(**context)
+    except Exception as e:
+        logger.error(f"Failed to render Jinja2 email template: {e}")
+        # Fallback minimal HTML
+        return f"""<div style="font-family: sans-serif; padding: 20px;">
+            <h1>T[root]H Mentor Report</h1>
+            <p><strong>Apprentice:</strong> {context.get('apprentice_name', 'Unknown')}</p>
+            <p><strong>Biblical Knowledge:</strong> {context.get('overall_mc_percent', 0)}% ({context.get('knowledge_band', 'N/A')})</p>
+            <p><strong>Overall Score:</strong> {context.get('overall_score', 'N/A')}</p>
+        </div>"""
 
 
 def render_markdown_print_v2(context: Dict[str, Any]) -> str:
