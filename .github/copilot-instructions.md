@@ -1,4 +1,4 @@
-# T[root]H Assessment - AI Agent Instructions (Backend)
+# T[root]H Discipleship - AI Agent Instructions (Backend)
 
 ## Project Overview
 FastAPI-based backend for T[root]H spiritual mentorship platform. Handles authentication (Firebase Admin SDK), PostgreSQL data persistence, AI-powered assessment scoring (OpenAI), email notifications (SendGrid), and RESTful API for Flutter mobile frontend.

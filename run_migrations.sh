@@ -36,6 +36,6 @@ PY
 fi
 
 # Run Alembic
-python -m alembic upgrade head
+python -m alembic upgrade a345d98395e5_mentor_notes
 
 echo "[migrate] Completed Alembic upgrade"

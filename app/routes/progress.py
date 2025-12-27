@@ -122,7 +122,7 @@ def progress_reports(limit: int = 20, cursor: Optional[str] = None, db: Session 
         
         if cat == "master_trooth":
             assessment_type = "master"
-            display_name = template_name or "Master T[root]H Assessment"
+            display_name = template_name or "Master T[root]H Discipleship"
             # version is already a string in master scores (e.g., master_v1)
             version = scores.get("version") or "master_v1"
             # summary
@@ -225,7 +225,7 @@ def get_apprentice_simplified_report(
     
     if cat == "master_trooth":
         assessment_type = "master"
-        display_name = template_name or "Master T[root]H Assessment"
+        display_name = template_name or "Master T[root]H Discipleship"
     elif cat == "spiritual_gifts":
         assessment_type = "spiritual_gifts"
         display_name = template_name or "Spiritual Gifts Assessment"

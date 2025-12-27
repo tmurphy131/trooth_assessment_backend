@@ -53,7 +53,7 @@ _docs_enabled = settings.is_development or _os.getenv("SHOW_DOCS", "").lower() i
 async def lifespan(app: FastAPI):
     # Startup logic
     logger.info("=" * 50)
-    logger.info(f"🚀 T[root]H Assessment API starting up")
+    logger.info(f"🚀 T[root]H Discipleship API starting up")
     logger.info(f"📁 Environment: {settings.environment}")
     logger.info(f"🌐 CORS origins: {settings.cors_origins}")
     logger.info(f"⚡ Rate limiting: {'enabled' if settings.rate_limit_enabled else 'disabled'}")
@@ -100,10 +100,10 @@ async def lifespan(app: FastAPI):
 
     yield
     # Shutdown logic
-    logger.info("🛑 T[root]H Assessment API shutting down gracefully")
+    logger.info("🛑 T[root]H Discipleship API shutting down gracefully")
 
 app = FastAPI(
-    title="T[root]H Assessment API",
+    title="T[root]H Discipleship API",
     description="Comprehensive spiritual assessment and mentoring platform",
     version="1.0.0",
     docs_url="/docs" if _docs_enabled else None,
@@ -261,7 +261,7 @@ async def general_exception_handler(request: Request, exc: Exception):
 async def root():
     """Root endpoint with API information."""
     return {
-        "message": "T[root]H Assessment API",
+        "message": "T[root]H Discipleship API",
         "version": "1.0.0",
         "environment": settings.environment,
         "docs_url": "/docs" if settings.is_development else None,

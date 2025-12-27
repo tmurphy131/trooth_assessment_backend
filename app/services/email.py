@@ -150,7 +150,7 @@ Overall Score: {scores.get('overall_score', 7.0)}/10
 View full results: {settings.app_url}
 
 Best regards,
-T[root]H Assessment Team
+T[root]H Discipleship Team
             """.strip()
             
             return html_content, plain_text
@@ -171,7 +171,7 @@ Dear {mentor_name},
 View full results at: {settings.app_url}
 
 Best regards,
-T[root]H Assessment Team
+T[root]H Discipleship Team
     """
     return plain_text, plain_text
 
@@ -197,7 +197,7 @@ Dear {apprentice_name},
 
 {mentor_name} has invited you to begin a structured assessment and mentoring relationship through the T[root]H platform.
 
-What is T[root]H Assessment?
+What is T[root]H Discipleship?
 T[root]H is a comprehensive spiritual assessment tool designed to help you and your mentor understand your current spiritual growth and identify areas for development.
 
 Accept your invitation here: {settings.app_url}/accept-invitation?token={token}
@@ -205,7 +205,7 @@ Accept your invitation here: {settings.app_url}/accept-invitation?token={token}
 This invitation will expire in 7 days.
 
 Best regards,
-T[root]H Assessment Team
+T[root]H Discipleship Team
             """.strip()
             
             return html_content, plain_text
@@ -215,16 +215,16 @@ T[root]H Assessment Team
     
     # Fallback to simple text
     plain_text = f"""
-Invitation to T[root]H Assessment
+Invitation to T[root]H Discipleship
 
 Dear {apprentice_name},
 
-{mentor_name} has invited you to join the T[root]H assessment platform.
+{mentor_name} has invited you to join the T[root]H Discipleship platform.
 
 Accept your invitation: {settings.app_url}/accept-invitation?token={token}
 
 Best regards,
-T[root]H Assessment Team
+T[root]H Discipleship Team
     """
     return plain_text, plain_text
 
@@ -271,7 +271,7 @@ def send_email(to_email: str, subject: str, html_content: str,
         try:
             from_email_addr = from_email or settings.email_from_address or "no-reply@test.local"
             _ = Mail(
-                from_email=From(from_email_addr, "T[root]H Assessment"),
+                from_email=From(from_email_addr, "T[root]H Discipleship"),
                 to_emails=To(to_email),
                 subject=Subject(subject),
                 html_content=HtmlContent(html_content),
@@ -289,7 +289,7 @@ def send_email(to_email: str, subject: str, html_content: str,
             return False
 
         message = Mail(
-            from_email=From(from_email, "T[root]H Assessment"),
+            from_email=From(from_email, "T[root]H Discipleship"),
             to_emails=To(to_email),
             subject=Subject(subject),
             html_content=HtmlContent(html_content),
@@ -394,7 +394,7 @@ def send_assessment_email(
             client = get_sendgrid_client() or SendGridAPIClient("DUMMY_TEST_KEY")
             from_email_addr = settings.email_from_address or "no-reply@test.local"
             message = Mail(
-                from_email=From(from_email_addr, "T[root]H Assessment"),
+                from_email=From(from_email_addr, "T[root]H Discipleship"),
                 to_emails=To(to_email),
                 subject=Subject(subject),
                 html_content=HtmlContent(html_content),
@@ -425,7 +425,7 @@ def send_invitation_email(to_email: str, apprentice_name: str, token: str,
             client = get_sendgrid_client() or SendGridAPIClient("DUMMY_TEST_KEY")
             from_email_addr = settings.email_from_address or "no-reply@test.local"
             message = Mail(
-                from_email=From(from_email_addr, "T[root]H Assessment"),
+                from_email=From(from_email_addr, "T[root]H Discipleship"),
                 to_emails=To(to_email),
                 subject=Subject(subject),
                 html_content=HtmlContent(html_content),
@@ -443,22 +443,22 @@ def send_notification_email(to_email: str, subject: str, message: str,
     """Send a general notification email."""
     html_content = f"""
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #007bff;">T[root]H Assessment</h2>
+        <h2 style="color: #007bff;">T[root]H Discipleship</h2>
         <p>{message}</p>
         {f'<p><a href="{action_url}" style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;">Take Action</a></p>' if action_url else ''}
-        <p style="color: #666; font-size: 14px;">Best regards,<br>T[root]H Assessment Team</p>
+        <p style="color: #666; font-size: 14px;">Best regards,<br>T[root]H Discipleship Team</p>
     </div>
     """
     
     plain_content = f"""
-T[root]H Assessment
+T[root]H Discipleship
 
 {message}
 
 {f'Take action: {action_url}' if action_url else ''}
 
 Best regards,
-T[root]H Assessment Team
+T[root]H Discipleship Team
     """
     
     return send_email(to_email, subject, html_content, plain_content)

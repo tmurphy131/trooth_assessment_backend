@@ -35,7 +35,7 @@ def generate_pdf(apprentice_name: Optional[str], scores: Dict) -> bytes:
         c = canvas.Canvas(buf, pagesize=letter)
         width, height = letter
         c.setFont('Helvetica-Bold', 16)
-        c.drawString(40, height-60, "Master T[root]H Assessment Report")
+        c.drawString(40, height-60, "Master T[root]H Discipleship Report")
         c.setFont('Helvetica', 11)
         c.drawString(40, height-80, f"Apprentice: {apprentice_name or 'Apprentice'}")
         c.drawString(40, height-96, f"Version: {version}")
@@ -77,7 +77,7 @@ def generate_html(apprentice_name: Optional[str], scores: Dict) -> str:
     cat_scores = scores.get('category_scores') or {}
     top3 = scores.get('top3') or []
     lines = []
-    lines.append("<h1>Master T[root]H Assessment Report</h1>")
+    lines.append("<h1>Master T[root]H Discipleship Report</h1>")
     lines.append(f"<p>Apprentice: {apprentice_name or 'Apprentice'}</p>")
     lines.append(f"<p>Version: {version} • Overall: {overall}</p>")
     lines.append("<h3>Top Categories</h3>")
