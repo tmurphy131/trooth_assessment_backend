@@ -8,7 +8,7 @@ This is an irreversible operation that removes:
 """
 
 from sqlalchemy.orm import Session
-from sqlalchemy import delete, text, inspect
+from sqlalchemy import delete, text, inspect, or_
 import logging
 
 from app.models.user import User, UserRole
@@ -94,10 +94,17 @@ def get_account_deletion_summary(db: Session, user: User) -> dict:
     
     if user.role == UserRole.apprentice or str(user.role) == "apprentice":
         # Count apprentice-specific data
+        # Agreements: Include both linked by ID and by email (pending invites)
+        agreement_count = safe_count(
+            Agreement, 
+            or_(Agreement.apprentice_id == user.id, Agreement.apprentice_email == user.email), 
+            "agreements"
+        )
         summary["items_to_delete"] = {
             "assessments": safe_count(Assessment, Assessment.apprentice_id == user.id, "assessments"),
             "assessment_drafts": safe_count(AssessmentDraft, AssessmentDraft.apprentice_id == user.id, "assessment_drafts"),
-            "agreements": safe_count(Agreement, Agreement.apprentice_id == user.id, "agreements"),
+            "agreements": agreement_count,
+            "pending_invitations": safe_count(ApprenticeInvitation, ApprenticeInvitation.apprentice_email == user.email, "apprentice_invitations"),
             "shared_resources": safe_count(MentorResource, MentorResource.apprentice_id == user.id, "mentor_resources"),
             "mentor_relationships": safe_count(MentorApprentice, MentorApprentice.apprentice_id == user.id, "mentor_apprentice"),
         }
@@ -118,7 +125,7 @@ def get_account_deletion_summary(db: Session, user: User) -> dict:
     return summary
 
 
-def delete_apprentice_account(db: Session, user_id: str) -> dict:
+def delete_apprentice_account(db: Session, user_id: str, user_email: str = None) -> dict:
     """
     Delete an apprentice account and all associated data.
     
@@ -129,11 +136,12 @@ def delete_apprentice_account(db: Session, user_id: str) -> dict:
     4. Mentor notes (on assessments)
     5. Assessments
     6. Agreement tokens
-    7. Agreements
-    8. Mentor resources shared with this apprentice
-    9. Mentor-apprentice relationships
-    10. Notifications
-    11. User record
+    7. Agreements (by ID and by email - for pending agreements)
+    8. Apprentice invitations sent to this email
+    9. Mentor resources shared with this apprentice
+    10. Mentor-apprentice relationships
+    11. Notifications
+    12. User record
     """
     deleted_counts = {}
     
@@ -162,29 +170,39 @@ def delete_apprentice_account(db: Session, user_id: str) -> dict:
         count = _safe_delete(db, Assessment, Assessment.apprentice_id == user_id, "assessments")
         deleted_counts["assessments"] = count
         
-        # 5. Delete agreement tokens (for agreements where apprentice is involved)
-        agreement_ids = [a.id for a in db.query(Agreement.id).filter(Agreement.apprentice_id == user_id).all()]
+        # 5. Delete agreement tokens (for agreements where apprentice is involved - by ID or email)
+        # Build condition for agreements associated with this apprentice
+        agreement_filter = Agreement.apprentice_id == user_id
+        if user_email:
+            agreement_filter = or_(Agreement.apprentice_id == user_id, Agreement.apprentice_email == user_email)
+        
+        agreement_ids = [a.id for a in db.query(Agreement.id).filter(agreement_filter).all()]
         if agreement_ids:
             count = _safe_delete_by_ids(db, AgreementToken, AgreementToken.agreement_id, agreement_ids, "agreement_tokens")
             deleted_counts["agreement_tokens"] = count
         
-        # 6. Delete agreements
-        count = _safe_delete(db, Agreement, Agreement.apprentice_id == user_id, "agreements")
+        # 6. Delete agreements (by ID and by email for pending agreements)
+        count = _safe_delete(db, Agreement, agreement_filter, "agreements")
         deleted_counts["agreements"] = count
         
-        # 7. Delete mentor resources shared with this apprentice
+        # 7. Delete apprentice invitations sent to this email
+        if user_email:
+            count = _safe_delete(db, ApprenticeInvitation, ApprenticeInvitation.apprentice_email == user_email, "apprentice_invitations")
+            deleted_counts["apprentice_invitations"] = count
+        
+        # 8. Delete mentor resources shared with this apprentice
         count = _safe_delete(db, MentorResource, MentorResource.apprentice_id == user_id, "mentor_resources")
         deleted_counts["mentor_resources"] = count
         
-        # 8. Delete mentor-apprentice relationships
+        # 9. Delete mentor-apprentice relationships
         count = _safe_delete(db, MentorApprentice, MentorApprentice.apprentice_id == user_id, "mentor_apprentice")
         deleted_counts["mentor_relationships"] = count
         
-        # 9. Delete notifications
+        # 10. Delete notifications
         count = _safe_delete(db, Notification, Notification.user_id == user_id, "notifications")
         deleted_counts["notifications"] = count
         
-        # 10. Delete the user (this table must exist)
+        # 11. Delete the user (this table must exist)
         count = db.query(User).filter(User.id == user_id).delete(synchronize_session=False)
         deleted_counts["user"] = count
         
@@ -286,7 +304,7 @@ def delete_user_account(db: Session, user: User) -> dict:
     role = user.role.value if hasattr(user.role, 'value') else str(user.role)
     
     if role == "apprentice":
-        return delete_apprentice_account(db, user.id)
+        return delete_apprentice_account(db, user.id, user.email)
     elif role == "mentor":
         return delete_mentor_account(db, user.id)
     else:

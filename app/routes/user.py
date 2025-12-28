@@ -1,12 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
+import logging
 from app.schemas.user import UserCreate, UserOut
 from app.models import user as user_model
 from app.db import get_db
 from app.services.auth import verify_token, require_roles, get_current_user
 from app.services.account_deletion import get_account_deletion_summary, delete_user_account
-from firebase_admin import auth
+from firebase_admin import auth, firestore
 from app.models.mentor_apprentice import MentorApprentice
 from app.models.user import User
 from app.exceptions import NotFoundException
@@ -118,22 +119,46 @@ def close_account(
         user_email = current_user.email
         user_id = current_user.id
         
-        # Perform the deletion
+        # Perform the database deletion
         result = delete_user_account(db, current_user)
         
-        # Try to delete the Firebase user as well (optional - may fail if not exists)
+        # Delete the Firebase Authentication user
+        firebase_auth_deleted = False
+        firebase_auth_error = None
         try:
             auth.delete_user(user_id)
+            firebase_auth_deleted = True
+            logging.info(f"Successfully deleted Firebase Auth user {user_id}")
+        except auth.UserNotFoundError:
+            # User doesn't exist in Firebase Auth - this is fine
+            firebase_auth_deleted = True
+            logging.info(f"Firebase Auth user {user_id} already does not exist")
         except Exception as firebase_error:
-            # Log but don't fail - the database deletion is the primary concern
-            import logging
-            logging.warning(f"Could not delete Firebase user {user_id}: {firebase_error}")
+            firebase_auth_error = str(firebase_error)
+            logging.warning(f"Could not delete Firebase Auth user {user_id}: {firebase_error}")
+        
+        # Delete the Firestore user document (contains role, onboarded flag, etc.)
+        firestore_deleted = False
+        firestore_error = None
+        try:
+            db_firestore = firestore.client()
+            # Delete from 'users' collection
+            db_firestore.collection('users').document(user_id).delete()
+            firestore_deleted = True
+            logging.info(f"Successfully deleted Firestore user document {user_id}")
+        except Exception as firestore_err:
+            firestore_error = str(firestore_err)
+            logging.warning(f"Could not delete Firestore user document {user_id}: {firestore_err}")
         
         return {
             "success": True,
             "message": f"Account {user_email} has been permanently deleted",
             "deleted_summary": summary["items_to_delete"],
-            "deleted_counts": result["deleted_counts"]
+            "deleted_counts": result["deleted_counts"],
+            "firebase_auth_deleted": firebase_auth_deleted,
+            "firebase_auth_error": firebase_auth_error,
+            "firestore_deleted": firestore_deleted,
+            "firestore_error": firestore_error
         }
         
     except Exception as e:
