@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ONLY BLV — Discipleship Apps</title>
+  <meta name="description" content="ONLY BLV is a suite of discipleship apps built to help people grow in their walk with Jesus. First release: T[root]H Discipleship." />
+
+  <style>
+    :root{
+      --bg:#070707;
+      --panel:#101010;
+      --panel2:#0c0c0c;
+      --text:#f2f2f2;
+      --muted:#bdbdbd;
+      --gold:#d7b02c;        /* gold highlight */
+      --gold2:#f2d46c;       /* lighter gold */
+      --line:rgba(215,176,44,.24);
+      --shadow: 0 10px 30px rgba(0,0,0,.55);
+      --radius:18px;
+      --radius-sm:14px;
+      --max:1100px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background:
+        radial-gradient(900px 500px at 20% 0%, rgba(215,176,44,.10), transparent 55%),
+        radial-gradient(900px 500px at 90% 10%, rgba(215,176,44,.08), transparent 50%),
+        linear-gradient(180deg, #0a0a0a 0%, var(--bg) 55%, #050505 100%);
+      color:var(--text);
+      letter-spacing:.2px;
+    }
+
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px}
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(7,7,7,.72);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width:0;
+      text-decoration:none;
+    }
+    .brand img{
+      width:40px; height:40px; border-radius:12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,.5);
+      border:1px solid rgba(255,255,255,.08);
+      background:#0a0a0a;
+      object-fit:cover;
+    }
+    .brand-title{
+      display:flex; flex-direction:column; line-height:1.05; min-width:0;
+    }
+    .brand-title strong{
+      font-size:14px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand-title span{
+      font-size:12px;
+      color:var(--muted);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .nav{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    }
+    .pill{
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(16,16,16,.7);
+      color:var(--text);
+      font-size:13px;
+      transition: transform .08s ease, border-color .2s ease, background .2s ease;
+      white-space:nowrap;
+    }
+    .pill:hover{
+      transform: translateY(-1px);
+      border-color: var(--line);
+      background: rgba(16,16,16,.95);
+    }
+    .pill.gold{
+      border-color: rgba(215,176,44,.45);
+      background: linear-gradient(180deg, rgba(215,176,44,.22), rgba(215,176,44,.10));
+    }
+
+    /* Hero */
+    .hero{
+      padding:28px 0 10px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(16,16,16,.95), rgba(10,10,10,.95));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-main{padding:26px}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      color: var(--gold2);
+      font-size:12px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    .dot{
+      width:9px; height:9px; border-radius:99px;
+      background: var(--gold);
+      box-shadow: 0 0 0 6px rgba(215,176,44,.15);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:42px;
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    @media (max-width: 520px){
+      h1{font-size:34px}
+    }
+    .lead{
+      margin:0 0 18px;
+      color: rgba(242,242,242,.86);
+      font-size:16px;
+      line-height:1.55;
+      max-width: 62ch;
+    }
+    .cta-row{
+      display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(14,14,14,.9);
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      transition: transform .08s ease, border-color .2s ease, background .2s ease;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: var(--line)}
+    .btn.primary{
+      border-color: rgba(215,176,44,.55);
+      background: linear-gradient(180deg, rgba(215,176,44,.30), rgba(215,176,44,.12));
+    }
+    .btn small{
+      font-weight:500;
+      color: rgba(242,242,242,.72);
+    }
+
+    /* Right hero: preview */
+    .hero-side{padding:18px; display:flex; flex-direction:column; gap:12px}
+    .preview{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.08);
+      background: radial-gradient(600px 300px at 10% 10%, rgba(215,176,44,.08), transparent 55%),
+                  linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      padding:14px;
+      display:grid;
+      gap:10px;
+      align-content:start;
+    }
+    .preview h3{margin:0; font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted)}
+    .logo-lockup{
+      display:flex; align-items:center; gap:12px;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.07);
+      background: rgba(12,12,12,.75);
+    }
+    .logo-lockup img{width:52px; height:52px; border-radius:14px; object-fit:cover; border:1px solid rgba(255,255,255,.10)}
+    .logo-lockup .txt{line-height:1.1}
+    .logo-lockup .txt strong{display:block; font-size:16px}
+    .logo-lockup .txt span{font-size:12px; color:var(--muted)}
+    .mini-list{
+      display:grid; gap:10px;
+    }
+    .mini{
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.07);
+      background: rgba(12,12,12,.65);
+      display:flex; gap:12px;
+    }
+    .mini b{color:var(--gold2)}
+    .mini div{font-size:13px; color:rgba(242,242,242,.82); line-height:1.35}
+
+    /* Sections */
+    section{margin-top:22px}
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin:20px 0 10px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:20px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color: rgba(242,242,242,.92);
+    }
+    .section-title p{
+      margin:0;
+      color: var(--muted);
+      font-size:13px;
+    }
+
+    /* App section */
+    .app-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    .app-card{padding:18px}
+    .app-head{
+      display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .app-head .left{
+      display:flex; align-items:center; gap:12px; min-width:0;
+    }
+    .badge{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(215,176,44,.45);
+      color: var(--gold2);
+      background: rgba(215,176,44,.10);
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .app-name{
+      display:flex; flex-direction:column; min-width:0;
+    }
+    .app-name strong{font-size:18px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    .app-name span{font-size:13px; color:var(--muted)}
+    .store-row{display:flex; gap:10px; flex-wrap:wrap}
+    .store{
+      text-decoration:none;
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(12,12,12,.85);
+      font-weight:600;
+      font-size:13px;
+    }
+    .store:hover{border-color: var(--line)}
+    .store svg{width:18px; height:18px; opacity:.92}
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .split{grid-template-columns:1fr}
+    }
+    .bullets{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .bullets li{
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.07);
+      background: rgba(12,12,12,.6);
+      color: rgba(242,242,242,.84);
+      line-height:1.35;
+    }
+    .bullets li b{color: var(--gold2)}
+    .note{
+      margin-top:10px;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    /* Screenshots */
+    .shots{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 980px){
+      .shots{grid-template-columns: repeat(2, 1fr)}
+    }
+    @media (max-width: 560px){
+      .shots{grid-template-columns: 1fr}
+    }
+    figure{
+      margin:0;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(10,10,10,.8);
+      box-shadow: 0 10px 26px rgba(0,0,0,.45);
+    }
+    figure img{
+      width:100%;
+      display:block;
+      height:auto;
+    }
+    figcaption{
+      padding:10px 12px;
+      font-size:12px;
+      color: var(--muted);
+      border-top:1px solid rgba(255,255,255,.06);
+      background: rgba(10,10,10,.85);
+    }
+
+    /* Footer */
+    footer{
+      margin-top:28px;
+      padding-top:18px;
+      border-top:1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+      font-size:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .footlinks{display:flex; gap:10px; flex-wrap:wrap}
+    .footlinks a{color:var(--muted); text-decoration:none}
+    .footlinks a:hover{color:var(--text)}
+  </style>
+</head>
+
+<body>
+  <!-- Sticky Top Bar -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top">
+        <!-- Swap this to your ONLY BLV mark if you prefer (IMG_0020.jpg).
+             Right now this uses your ONLY BLV square image. -->
+        <img src="onlyblv.jpg" alt="ONLY BLV logo" />
+        <div class="brand-title">
+          <strong>ONLY BLV</strong>
+          <span>Discipleship app suite</span>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a class="pill" href="#apps">Apps</a>
+        <a class="pill" href="#trooth">T[root]H</a>
+        <a class="pill" href="#screens">Screens</a>
+        <a class="pill gold" href="#download">Download</a>
+      </nav>
+    </div>
+  </div>
+
+  <main id="top" class="wrap">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="card hero-main">
+        <div class="kicker"><span class="dot"></span> Built for real discipleship</div>
+        <h1>ONLY BLV</h1>
+        <p class="lead">
+          ONLY BLV is a suite of apps designed to help people grow in their discipleship journey—
+          with practical tools for assessment, habits, mentoring, and next steps.
+          The goal is simple: make spiritual growth visible, actionable, and consistent.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="#trooth" aria-label="Jump to T[root]H Discipleship">
+            Explore T[root]H
+            <small>First app release</small>
+          </a>
+          <a class="btn" href="#apps">
+            View the app suite
+            <small>What’s coming</small>
+          </a>
+        </div>
+
+        <p class="note">
+          This site is intentionally a single page for now. It’s the front door. The apps do the heavy lifting.
+        </p>
+      </div>
+
+      <aside class="card hero-side">
+        <div class="preview">
+          <h3>First release</h3>
+          <div class="logo-lockup">
+            <img src="troothdiscipleshiplogo.png" alt="T[root]H Discipleship icon" />
+            <div class="txt">
+              <strong>T[root]H Discipleship</strong>
+              <span>Assess • Learn • Practice • Grow</span>
+            </div>
+          </div>
+
+          <div class="mini-list">
+            <div class="mini">
+              <div>★</div>
+              <div><b>Assessments</b> that turn “I should grow” into specific next steps.</div>
+            </div>
+            <div class="mini">
+              <div>✦</div>
+              <div><b>Spiritual gifts</b> results to help people serve with clarity.</div>
+            </div>
+            <div class="mini">
+              <div>↗</div>
+              <div><b>Progress tracking</b> so consistency becomes normal, not a random burst.</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- APPS (SUITE) -->
+    <section id="apps">
+      <div class="section-title">
+        <h2>App Suite</h2>
+        <p>Multiple apps. One mission: discipleship that actually moves.</p>
+      </div>
+
+      <div class="card app-card">
+        <div class="split">
+          <ul class="bullets">
+            <li><b>T[root]H Discipleship</b> — spiritual health assessments, actionable growth plans, and mentoring support.</li>
+            <li><b>Mentor / Apprentice tools</b> — invite, connect, coach, and track progress (built into the experience).</li>
+            <li><b>Resources & routines</b> — guided habits (prayer, Scripture, stewardship, leadership readiness, etc.).</li>
+            <li><b>Future apps</b> — additional tools in the ONLY BLV suite (released in stages, integrated over time).</li>
+          </ul>
+
+          <div>
+            <p class="lead" style="margin:0;">
+              The suite is designed to meet people where they actually are:
+              not with guilt, but with clarity. Not with vague inspiration, but with repeatable steps.
+            </p>
+            <p class="note">
+              You can update these bullet points later as your roadmap gets more concrete.
+              For now, keep the promise tight and believable.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TROOTH -->
+    <section id="trooth">
+      <div class="section-title">
+        <h2>T[root]H Discipleship</h2>
+        <p>Assess spiritual health. Get a plan. Grow with consistency.</p>
+      </div>
+
+      <div class="card app-card">
+        <div class="app-head">
+          <div class="left">
+            <span class="badge">v1</span>
+            <div class="app-name">
+              <strong>T[root]H Discipleship</strong>
+              <span>Your discipleship hub — built for real-life growth.</span>
+            </div>
+          </div>
+
+          <!-- Replace the href values with your real store URLs -->
+          <div id="download" class="store-row">
+            <a class="store" href="https://apps.apple.com/" target="_blank" rel="noopener">
+              <!-- Apple icon -->
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M16.2 2.6c-.8.9-1.4 2.1-1.2 3.4 1.1.1 2.2-.6 2.9-1.4.8-.9 1.4-2.1 1.2-3.3-1.1-.1-2.2.5-2.9 1.3Z" fill="currentColor"/>
+                <path d="M19.7 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2.1-3.8-2.1-1.6-.2-3.1 1-3.9 1s-2-.9-3.3-.9c-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 2 2.6 3.4 2.5 1.4-.1 1.9-.9 3.6-.9s2.2.9 3.7.9c1.6 0 2.5-1.2 3.4-2.4 1-1.5 1.4-2.9 1.4-3-.1 0-2.7-1-2.8-3.9Z" fill="currentColor"/>
+              </svg>
+              App Store
+            </a>
+
+            <a class="store" href="https://play.google.com/store" target="_blank" rel="noopener">
+              <!-- Play icon -->
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4.5 3.6c-.6.4-1 1.1-1 2v12.8c0 .9.4 1.6 1 2l9-8.4-9-8.4Z" fill="currentColor" opacity=".9"/>
+                <path d="M14.6 12 5.2 20.7c.3.2.7.3 1.1.3.5 0 1-.1 1.5-.4l10.5-6.1-3.7-2.5Z" fill="currentColor"/>
+                <path d="M18.3 9.5 7.8 3.4c-.5-.3-1-.4-1.5-.4-.4 0-.8.1-1.1.3L14.6 12l3.7-2.5Z" fill="currentColor" opacity=".85"/>
+                <path d="M20.7 11.1c.8.5.8 1.3 0 1.8l-1.7 1-3.9-2.6 3.9-2.6 1.7 1Z" fill="currentColor"/>
+              </svg>
+              Google Play
+            </a>
+          </div>
+        </div>
+
+        <div class="split">
+          <div>
+            <ul class="bullets">
+              <li><b>Health score + status</b> so people can see where they are, not guess.</li>
+              <li><b>Priority action</b> that translates results into one clear next step (not 47 vague ones).</li>
+              <li><b>Spiritual gifts</b> results that help people serve intentionally.</li>
+              <li><b>Progress</b> and <b>resources</b> built into the same flow—so growth isn’t scattered.</li>
+            </ul>
+            <p class="note">
+              Replace any language here to match your exact feature set once your v1 scope is finalized.
+            </p>
+          </div>
+
+          <div class="card" style="padding:14px; border-radius:18px; background:rgba(12,12,12,.65); border:1px solid rgba(255,255,255,.08);">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+              <img src="b6942425-baaf-40a8-85ed-2f22ccc29099.png" alt="T[root]H app preview" style="width:76px; height:auto; border-radius:14px; border:1px solid rgba(255,255,255,.10);" />
+              <div style="min-width:0;">
+                <div style="font-weight:700;">On-brand UI</div>
+                <div style="color:var(--muted); font-size:13px; line-height:1.35;">
+                  Black background, gold highlights, clean cards, and simple “what’s next” guidance.
+                </div>
+              </div>
+            </div>
+            <div style="color:rgba(242,242,242,.84); font-size:13px; line-height:1.45;">
+              Your screenshots already sell the vibe. This site’s job is to be a calm runway: explain,
+              show, then link out to download.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENSHOTS -->
+    <section id="screens">
+      <div class="section-title">
+        <h2>Screens</h2>
+        <p>Preview the experience (black + gold, clean and focused).</p>
+      </div>
+
+      <div class="shots">
+        <figure>
+          <img src="dashboard.png" alt="Home dashboard screen" />
+          <figcaption>Dashboard: quick actions, drafts, and a clean starting point.</figcaption>
+        </figure>
+        <figure>
+          <img src="assessmentResults.png" alt="Assessment results screen" />
+          <figcaption>Assessment results: health score + priority action with Scripture support.</figcaption>
+        </figure>
+        <figure>
+          <img src="spiritualGiftsScreen.png" alt="Spiritual gifts results screen" />
+          <figcaption>Spiritual gifts: ranked results with clear labels and score visibility.</figcaption>
+        </figure>
+        <figure>
+          <img src="mentorApprenticeRelationship.png" alt="Mentor / apprentice screen" />
+          <figcaption>Mentor / apprentice: relationships and progress in one place.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> ONLY BLV. All rights reserved.</div>
+      <div class="footlinks">
+        <!-- Replace these with your real policy pages when you create them -->
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms</a>
+        <a href="#top">Back to top</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Tiny, harmless script for the footer year.
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

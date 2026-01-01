@@ -3,19 +3,19 @@
 {% block content %}
     <h2>Assessment Complete</h2>
     <p>Dear {{ mentor_name }},</p>
-    <p><strong>{{ apprentice_name }}</strong> has completed their spiritual assessment. Here are the results:</p>
-    <div style="background:#F0F4F9;border:1px solid #D9E2EC;border-radius:10px;padding:20px 24px;margin:24px 0; text-align:center;">
-        <h3 style="margin:0 0 6px;font-size:18px;color:#0A4D8C;">Overall Score</h3>
-        <div style="font-size:46px;font-weight:700;color:#28A745;line-height:1;">{{ "%.1f"|format(overall_score) }}<span style="font-size:22px;font-weight:500;color:#2F855A;">/10</span></div>
-        <p style="margin:10px 0 0;font-size:14px;">This reflects current maturity across all assessed areas.</p>
+    <p><strong style="color:#d4af37;">{{ apprentice_name }}</strong> has completed their spiritual assessment. Here are the results:</p>
+    <div class="highlight-box" style="text-align:center;">
+        <h3 style="margin:0 0 6px;font-size:16px;color:#888;">Overall Score</h3>
+        <div style="font-size:48px;font-weight:700;color:#d4af37;line-height:1;">{{ "%.1f"|format(overall_score) }}<span style="font-size:22px;font-weight:500;color:#e8c547;">/10</span></div>
+        <p style="margin:10px 0 0;font-size:14px;color:#888;">This reflects current maturity across all assessed areas.</p>
     </div>
     {% if category_scores %}
         <h3 style="margin-top:30px;">Category Breakdown</h3>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:14px;">
             {% for category, score in category_scores.items() %}
-                <div style="background:#ffffff;border:1px solid #E2E8F0;border-radius:8px;padding:14px 12px;text-align:center;">
-                    <div style="font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:#555;font-weight:600;margin-bottom:4px;">{{ category }}</div>
-                    <div style="font-size:22px;font-weight:600;color:#0A4D8C;">{{ "%.1f"|format(score) }}</div>
+                <div style="background:#242424;border:1px solid #333;border-radius:12px;padding:14px 12px;text-align:center;">
+                    <div style="font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:#888;font-weight:600;margin-bottom:4px;">{{ category }}</div>
+                    <div style="font-size:22px;font-weight:600;color:#d4af37;">{{ "%.1f"|format(score) }}</div>
                 </div>
             {% endfor %}
         </div>
@@ -23,13 +23,13 @@
     <div style="margin:34px 0 10px;">
         <h3 style="margin:0 0 10px;">Recommendations for Growth</h3>
         {% if recommendations.summary_recommendation %}
-            <p style="background:#EEF7F1;border-left:4px solid #28A745;padding:12px 14px;border-radius:6px 8px 8px 6px;margin:0 0 16px;">
-                <strong>Summary:</strong> {{ recommendations.summary_recommendation }}
-            </p>
+            <div style="background:#242424;border-left:4px solid #d4af37;padding:12px 14px;border-radius:0 8px 8px 0;margin:0 0 16px;">
+                <strong style="color:#d4af37;">Summary:</strong> {{ recommendations.summary_recommendation }}
+            </div>
         {% endif %}
         {% for category, recommendation in recommendations.items() %}
             {% if category != 'summary_recommendation' %}
-                <h4 style="margin:18px 0 4px;font-size:15px;color:#0A4D8C;">{{ category }}</h4>
+                <h4 style="margin:18px 0 4px;font-size:15px;color:#e8c547;">{{ category }}</h4>
                 <p style="margin:0 0 8px;">{{ recommendation }}</p>
             {% endif %}
         {% endfor %}

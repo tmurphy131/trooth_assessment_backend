@@ -5,27 +5,31 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{% block title %}T[root]H Notification{% endblock %}</title>
   <style>
-  body { margin:0; padding:0; background:#F5F7FA; font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif; color:#222; -webkit-font-smoothing:antialiased; }
-    a { text-decoration:none; }
+  body { margin:0; padding:0; background:#0a0a0a; font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif; color:#f5f5f5; -webkit-font-smoothing:antialiased; }
+    a { text-decoration:none; color:#e8c547; }
+    a:hover { text-decoration:underline; }
   .container { max-width:640px; margin:0 auto; padding:32px 20px; }
-  .card { background:#ffffff; border:1px solid #E2E8F0; border-radius:10px; padding:32px 34px; box-shadow:0 4px 18px rgba(0,0,0,0.05); }
+  .card { background:#1a1a1a; border:1px solid #2a2a2a; border-radius:14px; padding:32px 34px; box-shadow:0 4px 24px rgba(0,0,0,0.3); }
     .logo-bar { text-align:center; margin-bottom:28px; }
     .logo-bar img { max-width:180px; height:auto; display:inline-block; }
-  .brand-title { font-size:22px; font-weight:600; color:#0A4D8C; letter-spacing:.5px; }
-  h1,h2,h3 { font-weight:600; color:#0A4D8C; margin-top:0; }
+  .brand-title { font-size:22px; font-weight:600; color:#d4af37; letter-spacing:.5px; }
+  h1,h2,h3 { font-weight:600; color:#d4af37; margin-top:0; }
     h2 { font-size:22px; }
-    p { line-height:1.55; }
+    h3 { font-size:18px; color:#e8c547; }
+    p { line-height:1.6; color:#e0e0e0; }
     .btn-row { text-align:center; margin:30px 0; }
-  .brand-btn { background:#0A4D8C; color:#fff !important; padding:14px 26px; border-radius:6px; font-weight:600; font-size:15px; display:inline-block; box-shadow:0 2px 6px rgba(0,0,0,0.15); }
-    .brand-btn:hover { background:#083b69; }
-  .accent-badge { display:inline-block; background:#28A745; color:#fff; padding:4px 10px; border-radius:12px; font-size:12px; font-weight:600; letter-spacing:.5px; }
-    .muted { color:#666; font-size:13px; }
-    .footer { text-align:center; margin-top:36px; font-size:12px; color:#777; line-height:1.4; }
-  .divider { border:none; border-top:1px solid #E2E8F0; margin:38px 0 30px; }
-    ul { padding-left:20px; }
-    .pill { background:#EEF4FA; color:#335; padding:4px 10px; font-size:12px; border-radius:14px; display:inline-block; margin:4px 4px 0 0; }
-  .danger { color:#A30000; }
-  @media (prefers-color-scheme: dark) { body { background:#101418; color:#ddd; } .card { background:#1C2430; border-color:#2C3A49; } .footer { color:#999; } .divider { border-top-color:#2C3A49; } }
+  .brand-btn { background:linear-gradient(135deg,#d4af37,#e8c547); color:#000 !important; padding:14px 28px; border-radius:10px; font-weight:600; font-size:15px; display:inline-block; box-shadow:0 4px 12px rgba(212,175,55,0.3); }
+    .brand-btn:hover { background:linear-gradient(135deg,#e8c547,#d4af37); text-decoration:none; }
+  .accent-badge { display:inline-block; background:#d4af37; color:#000; padding:4px 12px; border-radius:999px; font-size:12px; font-weight:600; letter-spacing:.5px; }
+    .muted { color:#888; font-size:13px; }
+    .footer { text-align:center; margin-top:36px; font-size:12px; color:#666; line-height:1.5; }
+  .divider { border:none; border-top:1px solid #2a2a2a; margin:38px 0 30px; }
+    ul { padding-left:20px; color:#e0e0e0; }
+    li { margin:8px 0; }
+    .pill { background:#2a2a2a; color:#d4af37; padding:4px 12px; font-size:12px; border-radius:999px; display:inline-block; margin:4px 4px 0 0; font-weight:500; }
+  .danger { color:#ef4444; }
+  .success { color:#22c55e; }
+  .highlight-box { background:linear-gradient(135deg,#2a2a2a,#1f1f1f); border:1px solid #d4af37; border-radius:12px; padding:20px 24px; margin:24px 0; }
   </style>
 </head>
 <body>
@@ -42,9 +46,10 @@
       {% block content %}{% endblock %}
       <hr class="divider" />
       <div class="footer">
-        <p>T[root]H Discipleship &mdash; Empowering intentional spiritual growth.</p>
-        <p>&copy; {{ 'now'|strftime('%Y') }} T[root]H Discipleship. All rights reserved.</p>
-        <p class="muted">If you didn’t expect this email you can safely ignore it.</p>
+        <p style="color:#d4af37; font-weight:500; margin-bottom:8px;">#getrooted #LUKE850</p>
+        <p>T[root]H Discipleship — Empowering intentional spiritual growth.</p>
+        <p>© {{ 'now'|strftime('%Y') }} ONLY BLV. All rights reserved.</p>
+        <p class="muted">If you didn't expect this email you can safely ignore it.</p>
       </div>
     </div>
   </div>

@@ -124,10 +124,10 @@ def validate_invitation_token(token: str, db: Session = Depends(get_db)):
 @router.post("/accept-invite")
 def accept_invite(data: InviteAccept, db: Session = Depends(get_db)):
     invitation = db.query(ApprenticeInvitation).filter_by(token=data.token).first()
+    if not invitation:
+        raise HTTPException(status_code=400, detail="Invitation is invalid or expired")
     if invitation.expires_at < datetime.utcnow():
         raise ValidationException("This invitation has expired.")
-    if not invitation or invitation.expires_at < datetime.utcnow():
-        raise HTTPException(status_code=400, detail="Invitation is invalid or expired")
 
     if invitation.accepted:
         raise HTTPException(status_code=400, detail="Invitation has already been accepted")
@@ -137,7 +137,20 @@ def accept_invite(data: InviteAccept, db: Session = Depends(get_db)):
     if not apprentice:
         raise NotFoundException("Apprentice not found")
 
+    # Check if the mentor-apprentice relationship already exists (e.g., from a signed agreement)
+    existing_relationship = db.query(MentorApprentice).filter(
+        MentorApprentice.mentor_id == invitation.mentor_id,
+        MentorApprentice.apprentice_id == data.apprentice_id
+    ).first()
+
     invitation.accepted = True
+    
+    if existing_relationship:
+        # Relationship already exists (likely from agreement signing), just mark invitation as accepted
+        db.commit()
+        return {"message": "Invitation accepted, relationship already exists"}
+    
+    # Create new relationship
     relationship = MentorApprentice(
         mentor_id=invitation.mentor_id,
         apprentice_id=data.apprentice_id

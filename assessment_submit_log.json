@@ -10803,7 +10803,7 @@
     "insertId": "68ca0ead0008e78e7edef36a",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessment-drafts/list",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessment-drafts/list",
       "requestSize": "1269",
       "status": 200,
       "responseSize": "144",
@@ -10858,7 +10858,7 @@
     "insertId": "68ca0ead0009017afca0240b",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/spiritual-gifts/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/spiritual-gifts/latest",
       "requestSize": "1283",
       "status": 200,
       "responseSize": "1467",
@@ -11072,7 +11072,7 @@
     "insertId": "68ca0ead000bb4b1db253449",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/spiritual-gifts/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/spiritual-gifts/latest",
       "requestSize": "1282",
       "status": 200,
       "responseSize": "1467",
@@ -11186,7 +11186,7 @@
     "insertId": "68ca0ebd000c291789a94637",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/templates/published",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/templates/published",
       "requestSize": "1269",
       "status": 200,
       "responseSize": "578",
@@ -11221,7 +11221,7 @@
     "insertId": "68ca0ebd000c29e783d661fe",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/master-trooth/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/master-trooth/latest",
       "requestSize": "1281",
       "status": 404,
       "responseSize": "182",
@@ -11375,7 +11375,7 @@
     "insertId": "68ca0ec0000a2464f017c6ac",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/templates/published",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/templates/published",
       "requestSize": "1268",
       "status": 200,
       "responseSize": "578",
@@ -11409,7 +11409,7 @@
     "insertId": "68ca0ec0000a0bd7247fe85b",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/master-trooth/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/master-trooth/latest",
       "requestSize": "1281",
       "status": 404,
       "responseSize": "182",
@@ -11563,7 +11563,7 @@
     "insertId": "68ca0ec5000b1f8e5deb442e",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessment-drafts/list",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessment-drafts/list",
       "requestSize": "1272",
       "status": 200,
       "responseSize": "144",
@@ -11677,7 +11677,7 @@
     "insertId": "68ca0ec5000b846f7e1d269a",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/spiritual-gifts/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/spiritual-gifts/latest",
       "requestSize": "1284",
       "status": 200,
       "responseSize": "1467",
@@ -11831,7 +11831,7 @@
     "insertId": "68ca0ec5000d463dbf03dd08",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/spiritual-gifts/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/spiritual-gifts/latest",
       "requestSize": "1284",
       "status": 200,
       "responseSize": "1467",
@@ -11945,7 +11945,7 @@
     "insertId": "68ca0ec7000199e7700a2a84",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/master-trooth/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/master-trooth/latest",
       "requestSize": "1282",
       "status": 404,
       "responseSize": "182",
@@ -11979,7 +11979,7 @@
     "insertId": "68ca0ec70001a6d1fad2b62f",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/templates/published",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/templates/published",
       "requestSize": "1269",
       "status": 200,
       "responseSize": "578",
@@ -12133,7 +12133,7 @@
     "insertId": "68ca0ec90002cb2cc119a5a5",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/master-trooth/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/master-trooth/latest",
       "requestSize": "1281",
       "status": 404,
       "responseSize": "182",
@@ -12188,7 +12188,7 @@
     "insertId": "68ca0ec90002df3234f44dae",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/templates/published",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/templates/published",
       "requestSize": "1269",
       "status": 200,
       "responseSize": "578",
@@ -12322,7 +12322,7 @@
     "insertId": "68ca0f0e0003a79416cd31be",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/master-trooth/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/master-trooth/latest",
       "requestSize": "1282",
       "status": 404,
       "responseSize": "182",
@@ -12377,7 +12377,7 @@
     "insertId": "68ca0f0e0003eccf5d1af9a1",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/templates/published",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/templates/published",
       "requestSize": "1267",
       "status": 200,
       "responseSize": "578",
@@ -12511,7 +12511,7 @@
     "insertId": "68ca0f10000d26fe4e025057",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/master-trooth/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/master-trooth/latest",
       "requestSize": "1278",
       "status": 404,
       "responseSize": "182",
@@ -12545,7 +12545,7 @@
     "insertId": "68ca0f10000d3c6679298436",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/templates/published",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/templates/published",
       "requestSize": "1269",
       "status": 200,
       "responseSize": "578",
@@ -12699,7 +12699,7 @@
     "insertId": "68ca0f13000eba42d6af54ed",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessment-drafts/list",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessment-drafts/list",
       "requestSize": "1272",
       "status": 200,
       "responseSize": "144",
@@ -12753,7 +12753,7 @@
     "insertId": "68ca0f13000ec3ffb3a4866e",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/spiritual-gifts/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/spiritual-gifts/latest",
       "requestSize": "1283",
       "status": 200,
       "responseSize": "1467",
@@ -12967,7 +12967,7 @@
     "insertId": "68ca0f140001e8b3c5f94f57",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/assessments/spiritual-gifts/latest",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/assessments/spiritual-gifts/latest",
       "requestSize": "1284",
       "status": 200,
       "responseSize": "1467",
@@ -13081,7 +13081,7 @@
     "insertId": "68ca0f340005d495f286c784",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/mentor/my-apprentices",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/mentor/my-apprentices",
       "requestSize": "1243",
       "status": 200,
       "responseSize": "425",
@@ -13176,7 +13176,7 @@
     "insertId": "68ca0f34000662001eb0ed86",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/mentor/notifications",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/mentor/notifications",
       "requestSize": "1243",
       "status": 200,
       "responseSize": "144",
@@ -13270,7 +13270,7 @@
     "insertId": "68ca0f41000cdd4d02d0b680",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/mentor/apprentice/6f81bcZ8Ziax8Hpb1gLL3Qsl5Bg1/submitted-assessments?skip=0&limit=100",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/mentor/apprentice/6f81bcZ8Ziax8Hpb1gLL3Qsl5Bg1/submitted-assessments?skip=0&limit=100",
       "requestSize": "1306",
       "status": 200,
       "responseSize": "144",
@@ -13365,7 +13365,7 @@
     "insertId": "68ca0f42000025180063eb65",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/mentor/apprentice/qoSyMaESRcURqRqLi6hsB7T7hs03/submitted-assessments?skip=0&limit=100",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/mentor/apprentice/qoSyMaESRcURqRqLi6hsB7T7hs03/submitted-assessments?skip=0&limit=100",
       "requestSize": "1307",
       "status": 500,
       "responseSize": "162",
@@ -25831,7 +25831,7 @@
     "insertId": "68ca0f42000b1a0a3a4325f6",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/mentor/apprentice/6f81bcZ8Ziax8Hpb1gLL3Qsl5Bg1/submitted-assessments?skip=0&limit=100",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/mentor/apprentice/6f81bcZ8Ziax8Hpb1gLL3Qsl5Bg1/submitted-assessments?skip=0&limit=100",
       "requestSize": "1307",
       "status": 200,
       "responseSize": "144",
@@ -25925,7 +25925,7 @@
     "insertId": "68ca0f42000d479ef0fb4917",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/mentor/apprentice/qoSyMaESRcURqRqLi6hsB7T7hs03/submitted-assessments?skip=0&limit=100",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/mentor/apprentice/qoSyMaESRcURqRqLi6hsB7T7hs03/submitted-assessments?skip=0&limit=100",
       "requestSize": "1307",
       "status": 500,
       "responseSize": "162",
@@ -38391,7 +38391,7 @@
     "insertId": "68ca0f700009061e1ab570e2",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/mentor/notifications",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/mentor/notifications",
       "requestSize": "1243",
       "status": 200,
       "responseSize": "144",
@@ -38486,7 +38486,7 @@
     "insertId": "68ca0fac0008cc554a28e0eb",
     "httpRequest": {
       "requestMethod": "GET",
-      "requestUrl": "https://trooth-assessment-dev.onlyblv.com/mentor/notifications",
+      "requestUrl": "https://trooth-discipleship-api.onlyblv.com/mentor/notifications",
       "requestSize": "1243",
       "status": 200,
       "responseSize": "144",

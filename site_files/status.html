@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>System Status — T[root]H Discipleship</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <style>
+    :root {
+      --bg: #050505;
+      --surface: #0a0a0a;
+      --surface2: #111;
+      --text: #f5f5f5;
+      --muted: #888;
+      --gold: #d4af37;
+      --gold-light: #e8c547;
+      --gold-glow: rgba(212, 175, 55, 0.15);
+      --green: #4caf50;
+      --green-glow: rgba(76, 175, 80, 0.15);
+      --red: #f44336;
+      --radius: 16px;
+      --max: 900px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    a { color: var(--gold-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 24px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+    }
+    .logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+    .logo span {
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--green);
+      background: var(--green-glow);
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+    .status-badge.error {
+      color: var(--red);
+      background: rgba(244, 67, 54, 0.15);
+      border-color: rgba(244, 67, 54, 0.3);
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Hero */
+    .hero {
+      padding: 48px 0 32px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--gold);
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .last-updated {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    /* Big Numbers Grid */
+    .big-numbers {
+      padding: 40px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .big-number-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .big-number-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+    .big-number-card.highlight {
+      border-color: var(--gold);
+      background: var(--gold-glow);
+    }
+    .big-number-value {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+    .big-number-card.highlight .big-number-value {
+      color: var(--gold);
+    }
+    .big-number-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .big-number-card.highlight .big-number-label {
+      color: var(--gold-light);
+    }
+
+    /* Section */
+    .section {
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::before {
+      content: '';
+      width: 3px;
+      height: 16px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    /* Metrics Table */
+    .metrics-table {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .metric-row:last-child {
+      border-bottom: none;
+    }
+    .metric-label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .metric-value {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .metric-value.gold {
+      color: var(--gold);
+    }
+    .metric-value.green {
+      color: var(--green);
+    }
+    .metric-value.red {
+      color: var(--red);
+    }
+
+    /* Activity Section */
+    .activity-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .activity-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .activity-card h4 {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .activity-card .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .activity-card .subtext {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 32px 0;
+      text-align: center;
+    }
+    .footer-brand {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Loading State */
+    .loading {
+      text-align: center;
+      padding: 60px 0;
+      color: var(--muted);
+    }
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(212, 175, 55, 0.2);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Error State */
+    .error-message {
+      background: rgba(244, 67, 54, 0.1);
+      border: 1px solid rgba(244, 67, 54, 0.3);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      color: var(--red);
+    }
+
+    /* Refresh Button */
+    .refresh-btn {
+      background: var(--gold-glow);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--gold-light);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .refresh-btn:hover {
+      background: rgba(212, 175, 55, 0.25);
+      border-color: var(--gold);
+    }
+    .refresh-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .big-numbers {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .big-number-value {
+        font-size: 32px;
+      }
+      .header-inner {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <img src="troothdiscipleship_icon.png" alt="T[root]H" />
+        <span>System Status</span>
+      </div>
+      <div class="status-badge" id="status-badge">
+        <span class="status-dot"></span>
+        <span id="status-text">Loading...</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>T[root]H Discipleship</h1>
+        <p>Real-time system health and usage metrics</p>
+        <div class="last-updated">
+          Last updated: <span id="last-updated">Loading...</span>
+          <button class="refresh-btn" onclick="loadMetrics()" style="margin-left: 12px;">Refresh</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Loading State -->
+      <div class="loading" id="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Loading metrics...</p>
+      </div>
+
+      <!-- Error State -->
+      <div class="error-message" id="error-state" style="display: none;">
+        <p>Failed to load metrics. <a href="#" onclick="loadMetrics(); return false;">Try again</a></p>
+      </div>
+
+      <!-- Content (hidden until loaded) -->
+      <div id="content" style="display: none;">
+        <!-- Big Numbers -->
+        <div class="big-numbers">
+          <div class="big-number-card highlight">
+            <div class="big-number-value" id="total-users">-</div>
+            <div class="big-number-label">Total Users</div>
+          </div>
+          <div class="big-number-card">
+            <div class="big-number-value" id="total-mentors">-</div>
+            <div class="big-number-label">Mentors</div>
+          </div>
+          <div class="big-number-card">
+            <div class="big-number-value" id="total-apprentices">-</div>
+            <div class="big-number-label">Apprentices</div>
+          </div>
+          <div class="big-number-card highlight">
+            <div class="big-number-value" id="active-pairs">-</div>
+            <div class="big-number-label">Active Pairs</div>
+          </div>
+          <div class="big-number-card">
+            <div class="big-number-value" id="assessments-completed">-</div>
+            <div class="big-number-label">Assessments Done</div>
+          </div>
+          <div class="big-number-card">
+            <div class="big-number-value" id="agreements-signed">-</div>
+            <div class="big-number-label">Agreements Signed</div>
+          </div>
+        </div>
+
+        <!-- This Week's Activity -->
+        <section class="section">
+          <h3 class="section-title">This Week</h3>
+          <div class="activity-grid">
+            <div class="activity-card">
+              <h4>New Users</h4>
+              <div class="value" id="new-users-week">-</div>
+              <div class="subtext">joined this week</div>
+            </div>
+            <div class="activity-card">
+              <h4>Assessments</h4>
+              <div class="value" id="assessments-week">-</div>
+              <div class="subtext">completed this week</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pending Items -->
+        <section class="section">
+          <h3 class="section-title">Pending Actions</h3>
+          <div class="metrics-table">
+            <div class="metric-row">
+              <span class="metric-label">Drafts In Progress</span>
+              <span class="metric-value" id="drafts-pending">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Agreements Awaiting Signature</span>
+              <span class="metric-value" id="agreements-pending">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Invitations Pending</span>
+              <span class="metric-value" id="invitations-pending">-</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-brand">#getrooted #LUKE850</div>
+      <div class="footer-copy">© <span id="year"></span> ONLY BLV. T[root]H Discipleship.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // API Base URL - adjust for your deployment
+    const API_BASE = window.location.hostname === 'localhost' 
+      ? 'http://localhost:8000'
+      : 'https://trooth-discipleship-api.onlyblv.com';
+
+    async function loadMetrics() {
+      const loadingState = document.getElementById('loading-state');
+      const errorState = document.getElementById('error-state');
+      const content = document.getElementById('content');
+      const statusBadge = document.getElementById('status-badge');
+      const statusText = document.getElementById('status-text');
+
+      // Show loading
+      loadingState.style.display = 'block';
+      errorState.style.display = 'none';
+      content.style.display = 'none';
+
+      try {
+        const response = await fetch(`${API_BASE}/metrics/dashboard`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const result = await response.json();
+        
+        if (result.status !== 'success') {
+          throw new Error(result.message || 'Failed to load metrics');
+        }
+
+        const data = result.data;
+
+        // Update totals
+        document.getElementById('total-users').textContent = data.totals.users;
+        document.getElementById('total-mentors').textContent = data.totals.mentors;
+        document.getElementById('total-apprentices').textContent = data.totals.apprentices;
+        document.getElementById('active-pairs').textContent = data.totals.active_pairs;
+        document.getElementById('assessments-completed').textContent = data.totals.assessments_completed;
+        document.getElementById('agreements-signed').textContent = data.totals.agreements_signed;
+
+        // Update activity
+        document.getElementById('new-users-week').textContent = '+' + data.activity.new_users_this_week;
+        document.getElementById('assessments-week').textContent = data.activity.assessments_this_week;
+
+        // Update pending
+        document.getElementById('drafts-pending').textContent = data.pending.drafts_in_progress;
+        document.getElementById('agreements-pending').textContent = data.pending.agreements_awaiting;
+        document.getElementById('invitations-pending').textContent = data.pending.invitations_pending;
+
+        // Update timestamp
+        const generatedAt = new Date(data.generated_at);
+        document.getElementById('last-updated').textContent = generatedAt.toLocaleString();
+
+        // Update status badge
+        statusBadge.classList.remove('error');
+        statusText.textContent = 'All Systems Operational';
+
+        // Show content
+        loadingState.style.display = 'none';
+        content.style.display = 'block';
+
+      } catch (error) {
+        console.error('Failed to load metrics:', error);
+        
+        // Show error state
+        loadingState.style.display = 'none';
+        errorState.style.display = 'block';
+        
+        // Update status badge
+        statusBadge.classList.add('error');
+        statusText.textContent = 'Connection Error';
+      }
+    }
+
+    // Load metrics on page load
+    loadMetrics();
+
+    // Auto-refresh every 5 minutes
+    setInterval(loadMetrics, 5 * 60 * 1000);
+  </script>
+</body>
+</html>

@@ -31,6 +31,7 @@ from app.routes import generic_assessments
 from app.routes import master_trooth
 from app.routes import progress
 from app.routes import mentor_report_v2
+from app.routes import metrics
 from app.exceptions import (
     UnauthorizedException, ForbiddenException, 
     NotFoundException, ValidationException
@@ -123,6 +124,11 @@ if settings.rate_limit_enabled:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        # Production domains
+        "https://onlyblv.com",
+        "https://www.onlyblv.com",
+        "https://trooth-discipleship-api.onlyblv.com",
+        # Local development
         "http://localhost:3000",
         "http://127.0.0.1:3000", 
         "http://localhost:3001",
@@ -174,6 +180,7 @@ app.include_router(progress.router)
 app.include_router(assessment_score_history.router)
 app.include_router(generic_assessments.router)
 app.include_router(mentor_report_v2.router)
+app.include_router(metrics.router, prefix="/metrics", tags=["Metrics"])
 
 # Static assets (logo etc.) – map /assets to ./assets if present
 _assets_dir = os.path.join(os.path.dirname(__file__), '..', 'assets')

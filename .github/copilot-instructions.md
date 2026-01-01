@@ -261,7 +261,7 @@ gcloud run deploy trooth-backend \
   --image=gcr.io/PROJECT/trooth-backend:latest \
   --region=us-east4 \
   --set-secrets=DATABASE_URL=DATABASE_URL:latest,FIREBASE_CERT_JSON=FIREBASE_CERT_JSON:latest,... \
-  --set-env-vars=ENV=development,APP_URL=https://trooth-assessment-dev.onlyblv.com \
+  --set-env-vars=ENV=development,APP_URL=https://trooth-discipleship-api.onlyblv.com \
   --allow-unauthenticated
 ```
 

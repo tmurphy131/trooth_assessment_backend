@@ -64,7 +64,7 @@ gcloud run deploy trooth-backend \
               SENDGRID_API_KEY=SENDGRID_API_KEY:latest,\
               OPENAI_API_KEY=OPENAI_API_KEY:latest,\
               FIREBASE_CERT_JSON=FIREBASE_CERT_JSON:latest \
-  --set-env-vars=EMAIL_FROM_ADDRESS=admin@onlyblv.com,ENV=development,APP_URL=https://trooth-assessment-dev.onlyblv.com \
+  --set-env-vars=EMAIL_FROM_ADDRESS=admin@onlyblv.com,ENV=development,APP_URL=https://trooth-discipleship-api.onlyblv.com \
   --allow-unauthenticated
 ```
 

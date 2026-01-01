@@ -5,29 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>T[root]H Mentor Report</title>
   <style>
-    body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background:#f7f7f9; margin:0; padding:24px; }
-    .card { max-width:720px; margin:0 auto; background:#fff; border-radius:16px; padding:24px; box-shadow: 0 8px 24px rgba(0,0,0,.08);}
-    .muted { color:#6b7280; }
-    .h1 { font-size:22px; margin:0 0 8px; }
-    .h2 { font-size:16px; margin:24px 0 8px; }
-    .pill { display:inline-block; padding:4px 10px; border-radius:999px; background:#eef2ff; color:#3730a3; font-weight:600; font-size:12px; }
+    body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background:#0a0a0a; margin:0; padding:24px; color:#f5f5f5; }
+    .card { max-width:720px; margin:0 auto; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:16px; padding:24px; box-shadow:0 8px 24px rgba(0,0,0,.3);}
+    .muted { color:#888; }
+    .h1 { font-size:22px; margin:0 0 8px; color:#f5f5f5; }
+    .h2 { font-size:16px; margin:24px 0 8px; color:#d4af37; }
+    .pill { display:inline-block; padding:4px 12px; border-radius:999px; background:#d4af37; color:#000; font-weight:600; font-size:12px; }
     .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-    .bar { height:10px; border-radius:8px; background:#eef2f7; overflow:hidden; }
-    .bar > div { height:100%; background:#111827; }
-    .kpi { display:flex; align-items:center; gap:12px; padding:12px; border:1px solid #e5e7eb; border-radius:12px; }
-    .kpi .num { font-size:22px; font-weight:800; }
-    .divider { height:1px; background:#e5e7eb; margin:24px 0; }
-    .list { margin:8px 0; padding-left:16px; }
+    .bar { height:10px; border-radius:8px; background:#2a2a2a; overflow:hidden; }
+    .bar > div { height:100%; background:linear-gradient(90deg,#d4af37,#e8c547); }
+    .kpi { display:flex; align-items:center; gap:12px; padding:12px; border:1px solid #333; border-radius:12px; background:#242424; }
+    .kpi .num { font-size:22px; font-weight:800; color:#d4af37; }
+    .divider { height:1px; background:#2a2a2a; margin:24px 0; }
+    .list { margin:8px 0; padding-left:16px; color:#e0e0e0; }
     .list li { margin:6px 0; }
-    .foot { font-size:12px; color:#9ca3af; margin-top:24px; }
-    .badge { font-weight:700; padding:2px 8px; border-radius:8px; background:#ecfeff; color:#155e75; }
-    .insight-card { background:#f9fafb; border-radius:12px; padding:16px; margin:12px 0; }
-    .insight-title { font-weight:600; color:#1f2937; }
-    .insight-level { font-size:12px; color:#059669; font-weight:500; }
-    .priority-card { background:linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius:12px; padding:16px; margin:16px 0; }
-    .flag-red { color:#dc2626; }
-    .flag-yellow { color:#d97706; }
-    .flag-green { color:#059669; }
+    .foot { font-size:12px; color:#666; margin-top:24px; text-align:center; }
+    .foot a { color:#d4af37; }
+    .badge { font-weight:700; padding:2px 8px; border-radius:8px; background:#2a2a2a; color:#d4af37; }
+    .insight-card { background:#242424; border:1px solid #333; border-radius:12px; padding:16px; margin:12px 0; }
+    .insight-title { font-weight:600; color:#f5f5f5; }
+    .insight-level { font-size:12px; color:#22c55e; font-weight:500; }
+    .priority-card { background:linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%); border:1px solid #d4af37; border-radius:12px; padding:16px; margin:16px 0; }
+    .flag-red { color:#ef4444; }
+    .flag-yellow { color:#eab308; }
+    .flag-green { color:#22c55e; }
   </style>
 </head>
 <body>
@@ -55,8 +56,8 @@
 
     {% if priority_action %}
     <div class="priority-card">
-      <div style="font-weight:700; margin-bottom:8px;">🎯 Priority Action: {{ priority_action.title }}</div>
-      <div style="margin-bottom:8px;">{{ priority_action.description }}</div>
+      <div style="font-weight:700; margin-bottom:8px; color:#d4af37;">🎯 Priority Action: {{ priority_action.title }}</div>
+      <div style="margin-bottom:8px; color:#e0e0e0;">{{ priority_action.description }}</div>
       {% if priority_action.scripture %}
       <div class="muted">📖 {{ priority_action.scripture }}</div>
       {% endif %}
@@ -67,8 +68,8 @@
     <div class="h2">Category Scores</div>
     {% for cat in categories %}
     <div style="margin:10px 0;">
-      <div style="display:flex; justify-content:space-between; font-weight:600;">
-        <span>{{ cat.name }}</span><span>{{ cat.score }}/10</span>
+      <div style="display:flex; justify-content:space-between; font-weight:600; color:#f5f5f5;">
+        <span>{{ cat.name }}</span><span style="color:#d4af37;">{{ cat.score }}/10</span>
       </div>
       <div class="bar"><div style="width: {{ cat.score_percent }}%;"></div></div>
       <div class="muted" style="margin-top:6px;">Level: {{ cat.level }}</div>
@@ -104,15 +105,15 @@
       <div class="insight-title">{{ insight.category or insight.title }}</div>
       <div class="insight-level">Level: {{ insight.level }}</div>
       {% if insight.evidence or insight.observation %}
-      <div style="margin-top:8px; color:#4b5563;">{{ insight.evidence or insight.observation }}</div>
+      <div style="margin-top:8px; color:#b0b0b0;">{{ insight.evidence or insight.observation }}</div>
       {% endif %}
       {% if insight.mentor_moves %}
-      <div style="margin-top:8px; font-weight:500; color:#1f2937;">Next Steps:</div>
+      <div style="margin-top:8px; font-weight:500; color:#d4af37;">Next Steps:</div>
       <ul class="list">
         {% for move in insight.mentor_moves %}<li>{{ move }}</li>{% endfor %}
       </ul>
       {% elif insight.next_step %}
-      <div style="margin-top:8px;"><strong>Next Step:</strong> {{ insight.next_step }}</div>
+      <div style="margin-top:8px;"><strong style="color:#d4af37;">Next Step:</strong> {{ insight.next_step }}</div>
       {% endif %}
     </div>
     {% endfor %}
@@ -124,19 +125,19 @@
     {% if flags.red %}
     <div class="flag-red" style="margin:8px 0;">
       <strong>⚠️ Urgent Concerns:</strong>
-      <ul class="list">{% for f in flags.red %}<li>{{ f }}</li>{% endfor %}</ul>
+      <ul class="list" style="color:#ef4444;">{% for f in flags.red %}<li>{{ f }}</li>{% endfor %}</ul>
     </div>
     {% endif %}
     {% if flags.yellow %}
     <div class="flag-yellow" style="margin:8px 0;">
       <strong>⚡ Watch Items:</strong>
-      <ul class="list">{% for f in flags.yellow %}<li>{{ f }}</li>{% endfor %}</ul>
+      <ul class="list" style="color:#eab308;">{% for f in flags.yellow %}<li>{{ f }}</li>{% endfor %}</ul>
     </div>
     {% endif %}
     {% if flags.green %}
     <div class="flag-green" style="margin:8px 0;">
       <strong>✅ Encouragements:</strong>
-      <ul class="list">{% for f in flags.green %}<li>{{ f }}</li>{% endfor %}</ul>
+      <ul class="list" style="color:#22c55e;">{% for f in flags.green %}<li>{{ f }}</li>{% endfor %}</ul>
     </div>
     {% endif %}
     {% endif %}
@@ -151,23 +152,26 @@
     <div class="divider"></div>
     <div class="h2">📚 Recommended Resources</div>
     <ul class="list">
-      {% for r in resources %}<li><strong>{{ r.title }}</strong> — {{ r.why }} <span class="muted">({{ r.type }})</span></li>{% endfor %}
+      {% for r in resources %}<li><strong style="color:#d4af37;">{{ r.title }}</strong> — {{ r.why }} <span class="muted">({{ r.type }})</span></li>{% endfor %}
     </ul>
     {% endif %}
 
     {% if trend_note %}
     <div class="divider"></div>
-    <div style="text-align:center; padding:16px; background:#f0fdf4; border-radius:12px;">
-      <div style="font-weight:600;">{{ trend_note }}</div>
+    <div style="text-align:center; padding:16px; background:#242424; border:1px solid #333; border-radius:12px;">
+      <div style="font-weight:600; color:#d4af37;">{{ trend_note }}</div>
     </div>
     {% endif %}
 
     <div class="divider"></div>
     <div style="text-align:center;">
-      <a href="{{ app_url }}" style="display:inline-block; padding:12px 24px; background:#1f2937; color:#fff; text-decoration:none; border-radius:8px; font-weight:600;">View Full Report in App</a>
+      <a href="{{ app_url }}" style="display:inline-block; padding:14px 28px; background:linear-gradient(135deg,#d4af37,#e8c547); color:#000; text-decoration:none; border-radius:10px; font-weight:600; box-shadow:0 4px 12px rgba(212,175,55,0.3);">View Full Report in App</a>
     </div>
 
-    <div class="foot">© {{ 'now'|strftime('%Y') }} T[root]H Discipleship · <a href="{{ app_url }}">{{ app_url }}</a></div>
+    <div class="foot">
+      <p style="color:#d4af37; font-weight:500; margin-bottom:8px;">#getrooted #LUKE850</p>
+      <p>© {{ 'now'|strftime('%Y') }} ONLY BLV · <a href="{{ app_url }}">{{ app_url }}</a></p>
+    </div>
   </div>
 </body>
 </html>
