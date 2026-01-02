@@ -1,6 +1,6 @@
 # Apprentice Progress Page — Requirements
 
-> Scope: Requirements only (no code). This page consolidates assessment outcomes for an apprentice. Focus on two official admin‑managed assessments first (Master T[root]H Assessment & Spiritual Gifts Assessment), then other assessments chronologically.
+> Scope: Requirements only (no code). This page consolidates assessment outcomes for an apprentice. Focus on two official admin‑managed assessments first (Master T[root]H Discipleship & Spiritual Gifts Assessment), then other assessments chronologically.
 
 ## 1. Objectives
 - Give apprentices a single, clear snapshot of their key formation metrics.
@@ -13,7 +13,7 @@
 [ Page Title: Progress ]
 
 [Row of Featured Cards]
-  ├─ Card A: Master T[root]H Assessment (latest overall score)
+  ├─ Card A: Master T[root]H Discipleship (latest overall score)
   └─ Card B: Spiritual Gifts Assessment (Top 3 gifts from latest attempt)
 
 [Section: All Assessment Reports]
@@ -23,8 +23,8 @@
 ```
 
 ## 3. Featured Cards (Hero Row)
-### 3.1 Master T[root]H Assessment Card
-- Title: "Master T[root]H Assessment"
+### 3.1 Master T[root]H Discipleship Card
+- Title: "Master T[root]H Discipleship"
 - Data shown (from latest completed attempt):
   - Overall aggregate score (integer badge) plus top 3 category scores (chips) provided directly by backend.
   - Date of latest completion (small text).
@@ -81,7 +81,7 @@ Provide chronological access to every assessment report the apprentice has gener
 
 ### 4.3 Report Entry Structure
 For each report entry:
-- Title: Assessment Display Name (e.g., "Master T[root]H Assessment", "Spiritual Gifts Assessment").
+- Title: Assessment Display Name (e.g., "Master T[root]H Discipleship", "Spiritual Gifts Assessment").
 - Subtitle/meta line: Completed <relative time> (e.g., "3d ago") + exact date (YYYY-MM-DD).
 - Summary snippet (truncated metrics):
   - Master: `Overall <score> • <Cat1>, <Cat2>, <Cat3>` (top3 truncated; no tie expansion). If <3 categories: list available.
@@ -122,7 +122,7 @@ Reports List Endpoint (paginated):
     {
       "id": "...",
       "assessment_type": "master" | "spiritual_gifts" | "other",
-      "display_name": "Master T[root]H Assessment",
+      "display_name": "Master T[root]H Discipleship",
       "completed_at": "2025-09-12T14:04:09Z",
       "version": "master_v1",
       "summary": {

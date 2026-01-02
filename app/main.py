@@ -31,6 +31,8 @@ from app.routes import generic_assessments
 from app.routes import master_trooth
 from app.routes import progress
 from app.routes import mentor_report_v2
+from app.routes import metrics
+from app.routes import support
 from app.exceptions import (
     UnauthorizedException, ForbiddenException, 
     NotFoundException, ValidationException
@@ -53,7 +55,7 @@ _docs_enabled = settings.is_development or _os.getenv("SHOW_DOCS", "").lower() i
 async def lifespan(app: FastAPI):
     # Startup logic
     logger.info("=" * 50)
-    logger.info(f"🚀 T[root]H Assessment API starting up")
+    logger.info(f"🚀 T[root]H Discipleship API starting up")
     logger.info(f"📁 Environment: {settings.environment}")
     logger.info(f"🌐 CORS origins: {settings.cors_origins}")
     logger.info(f"⚡ Rate limiting: {'enabled' if settings.rate_limit_enabled else 'disabled'}")
@@ -100,10 +102,10 @@ async def lifespan(app: FastAPI):
 
     yield
     # Shutdown logic
-    logger.info("🛑 T[root]H Assessment API shutting down gracefully")
+    logger.info("🛑 T[root]H Discipleship API shutting down gracefully")
 
 app = FastAPI(
-    title="T[root]H Assessment API",
+    title="T[root]H Discipleship API",
     description="Comprehensive spiritual assessment and mentoring platform",
     version="1.0.0",
     docs_url="/docs" if _docs_enabled else None,
@@ -123,6 +125,11 @@ if settings.rate_limit_enabled:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        # Production domains
+        "https://onlyblv.com",
+        "https://www.onlyblv.com",
+        "https://trooth-discipleship-api.onlyblv.com",
+        # Local development
         "http://localhost:3000",
         "http://127.0.0.1:3000", 
         "http://localhost:3001",
@@ -174,6 +181,8 @@ app.include_router(progress.router)
 app.include_router(assessment_score_history.router)
 app.include_router(generic_assessments.router)
 app.include_router(mentor_report_v2.router)
+app.include_router(metrics.router, prefix="/metrics", tags=["Metrics"])
+app.include_router(support.router)
 
 # Static assets (logo etc.) – map /assets to ./assets if present
 _assets_dir = os.path.join(os.path.dirname(__file__), '..', 'assets')
@@ -261,7 +270,7 @@ async def general_exception_handler(request: Request, exc: Exception):
 async def root():
     """Root endpoint with API information."""
     return {
-        "message": "T[root]H Assessment API",
+        "message": "T[root]H Discipleship API",
         "version": "1.0.0",
         "environment": settings.environment,
         "docs_url": "/docs" if settings.is_development else None,

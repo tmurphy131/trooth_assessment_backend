@@ -86,7 +86,7 @@ Your complete apprentice invite system is now:
 
 ## 🎉 **Congratulations!**
 
-Your T[root]H Assessment platform now has a **complete, professional-grade email system** for apprentice invitations. The integration is robust, secure, and ready for production use!
+Your T[root]H Discipleship platform now has a **complete, professional-grade email system** for apprentice invitations. The integration is robust, secure, and ready for production use!
 
 ---
 

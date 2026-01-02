@@ -193,6 +193,45 @@ def latest_spiritual_gifts(db: Session = Depends(get_db), current_user: User = D
     log_assessment_view(current_user.id, assessment.id, "spiritual_gifts", current_user.role.value, current_user.id)
     return _serialize_scores(assessment)
 
+
+@router.get("/by-id/{assessment_id}", response_model=SpiritualGiftsResult, summary="Get a specific spiritual gifts assessment by ID")
+def get_spiritual_gifts_by_id(assessment_id: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Fetch a specific spiritual gifts assessment by ID.
+    
+    Apprentices can only view their own assessments.
+    Mentors can view assessments of their assigned apprentices.
+    Admins can view any assessment.
+    """
+    assessment = db.query(Assessment).filter(
+        Assessment.id == assessment_id,
+        Assessment.category == "spiritual_gifts"
+    ).first()
+    
+    if not assessment:
+        raise HTTPException(status_code=404, detail="Spiritual gifts assessment not found")
+    
+    # Authorization check
+    from app.models.mentor_apprentice import MentorApprentice
+    from app.models.user import UserRole
+    
+    if current_user.role == UserRole.apprentice:
+        if assessment.apprentice_id != current_user.id:
+            raise HTTPException(status_code=403, detail="You can only view your own assessments")
+    elif current_user.role == UserRole.mentor:
+        # Check if mentor is linked to this apprentice
+        link = db.query(MentorApprentice).filter(
+            MentorApprentice.mentor_id == current_user.id,
+            MentorApprentice.apprentice_id == assessment.apprentice_id,
+            MentorApprentice.active == True
+        ).first()
+        if not link:
+            raise HTTPException(status_code=403, detail="You are not authorized to view this apprentice's assessments")
+    # Admins can view any assessment (no additional check needed)
+    
+    log_assessment_view(current_user.id, assessment.id, "spiritual_gifts", current_user.role.value, assessment.apprentice_id)
+    return _serialize_scores(assessment)
+
+
 class QuestionItem(BaseModel):
     code: str
     text: str

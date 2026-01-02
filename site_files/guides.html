@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Guides — ONLY BLV Apps</title>
+  <meta name="description" content="User guides for ONLY BLV apps including T[root]H Discipleship for mentors and apprentices." />
+  <link rel="icon" type="image/png" href="onlyblv_logo.png" />
+
+  <style>
+    :root {
+      --bg: #050505;
+      --surface: #0a0a0a;
+      --surface2: #111;
+      --text: #f5f5f5;
+      --muted: #888;
+      --gold: #d4af37;
+      --gold-light: #e8c547;
+      --gold-glow: rgba(212, 175, 55, 0.15);
+      --radius: 16px;
+      --max: 900px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    a { color: var(--gold-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 24px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+    }
+    .logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+    .logo span {
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .back-link {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .back-link:hover { color: var(--text); text-decoration: none; }
+
+    /* Hero */
+    .guide-hero {
+      padding: 48px 0 32px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .guide-hero h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .guide-hero p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* App Selector */
+    .app-selector {
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .app-tabs {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .app-tab {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .app-tab:hover {
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+    .app-tab.active {
+      border-color: var(--gold);
+      background: var(--gold-glow);
+    }
+    .app-tab img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+    .app-tab-info h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .app-tab-info span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .app-tab.active .app-tab-info span {
+      color: var(--gold-light);
+    }
+    .app-tab.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .app-tab.disabled:hover {
+      transform: none;
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    /* Guide Content */
+    .guide-content {
+      padding: 40px 0 80px;
+    }
+    .guide-section {
+      display: none;
+    }
+    .guide-section.active {
+      display: block;
+    }
+
+    /* Role Selector */
+    .role-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+      padding: 4px;
+      background: var(--surface);
+      border-radius: 12px;
+      width: fit-content;
+    }
+    .role-tab {
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+    }
+    .role-tab:hover {
+      color: var(--text);
+    }
+    .role-tab.active {
+      background: var(--gold);
+      color: #000;
+    }
+
+    /* Guide Sections */
+    .role-content {
+      display: none;
+    }
+    .role-content.active {
+      display: block;
+    }
+
+    /* Step Card */
+    .step {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .step-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      background: var(--gold-glow);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gold-light);
+      flex-shrink: 0;
+    }
+    .step-title h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .step-title p {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+    }
+    .step-body {
+      color: rgba(255,255,255,0.8);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .step-body p {
+      margin-bottom: 12px;
+    }
+    .step-body ul {
+      margin: 0 0 12px 20px;
+    }
+    .step-body li {
+      margin-bottom: 6px;
+    }
+    .step-body strong {
+      color: var(--text);
+    }
+
+    /* Screenshot in step */
+    .step-screenshot {
+      margin: 16px 0;
+      display: flex;
+      justify-content: center;
+    }
+    .step-screenshot img {
+      max-width: 280px;
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .step-screenshot figcaption {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* Tips */
+    .tip {
+      background: var(--gold-glow);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+    .tip::before {
+      content: '💡 ';
+    }
+    .tip strong {
+      color: var(--gold-light);
+    }
+
+    /* Section Divider */
+    .section-divider {
+      text-align: center;
+      padding: 32px 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .section-divider::before,
+    .section-divider::after {
+      content: '—';
+      margin: 0 12px;
+      opacity: 0.5;
+    }
+
+    /* Coming Soon */
+    .coming-soon {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--muted);
+    }
+    .coming-soon h3 {
+      font-size: 20px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .coming-soon p {
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 24px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .footer-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .role-tabs {
+        width: 100%;
+      }
+      .role-tab {
+        flex: 1;
+        text-align: center;
+      }
+      .step-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="onlyblv_logo.png" alt="ONLY BLV" />
+        <span>ONLY BLV</span>
+      </a>
+      <a class="back-link" href="index.html">← Back to Home</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="guide-hero">
+      <div class="container">
+        <h1>User Guides</h1>
+        <p>Learn how to get the most out of ONLY BLV apps with step-by-step guides for every feature.</p>
+        <div style="margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <span style="color: var(--gold); font-size: 13px; font-weight: 600;">#getrooted</span>
+          <span style="color: var(--gold); font-size: 13px; font-weight: 600;">#LUKE850</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- App Selector -->
+    <section class="app-selector">
+      <div class="container">
+        <div class="app-tabs">
+          <div class="app-tab active" data-app="discipleship">
+            <img src="troothdiscipleship_icon.png" alt="T[root]H Discipleship" />
+            <div class="app-tab-info">
+              <h3>T[root]H Discipleship</h3>
+              <span>Available Now</span>
+            </div>
+          </div>
+          <div class="app-tab disabled" data-app="accountability">
+            <img src="Accountability_icon.png" alt="T[root]H Accountability" />
+            <div class="app-tab-info">
+              <h3>T[root]H Accountability</h3>
+              <span>Coming Soon</span>
+            </div>
+          </div>
+          <div class="app-tab disabled" data-app="warbook">
+            <img src="troothwarbook_icon.png" alt="T[root]H Warbook" />
+            <div class="app-tab-info">
+              <h3>T[root]H Warbook</h3>
+              <span>Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guide Content -->
+    <section class="guide-content">
+      <div class="container">
+        
+        <!-- T[root]H Discipleship Guide -->
+        <div class="guide-section active" id="discipleship-guide">
+          
+          <!-- Role Tabs -->
+          <div class="role-tabs">
+            <button class="role-tab active" data-role="apprentice">Apprentice Guide</button>
+            <button class="role-tab" data-role="mentor">Mentor Guide</button>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- APPRENTICE GUIDE -->
+          <!-- ============================================ -->
+          <div class="role-content active" id="apprentice-content">
+            
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">1</div>
+                <div class="step-title">
+                  <h3>Getting Started</h3>
+                  <p>Create your account and set up your profile</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>Download T[root]H Discipleship from the App Store or Google Play. When you open the app for the first time:</p>
+                <ul>
+                  <li><strong>Sign up</strong> with your email address or use Google/Apple sign-in</li>
+                  <li>Select <strong>"Apprentice"</strong> as your role</li>
+                  <li>Complete the onboarding by entering your name</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="guides/apprentice_signup.png" alt="Signup screen" />
+                  <figcaption>Create your account</figcaption>
+                </figure>
+                <div class="tip">
+                  <strong>Tip:</strong> Use an email you check regularly—you'll receive important updates about your mentorship journey.
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">2</div>
+                <div class="step-title">
+                  <h3>Your Dashboard</h3>
+                  <p>Navigate the main screen and quick actions</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>Your dashboard is the home base for your spiritual growth journey. Here's what you'll find:</p>
+                <ul>
+                  <li><strong>Quick Actions:</strong> Start a new assessment, discover your spiritual gifts, view progress, or access resources</li>
+                  <li><strong>Draft Assessments:</strong> Resume any assessments you've started but haven't completed</li>
+                  <li><strong>Top Navigation:</strong> Access your profile, mentor info, and invitations</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="dashboard.png" alt="Dashboard screen" />
+                  <figcaption>Your personal dashboard</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">3</div>
+                <div class="step-title">
+                  <h3>Taking an Assessment</h3>
+                  <p>Complete spiritual health assessments</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>Assessments help you understand where you are in your spiritual journey and identify areas for growth.</p>
+                <ul>
+                  <li>Tap <strong>"New Assessment"</strong> from your dashboard</li>
+                  <li>Select an available assessment template</li>
+                  <li>Answer each question honestly—there are no wrong answers</li>
+                  <li>Your progress is <strong>auto-saved</strong>, so you can pause and continue later</li>
+                  <li>When finished, tap <strong>"Submit"</strong> to complete the assessment</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="guides/apprentice_assessment.png" alt="Assessment in progress" />
+                  <figcaption>Taking an assessment</figcaption>
+                </figure>
+                <div class="tip">
+                  <strong>Tip:</strong> Take your time with each question. The more honest your answers, the more accurate your results will be.
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">4</div>
+                <div class="step-title">
+                  <h3>Understanding Your Results</h3>
+                  <p>Review your assessment scores and recommendations</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>After completing an assessment, you'll receive detailed results:</p>
+                <ul>
+                  <li><strong>Overall Score:</strong> Your spiritual health score on a scale</li>
+                  <li><strong>Category Breakdown:</strong> See how you scored in different areas (prayer, Scripture, service, etc.)</li>
+                  <li><strong>Priority Action:</strong> One clear next step to focus on</li>
+                  <li><strong>Scripture Support:</strong> Relevant Bible verses for your growth areas</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="assessmentResults.png" alt="Assessment results screen" />
+                  <figcaption>Your assessment results</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">5</div>
+                <div class="step-title">
+                  <h3>Discovering Your Spiritual Gifts</h3>
+                  <p>Take the spiritual gifts assessment</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>The Spiritual Gifts assessment helps you discover how God has uniquely equipped you to serve.</p>
+                <ul>
+                  <li>Tap <strong>"Spiritual Gifts"</strong> from your dashboard</li>
+                  <li>Complete the assessment questions</li>
+                  <li>View your top gifts ranked by score</li>
+                  <li>Read descriptions of each gift and how to use it</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="spiritualGiftsScreen.png" alt="Spiritual gifts results" />
+                  <figcaption>Your spiritual gifts results</figcaption>
+                </figure>
+                <div class="tip">
+                  <strong>Tip:</strong> Share your results with your mentor—they can help you find ways to serve using your gifts.
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">6</div>
+                <div class="step-title">
+                  <h3>Connecting with a Mentor</h3>
+                  <p>Accept invitations and build your mentorship</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>Mentors can invite you to connect through the app. Here's how to accept:</p>
+                <ul>
+                  <li>Check the <strong>mail icon</strong> in your dashboard for pending invitations</li>
+                  <li>Review the mentor's information</li>
+                  <li>Tap <strong>"Accept"</strong> to connect</li>
+                  <li>You may need to sign a mentorship agreement</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="guides/apprenticeInvitationScreen.png" alt="Mentor connection screen" />
+                  <figcaption>Your mentor connection</figcaption>
+                </figure>
+                <p>Once connected, your mentor can see your assessment results and help guide your growth journey.</p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">7</div>
+                <div class="step-title">
+                  <h3>Tracking Your Progress</h3>
+                  <p>View your growth over time</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>The Progress section shows how you've grown over time:</p>
+                <ul>
+                  <li>Tap <strong>"View Progress"</strong> from your dashboard</li>
+                  <li>See your assessment history and score trends</li>
+                  <li>Compare results across different time periods</li>
+                  <li>Celebrate milestones and improvements</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="guides/apprentice_progress.png" alt="Progress screen" />
+                  <figcaption>Track your growth</figcaption>
+                </figure>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ============================================ -->
+          <!-- MENTOR GUIDE -->
+          <!-- ============================================ -->
+          <div class="role-content" id="mentor-content">
+            
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">1</div>
+                <div class="step-title">
+                  <h3>Getting Started as a Mentor</h3>
+                  <p>Create your account and set up your mentor profile</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>Download T[root]H Discipleship and create your mentor account:</p>
+                <ul>
+                  <li><strong>Sign up</strong> with your email address or use Google/Apple sign-in</li>
+                  <li>Select <strong>"Mentor"</strong> as your role</li>
+                  <li>Complete your profile with your name and information</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="guides/mentor_signup.png" alt="Mentor signup screen" />
+                  <figcaption>Create your mentor account</figcaption>
+                </figure>
+                <div class="tip">
+                  <strong>Tip:</strong> Your profile information will be visible to apprentices when you send invitations.
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">2</div>
+                <div class="step-title">
+                  <h3>Your Mentor Dashboard</h3>
+                  <p>Navigate the mentor interface</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>Your mentor dashboard gives you a complete view of your apprentices and their progress:</p>
+                <ul>
+                  <li><strong>Apprentices Tab:</strong> View all your connected apprentices</li>
+                  <li><strong>Assessments Tab:</strong> Review submitted assessments</li>
+                  <li><strong>Agreements Tab:</strong> Manage mentorship agreements</li>
+                  <li><strong>Resources Tab:</strong> Access mentor resources and guides</li>
+                  <li><strong>Quick Stats:</strong> See active apprentices, completed assessments, and average scores</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="guides/mentor_dashboard.png" alt="Mentor dashboard" />
+                  <figcaption>Your mentor dashboard</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">3</div>
+                <div class="step-title">
+                  <h3>Inviting Apprentices</h3>
+                  <p>Connect with people you want to mentor</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>To invite someone to become your apprentice:</p>
+                <ul>
+                  <li>Tap the <strong>person+ icon</strong> in your dashboard</li>
+                  <li>Enter the apprentice's <strong>name</strong> and <strong>email address</strong></li>
+                  <li>Tap <strong>"Send Invitation"</strong></li>
+                  <li>The apprentice will receive an email with instructions to accept</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="guides/mentor_invite.png" alt="Invite apprentice screen" />
+                  <figcaption>Send an invitation</figcaption>
+                </figure>
+                <div class="tip">
+                  <strong>Tip:</strong> Follow up with a personal message letting them know to check their email for the invitation.
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">4</div>
+                <div class="step-title">
+                  <h3>Creating Mentorship Agreements</h3>
+                  <p>Establish clear expectations with your apprentices</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>Mentorship agreements help set expectations for the relationship:</p>
+                <ul>
+                  <li>Go to the <strong>Agreements tab</strong></li>
+                  <li>Tap <strong>"Send Agreement"</strong> for an apprentice</li>
+                  <li>The agreement outlines commitments for both parties</li>
+                  <li>You sign first, then the apprentice receives it to sign</li>
+                  <li>If the apprentice is under 18, a parent signature is also required</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="guides/mentor_agreement.png" alt="Agreement screen" />
+                  <figcaption>Mentorship agreement</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">5</div>
+                <div class="step-title">
+                  <h3>Reviewing Apprentice Assessments</h3>
+                  <p>View and understand your apprentices' results</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>When an apprentice completes an assessment, you can review their results:</p>
+                <ul>
+                  <li>Go to the <strong>Assessments tab</strong> or tap on an apprentice</li>
+                  <li>Select a completed assessment to view</li>
+                  <li>Review their <strong>overall score</strong> and <strong>category breakdown</strong></li>
+                  <li>See their <strong>individual answers</strong> to each question</li>
+                  <li>Read the <strong>AI-generated recommendations</strong></li>
+                  <li>Add your own <strong>mentor notes</strong> for future reference</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="guides/mentor_results.png" alt="Reviewing assessment results" />
+                  <figcaption>Review apprentice results</figcaption>
+                </figure>
+                <div class="tip">
+                  <strong>Tip:</strong> Use the assessment results as a starting point for your next conversation with your apprentice.
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">6</div>
+                <div class="step-title">
+                  <h3>Viewing Spiritual Gifts</h3>
+                  <p>Help apprentices understand and use their gifts</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>You can view your apprentices' spiritual gifts results:</p>
+                <ul>
+                  <li>Tap on an apprentice's profile</li>
+                  <li>Navigate to their <strong>Spiritual Gifts</strong> section</li>
+                  <li>See their top gifts and scores</li>
+                  <li>Use this information to help them find serving opportunities</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="guides/mentor_gifts.png" alt="Viewing apprentice gifts" />
+                  <figcaption>Apprentice spiritual gifts</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <div class="step-number">7</div>
+                <div class="step-title">
+                  <h3>Using Mentor Resources</h3>
+                  <p>Access guides and materials to support your mentoring</p>
+                </div>
+              </div>
+              <div class="step-body">
+                <p>The Resources tab provides helpful materials for your mentoring journey:</p>
+                <ul>
+                  <li><strong>Mentor Guides:</strong> Best practices for discipleship</li>
+                  <li><strong>Conversation Starters:</strong> Questions to ask your apprentices</li>
+                  <li><strong>Topic Resources:</strong> Materials on specific spiritual topics</li>
+                  <li><strong>Weekly Tips:</strong> Regular encouragement and ideas</li>
+                </ul>
+                <figure class="step-screenshot">
+                  <img src="guides/mentor_resources.png" alt="Mentor resources" />
+                  <figcaption>Mentor resources</figcaption>
+                </figure>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- T[root]H Accountability Guide (Coming Soon) -->
+        <div class="guide-section" id="accountability-guide">
+          <div class="coming-soon">
+            <h3>Accountability Guide Coming Soon</h3>
+            <p>User guides for T[root]H Accountability will be available when the app launches.</p>
+          </div>
+        </div>
+
+        <!-- T[root]H Warbook Guide (Coming Soon) -->
+        <div class="guide-section" id="warbook-guide">
+          <div class="coming-soon">
+            <h3>Warbook Guide Coming Soon</h3>
+            <p>User guides for T[root]H Warbook will be available when the app launches.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-copy">
+        © <span id="year"></span> ONLY BLV. All rights reserved.
+        <span style="margin-left: 16px; color: var(--gold);">#getrooted #LUKE850</span>
+      </div>
+      <div class="footer-links">
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // App tab switching
+    const appTabs = document.querySelectorAll('.app-tab:not(.disabled)');
+    const guideSections = document.querySelectorAll('.guide-section');
+
+    appTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const appId = tab.dataset.app;
+        
+        // Update active tab
+        document.querySelectorAll('.app-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Show corresponding guide section
+        guideSections.forEach(section => section.classList.remove('active'));
+        document.getElementById(appId + '-guide').classList.add('active');
+      });
+    });
+
+    // Role tab switching (for Discipleship guide)
+    const roleTabs = document.querySelectorAll('.role-tab');
+    const roleContents = document.querySelectorAll('.role-content');
+
+    roleTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const role = tab.dataset.role;
+        
+        // Update active tab
+        roleTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Show corresponding content
+        roleContents.forEach(content => content.classList.remove('active'));
+        document.getElementById(role + '-content').classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 """add mentor_notes table
 
-Revision ID: a345d98395e5
-Revises: 2f136a5c8971
+Revision ID: a345d98395e5_mentor_notes
+Revises: 74e5aeebece0
 Create Date: 2025-06-25 04:28:51.293056
 
 """
@@ -12,8 +12,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'a345d98395e5'
-down_revision: Union[str, None] = '2f136a5c8971'
+revision: str = 'a345d98395e5_mentor_notes'
+down_revision: Union[str, None] = '74e5aeebece0'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

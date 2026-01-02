@@ -1,13 +1,13 @@
-# T[root]H Assessment API
+# T[root]H Discipleship API
 
-This is the backend for the **T[root]H Assessment** app — a spiritual mentorship and discipleship platform for churches and Christian organizations.
+This is the backend for the **T[root]H Discipleship** app — a spiritual mentorship and discipleship platform for churches and Christian organizations.
 
 It provides a RESTful API built with **FastAPI**, backed by a **PostgreSQL database**, and includes support for:
 - Spiritual assessments (created by admins)
 - Mentor/apprentice relationships
-# T[root]H Assessment API
+# T[root]H Discipleship API
 
-Backend for the T[root]H Assessment platform — a FastAPI service that powers assessments, mentor/apprentice workflows, Firebase auth, OpenAI scoring, and email notifications.
+Backend for the T[root]H Discipleship platform — a FastAPI service that powers assessments, mentor/apprentice workflows, Firebase auth, OpenAI scoring, and email notifications.
 
 Quick pointers
 - Language: Python 3.11+

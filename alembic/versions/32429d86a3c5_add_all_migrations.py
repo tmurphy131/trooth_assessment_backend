@@ -45,15 +45,6 @@ def upgrade() -> None:
     # migration path (some revisions were merged). Use PostgreSQL to_regclass
     # to detect table existence at runtime and skip if missing.
     conn = op.get_bind()
-    if conn.execute(sa.text("SELECT to_regclass('public.mentor_notes')")).scalar() is not None:
-        op.alter_column('mentor_notes', 'is_private',
-                   existing_type=sa.BOOLEAN(),
-                   nullable=True,
-                   existing_server_default=sa.text('true'))
-        op.alter_column('mentor_notes', 'created_at',
-                   existing_type=postgresql.TIMESTAMP(),
-                   nullable=True,
-                   existing_server_default=sa.text('now()'))
 
     if conn.execute(sa.text("SELECT to_regclass('public.notifications')")).scalar() is not None:
         op.alter_column('notifications', 'is_read',
@@ -78,14 +69,6 @@ def downgrade() -> None:
                existing_type=sa.BOOLEAN(),
                nullable=False,
                existing_server_default=sa.text('false'))
-    op.alter_column('mentor_notes', 'created_at',
-               existing_type=postgresql.TIMESTAMP(),
-               nullable=False,
-               existing_server_default=sa.text('now()'))
-    op.alter_column('mentor_notes', 'is_private',
-               existing_type=sa.BOOLEAN(),
-               nullable=False,
-               existing_server_default=sa.text('true'))
     op.drop_constraint(None, 'assessments', type_='foreignkey')
     op.alter_column('assessments', 'answers',
                existing_type=postgresql.JSON(astext_type=sa.Text()),

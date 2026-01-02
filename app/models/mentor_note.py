@@ -14,6 +14,7 @@ class MentorNote(Base):
     follow_up_plan = Column(Text, nullable=True)
     is_private = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     assessment = relationship("Assessment", back_populates="mentor_notes")
     # link back to the User that authored the note

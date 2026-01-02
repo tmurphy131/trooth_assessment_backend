@@ -1,4 +1,4 @@
-# T[root]H Assessment - AI Agent Instructions (Backend)
+# T[root]H Discipleship - AI Agent Instructions (Backend)
 
 ## Project Overview
 FastAPI-based backend for T[root]H spiritual mentorship platform. Handles authentication (Firebase Admin SDK), PostgreSQL data persistence, AI-powered assessment scoring (OpenAI), email notifications (SendGrid), and RESTful API for Flutter mobile frontend.
@@ -261,7 +261,7 @@ gcloud run deploy trooth-backend \
   --image=gcr.io/PROJECT/trooth-backend:latest \
   --region=us-east4 \
   --set-secrets=DATABASE_URL=DATABASE_URL:latest,FIREBASE_CERT_JSON=FIREBASE_CERT_JSON:latest,... \
-  --set-env-vars=ENV=development,APP_URL=https://trooth-assessment-dev.onlyblv.com \
+  --set-env-vars=ENV=development,APP_URL=https://trooth-discipleship-api.onlyblv.com \
   --allow-unauthenticated
 ```
 

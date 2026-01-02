@@ -1,4 +1,4 @@
-# T[root]H Assessment – Project Requirements
+# T[root]H Discipleship – Project Requirements
 
 ## 🧠 Project Overview
 

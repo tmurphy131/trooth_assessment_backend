@@ -12,6 +12,9 @@ class InviteAccept(BaseModel):
 
 class InviteOut(BaseModel):
     id: str
+    mentor_id: str | None = None
+    mentor_name: str | None = None
+    mentor_email: str | None = None
     apprentice_email: str
     apprentice_name: str
     token: str

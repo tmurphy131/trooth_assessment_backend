@@ -32,7 +32,7 @@ import requests
 from typing import Optional
 
 # Configuration
-DEFAULT_BASE_URL = "https://trooth-assessment-dev.onlyblv.com"
+DEFAULT_BASE_URL = "https://trooth-discipleship-api.onlyblv.com"
 # DEFAULT_BASE_URL = "http://localhost:8000"
 
 # Test user credentials (ch0senpriest@gmail.com is the apprentice, tay.murphy88@gmail.com is mentor)

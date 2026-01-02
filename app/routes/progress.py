@@ -4,14 +4,18 @@ from sqlalchemy.orm import Session
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 import base64, json
+import logging
 
 from app.db import get_db
 from app.models.assessment import Assessment
 from app.models.assessment_template import AssessmentTemplate
 from app.models.user import User
+from app.models.email_send_event import EmailSendEvent
 from app.services.auth import get_current_user
 from app.services.ai_scoring_master import _extract_top3 as master_extract_top3
 from sqlalchemy.orm import joinedload
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/progress", tags=["Progress"])
 
@@ -122,7 +126,7 @@ def progress_reports(limit: int = 20, cursor: Optional[str] = None, db: Session 
         
         if cat == "master_trooth":
             assessment_type = "master"
-            display_name = template_name or "Master T[root]H Assessment"
+            display_name = template_name or "Master T[root]H Discipleship"
             # version is already a string in master scores (e.g., master_v1)
             version = scores.get("version") or "master_v1"
             # summary
@@ -225,7 +229,7 @@ def get_apprentice_simplified_report(
     
     if cat == "master_trooth":
         assessment_type = "master"
-        display_name = template_name or "Master T[root]H Assessment"
+        display_name = template_name or "Master T[root]H Discipleship"
     elif cat == "spiritual_gifts":
         assessment_type = "spiritual_gifts"
         display_name = template_name or "Spiritual Gifts Assessment"
@@ -311,3 +315,47 @@ def get_apprentice_simplified_report(
         "template_id": assessment.template_id,
         "completed_at": assessment.created_at,
     }
+
+
+@router.delete("/reports/{assessment_id}", status_code=204)
+def delete_assessment_report(
+    assessment_id: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """DELETE /progress/reports/{assessment_id}
+    
+    Deletes a completed assessment report. Only the apprentice who owns the assessment
+    can delete it. This action cannot be undone.
+    """
+    # Fetch the assessment
+    assessment = db.query(Assessment).filter(Assessment.id == assessment_id).first()
+    if not assessment:
+        raise HTTPException(status_code=404, detail=f"Assessment {assessment_id} not found")
+    
+    # Verify the assessment belongs to the current user (apprentice)
+    if assessment.apprentice_id != current_user.id:
+        raise HTTPException(status_code=403, detail="Not authorized to delete this assessment")
+    
+    # Log for audit purposes
+    logger.info(
+        f"Apprentice {current_user.id} ({current_user.email}) deleting assessment {assessment_id} "
+        f"(category: {assessment.category}, template_id: {assessment.template_id})"
+    )
+    
+    # Clear foreign key references before deleting
+    # 1. Set assessment_id to NULL on email_send_events that reference this assessment
+    db.query(EmailSendEvent).filter(EmailSendEvent.assessment_id == assessment_id).update(
+        {"assessment_id": None}, synchronize_session=False
+    )
+    
+    # 2. Set previous_assessment_id to NULL on assessments that reference this one
+    db.query(Assessment).filter(Assessment.previous_assessment_id == assessment_id).update(
+        {"previous_assessment_id": None}, synchronize_session=False
+    )
+    
+    # Delete the assessment (cascade will handle score_history and mentor_notes)
+    db.delete(assessment)
+    db.commit()
+    
+    return None

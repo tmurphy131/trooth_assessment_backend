@@ -160,6 +160,9 @@ def create_agreement(payload: AgreementCreate, db: Session = Depends(get_db), me
     if not tpl.is_active:
         raise HTTPException(status_code=400, detail="Template version inactive")
 
+    # Lowercase email to match Firebase storage
+    apprentice_email = payload.apprentice_email.lower().strip()
+    
     # Pre-render draft so mentor can preview before submit
     fields_dict = payload.fields.model_dump()
     # Include parent_email for token substitution if provided
@@ -169,13 +172,13 @@ def create_agreement(payload: AgreementCreate, db: Session = Depends(get_db), me
         tpl.markdown_source,
         fields_dict,
         mentor_name=mentor.name or mentor.email,
-        apprentice_email=payload.apprentice_email,
+        apprentice_email=apprentice_email,
     apprentice_name=payload.apprentice_name,
     )
     agreement = Agreement(
         template_version=tpl.version,
         mentor_id=mentor.id,
-        apprentice_email=payload.apprentice_email,
+        apprentice_email=apprentice_email,
         apprentice_name=payload.apprentice_name,
         status='draft',
         apprentice_is_minor=payload.apprentice_is_minor,

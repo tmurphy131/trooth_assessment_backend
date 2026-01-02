@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Support — ONLY BLV</title>
+  <meta name="description" content="Get help with ONLY BLV apps. Contact our support team for assistance with T[root]H Discipleship and other apps." />
+  <link rel="icon" type="image/png" href="onlyblv_logo.png" />
+
+  <style>
+    :root {
+      --bg: #050505;
+      --surface: #0a0a0a;
+      --surface2: #111;
+      --text: #f5f5f5;
+      --muted: #888;
+      --gold: #d4af37;
+      --gold-light: #e8c547;
+      --gold-glow: rgba(212, 175, 55, 0.15);
+      --radius: 16px;
+      --max: 960px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 5, 5, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 24px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+    }
+    .logo span {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    nav { display: flex; gap: 8px; }
+    nav a {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    nav a:hover { background: var(--surface2); }
+    nav a.active {
+      background: var(--gold);
+      color: #000;
+    }
+
+    /* Main Content */
+    main {
+      padding: 80px 0;
+    }
+    
+    .page-title {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .page-title h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .page-title h1 span {
+      color: var(--gold);
+    }
+    .page-title p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Form Card */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--surface2);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-glow);
+    }
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+    .form-group select option {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    /* Honeypot - hidden from humans */
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      height: 0;
+      width: 0;
+      z-index: -1;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+    }
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Success/Error Messages */
+    .message {
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      display: none;
+    }
+    .message.success {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #22c55e;
+    }
+    .message.error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin-top: 80px;
+    }
+    .faq-section h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 32px;
+      color: var(--gold);
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .faq-item h3 {
+      color: var(--gold-light);
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+    .faq-item p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 32px 0;
+      margin-top: 80px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-copy {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      color: var(--muted);
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    @media (max-width: 640px) {
+      .form-card {
+        padding: 24px;
+      }
+      .page-title h1 {
+        font-size: 1.8rem;
+      }
+      nav {
+        display: none;
+      }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="onlyblv_logo.png" alt="ONLY BLV Logo" />
+        <span>ONLY BLV</span>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="guides.html">Guides</a>
+        <a href="support.html" class="active">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="page-title">
+        <h1>Need <span>Help</span>?</h1>
+        <p>We're here to assist you. Fill out the form below and our team will get back to you within 72 hours.</p>
+      </div>
+
+      <div class="form-card">
+        <div id="successMessage" class="message success">
+          ✅ Your support request has been submitted! Check your email for a confirmation.
+        </div>
+        <div id="errorMessage" class="message error">
+          ❌ Something went wrong. Please try again or email us directly at admin@onlyblv.com
+        </div>
+
+        <form id="supportForm">
+          <!-- Honeypot field - hidden from humans, bots will fill it -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="website">Website</label>
+            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required placeholder="John Smith" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="topic">What do you need help with?</label>
+            <select id="topic" name="topic" required>
+              <option value="" disabled selected>Select a topic...</option>
+              <option value="Account Issues">Account Issues</option>
+              <option value="Assessment Problems">Assessment Problems</option>
+              <option value="Technical Bug">Technical Bug</option>
+              <option value="Feature Request">Feature Request</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">How can we help?</label>
+            <textarea id="message" name="message" required placeholder="Please describe your issue or question in detail..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">
+            Send Support Request
+          </button>
+        </form>
+      </div>
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>How do I reset my password?</h3>
+            <p>On the login screen, tap "Forgot Password" and enter your email. You'll receive a reset link within minutes.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Why can't I see my mentor's assessments?</h3>
+            <p>Make sure your mentor has invited you and you've accepted the invitation. Check your email for any pending invites.</p>
+          </div>
+          <div class="faq-item">
+            <h3>How do I change my role?</h3>
+            <p>Roles are assigned during signup. To change your role, please contact support with your request.</p>
+          </div>
+          <div class="faq-item">
+            <h3>The app is crashing. What should I do?</h3>
+            <p>Try closing and reopening the app. If the issue persists, make sure you have the latest version installed.</p>
+          </div>
+          <div class="faq-item">
+            <h3>How do I create a custom assessment template?</h3>
+            <p>Submit a support request with your questions. For each question, include: the question text, category name, and whether it's open-ended or multiple choice. For multiple choice, provide the correct answer and all incorrect options.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-copy">
+        © <span id="year"></span> ONLY BLV. All rights reserved.
+        <span style="margin-left: 16px; color: var(--gold);">#getrooted #LUKE850</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="guides.html">User Guides</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const form = document.getElementById('supportForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMessage');
+    const errorMsg = document.getElementById('errorMessage');
+
+    // API endpoint
+    const API_URL = 'https://trooth-discipleship-api.onlyblv.com/support/submit';
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Reset messages
+      successMsg.style.display = 'none';
+      errorMsg.style.display = 'none';
+      
+      // Disable button
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const formData = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        topic: document.getElementById('topic').value,
+        message: document.getElementById('message').value.trim(),
+        website: document.getElementById('website').value, // Honeypot
+        source: 'website'
+      };
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          successMsg.style.display = 'block';
+          form.reset();
+        } else if (response.status === 429) {
+          errorMsg.textContent = '⏱️ Too many requests. Please try again in an hour.';
+          errorMsg.style.display = 'block';
+        } else {
+          throw new Error(data.detail || 'Unknown error');
+        }
+      } catch (error) {
+        console.error('Support form error:', error);
+        errorMsg.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Support Request';
+      }
+    });
+  </script>
+</body>
+</html>

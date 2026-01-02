@@ -1,4 +1,4 @@
-# T[root]H Assessment API - Mobile Integration Ready
+# T[root]H Discipleship API - Mobile Integration Ready
 
 ## 🚀 **VERDICT: YES, your backend is ready for mobile frontend integration!**
 

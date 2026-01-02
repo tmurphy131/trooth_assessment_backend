@@ -1,6 +1,6 @@
 # AI Scoring: Architecture, Flow, and Improvements
 
-This document describes how assessment scoring works today for both the Master T[root]H assessment and generic assessments, and proposes concrete improvements to address report quality issues (e.g., low-quality or mismatched feedback for Mini Trooth / smaller assessments).
+This document describes how assessment scoring works today for both the Master T[root]H Discipleship and generic assessments, and proposes concrete improvements to address report quality issues (e.g., low-quality or mismatched feedback for Mini Trooth / smaller assessments).
 
 ## At-a-glance
 
