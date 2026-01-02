@@ -1,3 +1,4 @@
+from typing import Optional
 from firebase_admin import auth
 from fastapi import Request, HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -9,7 +10,7 @@ from datetime import UTC, datetime
 from app.utils.datetime import utc_now
 from app.schemas.user import UserSchema
 
-security = HTTPBearer()
+security = HTTPBearer(auto_error=False)  # auto_error=False allows optional auth
 
 def verify_token(request: Request):
     auth_header = request.headers.get("Authorization")
@@ -111,6 +112,22 @@ def get_current_user(
         db.refresh(user)
     
     return user
+
+def get_current_user_optional(
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security),
+    db: Session = Depends(get_db),
+) -> Optional[User]:
+    """
+    Optional authentication - returns User if authenticated, None otherwise.
+    Used for endpoints that work for both authenticated and anonymous users.
+    """
+    if not credentials:
+        return None
+    
+    try:
+        return get_current_user(credentials, db)
+    except HTTPException:
+        return None
 
 def require_mentor(user: User = Depends(get_current_user)) -> User:
     # Treat admin as having mentor capabilities; accept enum or string roles

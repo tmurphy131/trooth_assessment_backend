@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+
+{% block title %}New Support Request{% endblock %}
+
+{% block content %}
+<h2>📬 New Support Request</h2>
+
+<p>A new support request has been submitted:</p>
+
+<div class="highlight-box">
+  <p style="margin:0 0 12px 0;"><strong style="color:#d4af37;">From:</strong> {{ name }} ({{ email }})</p>
+  <p style="margin:0 0 12px 0;"><strong style="color:#d4af37;">Topic:</strong> <span class="pill">{{ topic }}</span></p>
+  {% if user_id %}
+  <p style="margin:0 0 12px 0;"><strong style="color:#d4af37;">User ID:</strong> <span class="muted">{{ user_id }}</span></p>
+  {% endif %}
+  {% if device_info %}
+  <p style="margin:0 0 12px 0;"><strong style="color:#d4af37;">Device:</strong> <span class="muted">{{ device_info }}</span></p>
+  {% endif %}
+  <p style="margin:0;"><strong style="color:#d4af37;">Source:</strong> {{ source }}</p>
+</div>
+
+<h3>Message</h3>
+<div style="background:#0a0a0a; border-radius:8px; padding:16px; margin:16px 0;">
+  <p style="white-space:pre-wrap; margin:0; color:#e0e0e0;">{{ message }}</p>
+</div>
+
+<p class="muted">Submitted at {{ submitted_at }}</p>
+{% endblock %}

@@ -32,6 +32,7 @@ from app.routes import master_trooth
 from app.routes import progress
 from app.routes import mentor_report_v2
 from app.routes import metrics
+from app.routes import support
 from app.exceptions import (
     UnauthorizedException, ForbiddenException, 
     NotFoundException, ValidationException
@@ -181,6 +182,7 @@ app.include_router(assessment_score_history.router)
 app.include_router(generic_assessments.router)
 app.include_router(mentor_report_v2.router)
 app.include_router(metrics.router, prefix="/metrics", tags=["Metrics"])
+app.include_router(support.router)
 
 # Static assets (logo etc.) – map /assets to ./assets if present
 _assets_dir = os.path.join(os.path.dirname(__file__), '..', 'assets')

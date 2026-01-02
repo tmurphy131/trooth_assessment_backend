@@ -25,8 +25,11 @@ def invite_apprentice(
     # Use the authenticated mentor's ID instead of trusting the request
     mentor_id = current_user.id
     
+    # Lowercase email to match Firebase storage
+    apprentice_email = invite.apprentice_email.lower().strip()
+    
     existing = db.query(ApprenticeInvitation).filter(
-        ApprenticeInvitation.apprentice_email == invite.apprentice_email,
+        ApprenticeInvitation.apprentice_email == apprentice_email,
         ApprenticeInvitation.mentor_id == mentor_id,
         ApprenticeInvitation.accepted == False,
         ApprenticeInvitation.expires_at > datetime.utcnow()
@@ -37,7 +40,7 @@ def invite_apprentice(
     token = str(uuid.uuid4())
     invitation = ApprenticeInvitation(
         mentor_id=mentor_id,
-        apprentice_email=invite.apprentice_email,
+        apprentice_email=apprentice_email,
         apprentice_name=invite.apprentice_name,
         token=token
     )
@@ -47,7 +50,7 @@ def invite_apprentice(
     # Send invitation email
     try:
         email_sent = send_invitation_email(
-            to_email=invite.apprentice_email, 
+            to_email=apprentice_email, 
             apprentice_name=invite.apprentice_name, 
             token=token,
             mentor_name=current_user.name or current_user.email or "Your Mentor"
