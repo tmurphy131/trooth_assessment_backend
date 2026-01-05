@@ -500,9 +500,19 @@
         document.getElementById('agreements-pending').textContent = data.pending.agreements_awaiting;
         document.getElementById('invitations-pending').textContent = data.pending.invitations_pending;
 
-        // Update timestamp
+        // Update timestamp (Eastern Time)
         const generatedAt = new Date(data.generated_at);
-        document.getElementById('last-updated').textContent = generatedAt.toLocaleString();
+        document.getElementById('last-updated').textContent = generatedAt.toLocaleString('en-US', {
+          timeZone: 'America/New_York',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true,
+          timeZoneName: 'short'
+        });
 
         // Update status badge
         statusBadge.classList.remove('error');
