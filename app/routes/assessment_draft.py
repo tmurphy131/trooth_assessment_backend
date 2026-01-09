@@ -1023,22 +1023,22 @@ def start_draft(
     try:
         mentor_links = db.query(MentorApprentice).filter(
             MentorApprentice.apprentice_id == current_user.id,
-            MentorApprentice.is_active == True
+            MentorApprentice.active == True
         ).all()
         
+        apprentice_name = current_user.name or current_user.email
         for link in mentor_links:
             notification = Notification(
-                id=str(uuid.uuid4()),
                 user_id=link.mentor_id,
-                type="assessment_started",
-                title="Apprentice Started Assessment",
-                message=f"{current_user.full_name or current_user.email} has started the assessment: {template.name}",
-                related_id=draft.id,
+                message=f"{apprentice_name} started {template.name}",
+                link=f"/drafts/{draft.id}",
                 is_read=False
             )
             db.add(notification)
-        db.commit()
-        logger.info(f"Notified {len(mentor_links)} mentor(s) that apprentice {current_user.id} started assessment draft {draft.id}")
+        
+        if mentor_links:
+            db.commit()
+            logger.info(f"Notified {len(mentor_links)} mentor(s) that apprentice {current_user.id} started assessment draft {draft.id}")
     except Exception as e:
         logger.error(f"Failed to create mentor notification for assessment start: {e}")
         # Don't fail the request if notification fails
