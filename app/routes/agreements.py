@@ -355,9 +355,10 @@ def apprentice_sign(agreement_id: str, body: AgreementSign, request: Request, db
                 except Exception:
                     pass
     else:
+        # Parent signature not required - activate relationship immediately
         ag.status = 'fully_signed'
-    ag.activated_at = utc_now()
-    _activate_relationship(db, ag)
+        ag.activated_at = utc_now()
+        _activate_relationship(db, ag)
 
     db.commit()
     db.refresh(ag)
@@ -813,6 +814,14 @@ def public_sign(token: str, body: AgreementSign, db: Session = Depends(get_db)):
             raise HTTPException(status_code=409, detail="Already signed by apprentice")
         ag.apprentice_signature_name = body.typed_name
         ag.apprentice_signed_at = utc_now()
+        
+        # CRITICAL: Look up apprentice user by email and set apprentice_id
+        # This is needed for _activate_relationship to create the mentor-apprentice link
+        if not ag.apprentice_id and ag.apprentice_email:
+            apprentice_user = db.query(User).filter_by(email=ag.apprentice_email).first()
+            if apprentice_user:
+                ag.apprentice_id = apprentice_user.id
+        
         if ag.parent_required:
             ag.status = 'awaiting_parent'
             existing_parent = db.query(AgreementToken).filter_by(agreement_id=ag.id, token_type='parent', used_at=None).first()
