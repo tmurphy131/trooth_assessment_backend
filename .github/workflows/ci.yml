@@ -81,17 +81,20 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+          token_format: 'access_token'
+        continue-on-error: true
+        id: auth_wif
 
       - name: Auth to Google Cloud (JSON key fallback)
-        if: steps.auth_check.outputs.has_wif != 'true' && steps.auth_check.outputs.has_key == 'true'
+        if: (steps.auth_check.outputs.has_wif != 'true' || steps.auth_wif.outcome == 'failure') && steps.auth_check.outputs.has_key == 'true'
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Fail if no auth secrets configured
-        if: steps.auth_check.outputs.has_wif != 'true' && steps.auth_check.outputs.has_key != 'true'
+      - name: Fail if no auth succeeded
+        if: steps.auth_wif.outcome == 'failure' && steps.auth_check.outputs.has_key != 'true'
         run: |
-          echo "::error::No Google Cloud auth configured. Set either GCP_WORKLOAD_IDENTITY_PROVIDER + GCP_SERVICE_ACCOUNT_EMAIL for OIDC, or GCP_SA_KEY for JSON key auth." && exit 1
+          echo "::error::Google Cloud auth failed. WIF authentication was rejected (possibly due to branch restrictions). Configure GCP_SA_KEY as fallback." && exit 1
 
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
@@ -154,10 +157,21 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+          token_format: 'access_token'
+        continue-on-error: true
+        id: auth_wif
+      
+      - name: Auth to Google Cloud (JSON key fallback)
+        if: steps.auth_wif.outcome == 'failure'
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ env.PROJECT_ID }}
+      
       - name: Execute Cloud Run Job for migrations
         run: |
           gcloud run jobs execute "${{ env.MIGRATE_JOB }}" \
