@@ -10,6 +10,9 @@ Usage:
   2 = Genesis (80% accuracy)
   3 = Matthew (50% accuracy)
   4 = Gospel Fluency (78% accuracy)
+  
+For OAuth users (signed up with Google/Apple), you need to provide Firebase UID instead:
+  APPRENTICE_UID=<firebase_uid> python3 complete_assessment_via_api.py
 """
 import os
 import sys
@@ -17,14 +20,17 @@ import json
 import random
 import time
 import requests
+import firebase_admin
+from firebase_admin import credentials, auth as firebase_auth
 
 # Configuration
 FIREBASE_API_KEY = "AIzaSyDTzy7Z-LaX4wC1EH3k-MR4sbH2hiIFmAE"  # Web API key
 BACKEND_URL = "https://trooth-discipleship-api.onlyblv.com"
 
 # Apple reviewer credentials
-APPRENTICE_EMAIL = "apple.reviewer.apprentice@onlyblv.com"
-APPRENTICE_PASSWORD = "TroothReview2026!"
+APPRENTICE_EMAIL = "ch0senpriest@gmail.com"
+APPRENTICE_PASSWORD = "Murphyaddison1"  # Won't work for OAuth users
+APPRENTICE_UID = "3SQbPiCn9NM93iZUFF2SxcyYeeB2" #os.getenv("APPRENTICE_UID")  # For OAuth users, set this env var
 
 # Assessment configurations: (template_key_pattern, target_accuracy, display_name)
 ASSESSMENTS = [
@@ -35,8 +41,60 @@ ASSESSMENTS = [
 ]
 
 
+def init_firebase_admin():
+    """Initialize Firebase Admin SDK if not already initialized."""
+    if not firebase_admin._apps:
+        # Try to load Firebase credentials
+        firebase_cert_path = os.getenv("FIREBASE_CERT_PATH", "firebase_key.json")
+        firebase_cert_json = os.getenv("FIREBASE_CERT_JSON")
+        
+        if firebase_cert_json:
+            import json as json_lib
+            cred_dict = json_lib.loads(firebase_cert_json)
+            cred = credentials.Certificate(cred_dict)
+        elif os.path.exists(firebase_cert_path):
+            cred = credentials.Certificate(firebase_cert_path)
+        else:
+            print(f"WARNING: No Firebase Admin credentials found. OAuth user authentication will fail.")
+            print(f"Set FIREBASE_CERT_PATH or FIREBASE_CERT_JSON environment variable.")
+            return False
+        
+        firebase_admin.initialize_app(cred)
+    return True
+
+
+def get_custom_token_for_uid(uid: str) -> str:
+    """Generate a custom token for a Firebase UID using Admin SDK."""
+    if not init_firebase_admin():
+        print("ERROR: Cannot generate custom token without Firebase Admin credentials.")
+        sys.exit(1)
+    
+    print(f"Generating custom token for UID: {uid}...")
+    custom_token = firebase_auth.create_custom_token(uid)
+    
+    # Exchange custom token for ID token via Firebase REST API
+    url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key={FIREBASE_API_KEY}"
+    payload = {
+        "token": custom_token.decode('utf-8') if isinstance(custom_token, bytes) else custom_token,
+        "returnSecureToken": True
+    }
+    
+    response = requests.post(url, json=payload)
+    if response.status_code != 200:
+        print(f"ERROR: Failed to exchange custom token: {response.text}")
+        sys.exit(1)
+    
+    data = response.json()
+    return data.get("idToken")
+
+
 def firebase_sign_in(email: str, password: str) -> str:
     """Sign in via Firebase REST API and return ID token."""
+    # If APPRENTICE_UID is set, use Admin SDK instead (for OAuth users)
+    if APPRENTICE_UID:
+        print(f"Detected APPRENTICE_UID environment variable. Using Admin SDK authentication...")
+        return get_custom_token_for_uid(APPRENTICE_UID)
+    
     url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={FIREBASE_API_KEY}"
     
     payload = {
@@ -49,7 +107,19 @@ def firebase_sign_in(email: str, password: str) -> str:
     response = requests.post(url, json=payload)
     
     if response.status_code != 200:
-        print(f"ERROR: Firebase sign-in failed: {response.text}")
+        error_data = response.json()
+        error_message = error_data.get('error', {}).get('message', 'Unknown error')
+        
+        if 'INVALID_PASSWORD' in error_message or 'EMAIL_NOT_FOUND' in error_message:
+            print(f"\n❌ ERROR: Firebase sign-in failed!")
+            print(f"This user likely signed up with Google/Apple OAuth (not email/password).")
+            print(f"\nTo authenticate OAuth users, you need to:")
+            print(f"1. Get the user's Firebase UID from Firestore or Firebase Console")
+            print(f"2. Run: APPRENTICE_UID=<their_firebase_uid> python3 complete_assessment_via_api.py")
+            print(f"\nOriginal error: {error_message}")
+        else:
+            print(f"ERROR: Firebase sign-in failed: {response.text}")
+        
         sys.exit(1)
     
     data = response.json()
