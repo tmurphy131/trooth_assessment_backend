@@ -22,6 +22,7 @@ from app.models.mentor_note import MentorNote
 from app.models.apprentice_invitation import ApprenticeInvitation
 from app.models.notification import Notification
 from app.models.assessment_score_history import AssessmentScoreHistory
+from app.models.email_send_event import EmailSendEvent
 
 logger = logging.getLogger(__name__)
 
@@ -134,14 +135,15 @@ def delete_apprentice_account(db: Session, user_id: str, user_email: str = None)
     2. Assessment score history
     3. Assessment drafts
     4. Mentor notes (on assessments)
-    5. Assessments
-    6. Agreement tokens
-    7. Agreements (by ID and by email - for pending agreements)
-    8. Apprentice invitations sent to this email
-    9. Mentor resources shared with this apprentice
-    10. Mentor-apprentice relationships
-    11. Notifications
-    12. User record
+    5. Email send events (references assessments)
+    6. Assessments
+    7. Agreement tokens
+    8. Agreements (by ID and by email - for pending agreements)
+    9. Apprentice invitations sent to this email
+    10. Mentor resources shared with this apprentice
+    11. Mentor-apprentice relationships
+    12. Notifications
+    13. User record
     """
     deleted_counts = {}
     
@@ -166,11 +168,17 @@ def delete_apprentice_account(db: Session, user_id: str, user_email: str = None)
         count = _safe_delete(db, AssessmentDraft, AssessmentDraft.apprentice_id == user_id, "assessment_drafts")
         deleted_counts["assessment_drafts"] = count
         
-        # 4. Delete assessments
+        # 4. Delete email send events that reference these assessments
+        # Must be deleted BEFORE assessments due to foreign key constraint
+        if assessment_ids:
+            count = _safe_delete_by_ids(db, EmailSendEvent, EmailSendEvent.assessment_id, assessment_ids, "email_send_events")
+            deleted_counts["email_send_events"] = count
+        
+        # 5. Delete assessments
         count = _safe_delete(db, Assessment, Assessment.apprentice_id == user_id, "assessments")
         deleted_counts["assessments"] = count
         
-        # 5. Delete agreement tokens (for agreements where apprentice is involved - by ID or email)
+        # 6. Delete agreement tokens (for agreements where apprentice is involved - by ID or email)
         # Build condition for agreements associated with this apprentice
         agreement_filter = Agreement.apprentice_id == user_id
         if user_email:
@@ -181,28 +189,28 @@ def delete_apprentice_account(db: Session, user_id: str, user_email: str = None)
             count = _safe_delete_by_ids(db, AgreementToken, AgreementToken.agreement_id, agreement_ids, "agreement_tokens")
             deleted_counts["agreement_tokens"] = count
         
-        # 6. Delete agreements (by ID and by email for pending agreements)
+        # 7. Delete agreements (by ID and by email for pending agreements)
         count = _safe_delete(db, Agreement, agreement_filter, "agreements")
         deleted_counts["agreements"] = count
         
-        # 7. Delete apprentice invitations sent to this email
+        # 8. Delete apprentice invitations sent to this email
         if user_email:
             count = _safe_delete(db, ApprenticeInvitation, ApprenticeInvitation.apprentice_email == user_email, "apprentice_invitations")
             deleted_counts["apprentice_invitations"] = count
         
-        # 8. Delete mentor resources shared with this apprentice
+        # 9. Delete mentor resources shared with this apprentice
         count = _safe_delete(db, MentorResource, MentorResource.apprentice_id == user_id, "mentor_resources")
         deleted_counts["mentor_resources"] = count
         
-        # 9. Delete mentor-apprentice relationships
+        # 10. Delete mentor-apprentice relationships
         count = _safe_delete(db, MentorApprentice, MentorApprentice.apprentice_id == user_id, "mentor_apprentice")
         deleted_counts["mentor_relationships"] = count
         
-        # 10. Delete notifications
+        # 11. Delete notifications
         count = _safe_delete(db, Notification, Notification.user_id == user_id, "notifications")
         deleted_counts["notifications"] = count
         
-        # 11. Delete the user (this table must exist)
+        # 12. Delete the user (this table must exist)
         count = db.query(User).filter(User.id == user_id).delete(synchronize_session=False)
         deleted_counts["user"] = count
         
@@ -231,9 +239,10 @@ def delete_mentor_account(db: Session, user_id: str) -> dict:
     4. Mentor resources
     5. Apprentice invitations
     6. Mentor-apprentice relationships
-    7. Notifications
-    8. Mentor profile
-    9. User record
+    7. Email send events (where mentor is sender)
+    8. Notifications
+    9. Mentor profile
+    10. User record
     
     Note: This does NOT delete apprentice assessments - those belong to the apprentice.
     """
@@ -266,11 +275,15 @@ def delete_mentor_account(db: Session, user_id: str) -> dict:
         count = _safe_delete(db, MentorApprentice, MentorApprentice.mentor_id == user_id, "mentor_apprentice")
         deleted_counts["mentor_relationships"] = count
         
-        # 7. Delete notifications
+        # 7. Delete email send events where this mentor is the sender
+        count = _safe_delete(db, EmailSendEvent, EmailSendEvent.sender_user_id == user_id, "email_send_events")
+        deleted_counts["email_send_events"] = count
+        
+        # 8. Delete notifications
         count = _safe_delete(db, Notification, Notification.user_id == user_id, "notifications")
         deleted_counts["notifications"] = count
         
-        # 8. Delete mentor profile (if exists)
+        # 9. Delete mentor profile (if exists)
         try:
             from app.models.mentor_profile import MentorProfile
             count = _safe_delete(db, MentorProfile, MentorProfile.mentor_id == user_id, "mentor_profiles")
@@ -278,7 +291,7 @@ def delete_mentor_account(db: Session, user_id: str) -> dict:
         except Exception as e:
             logger.warning(f"Could not delete mentor profile: {e}")
         
-        # 9. Delete the user (this table must exist)
+        # 10. Delete the user (this table must exist)
         count = db.query(User).filter(User.id == user_id).delete(synchronize_session=False)
         deleted_counts["user"] = count
         
