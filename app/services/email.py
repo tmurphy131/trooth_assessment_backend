@@ -74,7 +74,7 @@ def render_generic_assessment_email(title: str, apprentice_name: str | None, sco
     if env and JINJA2_AVAILABLE:
         try:
             template = env.get_template('generic_assessment_report.html')
-            html_content = template.render(title=title, apprentice_name=apprentice_name, scores=scores, app_url=settings.app_url)
+            html_content = template.render(title=title, apprentice_name=apprentice_name, scores=scores, app_url=settings.ios_app_store_url)
         except Exception as e:
             logger.error(f"Failed to render generic assessment template: {e}")
             html_content = None
@@ -132,7 +132,7 @@ def render_assessment_completion_email(mentor_name: str, apprentice_name: str,
                 overall_score=scores.get('overall_score', 7.0),
                 category_scores=scores.get('category_scores', {}),
                 recommendations=recommendations,
-                app_url=settings.app_url
+                app_url=settings.ios_app_store_url
             )
             
             # Generate plain text version
@@ -147,7 +147,7 @@ Overall Score: {scores.get('overall_score', 7.0)}/10
 
 {recommendations.get('summary_recommendation', 'Continue growing in spiritual disciplines.')}
 
-View full results: {settings.app_url}
+View full results: {settings.ios_app_store_url}
 
 Best regards,
 T[root]H Discipleship Team
@@ -168,7 +168,7 @@ Dear {mentor_name},
 
 {recommendations.get('summary_recommendation', 'Continue growing in spiritual disciplines.')}
 
-View full results at: {settings.app_url}
+View full results at: {settings.ios_app_store_url}
 
 Best regards,
 T[root]H Discipleship Team
@@ -186,7 +186,7 @@ def render_invitation_email(apprentice_name: str, mentor_name: str, token: str) 
                 apprentice_name=apprentice_name,
                 mentor_name=mentor_name,
                 token=token,
-                app_url=settings.app_url
+                app_url=settings.backend_api_url
             )
             
             # Generate plain text version
@@ -200,7 +200,7 @@ Dear {apprentice_name},
 What is T[root]H Discipleship?
 T[root]H is a comprehensive spiritual assessment tool designed to help you and your mentor understand your current spiritual growth and identify areas for development.
 
-Accept your invitation here: {settings.app_url}/accept-invitation?token={token}
+Accept your invitation here: {settings.backend_api_url}/accept-invitation?token={token}
 
 This invitation will expire in 7 days.
 
@@ -221,7 +221,7 @@ Dear {apprentice_name},
 
 {mentor_name} has invited you to join the T[root]H Discipleship platform.
 
-Accept your invitation: {settings.app_url}/accept-invitation?token={token}
+Accept your invitation: {settings.backend_api_url}/accept-invitation?token={token}
 
 Best regards,
 T[root]H Discipleship Team
@@ -243,7 +243,7 @@ def send_email(to_email: str, subject: str, html_content: str,
         "subject": subject,
         "from_default": settings.email_from_address,
         "env_has_key": bool(os.getenv('SENDGRID_API_KEY')),
-        "app_url": settings.app_url,
+        "app_url": settings.ios_app_store_url,
     }
 
     # Ensure we treat unit tests as test env

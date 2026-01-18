@@ -293,7 +293,7 @@ def build_report_context(assessment: Dict[str, Any] | None, scores: Dict, mentor
         'mentor_blob_v2': mentor_blob,  # Pass entire blob for template access
         'priority_action': priority_action,
         'trend_note': trend_note,
-        'app_url': getattr(settings, 'app_url', ''),
+        'app_url': getattr(settings, 'ios_app_store_url', settings.app_url),  # Use App Store URL for mobile app link
     }
     return ctx
 

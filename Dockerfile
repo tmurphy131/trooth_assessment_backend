@@ -45,6 +45,9 @@ COPY --from=builder /opt/venv /opt/venv
 # Create application directory
 WORKDIR /app
 
+# Cache-busting arg to force fresh copy of application code
+ARG CACHEBUST=1
+
 # Copy application code
 COPY . .
 

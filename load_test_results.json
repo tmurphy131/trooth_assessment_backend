@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-01-17T18:58:45.074Z",
+  "baseUrl": "https://trooth-backend-dev-301248215198.us-east4.run.app",
+  "metrics": {
+    "totalRequests": 5266,
+    "failedRequests": 1708,
+    "avgResponseTime": "947.61",
+    "p95ResponseTime": "3790.55",
+    "maxResponseTime": "50770.82",
+    "errorRate": "10.60",
+    "assessmentSubmissions": 142,
+    "draftSaves": 653
+  }
+}

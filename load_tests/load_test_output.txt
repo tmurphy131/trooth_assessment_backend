@@ -1,0 +1,1043 @@
+🔐 Getting apprentice token...
+🔐 Getting mentor token...
+
+✅ Tokens obtained!
+
+🚀 Starting load test...
+   - Apprentice user: loadtest@test.com
+   - Mentor user: loadtest-mentor@test.com
+   - Target: https://trooth-backend-dev-ignpknnbva-uk.a.run.app
+
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: load_tests/infrastructure_test.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 100 max VUs, 5m10s max duration (incl. graceful stop):
+              * load_test: Up to 100 looping VUs for 5m0s over 5 stages (gracefulRampDown: 10s, gracefulStop: 30s)
+
+time="2026-01-17T13:53:34-05:00" level=info msg="Starting load test against: https://trooth-backend-dev-301248215198.us-east4.run.app" source=console
+time="2026-01-17T13:53:34-05:00" level=info msg="Auth token provided: Yes" source=console
+time="2026-01-17T13:53:35-05:00" level=info msg="Server is healthy, starting test..." source=console
+
+running (0m01.0s), 001/100 VUs, 0 complete and 0 interrupted iterations
+load_test   [   0% ] 001/100 VUs  0m00.9s/5m00.0s
+
+running (0m02.0s), 001/100 VUs, 0 complete and 0 interrupted iterations
+load_test   [   1% ] 001/100 VUs  0m01.9s/5m00.0s
+
+running (0m03.0s), 001/100 VUs, 1 complete and 0 interrupted iterations
+load_test   [   1% ] 001/100 VUs  0m02.9s/5m00.0s
+
+running (0m04.0s), 002/100 VUs, 1 complete and 0 interrupted iterations
+load_test   [   1% ] 002/100 VUs  0m03.9s/5m00.0s
+
+running (0m05.0s), 002/100 VUs, 1 complete and 0 interrupted iterations
+load_test   [   2% ] 002/100 VUs  0m04.9s/5m00.0s
+
+running (0m06.0s), 002/100 VUs, 3 complete and 0 interrupted iterations
+load_test   [   2% ] 002/100 VUs  0m05.9s/5m00.0s
+
+running (0m07.0s), 003/100 VUs, 3 complete and 0 interrupted iterations
+load_test   [   2% ] 003/100 VUs  0m06.9s/5m00.0s
+
+running (0m08.0s), 003/100 VUs, 3 complete and 0 interrupted iterations
+load_test   [   3% ] 003/100 VUs  0m07.9s/5m00.0s
+
+running (0m09.0s), 003/100 VUs, 4 complete and 0 interrupted iterations
+load_test   [   3% ] 003/100 VUs  0m08.9s/5m00.0s
+
+running (0m10.0s), 003/100 VUs, 5 complete and 0 interrupted iterations
+load_test   [   3% ] 003/100 VUs  0m09.9s/5m00.0s
+
+running (0m11.0s), 004/100 VUs, 7 complete and 0 interrupted iterations
+load_test   [   4% ] 004/100 VUs  0m10.9s/5m00.0s
+
+running (0m12.0s), 004/100 VUs, 8 complete and 0 interrupted iterations
+load_test   [   4% ] 004/100 VUs  0m11.9s/5m00.0s
+
+running (0m13.0s), 004/100 VUs, 9 complete and 0 interrupted iterations
+load_test   [   4% ] 004/100 VUs  0m12.9s/5m00.0s
+
+running (0m14.0s), 005/100 VUs, 10 complete and 0 interrupted iterations
+load_test   [   5% ] 005/100 VUs  0m13.9s/5m00.0s
+
+running (0m15.0s), 005/100 VUs, 13 complete and 0 interrupted iterations
+load_test   [   5% ] 005/100 VUs  0m14.9s/5m00.0s
+
+running (0m16.0s), 005/100 VUs, 15 complete and 0 interrupted iterations
+load_test   [   5% ] 005/100 VUs  0m15.9s/5m00.0s
+
+running (0m17.0s), 006/100 VUs, 16 complete and 0 interrupted iterations
+load_test   [   6% ] 006/100 VUs  0m16.9s/5m00.0s
+
+running (0m18.0s), 006/100 VUs, 19 complete and 0 interrupted iterations
+load_test   [   6% ] 006/100 VUs  0m17.9s/5m00.0s
+
+running (0m19.0s), 006/100 VUs, 19 complete and 0 interrupted iterations
+load_test   [   6% ] 006/100 VUs  0m18.9s/5m00.0s
+
+running (0m20.0s), 006/100 VUs, 22 complete and 0 interrupted iterations
+load_test   [   7% ] 006/100 VUs  0m19.9s/5m00.0s
+
+running (0m21.0s), 007/100 VUs, 25 complete and 0 interrupted iterations
+load_test   [   7% ] 007/100 VUs  0m20.9s/5m00.0s
+
+running (0m22.0s), 007/100 VUs, 27 complete and 0 interrupted iterations
+load_test   [   7% ] 007/100 VUs  0m21.9s/5m00.0s
+
+running (0m23.0s), 007/100 VUs, 30 complete and 0 interrupted iterations
+load_test   [   8% ] 007/100 VUs  0m22.9s/5m00.0s
+
+running (0m24.0s), 008/100 VUs, 33 complete and 0 interrupted iterations
+load_test   [   8% ] 008/100 VUs  0m23.9s/5m00.0s
+
+running (0m25.0s), 008/100 VUs, 34 complete and 0 interrupted iterations
+load_test   [   8% ] 008/100 VUs  0m24.9s/5m00.0s
+
+running (0m26.0s), 008/100 VUs, 39 complete and 0 interrupted iterations
+load_test   [   9% ] 008/100 VUs  0m25.9s/5m00.0s
+time="2026-01-17T13:54:01-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"ac01d32a\"}" source=console
+
+running (0m27.0s), 009/100 VUs, 44 complete and 0 interrupted iterations
+load_test   [   9% ] 009/100 VUs  0m26.9s/5m00.0s
+
+running (0m28.0s), 009/100 VUs, 46 complete and 0 interrupted iterations
+load_test   [   9% ] 009/100 VUs  0m27.9s/5m00.0s
+
+running (0m29.0s), 009/100 VUs, 48 complete and 0 interrupted iterations
+load_test   [  10% ] 009/100 VUs  0m28.9s/5m00.0s
+
+running (0m30.0s), 009/100 VUs, 55 complete and 0 interrupted iterations
+load_test   [  10% ] 009/100 VUs  0m29.9s/5m00.0s
+
+running (0m31.0s), 010/100 VUs, 58 complete and 0 interrupted iterations
+load_test   [  10% ] 010/100 VUs  0m30.9s/5m00.0s
+
+running (0m32.0s), 010/100 VUs, 61 complete and 0 interrupted iterations
+load_test   [  11% ] 010/100 VUs  0m31.9s/5m00.0s
+
+running (0m33.0s), 010/100 VUs, 67 complete and 0 interrupted iterations
+load_test   [  11% ] 010/100 VUs  0m32.9s/5m00.0s
+
+running (0m34.0s), 010/100 VUs, 70 complete and 0 interrupted iterations
+load_test   [  11% ] 010/100 VUs  0m33.9s/5m00.0s
+
+running (0m35.0s), 011/100 VUs, 76 complete and 0 interrupted iterations
+load_test   [  12% ] 011/100 VUs  0m34.9s/5m00.0s
+
+running (0m36.0s), 011/100 VUs, 79 complete and 0 interrupted iterations
+load_test   [  12% ] 011/100 VUs  0m35.9s/5m00.0s
+
+running (0m37.0s), 011/100 VUs, 86 complete and 0 interrupted iterations
+load_test   [  12% ] 011/100 VUs  0m36.9s/5m00.0s
+
+running (0m38.0s), 011/100 VUs, 90 complete and 0 interrupted iterations
+load_test   [  13% ] 011/100 VUs  0m37.9s/5m00.0s
+
+running (0m39.0s), 012/100 VUs, 94 complete and 0 interrupted iterations
+load_test   [  13% ] 012/100 VUs  0m38.9s/5m00.0s
+
+running (0m40.0s), 012/100 VUs, 102 complete and 0 interrupted iterations
+load_test   [  13% ] 012/100 VUs  0m39.9s/5m00.0s
+
+running (0m41.0s), 012/100 VUs, 107 complete and 0 interrupted iterations
+load_test   [  14% ] 012/100 VUs  0m40.9s/5m00.0s
+
+running (0m42.0s), 012/100 VUs, 112 complete and 0 interrupted iterations
+load_test   [  14% ] 012/100 VUs  0m41.9s/5m00.0s
+
+running (0m43.0s), 013/100 VUs, 117 complete and 0 interrupted iterations
+load_test   [  14% ] 013/100 VUs  0m42.9s/5m00.0s
+
+running (0m44.0s), 013/100 VUs, 122 complete and 0 interrupted iterations
+load_test   [  15% ] 013/100 VUs  0m43.9s/5m00.0s
+
+running (0m45.0s), 013/100 VUs, 126 complete and 0 interrupted iterations
+load_test   [  15% ] 013/100 VUs  0m44.9s/5m00.0s
+
+running (0m46.0s), 013/100 VUs, 132 complete and 0 interrupted iterations
+load_test   [  15% ] 013/100 VUs  0m45.9s/5m00.0s
+time="2026-01-17T13:54:21-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"e75052b5\"}" source=console
+
+running (0m47.0s), 014/100 VUs, 137 complete and 0 interrupted iterations
+load_test   [  16% ] 014/100 VUs  0m46.9s/5m00.0s
+
+running (0m48.0s), 014/100 VUs, 141 complete and 0 interrupted iterations
+load_test   [  16% ] 014/100 VUs  0m47.9s/5m00.0s
+
+running (0m49.0s), 014/100 VUs, 147 complete and 0 interrupted iterations
+load_test   [  16% ] 014/100 VUs  0m48.9s/5m00.0s
+
+running (0m50.0s), 014/100 VUs, 154 complete and 0 interrupted iterations
+load_test   [  17% ] 014/100 VUs  0m49.9s/5m00.0s
+
+running (0m51.0s), 015/100 VUs, 162 complete and 0 interrupted iterations
+load_test   [  17% ] 015/100 VUs  0m50.9s/5m00.0s
+
+running (0m52.0s), 015/100 VUs, 167 complete and 0 interrupted iterations
+load_test   [  17% ] 015/100 VUs  0m51.9s/5m00.0s
+
+running (0m53.0s), 015/100 VUs, 174 complete and 0 interrupted iterations
+load_test   [  18% ] 015/100 VUs  0m52.9s/5m00.0s
+
+running (0m54.0s), 015/100 VUs, 180 complete and 0 interrupted iterations
+load_test   [  18% ] 015/100 VUs  0m53.9s/5m00.0s
+
+running (0m55.0s), 016/100 VUs, 186 complete and 0 interrupted iterations
+load_test   [  18% ] 016/100 VUs  0m54.9s/5m00.0s
+
+running (0m56.0s), 016/100 VUs, 194 complete and 0 interrupted iterations
+load_test   [  19% ] 016/100 VUs  0m55.9s/5m00.0s
+time="2026-01-17T13:54:31-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"214bce0b\"}" source=console
+
+running (0m57.0s), 016/100 VUs, 197 complete and 0 interrupted iterations
+load_test   [  19% ] 016/100 VUs  0m56.9s/5m00.0s
+
+running (0m58.0s), 016/100 VUs, 205 complete and 0 interrupted iterations
+load_test   [  19% ] 016/100 VUs  0m57.9s/5m00.0s
+
+running (0m59.0s), 017/100 VUs, 210 complete and 0 interrupted iterations
+load_test   [  20% ] 017/100 VUs  0m58.9s/5m00.0s
+
+running (1m00.0s), 017/100 VUs, 217 complete and 0 interrupted iterations
+load_test   [  20% ] 017/100 VUs  0m59.9s/5m00.0s
+
+running (1m01.0s), 017/100 VUs, 227 complete and 0 interrupted iterations
+load_test   [  20% ] 017/100 VUs  1m00.9s/5m00.0s
+
+running (1m02.0s), 017/100 VUs, 232 complete and 0 interrupted iterations
+load_test   [  21% ] 017/100 VUs  1m01.9s/5m00.0s
+
+running (1m03.0s), 018/100 VUs, 239 complete and 0 interrupted iterations
+load_test   [  21% ] 018/100 VUs  1m02.9s/5m00.0s
+
+running (1m04.0s), 018/100 VUs, 244 complete and 0 interrupted iterations
+load_test   [  21% ] 018/100 VUs  1m03.9s/5m00.0s
+
+running (1m05.0s), 018/100 VUs, 255 complete and 0 interrupted iterations
+load_test   [  22% ] 018/100 VUs  1m04.9s/5m00.0s
+
+running (1m06.0s), 018/100 VUs, 262 complete and 0 interrupted iterations
+load_test   [  22% ] 018/100 VUs  1m05.9s/5m00.0s
+
+running (1m07.0s), 019/100 VUs, 267 complete and 0 interrupted iterations
+load_test   [  22% ] 019/100 VUs  1m06.9s/5m00.0s
+time="2026-01-17T13:54:42-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"1c0f0980\"}" source=console
+
+running (1m08.0s), 019/100 VUs, 282 complete and 0 interrupted iterations
+load_test   [  23% ] 019/100 VUs  1m07.9s/5m00.0s
+
+running (1m09.0s), 019/100 VUs, 288 complete and 0 interrupted iterations
+load_test   [  23% ] 019/100 VUs  1m08.9s/5m00.0s
+
+running (1m10.0s), 019/100 VUs, 295 complete and 0 interrupted iterations
+load_test   [  23% ] 019/100 VUs  1m09.9s/5m00.0s
+
+running (1m11.0s), 020/100 VUs, 304 complete and 0 interrupted iterations
+load_test   [  24% ] 020/100 VUs  1m10.9s/5m00.0s
+
+running (1m12.0s), 020/100 VUs, 312 complete and 0 interrupted iterations
+load_test   [  24% ] 020/100 VUs  1m11.9s/5m00.0s
+
+running (1m13.0s), 020/100 VUs, 323 complete and 0 interrupted iterations
+load_test   [  24% ] 020/100 VUs  1m12.9s/5m00.0s
+
+running (1m14.0s), 020/100 VUs, 329 complete and 0 interrupted iterations
+load_test   [  25% ] 020/100 VUs  1m13.9s/5m00.0s
+
+running (1m15.0s), 021/100 VUs, 338 complete and 0 interrupted iterations
+load_test   [  25% ] 021/100 VUs  1m14.9s/5m00.0s
+
+running (1m16.0s), 021/100 VUs, 346 complete and 0 interrupted iterations
+load_test   [  25% ] 021/100 VUs  1m15.9s/5m00.0s
+
+running (1m17.0s), 021/100 VUs, 355 complete and 0 interrupted iterations
+load_test   [  26% ] 021/100 VUs  1m16.9s/5m00.0s
+time="2026-01-17T13:54:52-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"f97d8433\"}" source=console
+
+running (1m18.0s), 021/100 VUs, 361 complete and 0 interrupted iterations
+load_test   [  26% ] 021/100 VUs  1m17.9s/5m00.0s
+
+running (1m19.0s), 022/100 VUs, 374 complete and 0 interrupted iterations
+load_test   [  26% ] 022/100 VUs  1m18.9s/5m00.0s
+
+running (1m20.0s), 022/100 VUs, 379 complete and 0 interrupted iterations
+load_test   [  27% ] 022/100 VUs  1m19.9s/5m00.0s
+
+running (1m21.0s), 022/100 VUs, 387 complete and 0 interrupted iterations
+load_test   [  27% ] 022/100 VUs  1m20.9s/5m00.0s
+
+running (1m22.0s), 022/100 VUs, 398 complete and 0 interrupted iterations
+load_test   [  27% ] 022/100 VUs  1m21.9s/5m00.0s
+
+running (1m23.0s), 023/100 VUs, 403 complete and 0 interrupted iterations
+load_test   [  28% ] 023/100 VUs  1m22.9s/5m00.0s
+
+running (1m24.0s), 023/100 VUs, 414 complete and 0 interrupted iterations
+load_test   [  28% ] 023/100 VUs  1m23.9s/5m00.0s
+
+running (1m25.0s), 023/100 VUs, 423 complete and 0 interrupted iterations
+load_test   [  28% ] 023/100 VUs  1m24.9s/5m00.0s
+
+running (1m26.0s), 023/100 VUs, 427 complete and 0 interrupted iterations
+load_test   [  29% ] 023/100 VUs  1m25.9s/5m00.0s
+
+running (1m27.0s), 024/100 VUs, 439 complete and 0 interrupted iterations
+load_test   [  29% ] 024/100 VUs  1m26.9s/5m00.0s
+
+running (1m28.0s), 024/100 VUs, 449 complete and 0 interrupted iterations
+load_test   [  29% ] 024/100 VUs  1m27.9s/5m00.0s
+
+running (1m29.0s), 024/100 VUs, 457 complete and 0 interrupted iterations
+load_test   [  30% ] 024/100 VUs  1m28.9s/5m00.0s
+
+running (1m30.0s), 024/100 VUs, 465 complete and 0 interrupted iterations
+load_test   [  30% ] 024/100 VUs  1m29.9s/5m00.0s
+
+running (1m31.0s), 025/100 VUs, 475 complete and 0 interrupted iterations
+load_test   [  30% ] 025/100 VUs  1m30.9s/5m00.0s
+
+running (1m32.0s), 025/100 VUs, 483 complete and 0 interrupted iterations
+load_test   [  31% ] 025/100 VUs  1m31.9s/5m00.0s
+
+running (1m33.0s), 025/100 VUs, 495 complete and 0 interrupted iterations
+load_test   [  31% ] 025/100 VUs  1m32.9s/5m00.0s
+time="2026-01-17T13:55:08-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"176ca261\"}" source=console
+
+running (1m34.0s), 025/100 VUs, 507 complete and 0 interrupted iterations
+load_test   [  31% ] 025/100 VUs  1m33.9s/5m00.0s
+time="2026-01-17T13:55:09-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"3770c428\"}" source=console
+
+running (1m35.0s), 026/100 VUs, 517 complete and 0 interrupted iterations
+load_test   [  32% ] 026/100 VUs  1m34.9s/5m00.0s
+
+running (1m36.0s), 026/100 VUs, 526 complete and 0 interrupted iterations
+load_test   [  32% ] 026/100 VUs  1m35.9s/5m00.0s
+
+running (1m37.0s), 026/100 VUs, 538 complete and 0 interrupted iterations
+load_test   [  32% ] 026/100 VUs  1m36.9s/5m00.0s
+
+running (1m38.0s), 026/100 VUs, 550 complete and 0 interrupted iterations
+load_test   [  33% ] 026/100 VUs  1m37.9s/5m00.0s
+time="2026-01-17T13:55:13-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"b36e5a42\"}" source=console
+
+running (1m39.0s), 026/100 VUs, 560 complete and 0 interrupted iterations
+load_test   [  33% ] 026/100 VUs  1m38.9s/5m00.0s
+
+running (1m40.0s), 027/100 VUs, 570 complete and 0 interrupted iterations
+load_test   [  33% ] 027/100 VUs  1m39.9s/5m00.0s
+time="2026-01-17T13:55:15-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"b18b51aa\"}" source=console
+
+running (1m41.0s), 027/100 VUs, 581 complete and 0 interrupted iterations
+load_test   [  34% ] 027/100 VUs  1m40.9s/5m00.0s
+
+running (1m42.0s), 027/100 VUs, 587 complete and 0 interrupted iterations
+load_test   [  34% ] 027/100 VUs  1m41.9s/5m00.0s
+
+running (1m43.0s), 027/100 VUs, 601 complete and 0 interrupted iterations
+load_test   [  34% ] 027/100 VUs  1m42.9s/5m00.0s
+
+running (1m44.0s), 027/100 VUs, 615 complete and 0 interrupted iterations
+load_test   [  35% ] 027/100 VUs  1m43.9s/5m00.0s
+
+running (1m45.0s), 028/100 VUs, 626 complete and 0 interrupted iterations
+load_test   [  35% ] 028/100 VUs  1m44.9s/5m00.0s
+
+running (1m46.0s), 028/100 VUs, 636 complete and 0 interrupted iterations
+load_test   [  35% ] 028/100 VUs  1m45.9s/5m00.0s
+
+running (1m47.0s), 028/100 VUs, 646 complete and 0 interrupted iterations
+load_test   [  36% ] 028/100 VUs  1m46.9s/5m00.0s
+
+running (1m48.0s), 028/100 VUs, 659 complete and 0 interrupted iterations
+load_test   [  36% ] 028/100 VUs  1m47.9s/5m00.0s
+
+running (1m49.0s), 028/100 VUs, 672 complete and 0 interrupted iterations
+load_test   [  36% ] 028/100 VUs  1m48.9s/5m00.0s
+time="2026-01-17T13:55:24-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"6f3b16fe\"}" source=console
+
+running (1m50.0s), 029/100 VUs, 684 complete and 0 interrupted iterations
+load_test   [  37% ] 029/100 VUs  1m49.9s/5m00.0s
+
+running (1m51.0s), 029/100 VUs, 696 complete and 0 interrupted iterations
+load_test   [  37% ] 029/100 VUs  1m50.9s/5m00.0s
+
+running (1m52.0s), 029/100 VUs, 705 complete and 0 interrupted iterations
+load_test   [  37% ] 029/100 VUs  1m51.9s/5m00.0s
+time="2026-01-17T13:55:26-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"46ade8d5\"}" source=console
+
+running (1m53.0s), 029/100 VUs, 722 complete and 0 interrupted iterations
+load_test   [  38% ] 029/100 VUs  1m52.9s/5m00.0s
+
+running (1m54.0s), 029/100 VUs, 731 complete and 0 interrupted iterations
+load_test   [  38% ] 029/100 VUs  1m53.9s/5m00.0s
+
+running (1m55.0s), 030/100 VUs, 749 complete and 0 interrupted iterations
+load_test   [  38% ] 030/100 VUs  1m54.9s/5m00.0s
+time="2026-01-17T13:55:30-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"283dffb4\"}" source=console
+
+running (1m56.0s), 030/100 VUs, 761 complete and 0 interrupted iterations
+load_test   [  39% ] 030/100 VUs  1m55.9s/5m00.0s
+
+running (1m57.0s), 030/100 VUs, 772 complete and 0 interrupted iterations
+load_test   [  39% ] 030/100 VUs  1m56.9s/5m00.0s
+
+running (1m58.0s), 030/100 VUs, 791 complete and 0 interrupted iterations
+load_test   [  39% ] 030/100 VUs  1m57.9s/5m00.0s
+
+running (1m59.0s), 031/100 VUs, 797 complete and 0 interrupted iterations
+load_test   [  40% ] 031/100 VUs  1m58.9s/5m00.0s
+time="2026-01-17T13:55:34-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"b5de6c5e\"}" source=console
+
+running (2m00.0s), 031/100 VUs, 804 complete and 0 interrupted iterations
+load_test   [  40% ] 031/100 VUs  1m59.9s/5m00.0s
+
+running (2m01.0s), 031/100 VUs, 814 complete and 0 interrupted iterations
+load_test   [  40% ] 031/100 VUs  2m00.9s/5m00.0s
+
+running (2m02.0s), 031/100 VUs, 826 complete and 0 interrupted iterations
+load_test   [  41% ] 031/100 VUs  2m01.9s/5m00.0s
+
+running (2m03.0s), 031/100 VUs, 840 complete and 0 interrupted iterations
+load_test   [  41% ] 031/100 VUs  2m02.9s/5m00.0s
+
+running (2m04.0s), 032/100 VUs, 851 complete and 0 interrupted iterations
+load_test   [  41% ] 032/100 VUs  2m03.9s/5m00.0s
+
+running (2m05.0s), 032/100 VUs, 868 complete and 0 interrupted iterations
+load_test   [  42% ] 032/100 VUs  2m04.9s/5m00.0s
+
+running (2m06.0s), 032/100 VUs, 882 complete and 0 interrupted iterations
+load_test   [  42% ] 032/100 VUs  2m05.9s/5m00.0s
+
+running (2m07.0s), 032/100 VUs, 896 complete and 0 interrupted iterations
+load_test   [  42% ] 032/100 VUs  2m06.9s/5m00.0s
+
+running (2m08.0s), 032/100 VUs, 906 complete and 0 interrupted iterations
+load_test   [  43% ] 032/100 VUs  2m07.9s/5m00.0s
+time="2026-01-17T13:55:43-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"1f7e24bc\"}" source=console
+
+running (2m09.0s), 033/100 VUs, 924 complete and 0 interrupted iterations
+load_test   [  43% ] 033/100 VUs  2m08.9s/5m00.0s
+
+running (2m10.0s), 033/100 VUs, 935 complete and 0 interrupted iterations
+load_test   [  43% ] 033/100 VUs  2m09.9s/5m00.0s
+
+running (2m11.0s), 033/100 VUs, 948 complete and 0 interrupted iterations
+load_test   [  44% ] 033/100 VUs  2m10.9s/5m00.0s
+time="2026-01-17T13:55:46-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"bfd27dc0\"}" source=console
+
+running (2m12.0s), 033/100 VUs, 959 complete and 0 interrupted iterations
+load_test   [  44% ] 033/100 VUs  2m11.9s/5m00.0s
+
+running (2m13.0s), 033/100 VUs, 965 complete and 0 interrupted iterations
+load_test   [  44% ] 033/100 VUs  2m12.9s/5m00.0s
+
+running (2m14.0s), 034/100 VUs, 980 complete and 0 interrupted iterations
+load_test   [  45% ] 034/100 VUs  2m13.9s/5m00.0s
+
+running (2m15.0s), 034/100 VUs, 996 complete and 0 interrupted iterations
+load_test   [  45% ] 034/100 VUs  2m14.9s/5m00.0s
+
+running (2m16.0s), 034/100 VUs, 1011 complete and 0 interrupted iterations
+load_test   [  45% ] 034/100 VUs  2m15.9s/5m00.0s
+
+running (2m17.0s), 034/100 VUs, 1024 complete and 0 interrupted iterations
+load_test   [  46% ] 034/100 VUs  2m16.9s/5m00.0s
+time="2026-01-17T13:55:52-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"f76512a1\"}" source=console
+
+running (2m18.0s), 034/100 VUs, 1035 complete and 0 interrupted iterations
+load_test   [  46% ] 034/100 VUs  2m17.9s/5m00.0s
+time="2026-01-17T13:55:53-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"54e32096\"}" source=console
+
+running (2m19.0s), 035/100 VUs, 1053 complete and 0 interrupted iterations
+load_test   [  46% ] 035/100 VUs  2m18.9s/5m00.0s
+
+running (2m20.0s), 035/100 VUs, 1061 complete and 0 interrupted iterations
+load_test   [  47% ] 035/100 VUs  2m19.9s/5m00.0s
+
+running (2m21.0s), 035/100 VUs, 1080 complete and 0 interrupted iterations
+load_test   [  47% ] 035/100 VUs  2m20.9s/5m00.0s
+
+running (2m22.0s), 035/100 VUs, 1093 complete and 0 interrupted iterations
+load_test   [  47% ] 035/100 VUs  2m21.9s/5m00.0s
+
+running (2m23.0s), 036/100 VUs, 1103 complete and 0 interrupted iterations
+load_test   [  48% ] 036/100 VUs  2m22.9s/5m00.0s
+
+running (2m24.0s), 036/100 VUs, 1119 complete and 0 interrupted iterations
+load_test   [  48% ] 036/100 VUs  2m23.9s/5m00.0s
+
+running (2m25.0s), 036/100 VUs, 1135 complete and 0 interrupted iterations
+load_test   [  48% ] 036/100 VUs  2m24.9s/5m00.0s
+
+running (2m26.0s), 036/100 VUs, 1151 complete and 0 interrupted iterations
+load_test   [  49% ] 036/100 VUs  2m25.9s/5m00.0s
+
+running (2m27.0s), 036/100 VUs, 1163 complete and 0 interrupted iterations
+load_test   [  49% ] 036/100 VUs  2m26.9s/5m00.0s
+
+running (2m28.0s), 037/100 VUs, 1178 complete and 0 interrupted iterations
+load_test   [  49% ] 037/100 VUs  2m27.9s/5m00.0s
+time="2026-01-17T13:56:03-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"45be62ca\"}" source=console
+time="2026-01-17T13:56:03-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"204ea101\"}" source=console
+
+running (2m29.0s), 037/100 VUs, 1191 complete and 0 interrupted iterations
+load_test   [  50% ] 037/100 VUs  2m28.9s/5m00.0s
+
+running (2m30.0s), 037/100 VUs, 1209 complete and 0 interrupted iterations
+load_test   [  50% ] 037/100 VUs  2m29.9s/5m00.0s
+
+running (2m31.0s), 037/100 VUs, 1225 complete and 0 interrupted iterations
+load_test   [  50% ] 037/100 VUs  2m30.9s/5m00.0s
+
+running (2m32.0s), 037/100 VUs, 1235 complete and 0 interrupted iterations
+load_test   [  51% ] 037/100 VUs  2m31.9s/5m00.0s
+
+running (2m33.0s), 038/100 VUs, 1251 complete and 0 interrupted iterations
+load_test   [  51% ] 038/100 VUs  2m32.9s/5m00.0s
+
+running (2m34.0s), 038/100 VUs, 1269 complete and 0 interrupted iterations
+load_test   [  51% ] 038/100 VUs  2m33.9s/5m00.0s
+
+running (2m35.0s), 038/100 VUs, 1277 complete and 0 interrupted iterations
+load_test   [  52% ] 038/100 VUs  2m34.9s/5m00.0s
+
+running (2m36.0s), 038/100 VUs, 1295 complete and 0 interrupted iterations
+load_test   [  52% ] 038/100 VUs  2m35.9s/5m00.0s
+
+running (2m37.0s), 038/100 VUs, 1312 complete and 0 interrupted iterations
+load_test   [  52% ] 038/100 VUs  2m36.9s/5m00.0s
+time="2026-01-17T13:56:12-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"bab4f04e\"}" source=console
+
+running (2m38.0s), 039/100 VUs, 1324 complete and 0 interrupted iterations
+load_test   [  53% ] 039/100 VUs  2m37.9s/5m00.0s
+
+running (2m39.0s), 039/100 VUs, 1341 complete and 0 interrupted iterations
+load_test   [  53% ] 039/100 VUs  2m38.9s/5m00.0s
+
+running (2m40.0s), 039/100 VUs, 1357 complete and 0 interrupted iterations
+load_test   [  53% ] 039/100 VUs  2m39.9s/5m00.0s
+time="2026-01-17T13:56:15-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"ee661423\"}" source=console
+
+running (2m41.0s), 039/100 VUs, 1371 complete and 0 interrupted iterations
+load_test   [  54% ] 039/100 VUs  2m40.9s/5m00.0s
+
+running (2m42.0s), 039/100 VUs, 1389 complete and 0 interrupted iterations
+load_test   [  54% ] 039/100 VUs  2m41.9s/5m00.0s
+
+running (2m43.0s), 040/100 VUs, 1408 complete and 0 interrupted iterations
+load_test   [  54% ] 040/100 VUs  2m42.9s/5m00.0s
+time="2026-01-17T13:56:18-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"364b9681\"}" source=console
+
+running (2m44.0s), 040/100 VUs, 1428 complete and 0 interrupted iterations
+load_test   [  55% ] 040/100 VUs  2m43.9s/5m00.0s
+time="2026-01-17T13:56:19-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"de9fa46f\"}" source=console
+
+running (2m45.0s), 040/100 VUs, 1437 complete and 0 interrupted iterations
+load_test   [  55% ] 040/100 VUs  2m44.9s/5m00.0s
+
+running (2m46.0s), 040/100 VUs, 1462 complete and 0 interrupted iterations
+load_test   [  55% ] 040/100 VUs  2m45.9s/5m00.0s
+
+running (2m47.0s), 041/100 VUs, 1476 complete and 0 interrupted iterations
+load_test   [  56% ] 041/100 VUs  2m46.9s/5m00.0s
+
+running (2m48.0s), 041/100 VUs, 1495 complete and 0 interrupted iterations
+load_test   [  56% ] 041/100 VUs  2m47.9s/5m00.0s
+
+running (2m49.0s), 041/100 VUs, 1502 complete and 0 interrupted iterations
+load_test   [  56% ] 041/100 VUs  2m48.9s/5m00.0s
+
+running (2m50.0s), 041/100 VUs, 1511 complete and 0 interrupted iterations
+load_test   [  57% ] 041/100 VUs  2m49.9s/5m00.0s
+time="2026-01-17T13:56:25-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"cf13272b\"}" source=console
+
+running (2m51.0s), 041/100 VUs, 1525 complete and 0 interrupted iterations
+load_test   [  57% ] 041/100 VUs  2m50.9s/5m00.0s
+
+running (2m52.0s), 042/100 VUs, 1538 complete and 0 interrupted iterations
+load_test   [  57% ] 042/100 VUs  2m51.9s/5m00.0s
+
+running (2m53.0s), 042/100 VUs, 1557 complete and 0 interrupted iterations
+load_test   [  58% ] 042/100 VUs  2m52.9s/5m00.0s
+
+running (2m54.0s), 042/100 VUs, 1577 complete and 0 interrupted iterations
+load_test   [  58% ] 042/100 VUs  2m53.9s/5m00.0s
+
+running (2m55.0s), 042/100 VUs, 1590 complete and 0 interrupted iterations
+load_test   [  58% ] 042/100 VUs  2m54.9s/5m00.0s
+time="2026-01-17T13:56:30-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"65b3109e\"}" source=console
+time="2026-01-17T13:56:30-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"e71449b0\"}" source=console
+
+running (2m56.0s), 042/100 VUs, 1607 complete and 0 interrupted iterations
+load_test   [  59% ] 042/100 VUs  2m55.9s/5m00.0s
+
+running (2m57.0s), 043/100 VUs, 1625 complete and 0 interrupted iterations
+load_test   [  59% ] 043/100 VUs  2m56.9s/5m00.0s
+
+running (2m58.0s), 043/100 VUs, 1643 complete and 0 interrupted iterations
+load_test   [  59% ] 043/100 VUs  2m57.9s/5m00.0s
+time="2026-01-17T13:56:32-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"328629c9\"}" source=console
+
+running (2m59.0s), 043/100 VUs, 1659 complete and 0 interrupted iterations
+load_test   [  60% ] 043/100 VUs  2m58.9s/5m00.0s
+time="2026-01-17T13:56:34-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"4fff6a7c\"}" source=console
+
+running (3m00.0s), 043/100 VUs, 1674 complete and 0 interrupted iterations
+load_test   [  60% ] 043/100 VUs  2m59.9s/5m00.0s
+
+running (3m01.0s), 043/100 VUs, 1694 complete and 0 interrupted iterations
+load_test   [  60% ] 043/100 VUs  3m00.9s/5m00.0s
+
+running (3m02.0s), 044/100 VUs, 1712 complete and 0 interrupted iterations
+load_test   [  61% ] 044/100 VUs  3m01.9s/5m00.0s
+time="2026-01-17T13:56:37-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"a36a1229\"}" source=console
+
+running (3m03.0s), 044/100 VUs, 1729 complete and 0 interrupted iterations
+load_test   [  61% ] 044/100 VUs  3m02.9s/5m00.0s
+
+running (3m04.0s), 044/100 VUs, 1748 complete and 0 interrupted iterations
+load_test   [  61% ] 044/100 VUs  3m03.9s/5m00.0s
+
+running (3m05.0s), 044/100 VUs, 1765 complete and 0 interrupted iterations
+load_test   [  62% ] 044/100 VUs  3m04.9s/5m00.0s
+time="2026-01-17T13:56:40-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"12325d24\"}" source=console
+
+running (3m06.0s), 044/100 VUs, 1782 complete and 0 interrupted iterations
+load_test   [  62% ] 044/100 VUs  3m05.9s/5m00.0s
+time="2026-01-17T13:56:41-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"f8854501\"}" source=console
+
+running (3m07.0s), 045/100 VUs, 1798 complete and 0 interrupted iterations
+load_test   [  62% ] 045/100 VUs  3m06.9s/5m00.0s
+
+running (3m08.0s), 045/100 VUs, 1809 complete and 0 interrupted iterations
+load_test   [  63% ] 045/100 VUs  3m07.9s/5m00.0s
+
+running (3m09.0s), 045/100 VUs, 1834 complete and 0 interrupted iterations
+load_test   [  63% ] 045/100 VUs  3m08.9s/5m00.0s
+
+running (3m10.0s), 045/100 VUs, 1852 complete and 0 interrupted iterations
+load_test   [  63% ] 045/100 VUs  3m09.9s/5m00.0s
+time="2026-01-17T13:56:45-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"83c396a4\"}" source=console
+
+running (3m11.0s), 046/100 VUs, 1873 complete and 0 interrupted iterations
+load_test   [  64% ] 046/100 VUs  3m10.9s/5m00.0s
+
+running (3m12.0s), 046/100 VUs, 1889 complete and 0 interrupted iterations
+load_test   [  64% ] 046/100 VUs  3m11.9s/5m00.0s
+
+running (3m13.0s), 046/100 VUs, 1905 complete and 0 interrupted iterations
+load_test   [  64% ] 046/100 VUs  3m12.9s/5m00.0s
+
+running (3m14.0s), 046/100 VUs, 1932 complete and 0 interrupted iterations
+load_test   [  65% ] 046/100 VUs  3m13.9s/5m00.0s
+
+running (3m15.0s), 046/100 VUs, 1951 complete and 0 interrupted iterations
+load_test   [  65% ] 046/100 VUs  3m14.9s/5m00.0s
+
+running (3m16.0s), 047/100 VUs, 1962 complete and 0 interrupted iterations
+load_test   [  65% ] 047/100 VUs  3m15.9s/5m00.0s
+
+running (3m17.0s), 047/100 VUs, 1977 complete and 0 interrupted iterations
+load_test   [  66% ] 047/100 VUs  3m16.9s/5m00.0s
+
+running (3m18.0s), 047/100 VUs, 1986 complete and 0 interrupted iterations
+load_test   [  66% ] 047/100 VUs  3m17.9s/5m00.0s
+time="2026-01-17T13:56:53-05:00" level=info msg="Submission failed: 500 - {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (3m19.0s), 047/100 VUs, 1995 complete and 0 interrupted iterations
+load_test   [  66% ] 047/100 VUs  3m18.9s/5m00.0s
+time="2026-01-17T13:56:54-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"ffa24b79\"}" source=console
+
+running (3m20.0s), 047/100 VUs, 2009 complete and 0 interrupted iterations
+load_test   [  67% ] 047/100 VUs  3m19.9s/5m00.0s
+
+running (3m21.0s), 048/100 VUs, 2028 complete and 0 interrupted iterations
+load_test   [  67% ] 048/100 VUs  3m20.9s/5m00.0s
+
+running (3m22.0s), 048/100 VUs, 2042 complete and 0 interrupted iterations
+load_test   [  67% ] 048/100 VUs  3m21.9s/5m00.0s
+time="2026-01-17T13:56:57-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"ae43369a\"}" source=console
+
+running (3m23.0s), 048/100 VUs, 2059 complete and 0 interrupted iterations
+load_test   [  68% ] 048/100 VUs  3m22.9s/5m00.0s
+
+running (3m24.0s), 048/100 VUs, 2071 complete and 0 interrupted iterations
+load_test   [  68% ] 048/100 VUs  3m23.9s/5m00.0s
+
+running (3m25.0s), 048/100 VUs, 2091 complete and 0 interrupted iterations
+load_test   [  68% ] 048/100 VUs  3m24.9s/5m00.0s
+
+running (3m26.0s), 049/100 VUs, 2119 complete and 0 interrupted iterations
+load_test   [  69% ] 049/100 VUs  3m25.9s/5m00.0s
+
+running (3m27.0s), 049/100 VUs, 2131 complete and 0 interrupted iterations
+load_test   [  69% ] 049/100 VUs  3m26.9s/5m00.0s
+time="2026-01-17T13:57:02-05:00" level=info msg="Submission failed: 404 - {\"detail\":\"Draft not found or already submitted\",\"correlation_id\":\"80845f83\"}" source=console
+
+running (3m28.0s), 049/100 VUs, 2147 complete and 0 interrupted iterations
+load_test   [  69% ] 049/100 VUs  3m27.9s/5m00.0s
+
+running (3m29.0s), 049/100 VUs, 2172 complete and 0 interrupted iterations
+load_test   [  70% ] 049/100 VUs  3m28.9s/5m00.0s
+
+running (3m30.0s), 049/100 VUs, 2190 complete and 0 interrupted iterations
+load_test   [  70% ] 049/100 VUs  3m29.9s/5m00.0s
+
+running (3m31.0s), 050/100 VUs, 2214 complete and 0 interrupted iterations
+load_test   [  70% ] 050/100 VUs  3m30.9s/5m00.0s
+
+running (3m32.0s), 051/100 VUs, 2226 complete and 0 interrupted iterations
+load_test   [  71% ] 051/100 VUs  3m31.9s/5m00.0s
+
+running (3m33.0s), 052/100 VUs, 2247 complete and 0 interrupted iterations
+load_test   [  71% ] 052/100 VUs  3m32.9s/5m00.0s
+
+running (3m34.0s), 053/100 VUs, 2260 complete and 0 interrupted iterations
+load_test   [  71% ] 053/100 VUs  3m33.9s/5m00.0s
+
+running (3m35.0s), 054/100 VUs, 2276 complete and 0 interrupted iterations
+load_test   [  72% ] 054/100 VUs  3m34.9s/5m00.0s
+
+running (3m36.0s), 054/100 VUs, 2283 complete and 0 interrupted iterations
+load_test   [  72% ] 054/100 VUs  3m35.9s/5m00.0s
+
+running (3m37.0s), 055/100 VUs, 2301 complete and 0 interrupted iterations
+load_test   [  72% ] 055/100 VUs  3m36.9s/5m00.0s
+
+running (3m38.0s), 056/100 VUs, 2319 complete and 0 interrupted iterations
+load_test   [  73% ] 056/100 VUs  3m37.9s/5m00.0s
+
+running (3m39.0s), 057/100 VUs, 2336 complete and 0 interrupted iterations
+load_test   [  73% ] 057/100 VUs  3m38.9s/5m00.0s
+
+running (3m40.0s), 058/100 VUs, 2356 complete and 0 interrupted iterations
+load_test   [  73% ] 058/100 VUs  3m39.9s/5m00.0s
+
+running (3m41.0s), 059/100 VUs, 2364 complete and 0 interrupted iterations
+load_test   [  74% ] 059/100 VUs  3m40.9s/5m00.0s
+
+running (3m42.0s), 059/100 VUs, 2375 complete and 0 interrupted iterations
+load_test   [  74% ] 059/100 VUs  3m41.9s/5m00.0s
+time="2026-01-17T13:57:17-05:00" level=info msg="Draft start failed: 500 - {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (3m43.0s), 060/100 VUs, 2387 complete and 0 interrupted iterations
+load_test   [  74% ] 060/100 VUs  3m42.9s/5m00.0s
+
+running (3m44.0s), 061/100 VUs, 2400 complete and 0 interrupted iterations
+load_test   [  75% ] 061/100 VUs  3m43.9s/5m00.0s
+
+running (3m45.0s), 062/100 VUs, 2406 complete and 0 interrupted iterations
+load_test   [  75% ] 062/100 VUs  3m44.9s/5m00.0s
+time="2026-01-17T13:57:20-05:00" level=info msg="Submission failed: 500 - {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+time="2026-01-17T13:57:20-05:00" level=info msg="Slow submission: 3837ms" source=console
+
+running (3m46.0s), 063/100 VUs, 2415 complete and 0 interrupted iterations
+load_test   [  75% ] 063/100 VUs  3m45.9s/5m00.0s
+time="2026-01-17T13:57:20-05:00" level=info msg="Draft start failed: 500 - {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (3m47.0s), 064/100 VUs, 2425 complete and 0 interrupted iterations
+load_test   [  76% ] 064/100 VUs  3m46.9s/5m00.0s
+
+running (3m48.0s), 064/100 VUs, 2435 complete and 0 interrupted iterations
+load_test   [  76% ] 064/100 VUs  3m47.9s/5m00.0s
+
+running (3m49.0s), 065/100 VUs, 2450 complete and 0 interrupted iterations
+load_test   [  76% ] 065/100 VUs  3m48.9s/5m00.0s
+
+running (3m50.0s), 066/100 VUs, 2465 complete and 0 interrupted iterations
+load_test   [  77% ] 066/100 VUs  3m49.9s/5m00.0s
+time="2026-01-17T13:57:25-05:00" level=info msg="Submission failed: 500 - {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (3m51.0s), 067/100 VUs, 2483 complete and 0 interrupted iterations
+load_test   [  77% ] 067/100 VUs  3m50.9s/5m00.0s
+
+running (3m52.0s), 068/100 VUs, 2492 complete and 0 interrupted iterations
+load_test   [  77% ] 068/100 VUs  3m51.9s/5m00.0s
+time="2026-01-17T13:57:27-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (3m53.0s), 069/100 VUs, 2501 complete and 0 interrupted iterations
+load_test   [  78% ] 069/100 VUs  3m52.9s/5m00.0s
+time="2026-01-17T13:57:28-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (3m54.0s), 069/100 VUs, 2517 complete and 0 interrupted iterations
+load_test   [  78% ] 069/100 VUs  3m53.9s/5m00.0s
+time="2026-01-17T13:57:29-05:00" level=info msg="Submission failed: 500 - {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (3m55.0s), 070/100 VUs, 2524 complete and 0 interrupted iterations
+load_test   [  78% ] 070/100 VUs  3m54.9s/5m00.0s
+
+running (3m56.0s), 071/100 VUs, 2533 complete and 0 interrupted iterations
+load_test   [  79% ] 071/100 VUs  3m55.9s/5m00.0s
+
+running (3m57.0s), 072/100 VUs, 2542 complete and 0 interrupted iterations
+load_test   [  79% ] 072/100 VUs  3m56.9s/5m00.0s
+
+running (3m58.0s), 073/100 VUs, 2556 complete and 0 interrupted iterations
+load_test   [  79% ] 073/100 VUs  3m57.9s/5m00.0s
+
+running (3m59.0s), 074/100 VUs, 2563 complete and 0 interrupted iterations
+load_test   [  80% ] 074/100 VUs  3m58.9s/5m00.0s
+time="2026-01-17T13:57:33-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m00.0s), 074/100 VUs, 2572 complete and 0 interrupted iterations
+load_test   [  80% ] 074/100 VUs  3m59.9s/5m00.0s
+time="2026-01-17T13:57:35-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m01.0s), 075/100 VUs, 2578 complete and 0 interrupted iterations
+load_test   [  80% ] 075/100 VUs  4m00.9s/5m00.0s
+
+running (4m02.0s), 076/100 VUs, 2582 complete and 0 interrupted iterations
+load_test   [  81% ] 076/100 VUs  4m01.9s/5m00.0s
+
+running (4m03.0s), 077/100 VUs, 2590 complete and 0 interrupted iterations
+load_test   [  81% ] 077/100 VUs  4m02.9s/5m00.0s
+time="2026-01-17T13:57:37-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m04.0s), 078/100 VUs, 2597 complete and 0 interrupted iterations
+load_test   [  81% ] 078/100 VUs  4m03.9s/5m00.0s
+
+running (4m05.0s), 079/100 VUs, 2604 complete and 0 interrupted iterations
+load_test   [  82% ] 079/100 VUs  4m04.9s/5m00.0s
+
+running (4m06.0s), 079/100 VUs, 2611 complete and 0 interrupted iterations
+load_test   [  82% ] 079/100 VUs  4m05.9s/5m00.0s
+time="2026-01-17T13:57:40-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m07.0s), 080/100 VUs, 2614 complete and 0 interrupted iterations
+load_test   [  82% ] 080/100 VUs  4m06.9s/5m00.0s
+time="2026-01-17T13:57:42-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m08.0s), 081/100 VUs, 2628 complete and 0 interrupted iterations
+load_test   [  83% ] 081/100 VUs  4m07.9s/5m00.0s
+
+running (4m09.0s), 082/100 VUs, 2637 complete and 0 interrupted iterations
+load_test   [  83% ] 082/100 VUs  4m08.9s/5m00.0s
+
+running (4m10.0s), 083/100 VUs, 2642 complete and 0 interrupted iterations
+load_test   [  83% ] 083/100 VUs  4m09.9s/5m00.0s
+
+running (4m11.0s), 084/100 VUs, 2648 complete and 0 interrupted iterations
+load_test   [  84% ] 084/100 VUs  4m10.9s/5m00.0s
+
+running (4m12.0s), 084/100 VUs, 2656 complete and 0 interrupted iterations
+load_test   [  84% ] 084/100 VUs  4m11.9s/5m00.0s
+
+running (4m13.0s), 085/100 VUs, 2659 complete and 0 interrupted iterations
+load_test   [  84% ] 085/100 VUs  4m12.9s/5m00.0s
+
+running (4m14.0s), 086/100 VUs, 2665 complete and 0 interrupted iterations
+load_test   [  85% ] 086/100 VUs  4m13.9s/5m00.0s
+
+running (4m15.0s), 087/100 VUs, 2670 complete and 0 interrupted iterations
+load_test   [  85% ] 087/100 VUs  4m14.9s/5m00.0s
+
+running (4m16.0s), 088/100 VUs, 2674 complete and 0 interrupted iterations
+load_test   [  85% ] 088/100 VUs  4m15.9s/5m00.0s
+
+running (4m17.0s), 089/100 VUs, 2680 complete and 0 interrupted iterations
+load_test   [  86% ] 089/100 VUs  4m16.9s/5m00.0s
+
+running (4m18.0s), 089/100 VUs, 2684 complete and 0 interrupted iterations
+load_test   [  86% ] 089/100 VUs  4m17.9s/5m00.0s
+
+running (4m19.0s), 090/100 VUs, 2690 complete and 0 interrupted iterations
+load_test   [  86% ] 090/100 VUs  4m18.9s/5m00.0s
+time="2026-01-17T13:57:54-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m20.0s), 091/100 VUs, 2692 complete and 0 interrupted iterations
+load_test   [  87% ] 091/100 VUs  4m19.9s/5m00.0s
+time="2026-01-17T13:57:55-05:00" level=info msg="Slow submission: 29285ms" source=console
+
+running (4m21.0s), 092/100 VUs, 2697 complete and 0 interrupted iterations
+load_test   [  87% ] 092/100 VUs  4m20.9s/5m00.0s
+time="2026-01-17T13:57:56-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m22.0s), 093/100 VUs, 2703 complete and 0 interrupted iterations
+load_test   [  87% ] 093/100 VUs  4m21.9s/5m00.0s
+time="2026-01-17T13:57:56-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m23.0s), 094/100 VUs, 2720 complete and 0 interrupted iterations
+load_test   [  88% ] 094/100 VUs  4m22.9s/5m00.0s
+time="2026-01-17T13:57:57-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m24.0s), 094/100 VUs, 2734 complete and 0 interrupted iterations
+load_test   [  88% ] 094/100 VUs  4m23.9s/5m00.0s
+
+running (4m25.0s), 095/100 VUs, 2756 complete and 0 interrupted iterations
+load_test   [  88% ] 095/100 VUs  4m24.9s/5m00.0s
+
+running (4m26.0s), 096/100 VUs, 2768 complete and 0 interrupted iterations
+load_test   [  89% ] 096/100 VUs  4m25.9s/5m00.0s
+
+running (4m27.0s), 097/100 VUs, 2780 complete and 0 interrupted iterations
+load_test   [  89% ] 097/100 VUs  4m26.9s/5m00.0s
+time="2026-01-17T13:58:02-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m28.0s), 098/100 VUs, 2791 complete and 0 interrupted iterations
+load_test   [  89% ] 098/100 VUs  4m27.9s/5m00.0s
+
+running (4m29.0s), 099/100 VUs, 2806 complete and 0 interrupted iterations
+load_test   [  90% ] 099/100 VUs  4m28.9s/5m00.0s
+
+running (4m30.0s), 099/100 VUs, 2816 complete and 0 interrupted iterations
+load_test   [  90% ] 099/100 VUs  4m29.9s/5m00.0s
+
+running (4m31.0s), 100/100 VUs, 2824 complete and 0 interrupted iterations
+load_test   [  90% ] 100/100 VUs  4m30.9s/5m00.0s
+
+running (4m32.0s), 098/100 VUs, 2835 complete and 0 interrupted iterations
+load_test   [  91% ] 098/100 VUs  4m31.9s/5m00.0s
+time="2026-01-17T13:58:07-05:00" level=info msg="Draft start failed: 500 - {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m33.0s), 098/100 VUs, 2839 complete and 0 interrupted iterations
+load_test   [  91% ] 098/100 VUs  4m32.9s/5m00.0s
+
+running (4m34.0s), 097/100 VUs, 2845 complete and 0 interrupted iterations
+load_test   [  91% ] 097/100 VUs  4m33.9s/5m00.0s
+
+running (4m35.0s), 096/100 VUs, 2853 complete and 0 interrupted iterations
+load_test   [  92% ] 096/100 VUs  4m34.9s/5m00.0s
+
+running (4m36.0s), 095/100 VUs, 2863 complete and 0 interrupted iterations
+load_test   [  92% ] 095/100 VUs  4m35.9s/5m00.0s
+time="2026-01-17T13:58:11-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m37.0s), 094/100 VUs, 2868 complete and 0 interrupted iterations
+load_test   [  92% ] 094/100 VUs  4m36.9s/5m00.0s
+
+running (4m38.0s), 092/100 VUs, 2873 complete and 0 interrupted iterations
+load_test   [  93% ] 092/100 VUs  4m37.9s/5m00.0s
+
+running (4m39.0s), 090/100 VUs, 2880 complete and 0 interrupted iterations
+load_test   [  93% ] 090/100 VUs  4m38.9s/5m00.0s
+
+running (4m40.0s), 089/100 VUs, 2889 complete and 0 interrupted iterations
+load_test   [  93% ] 089/100 VUs  4m39.9s/5m00.0s
+time="2026-01-17T13:58:15-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m41.0s), 086/100 VUs, 2896 complete and 0 interrupted iterations
+load_test   [  94% ] 086/100 VUs  4m40.9s/5m00.0s
+
+running (4m42.0s), 083/100 VUs, 2904 complete and 1 interrupted iterations
+load_test   [  94% ] 083/100 VUs  4m41.9s/5m00.0s
+
+running (4m43.0s), 075/100 VUs, 2914 complete and 3 interrupted iterations
+load_test   [  94% ] 075/100 VUs  4m42.9s/5m00.0s
+time="2026-01-17T13:58:17-05:00" level=info msg="Templates endpoint returned 500: {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m44.0s), 071/100 VUs, 2925 complete and 4 interrupted iterations
+load_test   [  95% ] 071/100 VUs  4m43.9s/5m00.0s
+
+running (4m45.0s), 067/100 VUs, 2934 complete and 5 interrupted iterations
+load_test   [  95% ] 067/100 VUs  4m44.9s/5m00.0s
+
+running (4m46.0s), 065/100 VUs, 2940 complete and 7 interrupted iterations
+load_test   [  95% ] 065/100 VUs  4m45.9s/5m00.0s
+
+running (4m47.0s), 063/100 VUs, 2948 complete and 7 interrupted iterations
+load_test   [  96% ] 063/100 VUs  4m46.9s/5m00.0s
+
+running (4m48.0s), 060/100 VUs, 2963 complete and 9 interrupted iterations
+load_test   [  96% ] 060/100 VUs  4m47.9s/5m00.0s
+
+running (4m49.0s), 057/100 VUs, 2972 complete and 9 interrupted iterations
+load_test   [  96% ] 057/100 VUs  4m48.9s/5m00.0s
+
+running (4m50.0s), 053/100 VUs, 2981 complete and 9 interrupted iterations
+load_test   [  97% ] 053/100 VUs  4m49.9s/5m00.0s
+
+running (4m51.0s), 050/100 VUs, 2989 complete and 10 interrupted iterations
+load_test   [  97% ] 050/100 VUs  4m50.9s/5m00.0s
+
+running (4m52.0s), 043/100 VUs, 2998 complete and 12 interrupted iterations
+load_test   [  97% ] 043/100 VUs  4m51.9s/5m00.0s
+time="2026-01-17T13:58:27-05:00" level=info msg="Submission failed: 500 - {\"detail\":\"Internal server error\",\"error\":\"(psycopg2.OperationalError) connection to server on socket \\\"/cloudsql/trooth-prod:us-east4:app-pg-dev/.s.PGSQL.5432\\\" failed: FATAL:  remaining connection s" source=console
+
+running (4m53.0s), 041/100 VUs, 3006 complete and 13 interrupted iterations
+load_test   [  98% ] 041/100 VUs  4m52.9s/5m00.0s
+
+running (4m54.0s), 035/100 VUs, 3018 complete and 16 interrupted iterations
+load_test   [  98% ] 035/100 VUs  4m53.9s/5m00.0s
+
+running (4m55.0s), 031/100 VUs, 3026 complete and 17 interrupted iterations
+load_test   [  98% ] 031/100 VUs  4m54.9s/5m00.0s
+
+running (4m56.0s), 027/100 VUs, 3034 complete and 18 interrupted iterations
+load_test   [  99% ] 027/100 VUs  4m55.9s/5m00.0s
+
+running (4m57.0s), 023/100 VUs, 3040 complete and 19 interrupted iterations
+load_test   [  99% ] 023/100 VUs  4m56.9s/5m00.0s
+
+running (4m58.0s), 018/100 VUs, 3045 complete and 20 interrupted iterations
+load_test   [  99% ] 018/100 VUs  4m57.9s/5m00.0s
+
+running (4m59.0s), 014/100 VUs, 3050 complete and 21 interrupted iterations
+load_test   [ 100% ] 014/100 VUs  4m58.9s/5m00.0s
+
+running (5m00.0s), 010/100 VUs, 3053 complete and 23 interrupted iterations
+load_test   [ 100% ] 010/100 VUs  4m59.9s/5m00.0s
+
+running (5m01.0s), 008/100 VUs, 3055 complete and 23 interrupted iterations
+load_test ↓ [ 100% ] 010/100 VUs  5m0s
+
+running (5m02.0s), 007/100 VUs, 3055 complete and 24 interrupted iterations
+load_test ↓ [ 100% ] 010/100 VUs  5m0s
+
+running (5m03.0s), 005/100 VUs, 3057 complete and 24 interrupted iterations
+load_test ↓ [ 100% ] 010/100 VUs  5m0s
+
+running (5m04.0s), 005/100 VUs, 3057 complete and 24 interrupted iterations
+load_test ↓ [ 100% ] 010/100 VUs  5m0s
+
+running (5m05.0s), 005/100 VUs, 3057 complete and 24 interrupted iterations
+load_test ↓ [ 100% ] 010/100 VUs  5m0s
+
+running (5m06.0s), 004/100 VUs, 3057 complete and 25 interrupted iterations
+load_test ↓ [ 100% ] 010/100 VUs  5m0s
+
+running (5m07.0s), 003/100 VUs, 3058 complete and 25 interrupted iterations
+load_test ↓ [ 100% ] 010/100 VUs  5m0s
+
+running (5m08.0s), 001/100 VUs, 3058 complete and 27 interrupted iterations
+load_test ↓ [ 100% ] 010/100 VUs  5m0s
+
+running (5m09.0s), 001/100 VUs, 3058 complete and 27 interrupted iterations
+load_test ↓ [ 100% ] 010/100 VUs  5m0s
+
+running (5m10.0s), 001/100 VUs, 3058 complete and 27 interrupted iterations
+load_test ↓ [ 100% ] 010/100 VUs  5m0s
+time="2026-01-17T13:58:45-05:00" level=info msg="Load test completed!" source=console
+
+================================================================================
+                        LOAD TEST RESULTS SUMMARY
+================================================================================
+Timestamp:          2026-01-17T18:58:45.074Z
+Target URL:         https://trooth-backend-dev-301248215198.us-east4.run.app
+--------------------------------------------------------------------------------
+REQUESTS
+  Total:            5266
+  Failed:           1708
+  Error Rate:       10.60%
+
+RESPONSE TIMES
+  Average:          947.61ms
+  95th Percentile:  3790.55ms
+  Maximum:          50770.82ms
+
+ASSESSMENT OPERATIONS
+  Submissions:      142
+  Draft Saves:      653
+================================================================================
+
+running (5m10.1s), 000/100 VUs, 3058 complete and 28 interrupted iterations
+load_test ✓ [ 100% ] 000/100 VUs  5m0s
+time="2026-01-17T13:58:45-05:00" level=error msg="thresholds on metrics 'http_req_duration' have been crossed"

@@ -46,8 +46,8 @@ class AssessmentDraftCreate(BaseModel):
     template_id: Optional[str] = None
 
 class AssessmentDraftUpdate(BaseModel):
-    last_question_id: Optional[str]
-    answers: Optional[Dict[str, str]]
+    last_question_id: Optional[str] = None
+    answers: Optional[Dict[str, str]] = None
 
 class AssessmentDraftOut(BaseModel):
     id: str

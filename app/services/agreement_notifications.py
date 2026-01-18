@@ -49,7 +49,8 @@ def render_agreement_email(event: AgreementEmailEvent, context: Dict[str, Any]) 
     """Render HTML & plain text plus subject for an agreement lifecycle event."""
     subject = SUBJECTS[event]
     env = get_email_template_env()
-    ctx = {**context, 'event': event.value, 'subject': subject, 'app_url': settings.app_url, 'logo_url': _logo_url(context)}
+    # Use backend_api_url for agreement signing pages (these are backend HTML pages, not mobile app links)
+    ctx = {**context, 'event': event.value, 'subject': subject, 'app_url': settings.backend_api_url, 'logo_url': _logo_url(context)}
 
     html = None
     if env:

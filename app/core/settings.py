@@ -23,9 +23,17 @@ class Settings:
         )
 
         # Application / branding
-        self.app_url = os.getenv("APP_URL", "http://localhost:3000")
+        # Backend API URL for agreement signing pages and internal use
+        self.backend_api_url = os.getenv("BACKEND_API_URL", os.getenv("APP_URL", "http://localhost:3000"))
+        # iOS App Store URL for email "Return to App" buttons
+        self.ios_app_store_url = os.getenv(
+            "IOS_APP_STORE_URL",
+            "https://apps.apple.com/app/t-root-h-discipleship/id6757311543"
+        )
+        # Backward compatibility: app_url falls back to backend_api_url
+        self.app_url = self.backend_api_url
         self.logo_url = os.getenv(
-            "LOGO_URL", f"{self.app_url.rstrip('/')}/assets/logo.png"
+            "LOGO_URL", f"{self.backend_api_url.rstrip('/')}/assets/logo.png"
         )
         self.email_from_address = os.getenv(
             "EMAIL_FROM_ADDRESS", "no-reply@trooth-app.com"

@@ -87,12 +87,12 @@ def _render_content(template_md: str, fields: dict, mentor_name: str, apprentice
     return content
 
 def _frontend_sign_url(token: str, token_type: str) -> str:
-    """Return the pretty frontend sign URL (handled by Flutter deep link).
+    """Return the backend sign URL for agreement signing pages.
 
-    Frontend screen: /agreements/sign/<type>/<token>
-    API calls still use /agreements/public/<token> endpoints under the hood.
+    These URLs point to backend HTML pages (/agreements/sign/<type>/<token>).
+    NOT for mobile app deep links - those use ios_app_store_url in email templates.
     """
-    base = settings.app_url.rstrip('/') if settings.app_url else 'http://localhost:3000'
+    base = settings.backend_api_url.rstrip('/') if settings.backend_api_url else 'http://localhost:3000'
     return f"{base}/agreements/sign/{token_type}/{token}"
 
 # Template Endpoints
@@ -767,14 +767,14 @@ def respond_reschedule(agreement_id: str, body: RescheduleResponse, db: Session 
 def public_signed_success(request: Request):
     return jinja_templates.TemplateResponse(
         "agreements/signed_success.html",
-        {"request": request, "title": "Agreement Signed", "logo_url": settings.logo_url},
+        {"request": request, "title": "Agreement Signed", "logo_url": settings.logo_url, "app_store_url": settings.ios_app_store_url},
     )
 
 @router.get("/public/parent-signed-success", response_class=HTMLResponse, include_in_schema=False)
 def public_parent_signed_success(request: Request):
     return jinja_templates.TemplateResponse(
         "agreements/parent_signed_success.html",
-        {"request": request, "title": "Parent Signature Received", "logo_url": settings.logo_url},
+        {"request": request, "title": "Parent Signature Received", "logo_url": settings.logo_url, "app_store_url": settings.ios_app_store_url},
     )
 
 # Public token-based endpoints (simplified placeholder implementation)
@@ -982,27 +982,12 @@ def sign_html(token_type: str, token: str, request: Request, db: Session = Depen
 def signed_success(request: Request):
     return jinja_templates.TemplateResponse(
         "agreements/signed_success.html",
-        {"request": request, "title": "Agreement Signed", "logo_url": settings.logo_url},
+        {"request": request, "title": "Agreement Signed", "logo_url": settings.logo_url, "app_store_url": settings.ios_app_store_url},
     )
 
 @router.get("/parent-signed-success", response_class=HTMLResponse, include_in_schema=False)
 def parent_signed_success(request: Request):
     return jinja_templates.TemplateResponse(
         "agreements/parent_signed_success.html",
-        {"request": request, "title": "Parent Signature Received", "logo_url": settings.logo_url},
-    )
-
-# Public, non-ambiguous success URLs used by the HTML sign page redirect
-@router.get("/public/signed-success", response_class=HTMLResponse, include_in_schema=False)
-def public_signed_success(request: Request):
-    return jinja_templates.TemplateResponse(
-        "agreements/signed_success.html",
-        {"request": request, "title": "Agreement Signed", "logo_url": settings.logo_url},
-    )
-
-@router.get("/public/parent-signed-success", response_class=HTMLResponse, include_in_schema=False)
-def public_parent_signed_success(request: Request):
-    return jinja_templates.TemplateResponse(
-        "agreements/parent_signed_success.html",
-        {"request": request, "title": "Parent Signature Received", "logo_url": settings.logo_url},
+        {"request": request, "title": "Parent Signature Received", "logo_url": settings.logo_url, "app_store_url": settings.ios_app_store_url},
     )
