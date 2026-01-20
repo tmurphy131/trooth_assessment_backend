@@ -25,6 +25,9 @@ class User(Base):
     # Notifications for this user
     notifications = relationship("Notification", back_populates="user", cascade="all, delete-orphan")
 
+    # Device tokens for push notifications
+    device_tokens = relationship("DeviceToken", back_populates="user", cascade="all, delete-orphan")
+
     # Mentor notes authored by this user (when user is a mentor)
     mentor_notes = relationship("MentorNote", back_populates="mentor", cascade="all, delete-orphan")
 

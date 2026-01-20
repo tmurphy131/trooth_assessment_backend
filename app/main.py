@@ -26,6 +26,8 @@ from app.routes import mentor_notes, assessment_score_history, agreements
 from app.routes import mentor_profile
 from app.routes import apprentice
 from app.routes import mentor_resources, apprentice_resources
+from app.routes import push_notifications
+from app.routes import scheduled_tasks
 from app.routes import spiritual_gifts
 from app.routes import generic_assessments
 from app.routes import master_trooth
@@ -184,6 +186,8 @@ app.include_router(generic_assessments.router)
 app.include_router(mentor_report_v2.router)
 app.include_router(metrics.router, prefix="/metrics", tags=["Metrics"])
 app.include_router(support.router)
+app.include_router(push_notifications.router, prefix="/push-notifications", tags=["Push Notifications"])
+app.include_router(scheduled_tasks.router, prefix="/scheduled", tags=["Scheduled Tasks"])
 
 # Static assets (logo etc.) – map /assets to ./assets if present
 _assets_dir = os.path.join(os.path.dirname(__file__), '..', 'assets')
