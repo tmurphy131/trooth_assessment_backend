@@ -200,7 +200,7 @@ Dear {apprentice_name},
 What is T[root]H Discipleship?
 T[root]H is a comprehensive spiritual assessment tool designed to help you and your mentor understand your current spiritual growth and identify areas for development.
 
-Accept your invitation here: {settings.backend_api_url}/accept-invitation?token={token}
+Accept your invitation here: {settings.backend_api_url}/invitations/accept-invitation?token={token}
 
 This invitation will expire in 7 days.
 
@@ -221,7 +221,7 @@ Dear {apprentice_name},
 
 {mentor_name} has invited you to join the T[root]H Discipleship platform.
 
-Accept your invitation: {settings.backend_api_url}/accept-invitation?token={token}
+Accept your invitation: {settings.backend_api_url}/invitations/accept-invitation?token={token}
 
 Best regards,
 T[root]H Discipleship Team

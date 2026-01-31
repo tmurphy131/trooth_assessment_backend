@@ -57,6 +57,14 @@ class Settings:
             os.getenv("USE_SIMPLIFIED_REPORT", "false")
         )
 
+        # Printful API (for shop availability)
+        self.printful_api_token = os.getenv("PRINTFUL_API_TOKEN", "")
+        self.printful_store_id = os.getenv("PRINTFUL_STORE_ID", "17585424")
+        
+        # Shopify Storefront API (for fetching products)
+        self.shopify_store_domain = os.getenv("SHOPIFY_STORE_DOMAIN", "0jpspx-qv.myshopify.com")
+        self.shopify_storefront_token = os.getenv("SHOPIFY_STOREFRONT_TOKEN", "51d92ea63e7a18e8a8a01c2d080fe813")
+
     def _parse_cors_origins(self, v: str) -> List[str]:
         if v == "*":
             return ["*"]

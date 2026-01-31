@@ -8,6 +8,7 @@ from app.models.notification import Notification
 from app.models.agreement import Agreement
 from pydantic import BaseModel
 from app.services.email import send_notification_email
+from app.services.push_notification import notify_mentorship_revoked
 
 class RevokeMentorBody(BaseModel):
     reason: str | None = None
@@ -51,6 +52,15 @@ def revoke_current_mentor(
         base_msg = f"Apprentice {apprentice.name or apprentice.email} revoked the mentorship"
         full_msg = base_msg + (f" – Reason: {reason}" if reason else "")
         db.add(Notification(user_id=mapping.mentor_id, message=full_msg, link=None))
+        # Push notification to mentor
+        try:
+            notify_mentorship_revoked(
+                db=db,
+                mentor_id=mapping.mentor_id,
+                apprentice_name=apprentice.name or apprentice.email
+            )
+        except Exception:
+            pass
         # Email mentor (best-effort)
         mentor_user = db.query(User).filter_by(id=mapping.mentor_id).first()
         if mentor_user and mentor_user.email:

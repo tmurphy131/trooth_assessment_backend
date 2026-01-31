@@ -1,0 +1,169 @@
+{
+  "timestamp": "2026-01-31 15:04:29",
+  "results": [
+    {
+      "provider": "OpenAI",
+      "model": "gpt-4o-mini",
+      "latency_ms": 12429,
+      "success": true,
+      "json_valid": true,
+      "error": null,
+      "tokens_used": 2010,
+      "estimated_cost_usd": 0.0005841,
+      "output": {
+        "health_score": 72,
+        "health_band": "Maturing",
+        "strengths": [
+          "Consistent prayer routine",
+          "Regular Bible reading",
+          "Participation in small group"
+        ],
+        "gaps": [
+          "Inconsistent prayer journaling",
+          "Limited deep study of Scripture",
+          "Lack of deeper fellowship discussions"
+        ],
+        "priority_action": {
+          "title": "Enhance Prayer and Scripture Engagement",
+          "description": "Improving your prayer life and deepening your engagement with Scripture will help you grow spiritually. Consider setting specific times for prayer and exploring deeper study methods to enrich your understanding of the Bible.",
+          "steps": [
+            "Set a specific time each day for prayer and stick to it.",
+            "Choose a Bible study method to explore deeper meanings in Scripture.",
+            "Engage with a mentor or group for accountability and discussion."
+          ],
+          "scripture": "James 1:5 - Seek wisdom from God in prayer, and He will guide you."
+        },
+        "biblical_knowledge": {
+          "percent": 72.0,
+          "weak_topics": [
+            "Pentateuch",
+            "Gospels"
+          ],
+          "study_recommendation": "Focus on studying the Pentateuch and Gospels to strengthen your foundational biblical knowledge."
+        },
+        "insights": [
+          {
+            "category": "Prayer Life",
+            "level": "Maturing",
+            "observation": "You have a consistent prayer routine but struggle with distractions. Incorporating listening time can enhance your prayer experience.",
+            "next_step": "Try setting aside a few minutes specifically for listening after your prayers."
+          },
+          {
+            "category": "Scripture Engagement",
+            "level": "Developing",
+            "observation": "You read the Bible regularly but have not yet explored deeper study methods, which could enrich your understanding.",
+            "next_step": "Consider joining a Bible study group or using resources that guide deeper exploration of Scripture."
+          },
+          {
+            "category": "Community & Fellowship",
+            "level": "Developing",
+            "observation": "Your involvement in community is limited, and you desire deeper connections with fellow believers.",
+            "next_step": "Make an effort to engage in more spiritual conversations with your Christian friends or seek out new fellowship opportunities."
+          }
+        ],
+        "flags": {
+          "red": [],
+          "yellow": [
+            "Inconsistent attendance in small group"
+          ],
+          "green": [
+            "Your desire to grow in prayer and Scripture engagement is commendable."
+          ]
+        },
+        "conversation_starters": [
+          "What specific areas of your prayer life do you feel need the most improvement?",
+          "How can you incorporate deeper study methods into your current routine?"
+        ],
+        "recommended_resources": [
+          {
+            "title": "How to Study the Bible",
+            "why": "This book provides practical methods for engaging deeply with Scripture.",
+            "type": "book"
+          }
+        ]
+      }
+    },
+    {
+      "provider": "Vertex AI",
+      "model": "gemini-2.0-flash",
+      "latency_ms": 7350,
+      "success": true,
+      "json_valid": true,
+      "error": null,
+      "tokens_used": 2454,
+      "estimated_cost_usd": 0.0002454,
+      "output": {
+        "health_score": 69,
+        "health_band": "Stable",
+        "strengths": [
+          "Consistent prayer attempts",
+          "Regular Bible reading",
+          "Desire for deeper community"
+        ],
+        "gaps": [
+          "Inconsistent prayer life",
+          "Lack of deep Bible study methods",
+          "Superficial fellowship"
+        ],
+        "priority_action": {
+          "title": "Establish a Consistent Prayer Rhythm",
+          "description": "Consistent prayer cultivates intimacy with God and strengthens our reliance on Him. Prioritizing a set time and place, even for a short duration, can transform your spiritual life and provide a stable foundation for your day.",
+          "steps": [
+            "Choose a specific time and place for prayer each day.",
+            "Start with 5-10 minutes and gradually increase the duration.",
+            "Use a prayer journal to focus your thoughts and track requests."
+          ],
+          "scripture": "Matthew 6:6 - But when you pray, go into your room, close the door and pray to your Father, who is unseen. Then your Father, who sees what is done in secret, will reward you."
+        },
+        "biblical_knowledge": {
+          "percent": 72.0,
+          "weak_topics": [
+            "Pentateuch",
+            "Gospels"
+          ],
+          "study_recommendation": "Focus on understanding the historical context and key themes of the Pentateuch and Gospels. Consider using a study Bible or commentary to deepen your understanding."
+        },
+        "insights": [
+          {
+            "category": "Prayer Life",
+            "level": "Developing",
+            "observation": "Jordan is making an effort to pray regularly, but struggles with consistency and focus. The use of a prayer journal is a positive step, but further development is needed to establish a more consistent and meaningful prayer life.",
+            "next_step": "Experiment with different prayer methods, such as praying scripture or using guided meditations, to find what helps you focus and connect with God more deeply."
+          },
+          {
+            "category": "Scripture Engagement",
+            "level": "Stable",
+            "observation": "Jordan reads the Bible regularly and uses a devotional app, indicating a commitment to engaging with Scripture. However, there's a desire to move beyond surface-level reading and explore deeper study methods.",
+            "next_step": "Begin incorporating a simple Bible study method, such as inductive study (observation, interpretation, application), to enhance comprehension and application of Scripture."
+          },
+          {
+            "category": "Community & Fellowship",
+            "level": "Developing",
+            "observation": "Jordan attends church and participates in a small group, but feels disconnected and desires deeper fellowship. The challenge lies in finding time and opportunities to cultivate meaningful relationships with other believers.",
+            "next_step": "Initiate deeper conversations with a few trusted Christian friends, sharing your struggles and seeking accountability in your faith journey. Consider inviting someone from your small group to grab coffee or lunch to build a stronger connection."
+          }
+        ],
+        "flags": {
+          "red": [],
+          "yellow": [
+            "Inconsistent small group attendance"
+          ],
+          "green": [
+            "Desire for deeper spiritual growth"
+          ]
+        },
+        "conversation_starters": [
+          "What are some specific challenges you face in maintaining a consistent prayer life?",
+          "What are some practical steps you can take to deepen your fellowship with other believers?"
+        ],
+        "recommended_resources": [
+          {
+            "title": "Prayer: Experiencing Awe and Intimacy with God by Timothy Keller",
+            "why": "This book provides a comprehensive guide to prayer, exploring different types of prayer and offering practical advice for developing a more meaningful prayer life.",
+            "type": "book"
+          }
+        ]
+      }
+    }
+  ]
+}

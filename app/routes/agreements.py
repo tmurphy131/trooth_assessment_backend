@@ -25,7 +25,11 @@ from app.services.agreement_notifications import (
     send_agreement_email,
     AgreementEmailEvent,
 )
+from app.services.push_notification import notify_agreement_signed
 import time
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Simple in-memory (process local) rate limit store for resend attempts
 _PARENT_RESEND_TRACK: dict[str, list[float]] = {}
@@ -410,6 +414,22 @@ def apprentice_sign(agreement_id: str, body: AgreementSign, request: Request, db
             )
         except Exception:
             pass
+    
+    # ──────────────────────────────────────────────────────────────────
+    # PUSH NOTIFICATION to mentor
+    # ──────────────────────────────────────────────────────────────────
+    try:
+        apprentice_name = ag.apprentice_name or ag.apprentice_email.split('@')[0]
+        notify_agreement_signed(
+            db=db,
+            user_id=ag.mentor_id,
+            signer_name=apprentice_name,
+            agreement_status=ag.status
+        )
+        logger.info(f"Push notification sent to mentor {ag.mentor_id} for agreement {ag.id}")
+    except Exception as e:
+        logger.warning(f"Failed to send push notification for agreement signing: {e}")
+    
     return ag
 
 @router.post("/{agreement_id}/sign/parent", response_model=AgreementOut)
@@ -447,8 +467,7 @@ def parent_sign(agreement_id: str, body: AgreementSign, db: Session = Depends(ge
         db.add(notif)
         db.commit()
     except Exception as e:
-        import logging
-        logging.getLogger(__name__).warning(f"Failed to create mentor notification for parent signing: {e}")
+        logger.warning(f"Failed to create mentor notification for parent signing: {e}")
     
     # Notify mentor/apprentice (email)
     try:
@@ -463,6 +482,22 @@ def parent_sign(agreement_id: str, body: AgreementSign, db: Session = Depends(ge
         )
     except Exception:
         pass
+    
+    # ──────────────────────────────────────────────────────────────────
+    # PUSH NOTIFICATION to mentor (parent signed)
+    # ──────────────────────────────────────────────────────────────────
+    try:
+        apprentice_name = ag.apprentice_name or ag.apprentice_email.split('@')[0]
+        notify_agreement_signed(
+            db=db,
+            user_id=ag.mentor_id,
+            signer_name=f"{apprentice_name}'s parent/guardian",
+            agreement_status=ag.status
+        )
+        logger.info(f"Push notification sent to mentor {ag.mentor_id} for parent signing on agreement {ag.id}")
+    except Exception as e:
+        logger.warning(f"Failed to send push notification for parent signing: {e}")
+    
     return ag
 
 @router.post("/{agreement_id}/revoke", response_model=AgreementOut)
@@ -633,6 +668,16 @@ def request_reschedule(agreement_id: str, body: MeetingRescheduleRequest, db: Se
             link=f"/agreements/{ag.id}",
         )
         db.add(notif)
+        # Push notification to mentor
+        try:
+            from app.services.push_notification import notify_reschedule_request
+            notify_reschedule_request(
+                db=db,
+                mentor_id=ag.mentor_id,
+                agreement_id=ag.id
+            )
+        except Exception:
+            pass
         db.commit()
     except Exception:
         pass

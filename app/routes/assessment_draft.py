@@ -25,6 +25,7 @@ from app.schemas.assessment_draft import QuestionItem
 from app.schemas.assessment_draft import AssessmentDraftUpdate
 from app.models.assessment import Assessment
 from app.models.notification import Notification
+from app.services.push_notification import notify_assessment_submitted
 
 logger = logging.getLogger(__name__)
 
@@ -886,6 +887,18 @@ async def submit_draft(
             if mentor_links:
                 db.commit()
                 logger.info(f"[notifications] Notified {len(mentor_links)} mentor(s) about assessment completion")
+                
+                # Send push notifications to mentors
+                for link in mentor_links:
+                    try:
+                        notify_assessment_submitted(
+                            db=db,
+                            mentor_id=link.mentor_id,
+                            apprentice_name=apprentice_display,
+                            assessment_name=template_name
+                        )
+                    except Exception as push_err:
+                        logger.warning(f"[notifications] Push notification failed for mentor {link.mentor_id}: {push_err}")
         except Exception as e:
             logger.warning(f"[notifications] Failed to notify mentor(s) about assessment: {e}")
             # Don't fail the submission just because notification failed
@@ -1035,6 +1048,17 @@ def start_draft(
                 is_read=False
             )
             db.add(notification)
+            # Push notification to mentor
+            try:
+                from app.services.push_notification import notify_assessment_started
+                notify_assessment_started(
+                    db=db,
+                    mentor_id=link.mentor_id,
+                    apprentice_name=apprentice_name,
+                    assessment_name=template.name
+                )
+            except Exception:
+                pass
         
         if mentor_links:
             db.commit()
