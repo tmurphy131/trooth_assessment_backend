@@ -1,0 +1,1279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shop — ONLY BLV</title>
+  <meta name="description" content="Shop ONLY BLV merch. Faith-inspired apparel and gear to represent your walk with Jesus. #getrooted #LUKE850" />
+  <link rel="icon" type="image/png" href="onlyblv_logo.png" />
+
+  <style>
+    :root {
+      --bg: #050505;
+      --surface: #0a0a0a;
+      --surface2: #111;
+      --text: #f5f5f5;
+      --muted: #888;
+      --gold: #d4af37;
+      --gold-light: #e8c547;
+      --gold-glow: rgba(212, 175, 55, 0.15);
+      --radius: 16px;
+      --max: 1100px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 5, 5, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 24px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+    }
+    .logo span {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    nav { display: flex; gap: 8px; }
+    nav a {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    nav a:hover { background: var(--surface2); }
+    nav a.active {
+      background: var(--gold-glow);
+      border-color: rgba(212, 175, 55, 0.3);
+      color: var(--gold-light);
+    }
+
+    /* Hero */
+    .shop-hero {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .shop-hero h1 {
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+    .shop-hero h1 span { color: var(--gold); }
+    .shop-hero p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .shop-tags {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .shop-tags span {
+      background: var(--gold-glow);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--gold-light);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .store-link {
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .store-link a {
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .store-link a:hover {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+
+    /* Products Section */
+    .products {
+      padding: 48px 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-header h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .section-header p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Category Headers */
+    .category-header {
+      margin: 48px 0 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .category-header:first-of-type {
+      margin-top: 0;
+    }
+    .category-header h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .category-header p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    @media (max-width: 720px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Product Card */
+    .product-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .product-card:hover {
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+    }
+    .product-image img.loading {
+      opacity: 0.5;
+    }
+    .product-info {
+      padding: 20px;
+    }
+    .product-info h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .product-info .price {
+      color: var(--gold-light);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    /* Custom Color Swatches */
+    .color-swatches {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .color-swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .color-swatch:hover:not(.sold-out) {
+      transform: scale(1.1);
+    }
+    .color-swatch.selected {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--gold);
+    }
+    .color-swatch.sold-out {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .color-swatch.sold-out::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -2px;
+      right: -2px;
+      height: 2px;
+      background: #ff4444;
+      transform: rotate(-45deg);
+    }
+    .color-swatch[title]::before {
+      content: attr(title);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface2);
+      color: var(--text);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      margin-bottom: 4px;
+    }
+    .color-swatch:hover::before {
+      opacity: 1;
+    }
+
+    /* Size Selector */
+    .size-selector {
+      margin-bottom: 12px;
+    }
+    .size-selector label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .size-options {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .size-option {
+      padding: 6px 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      background: var(--surface2);
+      color: var(--text);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .size-option:hover:not(.sold-out) {
+      border-color: var(--gold);
+    }
+    .size-option.selected {
+      background: var(--gold);
+      color: var(--bg);
+      border-color: var(--gold);
+    }
+    .size-option.sold-out {
+      opacity: 0.4;
+      text-decoration: line-through;
+      cursor: not-allowed;
+    }
+
+    /* Availability Badge */
+    .availability-badge {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .availability-badge.in-stock {
+      background: rgba(76, 175, 80, 0.15);
+      color: #4caf50;
+    }
+    .availability-badge.sold-out {
+      background: rgba(244, 67, 54, 0.15);
+      color: #f44336;
+    }
+
+    /* Shopify Buy Button Container */
+    .shopify-buy-button {
+      min-height: 50px;
+    }
+
+    /* Hide Shopify's built-in variant selectors since we have our own */
+    .shopify-buy-button [data-element="option.wrapper"] {
+      display: none !important;
+    }
+
+    /* Loading State */
+    .loading-container {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--surface2);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .loading-container p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    
+    /* Error State */
+    .error-container {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .error-container h3 {
+      color: #f44336;
+      margin-bottom: 8px;
+    }
+    .error-container p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .error-container button {
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .error-container button:hover {
+      background: var(--gold-light);
+    }
+
+    /* Footer */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: 60px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      .header-inner { flex-wrap: wrap; }
+      nav { width: 100%; justify-content: center; }
+      .shop-hero { padding: 40px 0 32px; }
+    }
+
+    /* Color map for swatches */
+    .color-black { background: #1a1a1a; }
+    .color-navy { background: #001f3f; }
+    .color-charcoal { background: #36454f; }
+    .color-heather-grey { background: #9a9a9a; }
+    .color-white { background: #ffffff; border: 1px solid #333; }
+    .color-maroon { background: #800000; }
+    .color-forest-green { background: #228b22; }
+    .color-royal-blue { background: #4169e1; }
+    .color-spruce { background: #2f5d50; }
+    .color-red { background: #cc0000; }
+    .color-dark-heather { background: #4a4a4a; }
+    .color-sport-grey { background: #8e8e8e; }
+    .color-military-green { background: #4b5320; }
+    .color-sand { background: #c2b280; }
+    .color-light-pink { background: #ffb6c1; }
+    .color-indigo { background: #4b0082; }
+    .color-purple { background: #800080; }
+    .color-orange { background: #ff6600; }
+    .color-gold { background: #ffd700; }
+    .color-brown { background: #8b4513; }
+    .color-kelly-green { background: #4cbb17; }
+    .color-carolina-blue { background: #56a0d3; }
+    .color-safety-orange { background: #ff6700; }
+    .color-texas-orange { background: #bf5700; }
+    .color-coyote-brown { background: #81613c; }
+    .color-olive { background: #808000; }
+    .color-slate { background: #708090; }
+    .color-heather-navy { background: #3d4f5f; }
+    .color-athletic-heather { background: #b0b0b0; }
+    .color-dark-grey { background: #3d3d3d; }
+    .color-light-blue { background: #add8e6; }
+    .color-dusty-rose { background: #dcae96; }
+    .color-sage { background: #87ae73; }
+    .color-burgundy { background: #722f37; }
+    .color-teal { background: #008080; }
+    .color-mustard { background: #ffdb58; }
+    .color-cream { background: #fffdd0; border: 1px solid #333; }
+    .color-ash { background: #b2beb5; }
+    .color-irish-green { background: #009a44; }
+    .color-true-royal { background: #4169e1; }
+    .color-deep-heather { background: #5a5a5a; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <img src="onlyblv_logo.png" alt="ONLY BLV" />
+        <span>ONLY BLV</span>
+      </a>
+      <nav>
+        <a href="index.html#apps">Apps</a>
+        <a href="index.html#mission">Mission</a>
+        <a href="shop.html" class="active">Shop</a>
+        <a href="guides.html">Guides</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Shop Hero -->
+    <section class="shop-hero">
+      <div class="container">
+        <h1>Wear Your <span>Faith</span></h1>
+        <p>Apparel and gear that represents your walk with Jesus. Quality merch with purpose.</p>
+        <div class="shop-tags">
+          <span>#getrooted</span>
+          <span>#LUKE850</span>
+        </div>
+        <p class="store-link">Prefer to browse? Visit our <a href="https://only-blv-merch.myshopify.com/" target="_blank" rel="noopener">full Shopify store →</a></p>
+      </div>
+    </section>
+
+    <!-- Products - Dynamically Loaded -->
+    <section class="products">
+      <div class="container">
+        <div class="section-header">
+          <h2>Shop the Collection</h2>
+          <p>Every purchase supports the ONLY BLV mission</p>
+        </div>
+
+        <!-- Dynamic content will be inserted here -->
+        <div id="products-container">
+          <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <p>Loading products...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-copy">
+        © <span id="year"></span> ONLY BLV. All rights reserved.
+        <span style="margin-left: 16px; color: var(--gold);">#getrooted #LUKE850</span>
+      </div>
+      <div class="footer-links">
+        <a href="guides.html">User Guides</a>
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+
+  <!-- Shopify Buy Button SDK -->
+  <script type="text/javascript">
+  (function () {
+    var SHOPIFY_DOMAIN = '0jpspx-qv.myshopify.com';
+    var STOREFRONT_TOKEN = '51d92ea63e7a18e8a8a01c2d080fe813';
+    var BACKEND_API = 'https://trooth-discipleship-api.onlyblv.com';
+    var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+    
+    // Store all product data (from our API)
+    var productData = {};
+    // Store Printful availability data
+    var printfulAvailability = {};
+    // Store Buy Button component references
+    var buyButtonComponents = {};
+    // Track selected options per product
+    var selectedOptions = {};
+    // Track all loaded product IDs for Buy Button initialization
+    var loadedProductIds = [];
+    
+    // Color name to CSS class mapping
+    var colorClasses = {
+      'black': 'color-black',
+      'navy': 'color-navy',
+      'navy blue': 'color-navy',
+      'charcoal': 'color-charcoal',
+      'charcoal heather': 'color-charcoal',
+      'heather grey': 'color-heather-grey',
+      'white': 'color-white',
+      'maroon': 'color-maroon',
+      'forest green': 'color-forest-green',
+      'royal blue': 'color-royal-blue',
+      'royal': 'color-royal-blue',
+      'true royal': 'color-true-royal',
+      'spruce': 'color-spruce',
+      'red': 'color-red',
+      'dark heather': 'color-dark-heather',
+      'deep heather': 'color-deep-heather',
+      'sport grey': 'color-sport-grey',
+      'military green': 'color-military-green',
+      'sand': 'color-sand',
+      'light pink': 'color-light-pink',
+      'indigo': 'color-indigo',
+      'purple': 'color-purple',
+      'orange': 'color-orange',
+      'gold': 'color-gold',
+      'brown': 'color-brown',
+      'kelly green': 'color-kelly-green',
+      'carolina blue': 'color-carolina-blue',
+      'safety orange': 'color-safety-orange',
+      'texas orange': 'color-texas-orange',
+      'coyote brown': 'color-coyote-brown',
+      'olive': 'color-olive',
+      'slate': 'color-slate',
+      'heather navy': 'color-heather-navy',
+      'athletic heather': 'color-athletic-heather',
+      'dark grey': 'color-dark-grey',
+      'dark gray': 'color-dark-grey',
+      'light blue': 'color-light-blue',
+      'dusty rose': 'color-dusty-rose',
+      'sage': 'color-sage',
+      'burgundy': 'color-burgundy',
+      'teal': 'color-teal',
+      'mustard': 'color-mustard',
+      'cream': 'color-cream',
+      'ash': 'color-ash',
+      'irish green': 'color-irish-green'
+    };
+    
+    // Fetch products from our backend API
+    async function fetchProducts() {
+      try {
+        var response = await fetch(BACKEND_API + '/shop/products');
+        if (!response.ok) {
+          throw new Error('Failed to fetch products: ' + response.status);
+        }
+        return await response.json();
+      } catch (err) {
+        console.error('Error fetching products:', err);
+        throw err;
+      }
+    }
+    
+    // Fetch availability from Printful via backend
+    async function fetchPrintfulAvailability() {
+      try {
+        var response = await fetch(BACKEND_API + '/shop/availability');
+        if (!response.ok) {
+          console.warn('Could not fetch Printful availability:', response.status);
+          return;
+        }
+        var data = await response.json();
+        console.log('Printful availability response:', data);
+        
+        // Build a map by Shopify product ID
+        data.products.forEach(function(product) {
+          printfulAvailability[product.external_id] = {};
+          product.variants.forEach(function(variant) {
+            var color = variant.color ? variant.color.toLowerCase() : null;
+            var size = variant.size ? variant.size.toLowerCase() : null;
+            
+            if (color || size) {
+              var key = color && size ? color + '|' + size : (color || size);
+              printfulAvailability[product.external_id][key] = {
+                in_stock: variant.in_stock,
+                discontinued: variant.discontinued,
+                is_ignored: variant.is_ignored
+              };
+              
+              // Store by color only for initial swatch rendering
+              if (color) {
+                if (!printfulAvailability[product.external_id]['_color_' + color]) {
+                  printfulAvailability[product.external_id]['_color_' + color] = variant.in_stock;
+                } else if (variant.in_stock) {
+                  printfulAvailability[product.external_id]['_color_' + color] = true;
+                }
+              }
+            }
+          });
+        });
+        
+        console.log('Processed Printful availability:', printfulAvailability);
+      } catch (err) {
+        console.error('Error fetching Printful availability:', err);
+      }
+    }
+    
+    // Check if a color is available
+    function isColorAvailable(productId, color) {
+      var productAvail = printfulAvailability[productId];
+      var colorLower = color.toLowerCase();
+      
+      if (productAvail) {
+        var colorKey = '_color_' + colorLower;
+        if (colorKey in productAvail) {
+          return productAvail[colorKey];
+        }
+      }
+      
+      // Fallback to Shopify data
+      var product = productData[productId];
+      if (product && product.variants) {
+        var anyAvailable = product.variants.some(function(v) {
+          return v.color && v.color.toLowerCase() === colorLower && v.available_for_sale;
+        });
+        return anyAvailable;
+      }
+      
+      return true;
+    }
+    
+    // Check if a specific variant is available
+    function isVariantAvailable(productId, color, size) {
+      var productAvail = printfulAvailability[productId];
+      var colorLower = color ? color.toLowerCase() : '';
+      var sizeLower = size ? size.toLowerCase() : '';
+      
+      var key;
+      if (colorLower && sizeLower) {
+        key = colorLower + '|' + sizeLower;
+      } else if (sizeLower) {
+        key = sizeLower;
+      } else if (colorLower) {
+        key = colorLower;
+      } else {
+        key = '';
+      }
+      
+      if (productAvail && key in productAvail) {
+        return productAvail[key].in_stock;
+      }
+      
+      // Fallback to Shopify data
+      var product = productData[productId];
+      if (product && product.variants) {
+        var matchingVariant = product.variants.find(function(v) {
+          var colorMatch = !color || !v.color || v.color.toLowerCase() === colorLower;
+          var sizeMatch = !size || !v.size || v.size.toLowerCase() === sizeLower;
+          return colorMatch && sizeMatch;
+        });
+        
+        if (matchingVariant) {
+          return matchingVariant.available_for_sale;
+        }
+      }
+      
+      return true;
+    }
+    
+    // Check size availability
+    function checkSizeAvailability(productId, size) {
+      var selectedColor = selectedOptions[productId] ? selectedOptions[productId].Color : null;
+      return isVariantAvailable(productId, selectedColor, size);
+    }
+    
+    // Placeholder image SVG (data URI)
+    var PLACEHOLDER_IMAGE = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect fill="#1a1a1a" width="400" height="400"/><text fill="#444" font-family="sans-serif" font-size="16" text-anchor="middle" x="200" y="200">No Image</text></svg>');
+    
+    // Generate HTML for a product card
+    function generateProductCard(product) {
+      var hasColorOption = product.options.some(function(o) { return o.name.toLowerCase() === 'color'; });
+      var hasSizeOption = product.options.some(function(o) { return o.name.toLowerCase() === 'size'; });
+      var imageUrl = product.featured_image || PLACEHOLDER_IMAGE;
+      
+      var html = '<div class="product-card" data-product-id="' + product.id + '">';
+      html += '<div class="product-image">';
+      html += '<img src="' + imageUrl + '" alt="' + escapeHtml(product.title) + '" onerror="this.src=\'' + PLACEHOLDER_IMAGE + '\';" />';
+      html += '</div>';
+      html += '<div class="product-info">';
+      html += '<h3>' + escapeHtml(product.title) + '</h3>';
+      html += '<div class="price">' + escapeHtml(product.price_range) + '</div>';
+      
+      if (hasColorOption) {
+        html += '<div class="color-swatches" data-option="Color"></div>';
+      }
+      
+      if (hasSizeOption) {
+        html += '<div class="size-selector">';
+        html += '<label>Size</label>';
+        html += '<div class="size-options" data-option="Size"></div>';
+        html += '</div>';
+      }
+      
+      html += '<div class="shopify-buy-button" id="product-component-' + product.id + '"></div>';
+      html += '</div>';
+      html += '</div>';
+      
+      return html;
+    }
+    
+    // Escape HTML to prevent XSS
+    function escapeHtml(text) {
+      var div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    // Render all products from API data
+    function renderProducts(data) {
+      var container = document.getElementById('products-container');
+      var html = '';
+      
+      // Check if we have any products
+      var totalProducts = data.categories.reduce(function(sum, cat) { return sum + cat.products.length; }, 0);
+      totalProducts += (data.uncategorized || []).length;
+      
+      if (totalProducts === 0) {
+        container.innerHTML = '<div class="error-container">' +
+          '<h3>No Products Available</h3>' +
+          '<p>Check back soon for new items!</p>' +
+          '<a href="https://only-blv-merch.myshopify.com/" target="_blank" style="color: var(--gold-light);">Visit our Shopify store →</a>' +
+          '</div>';
+        return;
+      }
+      
+      // Render each category
+      data.categories.forEach(function(category) {
+        html += '<div class="category-header">';
+        html += '<h3>' + escapeHtml(category.name) + '</h3>';
+        html += '<p>' + escapeHtml(category.description) + '</p>';
+        html += '</div>';
+        
+        html += '<div class="product-grid">';
+        category.products.forEach(function(product) {
+          html += generateProductCard(product);
+          
+          // Store product data for later use
+          productData[product.id] = product;
+          selectedOptions[product.id] = {};
+          loadedProductIds.push(product.id);
+        });
+        html += '</div>';
+      });
+      
+      // Render uncategorized products if any
+      if (data.uncategorized && data.uncategorized.length > 0) {
+        html += '<div class="category-header">';
+        html += '<h3>Other Products</h3>';
+        html += '<p>More items from our collection</p>';
+        html += '</div>';
+        
+        html += '<div class="product-grid">';
+        data.uncategorized.forEach(function(product) {
+          html += generateProductCard(product);
+          productData[product.id] = product;
+          selectedOptions[product.id] = {};
+          loadedProductIds.push(product.id);
+        });
+        html += '</div>';
+      }
+      
+      container.innerHTML = html;
+      
+      // Now render custom selectors
+      renderCustomSelectors();
+    }
+    
+    // Render custom color swatches and size selectors
+    function renderCustomSelectors() {
+      Object.keys(productData).forEach(function(productId) {
+        var product = productData[productId];
+        var card = document.querySelector('.product-card[data-product-id="' + productId + '"]');
+        if (!card) return;
+        
+        // Get color and size options
+        var colorOption = product.options.find(function(opt) {
+          return opt.name.toLowerCase() === 'color';
+        });
+        
+        var sizeOption = product.options.find(function(opt) {
+          return opt.name.toLowerCase() === 'size';
+        });
+        
+        // Build color availability and images
+        var colorAvailability = {};
+        var colorImages = {};
+        
+        if (colorOption) {
+          colorOption.values.forEach(function(color) {
+            colorAvailability[color] = isColorAvailable(productId, color);
+            
+            // Find variant image for this color
+            var variantWithImage = product.variants.find(function(v) {
+              return v.color === color && v.image_url;
+            });
+            colorImages[color] = variantWithImage ? variantWithImage.image_url : product.featured_image;
+          });
+        }
+        
+        // Render color swatches
+        var swatchContainer = card.querySelector('.color-swatches');
+        var productImage = card.querySelector('.product-image img');
+        
+        if (swatchContainer && colorOption) {
+          swatchContainer.innerHTML = '';
+          
+          // Track if we've selected a color yet
+          var hasSelectedColor = false;
+          
+          colorOption.values.forEach(function(color, index) {
+            var swatch = document.createElement('div');
+            swatch.className = 'color-swatch';
+            
+            var colorKey = color.toLowerCase();
+            if (colorClasses[colorKey]) {
+              swatch.classList.add(colorClasses[colorKey]);
+            } else {
+              // Try to generate a reasonable color from the name
+              swatch.style.background = '#666';
+            }
+            
+            var isAvailable = colorAvailability[color];
+            swatch.title = color + (isAvailable ? '' : ' (Sold Out)');
+            swatch.dataset.color = color;
+            swatch.dataset.productId = productId;
+            
+            if (!isAvailable) {
+              swatch.classList.add('sold-out');
+            }
+            
+            // Select first available color, or first color if none available
+            if (!hasSelectedColor && (isAvailable || index === colorOption.values.length - 1)) {
+              swatch.classList.add('selected');
+              selectedOptions[productId].Color = color;
+              hasSelectedColor = true;
+              if (productImage && colorImages[color]) {
+                productImage.src = colorImages[color];
+              }
+            }
+            
+            swatch.addEventListener('click', function() {
+              if (!colorAvailability[color]) return;
+              
+              swatchContainer.querySelectorAll('.color-swatch').forEach(function(s) {
+                s.classList.remove('selected');
+              });
+              swatch.classList.add('selected');
+              selectedOptions[productId].Color = color;
+              
+              // Update product image
+              var newImageUrl = colorImages[color] || product.featured_image || PLACEHOLDER_IMAGE;
+              if (productImage) {
+                productImage.classList.add('loading');
+                var newImg = new Image();
+                newImg.onload = function() {
+                  productImage.src = newImageUrl;
+                  productImage.classList.remove('loading');
+                };
+                newImg.onerror = function() {
+                  productImage.src = PLACEHOLDER_IMAGE;
+                  productImage.classList.remove('loading');
+                };
+                newImg.src = newImageUrl;
+              }
+              
+              updateSizeAvailability(productId);
+              updateBuyButtonVariant(productId);
+            });
+            
+            swatchContainer.appendChild(swatch);
+          });
+        }
+        
+        // Render size options
+        var sizeContainer = card.querySelector('.size-options');
+        if (sizeContainer && sizeOption) {
+          sizeContainer.innerHTML = '';
+          var hasSelectedSize = false;
+          
+          sizeOption.values.forEach(function(size, index) {
+            var sizeBtn = document.createElement('div');
+            sizeBtn.className = 'size-option';
+            sizeBtn.textContent = size;
+            sizeBtn.dataset.size = size;
+            sizeBtn.dataset.productId = productId;
+            
+            var isAvailable = checkSizeAvailability(productId, size);
+            if (!isAvailable) {
+              sizeBtn.classList.add('sold-out');
+            }
+            
+            // Select first available size, or first size if none available
+            if (!hasSelectedSize && (isAvailable || index === sizeOption.values.length - 1)) {
+              sizeBtn.classList.add('selected');
+              selectedOptions[productId].Size = size;
+              hasSelectedSize = true;
+            }
+            
+            sizeBtn.addEventListener('click', function() {
+              if (!checkSizeAvailability(productId, size)) return;
+              
+              sizeContainer.querySelectorAll('.size-option').forEach(function(s) {
+                s.classList.remove('selected');
+              });
+              sizeBtn.classList.add('selected');
+              selectedOptions[productId].Size = size;
+              
+              updateBuyButtonVariant(productId);
+            });
+            
+            sizeContainer.appendChild(sizeBtn);
+          });
+        }
+      });
+    }
+    
+    // Update size availability when color changes
+    function updateSizeAvailability(productId) {
+      var card = document.querySelector('.product-card[data-product-id="' + productId + '"]');
+      var sizeContainer = card.querySelector('.size-options');
+      if (!sizeContainer) return;
+      
+      var currentSelectedSize = selectedOptions[productId].Size;
+      var newSelectedSize = null;
+      
+      sizeContainer.querySelectorAll('.size-option').forEach(function(sizeBtn) {
+        var size = sizeBtn.dataset.size;
+        var isAvailable = checkSizeAvailability(productId, size);
+        
+        sizeBtn.classList.toggle('sold-out', !isAvailable);
+        
+        if (size === currentSelectedSize && !isAvailable) {
+          sizeBtn.classList.remove('selected');
+          selectedOptions[productId].Size = null;
+        }
+        
+        if (isAvailable && !newSelectedSize) {
+          newSelectedSize = size;
+        }
+      });
+      
+      if (!selectedOptions[productId].Size && newSelectedSize) {
+        selectedOptions[productId].Size = newSelectedSize;
+        sizeContainer.querySelector('[data-size="' + newSelectedSize + '"]').classList.add('selected');
+      }
+    }
+    
+    // Update Buy Button variant
+    function updateBuyButtonVariant(productId) {
+      // productId should already be numeric (e.g., "8589862617299")
+      var component = buyButtonComponents[productId];
+      if (!component) {
+        console.log('Buy Button component not found for product:', productId);
+        return;
+      }
+      
+      var product = productData[productId];
+      if (!product || !product.variants) return;
+      
+      var opts = selectedOptions[productId] || {};
+      
+      var matchingVariant = product.variants.find(function(v) {
+        var colorMatch = !opts.Color || !v.color || v.color === opts.Color;
+        var sizeMatch = !opts.Size || !v.size || v.size === opts.Size;
+        return colorMatch && sizeMatch;
+      });
+      
+      if (matchingVariant && component.model) {
+        var variantId = matchingVariant.id.toString();
+        
+        try {
+          // Shopify Buy Button uses full GIDs internally, so check both formats
+          var newVariant = component.model.variants.find(function(v) {
+            var buyButtonId = v.id.toString();
+            // Match either exact numeric ID or GID containing the numeric ID
+            return buyButtonId === variantId || 
+                   buyButtonId === 'gid://shopify/ProductVariant/' + variantId ||
+                   buyButtonId.endsWith('/' + variantId);
+          });
+          if (newVariant && component.model.selectedVariant !== newVariant) {
+            component.model.selectedVariant = newVariant;
+            console.log('Updated variant to:', variantId);
+          }
+          
+          // Update Buy Button state based on availability
+          var btnNode = document.getElementById('product-component-' + productId);
+          if (btnNode) {
+            var btn = btnNode.querySelector('button');
+            if (btn) {
+              var isAvailable = matchingVariant.available_for_sale && 
+                                isVariantAvailable(productId, opts.Color, opts.Size);
+              if (!isAvailable) {
+                btn.disabled = true;
+                btn.textContent = 'Sold Out';
+                btn.style.opacity = '0.5';
+                btn.style.cursor = 'not-allowed';
+              } else {
+                btn.disabled = false;
+                btn.textContent = 'Add to Cart';
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+              }
+            }
+          }
+        } catch (e) {
+          console.log('Could not update variant:', variantId, e);
+        }
+      }
+    }
+    
+    // Show error state
+    function showError(message) {
+      var container = document.getElementById('products-container');
+      container.innerHTML = '<div class="error-container">' +
+        '<h3>Unable to Load Products</h3>' +
+        '<p>' + escapeHtml(message) + '</p>' +
+        '<button onclick="location.reload()">Try Again</button>' +
+        '</div>';
+    }
+    
+    // Load Buy Button SDK
+    function loadScript() {
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = scriptURL;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+      script.onload = ShopifyBuyInit;
+    }
+    
+    // Initialize everything
+    async function init() {
+      try {
+        // Show loading state
+        var container = document.getElementById('products-container');
+        
+        // Add timeout handling for slow connections
+        var loadingTimeout = setTimeout(function() {
+          var loadingText = container.querySelector('.loading-container p');
+          if (loadingText) {
+            loadingText.textContent = 'Still loading... Please wait.';
+          }
+        }, 5000);
+        
+        // Fetch products and availability in parallel
+        var [productsData] = await Promise.all([
+          fetchProducts(),
+          fetchPrintfulAvailability()
+        ]);
+        
+        clearTimeout(loadingTimeout);
+        
+        console.log('Products loaded:', productsData);
+        
+        // Render products
+        renderProducts(productsData);
+        
+        // Initialize Buy Button
+        if (window.ShopifyBuy && window.ShopifyBuy.UI) {
+          ShopifyBuyInit();
+        } else {
+          loadScript();
+        }
+      } catch (err) {
+        console.error('Initialization error:', err);
+        showError('Could not load products. Please try again later.');
+      }
+    }
+    
+    init();
+    
+    function ShopifyBuyInit() {
+      var client = ShopifyBuy.buildClient({
+        domain: SHOPIFY_DOMAIN,
+        storefrontAccessToken: STOREFRONT_TOKEN,
+      });
+      
+      var buttonOptions = {
+        "product": {
+          "styles": {
+            "product": {
+              "@media (min-width: 601px)": {
+                "max-width": "100%",
+                "margin-left": "0",
+                "margin-bottom": "0px"
+              },
+              "text-align": "left"
+            },
+            "button": {
+              ":hover": {
+                "background-color": "#bf9e32"
+              },
+              "background-color": "#d4af37",
+              ":focus": {
+                "background-color": "#bf9e32"
+              },
+              "border-radius": "10px",
+              "font-weight": "600",
+              "padding": "12px 24px"
+            },
+            "variantTitle": {
+              "display": "none"
+            }
+          },
+          "contents": {
+            "img": false,
+            "title": false,
+            "price": false,
+            "button": true,
+            "quantity": false,
+            "description": false,
+            "options": false,
+            "variantTitle": false
+          },
+          "text": {
+            "button": "Add to Cart",
+            "outOfStock": "Sold Out",
+            "unavailable": "Unavailable"
+          },
+          "events": {
+            "afterRender": function(component) {
+              // Extract numeric ID from Shopify GID for consistent lookup
+              var fullId = component.model.id.toString();
+              var numericId = fullId.replace('gid://shopify/Product/', '');
+              buyButtonComponents[numericId] = component;
+              console.log('Buy Button rendered for product:', numericId);
+              
+              setTimeout(function() {
+                updateBuyButtonVariant(numericId);
+              }, 100);
+            }
+          }
+        },
+        "cart": {
+          "styles": {
+            "button": {
+              ":hover": {
+                "background-color": "#bf9e32"
+              },
+              "background-color": "#d4af37",
+              ":focus": {
+                "background-color": "#bf9e32"
+              },
+              "border-radius": "10px"
+            }
+          },
+          "text": {
+            "total": "Subtotal",
+            "button": "Checkout"
+          }
+        },
+        "toggle": {
+          "styles": {
+            "toggle": {
+              "background-color": "#d4af37",
+              ":hover": {
+                "background-color": "#bf9e32"
+              },
+              ":focus": {
+                "background-color": "#bf9e32"
+              }
+            }
+          }
+        }
+      };
+      
+      ShopifyBuy.UI.onReady(client).then(function(ui) {
+        // Create Buy Button for each dynamically loaded product
+        loadedProductIds.forEach(function(id) {
+          var node = document.getElementById('product-component-' + id);
+          if (node) {
+            try {
+              ui.createComponent('product', {
+                id: id,
+                node: node,
+                moneyFormat: '%24%7B%7Bamount%7D%7D',
+                options: buttonOptions
+              });
+            } catch (e) {
+              console.error('Failed to create Buy Button for product:', id, e);
+              node.innerHTML = '<p style="color: var(--muted); font-size: 13px;">Unable to load purchase button. <a href="https://only-blv-merch.myshopify.com/" target="_blank" style="color: var(--gold-light);">Shop on Shopify</a></p>';
+            }
+          }
+        });
+      }).catch(function(err) {
+        console.error('Shopify UI failed to initialize:', err);
+        // Show fallback links for all products
+        loadedProductIds.forEach(function(id) {
+          var node = document.getElementById('product-component-' + id);
+          if (node) {
+            node.innerHTML = '<a href="https://only-blv-merch.myshopify.com/" target="_blank" class="fallback-shop-link" style="display: inline-block; background: var(--gold); color: var(--bg); padding: 12px 24px; border-radius: 10px; font-weight: 600; text-decoration: none;">Shop on Shopify</a>';
+          }
+        });
+      });
+    }
+  })();
+  </script>
+
+</body>
+</html>

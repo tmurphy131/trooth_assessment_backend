@@ -366,3 +366,56 @@ def notify_weekly_tips_batch(
         )
     
     return results
+
+
+def notify_mentorship_revoked(
+    db: Session,
+    mentor_id: str,
+    apprentice_name: str
+) -> Dict[str, Any]:
+    """Notify mentor that an apprentice revoked the mentorship."""
+    payload = PushNotificationPayload(
+        title="Mentorship Revoked",
+        body=f"{apprentice_name} has revoked the mentorship relationship",
+        data={
+            "type": "mentorship_revoked",
+            "screen": "mentor_dashboard"
+        }
+    )
+    return PushNotificationService.send_to_user(db, mentor_id, payload)
+
+
+def notify_reschedule_request(
+    db: Session,
+    mentor_id: str,
+    agreement_id: str
+) -> Dict[str, Any]:
+    """Notify mentor that an apprentice requested to reschedule a meeting."""
+    payload = PushNotificationPayload(
+        title="Meeting Reschedule Requested",
+        body="Your apprentice has requested to reschedule a meeting",
+        data={
+            "type": "reschedule_request",
+            "screen": "agreements",
+            "agreement_id": agreement_id
+        }
+    )
+    return PushNotificationService.send_to_user(db, mentor_id, payload)
+
+
+def notify_assessment_started(
+    db: Session,
+    mentor_id: str,
+    apprentice_name: str,
+    assessment_name: str
+) -> Dict[str, Any]:
+    """Notify mentor that an apprentice started an assessment."""
+    payload = PushNotificationPayload(
+        title="Assessment Started",
+        body=f"{apprentice_name} started {assessment_name}",
+        data={
+            "type": "assessment_started",
+            "screen": "mentor_dashboard"
+        }
+    )
+    return PushNotificationService.send_to_user(db, mentor_id, payload)

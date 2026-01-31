@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accept Invitation - T[root]H Discipleship</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --surface: #0a0a0a;
+      --surface2: #111;
+      --text: #f5f5f5;
+      --muted: #888;
+      --gold: #d4af37;
+      --gold-light: #e8c547;
+      --gold-glow: rgba(212, 175, 55, 0.15);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      background: var(--bg); 
+      color: var(--text); 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container { max-width: 480px; width: 100%; }
+    .card { 
+      background: var(--surface); 
+      border: 1px solid rgba(255,255,255,0.1); 
+      border-radius: 16px; 
+      padding: 32px; 
+      text-align: center;
+    }
+    .logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+    h1 { 
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--gold);
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .invite-box {
+      background: var(--gold-glow);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .invite-box h2 {
+      font-size: 18px;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+    .invite-box p {
+      color: var(--text);
+      font-size: 14px;
+      margin: 0;
+    }
+    .mentor-name {
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .steps {
+      text-align: left;
+      margin-bottom: 24px;
+    }
+    .steps h3 {
+      font-size: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .step-num {
+      width: 24px;
+      height: 24px;
+      background: var(--gold);
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step p {
+      font-size: 14px;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .store-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, var(--gold), #c9a227);
+      color: #000;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .store-btn:hover { opacity: 0.9; }
+    .store-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+    .token-box {
+      background: var(--surface2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 20px;
+    }
+    .token-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .token-value {
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--gold-light);
+      word-break: break-all;
+    }
+    .error-card {
+      background: rgba(255, 59, 48, 0.1);
+      border: 1px solid rgba(255, 59, 48, 0.3);
+    }
+    .error-card h1 {
+      color: #ff6b6b;
+    }
+    .expired-text {
+      color: var(--muted);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    {% if error %}
+    <div class="card error-card">
+      <img src="{{ logo_url }}" alt="T[root]H" class="logo" />
+      <h1>{{ error_title }}</h1>
+      <p class="expired-text">{{ error_message }}</p>
+      <div style="margin-top: 24px;">
+        <a href="{{ ios_app_store_url }}" class="store-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Open T[root]H App
+        </a>
+      </div>
+    </div>
+    {% else %}
+    <div class="card">
+      <img src="{{ logo_url }}" alt="T[root]H" class="logo" />
+      <h1>You're Invited!</h1>
+      <p class="subtitle">Begin your spiritual growth journey</p>
+      
+      <div class="invite-box">
+        <h2>Welcome, {{ apprentice_name }}!</h2>
+        <p><span class="mentor-name">{{ mentor_name }}</span> has invited you to join T[root]H Discipleship for guided spiritual assessments and mentoring.</p>
+      </div>
+
+      <div class="steps">
+        <h3>Next Steps</h3>
+        <div class="step">
+          <div class="step-num">1</div>
+          <p>Download the T[root]H Discipleship app</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <p>Create an account using <strong>{{ apprentice_email }}</strong></p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <p>Your invitation will appear automatically when you log in</p>
+        </div>
+      </div>
+
+      <div class="store-buttons">
+        <a href="{{ ios_app_store_url }}" class="store-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </a>
+        <a href="{{ play_store_url }}" class="store-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.59.69.59 1.19s-.22.9-.57 1.18l-2.29 1.32-2.5-2.5 2.5-2.5 2.27 1.31M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/></svg>
+          Google Play
+        </a>
+      </div>
+
+      <div class="token-box">
+        <div class="token-label">Invitation Token</div>
+        <div class="token-value">{{ token }}</div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>

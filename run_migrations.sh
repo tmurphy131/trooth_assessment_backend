@@ -36,6 +36,6 @@ PY
 fi
 
 # Run Alembic
-python -m alembic upgrade 20260101_mentor_notes_updated
+python -m alembic upgrade add_device_tokens_push
 
 echo "[migrate] Completed Alembic upgrade"

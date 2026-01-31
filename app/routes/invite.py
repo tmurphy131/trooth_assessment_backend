@@ -1,7 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from datetime import datetime
 import uuid
+import os
 
 from app.db import get_db
 from app.models.user import User
@@ -12,9 +15,91 @@ from app.services.email import send_invitation_email
 from app.exceptions import NotFoundException
 from app.exceptions import ValidationException
 from app.services.auth import require_mentor, get_current_user
+from app.core.settings import settings
 
 
 router = APIRouter()
+
+# Set up templates
+templates_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "templates")
+templates = Jinja2Templates(directory=templates_dir)
+
+
+@router.get("/accept-invitation", response_class=HTMLResponse)
+def accept_invitation_page(
+    request: Request,
+    token: str,
+    db: Session = Depends(get_db)
+):
+    """Landing page for email invitation links.
+    
+    Shows invitation details and links to download the app.
+    """
+    logo_url = getattr(settings, 'logo_url', 'https://onlyblv.com/onlyblv_logo.png')
+    ios_app_store_url = getattr(settings, 'ios_app_store_url', 'https://apps.apple.com/app/t-root-h-discipleship/id6757311543')
+    play_store_url = "https://play.google.com/store/apps/details?id=com.onlyblv.trooth"
+    
+    # Look up the invitation
+    invitation = db.query(ApprenticeInvitation).filter_by(token=token).first()
+    
+    if not invitation:
+        return templates.TemplateResponse(
+            "invitations/accept_invitation.html",
+            {
+                "request": request,
+                "error": True,
+                "error_title": "Invitation Not Found",
+                "error_message": "This invitation link is invalid. Please check the link or contact your mentor for a new invitation.",
+                "logo_url": logo_url,
+                "ios_app_store_url": ios_app_store_url,
+            }
+        )
+    
+    if invitation.expires_at < datetime.utcnow():
+        return templates.TemplateResponse(
+            "invitations/accept_invitation.html",
+            {
+                "request": request,
+                "error": True,
+                "error_title": "Invitation Expired",
+                "error_message": "This invitation has expired. Please ask your mentor to send a new invitation.",
+                "logo_url": logo_url,
+                "ios_app_store_url": ios_app_store_url,
+            }
+        )
+    
+    if invitation.accepted:
+        return templates.TemplateResponse(
+            "invitations/accept_invitation.html",
+            {
+                "request": request,
+                "error": True,
+                "error_title": "Already Accepted",
+                "error_message": "This invitation has already been accepted. Open the T[root]H app to continue your journey.",
+                "logo_url": logo_url,
+                "ios_app_store_url": ios_app_store_url,
+            }
+        )
+    
+    # Get mentor details
+    mentor = db.query(User).filter_by(id=invitation.mentor_id).first()
+    mentor_name = mentor.name if mentor and mentor.name else (mentor.email if mentor else "Your Mentor")
+    
+    return templates.TemplateResponse(
+        "invitations/accept_invitation.html",
+        {
+            "request": request,
+            "error": False,
+            "apprentice_name": invitation.apprentice_name or "Friend",
+            "apprentice_email": invitation.apprentice_email,
+            "mentor_name": mentor_name,
+            "token": token,
+            "logo_url": logo_url,
+            "ios_app_store_url": ios_app_store_url,
+            "play_store_url": play_store_url,
+        }
+    )
+
 
 @router.post("/invite-apprentice")
 def invite_apprentice(

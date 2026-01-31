@@ -35,6 +35,7 @@ from app.routes import progress
 from app.routes import mentor_report_v2
 from app.routes import metrics
 from app.routes import support
+from app.routes import shop
 from app.exceptions import (
     UnauthorizedException, ForbiddenException, 
     NotFoundException, ValidationException
@@ -186,6 +187,7 @@ app.include_router(generic_assessments.router)
 app.include_router(mentor_report_v2.router)
 app.include_router(metrics.router, prefix="/metrics", tags=["Metrics"])
 app.include_router(support.router)
+app.include_router(shop.router, tags=["Shop"])
 app.include_router(push_notifications.router, prefix="/push-notifications", tags=["Push Notifications"])
 app.include_router(scheduled_tasks.router, prefix="/scheduled", tags=["Scheduled Tasks"])
 
