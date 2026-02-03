@@ -5,7 +5,7 @@ Handles sending weekly and monthly email reports.
 
 import logging
 import os
-from datetime import datetime
+from datetime import datetime, UTC
 from typing import Optional
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -46,8 +46,8 @@ def render_metrics_email(metrics: dict, report_type: str) -> tuple[str, str]:
     )
     
     period_label = "Week" if report_type == "Weekly" else "Month"
-    report_date = datetime.utcnow().strftime("%B %d, %Y")
-    generated_at = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+    report_date = datetime.now(UTC).strftime("%B %d, %Y")
+    generated_at = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     
     context = {
         "report_type": report_type,
@@ -166,7 +166,7 @@ def send_weekly_report() -> bool:
         db.close()
         
         html_content, plain_text = render_metrics_email(metrics, "Weekly")
-        subject = f"T[root]H Weekly Report - {datetime.utcnow().strftime('%b %d, %Y')}"
+        subject = f"T[root]H Weekly Report - {datetime.now(UTC).strftime('%b %d, %Y')}"
         
         success_count = 0
         for recipient in recipients:
@@ -201,7 +201,7 @@ def send_monthly_report() -> bool:
         db.close()
         
         html_content, plain_text = render_metrics_email(metrics, "Monthly")
-        subject = f"T[root]H Monthly Report - {datetime.utcnow().strftime('%B %Y')}"
+        subject = f"T[root]H Monthly Report - {datetime.now(UTC).strftime('%B %Y')}"
         
         success_count = 0
         for recipient in recipients:
@@ -245,7 +245,7 @@ def send_report_now(report_type: str = "weekly", recipient_override: Optional[st
         db.close()
         
         html_content, plain_text = render_metrics_email(metrics, report_label)
-        subject = f"T[root]H {report_label} Report - {datetime.utcnow().strftime('%b %d, %Y')}"
+        subject = f"T[root]H {report_label} Report - {datetime.now(UTC).strftime('%b %d, %Y')}"
         
         success = False
         for recipient in recipients:

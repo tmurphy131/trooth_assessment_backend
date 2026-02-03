@@ -52,9 +52,25 @@ class Settings:
         self.cache_ttl = int(os.getenv("CACHE_TTL", "300"))
         self.sql_debug = self._parse_bool(os.getenv("SQL_DEBUG", "false"))
 
-        # Feature flags
-        self.use_simplified_report = self._parse_bool(
-            os.getenv("USE_SIMPLIFIED_REPORT", "false")
+        # LLM Configuration
+        # Provider: 'gemini' (default, faster/cheaper) or 'openai'
+        self.llm_provider = os.getenv("LLM_PROVIDER", "gemini")
+        # Model: optional, uses provider default if not set
+        # Gemini models: gemini-2.5-flash (default), gemini-2.5-pro, gemini-2.5-flash-lite
+        # OpenAI models: gpt-4o-mini (default), gpt-4o
+        self.llm_model = os.getenv("LLM_MODEL", "")
+        # Enable automatic fallback to secondary provider on failure
+        self.llm_fallback_enabled = self._parse_bool(
+            os.getenv("LLM_FALLBACK_ENABLED", "true")
+        )
+        # GCP settings for Vertex AI (Gemini)
+        self.google_cloud_project = os.getenv("GOOGLE_CLOUD_PROJECT", "trooth-prod")
+        self.google_cloud_location = os.getenv("GOOGLE_CLOUD_LOCATION", "us-east4")
+
+        # Feature flags / Premium tier (placeholder for RevenueCat integration)
+        # When true, enables premium features for testing without subscription check
+        self.premium_features_enabled = self._parse_bool(
+            os.getenv("PREMIUM_FEATURES_ENABLED", "false")
         )
 
         # Printful API (for shop availability)

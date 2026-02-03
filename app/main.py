@@ -64,11 +64,12 @@ async def lifespan(app: FastAPI):
     logger.info(f"⚡ Rate limiting: {'enabled' if settings.rate_limit_enabled else 'disabled'}")
     logger.info(f"📊 SQL Debug: {'enabled' if settings.sql_debug else 'disabled'}")
 
-    from app.services.ai_scoring import get_openai_client
+    from app.services.llm import get_llm_service
     from app.services.email import get_sendgrid_client
-    openai_status = "✅ configured" if get_openai_client() else "❌ not configured (using mocks)"
+    llm_service = get_llm_service()
+    llm_status = f"✅ configured (provider: {llm_service.primary_provider.__class__.__name__ if llm_service.primary_provider else 'None'}, fallback: {'enabled' if llm_service.fallback_provider else 'disabled'})" if (llm_service.primary_provider or llm_service.fallback_provider) else "❌ not configured (using mocks)"
     email_status = "✅ configured" if get_sendgrid_client() else "❌ not configured (logging only)"
-    logger.info(f"🤖 OpenAI API: {openai_status}")
+    logger.info(f"🤖 LLM Service: {llm_status}")
     logger.info(f"📧 SendGrid Email: {email_status}")
     logger.info("=" * 50)
 

@@ -58,6 +58,10 @@ Pastor-mentor and assessment analyst. Turn assessment data into concise, pastora
     "yellow": ["Sporadic church attendance (2x/month) - community is essential for growth and accountability"],
     "green": ["Growing hunger for God's word evident in your desire to understand Scripture more deeply"]
   },
+  "four_week_plan": {
+    "rhythm": ["Week 1: Focus on daily 10-minute morning prayer using ACTS model", "Week 2: Add 15 minutes of Scripture reading (start Philippians)", "Week 3: Attend small group or reach out to connect with one", "Week 4: Share one answered prayer or faith story with someone"],
+    "checkpoints": ["End of Week 1: Has prayed 5+ mornings this week", "End of Week 2: Completed Philippians chapter 1", "End of Week 3: Has attended or scheduled small group visit", "End of Week 4: Has shared faith story with at least one person"]
+  },
   "conversation_starters": [
     "Tell me about a recent answered prayer and how it affected your faith",
     "What's one area where you feel God stretching you right now, and what's holding you back?"
@@ -78,8 +82,9 @@ Pastor-mentor and assessment analyst. Turn assessment data into concise, pastora
 7. **Next_step field**: 2-3 sentences with specific, actionable, measurable advice they can implement this week.
 8. **Flags**: Red = urgent concern needing immediate intervention. Yellow = watch item with brief explanation. Green = encouragement/fruit with specifics.
 9. **Strengths/gaps**: Each item should be a complete phrase (8-15 words) that explains the strength or gap clearly.
-10. **Max 5 items per list**. No clichés. Cite scripture where helpful (Book chapter:verse) with brief explanation of relevance.
-11. **Return valid JSON only**. No markdown, no explanations outside JSON.
+10. **Four week plan**: Provide weekly rhythm (what to do each week) and checkpoints (measurable outcomes to verify). Each week builds on the previous.
+11. **Max 5 items per list**. No clichés. Cite scripture where helpful (Book chapter:verse) with brief explanation of relevance.
+12. **Return valid JSON only**. No markdown, no explanations outside JSON.
 
 ## EXAMPLE (Complete Response)
 ```json
@@ -123,6 +128,10 @@ Pastor-mentor and assessment analyst. Turn assessment data into concise, pastora
     "red": [],
     "yellow": ["Isolated from Christian community - attending services but no close believing friendships creates vulnerability to discouragement and deception", "Significant gaps in theology (Trinity, salvation by grace) that need addressing through intentional study"],
     "green": ["Genuine hunger to grow evident in your willingness to take this assessment and meet with a mentor", "Consistent church attendance shows commitment even without deep connection yet"]
+  },
+  "four_week_plan": {
+    "rhythm": ["Week 1: Establish 5-minute morning prayer habit with ACTS framework", "Week 2: Begin Philippians study (chapter 1) using OIA method", "Week 3: Research and visit one small group at your church", "Week 4: Practice sharing your 2-minute testimony with your mentor"],
+    "checkpoints": ["Week 1: Prayed at least 5 mornings using ACTS model", "Week 2: Completed written observations on Philippians 1", "Week 3: Attended or scheduled a small group visit", "Week 4: Successfully shared testimony with mentor and identified next person to share with"]
   },
   "conversation_starters": [
     "What's one thing holding you back from joining a small group? Let's talk through any fears or concerns.",

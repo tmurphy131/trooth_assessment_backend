@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from datetime import datetime
+from datetime import datetime, UTC
 import logging
 
 from app.db import get_db
@@ -42,7 +42,7 @@ def register_device(
     if existing:
         if existing.user_id == current_user.id:
             # Same user, same token - just update last_used
-            existing.last_used = datetime.utcnow()
+            existing.last_used = datetime.now(UTC)
             existing.is_active = "true"
             existing.device_name = request.device_name or existing.device_name
             db.commit()
@@ -60,7 +60,7 @@ def register_device(
             existing.user_id = current_user.id
             existing.platform = DevicePlatform(request.platform.value)
             existing.device_name = request.device_name
-            existing.last_used = datetime.utcnow()
+            existing.last_used = datetime.now(UTC)
             existing.is_active = "true"
             db.commit()
             db.refresh(existing)

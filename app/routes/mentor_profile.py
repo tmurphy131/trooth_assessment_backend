@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from datetime import datetime
+from datetime import datetime, UTC
 
 from app.db import get_db
 from app.models.user import User
@@ -58,7 +58,7 @@ def update_my_profile(
     prof.organization = payload.organization if payload.organization is not None else prof.organization
     prof.phone = payload.phone if payload.phone is not None else prof.phone
     prof.bio = payload.bio if payload.bio is not None else prof.bio
-    prof.updated_at = datetime.utcnow()
+    prof.updated_at = datetime.now(UTC)
 
     db.add(prof)
     db.commit()

@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, DateTime, Integer, ForeignKey
-from datetime import datetime
+from datetime import datetime, UTC
 import uuid
 from app.db import Base
 
@@ -14,4 +14,4 @@ class EmailSendEvent(Base):
     template_version = Column(Integer, nullable=True)
     role_context = Column(String, nullable=True)  # apprentice|mentor|admin
     purpose = Column(String, nullable=False, default="report")  # 'report','invite', etc.
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(UTC), nullable=False)

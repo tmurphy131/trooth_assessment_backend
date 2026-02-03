@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
-from datetime import datetime
+from datetime import datetime, UTC
 import uuid
 import os
 
@@ -55,7 +55,7 @@ def accept_invitation_page(
             }
         )
     
-    if invitation.expires_at < datetime.utcnow():
+    if invitation.expires_at < datetime.now(UTC):
         return templates.TemplateResponse(
             "invitations/accept_invitation.html",
             {
@@ -117,7 +117,7 @@ def invite_apprentice(
         ApprenticeInvitation.apprentice_email == apprentice_email,
         ApprenticeInvitation.mentor_id == mentor_id,
         ApprenticeInvitation.accepted == False,
-        ApprenticeInvitation.expires_at > datetime.utcnow()
+        ApprenticeInvitation.expires_at > datetime.now(UTC)
     ).first()
     if existing:
         raise HTTPException(status_code=400, detail="An invitation is already pending for this apprentice")
@@ -158,7 +158,7 @@ def get_pending_invites(
     invitations = db.query(ApprenticeInvitation).filter(
         ApprenticeInvitation.mentor_id == current_user.id,
         ApprenticeInvitation.accepted == False,
-        ApprenticeInvitation.expires_at > datetime.utcnow()
+        ApprenticeInvitation.expires_at > datetime.now(UTC)
     ).all()
     return invitations
 
@@ -190,7 +190,7 @@ def validate_invitation_token(token: str, db: Session = Depends(get_db)):
     if not invitation:
         raise NotFoundException("Invalid invitation token")
     
-    if invitation.expires_at < datetime.utcnow():
+    if invitation.expires_at < datetime.now(UTC):
         raise ValidationException("This invitation has expired")
     
     if invitation.accepted:
@@ -214,7 +214,7 @@ def accept_invite(data: InviteAccept, db: Session = Depends(get_db)):
     invitation = db.query(ApprenticeInvitation).filter_by(token=data.token).first()
     if not invitation:
         raise HTTPException(status_code=400, detail="Invitation is invalid or expired")
-    if invitation.expires_at < datetime.utcnow():
+    if invitation.expires_at < datetime.now(UTC):
         raise ValidationException("This invitation has expired.")
 
     if invitation.accepted:
@@ -264,7 +264,7 @@ def get_apprentice_invites(
     invitations = db.query(ApprenticeInvitation).filter(
         ApprenticeInvitation.apprentice_email == email,
         ApprenticeInvitation.accepted == False,
-        ApprenticeInvitation.expires_at > datetime.utcnow()
+        ApprenticeInvitation.expires_at > datetime.now(UTC)
     ).all()
     
     # Enrich with mentor details

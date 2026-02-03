@@ -4,7 +4,7 @@ Collects various usage statistics for weekly/monthly reporting and real-time das
 """
 
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, UTC
 from typing import Dict, Any, Optional
 from sqlalchemy.orm import Session
 from sqlalchemy import func, and_, or_
@@ -23,7 +23,7 @@ logger = logging.getLogger("app.metrics")
 
 def get_date_range(period: str = "week") -> tuple[datetime, datetime]:
     """Get start and end date for the specified period."""
-    now = datetime.utcnow()
+    now = datetime.now(UTC)
     if period == "week":
         start = now - timedelta(days=7)
     elif period == "month":
@@ -171,7 +171,7 @@ def get_invitation_metrics(db: Session, period: str = "all") -> Dict[str, Any]:
     ).count()
     
     # Pending (not accepted, not expired)
-    now = datetime.utcnow()
+    now = datetime.now(UTC)
     pending = db.query(ApprenticeInvitation).filter(
         and_(
             ApprenticeInvitation.accepted == False,
@@ -293,7 +293,7 @@ def get_all_metrics(db: Session, period: str = "week") -> Dict[str, Any]:
     logger.info(f"Collecting metrics for period: {period}")
     
     return {
-        "generated_at": datetime.utcnow().isoformat(),
+        "generated_at": datetime.now(UTC).isoformat(),
         "period": period,
         "users": get_user_metrics(db, period),
         "assessments": get_assessment_metrics(db, period),
@@ -326,7 +326,7 @@ def get_dashboard_summary(db: Session) -> Dict[str, Any]:
     ).count()
     
     # This week's activity
-    week_start = datetime.utcnow() - timedelta(days=7)
+    week_start = datetime.now(UTC) - timedelta(days=7)
     assessments_this_week = db.query(Assessment).filter(
         and_(Assessment.created_at >= week_start, Assessment.status == "done")
     ).count()
@@ -341,7 +341,7 @@ def get_dashboard_summary(db: Session) -> Dict[str, Any]:
     ).count()
     
     # Pending invitations
-    now = datetime.utcnow()
+    now = datetime.now(UTC)
     pending_invitations = db.query(ApprenticeInvitation).filter(
         and_(
             ApprenticeInvitation.accepted == False,
@@ -350,7 +350,7 @@ def get_dashboard_summary(db: Session) -> Dict[str, Any]:
     ).count()
     
     return {
-        "generated_at": datetime.utcnow().isoformat(),
+        "generated_at": datetime.now(UTC).isoformat(),
         "totals": {
             "users": total_users,
             "mentors": total_mentors,

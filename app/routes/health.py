@@ -4,11 +4,11 @@ Health check and monitoring endpoints.
 import os
 import time
 import logging
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from typing import Dict, Any
 from app.db import get_db, check_database_health
-from app.services.ai_scoring import get_openai_client
+from app.services.llm import get_llm_service
 from app.services.email import get_sendgrid_client
 from app.core.settings import settings
 
@@ -49,21 +49,27 @@ async def detailed_health_check(db: Session = Depends(get_db)):
         }
         health_status["status"] = "degraded"
     
-    # Check OpenAI API
+    # Check LLM Service (Gemini/OpenAI)
     try:
-        openai_client = get_openai_client()
-        if openai_client:
-            health_status["services"]["openai"] = {
+        llm_service = get_llm_service()
+        primary = llm_service.primary_provider
+        fallback = llm_service.fallback_provider
+        if primary or fallback:
+            health_status["services"]["llm"] = {
                 "status": "configured",
-                "model": "gpt-4o-mini"
+                "primary_provider": primary.__class__.__name__ if primary else "None",
+                "primary_model": primary.model if primary else None,
+                "fallback_provider": fallback.__class__.__name__ if fallback else "None",
+                "fallback_model": fallback.model if fallback else None,
+                "fallback_enabled": settings.llm_fallback_enabled
             }
         else:
-            health_status["services"]["openai"] = {
+            health_status["services"]["llm"] = {
                 "status": "not_configured",
                 "note": "Using mock scoring"
             }
     except Exception as e:
-        health_status["services"]["openai"] = {
+        health_status["services"]["llm"] = {
             "status": "error",
             "error": str(e)
         }
@@ -138,3 +144,69 @@ async def readiness_check(db: Session = Depends(get_db)):
 async def liveness_check():
     """Kubernetes-style liveness probe."""
     return {"status": "alive", "timestamp": time.time()}
+
+
+@router.get("/health/llm")
+async def llm_health_check(
+    test_generation: bool = Query(False, description="Run a test generation (costs tokens)")
+):
+    """
+    LLM Service health check.
+    
+    Returns availability status of configured LLM providers (OpenAI, Gemini).
+    Set test_generation=true to run an actual API call (will cost tokens).
+    """
+    from app.services.llm import get_llm_service, LLMConfig
+    
+    start_time = time.time()
+    
+    try:
+        service = get_llm_service()
+        
+        result = {
+            "status": "healthy",
+            "timestamp": time.time(),
+            "configuration": {
+                "primary_provider": service.primary_provider.PROVIDER_NAME,
+                "primary_model": service.primary_provider.model,
+                "fallback_enabled": service._fallback_enabled,
+            },
+            "providers": service.get_available_providers(),
+        }
+        
+        # Optionally run a test generation
+        if test_generation:
+            config = LLMConfig(temperature=0.1, max_tokens=100, json_mode=True)
+            
+            response = service.generate(
+                system_prompt="Return JSON only.",
+                user_content='Return exactly: {"test": "ok", "provider": "<your_name>"}',
+                config=config
+            )
+            
+            result["test_generation"] = {
+                "success": response.success,
+                "provider_used": response.provider,
+                "model_used": response.model,
+                "latency_ms": response.latency_ms,
+                "tokens_used": response.total_tokens,
+                "cost_usd": response.estimated_cost_usd,
+                "content": response.content if response.success else None,
+                "error": response.error if not response.success else None,
+            }
+            
+            if not response.success:
+                result["status"] = "degraded"
+        
+        result["response_time_ms"] = round((time.time() - start_time) * 1000, 2)
+        return result
+        
+    except Exception as e:
+        logger.error(f"LLM health check failed: {e}")
+        return {
+            "status": "unhealthy",
+            "timestamp": time.time(),
+            "error": str(e),
+            "response_time_ms": round((time.time() - start_time) * 1000, 2)
+        }
+

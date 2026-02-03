@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, JSON, DateTime, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 from app.db import Base
-from datetime import datetime
+from datetime import datetime, UTC
 import uuid
 
 class Assessment(Base):
@@ -17,10 +17,10 @@ class Assessment(Base):
     category = Column(String, nullable=True)
     # v2 mentor report blob (strict JSON contract for email/PDF rendering)
     mentor_report_v2 = Column(JSON, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
     # Polling helpers
     status = Column(String, default="processing")  # processing | done | error
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_at = Column(DateTime, default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC))
     # Historical context (Phase 2)
     previous_assessment_id = Column(String, ForeignKey("assessments.id"), nullable=True, index=True)
     historical_summary = Column(JSON, nullable=True)  # Cached trend data from previous assessments

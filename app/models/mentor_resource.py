@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Text, Boolean, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import datetime, UTC
 import uuid
 
 from app.db import Base
@@ -18,8 +18,8 @@ class MentorResource(Base):
     link_url = Column(Text, nullable=True)
     is_shared = Column(Boolean, nullable=False, default=False)
 
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
+    updated_at = Column(DateTime, default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC))
 
     mentor = relationship("User", foreign_keys=[mentor_id])
     apprentice = relationship("User", foreign_keys=[apprentice_id])

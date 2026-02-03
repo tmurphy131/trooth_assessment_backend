@@ -33,7 +33,7 @@ router = APIRouter()
 
 # --- Background processing helper -------------------------------------------------
 import asyncio
-from datetime import datetime
+from datetime import datetime, UTC
 
 async def _process_assessment_background(assessment_id: str):
     """Compute AI scores and email mentor in the background.
@@ -157,6 +157,11 @@ async def _process_assessment_background(assessment_id: str):
             if rel:
                 mentor = session.query(_User).filter_by(id=rel.mentor_id).first()
                 if mentor and mentor.email:
+                    # Check if mentor is premium to send enhanced report
+                    from app.services.auth import is_premium_user
+                    mentor_is_premium = is_premium_user(mentor)
+                    logger.info(f"Background worker: mentor premium status={mentor_is_premium}")
+                    
                     # Prefer v2 mentor report email if mentor_report_v2 blob is present
                     try:
                         v2_blob = assess.mentor_report_v2 or (scoring.get('mentor_blob_v2') if isinstance(scoring, dict) else None)
@@ -166,7 +171,7 @@ async def _process_assessment_background(assessment_id: str):
                         if v2_blob:
                             # Build context and render v2 email (HTML + plain)
                             from app.services.master_trooth_report import build_report_context
-                            from app.services.email import render_mentor_report_v2_email, send_email as _send_email
+                            from app.services.email import render_mentor_report_v2_email, render_premium_report_email, send_email as _send_email
                             # Resolve template display name if available
                             template_name = None
                             try:
@@ -182,10 +187,65 @@ async def _process_assessment_background(assessment_id: str):
                                 'created_at': getattr(assess, 'created_at', None),
                             }
                             context = build_report_context(assessment_ctx, assess.scores or {}, v2_blob)
-                            html, plain = render_mentor_report_v2_email(context)
-                            subject = f"{template_name or 'Assessment'} Report — {apprentice_name} — {datetime.utcnow().date()}"
+                            
+                            # Premium users get enhanced email with full report
+                            if mentor_is_premium:
+                                try:
+                                    from app.services.ai_scoring import generate_full_report, _build_v2_prompt_input
+                                    from app.models.assessment_draft import AssessmentDraft as _Draft
+                                    
+                                    # Build proper payload for full report (need questions list)
+                                    payload, _ = _build_v2_prompt_input(
+                                        apprentice={'id': assess.apprentice_id, 'name': apprentice_name},
+                                        assessment_id=assess.id,
+                                        template_id=assess.template_id,
+                                        submitted_at=assess.created_at.isoformat() if assess.created_at else None,
+                                        answers=assess.answers or {},
+                                        questions=questions,  # Use questions built earlier in worker
+                                        previous_assessments=previous_assessments
+                                    )
+                                    full_report = generate_full_report(payload, previous_assessments)
+                                    
+                                    # CRITICAL: Save full_report to BOTH Assessment.scores AND Draft.score
+                                    # The email/PDF endpoints read from assess.scores
+                                    try:
+                                        # Save to Assessment.scores (PRIMARY - used by email/PDF endpoints)
+                                        assess_scores = dict(assess.scores or {})
+                                        assess_scores['full_report_v1'] = full_report
+                                        assess_scores['full_report_generated_at'] = datetime.now(UTC).isoformat()
+                                        assess.scores = assess_scores
+                                        session.commit()
+                                        logger.info(f"Background worker: saved full_report to Assessment {assess.id}")
+                                        
+                                        # Also cache in draft for backwards compatibility
+                                        draft = session.query(_Draft).filter(
+                                            _Draft.apprentice_id == assess.apprentice_id,
+                                            _Draft.template_id == assess.template_id,
+                                            _Draft.is_submitted == True
+                                        ).order_by(_Draft.updated_at.desc()).first()
+                                        if draft:
+                                            draft_scores = draft.score or {}
+                                            draft_scores['full_report_v1'] = full_report
+                                            draft_scores['full_report_generated_at'] = datetime.now(UTC).isoformat()
+                                            draft.score = draft_scores
+                                            session.commit()
+                                            logger.info(f"Background worker: also cached full report in draft {draft.id}")
+                                    except Exception as cache_err:
+                                        logger.warning(f"Background worker: failed to save full report: {cache_err}")
+                                    
+                                    html, plain = render_premium_report_email(context, full_report)
+                                    subject = f"✦ PREMIUM {template_name or 'Assessment'} Report — {apprentice_name} — {datetime.now(UTC).date()}"
+                                    logger.info(f"Background worker: sending premium email to {mentor.email}")
+                                except Exception as premium_err:
+                                    logger.warning(f"Background worker: failed to generate premium email, falling back to standard: {premium_err}")
+                                    html, plain = render_mentor_report_v2_email(context)
+                                    subject = f"{template_name or 'Assessment'} Report — {apprentice_name} — {datetime.now(UTC).date()}"
+                            else:
+                                html, plain = render_mentor_report_v2_email(context)
+                                subject = f"{template_name or 'Assessment'} Report — {apprentice_name} — {datetime.now(UTC).date()}"
+                            
                             ok = _send_email(mentor.email, subject, html, plain)
-                            logger.info(f"Background worker: sent v2 mentor report email ok={ok} to {mentor.email}")
+                            logger.info(f"Background worker: sent {'premium ' if mentor_is_premium else ''}v2 mentor report email ok={ok} to {mentor.email}")
                         else:
                             # Legacy email helper for environments without v2 blob
                             # Prepare details from category scores for legacy email helper
@@ -217,7 +277,7 @@ async def _process_assessment_background(assessment_id: str):
                 msg = (
                     f"Assessment scoring failed.\n"
                     f"assessment_id={assessment_id}\n"
-                    f"time={datetime.utcnow().isoformat()}Z\n"
+                    f"time={datetime.now(UTC).isoformat()}Z\n"
                     f"error={e}"
                 )
                 send_notification_email(

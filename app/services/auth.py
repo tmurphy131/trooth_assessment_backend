@@ -4,11 +4,12 @@ from fastapi import Request, HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from firebase_admin import auth as firebase_auth
 from app.db import get_db
-from app.models.user import User, UserRole
+from app.models.user import User, UserRole, SubscriptionTier
 from sqlalchemy.orm import Session
 from datetime import UTC, datetime
 from app.utils.datetime import utc_now
 from app.schemas.user import UserSchema
+from app.core.settings import settings
 
 security = HTTPBearer(auto_error=False)  # auto_error=False allows optional auth
 
@@ -165,3 +166,104 @@ def require_mentor_or_admin(user: User = Depends(get_current_user)) -> User:
             detail="Mentors or admins only"
         )
     return user
+
+
+# =============================================================================
+# Premium Feature Gating
+# =============================================================================
+
+def is_premium_user(user: User) -> bool:
+    """Check if user has premium access.
+    
+    Premium access is granted if:
+    1. User's subscription_tier is 'premium', OR
+    2. PREMIUM_FEATURES_ENABLED env var is true (for testing), OR
+    3. User is an admin (admins always have premium access)
+    
+    This function will be updated when RevenueCat integration is added
+    to verify subscription status in real-time.
+    
+    Args:
+        user: The user to check
+        
+    Returns:
+        True if user has premium access
+    """
+    # Admins always have premium access
+    role_val = user.role.value if hasattr(user.role, 'value') else str(user.role)
+    if role_val == UserRole.admin.value:
+        return True
+    
+    # Check env var for testing/override
+    if settings.premium_features_enabled:
+        return True
+    
+    # Check user's subscription tier (handle missing attribute gracefully)
+    if not hasattr(user, 'subscription_tier') or user.subscription_tier is None:
+        return False
+    tier_val = user.subscription_tier.value if hasattr(user.subscription_tier, 'value') else str(user.subscription_tier)
+    return tier_val == SubscriptionTier.premium.value
+
+
+def require_premium(user: User = Depends(get_current_user)) -> User:
+    """FastAPI dependency that requires premium subscription.
+    
+    Use this for endpoints that should only be accessible to premium users.
+    Raises HTTP 403 if user doesn't have premium access.
+    
+    Usage:
+        @router.get("/premium-feature")
+        def premium_endpoint(user: User = Depends(require_premium)):
+            # Only premium users reach here
+            pass
+    """
+    if not is_premium_user(user):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Premium subscription required for this feature"
+        )
+    return user
+
+
+def require_premium_mentor(user: User = Depends(require_mentor)) -> User:
+    """FastAPI dependency that requires both mentor role AND premium subscription.
+    
+    Use this for premium mentor-only features like full AI reports.
+    
+    Usage:
+        @router.get("/mentor/reports/{id}/full")
+        def get_full_report(user: User = Depends(require_premium_mentor)):
+            # Only premium mentors reach here
+            pass
+    """
+    if not is_premium_user(user):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Premium subscription required for this feature"
+        )
+    return user
+
+
+def check_premium_access(user: User) -> dict:
+    """Check user's premium access and return status details.
+    
+    Useful for frontend to show upgrade prompts or feature availability.
+    
+    Returns:
+        Dict with premium status info
+    """
+    has_premium = is_premium_user(user)
+    tier_val = user.subscription_tier.value if hasattr(user.subscription_tier, 'value') else str(user.subscription_tier)
+    role_val = user.role.value if hasattr(user.role, 'value') else str(user.role)
+    
+    return {
+        "has_premium": has_premium,
+        "subscription_tier": tier_val,
+        "is_admin": role_val == UserRole.admin.value,
+        "premium_source": (
+            "admin" if role_val == UserRole.admin.value else
+            "env_override" if settings.premium_features_enabled else
+            "subscription" if has_premium else
+            None
+        )
+    }
