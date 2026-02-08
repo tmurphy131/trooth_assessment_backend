@@ -433,6 +433,12 @@ def confirm_seat_purchase(
                 ).first()
             
             if apprentice:
+                # Check if apprentice already has premium
+                if apprentice.subscription_tier not in [None, SubscriptionTier.free]:
+                    logger.info(f"Apprentice {apprentice.email} already has {apprentice.subscription_tier} - seat will remain unassigned")
+                    apprentice = None  # Clear so seat stays unassigned
+            
+            if apprentice:
                 # Auto-assign to existing apprentice
                 existing_seat.apprentice_id = apprentice.id
                 existing_seat.apprentice_email = apprentice.email
@@ -458,20 +464,15 @@ def confirm_seat_purchase(
                 # Send email notification to apprentice about the gift
                 try:
                     from app.services.email import send_gift_seat_email
-                    logger.info(f"Attempting to send gift seat email to {apprentice.email} (existing seat)...")
-                    email_sent = send_gift_seat_email(
+                    send_gift_seat_email(
                         to_email=apprentice.email,
                         apprentice_name=apprentice.name,
                         mentor_name=user.name or user.email,
                         redemption_code=existing_seat.redemption_code,
                         auto_activated=True,
                     )
-                    if email_sent:
-                        logger.info(f"✓ Gift seat email sent to {apprentice.email}")
-                    else:
-                        logger.warning(f"✗ Gift seat email returned False for {apprentice.email}")
                 except Exception as e:
-                    logger.error(f"✗ Gift seat email exception for {apprentice.email}: {e}")
+                    logger.warning(f"Failed to send gift seat email to {apprentice.email}: {e}")
         
         return CreateSeatResponse(
             seat_id=existing_seat.id,
@@ -531,6 +532,13 @@ def confirm_seat_purchase(
         ).first()
     
     if apprentice:
+        # Check if apprentice already has premium
+        if apprentice.subscription_tier not in [None, SubscriptionTier.free]:
+            # Don't auto-assign to someone who already has premium
+            logger.info(f"Apprentice {apprentice.email} already has {apprentice.subscription_tier} - seat will remain unassigned")
+            apprentice = None  # Clear so seat stays unassigned
+    
+    if apprentice:
         # Auto-assign to existing apprentice
         seat.apprentice_id = apprentice.id
         seat.apprentice_email = apprentice.email
@@ -551,20 +559,15 @@ def confirm_seat_purchase(
         # Send email notification to apprentice about the gift
         try:
             from app.services.email import send_gift_seat_email
-            logger.info(f"Attempting to send gift seat email to {apprentice.email} (new seat)...")
-            email_sent = send_gift_seat_email(
+            send_gift_seat_email(
                 to_email=apprentice.email,
                 apprentice_name=apprentice.name,
                 mentor_name=user.name or user.email,
                 redemption_code=code,
-                auto_activated=True,  # Premium is already active
+                auto_activated=True,
             )
-            if email_sent:
-                logger.info(f"✓ Gift seat email sent to {apprentice.email}")
-            else:
-                logger.warning(f"✗ Gift seat email returned False for {apprentice.email}")
         except Exception as e:
-            logger.error(f"✗ Gift seat email exception for {apprentice.email}: {e}")
+            logger.warning(f"Failed to send gift seat email to {apprentice.email}: {e}")
     elif data.apprentice_email:
         # Apprentice doesn't exist yet - save email for later redemption
         seat.apprentice_email = data.apprentice_email.lower()
@@ -630,18 +633,13 @@ def revoke_gift_seat(
             # Send email notification to apprentice about revocation
             try:
                 from app.services.email import send_gift_seat_revoked_email
-                logger.info(f"Attempting to send gift seat revoked email to {apprentice.email}...")
-                email_sent = send_gift_seat_revoked_email(
+                send_gift_seat_revoked_email(
                     to_email=apprentice.email,
                     apprentice_name=apprentice.name,
                     mentor_name=user.name or user.email,
                 )
-                if email_sent:
-                    logger.info(f"✓ Gift seat revoked email sent to {apprentice.email}")
-                else:
-                    logger.warning(f"✗ Gift seat revoked email returned False for {apprentice.email}")
             except Exception as e:
-                logger.error(f"✗ Gift seat revoked email exception for {apprentice.email}: {e}")
+                logger.warning(f"Failed to send gift seat revoked email to {apprentice.email}: {e}")
     
     # Reset seat for reuse
     seat.apprentice_id = None
@@ -718,6 +716,13 @@ def assign_gift_seat(
     if not apprentice:
         raise HTTPException(status_code=404, detail="Apprentice not found")
     
+    # Check if apprentice already has premium
+    if apprentice.subscription_tier not in [None, SubscriptionTier.free]:
+        raise HTTPException(
+            status_code=400, 
+            detail=f"{apprentice.name or apprentice.email} already has a premium subscription"
+        )
+    
     # Assign the seat
     seat.apprentice_id = apprentice.id
     seat.apprentice_email = apprentice.email
@@ -738,29 +743,22 @@ def assign_gift_seat(
     db.commit()
     
     # Send email notification
-    email_sent = False
     try:
         from app.services.email import send_gift_seat_email
-        logger.info(f"Attempting to send gift seat email to {apprentice.email}...")
-        email_sent = send_gift_seat_email(
+        send_gift_seat_email(
             to_email=apprentice.email,
             apprentice_name=apprentice.name,
             mentor_name=user.name or user.email,
             redemption_code=seat.redemption_code,
             auto_activated=True,
         )
-        if email_sent:
-            logger.info(f"✓ Gift seat email sent successfully to {apprentice.email}")
-        else:
-            logger.warning(f"✗ Gift seat email returned False for {apprentice.email}")
     except Exception as e:
-        logger.error(f"✗ Gift seat email exception for {apprentice.email}: {e}")
+        logger.warning(f"Failed to send gift seat email to {apprentice.email}: {e}")
     
     return {
         "message": f"Gift seat assigned to {apprentice.name or apprentice.email}",
         "apprentice_id": apprentice.id,
         "apprentice_name": apprentice.name,
-        "email_sent": email_sent,
     }
 
 

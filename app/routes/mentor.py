@@ -130,7 +130,13 @@ def list_apprentices(
     )
 
     return [
-        {"id": u.id, "name": u.name, "email": u.email}
+        {
+            "id": u.id, 
+            "name": u.name, 
+            "email": u.email,
+            "subscription_tier": u.subscription_tier.value if u.subscription_tier else "free",
+            "has_premium": u.subscription_tier and u.subscription_tier.value != "free",
+        }
         for u in apprentice_users
     ]
 
