@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Text, Boolean, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import datetime, UTC
 from app.db import Base
 import uuid
 
@@ -13,8 +13,8 @@ class MentorNote(Base):
     content = Column(Text, nullable=False)
     follow_up_plan = Column(Text, nullable=True)
     is_private = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
+    updated_at = Column(DateTime, default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC))
 
     assessment = relationship("Assessment", back_populates="mentor_notes")
     # link back to the User that authored the note

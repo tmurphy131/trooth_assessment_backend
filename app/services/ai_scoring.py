@@ -7,8 +7,10 @@ from typing import Dict, List, Tuple, Optional, Any
 import asyncio
 from statistics import mean
 from dataclasses import dataclass
+from datetime import datetime, UTC
 from pydantic import BaseModel, ValidationError
 from app.core.cache import cache_result
+from app.services.llm import get_llm_service, LLMConfig
 
 logger = logging.getLogger(__name__)
 
@@ -107,9 +109,10 @@ class _TopicBreakdownItem(BaseModel):
 
 
 class _BiblicalKnowledgeV2(BaseModel):
-    """v2.1 format: percent and weak_topics"""
+    """v2.1 format: percent, weak_topics, and study_recommendation"""
     percent: float
     weak_topics: list[str] = []
+    study_recommendation: str = ""
 
 
 class _InsightV2(BaseModel):
@@ -133,6 +136,12 @@ class _ResourceV2(BaseModel):
     type: str = "book"
 
 
+class _FourWeekPlan(BaseModel):
+    """Four week mentoring plan with weekly rhythm and checkpoints"""
+    rhythm: list[str] = []
+    checkpoints: list[str] = []
+
+
 class MentorBlobV2(BaseModel):
     """v2.1 format from ai_prompt_master_assessment_v2_optimized.txt"""
     health_score: int
@@ -143,6 +152,7 @@ class MentorBlobV2(BaseModel):
     biblical_knowledge: _BiblicalKnowledgeV2
     insights: list[_InsightV2] = []
     flags: dict
+    four_week_plan: Optional[_FourWeekPlan] = None
     conversation_starters: list[str] = []
     recommended_resources: list[_ResourceV2] = []
 
@@ -168,6 +178,7 @@ def _health_band(score: int) -> str:
 def _safe_minimal_blob(overall_percent: float, by_topic: list[dict]) -> dict:
     """Return minimal v2.1 structure that matches ai_prompt_master_assessment_v2_optimized.txt"""
     score = int(overall_percent)
+    weak_topics = [t.get("topic") for t in by_topic if t.get("correct", 0) / max(t.get("total", 1), 1) < 0.6]
     return {
         "health_score": score,
         "health_band": _health_band(score),
@@ -176,10 +187,25 @@ def _safe_minimal_blob(overall_percent: float, by_topic: list[dict]) -> dict:
         "priority_action": None,
         "biblical_knowledge": {
             "percent": round(overall_percent, 1),
-            "weak_topics": [t.get("topic") for t in by_topic if t.get("correct", 0) / max(t.get("total", 1), 1) < 0.6],
+            "weak_topics": weak_topics,
+            "study_recommendation": f"Focus on studying {', '.join(weak_topics[:2]) if weak_topics else 'foundational Bible books'} to strengthen your biblical knowledge.",
         },
         "insights": [],
         "flags": {"red": [], "yellow": [], "green": []},
+        "four_week_plan": {
+            "rhythm": [
+                "Week 1: Establish daily Scripture reading habit (15 minutes)",
+                "Week 2: Add prayer journaling to your routine",
+                "Week 3: Connect with a mentor or small group",
+                "Week 4: Share what you've learned with someone"
+            ],
+            "checkpoints": [
+                "Week 1: Read Scripture 5+ days this week",
+                "Week 2: Journal at least 3 prayer entries",
+                "Week 3: Attended one group meeting or mentor session",
+                "Week 4: Had one conversation about your faith journey"
+            ]
+        },
         "conversation_starters": [],
         "recommended_resources": [],
     }
@@ -330,46 +356,266 @@ def _load_v2_prompt_text() -> str:
 
 
 def _call_llm_for_mentor_blob(client, payload: dict) -> dict:
+    """Generate mentor blob using LLMService abstraction (supports Gemini + OpenAI fallback).
+    
+    Args:
+        client: Legacy parameter, now ignored (kept for backward compatibility)
+        payload: Assessment data payload for the LLM prompt
+        
+    Returns:
+        Parsed JSON response from the LLM
+    """
     import time as _t
     start_ts = _t.time()
     
     prompt_text = _load_v2_prompt_text()
-    messages = [
-        {"role": "system", "content": "You must return STRICT JSON only."},
-        {"role": "user", "content": prompt_text.strip()},
-        {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
-    ]
-    def _api_call():
-        return client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=messages,
-            temperature=0.2,
-            max_tokens=2000,
-            response_format={"type": "json_object"}
-        )
-    response = _retry(_api_call)
-    dur = _t.time() - start_ts
+    system_prompt = "You must return STRICT JSON only. Complete the entire JSON response - do not truncate."
+    user_prompt = f"{prompt_text.strip()}\n\n{json.dumps(payload, ensure_ascii=False)}"
     
-    # Structured logging with token usage and cost
-    tokens_used = getattr(response, 'usage', None)
-    total_tokens = tokens_used.total_tokens if tokens_used else 0
-    prompt_tokens = tokens_used.prompt_tokens if tokens_used else 0
-    completion_tokens = tokens_used.completion_tokens if tokens_used else 0
-    cost_usd = (prompt_tokens * 0.150 + completion_tokens * 0.600) / 1_000_000
-    
-    logger.info(
-        f"[ai_scoring] type='mentor_blob' model='gpt-4o-mini' "
-        f"latency_ms={int(dur * 1000)} tokens={total_tokens} "
-        f"(prompt={prompt_tokens}, completion={completion_tokens}) "
-        f"cost_usd={cost_usd:.6f} version='v2.0'"
+    # Use LLMService abstraction with fallback support
+    llm_service = get_llm_service()
+    config = LLMConfig(
+        temperature=0.2,
+        max_tokens=8000,  # Increased significantly to prevent Gemini truncation
+        json_mode=True
     )
     
-    text = (response.choices[0].message.content or '').strip()
-    return _parse_json_lenient(text)
+    response = llm_service.generate(
+        user_content=user_prompt,
+        system_prompt=system_prompt,
+        config=config
+    )
+    
+    # Check if LLM call was successful
+    if not response.success:
+        logger.error(f"[mentor_blob] LLM generation failed: {response.error}")
+        raise Exception(f"LLM generation failed: {response.error}")
+    
+    dur = _t.time() - start_ts
+    
+    logger.info(
+        f"[ai_scoring] type='mentor_blob' provider='{response.provider}' model='{response.model}' "
+        f"latency_ms={int(dur * 1000)} tokens={response.total_tokens} "
+        f"cost_usd={response.estimated_cost_usd:.6f} version='v2.0'"
+    )
+    
+    # LLMService already parses JSON; use content dict or fallback to raw_response parsing
+    if response.content and isinstance(response.content, dict) and len(response.content) > 0:
+        return response.content
+    elif response.raw_response:
+        return _parse_json_lenient(response.raw_response)
+    else:
+        raise Exception("LLM returned empty response")
+
+
+def _load_full_report_prompt_text() -> str:
+    """Load the premium full report prompt text from ai_prompt_full_report_premium.txt.
+    
+    This is the enhanced prompt for premium users, generating comprehensive mentor reports
+    with conversation guides, growth pathways, and deeper analysis.
+    
+    Expected location (relative to backend root): ./ai_prompt_full_report_premium.txt
+    """
+    backend_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    candidates = [
+        os.path.join(backend_root, 'ai_prompt_full_report_premium.txt'),
+        os.path.join(backend_root, 'prompts', 'ai_prompt_full_report_premium.txt'),
+    ]
+    for p in candidates:
+        try:
+            with open(p, 'r', encoding='utf-8') as f:
+                logger.info(f"[ai] Loaded full report prompt from: {p}")
+                return f.read()
+        except Exception:
+            continue
+    logger.warning(f"Full report prompt file not found in candidates: {candidates}")
+    return ""
+
+
+def generate_full_report(payload: dict, previous_assessments: List[dict] = None) -> dict:
+    """Generate premium full report using LLMService (Gemini/OpenAI with fallback).
+    
+    This is the premium-tier enhanced report with:
+    - Deep dive analysis for strengths and gaps
+    - Multi-session conversation guides for mentors
+    - Phased growth pathways (30/60/90 day plans)
+    - Biblical knowledge detailed breakdown
+    - Progress tracking and milestone recommendations
+    - Personalized resource recommendations with specific application guidance
+    
+    Args:
+        payload: Assessment data payload (same format as standard report)
+        previous_assessments: List of previous assessment summaries for trend analysis
+        
+    Returns:
+        Full report JSON (premium_v1 format)
+    
+    Raises:
+        Exception: If LLM service fails and no fallback available
+    """
+    import time as _t
+    from datetime import datetime
+    
+    start_ts = _t.time()
+    
+    # Add previous assessments to payload if available
+    enriched_payload = payload.copy()
+    if previous_assessments:
+        enriched_payload['previous_assessments'] = previous_assessments
+        logger.info(f"[full_report] Including {len(previous_assessments)} previous assessments for trend analysis")
+    
+    prompt_text = _load_full_report_prompt_text()
+    if not prompt_text:
+        raise Exception("Full report prompt not found - premium feature unavailable")
+    
+    system_prompt = "You are a senior pastor-mentor generating a premium, comprehensive mentor report. Return STRICT JSON only."
+    user_prompt = f"{prompt_text.strip()}\n\n{json.dumps(enriched_payload, ensure_ascii=False)}"
+    
+    # Use LLMService with higher token limit for premium report
+    llm_service = get_llm_service()
+    config = LLMConfig(
+        temperature=0.3,  # Slightly higher for more nuanced analysis
+        max_tokens=16000,  # Higher limit for comprehensive report (Gemini supports up to 8192 default, but can go higher)
+        json_mode=True
+    )
+    
+    response = llm_service.generate(
+        user_content=user_prompt,
+        system_prompt=system_prompt,
+        config=config
+    )
+    
+    # Check if LLM call was successful
+    if not response.success:
+        logger.error(f"[full_report] LLM generation failed: {response.error}")
+        raise Exception(f"LLM generation failed: {response.error}")
+    
+    dur = _t.time() - start_ts
+    
+    logger.info(
+        f"[ai_scoring] type='full_report' provider='{response.provider}' model='{response.model}' "
+        f"latency_ms={int(dur * 1000)} tokens={response.total_tokens} "
+        f"cost_usd={response.estimated_cost_usd:.6f} version='premium_v1'"
+    )
+    
+    # LLMService already parses JSON; use content dict or fallback to raw_response parsing
+    if response.content and isinstance(response.content, dict) and len(response.content) > 0:
+        result = response.content
+    elif response.raw_response:
+        result = _parse_json_lenient(response.raw_response)
+    else:
+        raise Exception("LLM returned empty response")
+    
+    # Add metadata
+    result['_meta'] = {
+        'generated_at': datetime.now(UTC).isoformat() + 'Z',
+        'provider': response.provider,
+        'model': response.model,
+        'tokens_used': response.total_tokens,
+        'cost_usd': response.estimated_cost_usd,
+        'latency_ms': int(dur * 1000)
+    }
+    
+    return result
+
+
+def generate_full_report_for_assessment(assessment, apprentice_name: str = None, db_session = None) -> dict:
+    """Generate premium full report for an existing assessment.
+    
+    This is used for on-demand generation when a premium user requests an email
+    but the full_report wasn't cached during submission (e.g., older assessments).
+    
+    Args:
+        assessment: Assessment ORM object with answers, template_id, etc.
+        apprentice_name: Display name for the apprentice
+        db_session: Database session for loading questions
+        
+    Returns:
+        Full report dict (premium_v1 format), or None if generation fails
+    """
+    if not assessment or not assessment.answers:
+        logger.warning("[full_report_for_assessment] No assessment or answers provided")
+        return None
+    
+    try:
+        # Load questions from template if available
+        questions = []
+        if assessment.template_id and db_session:
+            from app.models.assessment_template_question import AssessmentTemplateQuestion
+            from app.models.question import Question
+            from app.models.category import Category
+            from sqlalchemy.orm import joinedload
+            
+            # AssessmentTemplateQuestion is a junction table - need to join with Question
+            tq_rows = db_session.query(AssessmentTemplateQuestion).options(
+                joinedload(AssessmentTemplateQuestion.question)
+            ).filter(
+                AssessmentTemplateQuestion.template_id == assessment.template_id
+            ).order_by(AssessmentTemplateQuestion.order).all()
+            
+            for tq in tq_rows:
+                q = tq.question  # The actual Question object
+                if not q:
+                    continue
+                    
+                # Get category name
+                category_name = 'General'
+                if q.category_id:
+                    cat = db_session.query(Category).filter_by(id=q.category_id).first()
+                    if cat:
+                        category_name = cat.name
+                
+                q_dict = {
+                    'id': str(q.id),
+                    'text': q.text,
+                    'question_type': q.question_type.value if hasattr(q.question_type, 'value') else str(q.question_type),
+                    'category': category_name,
+                    'topic': category_name,
+                }
+                
+                # Include options for multiple choice questions
+                if q.options:
+                    q_dict['options'] = [
+                        {'id': str(opt.id), 'text': opt.option_text, 'is_correct': opt.is_correct}
+                        for opt in q.options
+                    ]
+                
+                questions.append(q_dict)
+            
+            logger.info(f"[full_report_for_assessment] Loaded {len(questions)} questions for template {assessment.template_id}")
+        
+        # Build payload for full report
+        apprentice_info = {
+            'id': assessment.apprentice_id,
+            'name': apprentice_name or 'Apprentice',
+        }
+        
+        payload, _ = _build_v2_prompt_input(
+            apprentice=apprentice_info,
+            assessment_id=assessment.id,
+            template_id=assessment.template_id,
+            submitted_at=assessment.created_at.isoformat() if assessment.created_at else None,
+            answers=assessment.answers or {},
+            questions=questions,
+            previous_assessments=None
+        )
+        
+        # Generate the full report
+        full_report = generate_full_report(payload)
+        
+        logger.info(f"[full_report_for_assessment] Generated on-demand for assessment {assessment.id}")
+        return full_report
+        
+    except Exception as e:
+        logger.error(f"[full_report_for_assessment] Failed to generate: {e}")
+        return None
+
 
 def score_category_with_feedback(client, category: str, qa_pairs: List[Dict]) -> tuple:
     """Score a category and return detailed question feedback (with question_id echoed).
 
+    Uses LLMService abstraction with Gemini/OpenAI fallback support.
+    
     Keeps legacy return shape while ensuring each feedback item includes question_id,
     and MC items are graded objectively only when options with is_correct are provided.
     """
@@ -399,37 +645,44 @@ def score_category_with_feedback(client, category: str, qa_pairs: List[Dict]) ->
     try:
         import time as _t
         start_ts = _t.time()
-        def _api_call():
-            return client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {"role": "system", "content": "You are an expert spiritual mentor and assessor. Output pure JSON."},
-                    {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)}
-                ],
-                max_tokens=2500,  # Increased from 1200 to avoid truncated JSON responses
-                temperature=0.2,
-                response_format={"type": "json_object"}
-            )
-        response = _retry(_api_call)
-        dur = _t.time() - start_ts
         
-        # Structured logging with token usage and cost
-        tokens_used = getattr(response, 'usage', None)
-        total_tokens = tokens_used.total_tokens if tokens_used else 0
-        prompt_tokens = tokens_used.prompt_tokens if tokens_used else 0
-        completion_tokens = tokens_used.completion_tokens if tokens_used else 0
-        # gpt-4o-mini pricing: $0.150 per 1M input tokens, $0.600 per 1M output tokens
-        cost_usd = (prompt_tokens * 0.150 + completion_tokens * 0.600) / 1_000_000
-        
-        logger.info(
-            f"[ai_scoring] category='{category}' model='gpt-4o-mini' "
-            f"latency_ms={int(dur * 1000)} tokens={total_tokens} "
-            f"(prompt={prompt_tokens}, completion={completion_tokens}) "
-            f"cost_usd={cost_usd:.6f} version='v2.0'"
+        # Use LLMService abstraction with fallback support
+        llm_service = get_llm_service()
+        config = LLMConfig(
+            temperature=0.2,
+            max_tokens=4000,  # Increased to prevent Gemini truncation
+            json_mode=True
         )
         
-        content = (response.choices[0].message.content or "").strip()
-        parsed = _parse_json_lenient(content)
+        system_prompt = "You are an expert spiritual mentor and assessor. Output pure JSON."
+        user_prompt = json.dumps(prompt, ensure_ascii=False)
+        
+        response = llm_service.generate(
+            user_content=user_prompt,
+            system_prompt=system_prompt,
+            config=config
+        )
+        
+        # Check if LLM call was successful
+        if not response.success:
+            logger.warning(f"[category_scoring] LLM generation failed for {category}: {response.error}")
+            raise Exception(f"LLM generation failed: {response.error}")
+        
+        dur = _t.time() - start_ts
+        
+        logger.info(
+            f"[ai_scoring] category='{category}' provider='{response.provider}' model='{response.model}' "
+            f"latency_ms={int(dur * 1000)} tokens={response.total_tokens} "
+            f"cost_usd={response.estimated_cost_usd:.6f} version='v2.0'"
+        )
+        
+        # LLMService already parses JSON; use content dict or fallback to raw_response parsing
+        if response.content and isinstance(response.content, dict) and len(response.content) > 0:
+            parsed = response.content
+        elif response.raw_response:
+            parsed = _parse_json_lenient(response.raw_response)
+        else:
+            raise Exception("LLM returned empty response")
         score = int(round(float(parsed.get('score', 7))))
         recommendation = parsed.get('recommendation', f"Continue developing your {category.lower()} practices.")
         feedback = parsed.get('question_feedback', [])
@@ -512,6 +765,7 @@ async def score_assessment_by_category(answers: Dict[str, str],
     """Enhanced AI scoring with category breakdown and detailed question feedback.
     
     Phase 2: Now includes previous_assessments for historical context and trend analysis.
+    Uses LLMService abstraction with Gemini/OpenAI fallback support.
     """
     logger.info(f"Starting AI scoring with {len(answers)} answers and {len(questions)} questions")
     if previous_assessments:
@@ -519,10 +773,15 @@ async def score_assessment_by_category(answers: Dict[str, str],
     logger.info(f"Answer keys: {list(answers.keys())}")
     logger.info(f"Question IDs: {[q.get('id') for q in questions]}")
     
-    client = get_openai_client()
-    is_mock = client is None
+    # Check LLM service availability (Gemini or OpenAI)
+    llm_service = get_llm_service()
+    llm_available = llm_service.primary_provider is not None or llm_service.fallback_provider is not None
+    is_mock = not llm_available
+    
     if is_mock:
-        logger.info("OpenAI not configured; proceeding with mock scoring and safe mentor blob")
+        logger.info("LLM service not configured; proceeding with mock scoring and safe mentor blob")
+    else:
+        logger.info(f"LLM service configured: primary={llm_service.primary_provider.__class__.__name__ if llm_service.primary_provider else 'None'}, fallback={'enabled' if llm_service.fallback_provider else 'disabled'}")
     
     # Group answers by category
     categorized_answers = {}
@@ -579,10 +838,10 @@ async def score_assessment_by_category(answers: Dict[str, str],
         recommendations = mock.get('recommendations', {})
         all_question_feedback = mock.get('question_feedback', [])
     else:
-        # Process categories sequentially since OpenAI client is sync
+        # Process categories sequentially using LLMService
         for category, qa_pairs in categorized_answers.items():
             try:
-                score, rec, feedback = score_category_with_feedback(client, category, qa_pairs)
+                score, rec, feedback = score_category_with_feedback(None, category, qa_pairs)  # client param deprecated
                 category_scores[category] = round(score)  # Convert to int
                 recommendations[category] = rec
                 all_question_feedback.extend(feedback)
@@ -593,7 +852,7 @@ async def score_assessment_by_category(answers: Dict[str, str],
     
     overall_score = int(round(mean(category_scores.values()))) if category_scores else 7
     
-    # Build mentor_blob v2 via LLM (or fallback when no client)
+    # Build mentor_blob v2 via LLM (or fallback when no LLM available)
     mentor_blob = None
     try:
         apprentice_stub = {}
@@ -601,12 +860,12 @@ async def score_assessment_by_category(answers: Dict[str, str],
         payload, derived = _build_v2_prompt_input(apprentice_stub, assessment_id="N/A", template_id=None, submitted_at=None, answers=answers, questions=questions, previous_assessments=previous_assessments)
         if not is_mock:
             try:
-                raw_blob = _call_llm_for_mentor_blob(client, payload)
+                raw_blob = _call_llm_for_mentor_blob(None, payload)  # client param deprecated
                 mentor_blob = MentorBlobV2.model_validate(raw_blob).model_dump()
             except ValidationError as ve:
                 logger.warning(f"mentor_blob v2 validation failed, retrying once: {ve}")
                 # one more attempt
-                raw_blob = _call_llm_for_mentor_blob(client, payload)
+                raw_blob = _call_llm_for_mentor_blob(None, payload)  # client param deprecated
                 mentor_blob = MentorBlobV2.model_validate(raw_blob).model_dump()
         if mentor_blob is None:
             mentor_blob = _safe_minimal_blob(derived.get('percent', 0.0), derived.get('by_topic', []))
@@ -635,7 +894,7 @@ def score_assessment(answers: dict):
     """
     # First, try the mocked completions path if present
     try:
-        resp = client.chat.completions.create(model="gpt-4o-mini", messages=[])
+        resp = client.chat.completions.create(model="gpt-4o", messages=[])
         content = resp.choices[0].message.content
         parsed = json.loads(content)
         if isinstance(parsed, dict) and all(isinstance(k, str) for k in parsed.keys()):

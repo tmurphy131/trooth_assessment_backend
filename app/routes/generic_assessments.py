@@ -204,25 +204,76 @@ def email_generic(template_id: str, body: dict, db: Session = Depends(get_db), c
     if not a:
         raise HTTPException(status_code=404, detail="Assessment not found")
 
-    html, plain = render_generic_assessment_email(tpl.name or "Assessment Report", getattr(current_user, 'name', None), a.scores or {})
+    # Check if user is premium
+    from app.services.auth import is_premium_user
+    user_is_premium = is_premium_user(current_user)
+    subject_prefix = ""
+    apprentice_name = getattr(current_user, 'name', None) or 'Apprentice'
+    
+    # Premium users get enhanced report
+    scores_data = a.scores or {}
+    cached_full_report = scores_data.get('full_report_v1')
+    
+    if user_is_premium and a.mentor_report_v2:
+        # If no cached report, generate on-demand for premium users
+        if not cached_full_report:
+            try:
+                from app.services.ai_scoring import generate_full_report_for_assessment
+                cached_full_report = generate_full_report_for_assessment(a, apprentice_name, db)
+                # Cache it for future use
+                if cached_full_report:
+                    updated_scores = dict(scores_data)
+                    updated_scores['full_report_v1'] = cached_full_report
+                    a.scores = updated_scores
+                    db.commit()
+                    scores_data = a.scores  # Update reference
+            except Exception as e:
+                import logging
+                logging.getLogger(__name__).warning(f"On-demand full report generation failed: {e}")
+        
+        if cached_full_report:
+            try:
+                from app.services.email import render_premium_report_email
+                from app.services.master_trooth_report import build_report_context
+                
+                context = build_report_context(
+                    {
+                        'apprentice': {'id': a.apprentice_id, 'name': apprentice_name},
+                        'template_id': a.template_id,
+                        'created_at': getattr(a, 'created_at', None),
+                    },
+                    scores_data,
+                    a.mentor_report_v2 or {}
+                )
+                html, plain = render_premium_report_email(context, cached_full_report)
+                subject_prefix = "✦ PREMIUM "
+            except Exception as e:
+                import logging
+                logging.getLogger(__name__).warning(f"Premium email rendering failed, using standard: {e}")
+                html, plain = render_generic_assessment_email(tpl.name or "Assessment Report", apprentice_name, scores_data)
+        else:
+            html, plain = render_generic_assessment_email(tpl.name or "Assessment Report", apprentice_name, scores_data)
+    else:
+        html, plain = render_generic_assessment_email(tpl.name or "Assessment Report", apprentice_name, scores_data)
+    
     attachments = None
     if include_pdf:
-        pdf = gen_pdf(tpl.name or "Assessment Report", getattr(current_user, 'name', None), a.scores or {})
-        safe_name = (getattr(current_user, 'name', 'Apprentice') or 'Apprentice').lower().replace(' ', '_')
+        pdf = gen_pdf(tpl.name or "Assessment Report", apprentice_name, scores_data)
+        safe_name = (apprentice_name or 'Apprentice').lower().replace(' ', '_')
         today = datetime.now(UTC).strftime('%Y%m%d')
         attachments = [{
             "filename": f"assessment_report_{safe_name}_{today}.pdf",
             "mime_type": "application/pdf",
             "data": pdf,
         }]
-    subject = f"{tpl.name or 'Assessment Report'} — {getattr(current_user, 'name', 'Apprentice')} — {datetime.now(UTC).date()}"
+    subject = f"{subject_prefix}{tpl.name or 'Assessment Report'} — {apprentice_name} — {datetime.now(UTC).date()}"
     sent = send_email(to_email, subject, html, plain, attachments=attachments)
     event = EmailSendEvent(
         sender_user_id=current_user.id,
         target_user_id=current_user.id,
         assessment_id=a.id,
         category="generic",
-        template_version=(a.scores or {}).get("template_version"),
+        template_version=scores_data.get("template_version"),
         role_context=current_user.role.value,
         purpose="report",
     )
@@ -231,7 +282,7 @@ def email_generic(template_id: str, body: dict, db: Session = Depends(get_db), c
         db.commit()
     except Exception:
         db.rollback()
-    log_email_send(current_user.id, a.id, "generic", (a.scores or {}).get("template_version"), current_user.id, "report", current_user.role.value, bool(sent))
+    log_email_send(current_user.id, a.id, "generic", scores_data.get("template_version"), current_user.id, "report", current_user.role.value, bool(sent))
     return {"sent": bool(sent), "assessment_id": a.id}
 
 
@@ -315,25 +366,80 @@ def mentor_email_generic(
     )
     if not a:
         raise HTTPException(status_code=404, detail="Assessment not found")
-    # Render based on the apprentice context (no name known here unless we fetch user)
-    html, plain = render_generic_assessment_email(tpl.name or "Assessment Report", None, a.scores or {})
+    
+    # Check if mentor is premium (for enhanced reporting)
+    from app.services.auth import is_premium_user
+    user_is_premium = is_premium_user(current_user)
+    subject_prefix = ""
+    
+    # Fetch apprentice info for better email content
+    apprentice = db.query(User).filter(User.id == apprentice_id).first()
+    apprentice_name = getattr(apprentice, 'name', None) if apprentice else None
+    
+    # Premium users get enhanced report
+    scores_data = a.scores or {}
+    cached_full_report = scores_data.get('full_report_v1')
+    
+    if user_is_premium and a.mentor_report_v2:
+        # If no cached report, generate on-demand for premium users
+        if not cached_full_report:
+            try:
+                from app.services.ai_scoring import generate_full_report_for_assessment
+                cached_full_report = generate_full_report_for_assessment(a, apprentice_name or 'Apprentice', db)
+                # Cache it for future use
+                if cached_full_report:
+                    updated_scores = dict(scores_data)
+                    updated_scores['full_report_v1'] = cached_full_report
+                    a.scores = updated_scores
+                    db.commit()
+                    scores_data = a.scores  # Update reference
+            except Exception as e:
+                import logging
+                logging.getLogger(__name__).warning(f"On-demand full report generation failed: {e}")
+        
+        if cached_full_report:
+            try:
+                from app.services.email import render_premium_report_email
+                from app.services.master_trooth_report import build_report_context
+                
+                context = build_report_context(
+                    {
+                        'apprentice': {'id': apprentice_id, 'name': apprentice_name or 'Apprentice'},
+                        'template_id': a.template_id,
+                        'created_at': getattr(a, 'created_at', None),
+                    },
+                    scores_data,
+                    a.mentor_report_v2 or {}
+                )
+                html, plain = render_premium_report_email(context, cached_full_report)
+                subject_prefix = "✦ PREMIUM "
+            except Exception as e:
+                import logging
+                logging.getLogger(__name__).warning(f"Premium email rendering failed, using standard: {e}")
+                html, plain = render_generic_assessment_email(tpl.name or "Assessment Report", apprentice_name, scores_data)
+        else:
+            html, plain = render_generic_assessment_email(tpl.name or "Assessment Report", apprentice_name, scores_data)
+    else:
+        html, plain = render_generic_assessment_email(tpl.name or "Assessment Report", apprentice_name, scores_data)
+    
     attachments = None
     if include_pdf:
-        pdf = gen_pdf(tpl.name or "Assessment Report", None, a.scores or {})
+        pdf = gen_pdf(tpl.name or "Assessment Report", apprentice_name, scores_data)
+        safe_name = (apprentice_name or apprentice_id).lower().replace(' ', '_')
         today = datetime.now(UTC).strftime('%Y%m%d')
         attachments = [{
-            "filename": f"assessment_report_{apprentice_id}_{today}.pdf",
+            "filename": f"assessment_report_{safe_name}_{today}.pdf",
             "mime_type": "application/pdf",
             "data": pdf,
         }]
-    subject = f"{tpl.name or 'Assessment Report'} — {datetime.now(UTC).date()}"
+    subject = f"{subject_prefix}{tpl.name or 'Assessment Report'} — {apprentice_name or 'Apprentice'} — {datetime.now(UTC).date()}"
     sent = send_email(to_email, subject, html, plain, attachments=attachments)
     event = EmailSendEvent(
         sender_user_id=current_user.id,
         target_user_id=apprentice_id,
         assessment_id=a.id,
         category="generic",
-        template_version=(a.scores or {}).get("template_version"),
+        template_version=scores_data.get("template_version"),
         role_context=current_user.role.value,
         purpose="report",
     )
@@ -342,5 +448,5 @@ def mentor_email_generic(
         db.commit()
     except Exception:
         db.rollback()
-    log_email_send(current_user.id, a.id, "generic", (a.scores or {}).get("template_version"), apprentice_id, "report", current_user.role.value, bool(sent))
+    log_email_send(current_user.id, a.id, "generic", scores_data.get("template_version"), apprentice_id, "report", current_user.role.value, bool(sent))
     return {"sent": bool(sent), "assessment_id": a.id}

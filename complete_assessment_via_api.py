@@ -25,12 +25,12 @@ from firebase_admin import credentials, auth as firebase_auth
 
 # Configuration
 FIREBASE_API_KEY = "AIzaSyDTzy7Z-LaX4wC1EH3k-MR4sbH2hiIFmAE"  # Web API key
-BACKEND_URL = "https://trooth-discipleship-api.onlyblv.com"
+BACKEND_URL = "https://trooth-discipleship-api-dev.onlyblv.com"
 
 # Apple reviewer credentials
-APPRENTICE_EMAIL = "tay.murphy88@yahoo.com"
+APPRENTICE_EMAIL = "ch0senpriest@gmail.com"
 APPRENTICE_PASSWORD = "Addison1"  # Won't work for OAuth users
-APPRENTICE_UID = "OJkcNZ52RQMnSkzgb6ejmWvbNID2" #os.getenv("APPRENTICE_UID")  # For OAuth users, set this env var
+APPRENTICE_UID = "XFLqVMjgreT2NslFJQatA4w9Z713" #os.getenv("APPRENTICE_UID")  # For OAuth users, set this env var
 
 # Assessment configurations: (template_key_pattern, target_accuracy, display_name)
 ASSESSMENTS = [

@@ -2,7 +2,7 @@ from pydantic import BaseModel, field_validator
 from typing import Optional
 from enum import Enum
 from datetime import datetime
-from app.models.user import UserRole
+from app.models.user import UserRole, SubscriptionTier
 from app.core.security import SecurityMixin
 
 class RoleEnum(str, Enum):
@@ -28,6 +28,7 @@ class UserCreate(UserBase):
 class UserOut(UserBase):
     id: str
     role: UserRole
+    subscription_tier: SubscriptionTier = SubscriptionTier.free
     created_at: Optional[datetime]
 
     model_config = {

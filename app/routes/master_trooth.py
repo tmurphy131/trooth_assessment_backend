@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import Optional, List
 from datetime import datetime, timedelta, UTC
-import base64, json, uuid
+import base64, json, uuid, logging
 
 from app.db import get_db
 from app.models.user import User, UserRole
@@ -17,6 +17,8 @@ from app.core.settings import settings
 from app.services.audit import log_assessment_submit, log_assessment_view, log_email_send
 from app.models.email_send_event import EmailSendEvent
 from sqlalchemy import func
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/assessments/master-trooth", tags=["master-trooth"])
 
@@ -190,6 +192,7 @@ def email_master(body: dict, db: Session = Depends(get_db), current_user: User =
         raise HTTPException(status_code=403, detail="Only apprentices can email their Master report")
     to_email = (body.get("to_email") or "").strip()
     include_pdf = bool(body.get("include_pdf"))
+    assessment_id = body.get("assessment_id")  # Optional: specific assessment to email
     if not to_email:
         raise HTTPException(status_code=400, detail="to_email is required")
     # Allow either the apprentice's own email or the canonical test address used in fixtures
@@ -202,43 +205,100 @@ def email_master(body: dict, db: Session = Depends(get_db), current_user: User =
     if to_email.lower() not in allowed_emails:
         raise HTTPException(status_code=400, detail="to_email must match authenticated user email")
     _enforce_email_rate_limit(db, current_user.id)
-    a = (
-        db.query(Assessment)
-        .filter(Assessment.apprentice_id == current_user.id, Assessment.category == "master_trooth")
-        .order_by(Assessment.created_at.desc())
-        .first()
-    )
-    if not a:
-        raise HTTPException(status_code=404, detail="Assessment not found")
+    
+    # If assessment_id provided, look up that specific assessment
+    if assessment_id:
+        a = db.query(Assessment).filter(
+            Assessment.id == assessment_id,
+            Assessment.apprentice_id == current_user.id
+        ).first()
+        if not a:
+            raise HTTPException(status_code=404, detail="Assessment not found")
+    else:
+        # Fallback: get latest master_trooth assessment
+        a = (
+            db.query(Assessment)
+            .filter(Assessment.apprentice_id == current_user.id, Assessment.category == "master_trooth")
+            .order_by(Assessment.created_at.desc())
+            .first()
+        )
+        if not a:
+            raise HTTPException(status_code=404, detail="Assessment not found")
+    
+    # Check if user is premium
+    from app.services.auth import is_premium_user
+    user_is_premium = is_premium_user(current_user)
+    subject_prefix = ""
+    apprentice_name = getattr(current_user, 'name', None) or getattr(current_user, 'email', 'Apprentice')
+    cached_full_report = None  # Initialize for use in PDF generation
+    
     # Prefer v2 mentor report if available
     if a.mentor_report_v2:
         context = build_report_context(
             {
-                'apprentice': {'id': a.apprentice_id, 'name': getattr(current_user, 'name', None) or getattr(current_user, 'email', 'Apprentice')},
+                'apprentice': {'id': a.apprentice_id, 'name': apprentice_name},
                 'template_id': a.template_id,
                 'created_at': getattr(a, 'created_at', None),
             },
             a.scores or {},
             a.mentor_report_v2 or {}
         )
-        html = render_email_v2(context)
-        plain = f"T[root]H Mentor Report\nApprentice: {context.get('apprentice_name')}\nKnowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})\nView: {settings.app_url}"
+        
+        # Premium users get enhanced report
+        if user_is_premium:
+            # Check for cached full_report in scores (generated during assessment submission)
+            scores_data = a.scores or {}
+            cached_full_report = scores_data.get('full_report_v1')
+            
+            # If no cached report, generate on-demand for premium users
+            if not cached_full_report:
+                try:
+                    from app.services.ai_scoring import generate_full_report_for_assessment
+                    cached_full_report = generate_full_report_for_assessment(a, apprentice_name, db)
+                    # Cache it for future use
+                    if cached_full_report:
+                        updated_scores = dict(scores_data)
+                        updated_scores['full_report_v1'] = cached_full_report
+                        a.scores = updated_scores
+                        db.commit()
+                except Exception as e:
+                    logger.warning(f"On-demand full report generation failed: {e}")
+            
+            if cached_full_report:
+                try:
+                    from app.services.email import render_premium_report_email
+                    html, plain = render_premium_report_email(context, cached_full_report)
+                    subject_prefix = "✦ PREMIUM "
+                except Exception as e:
+                    logger.warning(f"Premium email rendering failed, using standard: {e}")
+                    html = render_email_v2(context)
+                    plain = f"T[root]H Mentor Report\nApprentice: {context.get('apprentice_name')}\nKnowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})\nView: {settings.app_url}"
+            else:
+                # No full report available - use standard email
+                html = render_email_v2(context)
+                plain = f"T[root]H Mentor Report\nApprentice: {context.get('apprentice_name')}\nKnowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})\nView: {settings.app_url}"
+        else:
+            html = render_email_v2(context)
+            plain = f"T[root]H Mentor Report\nApprentice: {context.get('apprentice_name')}\nKnowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})\nView: {settings.app_url}"
     else:
-        html, plain = render_master_trooth_email(getattr(current_user, 'name', None), a.scores or {}, settings.app_url)
+        html, plain = render_master_trooth_email(apprentice_name, a.scores or {}, settings.app_url)
     attachments = None
     if include_pdf:
         if a.mentor_report_v2:
+            # For premium users, add full_report to context for enhanced PDF
+            if user_is_premium and cached_full_report:
+                context['full_report'] = cached_full_report
             pdf = render_pdf_v2(context)
         else:
-            pdf = generate_pdf(getattr(current_user, 'name', None), a.scores or {})
-        safe_name = (getattr(current_user, 'name', 'Apprentice') or 'Apprentice').lower().replace(' ', '_')
+            pdf = generate_pdf(apprentice_name, a.scores or {})
+        safe_name = (apprentice_name or 'Apprentice').lower().replace(' ', '_')
         today = datetime.now(UTC).strftime('%Y%m%d')
         attachments = [{
             "filename": f"master_report_{safe_name}_{today}.pdf",
             "mime_type": "application/pdf",
             "data": pdf,
         }]
-    sent = send_email(to_email, f"Master Assessment Report — {getattr(current_user, 'name', 'Apprentice')} — {datetime.now(UTC).date()}", html, plain, attachments=attachments)
+    sent = send_email(to_email, f"{subject_prefix}Master Assessment Report — {getattr(current_user, 'name', 'Apprentice')} — {datetime.now(UTC).date()}", html, plain, attachments=attachments)
     event = EmailSendEvent(
         sender_user_id=current_user.id,
         target_user_id=current_user.id,
@@ -259,6 +319,11 @@ def email_master(body: dict, db: Session = Depends(get_db), current_user: User =
 
 @router.post("/{apprentice_id}/email-report")
 def mentor_email_master(apprentice_id: str, body: dict, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """Email the Master Trooth report for an apprentice.
+    
+    Authorization: mentor assigned to apprentice or admin.
+    Premium users receive an enhanced report with deep dive analysis.
+    """
     # mentor assigned to apprentice or admin
     if current_user.role == UserRole.mentor:
         link = (
@@ -287,6 +352,12 @@ def mentor_email_master(apprentice_id: str, body: dict, db: Session = Depends(ge
     # Resolve apprentice display name/email for template context
     apprentice_user = db.query(User).filter(User.id == apprentice_id).first()
     apprentice_display = getattr(apprentice_user, 'name', None) or getattr(apprentice_user, 'email', 'Apprentice')
+    
+    # Check if requesting user is premium
+    from app.services.auth import is_premium_user
+    user_is_premium = is_premium_user(current_user)
+    subject_prefix = ""
+    
     if a.mentor_report_v2:
         context = build_report_context(
             {
@@ -297,8 +368,42 @@ def mentor_email_master(apprentice_id: str, body: dict, db: Session = Depends(ge
             a.scores or {},
             a.mentor_report_v2 or {}
         )
-        html = render_email_v2(context)
-        plain = f"T[root]H Mentor Report\nApprentice: {context.get('apprentice_name')}\nKnowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})\nView: {settings.app_url}"
+        
+        # Premium users get enhanced email
+        scores_data = a.scores or {}
+        cached_full_report = scores_data.get('full_report_v1')
+        
+        if user_is_premium:
+            # If no cached report, generate on-demand for premium users
+            if not cached_full_report:
+                try:
+                    from app.services.ai_scoring import generate_full_report_for_assessment
+                    cached_full_report = generate_full_report_for_assessment(a, apprentice_display, db)
+                    # Cache it for future use
+                    if cached_full_report:
+                        updated_scores = dict(scores_data)
+                        updated_scores['full_report_v1'] = cached_full_report
+                        a.scores = updated_scores
+                        db.commit()
+                except Exception as e:
+                    logger.warning(f"On-demand full report generation failed: {e}")
+            
+            if cached_full_report:
+                try:
+                    from app.services.email import render_premium_report_email
+                    html, plain = render_premium_report_email(context, cached_full_report)
+                    subject_prefix = "✦ PREMIUM "
+                    logger.info(f"Master Trooth email: premium report sent for {current_user.id}")
+                except Exception as e:
+                    logger.warning(f"Premium email rendering failed, using standard: {e}")
+                    html = render_email_v2(context)
+                    plain = f"T[root]H Mentor Report\nApprentice: {context.get('apprentice_name')}\nKnowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})\nView: {settings.app_url}"
+            else:
+                html = render_email_v2(context)
+                plain = f"T[root]H Mentor Report\nApprentice: {context.get('apprentice_name')}\nKnowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})\nView: {settings.app_url}"
+        else:
+            html = render_email_v2(context)
+            plain = f"T[root]H Mentor Report\nApprentice: {context.get('apprentice_name')}\nKnowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})\nView: {settings.app_url}"
     else:
         html, plain = render_master_trooth_email(None, a.scores or {}, settings.app_url)
     attachments = None
@@ -313,7 +418,7 @@ def mentor_email_master(apprentice_id: str, body: dict, db: Session = Depends(ge
             "mime_type": "application/pdf",
             "data": pdf,
         }]
-    sent = send_email(to_email, f"Master Assessment Report — {datetime.now(UTC).date()}", html, plain, attachments=attachments)
+    sent = send_email(to_email, f"{subject_prefix}Master Assessment Report — {datetime.now(UTC).date()}", html, plain, attachments=attachments)
     event = EmailSendEvent(
         sender_user_id=current_user.id,
         target_user_id=apprentice_id,
@@ -329,4 +434,4 @@ def mentor_email_master(apprentice_id: str, body: dict, db: Session = Depends(ge
     except Exception:
         db.rollback()
     log_email_send(current_user.id, a.id, "master_trooth", None, apprentice_id, "report", current_user.role.value, bool(sent))
-    return {"sent": bool(sent), "assessment_id": a.id}
+    return {"sent": bool(sent), "assessment_id": a.id, "premium": user_is_premium}

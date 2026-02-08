@@ -36,6 +36,6 @@ PY
 fi
 
 # Run Alembic
-python -m alembic upgrade add_device_tokens_push
+python -m alembic upgrade 08d60ff3eee2
 
 echo "[migrate] Completed Alembic upgrade"

@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from typing import Optional
 import logging
 import os
-from datetime import datetime
+from datetime import datetime, UTC
 
 from app.db import get_db
 from app.models.user import User, UserRole
@@ -100,7 +100,7 @@ def test_push_notification(
     payload = PushNotificationPayload(
         title="Test Notification",
         body=f"Hello {user.name}! This is a test push notification from T[root]H.",
-        data={"type": "test", "timestamp": datetime.utcnow().isoformat()}
+        data={"type": "test", "timestamp": datetime.now(UTC).isoformat()}
     )
     
     result = PushNotificationService.send_to_user(db, user_id, payload)

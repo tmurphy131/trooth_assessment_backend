@@ -2,7 +2,7 @@
 
 from sqlalchemy import Column, String, DateTime, ForeignKey, Enum as SQLEnum
 from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import datetime, UTC
 from app.db import Base
 import uuid
 import enum
@@ -27,8 +27,8 @@ class DeviceToken(Base):
     fcm_token = Column(String, nullable=False, unique=True, index=True)
     platform = Column(SQLEnum(DevicePlatform), nullable=False)
     device_name = Column(String, nullable=True)  # e.g., "iPhone 15 Pro", "Pixel 8"
-    created_at = Column(DateTime, default=datetime.utcnow)
-    last_used = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
+    last_used = Column(DateTime, default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC))
     is_active = Column(String, default="true")  # String to avoid SQLite boolean issues
 
     user = relationship("User", back_populates="device_tokens")

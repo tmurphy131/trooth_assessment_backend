@@ -7,13 +7,15 @@ from app.models.user import User
 from app.models.notification import Notification
 from app.models.mentor_apprentice import MentorApprentice
 from app.models.assessment_draft import AssessmentDraft
+from app.models.assessment import Assessment
 from app.models.question import Question
+from app.models.category import Category
 from app.models.assessment_template_question import AssessmentTemplateQuestion
 from app.schemas.assessment_draft import AssessmentDraftOut, QuestionItem
 from app.models.user import User as UserModel
 from app.schemas.apprentice_profile import ApprenticeProfileOut
 from fastapi import Query
-from datetime import datetime
+from datetime import datetime, UTC
 from app.services.auth import get_current_user
 from app.exceptions import ForbiddenException, NotFoundException
 from pydantic import BaseModel
@@ -429,17 +431,190 @@ def get_single_submitted_draft(
     # Return as AssessmentDraftOut
     return AssessmentDraftOut(
         id=str(draft.id),
-        user_id=str(draft.apprentice_id),
-        assessment_template_id=str(draft.template_id),
-        title=draft.title,
+        apprentice_id=str(draft.apprentice_id),
+        template_id=str(draft.template_id),
         answers=draft.answers,
-        created_at=draft.created_at,
-        updated_at=draft.updated_at,
+        last_question_id=str(draft.last_question_id) if draft.last_question_id else None,
         is_submitted=draft.is_submitted,
-        submitted_at=draft.submitted_at,
-        score=draft.score,
         questions=questions
     )
+
+
+@router.get("/submitted-drafts/{draft_id}/full-report")
+def get_full_report(
+    draft_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_mentor)
+):
+    """Generate premium full report for a submitted assessment (Premium feature).
+    
+    This endpoint generates an enhanced mentor report with:
+    - Deep dive analysis for strengths and gaps
+    - Multi-session conversation guides
+    - Phased growth pathways (30/60/90 day plans)
+    - Biblical knowledge detailed breakdown
+    - Progress tracking and milestones
+    - Personalized resource recommendations
+    
+    Requires premium subscription. Returns cached report if previously generated.
+    """
+    from app.services.auth import require_premium_mentor, is_premium_user
+    from app.services.ai_scoring import generate_full_report, _build_v2_prompt_input
+    
+    # Check premium access
+    if not is_premium_user(current_user):
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "error": "premium_required",
+                "message": "Premium subscription required for full reports",
+                "upgrade_url": "/settings/subscription"
+            }
+        )
+    
+    # Get the submitted draft - try direct lookup first
+    draft = db.query(AssessmentDraft).filter_by(id=draft_id, is_submitted=True).first()
+    
+    # If not found, the ID might be an Assessment ID - look up the corresponding draft
+    if not draft:
+        assessment = db.query(Assessment).filter_by(id=draft_id).first()
+        if assessment:
+            # Find the draft that created this assessment
+            draft = db.query(AssessmentDraft).filter_by(
+                apprentice_id=assessment.apprentice_id,
+                template_id=assessment.template_id,
+                is_submitted=True
+            ).order_by(AssessmentDraft.updated_at.desc()).first()
+    
+    if not draft:
+        raise NotFoundException("Submitted draft not found")
+    
+    # Verify mentor access
+    mapping = db.query(MentorApprentice).filter_by(
+        mentor_id=current_user.id,
+        apprentice_id=draft.apprentice_id
+    ).first()
+    
+    if not mapping:
+        raise ForbiddenException("Not authorized to view this draft")
+    
+    # Check if we have a cached full report
+    scores = draft.score or {}
+    if scores.get('full_report_v1'):
+        return {
+            "report": scores.get('full_report_v1'),
+            "cached": True,
+            "cached_at": scores.get('full_report_generated_at')
+        }
+    
+    # Get apprentice info
+    apprentice = db.query(User).filter_by(id=draft.apprentice_id).first()
+    
+    # Get questions for this template
+    template_questions = db.query(AssessmentTemplateQuestion)\
+        .filter_by(template_id=draft.template_id)\
+        .order_by(AssessmentTemplateQuestion.order)\
+        .all()
+    
+    questions_list = []
+    for tq in template_questions:
+        q = tq.question
+        # Get category name from Category table if category_id exists
+        category_name = 'General'
+        if q.category_id:
+            cat = db.query(Category).filter_by(id=q.category_id).first()
+            if cat:
+                category_name = cat.name
+        q_dict = {
+            'id': str(q.id),
+            'text': q.text,
+            'question_type': q.question_type.value if hasattr(q.question_type, 'value') else str(q.question_type),
+            'category': category_name,
+        }
+        if q.options:
+            q_dict['options'] = [
+                {'id': str(opt.id), 'text': opt.option_text, 'is_correct': opt.is_correct}
+                for opt in q.options
+            ]
+        questions_list.append(q_dict)
+    
+    # Get previous assessments for trend analysis
+    previous_drafts = db.query(AssessmentDraft).filter(
+        AssessmentDraft.apprentice_id == draft.apprentice_id,
+        AssessmentDraft.is_submitted == True,
+        AssessmentDraft.id != draft_id
+    ).order_by(AssessmentDraft.updated_at.desc()).limit(5).all()
+    
+    previous_assessments = []
+    for pd in previous_drafts:
+        if pd.score:
+            previous_assessments.append({
+                'date': pd.updated_at.isoformat() if pd.updated_at else None,
+                'health_score': pd.score.get('mentor_blob_v2', {}).get('health_score'),
+                'strengths': pd.score.get('mentor_blob_v2', {}).get('strengths', []),
+                'gaps': pd.score.get('mentor_blob_v2', {}).get('gaps', [])
+            })
+    
+    # Build the payload for the full report
+    apprentice_info = {
+        'id': str(apprentice.id) if apprentice else 'unknown',
+        'name': apprentice.name if apprentice else 'Apprentice',
+        'age': None,  # Add if stored
+        'church': None  # Add if stored
+    }
+    
+    payload, _ = _build_v2_prompt_input(
+        apprentice=apprentice_info,
+        assessment_id=draft_id,
+        template_id=str(draft.template_id),
+        submitted_at=draft.updated_at.isoformat() if draft.updated_at else None,
+        answers=draft.answers or {},
+        questions=questions_list,
+        previous_assessments=previous_assessments
+    )
+    
+    try:
+        # Generate the full report
+        full_report = generate_full_report(payload, previous_assessments)
+        
+        # Cache the report in BOTH draft.score AND Assessment.scores
+        # Email/PDF endpoints read from Assessment.scores
+        if not scores:
+            scores = {}
+        scores['full_report_v1'] = full_report
+        scores['full_report_generated_at'] = datetime.now(UTC).isoformat()
+        draft.score = scores
+        
+        # Also save to Assessment.scores for email/PDF endpoints
+        assessment = db.query(Assessment).filter_by(
+            apprentice_id=draft.apprentice_id,
+            template_id=draft.template_id
+        ).order_by(Assessment.created_at.desc()).first()
+        if assessment:
+            assess_scores = dict(assessment.scores or {})
+            assess_scores['full_report_v1'] = full_report
+            assess_scores['full_report_generated_at'] = datetime.now(UTC).isoformat()
+            assessment.scores = assess_scores
+        
+        db.commit()
+        
+        return {
+            "report": full_report,
+            "cached": False
+        }
+        
+    except Exception as e:
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Failed to generate full report for draft {draft_id}: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "error": "generation_failed",
+                "message": "Failed to generate full report. Please try again later."
+            }
+        )
+
 
 from fastapi.responses import StreamingResponse
 import io

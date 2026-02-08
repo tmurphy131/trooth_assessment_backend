@@ -64,6 +64,85 @@ def render_mentor_report_v2_email(context: dict) -> tuple[str, str]:
     ]
     return html_content, "\n".join(plain_lines)
 
+def render_premium_report_email(context: dict, full_report: dict) -> tuple[str, str]:
+    """Render the PREMIUM mentor report email using the enhanced template.
+
+    Premium reports include:
+    - Strengths & gaps deep dive with evidence
+    - Multi-session conversation guide
+    - Growth pathways with phased plans
+    - Biblical knowledge detailed analysis
+    
+    Args:
+        context: Standard report context (from build_report_context)
+        full_report: Premium full report data (from generate_full_report)
+    
+    Returns (html, plain) tuple.
+    """
+    env = get_email_template_env()
+    html_content = None
+    
+    # Merge full_report data into context for template rendering
+    premium_context = {**context}
+    
+    # Add executive summary
+    exec_summary = full_report.get('executive_summary', {})
+    premium_context['health_score'] = exec_summary.get('health_score', context.get('overall_score', 0))
+    premium_context['health_band'] = exec_summary.get('health_band', 'Developing')
+    premium_context['one_liner'] = exec_summary.get('one_liner', '')
+    premium_context['trajectory'] = exec_summary.get('trajectory', '')
+    premium_context['trajectory_note'] = exec_summary.get('trajectory_note', '')
+    
+    # Add deep dive sections
+    premium_context['strengths_deep_dive'] = full_report.get('strengths_deep_dive', [])
+    premium_context['gaps_deep_dive'] = full_report.get('gaps_deep_dive', [])
+    
+    # Add conversation guide
+    premium_context['conversation_guide'] = full_report.get('conversation_guide', {})
+    
+    # Add biblical knowledge analysis
+    premium_context['biblical_knowledge_analysis'] = full_report.get('biblical_knowledge_analysis', {})
+    
+    # Add recommended resources from full report
+    premium_context['recommended_resources'] = full_report.get('recommended_resources', context.get('recommended_resources', []))
+    
+    if env and JINJA2_AVAILABLE:
+        try:
+            template = env.get_template('mentor_report_premium_email_template.html')
+            html_content = template.render(**premium_context)
+        except Exception as e:
+            logger.error(f"Failed to render premium email template: {e}")
+            # Fallback to standard v2 email
+            html_content = None
+    
+    if not html_content:
+        # Fallback to standard v2 email if premium template fails
+        return render_mentor_report_v2_email(context)
+    
+    # Plain text version for premium
+    plain_lines = [
+        "✦ T[root]H PREMIUM Mentor Report ✦",
+        f"Apprentice: {premium_context.get('apprentice_name')}",
+        f"Health Score: {premium_context.get('health_score')} ({premium_context.get('health_band')})",
+        f"Biblical Knowledge: {premium_context.get('overall_mc_percent')}% ({premium_context.get('knowledge_band')})",
+        "",
+        "Executive Summary:",
+        premium_context.get('one_liner', 'Assessment complete.'),
+        "",
+        "Strengths:",
+    ]
+    for s in premium_context.get('top_strengths', [])[:3]:
+        plain_lines.append(f"  • {s}")
+    plain_lines.append("")
+    plain_lines.append("Growth Areas:")
+    for g in premium_context.get('top_gaps', [])[:3]:
+        plain_lines.append(f"  • {g}")
+    plain_lines.append("")
+    plain_lines.append("View the full interactive premium report in the T[root]H app.")
+    
+    return html_content, "\n".join(plain_lines)
+
+
 def render_generic_assessment_email(title: str, apprentice_name: str | None, scores: dict) -> tuple[str, str]:
     """Render a generic assessment report email using Jinja2 template.
 

@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, ForeignKey, DateTime, Boolean, Float, Integer, JSON
 from sqlalchemy.orm import relationship
 from app.db import Base
-from datetime import datetime
+from datetime import datetime, UTC
 import uuid
 
 # models/assessment_template.py
@@ -14,7 +14,7 @@ class AssessmentTemplate(Base):
     is_published = Column(Boolean, default=False)
     is_master_assessment = Column(Boolean, default=False)  # True for the main Trooth Assessment
     created_by = Column(String, ForeignKey("users.id"), nullable=True)  # Allow null for existing records
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
     # Explicit version for versioned assessments (e.g., spiritual gifts). Null for legacy rows.
     version = Column(Integer, nullable=True)
 
