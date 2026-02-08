@@ -5,7 +5,7 @@ from app.db import get_db, SessionLocal
 from sqlalchemy import func
 from app.models.assessment_draft import AssessmentDraft
 from app.schemas.assessment_draft import AssessmentDraftCreate, AssessmentDraftOut
-from app.services.auth import get_current_user, require_apprentice, require_mentor
+from app.services.auth import get_current_user, require_apprentice, require_mentor, is_premium_user
 from app.models.user import User, UserRole
 from app.models.question import Question
 import uuid
@@ -23,6 +23,7 @@ from app.models.question import Question
 from app.models.category import Category
 from app.schemas.assessment_draft import QuestionItem
 from app.schemas.assessment_draft import AssessmentDraftUpdate
+from app.routes.templates import is_assessment_free
 from app.models.assessment import Assessment
 from app.models.notification import Notification
 from app.services.push_notification import notify_assessment_submitted
@@ -1079,6 +1080,13 @@ def start_draft(
     template = db.query(AssessmentTemplate).filter_by(id=template_id, is_published=True).first()
     if not template:
         raise HTTPException(status_code=404, detail="Template not found or not published")
+
+    # Check premium access for non-free assessments
+    if not is_assessment_free(template) and not is_premium_user(current_user):
+        raise HTTPException(
+            status_code=403,
+            detail="Premium subscription required for this assessment. Upgrade to access all assessments."
+        )
 
     # Create draft
     draft = AssessmentDraft(

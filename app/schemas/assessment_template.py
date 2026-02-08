@@ -21,6 +21,9 @@ class AssessmentTemplateOut(BaseModel):
     created_at: Optional[datetime] = None
     created_by: Optional[str] = None
     category_ids: List[str] = []  # populated at response time (from linked questions' categories if any)
+    # Premium gating: True if this assessment requires premium subscription
+    is_locked: bool = False
+    key: Optional[str] = None  # Assessment key for identification
     model_config = {'from_attributes': True}
 
 class AddQuestionToTemplate(BaseModel):

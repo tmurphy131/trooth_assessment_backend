@@ -172,16 +172,47 @@ def require_mentor_or_admin(user: User = Depends(get_current_user)) -> User:
 # Premium Feature Gating
 # =============================================================================
 
+# Premium tiers that grant full access
+PREMIUM_TIERS = {
+    SubscriptionTier.mentor_premium,
+    SubscriptionTier.apprentice_premium,
+    SubscriptionTier.mentor_gifted,
+}
+
+
+def is_subscription_expired(user: User) -> bool:
+    """Check if user's subscription has expired.
+    
+    Returns True if:
+    - subscription_expires_at is set AND is in the past
+    
+    Returns False if:
+    - subscription_expires_at is NULL (lifetime/admin grant)
+    - subscription_expires_at is in the future
+    """
+    if not hasattr(user, 'subscription_expires_at') or user.subscription_expires_at is None:
+        return False  # No expiration = never expires
+    
+    from datetime import datetime, timezone
+    
+    expires_at = user.subscription_expires_at
+    now = datetime.now(timezone.utc)
+    
+    # Handle timezone-naive datetimes from database (assume UTC)
+    if expires_at.tzinfo is None:
+        expires_at = expires_at.replace(tzinfo=timezone.utc)
+    
+    return expires_at < now
+
+
 def is_premium_user(user: User) -> bool:
     """Check if user has premium access.
     
     Premium access is granted if:
-    1. User's subscription_tier is 'premium', OR
+    1. User's subscription_tier is one of: mentor_premium, apprentice_premium, mentor_gifted
+       AND subscription has not expired, OR
     2. PREMIUM_FEATURES_ENABLED env var is true (for testing), OR
     3. User is an admin (admins always have premium access)
-    
-    This function will be updated when RevenueCat integration is added
-    to verify subscription status in real-time.
     
     Args:
         user: The user to check
@@ -201,8 +232,62 @@ def is_premium_user(user: User) -> bool:
     # Check user's subscription tier (handle missing attribute gracefully)
     if not hasattr(user, 'subscription_tier') or user.subscription_tier is None:
         return False
-    tier_val = user.subscription_tier.value if hasattr(user.subscription_tier, 'value') else str(user.subscription_tier)
-    return tier_val == SubscriptionTier.premium.value
+    
+    # Check if tier is a premium tier
+    tier = user.subscription_tier
+    if tier not in PREMIUM_TIERS:
+        return False
+    
+    # Check if subscription has expired
+    if is_subscription_expired(user):
+        return False
+    
+    return True
+
+
+def is_mentor_premium(user: User) -> bool:
+    """Check if user has mentor premium specifically (not gifted/apprentice).
+    
+    Used for mentor-only premium features like:
+    - Unlimited apprentices
+    - Creating custom templates
+    - Purchasing gift seats
+    """
+    if not is_premium_user(user):
+        return False
+    
+    tier = user.subscription_tier
+    return tier == SubscriptionTier.mentor_premium
+
+
+def can_mentor_add_apprentice(user: User, current_apprentice_count: int) -> tuple[bool, str]:
+    """Check if a mentor can add another apprentice.
+    
+    Rules:
+    - Premium mentors: unlimited apprentices
+    - Grandfathered mentors: unlimited apprentices (existing relationships preserved)
+    - Free mentors: max 1 apprentice
+    
+    Args:
+        user: The mentor user
+        current_apprentice_count: Current number of linked apprentices
+        
+    Returns:
+        Tuple of (can_add: bool, reason: str)
+    """
+    # Premium mentors have no limit
+    if is_mentor_premium(user):
+        return True, "Premium mentor - unlimited apprentices"
+    
+    # Grandfathered mentors have no limit
+    if hasattr(user, 'is_grandfathered_mentor') and user.is_grandfathered_mentor:
+        return True, "Grandfathered mentor - unlimited apprentices"
+    
+    # Free mentors limited to 1
+    if current_apprentice_count >= 1:
+        return False, "Free mentors can only have 1 apprentice. Upgrade to premium for unlimited."
+    
+    return True, "Free mentor - can add 1 apprentice"
 
 
 def require_premium(user: User = Depends(get_current_user)) -> User:
@@ -256,10 +341,27 @@ def check_premium_access(user: User) -> dict:
     tier_val = user.subscription_tier.value if hasattr(user.subscription_tier, 'value') else str(user.subscription_tier)
     role_val = user.role.value if hasattr(user.role, 'value') else str(user.role)
     
+    # Check expiration
+    expires_at = None
+    is_expired = False
+    if hasattr(user, 'subscription_expires_at') and user.subscription_expires_at:
+        expires_at = user.subscription_expires_at.isoformat()
+        is_expired = is_subscription_expired(user)
+    
+    # Check platform
+    platform = None
+    if hasattr(user, 'subscription_platform') and user.subscription_platform:
+        platform = user.subscription_platform.value
+    
     return {
         "has_premium": has_premium,
         "subscription_tier": tier_val,
+        "subscription_expires_at": expires_at,
+        "subscription_expired": is_expired,
+        "subscription_platform": platform,
         "is_admin": role_val == UserRole.admin.value,
+        "is_grandfathered": getattr(user, 'is_grandfathered_mentor', False),
+        "auto_renew": getattr(user, 'subscription_auto_renew', False),
         "premium_source": (
             "admin" if role_val == UserRole.admin.value else
             "env_override" if settings.premium_features_enabled else

@@ -37,6 +37,26 @@ Your FastAPI backend provides comprehensive API coverage that fully supports the
 - `POST /invitations/invite-apprentice` - Send apprentice invitations
 - `POST /invitations/accept-invite` - Accept mentor invitation
 
+### **Subscription & Premium (NEW!)**
+- `GET /subscriptions/status` - Get current user's subscription status
+- `POST /subscriptions/restore` - Trigger restore purchases (client-side)
+- `POST /subscriptions/webhook` - RevenueCat webhook receiver (backend only)
+
+### **Gift Seats (Mentors Only)**
+- `POST /mentor/seats` - Create gift seat code for apprentice
+- `GET /mentor/seats` - List mentor's gift seats
+- `POST /mentor/seats/{id}/revoke` - Revoke seat, regenerate code
+- `DELETE /mentor/seats/{id}` - Delete seat permanently
+
+### **Premium Code Redemption (Apprentices)**
+- `POST /apprentice/redeem-code` - Redeem mentor's gift code
+- `GET /apprentice/subscription-source` - Check if gifted or self-purchased
+
+### **Admin Subscription Management**
+- `POST /admin/subscriptions/users/{id}/grant-premium` - Grant premium
+- `DELETE /admin/subscriptions/users/{id}/revoke-premium` - Revoke premium
+- `GET /admin/subscriptions/stats` - Subscription analytics
+
 ### **Question Management**
 - `GET /question/categories` - Get question categories
 - `GET /question/questions` - Get questions
@@ -112,11 +132,49 @@ app.add_middleware(
 3. Include in API requests: `Authorization: Bearer <firebase_token>`
 
 ### **Assessment Flow**
-1. `GET /templates/published` - Show available assessments
-2. `POST /assessment-drafts/start` - Start new assessment
+1. `GET /templates/published` - Show available assessments (includes `is_locked` field)
+2. `POST /assessment-drafts/start` - Start new assessment (returns 403 if locked and not premium)
 3. `PATCH /assessment-drafts` - Auto-save progress frequently
 4. `GET /assessment-drafts/resume` - Resume on app restart
 5. `POST /assessment-drafts/submit` - Submit when complete
+
+### **Subscription Flow (RevenueCat)**
+1. App calls RevenueCat SDK to initiate purchase
+2. On success, RevenueCat sends webhook to `/subscriptions/webhook`
+3. Backend updates user's `subscription_tier` in database
+4. App calls `GET /subscriptions/status` to get updated status
+5. App unlocks premium features based on response
+
+### **Subscription Status Response**
+```json
+{
+  "has_premium": true,
+  "subscription_tier": "mentor_premium",
+  "subscription_expires_at": "2026-08-02T00:00:00Z",
+  "subscription_expired": false,
+  "subscription_platform": "apple",
+  "is_admin": false,
+  "is_grandfathered": false,
+  "auto_renew": true,
+  "premium_source": "subscription",
+  "can_add_apprentices": true,
+  "max_apprentices": null,
+  "current_apprentice_count": 3
+}
+```
+
+### **Free vs Premium Assessments**
+- Master T[root]H Assessment: **Always FREE**
+- Spiritual Gifts Assessment: **Always FREE**
+- All other assessments: **Premium required**
+
+The `GET /templates/published` response includes `is_locked: true/false` for each template.
+
+### **Gift Seat Flow (Mentor → Apprentice)**
+1. Premium mentor calls `POST /mentor/seats` to generate code
+2. Mentor shares code with apprentice (manually)
+3. Apprentice calls `POST /apprentice/redeem-code` with the code
+4. Apprentice gets `mentor_gifted` tier until mentor's subscription expires
 
 ### **Offline Support Considerations**
 - Cache assessment templates locally

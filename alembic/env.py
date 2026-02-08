@@ -10,7 +10,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # Import your Base and models
 from app.db import Base
 from app.models import ( user, assessment, mentor_apprentice, apprentice_invitation, 
-    question, category, assessment_draft, assessment_answer, assessment_template, assessment_template_question  )
+    question, category, assessment_draft, assessment_answer, assessment_template, assessment_template_question,
+    mentor_premium_seat, subscription_event )
 
 # Alembic Config object
 config = context.config
@@ -50,9 +51,13 @@ def run_migrations_online():
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
+            # PostgreSQL requires enum values to be committed before use.
+            # This ensures each migration runs in its own transaction.
+            transaction_per_migration=True,
         )
-        with context.begin_transaction():
-            context.run_migrations()
+        # Note: with transaction_per_migration=True, we don't wrap in begin_transaction()
+        # Alembic handles transaction boundaries per migration automatically
+        context.run_migrations()
 
 if context.is_offline_mode():
     run_migrations_offline()

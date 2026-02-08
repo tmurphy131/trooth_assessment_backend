@@ -36,6 +36,7 @@ from app.routes import mentor_report_v2
 from app.routes import metrics
 from app.routes import support
 from app.routes import shop
+from app.routes import subscriptions
 from app.exceptions import (
     UnauthorizedException, ForbiddenException, 
     NotFoundException, ValidationException
@@ -189,6 +190,10 @@ app.include_router(mentor_report_v2.router)
 app.include_router(metrics.router, prefix="/metrics", tags=["Metrics"])
 app.include_router(support.router)
 app.include_router(shop.router, tags=["Shop"])
+app.include_router(subscriptions.router, tags=["Subscriptions"])
+app.include_router(subscriptions.mentor_seats_router, tags=["Mentor Gift Seats"])
+app.include_router(subscriptions.apprentice_router, tags=["Apprentice Subscription"])
+app.include_router(subscriptions.admin_router, tags=["Admin - Subscriptions"])
 app.include_router(push_notifications.router, prefix="/push-notifications", tags=["Push Notifications"])
 app.include_router(scheduled_tasks.router, prefix="/scheduled", tags=["Scheduled Tasks"])
 
