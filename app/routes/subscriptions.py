@@ -88,6 +88,7 @@ class GiftSeatInfo(BaseModel):
     id: str
     redemption_code: str
     is_redeemed: bool
+    apprentice_id: Optional[str] = None
     apprentice_email: Optional[str] = None
     apprentice_name: Optional[str] = None
     created_at: str
@@ -344,6 +345,7 @@ def list_gift_seats(
             id=seat.id,
             redemption_code=seat.redemption_code,
             is_redeemed=seat.is_redeemed,
+            apprentice_id=seat.apprentice_id,
             apprentice_email=apprentice.email if apprentice else None,
             apprentice_name=apprentice.name if apprentice else None,
             created_at=seat.created_at.isoformat(),
@@ -437,6 +439,17 @@ def confirm_seat_purchase(
                 if apprentice.subscription_tier not in [None, SubscriptionTier.free]:
                     logger.info(f"Apprentice {apprentice.email} already has {apprentice.subscription_tier} - seat will remain unassigned")
                     apprentice = None  # Clear so seat stays unassigned
+                else:
+                    # Also check if apprentice already has an active gift seat from this mentor (excluding current seat)
+                    other_active_seat = db.query(MentorPremiumSeat).filter(
+                        MentorPremiumSeat.mentor_id == user.id,
+                        MentorPremiumSeat.apprentice_id == apprentice.id,
+                        MentorPremiumSeat.is_active == True,
+                        MentorPremiumSeat.id != existing_seat.id
+                    ).first()
+                    if other_active_seat:
+                        logger.info(f"Apprentice {apprentice.email} already has active gift seat {other_active_seat.id} - seat will remain unassigned")
+                        apprentice = None
             
             if apprentice:
                 # Auto-assign to existing apprentice
@@ -537,6 +550,16 @@ def confirm_seat_purchase(
             # Don't auto-assign to someone who already has premium
             logger.info(f"Apprentice {apprentice.email} already has {apprentice.subscription_tier} - seat will remain unassigned")
             apprentice = None  # Clear so seat stays unassigned
+        else:
+            # Also check if apprentice already has an active gift seat from this mentor
+            existing_seat = db.query(MentorPremiumSeat).filter(
+                MentorPremiumSeat.mentor_id == user.id,
+                MentorPremiumSeat.apprentice_id == apprentice.id,
+                MentorPremiumSeat.is_active == True
+            ).first()
+            if existing_seat:
+                logger.info(f"Apprentice {apprentice.email} already has active gift seat {existing_seat.id} from this mentor - seat will remain unassigned")
+                apprentice = None
     
     if apprentice:
         # Auto-assign to existing apprentice
@@ -721,6 +744,18 @@ def assign_gift_seat(
         raise HTTPException(
             status_code=400, 
             detail=f"{apprentice.name or apprentice.email} already has a premium subscription"
+        )
+    
+    # Check if apprentice already has an active gift seat from this mentor
+    existing_active_seat = db.query(MentorPremiumSeat).filter(
+        MentorPremiumSeat.mentor_id == user.id,
+        MentorPremiumSeat.apprentice_id == apprentice.id,
+        MentorPremiumSeat.is_active == True
+    ).first()
+    if existing_active_seat:
+        raise HTTPException(
+            status_code=400,
+            detail=f"{apprentice.name or apprentice.email} already has an active gift seat"
         )
     
     # Assign the seat
