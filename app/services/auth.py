@@ -43,6 +43,12 @@ def get_current_user(
     db: Session = Depends(get_db),
 ) -> User:
     
+    if credentials is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Authorization header missing",
+        )
+    
     token = credentials.credentials
     # Test tokens for development (ensure persistence so FK constraints pass)
     mock_map = {
