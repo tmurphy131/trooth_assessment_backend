@@ -100,23 +100,13 @@ def get_current_user(
             db.commit()
             return user
     
-    # If still not found, create a new user
+    # If still not found, do NOT auto-create - require explicit POST /users/ call
+    # This prevents race conditions where user gets created with wrong role
     if not user:
-        if role_from_token == "mentor":
-            user_role = UserRole.mentor
-        elif role_from_token == "admin":
-            user_role = UserRole.admin
-        else:
-            user_role = UserRole.apprentice
-        user = User(
-            id=user_id,
-            email=email,
-            name=full_name if full_name else email.split('@')[0].title(),
-            role=user_role
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found. Please complete registration first.",
         )
-        db.add(user)
-        db.commit()
-        db.refresh(user)
     
     return user
 

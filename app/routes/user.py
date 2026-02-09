@@ -46,11 +46,26 @@ def create_user(user: UserCreate, db: Session = Depends(get_db), decoded_token=D
         (User.email == user.email) | (User.id == firebase_uid)
     ).first()
     if existing_user:
-        # If found by email but with different ID, update the ID to match Firebase
+        # Update existing user to ensure consistency
+        needs_update = False
         if existing_user.id != firebase_uid:
             existing_user.id = firebase_uid
+            needs_update = True
+        # Also update role if it was incorrectly set (e.g., by old auto-create code)
+        if existing_user.role != user.role:
+            existing_user.role = user.role
+            needs_update = True
+        if existing_user.name != user.name:
+            existing_user.name = user.name
+            needs_update = True
+        if needs_update:
             db.commit()
             db.refresh(existing_user)
+            # Update Firebase custom claims with correct role
+            try:
+                auth.set_custom_user_claims(firebase_uid, {"role": existing_user.role.value})
+            except Exception:
+                pass  # Non-critical, claims will be set eventually
         return existing_user
 
     # Create user with Firebase UID as the primary key
