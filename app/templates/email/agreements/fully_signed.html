@@ -1,9 +1,0 @@
-{% extends "_base.html" %}
-{% block title %}Agreement Fully Signed{% endblock %}
-{% block content %}
-  <h2>Agreement Fully Signed</h2>
-  <p>The mentorship agreement (ID {{ agreement_id }}) is now fully executed and active.</p>
-  <p>Mentee: {{ apprentice_email }}<br/>Mentor: {{ mentor_name or mentor_email }}</p>
-  {% if action_url %}<div class="btn-row"><a class="brand-btn" href="{{ action_url }}">View Agreement</a></div>{% endif %}
-  <p class="muted">Thank you for completing the process.</p>
-{% endblock %}

@@ -1,9 +1,0 @@
-{% extends "_base.html" %}
-{% block title %}Apprentice Requested Parent Resend{% endblock %}
-{% block content %}
-  <h2>Parent Signature Resend Requested</h2>
-  <p>The apprentice has requested that the parent/guardian signature link be resent.</p>
-  {% if parent_email %}<p><strong>Parent Email:</strong> {{ parent_email }}</p>{% endif %}
-  {% if action_url %}<div class="btn-row"><a class="brand-btn" href="{{ action_url }}">Open Agreement</a></div>{% endif %}
-  <p class="muted">Please review and ensure the correct parent email is on file.</p>
-{% endblock %}

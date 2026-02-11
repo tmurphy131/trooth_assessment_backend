@@ -1,9 +1,0 @@
-{% extends "_base.html" %}
-{% block title %}Reminder: Signature Needed{% endblock %}
-{% block content %}
-  <h2>Reminder: Parent Signature Needed</h2>
-  <p>Hello {{ parent_email or 'Parent/Guardian' }},</p>
-  <p>This is a reminder to sign the mentorship agreement for <strong>{{ apprentice_email }}</strong>.</p>
-  {% if action_url %}<div class="btn-row"><a class="brand-btn" href="{{ action_url }}">Sign Now</a></div>{% endif %}
-  <p class="muted">If you've already signed, you can ignore this email.</p>
-{% endblock %}

@@ -23,6 +23,7 @@ from app.models.apprentice_invitation import ApprenticeInvitation
 from app.models.notification import Notification
 from app.models.assessment_score_history import AssessmentScoreHistory
 from app.models.email_send_event import EmailSendEvent
+from app.models.mentor_profile import MentorProfile
 
 logger = logging.getLogger(__name__)
 
@@ -283,13 +284,9 @@ def delete_mentor_account(db: Session, user_id: str) -> dict:
         count = _safe_delete(db, Notification, Notification.user_id == user_id, "notifications")
         deleted_counts["notifications"] = count
         
-        # 9. Delete mentor profile (if exists)
-        try:
-            from app.models.mentor_profile import MentorProfile
-            count = _safe_delete(db, MentorProfile, MentorProfile.mentor_id == user_id, "mentor_profiles")
-            deleted_counts["mentor_profile"] = count
-        except Exception as e:
-            logger.warning(f"Could not delete mentor profile: {e}")
+        # 9. Delete mentor profile (if exists) - uses user_id column
+        count = _safe_delete(db, MentorProfile, MentorProfile.user_id == user_id, "mentor_profiles")
+        deleted_counts["mentor_profile"] = count
         
         # 10. Delete the user (this table must exist)
         count = db.query(User).filter(User.id == user_id).delete(synchronize_session=False)

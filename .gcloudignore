@@ -1,0 +1,63 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# Git
+.git/
+.gitignore
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+logs 2/
+*.log
+
+# Tests (not needed in production)
+tests/
+test_*.py
+load_tests/
+pytest.ini
+conftest.py
+
+# Development files
+.env
+*.json
+!firebase_key.json
+mcp_postgres_server/
+
+# Documentation (not needed in container)
+*.md
+docs/
+
+# Scripts not needed at runtime
+setup_*.py
+complete_*.py
+create_*.py
+convert_*.py
+get_*.py
+populate_*.py
+manage_subscriptions.py
+
+# Build artifacts
+*.txt
+!requirements.txt
+
+# Site files
+site_files/
+
+# Misc
+Build Runner*.txt
