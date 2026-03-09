@@ -36,19 +36,52 @@ def assign_apprentice(mentor_id: str, apprentice_id: str, db: Session = Depends(
 
 @router.post("/", response_model=UserOut)
 def create_user(user: UserCreate, db: Session = Depends(get_db), decoded_token=Depends(verify_token)):
-    existing_user = db.query(User).filter(User.email == user.email).first()
+    # Get Firebase UID from the verified token (NOT from request body)
+    firebase_uid = decoded_token.get("uid")
+    if not firebase_uid:
+        raise HTTPException(status_code=400, detail="Could not extract user ID from Firebase token")
+    
+    # Check if user already exists by email OR by Firebase UID
+    existing_user = db.query(User).filter(
+        (User.email == user.email) | (User.id == firebase_uid)
+    ).first()
     if existing_user:
+        # Update existing user to ensure consistency
+        needs_update = False
+        if existing_user.id != firebase_uid:
+            existing_user.id = firebase_uid
+            needs_update = True
+        # Also update role if it was incorrectly set (e.g., by old auto-create code)
+        if existing_user.role != user.role:
+            existing_user.role = user.role
+            needs_update = True
+        if existing_user.name != user.name:
+            existing_user.name = user.name
+            needs_update = True
+        if needs_update:
+            db.commit()
+            db.refresh(existing_user)
+            # Update Firebase custom claims with correct role
+            try:
+                auth.set_custom_user_claims(firebase_uid, {"role": existing_user.role.value})
+            except Exception:
+                pass  # Non-critical, claims will be set eventually
         return existing_user
 
-    db_user = user_model.User(**user.dict())
+    # Create user with Firebase UID as the primary key
+    db_user = user_model.User(
+        id=firebase_uid,  # Use Firebase UID, not auto-generated UUID
+        name=user.name,
+        email=user.email,
+        role=user.role,
+    )
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
 
     try:
-        # user is the input schema (UserCreate) and doesn't have an id yet.
-        # Use the persisted db_user's id and role when assigning Firebase claims.
-        auth.set_custom_user_claims(db_user.id, {"role": db_user.role})
+        # Set Firebase custom claims with the correct Firebase UID
+        auth.set_custom_user_claims(firebase_uid, {"role": db_user.role.value})
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error assigning Firebase role: {str(e)}")
 

@@ -5,7 +5,7 @@ from app.db import get_db, SessionLocal
 from sqlalchemy import func
 from app.models.assessment_draft import AssessmentDraft
 from app.schemas.assessment_draft import AssessmentDraftCreate, AssessmentDraftOut
-from app.services.auth import get_current_user, require_apprentice, require_mentor
+from app.services.auth import get_current_user, require_apprentice, require_mentor, is_premium_user
 from app.models.user import User, UserRole
 from app.models.question import Question
 import uuid
@@ -23,6 +23,7 @@ from app.models.question import Question
 from app.models.category import Category
 from app.schemas.assessment_draft import QuestionItem
 from app.schemas.assessment_draft import AssessmentDraftUpdate
+from app.routes.templates import is_assessment_free
 from app.models.assessment import Assessment
 from app.models.notification import Notification
 from app.services.push_notification import notify_assessment_submitted
@@ -890,6 +891,16 @@ async def submit_draft(
 
         # Create Assessment record with baseline scores (or None if baseline failed)
         logger.info("Creating assessment record with baseline scores (full AI scoring will follow)...")
+
+        # Derive category from template metadata so progress queries can find it
+        _tpl = db.query(AssessmentTemplate).filter_by(id=draft.template_id).first()
+        _category = None
+        if _tpl:
+            if _tpl.is_master_assessment:
+                _category = "master_trooth"
+            elif (_tpl.key or "").startswith("spiritual_gifts"):
+                _category = "spiritual_gifts"
+
         assessment = Assessment(
             id=str(uuid.uuid4()),
             apprentice_id=current_user.id,
@@ -899,6 +910,7 @@ async def submit_draft(
             recommendation=baseline_scores.get('summary_recommendation') if baseline_scores else None,
             status="processing",  # Will be updated to "done" after AI enrichment
             previous_assessment_id=previous_assessment.id if previous_assessment else None,
+            category=_category,
         )
         # Store baseline mentor_report_v2 if generated
         if baseline_scores and baseline_scores.get('mentor_blob_v2'):
@@ -1079,6 +1091,13 @@ def start_draft(
     template = db.query(AssessmentTemplate).filter_by(id=template_id, is_published=True).first()
     if not template:
         raise HTTPException(status_code=404, detail="Template not found or not published")
+
+    # Check premium access for non-free assessments
+    if not is_assessment_free(template) and not is_premium_user(current_user):
+        raise HTTPException(
+            status_code=403,
+            detail="Premium subscription required for this assessment. Upgrade to access all assessments."
+        )
 
     # Create draft
     draft = AssessmentDraft(

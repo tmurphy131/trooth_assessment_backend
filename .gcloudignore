@@ -1,0 +1,52 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# Git
+.git/
+.gitignore
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+logs 2/
+*.log
+
+# Tests (not needed in production)
+tests/
+test_*.py
+load_tests/
+pytest.ini
+conftest.py
+
+# Development files
+.env
+mcp_postgres_server/
+
+# Documentation (not needed in container)
+*.md
+!MENTOR_AGREEMENT.md
+!mentor_report_print_template.md
+
+# Scripts not needed at runtime
+manage_subscriptions.py
+
+# Site files
+site_files/
+
+# Misc
+Build Runner*.txt

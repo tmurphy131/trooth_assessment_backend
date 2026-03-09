@@ -11,7 +11,7 @@ from pydantic import BaseModel, EmailStr
 from sqlalchemy.orm import Session
 
 from app.db import get_db
-from app.services.auth import get_current_user_optional
+from app.services.auth import get_current_user_optional, is_premium_user
 from app.models.user import User
 from app.core.settings import settings
 
@@ -63,7 +63,7 @@ def _check_rate_limit(identifier: str) -> bool:
     return True
 
 
-def _send_support_emails(data: SupportRequest, submitted_at: str):
+def _send_support_emails(data: SupportRequest, submitted_at: str, is_premium: bool = False):
     """Send admin notification and user confirmation emails."""
     from sendgrid import SendGridAPIClient
     from sendgrid.helpers.mail import Mail
@@ -91,6 +91,10 @@ def _send_support_emails(data: SupportRequest, submitted_at: str):
     from_email = os.getenv("EMAIL_FROM_ADDRESS", "admin@onlyblv.com")
     admin_emails = ["admin@onlyblv.com", "tay.murphy88@gmail.com"]
     
+    # Build subject line with premium tag if applicable
+    subject_prefix = "[PREMIUM SUPPORT]" if is_premium else "[Support]"
+    admin_subject = f"{subject_prefix} {data.topic} - {data.name}"
+    
     try:
         sg = SendGridAPIClient(api_key)
         
@@ -104,14 +108,15 @@ def _send_support_emails(data: SupportRequest, submitted_at: str):
             user_id=data.user_id,
             device_info=data.device_info,
             source=data.source,
-            submitted_at=submitted_at
+            submitted_at=submitted_at,
+            is_premium=is_premium
         )
         
         for admin_email in admin_emails:
             admin_mail = Mail(
                 from_email=from_email,
                 to_emails=admin_email,
-                subject=f"[Support] {data.topic} - {data.name}",
+                subject=admin_subject,
                 html_content=admin_html
             )
             # Set reply-to as the user's email for easy response
@@ -192,8 +197,13 @@ async def submit_support_request(
     submitted_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     logger.info(f"Support request from {data.email} ({data.source}): {data.topic}")
     
-    # 5. Send emails
-    email_sent = _send_support_emails(data, submitted_at)
+    # 5. Check if user is premium (for priority support tagging)
+    user_is_premium = False
+    if current_user:
+        user_is_premium = is_premium_user(current_user)
+    
+    # 6. Send emails
+    email_sent = _send_support_emails(data, submitted_at, is_premium=user_is_premium)
     
     if not email_sent:
         # Log but don't fail - we don't want to lose the user's message

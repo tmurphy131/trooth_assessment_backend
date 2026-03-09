@@ -37,7 +37,7 @@ def accept_invitation_page(
     """
     logo_url = getattr(settings, 'logo_url', 'https://onlyblv.com/onlyblv_logo.png')
     ios_app_store_url = getattr(settings, 'ios_app_store_url', 'https://apps.apple.com/app/t-root-h-discipleship/id6757311543')
-    play_store_url = "https://play.google.com/store/apps/details?id=com.onlyblv.trooth"
+    play_store_url = "https://play.google.com/store/apps/details?id=com.trooth.flutterTroothAssessment"
     
     # Look up the invitation
     invitation = db.query(ApprenticeInvitation).filter_by(token=token).first()
@@ -55,7 +55,7 @@ def accept_invitation_page(
             }
         )
     
-    if invitation.expires_at < datetime.now(UTC):
+    if invitation.expires_at < datetime.now(UTC).replace(tzinfo=None):
         return templates.TemplateResponse(
             "invitations/accept_invitation.html",
             {
@@ -190,7 +190,7 @@ def validate_invitation_token(token: str, db: Session = Depends(get_db)):
     if not invitation:
         raise NotFoundException("Invalid invitation token")
     
-    if invitation.expires_at < datetime.now(UTC):
+    if invitation.expires_at < datetime.now(UTC).replace(tzinfo=None):
         raise ValidationException("This invitation has expired")
     
     if invitation.accepted:
@@ -214,7 +214,8 @@ def accept_invite(data: InviteAccept, db: Session = Depends(get_db)):
     invitation = db.query(ApprenticeInvitation).filter_by(token=data.token).first()
     if not invitation:
         raise HTTPException(status_code=400, detail="Invitation is invalid or expired")
-    if invitation.expires_at < datetime.now(UTC):
+    # Compare as naive datetimes (DB stores naive, so strip tz from now())
+    if invitation.expires_at < datetime.now(UTC).replace(tzinfo=None):
         raise ValidationException("This invitation has expired.")
 
     if invitation.accepted:

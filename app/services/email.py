@@ -542,6 +542,216 @@ T[root]H Discipleship Team
     
     return send_email(to_email, subject, html_content, plain_content)
 
+
+def send_gift_seat_email(
+    to_email: str,
+    apprentice_name: str,
+    mentor_name: str,
+    redemption_code: str,
+    auto_activated: bool = False,
+) -> bool:
+    """Send email notification when mentor gifts premium access to apprentice.
+    
+    Args:
+        to_email: Apprentice's email address
+        apprentice_name: Apprentice's display name
+        mentor_name: Mentor's display name
+        redemption_code: The redemption code (as fallback if not auto-activated)
+        auto_activated: Whether premium was automatically activated
+    
+    Returns: True if sent successfully
+    """
+    if auto_activated:
+        subject = f"🎁 {mentor_name} gifted you Premium access!"
+        status_message = """
+            <p style="background: linear-gradient(135deg, #d4af37 0%, #f5e6a3 50%, #d4af37 100%); 
+                      color: #1a1a1a; padding: 16px; border-radius: 8px; text-align: center; 
+                      font-weight: bold; font-size: 18px;">
+                ✨ Your Premium access is now ACTIVE! ✨
+            </p>
+            <p style="color: #ccc;">
+                Open the T[root]H Discipleship app to enjoy your new premium features.
+            </p>
+        """
+    else:
+        subject = f"🎁 {mentor_name} wants to gift you Premium access!"
+        status_message = f"""
+            <p style="color: #ccc;">
+                To activate your premium access, open the T[root]H Discipleship app and enter this code:
+            </p>
+            <div style="background: #2a2a2a; border: 2px solid #d4af37; border-radius: 8px; 
+                        padding: 20px; text-align: center; margin: 20px 0;">
+                <span style="font-family: monospace; font-size: 28px; color: #d4af37; 
+                             letter-spacing: 4px; font-weight: bold;">
+                    {redemption_code}
+                </span>
+            </div>
+        """
+    
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #0a0a0a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+            <!-- Header -->
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h1 style="color: #d4af37; font-size: 24px; margin: 0;">T[root]H Discipleship</h1>
+            </div>
+            
+            <!-- Main Content -->
+            <div style="background: #1a1a1a; border-radius: 12px; padding: 32px; border: 1px solid #333;">
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <span style="font-size: 48px;">🎁</span>
+                </div>
+                
+                <h2 style="color: #fff; text-align: center; margin: 0 0 16px 0; font-size: 22px;">
+                    You've received a gift!
+                </h2>
+                
+                <p style="color: #ccc; text-align: center; font-size: 16px; line-height: 1.6;">
+                    Hi {apprentice_name or 'there'},<br><br>
+                    <strong style="color: #d4af37;">{mentor_name}</strong> has gifted you 
+                    <strong style="color: #d4af37;">Premium access</strong> to T[root]H Discipleship!
+                </p>
+                
+                {status_message}
+                
+                <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #333;">
+                    <h3 style="color: #d4af37; margin: 0 0 12px 0; font-size: 16px;">Premium Benefits:</h3>
+                    <ul style="color: #ccc; margin: 0; padding-left: 20px; line-height: 1.8;">
+                        <li>Full AI-powered assessment reports</li>
+                        <li>Unlimited assessment history</li>
+                        <li>Spiritual gifts detailed analysis</li>
+                        <li>Priority support</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="text-align: center; margin-top: 32px; color: #666; font-size: 12px;">
+                <p>This premium access was gifted by your mentor and will remain active as long as they maintain the gift.</p>
+                <p style="margin-top: 16px;">
+                    Questions? Contact us at admin@onlyblv.com
+                </p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    
+    plain_content = f"""
+T[root]H Discipleship - You've received a gift!
+
+Hi {apprentice_name or 'there'},
+
+{mentor_name} has gifted you Premium access to T[root]H Discipleship!
+
+{'Your Premium access is now ACTIVE! Open the app to enjoy your new features.' if auto_activated else f'To activate, open the app and enter this code: {redemption_code}'}
+
+Premium Benefits:
+- Full AI-powered assessment reports
+- Unlimited assessment history
+- Spiritual gifts detailed analysis
+- Priority support
+
+This premium access was gifted by your mentor and will remain active as long as they maintain the gift.
+
+Questions? Contact us at admin@onlyblv.com
+
+Best regards,
+T[root]H Discipleship Team
+    """
+    
+    return send_email(to_email, subject, html_content, plain_content)
+
+
+def send_gift_seat_revoked_email(
+    to_email: str,
+    apprentice_name: str,
+    mentor_name: str,
+) -> bool:
+    """Send email notification when mentor revokes gift seat from apprentice.
+    
+    Args:
+        to_email: Apprentice's email address
+        apprentice_name: Apprentice's display name
+        mentor_name: Mentor's display name
+    
+    Returns: True if sent successfully
+    """
+    subject = "Your T[root]H Premium access has ended"
+    
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #0a0a0a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+            <!-- Header -->
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h1 style="color: #d4af37; font-size: 24px; margin: 0;">T[root]H Discipleship</h1>
+            </div>
+            
+            <!-- Main Content -->
+            <div style="background: #1a1a1a; border-radius: 12px; padding: 32px; border: 1px solid #333;">
+                <h2 style="color: #fff; text-align: center; margin: 0 0 16px 0; font-size: 20px;">
+                    Premium Access Update
+                </h2>
+                
+                <p style="color: #ccc; text-align: center; font-size: 16px; line-height: 1.6;">
+                    Hi {apprentice_name or 'there'},<br><br>
+                    Your gifted Premium access from <strong style="color: #d4af37;">{mentor_name}</strong> 
+                    has ended. Your account has been switched back to the free tier.
+                </p>
+                
+                <p style="color: #ccc; text-align: center; margin-top: 24px;">
+                    You can still use T[root]H Discipleship with free features, or upgrade to 
+                    Premium yourself to continue enjoying full access.
+                </p>
+                
+                <div style="text-align: center; margin-top: 24px;">
+                    <p style="color: #666; font-size: 14px;">
+                        Open the app to explore upgrade options.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="text-align: center; margin-top: 32px; color: #666; font-size: 12px;">
+                <p>Questions? Contact us at admin@onlyblv.com</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    
+    plain_content = f"""
+T[root]H Discipleship - Premium Access Update
+
+Hi {apprentice_name or 'there'},
+
+Your gifted Premium access from {mentor_name} has ended. Your account has been switched back to the free tier.
+
+You can still use T[root]H Discipleship with free features, or upgrade to Premium yourself to continue enjoying full access.
+
+Open the app to explore upgrade options.
+
+Questions? Contact us at admin@onlyblv.com
+
+Best regards,
+T[root]H Discipleship Team
+    """
+    
+    return send_email(to_email, subject, html_content, plain_content)
+
+
 def render_spiritual_gifts_report_email(apprentice_name: str | None, version: int, scores: dict, definitions: dict, app_url: str) -> tuple[str, str]:
     """Render enhanced Spiritual Gifts report email (HTML + plain text).
 

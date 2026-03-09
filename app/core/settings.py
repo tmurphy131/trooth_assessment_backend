@@ -72,6 +72,9 @@ class Settings:
         self.premium_features_enabled = self._parse_bool(
             os.getenv("PREMIUM_FEATURES_ENABLED", "false")
         )
+        
+        # RevenueCat settings
+        self.revenuecat_webhook_secret = os.getenv("REVENUECAT_WEBHOOK_SECRET", "")
 
         # Printful API (for shop availability)
         self.printful_api_token = os.getenv("PRINTFUL_API_TOKEN", "")
