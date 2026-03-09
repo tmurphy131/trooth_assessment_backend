@@ -1,6 +1,7 @@
 from __future__ import annotations
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 import base64, json
@@ -36,9 +37,18 @@ def _decode_cursor(cursor: str) -> tuple[datetime, str]:
 
 @router.get("/master/latest", summary="Featured card: latest Master (summary shape)")
 def featured_master_latest(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    # Match by category column OR by template is_master_assessment flag
+    # (handles existing assessments created before category was set)
     a = (
         db.query(Assessment)
-        .filter(Assessment.apprentice_id == current_user.id, Assessment.category == "master_trooth")
+        .outerjoin(AssessmentTemplate, Assessment.template_id == AssessmentTemplate.id)
+        .filter(
+            Assessment.apprentice_id == current_user.id,
+            or_(
+                Assessment.category == "master_trooth",
+                AssessmentTemplate.is_master_assessment == True,
+            ),
+        )
         .order_by(Assessment.created_at.desc())
         .first()
     )
@@ -119,7 +129,14 @@ def progress_reports(limit: int = 20, cursor: Optional[str] = None, db: Session 
     items: List[Dict[str, Any]] = []
     for a in rows:
         scores = a.scores or {}
-        cat = (a.category or "other").lower()
+        cat = (a.category or "").lower()
+        # Fallback: derive category from template flags if not set on the assessment
+        if not cat and a.template:
+            if getattr(a.template, 'is_master_assessment', False):
+                cat = "master_trooth"
+            elif (getattr(a.template, 'key', '') or '').startswith("spiritual_gifts"):
+                cat = "spiritual_gifts"
+        cat = cat or "other"
         # Get template info if available
         template_id = a.template_id
         template_name = a.template.name if a.template else None

@@ -891,6 +891,16 @@ async def submit_draft(
 
         # Create Assessment record with baseline scores (or None if baseline failed)
         logger.info("Creating assessment record with baseline scores (full AI scoring will follow)...")
+
+        # Derive category from template metadata so progress queries can find it
+        _tpl = db.query(AssessmentTemplate).filter_by(id=draft.template_id).first()
+        _category = None
+        if _tpl:
+            if _tpl.is_master_assessment:
+                _category = "master_trooth"
+            elif (_tpl.key or "").startswith("spiritual_gifts"):
+                _category = "spiritual_gifts"
+
         assessment = Assessment(
             id=str(uuid.uuid4()),
             apprentice_id=current_user.id,
@@ -900,6 +910,7 @@ async def submit_draft(
             recommendation=baseline_scores.get('summary_recommendation') if baseline_scores else None,
             status="processing",  # Will be updated to "done" after AI enrichment
             previous_assessment_id=previous_assessment.id if previous_assessment else None,
+            category=_category,
         )
         # Store baseline mentor_report_v2 if generated
         if baseline_scores and baseline_scores.get('mentor_blob_v2'):

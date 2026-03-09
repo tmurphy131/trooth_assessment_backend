@@ -35,26 +35,15 @@ conftest.py
 
 # Development files
 .env
-*.json
-!firebase_key.json
 mcp_postgres_server/
 
 # Documentation (not needed in container)
 *.md
-docs/
+!MENTOR_AGREEMENT.md
+!mentor_report_print_template.md
 
 # Scripts not needed at runtime
-setup_*.py
-complete_*.py
-create_*.py
-convert_*.py
-get_*.py
-populate_*.py
 manage_subscriptions.py
-
-# Build artifacts
-*.txt
-!requirements.txt
 
 # Site files
 site_files/

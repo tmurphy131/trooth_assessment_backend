@@ -141,24 +141,88 @@ def get_subscription_status(
     return SubscriptionStatusResponse(**base_status)
 
 
+class RestorePurchaseRequest(BaseModel):
+    """Optional body for restore endpoint to sync client-side RevenueCat data."""
+    revenuecat_customer_id: Optional[str] = Field(None, description="RevenueCat customer ID from SDK")
+    product_id: Optional[str] = Field(None, description="Active product ID from RevenueCat entitlement")
+    entitlement_id: Optional[str] = Field(None, description="Active entitlement identifier (e.g. 'premium')")
+    expiration_date: Optional[str] = Field(None, description="ISO 8601 expiration date from entitlement")
+    is_active: Optional[bool] = Field(None, description="Whether the entitlement is currently active")
+    store: Optional[str] = Field(None, description="Store source: PLAY_STORE, APP_STORE, etc.")
+
+
 @router.post("/restore")
 def restore_purchases(
+    body: Optional[RestorePurchaseRequest] = None,
     user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
 ):
     """
-    Trigger restore purchases.
-    
-    This endpoint doesn't actually restore - that happens on the client via
-    RevenueCat SDK. This endpoint just acknowledges the request and tells
-    the client the current server-side status after any webhooks have processed.
+    Restore / sync subscription from RevenueCat client SDK.
     
     The client should:
     1. Call RevenueCat.restorePurchases() on the SDK
-    2. Wait for webhooks to update server
-    3. Call GET /subscriptions/status to get updated status
+    2. Read the active entitlements from CustomerInfo
+    3. POST them here so the backend can update the user record
+       (in case the webhook was missed or delayed)
+    4. Call GET /subscriptions/status to confirm updated status
+    
+    If no body is provided, returns current status (backward compatible).
     """
+    updated = False
+    
+    if body:
+        # Store RevenueCat customer ID
+        if body.revenuecat_customer_id and not user.revenuecat_customer_id:
+            user.revenuecat_customer_id = body.revenuecat_customer_id
+            updated = True
+            logger.info(f"Restore: set revenuecat_customer_id for {user.email}: {body.revenuecat_customer_id}")
+        
+        # If the client reports an active premium entitlement, sync it
+        if body.is_active and body.product_id:
+            tier = map_product_to_tier(body.product_id)
+            platform = map_product_to_platform(body.product_id)
+            
+            # Parse store from client if available
+            if body.store:
+                store_lower = body.store.lower()
+                if "play" in store_lower or "google" in store_lower:
+                    platform = SubscriptionPlatform.google
+                elif "app_store" in store_lower or "apple" in store_lower:
+                    platform = SubscriptionPlatform.apple
+            
+            # Parse expiration
+            expires_at = None
+            if body.expiration_date:
+                try:
+                    expires_at = datetime.fromisoformat(body.expiration_date.replace("Z", "+00:00"))
+                except ValueError:
+                    logger.warning(f"Could not parse expiration_date: {body.expiration_date}")
+            
+            # Only update if current tier is free or expired
+            current_premium = check_premium_access(user)
+            if not current_premium.get("has_premium", False):
+                user.subscription_tier = tier
+                user.subscription_platform = platform
+                user.subscription_expires_at = expires_at
+                user.subscription_auto_renew = True
+                updated = True
+                
+                log_subscription_event(
+                    db, user.id, EventTypes.INITIAL_PURCHASE,
+                    {"product_id": body.product_id, "source": "client_restore", "store": body.store}
+                )
+                logger.info(f"Restore: synced subscription for {user.email} from client: tier={tier.value}, product={body.product_id}")
+            else:
+                logger.info(f"Restore: user {user.email} already has premium, skipping tier update")
+        
+        if updated:
+            db.commit()
+            db.refresh(user)
+    
     return {
-        "message": "Restore initiated. Please refresh subscription status after a moment.",
+        "message": "Restore completed." if updated else "Restore initiated. Please refresh subscription status after a moment.",
+        "updated": updated,
         "current_status": check_premium_access(user)
     }
 
@@ -1018,6 +1082,13 @@ async def revenuecat_webhook(
         logger.warning(f"Webhook user not found: {app_user_id}")
         return {"status": "user_not_found"}
     
+    # Always update revenuecat_customer_id when we see this user in a webhook
+    # Do this BEFORE any other processing so it's captured for all event types
+    if app_user_id and not user.revenuecat_customer_id:
+        user.revenuecat_customer_id = app_user_id
+        db.commit()  # Commit immediately so this persists even if we return early from gift seat handler
+        logger.info(f"Set revenuecat_customer_id for user {user.email}: {app_user_id}")
+    
     # Check if this is a gift seat subscription
     is_gift_seat = "gift_seat" in product_id.lower()
     
@@ -1078,8 +1149,11 @@ async def revenuecat_webhook(
         logger.warning(f"Billing issue for user {user.email}")
         
     elif event_type == "PRODUCT_CHANGE":
-        # User upgraded/downgraded
+        # User upgraded/downgraded - update all subscription fields
         user.subscription_tier = tier
+        user.subscription_platform = platform
+        user.subscription_expires_at = expires_at
+        user.subscription_auto_renew = True
         log_subscription_event(
             db, user.id, EventTypes.INITIAL_PURCHASE,
             {"product_id": product_id, "event_type": "PRODUCT_CHANGE"}
