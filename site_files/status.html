@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>System Status — T[root]H Discipleship</title>
+  <title>System Status — T[root]H</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/png" href="onlyblv_logo.png" />
 
@@ -318,6 +318,62 @@
       cursor: not-allowed;
     }
 
+    /* Tabs */
+    .tab-bar {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 0;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 14px 24px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      font-family: var(--font);
+      letter-spacing: 0.02em;
+    }
+    .tab-btn:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+    }
+    .tab-btn.active {
+      color: var(--gold);
+    }
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 2px 2px 0 0;
+    }
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* Accountability-specific: red accent */
+    .acc-accent { color: #dc2626; }
+    .big-number-card.acc-highlight {
+      border-color: #dc2626;
+      background: rgba(220, 38, 38, 0.1);
+    }
+    .big-number-card.acc-highlight .big-number-value { color: #dc2626; }
+    .big-number-card.acc-highlight .big-number-label { color: #ef4444; }
+    .acc-section-title::before { background: #dc2626; }
+    .acc-section-title { color: #dc2626; }
+
     /* Mobile */
     @media (max-width: 600px) {
       .big-numbers {
@@ -330,6 +386,131 @@
         flex-direction: column;
         gap: 12px;
       }
+    }
+
+    /* Clickable stat cards */
+    .big-number-card.clickable {
+      cursor: pointer;
+    }
+    .big-number-card.clickable:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 480px;
+      max-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      animation: modalIn 0.2s ease-out;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .modal-header h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 22px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      line-height: 1;
+    }
+    .modal-close:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+    }
+    .modal-body {
+      padding: 16px 24px 24px;
+      overflow-y: auto;
+    }
+    .modal-loading {
+      text-align: center;
+      padding: 32px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .modal-loading .loading-spinner {
+      margin-bottom: 12px;
+    }
+    .user-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .user-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 14px;
+    }
+    .user-list li:last-child {
+      border-bottom: none;
+    }
+    .user-name {
+      color: var(--text);
+      font-weight: 500;
+    }
+    .user-meta {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .pair-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 14px;
+    }
+    .pair-row:last-child { border-bottom: none; }
+    .pair-arrow {
+      color: var(--gold);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .modal-count {
+      font-size: 12px;
+      color: var(--muted);
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 8px;
     }
   </style>
 </head>
@@ -351,16 +532,21 @@
   <main>
     <section class="hero">
       <div class="container">
-        <h1>T[root]H Discipleship</h1>
+        <h1 id="hero-title">T[root]H Discipleship</h1>
         <p>Real-time system health and usage metrics</p>
         <div class="last-updated">
           Last updated: <span id="last-updated">Loading...</span>
-          <button class="refresh-btn" onclick="loadMetrics()" style="margin-left: 12px;">Refresh</button>
+          <button class="refresh-btn" onclick="refreshCurrentTab()" style="margin-left: 12px;">Refresh</button>
         </div>
       </div>
     </section>
 
     <div class="container">
+      <!-- Tab Bar -->
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="discipleship" onclick="switchTab('discipleship')">Discipleship</button>
+        <button class="tab-btn" data-tab="accountability" onclick="switchTab('accountability')">Accountability</button>
+      </div>
       <!-- Loading State -->
       <div class="loading" id="loading-state">
         <div class="loading-spinner"></div>
@@ -369,26 +555,26 @@
 
       <!-- Error State -->
       <div class="error-message" id="error-state" style="display: none;">
-        <p>Failed to load metrics. <a href="#" onclick="loadMetrics(); return false;">Try again</a></p>
+        <p>Failed to load metrics. <a href="#" onclick="refreshCurrentTab(); return false;">Try again</a></p>
       </div>
 
-      <!-- Content (hidden until loaded) -->
-      <div id="content" style="display: none;">
+      <!-- ========== DISCIPLESHIP TAB ========== -->
+      <div class="tab-panel active" id="tab-discipleship">
         <!-- Big Numbers -->
         <div class="big-numbers">
-          <div class="big-number-card highlight">
+          <div class="big-number-card highlight clickable" onclick="openUserModal('all', 'Total Users')">
             <div class="big-number-value" id="total-users">-</div>
             <div class="big-number-label">Total Users</div>
           </div>
-          <div class="big-number-card">
+          <div class="big-number-card clickable" onclick="openUserModal('mentors', 'Mentors')">
             <div class="big-number-value" id="total-mentors">-</div>
             <div class="big-number-label">Mentors</div>
           </div>
-          <div class="big-number-card">
+          <div class="big-number-card clickable" onclick="openUserModal('apprentices', 'Apprentices')">
             <div class="big-number-value" id="total-apprentices">-</div>
             <div class="big-number-label">Apprentices</div>
           </div>
-          <div class="big-number-card highlight">
+          <div class="big-number-card highlight clickable" onclick="openUserModal('pairs', 'Active Pairs')">
             <div class="big-number-value" id="active-pairs">-</div>
             <div class="big-number-label">Active Pairs</div>
           </div>
@@ -438,52 +624,191 @@
           </div>
         </section>
       </div>
+      <!-- END DISCIPLESHIP TAB -->
+
+      <!-- ========== ACCOUNTABILITY TAB ========== -->
+      <div class="tab-panel" id="tab-accountability">
+        <!-- Big Numbers -->
+        <div class="big-numbers">
+          <div class="big-number-card acc-highlight">
+            <div class="big-number-value" id="acc-total-users">-</div>
+            <div class="big-number-label">Total Users</div>
+          </div>
+          <div class="big-number-card">
+            <div class="big-number-value" id="acc-total-partners">-</div>
+            <div class="big-number-label">Partners Added</div>
+          </div>
+          <div class="big-number-card acc-highlight">
+            <div class="big-number-value" id="acc-total-alerts">-</div>
+            <div class="big-number-label">Help Alerts Sent</div>
+          </div>
+          <div class="big-number-card">
+            <div class="big-number-value" id="acc-alerts-responded">-</div>
+            <div class="big-number-label">Alerts Responded</div>
+          </div>
+          <div class="big-number-card">
+            <div class="big-number-value" id="acc-response-rate">-</div>
+            <div class="big-number-label">Response Rate</div>
+          </div>
+          <div class="big-number-card">
+            <div class="big-number-value" id="acc-users-with-partners">-</div>
+            <div class="big-number-label">Users w/ Partners</div>
+          </div>
+        </div>
+
+        <!-- This Week -->
+        <section class="section">
+          <h3 class="section-title acc-section-title">This Week</h3>
+          <div class="activity-grid">
+            <div class="activity-card">
+              <h4>New Users</h4>
+              <div class="value" id="acc-new-users-week">-</div>
+              <div class="subtext">joined this week</div>
+            </div>
+            <div class="activity-card">
+              <h4>Help Alerts</h4>
+              <div class="value" id="acc-alerts-week">-</div>
+              <div class="subtext">sent this week</div>
+            </div>
+            <div class="activity-card">
+              <h4>Responses</h4>
+              <div class="value" id="acc-responded-week">-</div>
+              <div class="subtext">responded this week</div>
+            </div>
+            <div class="activity-card">
+              <h4>Partners Added</h4>
+              <div class="value" id="acc-partners-week">-</div>
+              <div class="subtext">added this week</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Alert Status -->
+        <section class="section">
+          <h3 class="section-title acc-section-title">Alert Status</h3>
+          <div class="metrics-table">
+            <div class="metric-row">
+              <span class="metric-label">Pending Alerts</span>
+              <span class="metric-value gold" id="acc-alerts-pending">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Responded Alerts</span>
+              <span class="metric-value green" id="acc-alerts-responded-total">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Expired Alerts</span>
+              <span class="metric-value red" id="acc-alerts-expired">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Linked Partners (in-app)</span>
+              <span class="metric-value" id="acc-linked-partners">-</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Notifications -->
+        <section class="section">
+          <h3 class="section-title acc-section-title">Notifications Delivered</h3>
+          <div class="activity-grid">
+            <div class="activity-card">
+              <h4>SMS Sent</h4>
+              <div class="value" id="acc-sms-sent">-</div>
+              <div class="subtext">via Twilio</div>
+            </div>
+            <div class="activity-card">
+              <h4>Emails Sent</h4>
+              <div class="value" id="acc-emails-sent">-</div>
+              <div class="subtext">via SendGrid</div>
+            </div>
+            <div class="activity-card">
+              <h4>Push Sent</h4>
+              <div class="value" id="acc-push-sent">-</div>
+              <div class="subtext">via FCM</div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- END ACCOUNTABILITY TAB -->
     </div>
   </main>
+
+  <!-- User List Modal -->
+  <div class="modal-overlay" id="user-modal" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-title">Users</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <div class="modal-loading">
+          <div class="loading-spinner"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <div class="container">
       <div class="footer-brand">#getrooted #LUKE850</div>
-      <div class="footer-copy">© <span id="year"></span> ONLY BLV. T[root]H Discipleship.</div>
+      <div class="footer-copy">© <span id="year"></span> ONLY BLV. T[root]H.</div>
     </div>
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // API Base URL - adjust for your deployment
-    const API_BASE = window.location.hostname === 'localhost' 
+    // --- API URLs ---
+    const DISCIPLESHIP_API = window.location.hostname === 'localhost' 
       ? 'http://localhost:8000'
       : 'https://trooth-discipleship-api.onlyblv.com';
+    const ACCOUNTABILITY_API = 'https://us-central1-troothaccoutability.cloudfunctions.net/getAccountabilityMetrics';
 
-    async function loadMetrics() {
+    let currentTab = 'discipleship';
+
+    // ========== TAB SWITCHING ==========
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(`tab-${tab}`).classList.add('active');
+
+      // Update hero title
+      document.getElementById('hero-title').textContent = 
+        tab === 'discipleship' ? 'T[root]H Discipleship' : 'T[root]H Accountability';
+
+      // Load data for the selected tab
+      if (tab === 'discipleship') loadDiscipleshipMetrics();
+      else loadAccountabilityMetrics();
+    }
+
+    function refreshCurrentTab() {
+      if (currentTab === 'discipleship') loadDiscipleshipMetrics();
+      else loadAccountabilityMetrics();
+    }
+
+    // ========== DISCIPLESHIP METRICS ==========
+    async function loadDiscipleshipMetrics() {
       const loadingState = document.getElementById('loading-state');
       const errorState = document.getElementById('error-state');
-      const content = document.getElementById('content');
+      const panel = document.getElementById('tab-discipleship');
       const statusBadge = document.getElementById('status-badge');
       const statusText = document.getElementById('status-text');
 
-      // Show loading
+      // Hide all tab panels first
+      document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
       loadingState.style.display = 'block';
       errorState.style.display = 'none';
-      content.style.display = 'none';
 
       try {
-        const response = await fetch(`${API_BASE}/metrics/dashboard`);
-        
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
+        const response = await fetch(`${DISCIPLESHIP_API}/metrics/dashboard`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const result = await response.json();
-        
-        if (result.status !== 'success') {
-          throw new Error(result.message || 'Failed to load metrics');
-        }
+        if (result.status !== 'success') throw new Error(result.message || 'Failed to load metrics');
 
         const data = result.data;
 
-        // Update totals
         document.getElementById('total-users').textContent = data.totals.users;
         document.getElementById('total-mentors').textContent = data.totals.mentors;
         document.getElementById('total-apprentices').textContent = data.totals.apprentices;
@@ -491,55 +816,188 @@
         document.getElementById('assessments-completed').textContent = data.totals.assessments_completed;
         document.getElementById('agreements-signed').textContent = data.totals.agreements_signed;
 
-        // Update activity
         document.getElementById('new-users-week').textContent = '+' + data.activity.new_users_this_week;
         document.getElementById('assessments-week').textContent = data.activity.assessments_this_week;
 
-        // Update pending
         document.getElementById('drafts-pending').textContent = data.pending.drafts_in_progress;
         document.getElementById('agreements-pending').textContent = data.pending.agreements_awaiting;
         document.getElementById('invitations-pending').textContent = data.pending.invitations_pending;
 
-        // Update timestamp (Eastern Time)
-        const generatedAt = new Date(data.generated_at);
-        document.getElementById('last-updated').textContent = generatedAt.toLocaleString('en-US', {
-          timeZone: 'America/New_York',
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-          hour: 'numeric',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: true,
-          timeZoneName: 'short'
-        });
+        updateTimestamp(data.generated_at);
 
-        // Update status badge
         statusBadge.classList.remove('error');
         statusText.textContent = 'All Systems Operational';
-
-        // Show content
         loadingState.style.display = 'none';
-        content.style.display = 'block';
+        panel.style.display = 'block';
 
       } catch (error) {
-        console.error('Failed to load metrics:', error);
-        
-        // Show error state
+        console.error('Failed to load discipleship metrics:', error);
         loadingState.style.display = 'none';
         errorState.style.display = 'block';
-        
-        // Update status badge
         statusBadge.classList.add('error');
         statusText.textContent = 'Connection Error';
       }
     }
 
-    // Load metrics on page load
-    loadMetrics();
+    // ========== ACCOUNTABILITY METRICS ==========
+    async function loadAccountabilityMetrics() {
+      const loadingState = document.getElementById('loading-state');
+      const errorState = document.getElementById('error-state');
+      const panel = document.getElementById('tab-accountability');
+      const statusBadge = document.getElementById('status-badge');
+      const statusText = document.getElementById('status-text');
+
+      // Hide all tab panels first
+      document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+      loadingState.style.display = 'block';
+      errorState.style.display = 'none';
+
+      try {
+        const response = await fetch(ACCOUNTABILITY_API);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const result = await response.json();
+        if (result.status !== 'success') throw new Error(result.message || 'Failed to load metrics');
+
+        const data = result.data;
+
+        // Big numbers
+        document.getElementById('acc-total-users').textContent = data.totals.users;
+        document.getElementById('acc-total-partners').textContent = data.totals.partners;
+        document.getElementById('acc-total-alerts').textContent = data.totals.alerts_sent;
+        document.getElementById('acc-alerts-responded').textContent = data.totals.alerts_responded;
+        document.getElementById('acc-response-rate').textContent = data.totals.response_rate + '%';
+        document.getElementById('acc-users-with-partners').textContent = data.totals.users_with_partners;
+
+        // This week
+        document.getElementById('acc-new-users-week').textContent = '+' + data.activity.new_users_this_week;
+        document.getElementById('acc-alerts-week').textContent = data.activity.alerts_this_week;
+        document.getElementById('acc-responded-week').textContent = data.activity.alerts_responded_this_week;
+        document.getElementById('acc-partners-week').textContent = '+' + data.activity.partners_added_this_week;
+
+        // Alert status
+        document.getElementById('acc-alerts-pending').textContent = data.totals.alerts_pending;
+        document.getElementById('acc-alerts-responded-total').textContent = data.totals.alerts_responded;
+        document.getElementById('acc-alerts-expired').textContent = data.totals.alerts_expired;
+        document.getElementById('acc-linked-partners').textContent = data.totals.linked_partners;
+
+        // Notifications
+        document.getElementById('acc-sms-sent').textContent = data.notifications.sms_sent;
+        document.getElementById('acc-emails-sent').textContent = data.notifications.emails_sent;
+        document.getElementById('acc-push-sent').textContent = data.notifications.push_sent;
+
+        updateTimestamp(data.generated_at);
+
+        statusBadge.classList.remove('error');
+        statusText.textContent = 'All Systems Operational';
+        loadingState.style.display = 'none';
+        panel.style.display = 'block';
+
+      } catch (error) {
+        console.error('Failed to load accountability metrics:', error);
+        loadingState.style.display = 'none';
+        errorState.style.display = 'block';
+        statusBadge.classList.add('error');
+        statusText.textContent = 'Connection Error';
+      }
+    }
+
+    // ========== HELPERS ==========
+    function updateTimestamp(isoString) {
+      const generatedAt = new Date(isoString);
+      document.getElementById('last-updated').textContent = generatedAt.toLocaleString('en-US', {
+        timeZone: 'America/New_York',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        timeZoneName: 'short'
+      });
+    }
+
+    // Load discipleship on page load (default tab)
+    loadDiscipleshipMetrics();
 
     // Auto-refresh every 5 minutes
-    setInterval(loadMetrics, 5 * 60 * 1000);
+    setInterval(refreshCurrentTab, 5 * 60 * 1000);
+
+    // ========== USER LIST MODAL ==========
+    function openUserModal(category, title) {
+      const overlay = document.getElementById('user-modal');
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-body').innerHTML = `
+        <div class="modal-loading">
+          <div class="loading-spinner"></div>
+          <p>Loading...</p>
+        </div>`;
+      overlay.classList.add('open');
+      fetchUserList(category);
+    }
+
+    function closeModal() {
+      document.getElementById('user-modal').classList.remove('open');
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    async function fetchUserList(category) {
+      const body = document.getElementById('modal-body');
+      try {
+        const res = await fetch(`${DISCIPLESHIP_API}/metrics/users?category=${category}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        if (json.status !== 'success') throw new Error(json.message || 'Failed');
+        const data = json.data;
+
+        if (!data.length) {
+          body.innerHTML = '<p style="color:var(--muted);text-align:center;padding:24px 0;">No users found.</p>';
+          return;
+        }
+
+        if (category === 'pairs') {
+          body.innerHTML = `
+            <div class="modal-count">${data.length} active pair${data.length !== 1 ? 's' : ''}</div>
+            ${data.map(p => `
+              <div class="pair-row">
+                <span class="user-name">${escapeHtml(p.mentor)}</span>
+                <span class="pair-arrow">→</span>
+                <span class="user-name">${escapeHtml(p.apprentice)}</span>
+              </div>`).join('')}`;
+        } else if (category === 'all') {
+          body.innerHTML = `
+            <div class="modal-count">${data.length} user${data.length !== 1 ? 's' : ''}</div>
+            <ul class="user-list">
+              ${data.map(u => `
+                <li>
+                  <span class="user-name">${escapeHtml(u.name)}</span>
+                  <span class="user-meta">${u.role} · ${u.joined}</span>
+                </li>`).join('')}
+            </ul>`;
+        } else {
+          body.innerHTML = `
+            <div class="modal-count">${data.length} ${category.slice(0, -1)}${data.length !== 1 ? 's' : ''}</div>
+            <ul class="user-list">
+              ${data.map(u => `
+                <li>
+                  <span class="user-name">${escapeHtml(u.name)}</span>
+                  <span class="user-meta">${u.joined}</span>
+                </li>`).join('')}
+            </ul>`;
+        }
+      } catch (err) {
+        console.error('Failed to load user list:', err);
+        body.innerHTML = '<p style="color:var(--red);text-align:center;padding:24px 0;">Failed to load users. Try again.</p>';
+      }
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
   </script>
 </body>
 </html>
