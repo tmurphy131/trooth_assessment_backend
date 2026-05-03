@@ -1,0 +1,46 @@
+# Cloud Run Job definition for seeding the "Who is Jesus?" assessment
+# Apply via:
+#   gcloud run jobs replace cloudrun_job_seed_who_is_jesus.yaml --region us-east4
+# Then execute:
+#   gcloud run jobs execute seed-who-is-jesus --region us-east4
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  name: seed-who-is-jesus
+  annotations:
+    run.googleapis.com/cloudsql-instances: trooth-prod:us-east4:app-pg
+spec:
+  template:
+    template:
+      spec:
+        serviceAccountName: trooth-run-sa@trooth-prod.iam.gserviceaccount.com
+        containers:
+        - image: gcr.io/trooth-prod/trooth-backend:latest
+          command: ["python", "setup_who_is_jesus_assessment.py"]
+          env:
+          - name: ENV
+            value: production
+          - name: SHOW_DOCS
+            value: "false"
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: DB_URL
+                key: latest
+          - name: FIREBASE_CERT_JSON
+            valueFrom:
+              secretKeyRef:
+                name: FIREBASE_CERT_JSON
+                key: latest
+          - name: SENDGRID_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: SENDGRID_API_KEY
+                key: latest
+          - name: OPENAI_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: OPENAI_API_KEY
+                key: latest
+    spec:
+      taskCount: 1
