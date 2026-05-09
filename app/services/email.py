@@ -417,6 +417,233 @@ def send_email(to_email: str, subject: str, html_content: str,
         logger.error(f"[email] Exception during send to={to_email}: {e}", exc_info=True)
         return False
 
+def _log_campaign_email(db, target_user_id: str, campaign_type: str, context: dict) -> None:
+    """Log a sent campaign email to EmailSendEvent for dedup and analytics."""
+    try:
+        from app.models.email_send_event import EmailSendEvent
+        event = EmailSendEvent(
+            sender_user_id=target_user_id,
+            target_user_id=target_user_id,
+            campaign_type=campaign_type,
+            purpose="engagement",
+            context=context,
+            delivery_status="sent",
+        )
+        db.add(event)
+        db.commit()
+    except Exception as e:
+        logger.error(f"[email] Failed to log campaign event: {e}")
+        db.rollback()
+
+
+def _already_sent_campaign(db, target_user_id: str, campaign_type: str, context_key: str,
+                            context_value: str, within_days: int = 3) -> bool:
+    """Return True if a matching campaign email was already sent recently."""
+    from datetime import timedelta
+    from app.models.email_send_event import EmailSendEvent
+    from sqlalchemy import cast, String
+    cutoff = datetime.utcnow() - timedelta(days=within_days)
+    existing = db.query(EmailSendEvent).filter(
+        EmailSendEvent.target_user_id == target_user_id,
+        EmailSendEvent.campaign_type == campaign_type,
+        EmailSendEvent.created_at >= cutoff,
+    ).first()
+    if not existing:
+        return False
+    ctx = existing.context or {}
+    return str(ctx.get(context_key)) == str(context_value)
+
+
+def send_draft_reminder_email(db, user, draft, mentor_name: str, days_since_start: int) -> bool:
+    """Send a reminder email for an incomplete assessment draft."""
+    env = get_email_template_env()
+    if not env:
+        return False
+
+    answers = draft.answers or {}
+    answered_count = len(answers) if isinstance(answers, dict) else 0
+    total_questions = len(draft.template.questions) if hasattr(draft, 'template') and draft.template else 0
+    progress_percent = int((answered_count / total_questions) * 100) if total_questions else 0
+    remaining_minutes = max(2, (total_questions - answered_count) // 3 + 1)
+    resume_link = f"{settings.backend_api_url.rstrip('/')}/r/draft/{draft.id}"
+    unsubscribe_link = f"{settings.app_url}/settings/notifications"
+
+    ctx = {
+        "apprentice_name": user.name,
+        "assessment_name": getattr(getattr(draft, 'template', None), 'name', 'your assessment'),
+        "days_ago": days_since_start,
+        "progress_percent": progress_percent,
+        "answered_count": answered_count,
+        "total_questions": total_questions,
+        "remaining_minutes": remaining_minutes,
+        "mentor_name": mentor_name,
+        "resume_link": resume_link,
+        "unsubscribe_link": unsubscribe_link,
+        "logo_url": settings.logo_url,
+    }
+
+    try:
+        html_content = env.get_template("campaigns/draft_reminder.html").render(**ctx)
+    except Exception as e:
+        logger.error(f"[email] Failed to render draft_reminder template: {e}")
+        return False
+
+    plain_content = (
+        f"Hi {user.name},\n\n"
+        f"You started the {ctx['assessment_name']} assessment {days_since_start} days ago "
+        f"and you're {progress_percent}% through.\n\n"
+        f"Resume here: {resume_link}\n\n"
+        f"Your mentor {mentor_name} is waiting to provide guidance."
+    )
+
+    subject = f"You're {progress_percent}% Through Your Assessment!"
+    success = send_email(user.email, subject, html_content, plain_content)
+    if success:
+        _log_campaign_email(db, user.id, "draft_reminder", {
+            "draft_id": draft.id,
+            "days_since_start": days_since_start,
+            "progress_percent": progress_percent,
+        })
+    return success
+
+
+def send_welcome_email(db, user) -> bool:
+    """Send role-appropriate welcome email on signup."""
+    env = get_email_template_env()
+    if not env:
+        return False
+
+    from app.models.user import UserRole
+    is_mentor = user.role == UserRole.mentor
+    template_name = "campaigns/welcome_mentor.html" if is_mentor else "campaigns/welcome_apprentice.html"
+
+    ctx = {
+        "name": user.name,
+        "app_url": settings.app_url,
+        "mentor_name": None,
+        "logo_url": settings.logo_url,
+    }
+
+    try:
+        html_content = env.get_template(template_name).render(**ctx)
+    except Exception as e:
+        logger.error(f"[email] Failed to render welcome template: {e}")
+        return False
+
+    if is_mentor:
+        subject = "Welcome to T[root]H — Start Mentoring Today"
+        plain_content = (
+            f"Hi {user.name},\n\nWelcome to T[root]H! Invite your first apprentice to get started.\n\n"
+            f"Open the app: {settings.app_url}"
+        )
+    else:
+        subject = "Welcome to T[root]H — Your Growth Journey Starts Now"
+        plain_content = (
+            f"Hi {user.name},\n\nWelcome to T[root]H! Take your first assessment to begin.\n\n"
+            f"Open the app: {settings.app_url}"
+        )
+
+    success = send_email(user.email, subject, html_content, plain_content)
+    if success:
+        _log_campaign_email(db, user.id, "welcome", {"role": user.role.value})
+    return success
+
+
+def send_new_template_email(db, user, template) -> bool:
+    """Notify an apprentice that a new assessment template is available."""
+    env = get_email_template_env()
+    if not env:
+        return False
+
+    ctx = {
+        "name": user.name,
+        "template_name": template.name,
+        "description": getattr(template, 'description', None),
+        "category": getattr(getattr(template, 'category', None), 'name', None),
+        "estimated_minutes": getattr(template, 'estimated_minutes', None),
+        "app_url": settings.app_url,
+        "unsubscribe_link": f"{settings.app_url}/settings/notifications",
+        "logo_url": settings.logo_url,
+    }
+
+    try:
+        html_content = env.get_template("campaigns/new_template.html").render(**ctx)
+    except Exception as e:
+        logger.error(f"[email] Failed to render new_template template: {e}")
+        return False
+
+    plain_content = (
+        f"Hi {user.name},\n\nA new assessment is available: {template.name}.\n\n"
+        f"Start it here: {settings.app_url}"
+    )
+    subject = f"New Assessment Available: {template.name}"
+
+    success = send_email(user.email, subject, html_content, plain_content)
+    if success:
+        _log_campaign_email(db, user.id, "new_template", {"template_id": template.id})
+    return success
+
+
+def send_inactive_reengagement_email(db, user, days_inactive: int,
+                                      assessment_count: int = 0,
+                                      last_assessment_name: str = None,
+                                      new_templates_count: int = 0,
+                                      apprentice_names: list = None) -> bool:
+    """Send re-engagement email to inactive users (apprentices and mentors)."""
+    env = get_email_template_env()
+    if not env:
+        return False
+
+    from app.models.user import UserRole
+    is_mentor = user.role == UserRole.mentor
+
+    ctx = {
+        "name": user.name,
+        "is_mentor": is_mentor,
+        "days_inactive": days_inactive,
+        "assessment_count": assessment_count,
+        "last_assessment_name": last_assessment_name,
+        "new_templates_count": new_templates_count,
+        "apprentice_names": apprentice_names or [],
+        "app_url": settings.app_url,
+        "unsubscribe_link": f"{settings.app_url}/settings/notifications",
+        "logo_url": settings.logo_url,
+    }
+
+    try:
+        html_content = env.get_template("campaigns/inactive_reengagement.html").render(**ctx)
+    except Exception as e:
+        logger.error(f"[email] Failed to render inactive_reengagement template: {e}")
+        return False
+
+    if is_mentor:
+        subject = "Your Apprentices May Need Your Guidance"
+        plain_content = (
+            f"Hi {user.name},\n\nIt's been {days_inactive} days since your last visit. "
+            f"Your apprentices are waiting for your guidance.\n\nOpen the app: {settings.app_url}"
+        )
+    elif assessment_count == 0:
+        subject = "Still Thinking About Your Spiritual Growth?"
+        plain_content = (
+            f"Hi {user.name},\n\nYou joined T[root]H {days_inactive} days ago. "
+            f"Take your first assessment when you're ready!\n\nOpen the app: {settings.app_url}"
+        )
+    else:
+        subject = "Time for a Spiritual Check-In?"
+        plain_content = (
+            f"Hi {user.name},\n\nIt's been {days_inactive} days since your last visit. "
+            f"Continue your growth journey!\n\nOpen the app: {settings.app_url}"
+        )
+
+    success = send_email(user.email, subject, html_content, plain_content)
+    if success:
+        _log_campaign_email(db, user.id, "inactive_reengagement", {
+            "days_inactive": days_inactive,
+            "is_mentor": is_mentor,
+        })
+    return success
+
+
 def send_assessment_email(
     to_email: str,
     apprentice_name: str,

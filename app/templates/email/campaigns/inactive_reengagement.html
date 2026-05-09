@@ -1,0 +1,48 @@
+{% extends "_base.html" %}
+{% block title %}We Miss You — T[root]H{% endblock %}
+{% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">{% if is_mentor %}Your apprentices may need your guidance.{% else %}Your spiritual growth journey is waiting for you.{% endif %}</span>{% endblock %}
+{% block content %}
+{% if is_mentor %}
+  <h2>Your Apprentices May Need You</h2>
+  <p>Hi {{ name }},</p>
+  <p>It's been a while since you've logged into T[root]H. Your apprentices{% if apprentice_names %} — {{ apprentice_names | join(', ') }} —{% endif %} are on their growth journey and your guidance matters.</p>
+  <div class="highlight-box">
+    <h3 style="margin-top:0;">As their mentor, you can</h3>
+    <ul style="margin:0;padding-left:18px;">
+      <li>Review any pending assessment reports</li>
+      <li>Leave encouraging notes on completed assessments</li>
+      <li>Assign a new assessment to prompt deeper reflection</li>
+    </ul>
+  </div>
+  <div class="btn-row">
+    <a href="{{ app_url }}" class="brand-btn">View Your Apprentices →</a>
+  </div>
+{% elif assessment_count == 0 %}
+  <h2>Still Thinking About Your Growth?</h2>
+  <p>Hi {{ name }},</p>
+  <p>You joined T[root]H {{ days_inactive }} day{% if days_inactive != 1 %}s{% endif %} ago but haven't taken your first assessment yet. That's okay — we're here whenever you're ready.</p>
+  <div class="highlight-box">
+    <p style="margin:0;">Your first assessment takes about <strong>10–15 minutes</strong> and gives your mentor a clear starting point to guide your spiritual growth.</p>
+  </div>
+  <div class="btn-row">
+    <a href="{{ app_url }}" class="brand-btn">Take Your First Assessment →</a>
+  </div>
+{% else %}
+  <h2>Time for a Spiritual Check-In?</h2>
+  <p>Hi {{ name }},</p>
+  <p>It's been {{ days_inactive }} day{% if days_inactive != 1 %}s{% endif %} since you last visited T[root]H. Growth is a journey, not a destination — and every assessment brings fresh clarity.</p>
+  {% if last_assessment_name %}
+  <div class="highlight-box">
+    <p style="margin:0;color:#aaa;">Your last assessment: <strong style="color:#d4af37;">{{ last_assessment_name }}</strong></p>
+    {% if new_templates_count and new_templates_count > 0 %}
+    <p style="margin:8px 0 0;">There {{ 'is' if new_templates_count == 1 else 'are' }} <strong>{{ new_templates_count }} new assessment{{ 's' if new_templates_count != 1 else '' }}</strong> available since your last visit.</p>
+    {% endif %}
+  </div>
+  {% endif %}
+  <div class="btn-row">
+    <a href="{{ app_url }}" class="brand-btn">Continue Your Growth Journey →</a>
+  </div>
+{% endif %}
+
+<p class="muted" style="text-align:center;margin-top:16px;">To stop receiving these emails, <a href="{{ unsubscribe_link }}">unsubscribe here</a>.</p>
+{% endblock %}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Opening T[root]H…</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0a;
+      color: #f0f0f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+      padding: 40px 32px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #d4af37;
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+    }
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #f0f0f0;
+      margin-bottom: 12px;
+    }
+    p {
+      color: #999;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid #2a2a2a;
+      border-top-color: #d4af37;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 28px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #d4af37, #e8c547);
+      color: #000;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-bottom: 12px;
+      width: 100%;
+    }
+    .btn-secondary {
+      display: inline-block;
+      color: #d4af37;
+      font-size: 14px;
+      text-decoration: none;
+      padding: 10px;
+    }
+    .hidden { display: none; }
+    #state-opening .spinner { display: block; }
+    #state-fallback { display: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">T[root]H Discipleship</div>
+
+    <!-- State 1: trying to open app -->
+    <div id="state-opening">
+      <div class="spinner"></div>
+      <h1>Opening your assessment…</h1>
+      <p>Launching the T[root]H app on your device.</p>
+    </div>
+
+    <!-- State 2: app didn't open (shown after timeout) -->
+    <div id="state-fallback" class="hidden">
+      <h1>Get the T[root]H app</h1>
+      <p>Download the app to continue your assessment and receive guidance from your mentor.</p>
+      <a id="store-link" href="{{ ios_url }}" class="btn">Download on the App Store</a>
+      <br />
+      <a href="{{ deep_link }}" class="btn-secondary">Try opening app again</a>
+    </div>
+  </div>
+
+  <script>
+    var deepLink  = {{ deep_link | tojson }};
+    var iosUrl    = {{ ios_url | tojson }};
+    var androidUrl = {{ android_url | tojson }};
+
+    // Detect platform
+    var ua = navigator.userAgent || '';
+    var isAndroid = /android/i.test(ua);
+    var isIOS = /iphone|ipad|ipod/i.test(ua);
+
+    // Update store link to correct platform
+    var storeLink = document.getElementById('store-link');
+    if (isAndroid) {
+      storeLink.href = androidUrl;
+      storeLink.textContent = 'Get it on Google Play';
+    }
+
+    function showFallback() {
+      document.getElementById('state-opening').classList.add('hidden');
+      document.getElementById('state-fallback').classList.remove('hidden');
+    }
+
+    // Attempt deep link open
+    var didOpen = false;
+
+    // Listen for page visibility change — if app opened, user will come back and page will be hidden/visible
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) didOpen = true;
+    });
+
+    window.addEventListener('blur', function() {
+      didOpen = true;
+    });
+
+    // Try the deep link
+    if (isAndroid || isIOS) {
+      window.location.href = deepLink;
+
+      // If still on page after 1.8s, app isn't installed or didn't respond
+      setTimeout(function() {
+        if (!didOpen) {
+          showFallback();
+        }
+      }, 1800);
+    } else {
+      // Desktop — just show the store options immediately
+      showFallback();
+      storeLink.textContent = 'Download on iOS';
+      storeLink.insertAdjacentHTML(
+        'afterend',
+        '<br/><a href="' + androidUrl + '" class="btn" style="margin-top:10px;">Download on Android</a>'
+      );
+    }
+  </script>
+</body>
+</html>

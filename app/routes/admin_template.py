@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.db import get_db
 from app.services.auth import require_mentor_or_admin, get_current_user, require_admin
@@ -317,6 +317,7 @@ def clone_assessment_template_compat(
 @router.post("/{template_id}/publish", response_model=AssessmentTemplateOut)
 def publish_template(
     template_id: str,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_mentor_or_admin)
 ):
@@ -340,6 +341,24 @@ def publish_template(
     template.is_published = True
     db.commit()
     db.refresh(template)
+
+    # Notify all apprentices about the newly published template
+    def _notify(template_id: str):
+        from app.db import SessionLocal
+        from app.routes.campaigns import notify_new_template_to_all_apprentices
+        _db = SessionLocal()
+        try:
+            _template = _db.query(AssessmentTemplate).filter_by(id=template_id).first()
+            if _template:
+                notify_new_template_to_all_apprentices(_db, _template)
+        except Exception as exc:
+            import logging as _log
+            _log.getLogger(__name__).error(f"New template notification failed for {template_id}: {exc}")
+        finally:
+            _db.close()
+
+    background_tasks.add_task(_notify, template.id)
+
     return template
 
 @router.post("/{template_id}/unpublish", response_model=AssessmentTemplateOut)

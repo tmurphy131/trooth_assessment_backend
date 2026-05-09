@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+{% block title %}Welcome to T[root]H!{% endblock %}
+{% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">Your spiritual growth journey starts now. Take your first assessment today.</span>{% endblock %}
+{% block content %}
+<h2>Welcome to T[root]H, {{ name }}!</h2>
+
+<p>We're so glad you're here. T[root]H is a discipleship platform built to help you grow intentionally in your faith — through guided assessments, personal feedback, and a mentor who walks with you.</p>
+
+<div class="highlight-box">
+  <h3 style="margin-top:0;">What happens next?</h3>
+  <ul style="margin:0;padding-left:18px;">
+    <li><strong>Take an assessment</strong> — answer reflective questions about your faith and spiritual life</li>
+    <li><strong>Get scored by AI</strong> — your answers are reviewed and organized into a clear report</li>
+    <li><strong>Receive mentor guidance</strong> — your mentor reviews the report and provides personalized feedback</li>
+    <li><strong>Grow together</strong> — track progress over time with multiple assessments</li>
+  </ul>
+</div>
+
+{% if mentor_name %}
+<p>You've been connected with <strong>{{ mentor_name }}</strong> as your mentor. They're ready to support your journey!</p>
+{% endif %}
+
+<div class="btn-row">
+  <a href="{{ app_url }}" class="brand-btn">Take Your First Assessment →</a>
+</div>
+
+<p class="muted" style="text-align:center;">Your first assessment takes about 10–15 minutes. There are no wrong answers — just honest ones.</p>
+{% endblock %}

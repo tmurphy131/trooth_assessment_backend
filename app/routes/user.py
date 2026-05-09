@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 import logging
@@ -35,7 +35,12 @@ def assign_apprentice(mentor_id: str, apprentice_id: str, db: Session = Depends(
     return {"message": "Apprentice assigned successfully"}
 
 @router.post("/", response_model=UserOut)
-def create_user(user: UserCreate, db: Session = Depends(get_db), decoded_token=Depends(verify_token)):
+def create_user(
+    user: UserCreate,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    decoded_token=Depends(verify_token),
+):
     # Get Firebase UID from the verified token (NOT from request body)
     firebase_uid = decoded_token.get("uid")
     if not firebase_uid:
@@ -84,6 +89,23 @@ def create_user(user: UserCreate, db: Session = Depends(get_db), decoded_token=D
         auth.set_custom_user_claims(firebase_uid, {"role": db_user.role.value})
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error assigning Firebase role: {str(e)}")
+
+    # Send welcome email in background (non-blocking)
+    def _send_welcome(user_id: str):
+        from app.db import SessionLocal
+        from app.services.email import send_welcome_email
+        _db = SessionLocal()
+        try:
+            _user = _db.query(user_model.User).filter(user_model.User.id == user_id).first()
+            if _user:
+                send_welcome_email(_db, _user)
+        except Exception as exc:
+            import logging as _log
+            _log.getLogger(__name__).error(f"Welcome email failed for {user_id}: {exc}")
+        finally:
+            _db.close()
+
+    background_tasks.add_task(_send_welcome, db_user.id)
 
     return db_user
 

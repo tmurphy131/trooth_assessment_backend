@@ -256,7 +256,95 @@ class PushNotificationService:
             logger.info(f"Deactivated token for user {token.user_id}")
 
 
-# Convenience functions for common notification types
+# ---------------------------------------------------------------------------
+# Campaign push notification functions
+# ---------------------------------------------------------------------------
+
+def notify_draft_reminder_push(
+    db: Session,
+    user_id: str,
+    draft_id: str,
+    progress_pct: int,
+    days_since_start: int,
+) -> dict:
+    """Send push reminder for an incomplete assessment draft."""
+    if days_since_start >= 14:
+        body = "Complete your assessment today — your mentor is waiting!"
+    elif days_since_start >= 10:
+        body = f"Your mentor is waiting! You're {progress_pct}% through. Finish today!"
+    else:
+        body = f"You're {progress_pct}% through your assessment. Just a few minutes to finish!"
+
+    payload = PushNotificationPayload(
+        title="Finish Your Assessment!",
+        body=body,
+        data={
+            "type": "draft_reminder",
+            "draft_id": draft_id,
+            "screen": "assessment_draft",
+        },
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_new_template_push(
+    db: Session,
+    user_id: str,
+    template_name: str,
+    template_id: str,
+) -> dict:
+    """Send push notification when a new assessment template is published."""
+    payload = PushNotificationPayload(
+        title="New Assessment Available!",
+        body=f"Start '{template_name}' and continue your growth journey",
+        data={
+            "type": "new_template",
+            "template_id": template_id,
+            "screen": "assessment_templates",
+        },
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_welcome_push(db: Session, user_id: str, is_mentor: bool) -> dict:
+    """Send welcome push on first login after signup."""
+    if is_mentor:
+        body = "Invite your first apprentice and start making a difference!"
+    else:
+        body = "Take your first assessment and start your growth journey!"
+
+    payload = PushNotificationPayload(
+        title="Welcome to T[root]H!",
+        body=body,
+        data={
+            "type": "welcome",
+            "screen": "home",
+        },
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_milestone_push(
+    db: Session,
+    user_id: str,
+    milestone_title: str,
+    milestone_body: str,
+) -> dict:
+    """Send push notification when a user hits a milestone (first assessment, 5th, etc.)."""
+    payload = PushNotificationPayload(
+        title=milestone_title,
+        body=milestone_body,
+        data={
+            "type": "milestone",
+            "screen": "progress",
+        },
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+# ---------------------------------------------------------------------------
+# Existing convenience functions for common notification types
+# ---------------------------------------------------------------------------
 
 def notify_assessment_submitted(
     db: Session,

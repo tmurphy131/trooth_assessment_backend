@@ -62,6 +62,13 @@ class User(Base):
     # Grandfathering flag for existing mentors with >1 apprentice at freemium launch
     is_grandfathered_mentor = Column(Boolean, nullable=False, default=False, server_default="false")
     
+    # Engagement tracking fields (for email/push campaigns)
+    last_activity_at = Column(DateTime, nullable=True)  # Last app activity for inactive user campaigns
+    push_enabled = Column(Boolean, nullable=False, default=True, server_default="true")  # Push notification opt-in
+    push_quiet_hours_start = Column(Integer, nullable=True)  # Quiet hours start (0-23 hour)
+    push_quiet_hours_end = Column(Integer, nullable=True)    # Quiet hours end (0-23 hour)
+    timezone = Column(String(100), nullable=True)            # User timezone (e.g., "America/New_York")
+    
     # Relationship to templates created by this user
     created_templates = relationship("AssessmentTemplate", back_populates="creator")
     # Notifications for this user

@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+{% block title %}Finish Your Assessment — T[root]H{% endblock %}
+{% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">You're {{ progress_percent }}% through your {{ assessment_name }} assessment — just a few minutes to finish!</span>{% endblock %}
+{% block content %}
+<h2>You're Almost There!</h2>
+
+<p>Hi {{ apprentice_name }},</p>
+
+<p>You started the <strong>{{ assessment_name }}</strong> assessment {{ days_ago }} day{% if days_ago != 1 %}s{% endif %} ago and you're <strong>{{ progress_percent }}% of the way through</strong>. That's real progress!</p>
+
+<div class="highlight-box" style="margin:24px 0;">
+  <h3 style="margin-top:0;">Your Progress</h3>
+  <div style="background:#111;height:24px;border-radius:12px;overflow:hidden;margin:12px 0;">
+    <div style="background:linear-gradient(90deg,#d4af37,#e8c547);width:{{ progress_percent }}%;height:100%;min-width:8%;display:flex;align-items:center;justify-content:center;">
+      <span style="color:#000;font-weight:700;font-size:12px;">{{ progress_percent }}%</span>
+    </div>
+  </div>
+  <p style="color:#aaa;margin:0;font-size:13px;">{{ answered_count }} of {{ total_questions }} questions answered</p>
+</div>
+
+<p>{% if mentor_name and mentor_name != 'your mentor' %}<strong>{{ mentor_name }}</strong> is{% else %}Your mentor is{% endif %} ready to review your results and provide personalized guidance for your growth journey.</p>
+
+<div class="btn-row">
+  <a href="{{ resume_link }}" class="brand-btn">Resume Assessment →</a>
+</div>
+
+<p class="muted" style="text-align:center;">This should only take {{ remaining_minutes }} more minutes. Your spiritual growth journey is worth it!</p>
+
+<hr class="divider" />
+<p class="muted" style="text-align:center;">If you've already finished this assessment, you can ignore this reminder.<br>To stop receiving these reminders, <a href="{{ unsubscribe_link }}">unsubscribe here</a>.</p>
+{% endblock %}

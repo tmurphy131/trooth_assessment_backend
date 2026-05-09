@@ -1,0 +1,26 @@
+{% extends "_base.html" %}
+{% block title %}Welcome to T[root]H — Mentor{% endblock %}
+{% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">Start making a difference — invite your first apprentice today.</span>{% endblock %}
+{% block content %}
+<h2>Welcome to T[root]H, {{ name }}!</h2>
+
+<p>Thank you for stepping into the role of mentor. Discipleship is one of the most powerful ways to invest in someone's spiritual growth — and T[root]H is built to support that relationship.</p>
+
+<div class="highlight-box">
+  <h3 style="margin-top:0;">Your role as a mentor</h3>
+  <ul style="margin:0;padding-left:18px;">
+    <li><strong>Invite apprentices</strong> — send invitation links from the app</li>
+    <li><strong>Assign assessments</strong> — choose from existing templates or create custom ones</li>
+    <li><strong>Review reports</strong> — get AI-generated summaries of your apprentice's answers</li>
+    <li><strong>Leave notes</strong> — add private mentor notes to guide your coaching sessions</li>
+  </ul>
+</div>
+
+<p>The best place to start is by inviting your first apprentice so they can take an assessment and you can see the full mentorship flow in action.</p>
+
+<div class="btn-row">
+  <a href="{{ app_url }}" class="brand-btn">Invite Your First Apprentice →</a>
+</div>
+
+<p class="muted" style="text-align:center;">Questions? Reply to this email and we'll be happy to help you get started.</p>
+{% endblock %}
