@@ -91,16 +91,18 @@ def run_draft_reminders(
                 skipped += 1
                 continue
 
-            # Resolve mentor name
+            # Resolve mentor name(s) — apprentice may have multiple active mentors
             mentor_name = "your mentor"
-            ma = db.query(MentorApprentice).filter(
+            mas = db.query(MentorApprentice).filter(
                 MentorApprentice.apprentice_id == user.id,
                 MentorApprentice.active == True,  # noqa: E712
-            ).first()
-            if ma:
-                mentor = db.query(User).filter(User.id == ma.mentor_id).first()
-                if mentor:
-                    mentor_name = mentor.name
+            ).all()
+            if mas:
+                mentor_ids = [m.mentor_id for m in mas]
+                mentor_users = db.query(User).filter(User.id.in_(mentor_ids)).all()
+                names = [m.name for m in mentor_users if m.name]
+                if names:
+                    mentor_name = " and ".join(names) if len(names) <= 2 else ", ".join(names[:-1]) + ", and " + names[-1]
 
             if send_draft_reminder_email(db, user, draft, mentor_name, days):
                 sent_email += 1

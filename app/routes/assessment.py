@@ -27,13 +27,9 @@ def create_assessment(
         if not apprentice:
             raise NotFoundException("User not found.")
 
-        mentor_link = db.query(mentor_model.MentorApprentice).filter_by(apprentice_id=user_id, active=True).first()
-        if not mentor_link:
+        mentor_links = db.query(mentor_model.MentorApprentice).filter_by(apprentice_id=user_id, active=True).all()
+        if not mentor_links:
             raise HTTPException(status_code=400, detail="No active mentor relationship found.")
-
-        mentor = db.query(user_model.User).filter_by(id=mentor_link.mentor_id).first()
-        if not mentor:
-            raise NotFoundException("Mentor not found.")
 
         ai_result = ai_scoring.score_assessment(assessment_input.answers)
 
@@ -48,14 +44,18 @@ def create_assessment(
         db.commit()
         db.refresh(db_assessment)
 
-        send_assessment_email(
-            to_email=mentor.email,
-            apprentice_name=apprentice.name,
-            assessment_title=assessment_input.title,
-            score=ai_result.get("overall_score"),
-            feedback_summary=ai_result.get("summary_feedback"),
-            details=ai_result.get("details")
-        )
+        for link in mentor_links:
+            mentor = db.query(user_model.User).filter_by(id=link.mentor_id).first()
+            if not mentor or not mentor.email:
+                continue
+            send_assessment_email(
+                to_email=mentor.email,
+                apprentice_name=apprentice.name,
+                assessment_title=assessment_input.title,
+                score=ai_result.get("overall_score"),
+                feedback_summary=ai_result.get("summary_feedback"),
+                details=ai_result.get("details")
+            )
 
         return db_assessment
 
@@ -74,7 +74,7 @@ def list_assessments(
         
         # Check if user is a mentor or apprentice
         mentor_relationships = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id).all()
-        apprentice_relationship = db.query(mentor_model.MentorApprentice).filter_by(apprentice_id=user_id).first()
+        apprentice_relationship = db.query(mentor_model.MentorApprentice).filter_by(apprentice_id=user_id, active=True).first()
         
         if mentor_relationships:
             # User is a mentor - show all apprentice assessments
