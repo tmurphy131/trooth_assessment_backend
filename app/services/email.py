@@ -466,7 +466,7 @@ def send_draft_reminder_email(db, user, draft, mentor_name: str, days_since_star
     progress_percent = int((answered_count / total_questions) * 100) if total_questions else 0
     remaining_minutes = max(2, (total_questions - answered_count) // 3 + 1)
     resume_link = f"{settings.backend_api_url.rstrip('/')}/r/draft/{draft.id}"
-    unsubscribe_link = f"{settings.app_url}/settings/notifications"
+    unsubscribe_link = f"{settings.backend_api_url}/settings/notifications"
 
     ctx = {
         "apprentice_name": user.name,
@@ -519,7 +519,7 @@ def send_welcome_email(db, user) -> bool:
 
     ctx = {
         "name": user.name,
-        "app_url": settings.app_url,
+        "app_url": settings.ios_app_store_url,
         "mentor_name": None,
         "logo_url": settings.logo_url,
     }
@@ -534,13 +534,13 @@ def send_welcome_email(db, user) -> bool:
         subject = "Welcome to T[root]H — Start Mentoring Today"
         plain_content = (
             f"Hi {user.name},\n\nWelcome to T[root]H! Invite your first apprentice to get started.\n\n"
-            f"Open the app: {settings.app_url}"
+            f"Open the app: {settings.ios_app_store_url}"
         )
     else:
         subject = "Welcome to T[root]H — Your Growth Journey Starts Now"
         plain_content = (
             f"Hi {user.name},\n\nWelcome to T[root]H! Take your first assessment to begin.\n\n"
-            f"Open the app: {settings.app_url}"
+            f"Open the app: {settings.ios_app_store_url}"
         )
 
     success = send_email(user.email, subject, html_content, plain_content)
@@ -561,8 +561,8 @@ def send_new_template_email(db, user, template) -> bool:
         "description": getattr(template, 'description', None),
         "category": getattr(getattr(template, 'category', None), 'name', None),
         "estimated_minutes": getattr(template, 'estimated_minutes', None),
-        "app_url": settings.app_url,
-        "unsubscribe_link": f"{settings.app_url}/settings/notifications",
+        "app_url": settings.ios_app_store_url,
+        "unsubscribe_link": f"{settings.backend_api_url}/settings/notifications",
         "logo_url": settings.logo_url,
     }
 
@@ -574,7 +574,7 @@ def send_new_template_email(db, user, template) -> bool:
 
     plain_content = (
         f"Hi {user.name},\n\nA new assessment is available: {template.name}.\n\n"
-        f"Start it here: {settings.app_url}"
+        f"Start it here: {settings.ios_app_store_url}"
     )
     subject = f"New Assessment Available: {template.name}"
 
@@ -605,8 +605,8 @@ def send_inactive_reengagement_email(db, user, days_inactive: int,
         "last_assessment_name": last_assessment_name,
         "new_templates_count": new_templates_count,
         "apprentice_names": apprentice_names or [],
-        "app_url": settings.app_url,
-        "unsubscribe_link": f"{settings.app_url}/settings/notifications",
+        "app_url": settings.ios_app_store_url,
+        "unsubscribe_link": f"{settings.backend_api_url}/settings/notifications",
         "logo_url": settings.logo_url,
     }
 
@@ -620,19 +620,19 @@ def send_inactive_reengagement_email(db, user, days_inactive: int,
         subject = "Your Apprentices May Need Your Guidance"
         plain_content = (
             f"Hi {user.name},\n\nIt's been {days_inactive} days since your last visit. "
-            f"Your apprentices are waiting for your guidance.\n\nOpen the app: {settings.app_url}"
+            f"Your apprentices are waiting for your guidance.\n\nOpen the app: {settings.ios_app_store_url}"
         )
     elif assessment_count == 0:
         subject = "Still Thinking About Your Spiritual Growth?"
         plain_content = (
             f"Hi {user.name},\n\nYou joined T[root]H {days_inactive} days ago. "
-            f"Take your first assessment when you're ready!\n\nOpen the app: {settings.app_url}"
+            f"Take your first assessment when you're ready!\n\nOpen the app: {settings.ios_app_store_url}"
         )
     else:
         subject = "Time for a Spiritual Check-In?"
         plain_content = (
             f"Hi {user.name},\n\nIt's been {days_inactive} days since your last visit. "
-            f"Continue your growth journey!\n\nOpen the app: {settings.app_url}"
+            f"Continue your growth journey!\n\nOpen the app: {settings.ios_app_store_url}"
         )
 
     success = send_email(user.email, subject, html_content, plain_content)
