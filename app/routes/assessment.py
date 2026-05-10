@@ -27,9 +27,9 @@ def create_assessment(
         if not apprentice:
             raise NotFoundException("User not found.")
 
-        mentor_link = db.query(mentor_model.MentorApprentice).filter_by(apprentice_id=user_id).first()
+        mentor_link = db.query(mentor_model.MentorApprentice).filter_by(apprentice_id=user_id, active=True).first()
         if not mentor_link:
-            raise HTTPException(status_code=400, detail="No mentor relationship found.")
+            raise HTTPException(status_code=400, detail="No active mentor relationship found.")
 
         mentor = db.query(user_model.User).filter_by(id=mentor_link.mentor_id).first()
         if not mentor:
@@ -172,12 +172,9 @@ def get_assessment(
         mentor_relationship = db.query(mentor_model.MentorApprentice).filter_by(
             mentor_id=user_id, apprentice_id=assessment.apprentice_id
         ).first()
-        apprentice_relationship = db.query(mentor_model.MentorApprentice).filter_by(
-            apprentice_id=user_id
-        ).first()
-        
-        # User must be either the mentor of this apprentice or the apprentice themselves
-        if not (mentor_relationship or (apprentice_relationship and apprentice_relationship.apprentice_id == assessment.apprentice_id)):
+
+        # User must be either a mentor linked to this apprentice or the apprentice themselves
+        if not (mentor_relationship or user_id == assessment.apprentice_id):
             raise ForbiddenException("You don't have permission to view this assessment.")
         
         # Get apprentice info
