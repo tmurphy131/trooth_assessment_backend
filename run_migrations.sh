@@ -36,6 +36,6 @@ PY
 fi
 
 # Run Alembic
-python -m alembic upgrade 20260508_expand_email_tracking
+python -m alembic upgrade 20260510_multi_mentor
 
 echo "[migrate] Completed Alembic upgrade"

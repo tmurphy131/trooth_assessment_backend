@@ -62,7 +62,14 @@ def list_mentor_notes_for_assessment(
         raise HTTPException(status_code=403, detail="Not authorized")
 
     notes = db.query(MentorNote).filter_by(assessment_id=assessment_id).order_by(MentorNote.created_at.desc()).all()
-    return notes
+    mentor_ids = {n.mentor_id for n in notes}
+    mentor_map = {u.id: u.name for u in db.query(User).filter(User.id.in_(mentor_ids)).all()}
+    result = []
+    for n in notes:
+        out = MentorNoteOut.model_validate(n)
+        out.mentor_name = mentor_map.get(n.mentor_id)
+        result.append(out)
+    return result
 
 
 @router.patch("/{note_id}", response_model=MentorNoteOut)
@@ -131,10 +138,15 @@ def get_shared_notes_for_assessment(
     if assessment.apprentice_id != current_user.id:
         raise HTTPException(status_code=403, detail="Not your assessment")
 
-    # Return only shared (non-private) notes
     notes = db.query(MentorNote).filter_by(
         assessment_id=assessment_id,
         is_private=False
     ).order_by(MentorNote.created_at.desc()).all()
-    
-    return notes
+    mentor_ids = {n.mentor_id for n in notes}
+    mentor_map = {u.id: u.name for u in db.query(User).filter(User.id.in_(mentor_ids)).all()}
+    result = []
+    for n in notes:
+        out = MentorNoteOut.model_validate(n)
+        out.mentor_name = mentor_map.get(n.mentor_id)
+        result.append(out)
+    return result

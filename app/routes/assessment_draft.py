@@ -154,8 +154,8 @@ async def _process_assessment_background(assessment_id: str):
             # Email mentor notification
             apprentice = session.query(_User).filter_by(id=assess.apprentice_id).first()
             apprentice_name = getattr(apprentice, 'name', None) or 'Apprentice'
-            rel = session.query(_MA).filter_by(apprentice_id=assess.apprentice_id).first()
-            if rel:
+            rels = session.query(_MA).filter_by(apprentice_id=assess.apprentice_id, active=True).all()
+            for rel in rels:
                 mentor = session.query(_User).filter_by(id=rel.mentor_id).first()
                 if mentor and mentor.email:
                     # Check if mentor is premium to send enhanced report
@@ -267,9 +267,9 @@ async def _process_assessment_background(assessment_id: str):
                     except Exception as _e:
                         logger.error(f"Background worker: failed to send mentor email: {_e}")
                 else:
-                    logger.warning("Background worker: mentor not found or email missing")
-            else:
-                logger.info("Background worker: no mentor relationship found; skipping mentor email")
+                    logger.warning(f"Background worker: mentor {rel.mentor_id} not found or email missing")
+            if not rels:
+                logger.info("Background worker: no active mentor relationships found; skipping mentor email")
 
         except Exception as e:
             logger.error(f"Background worker error for assessment {assessment_id}: {e}", exc_info=True)

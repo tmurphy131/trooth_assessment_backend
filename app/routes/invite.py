@@ -241,26 +241,22 @@ def accept_invite(data: InviteAccept, db: Session = Depends(get_db)):
     if not apprentice:
         raise NotFoundException("Apprentice not found")
 
-    # Check if apprentice already has any mentor relationship (active or previously terminated)
-    existing_relationship = db.query(MentorApprentice).filter(
-        MentorApprentice.apprentice_id == data.apprentice_id
-    ).first()
-
     invitation.accepted = True
 
+    # Check if this exact (apprentice, mentor) pair already exists
+    existing_relationship = db.query(MentorApprentice).filter_by(
+        apprentice_id=data.apprentice_id,
+        mentor_id=invitation.mentor_id
+    ).first()
+
     if existing_relationship:
-        # Re-assign to the new mentor (handles terminated relationships switching mentors)
-        existing_relationship.mentor_id = invitation.mentor_id
+        # Reactivate a previously terminated relationship with this same mentor
         existing_relationship.active = True
         db.commit()
-        return {"message": "Invitation accepted, relationship updated"}
+        return {"message": "Invitation accepted, relationship reactivated"}
 
-    # No prior relationship — create one
-    relationship = MentorApprentice(
-        mentor_id=invitation.mentor_id,
-        apprentice_id=data.apprentice_id
-    )
-    db.add(relationship)
+    # New mentor pairing — create a row without touching any other mentor relationships
+    db.add(MentorApprentice(mentor_id=invitation.mentor_id, apprentice_id=data.apprentice_id))
     db.commit()
 
     return {"message": "Invitation accepted, relationship created"}

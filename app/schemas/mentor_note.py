@@ -23,6 +23,7 @@ class MentorNoteOut(MentorNoteBase):
     id: str
     assessment_id: str
     mentor_id: str
+    mentor_name: Optional[str] = None
     created_at: datetime
     updated_at: Optional[datetime] = None
     model_config = {'from_attributes': True}
