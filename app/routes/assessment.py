@@ -153,6 +153,35 @@ def check_assessment_status(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.get("/self", response_model=list[assessment_schema.AssessmentOut])
+def list_own_assessments(
+    db: Session = Depends(get_db),
+    decoded_token=Depends(verify_token)
+):
+    """List all submitted assessments for the currently authenticated user (any role)."""
+    user_id = decoded_token["uid"]
+    rows = (
+        db.query(assessment_model.Assessment)
+        .filter_by(apprentice_id=user_id)
+        .order_by(assessment_model.Assessment.created_at.desc())
+        .all()
+    )
+    user = db.query(user_model.User).filter_by(id=user_id).first()
+    user_name = (user.name or user.email) if user else "Unknown"
+    return [
+        assessment_schema.AssessmentOut(
+            id=a.id,
+            apprentice_id=a.apprentice_id,
+            apprentice_name=user_name,
+            template_id=a.template_id,
+            answers=a.answers,
+            scores=a.scores or {},
+            created_at=a.created_at,
+        )
+        for a in rows
+    ]
+
+
 @router.get("/{assessment_id}", response_model=assessment_schema.AssessmentOut)
 def get_assessment(
     assessment_id: str,

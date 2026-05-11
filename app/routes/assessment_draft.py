@@ -321,8 +321,8 @@ def save_draft(
         role_val = current_user.role.value if hasattr(current_user.role, 'value') else str(current_user.role)
     except Exception:
         role_val = str(current_user.role)
-    if role_val != UserRole.apprentice.value:
-        raise HTTPException(status_code=403, detail="Only apprentices can save drafts")
+    if role_val not in (UserRole.apprentice.value, UserRole.mentor.value):
+        raise HTTPException(status_code=403, detail="Only apprentices or mentors can save drafts")
 
     # Don't auto-submit drafts - let the explicit submit endpoint handle that
     is_complete = False
@@ -431,8 +431,8 @@ def save_draft(
 
 @router.get("", response_model=AssessmentDraftOut)
 def get_draft(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    if current_user.role != UserRole.apprentice:
-        raise ForbiddenException("Only apprentices can access drafts")
+    if current_user.role not in (UserRole.apprentice, UserRole.mentor):
+        raise ForbiddenException("Only apprentices or mentors can access drafts")
 
     draft = db.query(AssessmentDraft).options(selectinload(AssessmentDraft.answers_rel))\
         .filter_by(apprentice_id=current_user.id, is_submitted=False).first()
@@ -467,8 +467,8 @@ def resume_draft(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    if current_user.role != UserRole.apprentice:
-        raise ForbiddenException("Only apprentices can resume drafts")
+    if current_user.role not in (UserRole.apprentice, UserRole.mentor):
+        raise ForbiddenException("Only apprentices or mentors can resume drafts")
     
     draft = db.query(AssessmentDraft).filter_by(
         apprentice_id=current_user.id,
@@ -502,8 +502,8 @@ def list_drafts(
 ):
     """Get only in-progress drafts for the current apprentice (not submitted assessments)"""
     print(f"DEBUG: list_drafts called for user {current_user.id}")
-    if current_user.role != UserRole.apprentice:
-        raise ForbiddenException("Only apprentices can access drafts")
+    if current_user.role not in (UserRole.apprentice, UserRole.mentor):
+        raise ForbiddenException("Only apprentices or mentors can access drafts")
 
     # Only get non-submitted drafts for the apprentice dashboard
     drafts = db.query(AssessmentDraft).filter_by(
@@ -554,8 +554,8 @@ def list_completed_assessments(
 ):
     """Get only completed/submitted assessments for the current apprentice"""
     print(f"DEBUG: list_completed_assessments called for user {current_user.id}")
-    if current_user.role != UserRole.apprentice:
-        raise ForbiddenException("Only apprentices can access their completed assessments")
+    if current_user.role not in (UserRole.apprentice, UserRole.mentor):
+        raise ForbiddenException("Only apprentices or mentors can access their completed assessments")
 
     # Only get submitted assessments
     drafts = db.query(AssessmentDraft).filter_by(
@@ -606,8 +606,8 @@ def get_draft_by_id(
     current_user: User = Depends(get_current_user)
 ):
     """Get a specific draft by ID for the current apprentice"""
-    if current_user.role != UserRole.apprentice:
-        raise ForbiddenException("Only apprentices can access drafts")
+    if current_user.role not in (UserRole.apprentice, UserRole.mentor):
+        raise ForbiddenException("Only apprentices or mentors can access drafts")
 
     draft = db.query(AssessmentDraft).filter_by(
         id=draft_id, 
@@ -644,8 +644,8 @@ def update_draft(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    if current_user.role != UserRole.apprentice:
-        raise ForbiddenException("Only apprentices can update drafts")
+    if current_user.role not in (UserRole.apprentice, UserRole.mentor):
+        raise ForbiddenException("Only apprentices or mentors can update drafts")
 
     draft = db.query(AssessmentDraft).filter_by(
         apprentice_id=current_user.id,
@@ -693,8 +693,8 @@ def update_draft_by_id(
     current_user: User = Depends(get_current_user)
 ):
     """Update a specific draft by ID"""
-    if current_user.role != UserRole.apprentice:
-        raise ForbiddenException("Only apprentices can update drafts")
+    if current_user.role not in (UserRole.apprentice, UserRole.mentor):
+        raise ForbiddenException("Only apprentices or mentors can update drafts")
 
     draft = db.query(AssessmentDraft).filter_by(
         id=draft_id,
@@ -742,8 +742,8 @@ def delete_draft(
     current_user: User = Depends(get_current_user)
 ):
     """Delete a draft assessment. Only the apprentice who created it can delete it."""
-    if current_user.role != UserRole.apprentice:
-        raise HTTPException(status_code=403, detail="Only apprentices can delete drafts")
+    if current_user.role not in (UserRole.apprentice, UserRole.mentor):
+        raise HTTPException(status_code=403, detail="Only apprentices or mentors can delete drafts")
 
     # Find the draft
     draft = db.query(AssessmentDraft).filter(
@@ -771,8 +771,8 @@ async def submit_draft(
 ):
     logger.info(f"Submit draft request from user: {current_user.id}")
     
-    if current_user.role != UserRole.apprentice:
-        raise ForbiddenException("Only apprentices can submit assessments")
+    if current_user.role not in (UserRole.apprentice, UserRole.mentor):
+        raise ForbiddenException("Only apprentices or mentors can submit assessments")
 
     # Pick the correct draft to submit, with priority:
     # 1) explicit draft_id
@@ -903,7 +903,7 @@ async def submit_draft(
 
         assessment = Assessment(
             id=str(uuid.uuid4()),
-            apprentice_id=current_user.id,
+            apprentice_id=current_user.id,  # taker's user id; may be apprentice or mentor
             template_id=draft.template_id,
             answers=draft.answers,
             scores=baseline_scores if baseline_scores else None,
@@ -1056,8 +1056,8 @@ def start_draft(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    if current_user.role != UserRole.apprentice:
-        raise HTTPException(status_code=403, detail="Only apprentices can start drafts")
+    if current_user.role not in (UserRole.apprentice, UserRole.mentor):
+        raise HTTPException(status_code=403, detail="Only apprentices or mentors can start drafts")
 
     # Check if apprentice has a draft already in progress for this template
     existing = db.query(AssessmentDraft).filter_by(
@@ -1092,7 +1092,7 @@ def start_draft(
     if not template:
         raise HTTPException(status_code=404, detail="Template not found or not published")
 
-    # Check premium access for non-free assessments
+    # Check premium access — applies to all roles including mentors
     if not is_assessment_free(template) and not is_premium_user(current_user):
         raise HTTPException(
             status_code=403,
