@@ -163,6 +163,7 @@ def list_own_assessments(
     decoded_token=Depends(verify_token)
 ):
     """List all submitted assessments for the currently authenticated user (any role)."""
+    from app.models.assessment_template import AssessmentTemplate
     user_id = decoded_token["uid"]
     rows = (
         db.query(assessment_model.Assessment)
@@ -172,12 +173,21 @@ def list_own_assessments(
     )
     user = db.query(user_model.User).filter_by(id=user_id).first()
     user_name = (user.name or user.email) if user else "Unknown"
+
+    # Pre-load template names in one query
+    template_ids = [a.template_id for a in rows if a.template_id]
+    templates = {}
+    if template_ids:
+        for t in db.query(AssessmentTemplate).filter(AssessmentTemplate.id.in_(template_ids)).all():
+            templates[t.id] = t.name
+
     return [
         assessment_schema.AssessmentOut(
             id=a.id,
             apprentice_id=a.apprentice_id,
             apprentice_name=user_name,
             template_id=a.template_id,
+            template_name=templates.get(a.template_id),
             answers=a.answers,
             scores=a.scores or {},
             created_at=a.created_at,
