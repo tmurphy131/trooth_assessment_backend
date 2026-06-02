@@ -417,7 +417,8 @@ def notify_weekly_tip(
         body=tip_title,
         data={
             "type": "weekly_tip",
-            "screen": "resources"
+            "screen": "resources",
+            "is_mentor": "true" if is_mentor else "false"
         }
     )
     return PushNotificationService.send_to_user(db, user_id, payload)
@@ -437,7 +438,7 @@ def notify_weekly_tips_batch(
         mentor_payload = PushNotificationPayload(
             title="Weekly Mentor Tip",
             body=mentor_tip_title,
-            data={"type": "weekly_tip", "screen": "resources"}
+            data={"type": "weekly_tip", "screen": "resources", "is_mentor": "true"}
         )
         results["mentors"] = PushNotificationService.send_to_users(
             db, mentor_ids, mentor_payload
@@ -447,7 +448,7 @@ def notify_weekly_tips_batch(
         apprentice_payload = PushNotificationPayload(
             title="Weekly Apprentice Tip",
             body=apprentice_tip_title,
-            data={"type": "weekly_tip", "screen": "resources"}
+            data={"type": "weekly_tip", "screen": "resources", "is_mentor": "false"}
         )
         results["apprentices"] = PushNotificationService.send_to_users(
             db, apprentice_ids, apprentice_payload
