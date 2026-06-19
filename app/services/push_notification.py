@@ -508,3 +508,111 @@ def notify_assessment_started(
         }
     )
     return PushNotificationService.send_to_user(db, mentor_id, payload)
+
+
+# ---------------------------------------------------------------------------
+# Trivia push notification functions
+# ---------------------------------------------------------------------------
+
+def notify_trivia_challenge_received(
+    db: Session,
+    user_id: str,
+    challenger_name: str,
+    challenge_id: str,
+) -> Dict[str, Any]:
+    """Notify user they have been challenged to a trivia game."""
+    payload = PushNotificationPayload(
+        title="Trivia Challenge!",
+        body=f"{challenger_name} challenged you to a trivia match",
+        data={
+            "type": "trivia_challenge_received",
+            "challenge_id": challenge_id,
+            "screen": "trivia_challenges",
+        }
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_trivia_question_unlocked(
+    db: Session,
+    challenger_id: str,
+    challenged_id: str,
+    challenge_id: str,
+    question_index: int,
+) -> None:
+    """Notify both players that the next trivia question has unlocked."""
+    payload = PushNotificationPayload(
+        title="Next Question Unlocked",
+        body="Both players answered — see the results and answer the next question!",
+        data={
+            "type": "trivia_question_unlocked",
+            "challenge_id": challenge_id,
+            "question_index": str(question_index),
+            "screen": "trivia_challenge_detail",
+        }
+    )
+    PushNotificationService.send_to_users(db, [challenger_id, challenged_id], payload)
+
+
+def notify_trivia_challenge_result(
+    db: Session,
+    user_id: str,
+    challenge_id: str,
+    result: str,  # "won" | "lost" | "tied"
+) -> Dict[str, Any]:
+    """Notify a user of the final trivia challenge result."""
+    messages = {
+        "won": ("You Won! 🏆", "Congratulations — you won the trivia challenge!"),
+        "lost": ("Challenge Complete", "Your trivia challenge is over — check the results."),
+        "tied": ("It's a Tie!", "You and your opponent finished with the same score!"),
+    }
+    title, body = messages.get(result, ("Challenge Complete", "Your trivia challenge has ended."))
+    payload = PushNotificationPayload(
+        title=title,
+        body=body,
+        data={
+            "type": "trivia_challenge_result",
+            "challenge_id": challenge_id,
+            "result": result,
+            "screen": "trivia_challenge_detail",
+        }
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_trivia_nudge(
+    db: Session,
+    user_id: str,
+    nudger_name: str,
+    challenge_id: str,
+) -> Dict[str, Any]:
+    """Notify a user that their trivia opponent nudged them."""
+    payload = PushNotificationPayload(
+        title="Trivia Nudge 👋",
+        body=f"{nudger_name} is waiting for you to answer your trivia question!",
+        data={
+            "type": "trivia_nudge",
+            "challenge_id": challenge_id,
+            "screen": "trivia_challenge_detail",
+        }
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_trivia_challenge_expired(
+    db: Session,
+    challenger_id: str,
+    challenged_id: str,
+    challenge_id: str,
+) -> None:
+    """Notify both players that a trivia challenge expired with no winner."""
+    payload = PushNotificationPayload(
+        title="Trivia Challenge Expired",
+        body="Your trivia challenge expired — no winner was declared.",
+        data={
+            "type": "trivia_challenge_expired",
+            "challenge_id": challenge_id,
+            "screen": "trivia_challenges",
+        }
+    )
+    PushNotificationService.send_to_users(db, [challenger_id, challenged_id], payload)

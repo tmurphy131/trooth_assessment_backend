@@ -1,0 +1,2620 @@
+[
+  {
+    "question": "Which of these cities was Jesus born in?",
+    "options": {
+      "a": "Jerusalem",
+      "b": "Nazareth",
+      "c": "Bethlehem",
+      "d": "Capernaum"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What gifts did the Wise Men bring to Jesus?",
+    "options": {
+      "a": "Fabrics, jewels, and incense",
+      "b": "Gold, frankincense, and myrrh",
+      "c": "Gold, frankincense, and oil",
+      "d": "Silver, myrrh, and spices"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who baptized Jesus in the Jordan River?",
+    "options": {
+      "a": "An angel",
+      "b": "A Roman priest",
+      "c": "Peter",
+      "d": "John the Baptist"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "After his baptism, Jesus was tempted in the wilderness for how many days?",
+    "options": {
+      "a": "7",
+      "b": "40",
+      "c": "30",
+      "d": "12"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which disciple was a tax collector before Jesus called him?",
+    "options": {
+      "a": "Matthew (Levi)",
+      "b": "Andrew",
+      "c": "Simon Peter",
+      "d": "James"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the Sermon on the Mount, Jesus taught a series of blessings known as the...",
+    "options": {
+      "a": "Beatitudes",
+      "b": "Commandments",
+      "c": "Prophecies",
+      "d": "Parables"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus taught his disciples to pray the Lord's Prayer.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which parable describes a man who plants seed, and some falls on good soil, some on rocky ground, and some among thorns?",
+    "options": {
+      "a": "The Parable of the Sower",
+      "b": "The Parable of the Good Samaritan",
+      "c": "The Parable of the Prodigal Son",
+      "d": "The Parable of the Talents"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Jesus fed a crowd of five thousand with how many loaves of bread and fish?",
+    "options": {
+      "a": "Seven loaves and a few small fish",
+      "b": "Five loaves and two fish",
+      "c": "Ten loaves and four fish",
+      "d": "Two loaves and five fish"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which disciple walked on water with Jesus for a short time?",
+    "options": {
+      "a": "James",
+      "b": "Thomas",
+      "c": "Peter",
+      "d": "John"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What miracle did Jesus perform at the wedding in Cana?",
+    "options": {
+      "a": "Healed a blind man",
+      "b": "Calmed a storm on the sea",
+      "c": "Turned water into wine",
+      "d": "Raised Lazarus from the dead"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who betrayed Jesus for 30 pieces of silver?",
+    "options": {
+      "a": "Peter",
+      "b": "Judas Iscariot",
+      "c": "Simon the Zealot",
+      "d": "Thomas"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Where did Jesus pray to the Father before his crucifixion, asking for the cup to be taken from him?",
+    "options": {
+      "a": "Garden of Gethsemane",
+      "b": "Mount Zion",
+      "c": "Mount of Olives",
+      "d": "Kidron Valley"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus was crucified on a cross between two thieves.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the Roman governor who presided over Jesus' trial and condemned him to death?",
+    "options": {
+      "a": "King Agrippa",
+      "b": "Caesar Augustus",
+      "c": "Herod Antipas",
+      "d": "Pontius Pilate"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "How long did Jesus remain on earth after his resurrection before ascending into heaven?",
+    "options": {
+      "a": "50 days",
+      "b": "3 days",
+      "c": "40 days",
+      "d": "7 days"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What event marked the birth of the early Christian church, as described in the book of Acts?",
+    "options": {
+      "a": "Pentecost",
+      "b": "The Last Supper",
+      "c": "The Ascension of Jesus",
+      "d": "The Conversion of Paul"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which apostle preached the first sermon on the Day of Pentecost, leading to many conversions?",
+    "options": {
+      "a": "Peter",
+      "b": "James",
+      "c": "Paul",
+      "d": "John"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Before his conversion, Saul (who later became Paul) was known for what activity?",
+    "options": {
+      "a": "Healing the sick",
+      "b": "Serving in the Roman army",
+      "c": "Writing prophetic scrolls",
+      "d": "Persecuting Christians"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "On what road did Saul have a dramatic encounter with Jesus that led to his conversion?",
+    "options": {
+      "a": "Road to Jericho",
+      "b": "Road to Jerusalem",
+      "c": "Road to Emmaus",
+      "d": "Road to Damascus"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Peter wrote the book of Romans.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to 1 Corinthians 13, which of these is described as the greatest of faith, hope, and love?",
+    "options": {
+      "a": "Hope",
+      "b": "Faith",
+      "c": "Wisdom",
+      "d": "Love"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which New Testament book is a letter written to a church in a city known for its immoral culture, encouraging them to live holy lives?",
+    "options": {
+      "a": "1 Corinthians",
+      "b": "Philippians",
+      "c": "Ephesians",
+      "d": "Galatians"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the common theme in the book of James?",
+    "options": {
+      "a": "Faith without works is dead",
+      "b": "The end times prophecies",
+      "c": "The importance of spiritual gifts",
+      "d": "The sovereignty of God"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of Revelation, what does Jesus primarily appear as, symbolizing his sacrifice and victory?",
+    "options": {
+      "a": "A rider on a white horse",
+      "b": "A powerful Lion",
+      "c": "A radiant Morning Star",
+      "d": "A Lamb that was slain"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the mother of Jesus?",
+    "options": {
+      "a": "Martha",
+      "b": "Elizabeth",
+      "c": "Mary Magdalene",
+      "d": "Mary"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus' first miracle was raising Lazarus from the dead.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these parables teaches about God's rejoicing over a sinner who repents?",
+    "options": {
+      "a": "The Parable of the Ten Virgins",
+      "b": "The Parable of the Rich Fool",
+      "c": "The Parable of the Lost Coin",
+      "d": "The Parable of the Unforgiving Servant"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the occupation of Jesus' earthly father, Joseph?",
+    "options": {
+      "a": "Fisherman",
+      "b": "Carpenter",
+      "c": "Tax collector",
+      "d": "Shepherd"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which Gospel writer was a physician and carefully researched his account?",
+    "options": {
+      "a": "Matthew",
+      "b": "John",
+      "c": "Mark",
+      "d": "Luke"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to Jesus, what are the two greatest commandments?",
+    "options": {
+      "a": "Worship God alone and keep the Sabbath holy",
+      "b": "Love God and love your neighbor",
+      "c": "Do not steal and do not lie",
+      "d": "Honor your father and mother and do not murder"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus said, 'I am the way, the truth, and the life. No one comes to the Father except through me.'",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which apostle initially doubted Jesus' resurrection until he saw and touched Jesus' wounds?",
+    "options": {
+      "a": "Peter",
+      "b": "Andrew",
+      "c": "Thomas",
+      "d": "Philip"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the high priest who questioned Jesus before his crucifixion?",
+    "options": {
+      "a": "Nicodemus",
+      "b": "Caiaphas",
+      "c": "Joseph of Arimathea",
+      "d": "Annas"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these women was among the first to witness the empty tomb of Jesus?",
+    "options": {
+      "a": "Martha",
+      "b": "Mary Magdalene",
+      "c": "Joanna",
+      "d": "Salome"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, who was chosen to replace Judas Iscariot among the twelve apostles?",
+    "options": {
+      "a": "Matthias",
+      "b": "Stephen",
+      "c": "Barnabas",
+      "d": "Paul"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the primary motivation for the early Christians selling their possessions and distributing to those in need?",
+    "options": {
+      "a": "To gain favor with the Roman authorities",
+      "b": "To ensure no one among them had need",
+      "c": "To follow a legal requirement of Judaism",
+      "d": "To accumulate wealth for future church projects"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Paul was blinded for a short time after his encounter with Jesus on the road to Damascus.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which letter of Paul emphasizes that salvation is by grace through faith, not by works of the law?",
+    "options": {
+      "a": "Romans",
+      "b": "Ephesians",
+      "c": "Philippians",
+      "d": "Colossians"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the collective name for the letters written by Paul to individuals like Timothy and Titus?",
+    "options": {
+      "a": "Pastoral Epistles",
+      "b": "Prison Epistles",
+      "c": "General Epistles",
+      "d": "Catholic Epistles"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which New Testament book begins with 'In the beginning was the Word, and the Word was with God, and the Word was God'?",
+    "options": {
+      "a": "Revelation",
+      "b": "Matthew",
+      "c": "John",
+      "d": "Luke"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The book of Hebrews emphasizes the superiority of Jesus Christ over angels, Moses, and the Old Covenant.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these is NOT one of the 'Fruits of the Spirit' listed in Galatians 5?",
+    "options": {
+      "a": "Love",
+      "b": "Wealth",
+      "c": "Joy",
+      "d": "Peace"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the primary message of the Great Commission given by Jesus?",
+    "options": {
+      "a": "To build a grand temple in Jerusalem",
+      "b": "To establish political rule over Israel",
+      "c": "To gather wealth for the poor",
+      "d": "To make disciples of all nations"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which city was Paul traveling to when he had his conversion experience?",
+    "options": {
+      "a": "Rome",
+      "b": "Damascus",
+      "c": "Antioch",
+      "d": "Corinth"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was struck dead along with his wife for lying to the Holy Spirit about money from a land sale?",
+    "options": {
+      "a": "Ananias",
+      "b": "Felix",
+      "c": "Barnabas",
+      "d": "Simon the sorcerer"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Book of Revelation was written by the Apostle Paul.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which powerful Roman emperor was in power when Jesus was born?",
+    "options": {
+      "a": "Augustus",
+      "b": "Tiberius",
+      "c": "Claudius",
+      "d": "Nero"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the occupation of Peter and Andrew before they became disciples of Jesus?",
+    "options": {
+      "a": "Fishermen",
+      "b": "Carpenters",
+      "c": "Shepherds",
+      "d": "Farmers"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these is NOT a Gospel in the New Testament?",
+    "options": {
+      "a": "John",
+      "b": "Luke",
+      "c": "Acts",
+      "d": "Matthew"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus told Nicodemus that people must be 'born again' to see the kingdom of God.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which book recounts the history of the early Christian church and the spread of the Gospel?",
+    "options": {
+      "a": "Revelation",
+      "b": "Romans",
+      "c": "Acts",
+      "d": "Hebrews"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What common theme is found in the letters of 1, 2, and 3 John?",
+    "options": {
+      "a": "The importance of the law",
+      "b": "Warnings against false teachers",
+      "c": "The suffering of Christ",
+      "d": "Love for one another"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of Philippians, Paul encourages believers to have the mind of Christ, characterized by...",
+    "options": {
+      "a": "Wealth and prosperity",
+      "b": "Humility and self-sacrifice",
+      "c": "Strict adherence to rules",
+      "d": "Power and authority"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT a name of one of the twelve apostles?",
+    "options": {
+      "a": "Bartholomew",
+      "b": "Silas",
+      "c": "Jude",
+      "d": "Simon"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul wrote the letter to the Hebrews.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which Old Testament prophet is quoted at the beginning of Mark's Gospel regarding John the Baptist's ministry?",
+    "options": {
+      "a": "Jeremiah",
+      "b": "Malachi",
+      "c": "Isaiah",
+      "d": "Elijah"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the 'armor of God' described in Ephesians 6 for believers?",
+    "options": {
+      "a": "Shield of gold, helmet of silver, belt of jewels",
+      "b": "Breastplate of righteousness, sandals of peace, spear of truth",
+      "c": "Helmet of salvation, sword of the Spirit, shield of faith",
+      "d": "Cloak of humility, staff of authority, crown of glory"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus healed ten lepers, and all ten returned to thank him.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of Jesus' parables tells of a son who wasted his inheritance but was welcomed back by his father?",
+    "options": {
+      "a": "The Parable of the Talents",
+      "b": "The Parable of the Prodigal Son",
+      "c": "The Parable of the Rich Man and Lazarus",
+      "d": "The Parable of the Ten Virgins"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What did Jesus say was the 'sign of Jonah'?",
+    "options": {
+      "a": "His coming baptism by John",
+      "b": "His feeding of the five thousand",
+      "c": "His death and resurrection after three days and nights",
+      "d": "His ability to calm storms"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus strictly forbade his disciples from sharing the Gospel with Gentiles.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the first Christian martyr, stoned to death as recorded in the book of Acts?",
+    "options": {
+      "a": "Stephen",
+      "b": "Peter",
+      "c": "Barnabas",
+      "d": "James"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which two apostles were known as 'sons of thunder'?",
+    "options": {
+      "a": "James and John",
+      "b": "Thomas and Matthew",
+      "c": "Peter and Andrew",
+      "d": "Philip and Bartholomew"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What vision did Peter have on a rooftop in Joppa, teaching him that God accepts both Jews and Gentiles?",
+    "options": {
+      "a": "A ladder reaching to heaven",
+      "b": "An angel with a message",
+      "c": "A sheet descending with all kinds of animals",
+      "d": "A burning bush"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul wrote more books in the New Testament than any other author.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which epistle contains the famous passage about 'love is patient, love is kind'?",
+    "options": {
+      "a": "1 Corinthians",
+      "b": "Romans",
+      "c": "Ephesians",
+      "d": "Galatians"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the young man that fell asleep and fell out of a third-story window during Paul's long sermon, but was revived by Paul?",
+    "options": {
+      "a": "Titus",
+      "b": "Eutychus",
+      "c": "Timothy",
+      "d": "Silas"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the last book of the New Testament?",
+    "options": {
+      "a": "2 Peter",
+      "b": "Philemon",
+      "c": "Jude",
+      "d": "Revelation"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Paul was shipwrecked on his way to Rome.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What city was the primary base for Paul's missionary journeys, often referred to as the 'mother church' for Gentile missions?",
+    "options": {
+      "a": "Corinth",
+      "b": "Antioch",
+      "c": "Jerusalem",
+      "d": "Ephesus"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the Roman emperor during much of Paul's ministry and eventual execution?",
+    "options": {
+      "a": "Domitian",
+      "b": "Augustus",
+      "c": "Nero",
+      "d": "Caligula"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus taught that it is easier for a camel to go through the eye of a needle than for a rich man to enter the kingdom of God.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which book contains a detailed discussion of the qualifications for elders and deacons in the church?",
+    "options": {
+      "a": "Hebrews",
+      "b": "Philemon",
+      "c": "Jude",
+      "d": "Titus"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What did Jesus do in the Temple, causing conflict with the religious leaders?",
+    "options": {
+      "a": "He drove out merchants and money-changers.",
+      "b": "He taught only in parables.",
+      "c": "He performed a miracle of feeding a crowd.",
+      "d": "He offered a new type of sacrifice."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the garden where Jesus was buried?",
+    "options": {
+      "a": "Garden of Eden",
+      "b": "Mount of Olives Garden",
+      "c": "Garden of Joseph of Arimathea",
+      "d": "Garden of Gethsemane"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these was NOT a common occupation among Jesus' first disciples?",
+    "options": {
+      "a": "Fisherman",
+      "b": "Tax Collector",
+      "c": "Carpenter",
+      "d": "Zealot"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the angel that announced to Mary that she would give birth to Jesus?",
+    "options": {
+      "a": "Uriel",
+      "b": "Michael",
+      "c": "Gabriel",
+      "d": "Raphael"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle John was exiled to the island of Patmos where he received the visions recorded in Revelation.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the central theme of the book of Galatians?",
+    "options": {
+      "a": "Warnings about the end times",
+      "b": "The importance of spiritual gifts",
+      "c": "Freedom in Christ from the law",
+      "d": "Guidance for church leaders"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these parables highlights the importance of being prepared for Christ's return?",
+    "options": {
+      "a": "The Parable of the Persistent Widow",
+      "b": "The Parable of the Growing Seed",
+      "c": "The Parable of the Lost Sheep",
+      "d": "The Parable of the Ten Virgins"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What did Jesus say about paying taxes to Caesar?",
+    "options": {
+      "a": "Do not pay them, as they are unjust.",
+      "b": "Give to Caesar what is Caesar's, and to God what is God's.",
+      "c": "Only pay them if you are a Roman citizen.",
+      "d": "Pay only what you can afford."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The book of Philemon is a long letter written to an entire church congregation.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a key theme in the Gospel of Mark?",
+    "options": {
+      "a": "Jesus as the Son of God and suffering servant",
+      "b": "Jesus as the promised Messiah to the Jews",
+      "c": "Jesus as the universal Savior for all people",
+      "d": "Jesus as the divine Word of God"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, who was the prophet that predicted a severe famine, prompting the early church to send aid?",
+    "options": {
+      "a": "Barnabas",
+      "b": "Agabus",
+      "c": "Silas",
+      "d": "Philip"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which book encourages believers to 'submit yourselves to every human authority for the Lord's sake'?",
+    "options": {
+      "a": "1 Peter",
+      "b": "Jude",
+      "c": "Hebrews",
+      "d": "James"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus commanded his disciples to wait in Jerusalem for the Holy Spirit after his resurrection.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the primary message of the book of Romans?",
+    "options": {
+      "a": "Encouragement during persecution",
+      "b": "Warnings against false doctrines",
+      "c": "Instructions for communal worship",
+      "d": "The righteousness of God revealed through faith in Christ"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which city was Paul imprisoned in when he wrote letters like Philippians, Ephesians, Colossians, and Philemon?",
+    "options": {
+      "a": "Antioch",
+      "b": "Rome",
+      "c": "Athens",
+      "d": "Jerusalem"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Revelation, the New Jerusalem will come down from heaven.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which Gospel emphasizes Jesus' divine nature and contains many 'I Am' statements?",
+    "options": {
+      "a": "Matthew",
+      "b": "Mark",
+      "c": "John",
+      "d": "Luke"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the man who sold his land and laid the money at the apostles' feet, setting an example for communal sharing?",
+    "options": {
+      "a": "Barnabas",
+      "b": "Stephen",
+      "c": "Ananias",
+      "d": "Philip"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Thomas was known for his unwavering faith and never doubted Jesus.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these women was known for choosing to sit at Jesus' feet and listen to his teaching, rather than helping Martha with housework?",
+    "options": {
+      "a": "Salome",
+      "b": "Mary (sister of Martha)",
+      "c": "Mary Magdalene",
+      "d": "Joanna"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the famous passage in Matthew 6 where Jesus teaches about not worrying about food or clothing, but seeking first God's kingdom?",
+    "options": {
+      "a": "The Sermon on the Mount",
+      "b": "The Parable of the Rich Fool",
+      "c": "The Olivet Discourse",
+      "d": "The Last Supper discourse"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The book of 1 John states that 'God is light, and in him is no darkness at all.'",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the Roman governor before whom Paul made his defense, almost persuading him to become a Christian?",
+    "options": {
+      "a": "Felix",
+      "b": "Festus",
+      "c": "Pilate",
+      "d": "Agrippa"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these is considered a 'Prison Epistle' written by Paul?",
+    "options": {
+      "a": "Romans",
+      "b": "1 Corinthians",
+      "c": "Ephesians",
+      "d": "Galatians"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the 'good news' or 'gospel' that the New Testament proclaims?",
+    "options": {
+      "a": "The establishment of an earthly kingdom",
+      "b": "The promise of worldly prosperity",
+      "c": "Salvation through Jesus Christ's death and resurrection",
+      "d": "God's strict laws for humanity"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus' first public miracle was healing a man born blind.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which disciple was known for his confession, 'You are the Christ, the Son of the living God'?",
+    "options": {
+      "a": "Philip",
+      "b": "John",
+      "c": "Peter",
+      "d": "Andrew"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What event immediately preceded Jesus' temptation in the wilderness?",
+    "options": {
+      "a": "His baptism by John",
+      "b": "His first miracle at Cana",
+      "c": "The transfiguration",
+      "d": "The calling of his disciples"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus taught his disciples to take vengeance on their enemies.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the Roman ruler of Judea at the time of Jesus' birth, according to Luke?",
+    "options": {
+      "a": "Caesar Augustus",
+      "b": "Quirinius",
+      "c": "Pontius Pilate",
+      "d": "King Herod"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which book warns against false teachers and encourages believers to contend for the faith that was once for all delivered to the saints?",
+    "options": {
+      "a": "Jude",
+      "b": "Philemon",
+      "c": "2 Timothy",
+      "d": "3 John"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul was originally named Saul and was a Pharisee.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these parables illustrates the boundless joy of heaven over one repentant sinner?",
+    "options": {
+      "a": "The Parable of the Rich Man and Lazarus",
+      "b": "The Parable of the Talents",
+      "c": "The Parable of the Lost Sheep",
+      "d": "The Parable of the Pearl of Great Price"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the woman who harbored Paul and Silas in Philippi and whose household was baptized?",
+    "options": {
+      "a": "Phoebe",
+      "b": "Priscilla",
+      "c": "Dorcas",
+      "d": "Lydia"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The early church in Jerusalem practiced communal living, sharing all their possessions.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which epistle warns against being carried away by 'every wind of doctrine' and encourages unity in the body of Christ?",
+    "options": {
+      "a": "Philippians",
+      "b": "2 Peter",
+      "c": "Colossians",
+      "d": "Ephesians"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who authored the book of James?",
+    "options": {
+      "a": "James, the brother of John",
+      "b": "James, son of Alphaeus",
+      "c": "James, the brother of Jesus",
+      "d": "James, the Elder"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Book of Revelation speaks of a new heaven and a new earth.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these events took place on the Mount of Transfiguration?",
+    "options": {
+      "a": "Jesus delivered the Sermon on the Mount",
+      "b": "Jesus appeared with Moses and Elijah",
+      "c": "Jesus was tempted by Satan",
+      "d": "Jesus ascended into heaven"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the man who, along with his wife Sapphira, died after lying to Peter about their property sale?",
+    "options": {
+      "a": "Felix",
+      "b": "Ananias",
+      "c": "Barnabas",
+      "d": "Simon Magus"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul was primarily sent to preach the Gospel to the Jews.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of Paul's letters emphasizes joy and thanksgiving, despite his imprisonment?",
+    "options": {
+      "a": "Romans",
+      "b": "1 Timothy",
+      "c": "Philippians",
+      "d": "Galatians"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the opening verse of the Gospel of John?",
+    "options": {
+      "a": "Inasmuch as many have undertaken to compile a narrative of the things that have been accomplished among us.",
+      "b": "The book of the genealogy of Jesus Christ, the son of David, the son of Abraham.",
+      "c": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+      "d": "The beginning of the gospel of Jesus Christ, the Son of God."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus healed the servant of a Roman centurion who showed great faith.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these figures was a leading persecutor of Christians before becoming a prominent apostle?",
+    "options": {
+      "a": "Peter",
+      "b": "Paul",
+      "c": "James",
+      "d": "John"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the 'new commandment' Jesus gave to his disciples?",
+    "options": {
+      "a": "Honor your father and mother.",
+      "b": "Go and make disciples of all nations.",
+      "c": "Love one another as I have loved you.",
+      "d": "Love the Lord your God with all your heart."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The book of 2 Peter warns about false teachers and scoffers who deny the second coming of Christ.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the man from Cyrene compelled to carry Jesus' cross?",
+    "options": {
+      "a": "Joseph",
+      "b": "Simon",
+      "c": "Nicodemus",
+      "d": "Barabbas"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these miracles demonstrated Jesus' power over death?",
+    "options": {
+      "a": "Feeding the five thousand",
+      "b": "Calming the storm",
+      "c": "Healing the Gerasene demoniac",
+      "d": "Raising Lazarus"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus taught that one should forgive their brother seven times.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What title did Jesus often use to refer to himself, emphasizing his humanity and messianic role?",
+    "options": {
+      "a": "Son of Man",
+      "b": "Son of God",
+      "c": "Son of David",
+      "d": "King of the Jews"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which book of the New Testament is structured as a letter from an imprisoned Paul to a runaway slave's master?",
+    "options": {
+      "a": "Titus",
+      "b": "Galatians",
+      "c": "Philemon",
+      "d": "Colossians"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle John wrote the letter to the Romans.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these cities was NOT visited by Paul on his missionary journeys?",
+    "options": {
+      "a": "Corinth",
+      "b": "Athens",
+      "c": "Bethlehem",
+      "d": "Ephesus"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the primary theme of the book of Hebrews?",
+    "options": {
+      "a": "The coming tribulation and judgment",
+      "b": "Practical advice for daily Christian living",
+      "c": "The superiority of Christ and his New Covenant",
+      "d": "The law of Moses and its importance"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Holy Spirit descended as tongues of fire at Pentecost.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these parables teaches about stewardship and using one's gifts wisely?",
+    "options": {
+      "a": "The Parable of the Rich Fool",
+      "b": "The Parable of the Lost Son",
+      "c": "The Parable of the Sower",
+      "d": "The Parable of the Talents"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the young pastor that Paul mentored and wrote two letters to, offering guidance on ministry?",
+    "options": {
+      "a": "Silas",
+      "b": "Barnabas",
+      "c": "Timothy",
+      "d": "Titus"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The book of 1 Peter instructs believers to rejoice in their sufferings for Christ.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the island where Paul was shipwrecked on his way to Rome?",
+    "options": {
+      "a": "Crete",
+      "b": "Malta",
+      "c": "Cyprus",
+      "d": "Patmos"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which Gospel begins with a long genealogy tracing Jesus' lineage back to Abraham?",
+    "options": {
+      "a": "Mark",
+      "b": "Matthew",
+      "c": "John",
+      "d": "Luke"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus cursed a fig tree because it had no fruit when he was hungry.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What important doctrine is primarily discussed in 1 Corinthians 15?",
+    "options": {
+      "a": "The resurrection of the dead",
+      "b": "Giving to the poor",
+      "c": "The role of women in the church",
+      "d": "The importance of baptism"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the governor of Judea who released Barabbas instead of Jesus?",
+    "options": {
+      "a": "Felix",
+      "b": "Agrippa",
+      "c": "Herod Antipas",
+      "d": "Pontius Pilate"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Peter was crucified upside down.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these cities was NOT one of the seven churches addressed in Revelation?",
+    "options": {
+      "a": "Sardis",
+      "b": "Jerusalem",
+      "c": "Ephesus",
+      "d": "Laodicea"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the primary theme of the book of Colossians?",
+    "options": {
+      "a": "Warnings against legalism",
+      "b": "The importance of good works",
+      "c": "The supremacy and sufficiency of Christ",
+      "d": "Instructions for family life"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul taught that Christians should separate themselves from the world completely and not interact with non-believers.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which book of the New Testament contains the 'Hall of Faith' chapter (chapter 11) listing heroes of faith?",
+    "options": {
+      "a": "James",
+      "b": "Galatians",
+      "c": "Romans",
+      "d": "Hebrews"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What did Jesus tell the rich young ruler he must do to inherit eternal life?",
+    "options": {
+      "a": "Become a priest in the Temple",
+      "b": "Perform many good deeds",
+      "c": "Sell all his possessions and give to the poor",
+      "d": "Follow the Ten Commandments perfectly"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus healed on the Sabbath, causing conflict with the religious leaders.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the Roman centurion in Caesarea whose conversion is a key event in Acts, showing the Gospel reaching Gentiles?",
+    "options": {
+      "a": "Felix",
+      "b": "Sergius Paulus",
+      "c": "Cornelius",
+      "d": "Julius"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a key theme of 1 Thessalonians?",
+    "options": {
+      "a": "The importance of the resurrection",
+      "b": "Warnings against legalism",
+      "c": "The qualifications for church leaders",
+      "d": "Comfort and instruction regarding Christ's second coming"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Mary Magdalene was one of the twelve apostles.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What did Jesus do for his disciples at the Last Supper to teach humility and service?",
+    "options": {
+      "a": "He gave them expensive gifts",
+      "b": "He anointed them with oil",
+      "c": "He cooked a meal for them",
+      "d": "He washed their feet"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these is often called the 'Gospel for the Gentiles' because of its universal focus and clear historical accounts?",
+    "options": {
+      "a": "Matthew",
+      "b": "Luke",
+      "c": "John",
+      "d": "Mark"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul was circumcised on the eighth day, as per Jewish law.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which book of the New Testament is a letter from James, the brother of Jesus, addressing practical Christian living?",
+    "options": {
+      "a": "Hebrews",
+      "b": "1 Peter",
+      "c": "Jude",
+      "d": "James"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What city was Paul trying to reach when he received his vision of a man from Macedonia calling for help?",
+    "options": {
+      "a": "Antioch",
+      "b": "Troas",
+      "c": "Ephesus",
+      "d": "Philippi"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus willingly submitted to crucifixion, even though he had the power to avoid it.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of Revelation, what does 'Alpha and Omega' signify about Jesus?",
+    "options": {
+      "a": "His authority over the nations",
+      "b": "His eternal nature as the beginning and the end",
+      "c": "His role as a powerful judge",
+      "d": "His leadership over the angels"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these figures is known for saying, 'Indeed, I am coming soon' at the end of Revelation?",
+    "options": {
+      "a": "The Apostle John",
+      "b": "God the Father",
+      "c": "Jesus Christ",
+      "d": "An angel"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul encouraged women to remain silent in all church gatherings and never participate in ministry.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which city was the home of Mary, Martha, and Lazarus?",
+    "options": {
+      "a": "Capernaum",
+      "b": "Nazareth",
+      "c": "Bethany",
+      "d": "Jericho"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What did Jesus predict Peter would do before the rooster crowed twice?",
+    "options": {
+      "a": "Be arrested by the authorities",
+      "b": "Deny him three times",
+      "c": "Preach a sermon to thousands",
+      "d": "Die for his faith"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus taught that the Sabbath was made for man, not man for the Sabbath.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the common term for the first three Gospels (Matthew, Mark, Luke) due to their similar perspectives?",
+    "options": {
+      "a": "Apocalyptic Gospels",
+      "b": "Synoptic Gospels",
+      "c": "Didactic Gospels",
+      "d": "Canonical Gospels"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which letter of Paul addresses divisions and factions within the church, emphasizing unity in Christ?",
+    "options": {
+      "a": "Philippians",
+      "b": "1 Corinthians",
+      "c": "Galatians",
+      "d": "Romans"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul remained single throughout his ministry.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these cities was the recipient of a letter from Paul that praises their generosity and partnership in the Gospel?",
+    "options": {
+      "a": "Corinth",
+      "b": "Ephesus",
+      "c": "Thessalonica",
+      "d": "Philippi"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the Roman ruler of Galilee who had John the Baptist imprisoned and beheaded?",
+    "options": {
+      "a": "Caesar Augustus",
+      "b": "Pontius Pilate",
+      "c": "Herod Antipas",
+      "d": "Felix"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In Revelation, Jesus is described as the 'Lion of the tribe of Judah.'",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the island where the Apostle John received the visions of Revelation?",
+    "options": {
+      "a": "Cyprus",
+      "b": "Rhodes",
+      "c": "Patmos",
+      "d": "Crete"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a key teaching of Jesus found in Matthew 5-7 (Sermon on the Mount)?",
+    "options": {
+      "a": "Seek personal revenge for wrongs committed",
+      "b": "An eye for an eye, and a tooth for a tooth",
+      "c": "Love your enemies and pray for those who persecute you",
+      "d": "Only righteous people deserve kindness"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Paul used his Roman citizenship to appeal his case to Caesar.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of Paul's letters contains the famous passage about the 'spiritual armor of God'?",
+    "options": {
+      "a": "Colossians",
+      "b": "Philippians",
+      "c": "Romans",
+      "d": "Ephesians"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the occupation of Zacchaeus before he met Jesus?",
+    "options": {
+      "a": "Shepherd",
+      "b": "Fisherman",
+      "c": "Carpenter",
+      "d": "Tax Collector"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The book of 2 Timothy is Paul's last known letter, written shortly before his death.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which parable illustrates the varying responses people have to God's word?",
+    "options": {
+      "a": "The Parable of the Weeds",
+      "b": "The Parable of the Sower",
+      "c": "The Parable of the Unmerciful Servant",
+      "d": "The Parable of the Ten Virgins"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the Jewish ruling council that tried Jesus and later persecuted the early Christians?",
+    "options": {
+      "a": "The Sanhedrin",
+      "b": "The Sadducees",
+      "c": "The Elders",
+      "d": "The Pharisees"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus commanded his disciples to love their neighbors as themselves.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who accompanied Paul on his first missionary journey?",
+    "options": {
+      "a": "Luke and Titus",
+      "b": "Timothy and Silas",
+      "c": "Peter and John",
+      "d": "Barnabas and John Mark"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which book of the New Testament addresses the importance of submission to governing authorities and paying taxes?",
+    "options": {
+      "a": "James",
+      "b": "Revelation",
+      "c": "Romans",
+      "d": "Galatians"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: All of Jesus' twelve disciples were martyred for their faith.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the primary theme of the book of Jude?",
+    "options": {
+      "a": "The superiority of Christ",
+      "b": "Encouragement during persecution",
+      "c": "Instructions for church organization",
+      "d": "Contending for the faith against false teachers"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these was a Jewish sect known for strict adherence to the Law and oral traditions, often clashing with Jesus?",
+    "options": {
+      "a": "Sadducees",
+      "b": "Pharisees",
+      "c": "Essenes",
+      "d": "Zealots"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Peter is considered the first Pope by some Christian traditions.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What did Jesus do before choosing his twelve apostles?",
+    "options": {
+      "a": "He went to the temple to offer a sacrifice.",
+      "b": "He spent the night praying to God.",
+      "c": "He consulted with John the Baptist.",
+      "d": "He held a public meeting to gather volunteers."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a key theme in the book of Ephesians?",
+    "options": {
+      "a": "Instructions for communal living in Jerusalem",
+      "b": "The unity of believers in Christ and the church as His body",
+      "c": "Warnings against backsliding",
+      "d": "The proper way to conduct evangelistic campaigns"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The book of Titus is a letter written to a young pastor on the island of Crete.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of these events is recorded in all four Gospels?",
+    "options": {
+      "a": "The transfiguration",
+      "b": "The feeding of the five thousand",
+      "c": "The birth of Jesus",
+      "d": "The temptation of Jesus"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the primary focus of the book of 1 John?",
+    "options": {
+      "a": "Detailed prophecies of the end times",
+      "b": "Warnings about the mark of the beast",
+      "c": "Assurance of salvation and the nature of true faith and love",
+      "d": "Instructions for church governance"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus used parables to make his teachings more obscure to outsiders but clear to his disciples.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "new_testament",
+    "approved": true
+  }
+]

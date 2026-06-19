@@ -1,0 +1,2312 @@
+[
+  {
+    "question": "Which early Trinitarian heresy taught that the Father, Son, and Holy Spirit are not distinct persons but rather three successive modes or manifestations of the one God?",
+    "options": {
+      "a": "Modalism",
+      "b": "Tritheism",
+      "c": "Adoptionism",
+      "d": "Arianism"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The theological term 'communicatio idiomatum' primarily refers to the communication of properties between which two natures in Christ?",
+    "options": {
+      "a": "The old covenant and the new covenant",
+      "b": "The Father and the Son",
+      "c": "The spirit and the soul of man",
+      "d": "The divine and human natures"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which view of the Atonement, popularized by Gustaf Aulén, posits that Christ's death was primarily a victory over the powers of sin, death, and the devil?",
+    "options": {
+      "a": "Christus Victor",
+      "b": "Ransom Theory",
+      "c": "Moral Influence",
+      "d": "Penal Substitution"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'Theosis' or 'Deification' is most prominently associated with which branch of Christianity?",
+    "options": {
+      "a": "Anabaptism",
+      "b": "Roman Catholicism",
+      "c": "Protestantism (Reformed)",
+      "d": "Eastern Orthodoxy"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The Nicene Creed (325 AD), in its original form, used which specific Greek term to affirm that the Son is 'of one substance' with the Father?",
+    "options": {
+      "a": "Hypostasis",
+      "b": "Ousia",
+      "c": "Theotokos",
+      "d": "Homoousios"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Augustine of Hippo's comprehensive work 'City of God' was written primarily in response to which historical event or accusation?",
+    "options": {
+      "a": "The Pelagian controversy",
+      "b": "The Donatist schism",
+      "c": "The Arian controversy",
+      "d": "The sack of Rome by the Visigoths in 410 AD"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which Reformed theologian is credited with developing the concept of the 'pactum salutis' (covenant of redemption) between the persons of the Trinity?",
+    "options": {
+      "a": "Francis Turretin",
+      "b": "Jonathan Edwards",
+      "c": "John Calvin",
+      "d": "Herman Witsius"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'perspicuity of Scripture' asserts that the main message of the Bible is clear enough for any diligent reader to understand.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following figures was NOT a scholastic theologian from the High Middle Ages?",
+    "options": {
+      "a": "Anselm of Canterbury",
+      "b": "Peter Lombard",
+      "c": "John Wycliffe",
+      "d": "Thomas Aquinas"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'impeccability of Christ' refers to the theological position that Christ could not have sinned.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The Council of Chalcedon (451 AD) is most famous for its definitive statements regarding which Christological doctrine?",
+    "options": {
+      "a": "The two natures of Christ in one person",
+      "b": "The eternal procession of the Holy Spirit",
+      "c": "The human nature of Christ",
+      "d": "The divine nature of Christ"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which Reformation doctrine emphasizes that God's electing grace is monergistic, meaning God alone performs the work of salvation?",
+    "options": {
+      "a": "Synergism",
+      "b": "Pelagianism",
+      "c": "Arminianism",
+      "d": "Monergism"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Filioque' clause, added to the Nicene-Constantinopolitan Creed in the West, refers to the Holy Spirit proceeding from whom?",
+    "options": {
+      "a": "From the Son only",
+      "b": "From the Father and the Son",
+      "c": "From the Father only",
+      "d": "From the Father through the Son"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Karl Barth's theology is often characterized by its emphasis on the 'Word of God' in which three forms?",
+    "options": {
+      "a": "Law, Gospel, Prophecy",
+      "b": "Preached, Written, Revealed",
+      "c": "Father, Son, Holy Spirit",
+      "d": "Canonical, Apocryphal, Extra-biblical"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'anamnesis' component of the Eucharist primarily emphasizes which aspect of Christ's sacrifice?",
+    "options": {
+      "a": "A future hope for Christ's return",
+      "b": "A memorial or remembrance of Christ's sacrifice",
+      "c": "A re-sacrificing of Christ",
+      "d": "A mystical union with Christ's body"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which eschatological view holds that Christ will return physically to Earth after a period of increasing righteousness and peace, often identified with the church age?",
+    "options": {
+      "a": "Dispensationalism",
+      "b": "Postmillennialism",
+      "c": "Premillennialism",
+      "d": "Amillennialism"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "According to the Westminster Confession of Faith, the 'chief end of man' is to glorify God and to enjoy Him forever.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The theological debate between Luther and Zwingli at the Marburg Colloquy primarily concerned the doctrine of:",
+    "options": {
+      "a": "Infant baptism",
+      "b": "Justification by faith alone",
+      "c": "Predestination",
+      "d": "The real presence of Christ in the Eucharist"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which early church father is known for advocating the 'recapitulation' theory of atonement, where Christ perfectly re-enacted human life, reversing the fall?",
+    "options": {
+      "a": "Irenaeus of Lyons",
+      "b": "Tertullian",
+      "c": "Athanasius of Alexandria",
+      "d": "Augustine of Hippo"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'common grace' refers to God's general benevolence and restraint of sin in the world, extended to all humanity, not just believers.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theologian's work 'Institutes of the Christian Religion' became a foundational text for Reformed theology?",
+    "options": {
+      "a": "Philip Melanchthon",
+      "b": "John Calvin",
+      "c": "Martin Luther",
+      "d": "Huldrych Zwingli"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'particular redemption' (limited atonement) teaches that Christ died only for the elect.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'parousia' in eschatology most directly refers to:",
+    "options": {
+      "a": "The final judgment",
+      "b": "The rapture of the church",
+      "c": "The tribulation period",
+      "d": "The physical return of Christ"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the five 'solas' of the Protestant Reformation?",
+    "options": {
+      "a": "Sola Fide (faith alone)",
+      "b": "Sola Ecclesia (church alone)",
+      "c": "Solus Christus (Christ alone)",
+      "d": "Sola Scriptura (Scripture alone)"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Arminianism, as opposed to Calvinism, emphasizes the role of human free will in salvation.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'Total Depravity' in Calvinism asserts that every part of human nature is corrupted by sin, not that humans are as evil as they could be.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which Ecumenical Council formally condemned Nestorianism, affirming Mary as 'Theotokos' (God-bearer)?",
+    "options": {
+      "a": "Council of Ephesus (431)",
+      "b": "Council of Constantinople (381)",
+      "c": "Council of Chalcedon (451)",
+      "d": "Council of Nicaea (325)"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'hypostatic union' refers to the union of the divine and human natures in the one person of Jesus Christ.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Jonathan Edwards' 'Freedom of the Will' was a significant work defending which theological concept?",
+    "options": {
+      "a": "Compatibilistic freedom (Reformed view)",
+      "b": "Arminian free will",
+      "c": "Absolute indeterminism",
+      "d": "Pelagian self-determination"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following describes the 'Anabaptist' view of baptism?",
+    "options": {
+      "a": "Infant baptism by pouring",
+      "b": "Believer's baptism (regardless of mode)",
+      "c": "Believer's baptism by immersion only",
+      "d": "No baptism is necessary"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'ordo salutis' (order of salvation) refers to the logical sequence of God's work in applying salvation to individuals.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'eschaton' broadly refers to:",
+    "options": {
+      "a": "The beginning of creation",
+      "b": "The end times or final events of history",
+      "c": "The incarnation of Christ",
+      "d": "The middle period of human history"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theologian is often associated with the phrase 'lex orandi, lex credendi' (the law of prayer is the law of belief), highlighting the relationship between worship and doctrine?",
+    "options": {
+      "a": "John Damascene",
+      "b": "Thomas Aquinas",
+      "c": "Augustine of Hippo",
+      "d": "Prosper of Aquitaine"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The Augsburg Confession is a key confessional document of which Protestant tradition?",
+    "options": {
+      "a": "Reformed",
+      "b": "Methodist",
+      "c": "Lutheran",
+      "d": "Anglican"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'concursus' explains how God cooperates with secondary causes in the world.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these concepts is most closely associated with the Roman Catholic understanding of justification?",
+    "options": {
+      "a": "Infused righteousness",
+      "b": "Imputed righteousness",
+      "c": "Declarative justification",
+      "d": "Forensic justification"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Who was the leading figure in the early Pelagian controversy, opposing Augustine's views on grace and free will?",
+    "options": {
+      "a": "Nestorius",
+      "b": "Pelagius",
+      "c": "Donatus",
+      "d": "Arius"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which school of thought within early Christianity denied the true humanity of Christ, holding that His body was only an illusion?",
+    "options": {
+      "a": "Ebionitism",
+      "b": "Apollinarianism",
+      "c": "Arianism",
+      "d": "Docetism"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'regula fidei' (rule of faith) in early Christianity referred to a summary of essential Christian beliefs that preceded the formal creeds.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theologian wrote 'The Bondage of the Will' in response to Erasmus, defending a strong view of human depravity and divine sovereignty?",
+    "options": {
+      "a": "Philipp Melanchthon",
+      "b": "Martin Luther",
+      "c": "Huldrych Zwingli",
+      "d": "John Calvin"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'infralapsarianism' in Reformed theology refers to a specific ordering of God's decrees regarding election and the fall.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "According to the traditional understanding of the 'federal headship' of Adam, what is the primary consequence of his sin for all humanity?",
+    "options": {
+      "a": "The inability to experience divine love",
+      "b": "Imputed guilt and inherited corruption",
+      "c": "A universal predisposition to idolatry",
+      "d": "Loss of free will to choose good"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT typically considered a 'mark' of the true church in Protestant theology?",
+    "options": {
+      "a": "Right administration of the sacraments",
+      "b": "Pure preaching of the Word",
+      "c": "Exercise of church discipline",
+      "d": "The presence of a Pope"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Edict of Milan' (313 AD) legalized Christianity throughout the Roman Empire.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which eschatological view interprets the book of Revelation primarily as a symbolic depiction of the ongoing struggle between good and evil throughout church history?",
+    "options": {
+      "a": "Historicism",
+      "b": "Futurism",
+      "c": "Idealism",
+      "d": "Preterism"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theologian is often considered the father of Methodism and emphasized the doctrine of 'Christian Perfection' or 'Entire Sanctification'?",
+    "options": {
+      "a": "Jonathan Edwards",
+      "b": "John Wesley",
+      "c": "George Whitefield",
+      "d": "Charles Spurgeon"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The Gnostic belief system typically held that salvation was achieved through secret knowledge ('gnosis') rather than faith in Christ.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which specific work of Augustine primarily details his personal journey of conversion and his struggles with sin?",
+    "options": {
+      "a": "Confessions",
+      "b": "On Christian Doctrine",
+      "c": "On the Trinity",
+      "d": "City of God"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The Council of Trent (1545-1563) was the Catholic Church's official response to the Protestant Reformation.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which prominent early church figure from Alexandria argued that the Son was a created being, subordinate to the Father, leading to the Arian controversy?",
+    "options": {
+      "a": "Clement",
+      "b": "Origen",
+      "c": "Athanasius",
+      "d": "Arius"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'anamnesis' in the context of the Eucharist means that the ceremony is merely a symbolic reminder with no real spiritual significance.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Adoptionist' heresy taught that Jesus was born a mere human but was later adopted as God's Son at his baptism or resurrection.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which Reformed theologian, often called 'the second founder of the Dutch Reformed Church,' authored 'The Sum of Theology'?",
+    "options": {
+      "a": "William Ames",
+      "b": "Gisbert Voetius",
+      "c": "Jacob Arminius",
+      "d": "Johannes Cocceius"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Edict of Thessalonica' (380 AD) made Nicene Christianity the official state religion of the Roman Empire.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following best describes the 'governmental theory' of atonement?",
+    "options": {
+      "a": "Christ's death inspires us to live morally.",
+      "b": "Christ's death demonstrated God's righteous governance and the seriousness of sin, making forgiveness possible.",
+      "c": "Christ's death was a payment to Satan.",
+      "d": "Christ suffered the penalty due to us."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The Muratorian Fragment is an early list of New Testament books, providing evidence for the canon's development.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological system, originating in the 17th century, divides biblical history into distinct periods or 'dispensations'?",
+    "options": {
+      "a": "Covenant Theology",
+      "b": "Federal Theology",
+      "c": "Dispensationalism",
+      "d": "New Covenant Theology"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'ontological argument' for the existence of God was first formulated by which medieval theologian?",
+    "options": {
+      "a": "Peter Abelard",
+      "b": "John Duns Scotus",
+      "c": "Anselm of Canterbury",
+      "d": "Thomas Aquinas"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'imago Dei' specifically refers to the image of God in humanity, which is primarily found in our capacity for reason and moral agency.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which Christological heresy taught that Christ had a human body and soul, but a divine mind (Logos) instead of a human mind?",
+    "options": {
+      "a": "Monophysitism",
+      "b": "Eutychianism",
+      "c": "Apollinarianism",
+      "d": "Nestorianism"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'Theodicy' attempts to reconcile God's omnipotence and goodness with the existence of evil and suffering.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological concept asserts that the Bible contains all knowledge necessary for salvation and godly living, and no additional revelation is needed?",
+    "options": {
+      "a": "Sufficiency of Scripture",
+      "b": "Perspicuity of Scripture",
+      "c": "Infallibility of Scripture",
+      "d": "Inerrancy of Scripture"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'eschatological already and not yet' refers to the idea that the Kingdom of God has both inaugurated and future aspects.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which ancient philosopher's thought significantly influenced Thomas Aquinas's theological method and metaphysics?",
+    "options": {
+      "a": "Epicurus",
+      "b": "Socrates",
+      "c": "Plato",
+      "d": "Aristotle"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'via negativa' (negative way) in theology describes God by stating what He is not, due to His transcendence.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Pactum Salutis' or Covenant of Redemption, in Reformed theology, refers to an eternal agreement between whom?",
+    "options": {
+      "a": "The persons of the Trinity",
+      "b": "God and Abraham",
+      "c": "God and individual believers",
+      "d": "God and the Church"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The distinction between 'invisible' and 'visible' church is primarily emphasized in which theological tradition?",
+    "options": {
+      "a": "Mormonism",
+      "b": "Protestantism",
+      "c": "Roman Catholicism",
+      "d": "Eastern Orthodoxy"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'five points of Calvinism' were formulated in response to the 'Five Articles of Remonstrance' proposed by the followers of Jacob Arminius.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which type of church governance is characterized by local congregations being autonomous and self-governing?",
+    "options": {
+      "a": "Episcopal",
+      "b": "Presbyterian",
+      "c": "Congregational",
+      "d": "Hierarchical"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Westminster Shorter Catechism' was completed in the mid-17th century.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is most associated with the 'Pietist' movement?",
+    "options": {
+      "a": "Emphasis on systematic theology and scholasticism",
+      "b": "Strict adherence to liturgical traditions",
+      "c": "Focus on personal devotion, experience, and practical holiness",
+      "d": "Rejection of infant baptism"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'bibliolatry' refers to the worship of the Bible itself, rather than God revealed through the Bible.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Who formulated the 'moral influence theory' of atonement, suggesting Christ's death primarily demonstrates God's love to inspire humanity to love God in return?",
+    "options": {
+      "a": "Peter Abelard",
+      "b": "John Calvin",
+      "c": "Anselm of Canterbury",
+      "d": "Hugo Grotius"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Chicago Statement on Biblical Inerrancy' (1978) affirmed the inerrancy of Scripture in its original manuscripts.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which church father is known for his extensive allegorical interpretation of Scripture, particularly in Alexandria?",
+    "options": {
+      "a": "Jerome",
+      "b": "Augustine",
+      "c": "Origen",
+      "d": "Chrysostom"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'eschatological hope' in Christianity primarily focuses on the restoration of a physical, earthly kingdom in the future.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The theological view that baptism is a sign of the covenant, similar to circumcision in the Old Testament, is characteristic of:",
+    "options": {
+      "a": "Covenant Theology (Reformed/Presbyterian)",
+      "b": "Baptists",
+      "c": "Anabaptists",
+      "d": "Dispensationalism"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Karl Barth's understanding of election emphasized that Christ is the elected one, and in Him, humanity is also elected.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following describes the Roman Catholic doctrine of 'transubstantiation' regarding the Eucharist?",
+    "options": {
+      "a": "Christ's body and blood are present 'in, with, and under' the elements.",
+      "b": "The bread and wine remain unchanged but symbolize Christ's body and blood.",
+      "c": "Christ is spiritually present in the elements.",
+      "d": "The substance of the bread and wine changes into the body and blood of Christ, while the accidents remain."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Great Schism' of 1054 primarily resulted in the division between which two major branches of Christianity?",
+    "options": {
+      "a": "Eastern Orthodoxy and Protestantism",
+      "b": "Roman Catholicism and Protestantism",
+      "c": "Roman Catholicism and Eastern Orthodoxy",
+      "d": "Nestorianism and Chalcedonian Christianity"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'eternal generation' states that the Son is eternally begotten of the Father, without beginning.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which early Christian apologist is known for his 'Logos' theology, attempting to bridge Greek philosophy and Christian thought?",
+    "options": {
+      "a": "Irenaeus of Lyons",
+      "b": "Clement of Alexandria",
+      "c": "Tertullian",
+      "d": "Justin Martyr"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Book of Common Prayer' is a foundational liturgical text for which tradition?",
+    "options": {
+      "a": "Anglicanism",
+      "b": "Methodism",
+      "c": "Lutheranism",
+      "d": "Presbyterianism"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Second Helvetic Confession' is a key document for which branch of the Reformation?",
+    "options": {
+      "a": "Reformed",
+      "b": "Lutheran",
+      "c": "Anglican",
+      "d": "Anabaptist"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Cosmological Argument' for God's existence posits that everything has a cause, leading to an uncaused first cause.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is NOT a traditional attribute of God?",
+    "options": {
+      "a": "Omnipotence",
+      "b": "Omniscience",
+      "c": "Immutability",
+      "d": "Anthropomorphism"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'moral government theory' of atonement suggests that Christ's death was a necessary display of God's justice to maintain His moral law, but not a direct payment for specific sins.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which Roman Catholic concept refers to a state or place of temporary punishment for those who die in God's grace but are not yet perfectly purified?",
+    "options": {
+      "a": "Limbo",
+      "b": "Sheol",
+      "c": "Purgatory",
+      "d": "Hades"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Athanasian Creed' is unique among the ecumenical creeds for its specific condemnations of those who reject its Trinitarian and Christological formulations.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which early church heresy argued that the divine element of Christ's nature entirely absorbed his human nature, resulting in one 'monophysite' nature?",
+    "options": {
+      "a": "Apollinarianism",
+      "b": "Nestorianism",
+      "c": "Eutychianism",
+      "d": "Arianism"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'perichoresis' describes the mutual indwelling and interpenetration of the persons of the Trinity.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Who famously declared, 'The unexamined life is not worth living,' a sentiment often echoed in Christian philosophical theology?",
+    "options": {
+      "a": "Plato",
+      "b": "Aristotle",
+      "c": "Socrates",
+      "d": "Augustine"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'total inability' (or 'radical corruption') teaches that fallen humanity is incapable of responding positively to God's offer of salvation without divine grace.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theologian's 'Summa Theologica' is a monumental work of systematic theology that became a cornerstone of Roman Catholic thought?",
+    "options": {
+      "a": "Peter Lombard",
+      "b": "Thomas Aquinas",
+      "c": "John Duns Scotus",
+      "d": "Augustine of Hippo"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'historical-critical method' of biblical interpretation primarily focuses on the theological message of the text over its historical context.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological view holds that the millennium in Revelation 20 is a symbolic representation of the current church age, culminating in Christ's return?",
+    "options": {
+      "a": "Amillennialism",
+      "b": "Postmillennialism",
+      "c": "Premillennialism",
+      "d": "Historic Premillennialism"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'fivefold ministry' (apostle, prophet, evangelist, pastor, teacher) is primarily emphasized in which theological movement?",
+    "options": {
+      "a": "Charismatic/Pentecostal circles",
+      "b": "Lutheran orthodoxy",
+      "c": "Reformed scholasticism",
+      "d": "Traditional Anglicanism"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'propitiation' primarily refers to the act of appeasing wrath or gaining favor, often in the context of Christ's sacrifice satisfying God's justice.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which early church father wrote 'Adversus Haereses' (Against Heresies), a significant work combating Gnosticism?",
+    "options": {
+      "a": "Irenaeus of Lyons",
+      "b": "Clement of Alexandria",
+      "c": "Tertullian",
+      "d": "Cyprian of Carthage"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which Reformer is known for his emphasis on the 'priesthood of all believers'?",
+    "options": {
+      "a": "Huldrych Zwingli",
+      "b": "Martin Luther",
+      "c": "John Knox",
+      "d": "John Calvin"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'hypostatic union' means that Jesus Christ was two distinct persons, one divine and one human, joined together.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these figures is NOT typically associated with the development of Liberation Theology?",
+    "options": {
+      "a": "Gustavo Gutiérrez",
+      "b": "J.I. Packer",
+      "c": "Leonardo Boff",
+      "d": "James Cone"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Protoevangelium' refers to the first gospel promise found in Genesis 3:15.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following describes the 'semper reformanda' principle in Reformed theology?",
+    "options": {
+      "a": "The church must always return to its first century form.",
+      "b": "The church must never change its traditions.",
+      "c": "The church must always be reforming according to the Word of God.",
+      "d": "The church must always be seeking new revelations."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Analogy of Being' (analogia entis) vs. 'Analogy of Faith' (analogia fidei) debate is famously associated with the theology of:",
+    "options": {
+      "a": "Augustine and Pelagius",
+      "b": "Thomas Aquinas and Martin Luther",
+      "c": "Karl Barth and Emil Brunner",
+      "d": "John Calvin and Jacob Arminius"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'eternal conscious torment' in hell is a universally accepted belief across all Christian traditions.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which biblical covenant is generally understood as establishing the nation of Israel and the Mosaic Law?",
+    "options": {
+      "a": "Noahic Covenant",
+      "b": "Mosaic Covenant",
+      "c": "Adamic Covenant",
+      "d": "Abrahamic Covenant"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Ransom Theory' of Atonement, popular in the early church, posited that Christ's death was a payment made to God for human sin.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which influential theologian defined theology as 'faith seeking understanding' (fides quaerens intellectum)?",
+    "options": {
+      "a": "John Calvin",
+      "b": "Augustine of Hippo",
+      "c": "Thomas Aquinas",
+      "d": "Anselm of Canterbury"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Docetic' heresy taught that Jesus was fully God and fully human, just appeared to be human.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these Reformers advocated for a 'memorialist' view of the Eucharist, where the elements are purely symbolic?",
+    "options": {
+      "a": "Thomas Cranmer",
+      "b": "John Calvin",
+      "c": "Huldrych Zwingli",
+      "d": "Martin Luther"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'Concupiscence' refers to the inclination to sin that remains even after baptism, according to Roman Catholic theology.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'eschatological reversal' theme in the New Testament highlights how God's kingdom turns societal norms and expectations upside down.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Book of Concord' is the definitive collection of confessional documents for which Christian tradition?",
+    "options": {
+      "a": "Lutheran",
+      "b": "Anglican",
+      "c": "Reformed",
+      "d": "Baptist"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theologian coined the term 'dialectical theology' and emphasized the infinite qualitative distinction between God and humanity?",
+    "options": {
+      "a": "Dietrich Bonhoeffer",
+      "b": "Karl Barth",
+      "c": "Paul Tillich",
+      "d": "Rudolf Bultmann"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'apokatastasis' (universalism) suggests that all rational creatures will eventually be saved.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which early ecumenical council (381 AD) expanded the Nicene Creed to include a more robust statement on the divinity of the Holy Spirit?",
+    "options": {
+      "a": "Council of Nicaea",
+      "b": "Council of Chalcedon",
+      "c": "Council of Constantinople",
+      "d": "Council of Ephesus"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Pneumatomachian' heresy denied the full divinity of the Holy Spirit.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theologian from Alexandria was a staunch defender of Nicene orthodoxy against Arianism, earning him the title 'Black Dwarf' by his opponents?",
+    "options": {
+      "a": "Cyril of Alexandria",
+      "b": "Clement of Alexandria",
+      "c": "Origen",
+      "d": "Athanasius"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Five Articles of Remonstrance' (1610) articulated the theological positions that became known as Arminianism.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which view of the end times typically expects a secret rapture of the church before the Great Tribulation?",
+    "options": {
+      "a": "Post-tribulational Premillennialism",
+      "b": "Pre-tribulational Dispensational Premillennialism",
+      "c": "Amillennialism",
+      "d": "Historic Premillennialism"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'creation ex nihilo' states that God created the world out of pre-existing matter.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is most closely associated with the 'Christus Victor' theory of atonement?",
+    "options": {
+      "a": "Charles Hodge",
+      "b": "Gustaf Aulén",
+      "c": "John McLeod Campbell",
+      "d": "Anselm of Canterbury"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Didache' is an early Christian treatise that provides insights into early church practices and doctrine.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which key figure in the Reformation insisted on the literal interpretation of 'This is my body' in the Eucharist, leading to disagreement with Zwingli?",
+    "options": {
+      "a": "Martin Luther",
+      "b": "John Calvin",
+      "c": "Martin Bucer",
+      "d": "Philipp Melanchthon"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'imputation of Christ's righteousness' to believers is a central tenet of the Protestant doctrine of justification.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which concept describes God's complete and perfect knowledge of all things, past, present, and future?",
+    "options": {
+      "a": "Omnipotence",
+      "b": "Omniscience",
+      "c": "Immanence",
+      "d": "Omnipresence"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'moral influence theory' of atonement was also significantly developed by which 19th-century Scottish pastor?",
+    "options": {
+      "a": "Thomas Chalmers",
+      "b": "Andrew Fuller",
+      "c": "John McLeod Campbell",
+      "d": "Robert Candlish"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'apostolic succession' is a core belief in Protestant ecclesiology.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these figures was a leading theologian of the Counter-Reformation, known for his work 'Disputations on the Controversies of the Christian Faith'?",
+    "options": {
+      "a": "Teresa of Avila",
+      "b": "Robert Bellarmine",
+      "c": "Erasmus of Rotterdam",
+      "d": "Ignatius of Loyola"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'monarchian' heresies emphasized the unity of God to the detriment of the distinct persons of the Trinity.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which term describes the gradual process of becoming more like Christ after conversion?",
+    "options": {
+      "a": "Sanctification",
+      "b": "Justification",
+      "c": "Glorification",
+      "d": "Regeneration"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'eschatological already and not yet' concept applies only to the resurrection of believers, not the Kingdom of God.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theologian famously argued that the purpose of the incarnation was 'God became man so that man might become God'?",
+    "options": {
+      "a": "Anselm of Canterbury",
+      "b": "Cyril of Jerusalem",
+      "c": "Augustine of Hippo",
+      "d": "Athanasius of Alexandria"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'synoptic problem' in biblical studies deals with the literary relationship between Matthew, Mark, and Luke.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological theory of inspiration holds that God inspired the thoughts of the biblical authors, but allowed them freedom in choosing words?",
+    "options": {
+      "a": "Verbal plenary inspiration",
+      "b": "General inspiration",
+      "c": "Dynamic inspiration",
+      "d": "Mechanical dictation"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Septuagint' is the name given to the early Latin translation of the Old Testament.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which concept describes the unique attribute of God that He exists necessarily, not contingently upon anything else?",
+    "options": {
+      "a": "Immutability",
+      "b": "Omnibenevolence",
+      "c": "Simplicity",
+      "d": "Aseity"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'monarchianism' of Paul of Samosata was a form of modalism, denying distinct persons within the Godhead.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which early church council formally established the canon of the New Testament books for the entire Christian church?",
+    "options": {
+      "a": "Council of Chalcedon",
+      "b": "No single ecumenical council definitively established the canon for the entire church at once.",
+      "c": "Council of Hippo",
+      "d": "Council of Nicaea"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'filioque' clause was one of the primary theological disagreements leading to the Great Schism between East and West.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which historical creed is considered the most detailed and explicit affirmation of Trinitarian doctrine, though not officially accepted by Eastern Orthodoxy?",
+    "options": {
+      "a": "Chalcedonian Creed",
+      "b": "Apostles' Creed",
+      "c": "Nicene Creed",
+      "d": "Athanasian Creed"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'hypostatic union' asserts that Jesus Christ has two wills, a divine will and a human will, both perfectly aligned.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is NOT considered one of the 'four streams' of the Anabaptist movement?",
+    "options": {
+      "a": "Mennonites",
+      "b": "Swiss Brethren",
+      "c": "Unitarians",
+      "d": "Hutterites"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'eschatological tension' describes the ongoing struggle between spiritual and material realities in the Christian life.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which 19th-century theologian is known for his work 'The Christian Faith' and for emphasizing feeling and intuition over reason in religious experience?",
+    "options": {
+      "a": "Albrecht Ritschl",
+      "b": "Adolf von Harnack",
+      "c": "Søren Kierkegaard",
+      "d": "Friedrich Schleiermacher"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'autotheos' refers to Christ's self-existence as God.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which major prophet's book is often cited for its extensive prophecies regarding the suffering servant, fulfilled in Christ?",
+    "options": {
+      "a": "Jeremiah",
+      "b": "Isaiah",
+      "c": "Ezekiel",
+      "d": "Daniel"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Council of Nicaea' was the first ecumenical council held in 325 AD.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following describes the 'communicatio operationum' (communication of operations) in Christology?",
+    "options": {
+      "a": "The divine nature performs human actions.",
+      "b": "The one person of Christ performs actions attributable to both natures.",
+      "c": "The human nature performs divine actions.",
+      "d": "The Father, Son, and Spirit operate as one."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'eschatological banquet' is a common biblical metaphor for the ultimate celebration and fellowship in God's completed kingdom.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which influential theologian from the Patristic era wrote 'On the Incarnation of the Word'?",
+    "options": {
+      "a": "Gregory of Nyssa",
+      "b": "Athanasius",
+      "c": "Basil the Great",
+      "d": "John Chrysostom"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'regeneration' in salvation refers to the lifelong process of becoming more holy.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theologian's work 'Christian Dogmatics' (Kirchliche Dogmatik) is considered one of the most significant theological works of the 20th century?",
+    "options": {
+      "a": "Karl Rahner",
+      "b": "Rudolf Bultmann",
+      "c": "Paul Tillich",
+      "d": "Karl Barth"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'ordo salutis' of the Wesleyan-Arminian tradition typically places prevenient grace before conversion.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which early church father is famous for his statement 'What has Athens to do with Jerusalem?' expressing caution about integrating philosophy with theology?",
+    "options": {
+      "a": "Tertullian",
+      "b": "Clement of Alexandria",
+      "c": "Origen",
+      "d": "Justin Martyr"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'eschatological dualism' often refers to the conflict between good and evil, light and darkness, found in apocalyptic literature.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Formula of Concord' (1577) was an attempt to resolve theological controversies within which tradition?",
+    "options": {
+      "a": "Reformed",
+      "b": "Roman Catholic",
+      "c": "Anglican",
+      "d": "Lutheran"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'divine election' (predestination) is exclusively a Calvinistic doctrine and has no basis in Arminian theology.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theologian famously debated with Augustine on the nature of grace and free will, arguing for greater human capacity in salvation?",
+    "options": {
+      "a": "Arius",
+      "b": "Donatus",
+      "c": "Pelagius",
+      "d": "Mani"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'homoousios' clause, meaning 'of the same substance,' was affirmed at the Council of Chalcedon.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which early church father is known for his work 'On First Principles,' an early systematic theology, though some of his views were later condemned?",
+    "options": {
+      "a": "Tertullian",
+      "b": "Clement of Alexandria",
+      "c": "Irenaeus",
+      "d": "Origen"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Covenant of Works' in Reformed theology refers to God's agreement with Adam prior to the Fall, requiring perfect obedience for life.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these figures is most associated with the New Perspective on Paul?",
+    "options": {
+      "a": "N.T. Wright",
+      "b": "D.A. Carson",
+      "c": "R.C. Sproul",
+      "d": "John Piper"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological concept emphasizes God's sovereign control over all events, including human choices, without negating human responsibility?",
+    "options": {
+      "a": "Open Theism",
+      "b": "Deism",
+      "c": "Compatibilism",
+      "d": "Libertarian Free Will"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "theology_doctrine",
+    "approved": true
+  }
+]

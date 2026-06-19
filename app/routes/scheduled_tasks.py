@@ -15,6 +15,7 @@ from app.db import get_db
 from app.models.user import User, UserRole
 from app.services.push_notification import notify_weekly_tips_batch, PushNotificationService
 from app.schemas.push_notification import PushNotificationPayload
+from app.services.trivia import expire_stale_challenges
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -81,6 +82,21 @@ def trigger_weekly_tips(
         "apprentice_count": len(apprentice_ids),
         "result": result
     }
+
+
+@router.post("/trivia-expiry")
+def trigger_trivia_expiry(
+    db: Session = Depends(get_db),
+    _verified: bool = Depends(verify_cron_secret)
+):
+    """Expire stale trivia challenges and notify both players.
+
+    Should be called daily by Cloud Scheduler.
+    Example schedule: 0 2 * * * (Every day at 2 AM)
+    """
+    expired_ids = expire_stale_challenges(db)
+    logger.info(f"Trivia expiry: {len(expired_ids)} challenges expired")
+    return {"message": "Trivia expiry check complete", "expired_count": len(expired_ids), "expired_ids": expired_ids}
 
 
 @router.post("/test-push/{user_id}")

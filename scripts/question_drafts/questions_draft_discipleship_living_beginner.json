@@ -1,0 +1,2396 @@
+[
+  {
+    "question": "What is often considered the primary purpose of prayer for a Christian?",
+    "options": {
+      "a": "To show others how spiritual we are",
+      "b": "To communicate with God and build a relationship",
+      "c": "To fulfill a religious duty",
+      "d": "To get God to do what we want"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of these is NOT typically considered one of the spiritual disciplines?",
+    "options": {
+      "a": "Fasting",
+      "b": "Serving others",
+      "c": "Meditation on Scripture",
+      "d": "Gossiping about others"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Reading the Bible daily is primarily about gaining intellectual knowledge, not about building a relationship with God.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the Bible, what is often associated with the practice of fasting?",
+    "options": {
+      "a": "Avoiding household chores",
+      "b": "Attending social parties",
+      "c": "Seeking God's guidance and spiritual focus",
+      "d": "Losing weight quickly"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What attitude does the Bible encourage Christians to have when giving to God and others?",
+    "options": {
+      "a": "Cheerfully, with a willing heart",
+      "b": "Grudgingly, under compulsion",
+      "c": "Reluctantly, out of obligation",
+      "d": "Secretly, to avoid attention"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the primary reason Christians are encouraged to serve others?",
+    "options": {
+      "a": "To imitate Christ's love and demonstrate faith",
+      "b": "To earn salvation or favor from God",
+      "c": "To avoid feelings of guilt",
+      "d": "To gain recognition and praise from people"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: All prayer must be spoken aloud for God to hear it.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Jesus taught His disciples to pray (The Lord's Prayer), what was one of the first things He instructed them to do?",
+    "options": {
+      "a": "Ask for daily bread",
+      "b": "Praise and hallow God's name",
+      "c": "Confess their sins",
+      "d": "Pray for their enemies"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which section of the Bible is most frequently recommended for new believers to start reading?",
+    "options": {
+      "a": "The book of Revelation",
+      "b": "The book of Leviticus",
+      "c": "The Gospel of John",
+      "d": "The book of Genesis"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is often referred to as the 'tithe' in Christian giving?",
+    "options": {
+      "a": "Ten percent of one's income",
+      "b": "Any amount given voluntarily",
+      "c": "One percent of one's income",
+      "d": "All of one's savings"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Spiritual disciplines like prayer and Bible reading are only for pastors and missionaries.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is a common benefit of consistently practicing spiritual disciplines?",
+    "options": {
+      "a": "Increased spiritual growth and maturity",
+      "b": "Gaining social popularity",
+      "c": "Avoiding all life challenges",
+      "d": "Guaranteed financial prosperity"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which spiritual discipline involves intentionally setting aside time to listen to God and reflect on His Word?",
+    "options": {
+      "a": "Fasting",
+      "b": "Giving",
+      "c": "Evangelism",
+      "d": "Meditation"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "According to Matthew 6, what attitude should one avoid when practicing spiritual disciplines like giving or praying?",
+    "options": {
+      "a": "Humility",
+      "b": "Generosity",
+      "c": "Hypocrisy",
+      "d": "Sincerity"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: True Christian service always involves grand, public acts that are seen by many people.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of these is NOT listed as a Fruit of the Spirit in Galatians 5:22-23?",
+    "options": {
+      "a": "Joy",
+      "b": "Love",
+      "c": "Patience",
+      "d": "Courage"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The Fruit of the Spirit are evidence of what in a believer's life?",
+    "options": {
+      "a": "Strict adherence to legalistic rules",
+      "b": "The work of the Holy Spirit",
+      "c": "Great wealth",
+      "d": "Natural talent and abilities"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "'Gentleness' as a Fruit of the Spirit primarily means:",
+    "options": {
+      "a": "Avoiding all forms of confrontation",
+      "b": "Being weak and easily manipulated",
+      "c": "Being soft-spoken and quiet",
+      "d": "Having controlled strength and considerate behavior"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: A Christian can pick and choose which of the Fruit of the Spirit they want to develop.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which Fruit of the Spirit enables a person to endure difficult situations and people without complaint?",
+    "options": {
+      "a": "Love",
+      "b": "Peace",
+      "c": "Self-control",
+      "d": "Patience"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "'Goodness' as a Fruit of the Spirit refers to:",
+    "options": {
+      "a": "Being popular among friends",
+      "b": "Being physically attractive",
+      "c": "Having good fortune in life",
+      "d": "Moral excellence and active kindness"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does 'self-control' in the Fruit of the Spirit refer to?",
+    "options": {
+      "a": "Being very reserved and quiet in public",
+      "b": "Having no desires or emotions",
+      "c": "Trying to control other people's actions",
+      "d": "Mastery over one's own desires, impulses, and actions"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Fruit of the Spirit are instantly and fully developed upon becoming a Christian.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which Fruit of the Spirit relates to maintaining tranquility and inner calm regardless of external circumstances?",
+    "options": {
+      "a": "Peace",
+      "b": "Faithfulness",
+      "c": "Joy",
+      "d": "Kindness"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "If someone is described as 'faithful' in a Christian context, what does it most often mean?",
+    "options": {
+      "a": "Following church rules very strictly",
+      "b": "Having many friends and followers",
+      "c": "Being reliable, trustworthy, and loyal to God",
+      "d": "Believing in miracles without question"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What did Jesus identify as the greatest commandment?",
+    "options": {
+      "a": "To keep the Sabbath holy",
+      "b": "To love the Lord your God with all your heart, soul, and mind",
+      "c": "To honor your father and mother",
+      "d": "To not murder"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the second greatest commandment, according to Jesus?",
+    "options": {
+      "a": "To forgive your enemies",
+      "b": "To give to the poor",
+      "c": "To love your neighbor as yourself",
+      "d": "To tell the truth at all times"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Forgiveness in Christianity means forgetting the offense ever happened and pretending it didn't hurt.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does Christian ethics primarily base its principles on?",
+    "options": {
+      "a": "Ancient philosophical traditions",
+      "b": "God's character revealed in the Bible and His commands",
+      "c": "Current societal norms and popular opinion",
+      "d": "Personal feelings and intuition"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible teach about honesty in speech?",
+    "options": {
+      "a": "Christians should speak truthfully and avoid deceit",
+      "b": "It's okay to lie if it avoids hurting someone's feelings",
+      "c": "It's optional if it benefits you",
+      "d": "It's only important in legal settings"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of humility?",
+    "options": {
+      "a": "Being shy and avoiding leadership positions",
+      "b": "Downplaying your achievements to impress others",
+      "c": "Thinking less of yourself and your abilities",
+      "d": "Thinking of yourself less and others more"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christians are called to live ethically only in church settings or among other believers.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When facing temptation, what does the Bible often encourage believers to do?",
+    "options": {
+      "a": "Blame others for putting them in the situation",
+      "b": "Give in a little, then ask for forgiveness",
+      "c": "Try to resist on their own strength",
+      "d": "Flee from the temptation and pray for strength"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is stewardship in a Christian sense?",
+    "options": {
+      "a": "Managing only one's money and finances",
+      "b": "Donating a small portion of income to charity",
+      "c": "Owning as many possessions as possible",
+      "d": "Caring for and responsibly managing all resources God entrusts to us (time, talents, possessions, etc.)"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the core principle behind the 'Golden Rule' (Do unto others as you would have them do unto you)?",
+    "options": {
+      "a": "Self-interest and personal gain",
+      "b": "Love and empathy",
+      "c": "Strict adherence to rules",
+      "d": "Seeking revenge when wronged"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christian ethics allows for exceptions to truthfulness if it benefits oneself or one's family.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is a key Christian response to someone who wrongs you?",
+    "options": {
+      "a": "Ignoring them completely",
+      "b": "Seeking reconciliation and offering forgiveness",
+      "c": "Seeking revenge or retaliation",
+      "d": "Holding a grudge indefinitely"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is a primary benefit of Christian fellowship and community?",
+    "options": {
+      "a": "Only for socializing and entertainment",
+      "b": "Competing for spiritual gifts",
+      "c": "Networking for career opportunities",
+      "d": "Mutual encouragement, support, and accountability"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the role of an older, more mature believer in discipling a younger believer?",
+    "options": {
+      "a": "To dictate all their life decisions",
+      "b": "To do everything for them so they don't struggle",
+      "c": "To share wisdom, guide, and mentor in faith",
+      "d": "To test their faith with difficult challenges"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: A Christian can grow best spiritually in complete isolation from other believers.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does 'accountability' typically mean in a Christian discipleship relationship?",
+    "options": {
+      "a": "Reporting every single action to another person",
+      "b": "Being answerable for one's choices and spiritual growth, often with a trusted mentor",
+      "c": "Being judged by others for every mistake",
+      "d": "Comparing spiritual progress with others"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Why is it important for Christians to have relationships with other believers?",
+    "options": {
+      "a": "For shared worship, mutual support, and encouragement",
+      "b": "To make the local church grow numerically",
+      "c": "To form a larger social group",
+      "d": "To avoid all contact with non-Christians"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Discipleship relationships are only for new converts and young Christians.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What biblical example emphasizes the importance of mentoring relationships in the early church?",
+    "options": {
+      "a": "Paul and Timothy",
+      "b": "Samson and Delilah",
+      "c": "Cain and Abel",
+      "d": "David and Goliath"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is often a crucial element for healthy discipleship relationships?",
+    "options": {
+      "a": "Competition and rivalry",
+      "b": "Trust, vulnerability, and open communication",
+      "c": "Strict financial arrangements",
+      "d": "Secrecy and isolation"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The primary goal of a discipleship relationship is to make the mentee exactly like the mentor.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible mean by 'bearing one another's burdens'?",
+    "options": {
+      "a": "Doing all of someone else's work for them",
+      "b": "Taking responsibility for someone else's sins",
+      "c": "Sharing sorrows, offering support, and helping each other",
+      "d": "Physically carrying someone's belongings"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the 'Great Commission' in Matthew 28?",
+    "options": {
+      "a": "To make disciples of all nations, baptizing and teaching them",
+      "b": "To establish a human kingdom on earth",
+      "c": "To gather all wealth for the church",
+      "d": "To build a great temple in Jerusalem"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is a common way for a Christian to 'witness' their faith?",
+    "options": {
+      "a": "Only by preaching loudly in public places",
+      "b": "By wearing Christian symbols without speaking",
+      "c": "By distributing religious pamphlets only",
+      "d": "By living a Christ-like life and sharing the Gospel verbally when appropriate"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Evangelism is only the responsibility of ordained ministers or professional missionaries.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When applying faith to everyday decisions, what is a primary guide for Christians?",
+    "options": {
+      "a": "Personal feelings and emotions alone",
+      "b": "Public opinion and trends",
+      "c": "Immediate convenience and comfort",
+      "d": "God's Word (Scripture) and prayer for guidance"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "How should a Christian typically approach ethical dilemmas at work?",
+    "options": {
+      "a": "Prioritize personal financial gain above all else",
+      "b": "Avoid making any decisions that involve ethics",
+      "c": "Seek to honor God and apply biblical principles to the situation",
+      "d": "Do what everyone else is doing, regardless of ethics"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is a Christian perspective on how to use their money?",
+    "options": {
+      "a": "Steward it for God's glory, to meet needs, and for others",
+      "b": "Spend it all quickly on personal desires",
+      "c": "Save it all and never spend it",
+      "d": "Only use it for church contributions"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christians should completely avoid engaging with secular culture in any form.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When making a major life decision, what is a key step for a Christian?",
+    "options": {
+      "a": "Flip a coin and let chance decide",
+      "b": "Seek God's will through prayer and studying Scripture",
+      "c": "Ask a friend to make the decision for them",
+      "d": "Follow the most popular trend without question"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does 'living out your faith' in daily life primarily involve?",
+    "options": {
+      "a": "Performing religious rituals only",
+      "b": "Avoiding all non-Christian friends and activities",
+      "c": "Integrating biblical values into all actions, choices, and relationships",
+      "d": "Discussing theology constantly with everyone you meet"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Sharing your faith means you must have all the answers to every theological question someone might ask.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible say about how Christians should generally respond to governing authorities?",
+    "options": {
+      "a": "Ignore them completely",
+      "b": "Obey them, unless they command something contrary to God's will",
+      "c": "Always agree with every decision they make",
+      "d": "Rebel against them whenever possible"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "How should a Christian treat someone with different religious beliefs?",
+    "options": {
+      "a": "Love them and share the Gospel respectfully",
+      "b": "Avoid them entirely",
+      "c": "Try to convert them by force or manipulation",
+      "d": "Condemn them and tell them they are wrong"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does 'abiding in Christ' primarily mean for a Christian?",
+    "options": {
+      "a": "Physically staying in a church building",
+      "b": "Never leaving your home or community",
+      "c": "Maintaining a close, dependent relationship with Jesus through prayer and His Word",
+      "d": "Strictly following all church traditions"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that faith without actions (works) is dead.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian concept of 'redemption'?",
+    "options": {
+      "a": "Receiving a large inheritance",
+      "b": "Earning enough money to buy freedom",
+      "c": "Redecorating a church building",
+      "d": "Being bought back or set free from sin's bondage through Christ"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does it mean to be 'born again' in a Christian context?",
+    "options": {
+      "a": "To have a spiritual transformation and new life in Christ",
+      "b": "To repeat baptism multiple times",
+      "c": "To be physically reborn as a baby",
+      "d": "To start a new career path"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the significance of baptism for a Christian?",
+    "options": {
+      "a": "It is a public declaration of faith and identification with Christ's death and resurrection",
+      "b": "It earns salvation",
+      "c": "It is merely a traditional ritual",
+      "d": "It guarantees entry into heaven"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christians are called to forgive others even as Christ has forgiven them.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian view on vengeance or 'getting even'?",
+    "options": {
+      "a": "It strengthens one's character",
+      "b": "Christians should leave vengeance to God and seek peace",
+      "c": "It is sometimes necessary for self-defense",
+      "d": "It is a natural and just response to being wronged"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of these best describes 'agape' love in Christianity?",
+    "options": {
+      "a": "Brotherly love or friendship",
+      "b": "Love based on mutual attraction",
+      "c": "Unconditional, self-sacrificing love",
+      "d": "Romantic love"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the role of the Holy Spirit in a believer's life?",
+    "options": {
+      "a": "To replace the need for personal effort",
+      "b": "To empower, guide, comfort, and convict believers",
+      "c": "To make life easy and problem-free",
+      "d": "To grant instant wealth and fame"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: God desires for Christians to be isolated from the world to maintain their purity.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of 'sanctification'?",
+    "options": {
+      "a": "The lifelong process of becoming more like Christ",
+      "b": "Making a place holy through rituals",
+      "c": "Being declared righteous by God (justification)",
+      "d": "Earning good deeds to get into heaven"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the phrase 'deny himself and take up his cross' mean for a follower of Christ?",
+    "options": {
+      "a": "To literally carry a wooden cross",
+      "b": "To avoid all difficult situations",
+      "c": "To give up personal desires and follow Christ's will, even through suffering",
+      "d": "To reject all worldly possessions"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the purpose of Christian confession?",
+    "options": {
+      "a": "To acknowledge sin, seek God's forgiveness, and restore relationship",
+      "b": "To make oneself feel guilty",
+      "c": "To tell others about one's faults",
+      "d": "To earn forgiveness from God"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible encourages believers to trust in their own understanding above all else.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the importance of perseverance in the Christian faith?",
+    "options": {
+      "a": "It helps believers endure trials and remain faithful to the end",
+      "b": "It means never facing difficulties",
+      "c": "It guarantees immediate success in earthly matters",
+      "d": "It is only for those with strong personalities"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does it mean for a Christian to be 'salt and light' in the world?",
+    "options": {
+      "a": "To avoid all worldly influence",
+      "b": "To preserve goodness and illuminate truth in a dark world",
+      "c": "To only eat salty foods and use bright lights",
+      "d": "To be physically healthier than non-believers"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which spiritual discipline involves intentionally seeking to hear God's voice and guidance for one's life?",
+    "options": {
+      "a": "Church attendance",
+      "b": "Solitude",
+      "c": "Tithing",
+      "d": "Listening Prayer"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: True discipleship involves both learning from Christ and imitating His life.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian perspective on caring for the poor and needy?",
+    "options": {
+      "a": "It is a waste of resources",
+      "b": "Only give if you have an abundance",
+      "c": "Christians have a responsibility to show compassion and provide assistance",
+      "d": "It is solely the government's responsibility"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does it mean to 'take every thought captive to obey Christ'?",
+    "options": {
+      "a": "To suppress all negative thoughts without processing them",
+      "b": "To evaluate thoughts against biblical truth and align them with Christ",
+      "c": "To only think about religious topics",
+      "d": "To stop thinking entirely"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the purpose of Christian fasting beyond abstaining from food?",
+    "options": {
+      "a": "To impress other believers",
+      "b": "To draw closer to God and focus on spiritual matters",
+      "c": "To improve physical health",
+      "d": "To punish oneself for sins"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: God's guidance for our lives is always revealed through dramatic signs and miracles.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian call to 'peacemaking'?",
+    "options": {
+      "a": "To avoid all conflict at any cost",
+      "b": "To actively seek reconciliation and resolution in conflicts",
+      "c": "To only make peace when it benefits oneself",
+      "d": "To ignore disputes and hope they go away"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "How should Christians view their work or profession?",
+    "options": {
+      "a": "As separate from their faith life",
+      "b": "As an opportunity to serve God and others, and bring Him glory",
+      "c": "As a means to gain power and influence",
+      "d": "As a necessary evil to earn money"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian approach to worry and anxiety?",
+    "options": {
+      "a": "To ignore problems and pretend they don't exist",
+      "b": "To embrace it as part of life",
+      "c": "To trust God with concerns and pray instead of worrying",
+      "d": "To try to control every outcome"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Discipleship is a one-time decision, not a lifelong process.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible teach about showing hospitality?",
+    "options": {
+      "a": "It should only be extended to close friends and family",
+      "b": "It is an outdated practice",
+      "c": "It is only for wealthy people",
+      "d": "It is an important way to show love and welcome others"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of these phrases best describes what it means to 'walk by faith'?",
+    "options": {
+      "a": "To rely solely on personal feelings and experiences",
+      "b": "To have perfect understanding of everything",
+      "c": "To avoid all risks and challenges",
+      "d": "To trust in God's promises and character, even when circumstances are uncertain"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of self-denial?",
+    "options": {
+      "a": "Hating oneself and one's body",
+      "b": "Prioritizing God's will and the needs of others over personal desires",
+      "c": "Never enjoying anything pleasurable",
+      "d": "Living a life of extreme poverty"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christians are called to be in the world, but not of the world.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "How does a Christian typically seek wisdom for difficult decisions?",
+    "options": {
+      "a": "By relying solely on their own intellect",
+      "b": "By making impulsive choices",
+      "c": "By seeking God through prayer, Scripture, and wise counsel from other believers",
+      "d": "By consulting horoscopes or fortune tellers"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the significance of the Lord's Supper (Communion) for believers?",
+    "options": {
+      "a": "It is a symbolic remembrance of Christ's sacrifice and a proclamation of His return",
+      "b": "It is a regular meal to enjoy with friends",
+      "c": "It is a meal to earn God's favor",
+      "d": "It is a tradition without deeper meaning"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible teach about giving thanks?",
+    "options": {
+      "a": "It is a sign of weakness",
+      "b": "It is primarily for public display",
+      "c": "Believers should give thanks in all circumstances",
+      "d": "It is only necessary for big blessings"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christians are expected to be perfect and never make mistakes after conversion.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of 'hope'?",
+    "options": {
+      "a": "A wishful thinking or desire",
+      "b": "A confident expectation and assurance in God's promises for the future",
+      "c": "A feeling that comes and goes",
+      "d": "Only hoping for earthly possessions"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does it mean to 'put on the new self' in Christian living?",
+    "options": {
+      "a": "To live according to our new identity in Christ, reflecting righteousness and holiness",
+      "b": "To forget one's past completely",
+      "c": "To adopt a new personality",
+      "d": "To get new clothes"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which spiritual discipline involves intentionally seeking quiet time to commune with God without distractions?",
+    "options": {
+      "a": "Service",
+      "b": "Preaching",
+      "c": "Fellowship",
+      "d": "Solitude"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Personal evangelism is primarily about arguing people into believing in Christ.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian ethical stance on integrity?",
+    "options": {
+      "a": "Only being honest in church",
+      "b": "Acting consistently with moral principles, even when no one is watching",
+      "c": "It's important only when others are watching",
+      "d": "Being flexible with truth for personal gain"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible teach about prayer for leaders and authorities?",
+    "options": {
+      "a": "Pray against them if they are not Christian",
+      "b": "It is unnecessary",
+      "c": "Only pray for leaders you agree with",
+      "d": "Believers should pray for them for wise governance and peace"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "How should a Christian respond to suffering or trials?",
+    "options": {
+      "a": "Believe it is always a sign of personal sin",
+      "b": "Try to escape all suffering by any means necessary",
+      "c": "Endure with patience, seeking God's strength and learning from the experience",
+      "d": "Blame God and lose faith"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible encourages active participation in a local church community.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of 'submission' within relationships (e.g., marriage, church)?",
+    "options": {
+      "a": "Blind obedience and loss of personal will",
+      "b": "Inferiority and weakness",
+      "c": "Allowing others to control all decisions",
+      "d": "A voluntary act of respect and cooperation, recognizing God-given roles"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the importance of 'confessing sins to one another' as mentioned in James 5:16?",
+    "options": {
+      "a": "To gossip about each other's failures",
+      "b": "To seek prayer, accountability, and healing within a trusting community",
+      "c": "To earn forgiveness from others",
+      "d": "To prove one is holier than others"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible mean by 'walking in the Spirit'?",
+    "options": {
+      "a": "Literally walking while thinking about the Holy Spirit",
+      "b": "Living a life guided and empowered by the Holy Spirit, not by sinful desires",
+      "c": "Having mystical experiences frequently",
+      "d": "Attending spiritual gatherings often"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christians should seek to love their enemies and pray for those who persecute them.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian view of gossip?",
+    "options": {
+      "a": "It is acceptable if the information is true",
+      "b": "It builds community",
+      "c": "It is destructive and should be avoided",
+      "d": "It is a harmless way to share information"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When faced with personal suffering, what is a biblical response?",
+    "options": {
+      "a": "Question God's goodness and justice",
+      "b": "Believe God is punishing them for a specific sin",
+      "c": "Turn to God in prayer, seeking comfort and strength",
+      "d": "Isolate oneself from others"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does it mean to 'set your mind on things above, not on earthly things'?",
+    "options": {
+      "a": "To ignore all responsibilities on earth",
+      "b": "To avoid all physical activities",
+      "c": "To become financially wealthy",
+      "d": "To focus on eternal values and God's kingdom rather than fleeting worldly concerns"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the primary motivation for Christians to live a holy life?",
+    "options": {
+      "a": "To earn salvation",
+      "b": "To impress other people",
+      "c": "Out of gratitude for God's salvation and to honor Him",
+      "d": "To avoid punishment"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: For a Christian, their identity is primarily found in their achievements or possessions.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible teach about the importance of worshipping God?",
+    "options": {
+      "a": "It is a vital response to God's worthiness and love, involving adoration and reverence",
+      "b": "It is a way to gain personal power",
+      "c": "It is optional and can be skipped",
+      "d": "It is only about singing songs in church"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian concept of 'spiritual warfare'?",
+    "options": {
+      "a": "Physical fighting between religious groups",
+      "b": "The unseen struggle against spiritual forces of evil and temptation",
+      "c": "Debating theological points aggressively",
+      "d": "Struggling with personal doubts about faith"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the 'armor of God' described in Ephesians 6 meant for?",
+    "options": {
+      "a": "Only for pastors and church leaders",
+      "b": "Spiritual protection and readiness for spiritual warfare",
+      "c": "A metaphorical way to describe good behavior",
+      "d": "Physical protection in battle"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: God wants Christians to keep their faith a private matter and not share it with others.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does 'dying to self' mean in a spiritual sense?",
+    "options": {
+      "a": "Putting aside selfish desires and ambitions to live for Christ",
+      "b": "Ending one's life",
+      "c": "Becoming physically ill",
+      "d": "Avoiding all pleasure"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian view on the use of time?",
+    "options": {
+      "a": "Time should be spent solely on personal enjoyment",
+      "b": "Time should always be filled with religious activities",
+      "c": "Time is a gift from God to be stewarded wisely for His glory and purposes",
+      "d": "Time is irrelevant in the long run"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the 'peace of God' refer to for believers?",
+    "options": {
+      "a": "A feeling of indifference",
+      "b": "An inner tranquility and confidence that surpasses understanding, even amidst difficulties",
+      "c": "Peace negotiations between nations",
+      "d": "The absence of all conflict in life"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: It is permissible for Christians to compromise their ethical standards if it benefits their family or business financially.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of 'purity of heart'?",
+    "options": {
+      "a": "Having motives and intentions that are undivided and devoted to God",
+      "b": "Never having any negative thoughts",
+      "c": "Being outwardly flawless in appearance",
+      "d": "Only engaging in religious activities"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What role does 'praise' play in a Christian's spiritual life?",
+    "options": {
+      "a": "It is a form of self-promotion",
+      "b": "It is a means to get what one wants from God",
+      "c": "It is an expression of worship and gratitude to God, shifting focus from self to Him",
+      "d": "It is only for special church services"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian view on the importance of rest and Sabbath?",
+    "options": {
+      "a": "It is an outdated command not applicable today",
+      "b": "It is a vital discipline for physical, mental, and spiritual renewal, trusting God's provision",
+      "c": "It is a suggestion, not a command",
+      "d": "It is only for those who are tired"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Every Christian is called to use their unique gifts and talents to serve God and others.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian approach to consumerism and materialism?",
+    "options": {
+      "a": "Believe that God wants everyone to be rich",
+      "b": "Judge others based on their possessions",
+      "c": "Accumulate as much as possible for personal enjoyment",
+      "d": "Be content with what one has and prioritize generosity over accumulation"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does 'walking humbly with your God' imply?",
+    "options": {
+      "a": "Never expressing an opinion",
+      "b": "Recognizing one's dependence on God and acting with modesty and justice",
+      "c": "Always seeking personal recognition for good deeds",
+      "d": "Avoiding eye contact with others"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian view on vengeance or 'an eye for an eye' from the Old Testament?",
+    "options": {
+      "a": "It applies only to criminal law, not personal relationships.",
+      "b": "It is the primary principle for justice in all situations.",
+      "c": "Jesus taught a higher standard of turning the other cheek and loving enemies.",
+      "d": "It means punishing offenders as harshly as possible."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that jealousy and envy are positive motivators for spiritual growth.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the importance of 'listening' in Christian relationships?",
+    "options": {
+      "a": "To wait for your turn to speak",
+      "b": "To understand, empathize, and show love and respect to others",
+      "c": "To find flaws in others' arguments",
+      "d": "It is less important than speaking one's mind"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does 'blessed are the merciful' imply for Christian living?",
+    "options": {
+      "a": "Avoid making tough decisions",
+      "b": "Mercy is only for those who deserve it",
+      "c": "Only give mercy if you are sure to receive it back",
+      "d": "Show compassion and kindness to others, as God has shown mercy to us"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the role of spiritual mentors in Christian discipleship?",
+    "options": {
+      "a": "To be worshipped and revered",
+      "b": "To provide financial support",
+      "c": "To make all decisions for the mentee",
+      "d": "To offer guidance, wisdom, and prayerful support based on experience and scripture"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that believers should strive for unity within the body of Christ.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian perspective on caring for the environment (creation care)?",
+    "options": {
+      "a": "Humans are called to be responsible stewards of God's creation",
+      "b": "It's a secular concern, not a Christian one",
+      "c": "Nature exists only for human exploitation",
+      "d": "It's irrelevant to faith"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does 'bearing good fruit' refer to in a Christian context?",
+    "options": {
+      "a": "Being financially successful",
+      "b": "Demonstrating Christ-like character and actions in one's life",
+      "c": "Literally growing fruit in a garden",
+      "d": "Having many children"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the primary motive for Christian obedience to God's commands?",
+    "options": {
+      "a": "To earn a place in heaven",
+      "b": "Fear of punishment",
+      "c": "To gain approval from other Christians",
+      "d": "Love for God and gratitude for His grace"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that every Christian has spiritual gifts to be used for the church and the world.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of 'repentance'?",
+    "options": {
+      "a": "Feeling sorry for a moment",
+      "b": "Performing a religious ritual",
+      "c": "A change of mind and heart leading to a turning away from sin and toward God",
+      "d": "Blaming others for one's sins"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "How should a Christian approach conflicts within the church community?",
+    "options": {
+      "a": "Ignore them and hope they disappear",
+      "b": "Take sides immediately",
+      "c": "Address them with humility, love, and a desire for reconciliation",
+      "d": "Spread rumors about the conflict"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does it mean for a Christian to live by 'faith, hope, and love'?",
+    "options": {
+      "a": "To avoid all difficult decisions",
+      "b": "To only focus on these three things and nothing else",
+      "c": "To prioritize personal happiness above all",
+      "d": "To base life on trust in God, confident expectation, and unconditional love as guiding principles"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: A Christian's primary allegiance is to their nation or political party.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the importance of 'remembering God's faithfulness' in times of doubt or struggle?",
+    "options": {
+      "a": "It causes one to dwell on negative memories",
+      "b": "It is a pointless exercise in the past",
+      "c": "It is a distraction from present problems",
+      "d": "It strengthens faith and provides encouragement by recalling His past actions"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does it mean to 'seek first the kingdom of God and His righteousness'?",
+    "options": {
+      "a": "To only care about heaven and ignore earthly matters",
+      "b": "To prioritize God's reign and His moral standards above all else in life",
+      "c": "To join a political movement",
+      "d": "To become a king or queen"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "How should Christians approach decisions about entertainment and media?",
+    "options": {
+      "a": "Judge others based on their media choices",
+      "b": "Only watch religious programming",
+      "c": "Consume everything without discernment",
+      "d": "Seek what is wholesome, truthful, and glorifies God, avoiding what is harmful"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible encourages believers to practice self-examination and evaluate their spiritual condition.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of 'spiritual maturity'?",
+    "options": {
+      "a": "Being old in age",
+      "b": "Growing in Christ-like character, discernment, and obedience to God's will",
+      "c": "Having perfect knowledge of the Bible",
+      "d": "Never asking questions about faith"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the purpose of Christian worship beyond singing?",
+    "options": {
+      "a": "To express adoration, reverence, and submission to God through all aspects of life",
+      "b": "To entertain the congregation",
+      "c": "To showcase musical talents",
+      "d": "To fulfill a requirement for church membership"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible teach about being a 'good neighbor'?",
+    "options": {
+      "a": "Only be good to neighbors who are also Christian",
+      "b": "Love and serve all neighbors, regardless of their beliefs or background",
+      "c": "Avoid interacting with neighbors who are different",
+      "d": "Only help neighbors if you expect something in return"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: God's love is conditional, depending on how well a Christian behaves.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian view on gratitude?",
+    "options": {
+      "a": "It is an essential attitude for all circumstances, recognizing God's goodness",
+      "b": "It is only necessary for large blessings",
+      "c": "It is a sign of weakness to express thanks",
+      "d": "It can be faked for social approval"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does it mean to be 'transformed by the renewing of your mind'?",
+    "options": {
+      "a": "To allow God's Word and the Holy Spirit to change one's thoughts and perspectives",
+      "b": "To simply try harder to be good",
+      "c": "To get a higher education",
+      "d": "To forget everything you once knew"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "How should a Christian approach financial debt?",
+    "options": {
+      "a": "Ignore debt and hope it goes away",
+      "b": "Believe God will miraculously pay all debts regardless of personal action",
+      "c": "Strive to live within means, avoid unnecessary debt, and honor financial commitments",
+      "d": "Accumulate as much debt as possible"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that pride is a virtue for Christians to cultivate.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the purpose of spiritual disciplines in a Christian's life?",
+    "options": {
+      "a": "To make life easier and more comfortable",
+      "b": "To train and equip believers for spiritual growth and effectiveness",
+      "c": "To earn God's love and approval",
+      "d": "To showcase one's religious devotion to others"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible teach about exercising spiritual gifts?",
+    "options": {
+      "a": "Every believer has gifts to be used for the building up of the church and glory of God",
+      "b": "Spiritual gifts are no longer active today",
+      "c": "Only a select few Christians have spiritual gifts",
+      "d": "Spiritual gifts are for personal gain only"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian view on seeking justice?",
+    "options": {
+      "a": "Justice is only for personal grievances",
+      "b": "Justice contradicts mercy",
+      "c": "It is solely a secular pursuit",
+      "d": "Believers are called to pursue justice and righteousness, especially for the oppressed"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christian discipleship is a personal journey that does not require involvement with a church community.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of 'reconciliation'?",
+    "options": {
+      "a": "Only possible if both parties are perfect",
+      "b": "Restoring broken relationships through forgiveness and seeking peace",
+      "c": "Making sure the other person admits they were wrong",
+      "d": "Ignoring past wrongs and moving on"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible teach about being a 'cheerful giver'?",
+    "options": {
+      "a": "Give generously and willingly, not under compulsion or grudgingly",
+      "b": "Give only a small amount with a smile",
+      "c": "Only give to those who can give back",
+      "d": "Give only if you feel like it"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian view on the value of human life?",
+    "options": {
+      "a": "Life's value diminishes with age",
+      "b": "Only the lives of believers are valuable",
+      "c": "Its value depends on a person's achievements",
+      "d": "All human life is sacred and created in God's image, possessing inherent dignity"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Prayer should only be reserved for major crises or emergencies.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does 'making disciples' involve according to the Great Commission?",
+    "options": {
+      "a": "Only sharing personal testimonies",
+      "b": "Teaching others to obey Christ's commands and grow in their faith",
+      "c": "Only baptizing new believers",
+      "d": "Forcing people to convert"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian ethical principle regarding coveting?",
+    "options": {
+      "a": "It is a sin to desire what belongs to others",
+      "b": "It is only wrong if you act on it",
+      "c": "It is a natural and acceptable human desire",
+      "d": "It can motivate personal achievement"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "How should a Christian respond to criticism or rebuke?",
+    "options": {
+      "a": "Listen humbly, discern if it's true, and learn from it",
+      "b": "Retaliate with criticism of their own",
+      "c": "Ignore it completely",
+      "d": "Become defensive and angry"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that Christians should love the world and everything in it.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian view on the importance of family relationships?",
+    "options": {
+      "a": "Family exists only to provide support for personal needs",
+      "b": "Family ties are unimportant after conversion",
+      "c": "Family is secondary to personal ambitions",
+      "d": "Family is a sacred institution, to be honored, loved, and discipled according to God's Word"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does 'perseverance of the saints' refer to?",
+    "options": {
+      "a": "Saints never face difficulties",
+      "b": "Only very special saints have perseverance",
+      "c": "The ability to withstand physical pain",
+      "d": "The belief that those truly saved by God will endure in faith until the end"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian ethical principle regarding self-care?",
+    "options": {
+      "a": "It is selfish and should be avoided",
+      "b": "It means never asking for help",
+      "c": "It is important for sustaining one's ability to serve God and others, but not to the exclusion of others",
+      "d": "It involves indulging every desire"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The goal of Christian discipleship is simply to gain knowledge about the Bible.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian approach to worry about the future?",
+    "options": {
+      "a": "To ignore any planning for the future",
+      "b": "To constantly dwell on potential negative outcomes",
+      "c": "To trust God's sovereignty and provision, bringing concerns to Him in prayer",
+      "d": "To control every aspect of the future"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible teach about the power of the tongue?",
+    "options": {
+      "a": "Only religious words have power",
+      "b": "It is always best to speak one's mind without filter",
+      "c": "The tongue has power to build up or tear down, and should be used to bless",
+      "d": "Words have little effect on others"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian ethical stance on bearing false witness?",
+    "options": {
+      "a": "It is a serious sin to lie or give false testimony against another",
+      "b": "It can be justified in difficult situations",
+      "c": "It is acceptable if it protects a friend",
+      "d": "It is only wrong in a court of law"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christian discipleship ends when a person becomes a church leader.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What does the Bible teach about the importance of generosity?",
+    "options": {
+      "a": "Generosity is a sign of weakness",
+      "b": "Believers are called to be generous with their resources, time, and talents",
+      "c": "It is a way to earn salvation",
+      "d": "It is only for the wealthy"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "discipleship_living",
+    "approved": true
+  }
+]

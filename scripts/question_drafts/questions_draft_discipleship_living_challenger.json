@@ -1,0 +1,2438 @@
+[
+  {
+    "question": "In the book of Acts, Stephen, before his martyrdom, recounts much of Israel's history. He mentions that Moses was instructed to build the tabernacle according to a 'pattern' shown to him. To which specific Old Testament figure does Stephen compare Moses' role as a prophet, stating God would raise up a prophet like him?",
+    "options": {
+      "a": "Abraham",
+      "b": "Joseph",
+      "c": "Moses himself",
+      "d": "Joshua"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The apostle Paul explicitly states in 1 Timothy 3 that an elder must be a man who has never been divorced.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul describes the spiritual armor of God in Ephesians 6, he lists six pieces. Which piece of armor does he identify as 'the word of God'?",
+    "options": {
+      "a": "The helmet of salvation",
+      "b": "The breastplate of righteousness",
+      "c": "The shield of faith",
+      "d": "The sword of the Spirit"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 7, Paul provides detailed advice on marriage and singleness. He states that it is good for a man not to touch a woman, but to avoid sexual immorality, each man should have his own wife. For how long does Paul suggest that married couples might agree to abstain from sexual relations, and for what purpose?",
+    "options": {
+      "a": "For a fixed time, to devote yourselves to prayer",
+      "b": "For several months, to save money for the poor",
+      "c": "Indefinitely, to live a life of greater holiness",
+      "d": "For a year, to focus on mission work"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, writing to the Thessalonians, encourages them to 'pray without ceasing.' In the same chapter, he also gives another instruction regarding prayer, saying 'do not quench the Spirit.' Which specific instruction immediately follows 'pray without ceasing'?",
+    "options": {
+      "a": "Do not despise prophecies",
+      "b": "Abstain from every form of evil",
+      "c": "Hold fast what is good",
+      "d": "Give thanks in all circumstances"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What specific Old Testament prophet's words does James quote in James 5:20 to affirm the power of prayer for a sick person, stating, 'The prayer of a righteous person has great power as it is working'?",
+    "options": {
+      "a": "Isaiah",
+      "b": "Elijah",
+      "c": "Jeremiah",
+      "d": "Ezekiel"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to the Sermon on the Mount, Jesus teaches that if someone forces you to go one mile, you should go with him two miles, specifically to demonstrate your superior physical endurance.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in his letter to the Colossians (3:16), instructs believers to 'let the word of Christ dwell in you richly.' What specific actions does he say this rich indwelling of the word enables them to do?",
+    "options": {
+      "a": "To speak in tongues and interpret",
+      "b": "To teach and admonish one another with all wisdom, singing psalms, hymns, and spiritual songs",
+      "c": "To perform miracles and heal the sick",
+      "d": "To debate with non-believers and win arguments"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When instructing Timothy on how to deal with an elder who persists in sin, Paul gives a specific instruction for confronting him. What is this instruction, found in 1 Timothy 5:20?",
+    "options": {
+      "a": "Warn him once, then avoid him if he does not repent",
+      "b": "Rebuke him privately before two or three witnesses",
+      "c": "Bring him before the church council for judgment",
+      "d": "Rebuke him publicly, so that the others may take warning"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Romans 12, Paul urges believers to present their bodies as 'a living sacrifice, holy and acceptable to God.' What is this act described as?",
+    "options": {
+      "a": "Your spiritual act of service",
+      "b": "Your profound act of devotion",
+      "c": "Your reasonable worship",
+      "d": "Your daily offering of praise"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible explicitly commands Christians to tithe exactly 10% of their gross income to their local church.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs frequently contrasts the wise and the foolish. Proverbs 22:7 states, 'The rich rules over the poor, and the borrower is the slave of the lender.' What specific piece of advice immediately precedes this verse, emphasizing ethical behavior in dealings?",
+    "options": {
+      "a": "Do not move an ancient landmark",
+      "b": "Do not rob the poor because he is poor",
+      "c": "A good name is to be chosen rather than great riches",
+      "d": "Do not enter the path of the wicked"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul commends the Berean Jews in Acts 17 for their noble character. What specific action did they take that earned them this commendation regarding Paul's teaching?",
+    "options": {
+      "a": "They provided Paul with generous financial support",
+      "b": "They immediately believed and were baptized",
+      "c": "They eagerly received the word and examined the Scriptures daily to see if these things were so",
+      "d": "They challenged Paul to a public debate"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Romans 14, Paul discusses eating practices among believers, cautioning against judging one another over disputable matters. What specific dietary practice does Paul mention as an example of such a disputable matter that some consider defiling?",
+    "options": {
+      "a": "Eating all things, while others eat only vegetables",
+      "b": "Eating pork",
+      "c": "Eating shellfish",
+      "d": "Eating meat sacrificed to idols"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul instructs the Corinthian church on the proper administration of the Lord's Supper, warning against partaking in an 'unworthy manner.' What specific consequence does he say may befall those who do so, leading to weakness, illness, and even death?",
+    "options": {
+      "a": "Many among you are weak and sick, and some have fallen asleep",
+      "b": "They become possessed by demons",
+      "c": "They lose their salvation",
+      "d": "They are publicly excommunicated from the church"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The parable of the Good Samaritan, as told by Jesus, illustrates that showing mercy and compassion is more important than strict adherence to religious ritual or social status.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In his letter to Philemon, Paul appeals for the runaway slave Onesimus. What specific familial term does Paul use to describe Onesimus's relationship to him, now that Onesimus is a believer?",
+    "options": {
+      "a": "My spiritual son",
+      "b": "My beloved brother",
+      "c": "My fellow worker",
+      "d": "My faithful servant"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Before his ascension, Jesus gave the Great Commission to his disciples. In Matthew 28, he instructs them to 'make disciples of all nations.' What specific action immediately follows this instruction?",
+    "options": {
+      "a": "Teaching them to observe all that I have commanded you",
+      "b": "Healing the sick and casting out demons",
+      "c": "Proclaiming the gospel to every creature",
+      "d": "Baptizing them in the name of the Father and of the Son and of the Holy Spirit"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of James warns against showing favoritism to the rich over the poor in the assembly. What specific example does James use to illustrate this favoritism, involving seating arrangements?",
+    "options": {
+      "a": "Offering the rich man a good seat and telling the poor man to stand or sit at his feet",
+      "b": "Inviting the rich man to a special meal while the poor man receives only leftovers",
+      "c": "Allowing the rich man to speak first in the assembly",
+      "d": "Giving the rich man a seat on the platform while the poor man stands"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Ephesians 4, Paul encourages believers to 'walk in a manner worthy of the calling to which you have been called.' He lists several virtues essential for unity. Which specific pair of virtues are mentioned alongside humility, gentleness, and patience?",
+    "options": {
+      "a": "Faithfulness and goodness",
+      "b": "Bearing with one another in love and eagerness to maintain the unity of the Spirit",
+      "c": "Love and joy",
+      "d": "Peace and self-control"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Jesus' teaching in Matthew 6, when you fast, you should make it obvious to others so that they may commend your piety.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, speaking of the dangers of false teachers and love of money in 1 Timothy 6, warns that 'those who desire to be rich fall into temptation, into a snare, into many foolish and harmful desires that plunge people into ruin and destruction.' What specific vice does he then declare to be 'a root of all kinds of evil'?",
+    "options": {
+      "a": "Greed",
+      "b": "Love of money",
+      "c": "Materialism",
+      "d": "Idolatry"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Peter and John were commanded by the Sanhedrin not to speak or teach in the name of Jesus, what was their defiant reply, emphasizing their obedience to God over men?",
+    "options": {
+      "a": "We cannot but speak of what we have seen and heard",
+      "b": "We must obey God rather than men",
+      "c": "Whether it is right in the sight of God to listen to you rather than to God, you must judge",
+      "d": "All of the above"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Hebrews 12, believers are encouraged to 'lay aside every weight, and sin which clings so closely.' What specific action are they then urged to take, looking to Jesus?",
+    "options": {
+      "a": "To run with endurance the race that is set before us",
+      "b": "Both A and B",
+      "c": "To fix our eyes on the author and perfecter of our faith",
+      "d": "To endure trials and tribulations patiently"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Galatians 6:10, instructs believers to 'do good to everyone, and especially to those who are of the household of faith.' This specific instruction comes directly after a statement about what principle?",
+    "options": {
+      "a": "Bearing one another's burdens",
+      "b": "Restoring a brother caught in sin with gentleness",
+      "c": "Testing one's own work",
+      "d": "Sowing to the Spirit and reaping eternal life"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to 1 Peter 3:15, believers should always be prepared to make a defense to anyone who asks them for a reason for the hope that is in them, doing so with gentleness and respect.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Jesus sends out the seventy-two (or seventy) disciples in Luke 10, he gives them specific instructions. What does he tell them to do regarding their greeting upon entering a house?",
+    "options": {
+      "a": "Say, 'Peace be to this house!'",
+      "b": "Shake off the dust from your feet if they do not receive you",
+      "c": "Eat what is set before you, without asking questions",
+      "d": "Heal the sick and then preach the kingdom of God"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Titus outlines qualifications for elders. Which of the following is NOT explicitly listed as a qualification for an elder/overseer in Titus 1?",
+    "options": {
+      "a": "Hospitable",
+      "b": "Self-controlled",
+      "c": "A lover of good",
+      "d": "Able to speak in tongues"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Philippians 2, Paul encourages believers to have the same mind as Christ, who 'emptied himself.' What specific action did Christ take that immediately followed his emptying himself and taking the form of a servant?",
+    "options": {
+      "a": "Becoming obedient to the point of death",
+      "b": "Dying on a cross",
+      "c": "Being born in the likeness of men",
+      "d": "Being found in human form"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The apostle John, in 1 John 3:18, exhorts believers: 'Little children, let us not love in word or talk but in...' What specific phrase completes this exhortation, emphasizing practical love?",
+    "options": {
+      "a": "Deed and truth",
+      "b": "Purity and holiness",
+      "c": "Spirit and truth",
+      "d": "Sacrifice and devotion"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that faith without works is dead, implying that genuine faith must be accompanied by actions consistent with that faith.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul visited Athens in Acts 17, he observed their many objects of worship. He then used an altar dedicated to a specific deity as a starting point for his evangelistic message. Which deity was this altar dedicated to?",
+    "options": {
+      "a": "Athena",
+      "b": "The Unknown God",
+      "c": "Zeus",
+      "d": "Ares"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the Sermon on the Mount, Jesus teaches about giving to the needy. What is the specific instruction he gives regarding the secrecy of one's giving?",
+    "options": {
+      "a": "Do not give in order to be seen by others",
+      "b": "Do not let your left hand know what your right hand is doing",
+      "c": "Give generously, and it will be given back to you",
+      "d": "Give to everyone who begs from you"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The apostle Paul encourages believers to be transformed by the renewal of their minds in Romans 12:2. What is the explicit purpose he states for this transformation?",
+    "options": {
+      "a": "So that you may discern the will of God, what is good and acceptable and perfect",
+      "b": "So that you may offer your bodies as a living sacrifice",
+      "c": "So that you may have unity with other believers",
+      "d": "So that you may not be conformed to this world"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Colossians 3:5-9, Paul lists vices that believers should put to death or put off. Which specific vice is mentioned alongside covetousness, which is described as idolatry?",
+    "options": {
+      "a": "All of the above",
+      "b": "Evil desire",
+      "c": "Impurity",
+      "d": "Fornication"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible indicates that King David, despite his many flaws, was known for always keeping his promises, even when it was to his own detriment.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in 1 Corinthians 9, discusses his rights as an apostle but chooses not to exercise them. What specific analogy does he use to explain his willingness to become 'all things to all people' for the sake of the gospel?",
+    "options": {
+      "a": "A slave to everyone",
+      "b": "A runner in a race",
+      "c": "A soldier fighting for his commander",
+      "d": "A farmer working his own vineyard"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, when the apostles needed to choose seven men to serve the Hellenist widows, what specific qualifications were they looking for in these men?",
+    "options": {
+      "a": "Good reputation and ability to preach",
+      "b": "Knowledge of the Law and ability to manage finances",
+      "c": "Full of the Spirit and of wisdom",
+      "d": "Married men with children who believed"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Ecclesiastes advises on how to approach God in worship. It warns, 'Guard your steps when you go to the house of God; to draw near to listen is better than to offer the sacrifice of fools, for they do not know that they are doing evil.' What specific ethical advice immediately follows this warning?",
+    "options": {
+      "a": "Do not be overly righteous, nor be overly wise. Why should you destroy yourself?",
+      "b": "Be not rash with your mouth, nor let your heart be hasty to utter a word before God",
+      "c": "There is nothing better for a person than that he should eat and drink and find enjoyment in his toil",
+      "d": "Fear God and keep His commandments, for this is the whole duty of man"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 5, Jesus states, 'You are the salt of the earth.' What specific consequence does he describe if salt loses its saltiness?",
+    "options": {
+      "a": "It is no longer useful for preserving food",
+      "b": "It is thrown out and trampled underfoot by men",
+      "c": "It loses its flavor and becomes bitter",
+      "d": "It can only be used for salting roads"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to the book of Hosea, God desires steadfast love more than sacrifice, and the knowledge of God more than burnt offerings.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul writes in Philippians 4:8, 'Finally, brothers, whatever is true, whatever is honorable, whatever is just, whatever is pure, whatever is lovely, whatever is commendable, if there is any excellence, if there is anything worthy of praise, think about these things.' What specific virtue does he mention between 'pure' and 'commendable'?",
+    "options": {
+      "a": "Righteous",
+      "b": "Good",
+      "c": "Perfect",
+      "d": "Lovely"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The writer of Hebrews encourages believers not to forsake meeting together. What specific purpose does he mention for this gathering in Hebrews 10:24-25?",
+    "options": {
+      "a": "To pray for one another and confess sins",
+      "b": "To hear the teaching of the apostles and prophets",
+      "c": "To encourage one another to love and good deeds",
+      "d": "To partake in the Lord's Supper and remember Christ's sacrifice"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 2 Timothy 2, Paul encourages Timothy to be a good soldier of Christ Jesus. What specific action does he say a soldier does not do, indicating a principle of focused dedication?",
+    "options": {
+      "a": "He does not seek to please men",
+      "b": "He does not get entangled in civilian pursuits",
+      "c": "He does not disobey his commander",
+      "d": "He does not complain about his rations"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When instructing servants (slaves) in Ephesians 6, Paul tells them to obey their earthly masters 'with fear and trembling, with a sincere heart, as you would Christ.' What is the specific motivation he gives for their diligent service?",
+    "options": {
+      "a": "Knowing that whatever good anyone does, this he will receive back from the Lord",
+      "b": "To avoid punishment from their masters",
+      "c": "So that they may earn their freedom",
+      "d": "To set a good example for other servants"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Revelation 2, the church in Thyatira was rebuked for tolerating the woman Jezebel, who taught and enticed God's servants to practice sexual immorality and eat food sacrificed to idols.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The Sermon on the Mount includes several 'You have heard that it was said... But I say to you' statements. Regarding oaths, Jesus teaches to 'not swear at all.' What specific alternatives does he offer for confirming one's word?",
+    "options": {
+      "a": "Let your 'yes' be yes and your 'no' be no",
+      "b": "Ask a priest to witness your pledge",
+      "c": "Swear by God's name only in solemn oaths",
+      "d": "Write down your promises and sign them"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Acts 6, when a dispute arose between the Hellenist and Hebraic Jews over the daily distribution of food to widows, what was the specific complaint of the Hellenists?",
+    "options": {
+      "a": "They were being excluded from leadership roles",
+      "b": "They were being forced to eat unclean food",
+      "c": "Their children were not receiving proper instruction",
+      "d": "Their widows were being neglected in the daily distribution"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Romans 13:7, instructs believers to 'pay to all what is owed to them.' What specific governmental obligations does he list immediately after this general command?",
+    "options": {
+      "a": "Taxes to the emperor, service to the community, loyalty to the state, obedience to the laws",
+      "b": "Taxes to whom taxes are owed, revenue to whom revenue is owed, respect to whom respect is owed, honor to whom honor is owed",
+      "c": "Tribute to the officials, tithes to the temple, offerings to the poor, kindness to all",
+      "d": "Service to your masters, respect to your elders, love to your neighbors, fear to your God"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "According to Paul's teaching in 1 Corinthians 10, when faced with temptation, God is faithful and will not let you be tempted beyond what you can bear. What specific provision does God make in such circumstances?",
+    "options": {
+      "a": "He will remove the temptation altogether",
+      "b": "He will provide a way of escape",
+      "c": "He will give you strength to resist",
+      "d": "He will send an angel to assist you"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The prophet Micah declares that God requires of humanity only to do justice, love kindness, and walk humbly with their God.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 18:24 states, 'A man of many companions may come to ruin.' What specific positive statement immediately follows this warning, highlighting the value of a certain kind of relationship?",
+    "options": {
+      "a": "But there is a friend who sticks closer than a brother",
+      "b": "But the righteous will never be forsaken",
+      "c": "But a faithful friend is a strong defense",
+      "d": "But a wise man seeks wise counsel"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In James 1, the author discusses trials and temptations. He states that when desire is conceived, it gives birth to sin. What then does he say happens when sin is fully grown?",
+    "options": {
+      "a": "It results in shame and regret",
+      "b": "It brings forth death",
+      "c": "It causes spiritual sickness",
+      "d": "It leads to eternal condemnation"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in his letter to the Romans (15:1), writes, 'We who are strong have an obligation to bear with the failings of the weak, and not to please ourselves.' What specific duty does he then exhort believers to fulfill towards their neighbor?",
+    "options": {
+      "a": "To teach them the truth, so they may become strong",
+      "b": "To seek their own good, to build them up",
+      "c": "To pray for them constantly, that they may grow in faith",
+      "d": "To confront them when they are in error, with gentleness"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the man who, along with his wife Sapphira, sold a piece of property but kept back some of the proceeds, lying to the apostles and ultimately dying as a consequence?",
+    "options": {
+      "a": "Nicodemus",
+      "b": "Ananias",
+      "c": "Simon",
+      "d": "Joseph"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus explicitly taught that divorce is permissible in all cases of marital unfaithfulness.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 7:1-5, Jesus gives a strong warning about judging others. What analogy does he use to illustrate the hypocrisy of judging a small fault in another while ignoring a large fault in oneself?",
+    "options": {
+      "a": "A dust particle in your brother's eye compared to a tree in your own eye",
+      "b": "A speck in your brother's eye compared to a log in your own eye",
+      "c": "A mote in your brother's eye compared to a beam in your own eye",
+      "d": "A splinter in your brother's eye compared to a plank in your own eye"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the Roman centurion in Caesarea whose household was the first Gentile household to receive the Holy Spirit after Peter's preaching?",
+    "options": {
+      "a": "Cornelius",
+      "b": "Julius",
+      "c": "Gallio",
+      "d": "Sergius Paulus"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul exhorts Timothy in 2 Timothy 2 to 'do your best to present yourself to God as one approved, a worker who has no need to be ashamed.' What specific action does he say this approved worker does?",
+    "options": {
+      "a": "Exercising spiritual gifts faithfully",
+      "b": "Preaching the gospel boldly",
+      "c": "Living a blameless life among unbelievers",
+      "d": "Rightly handling the word of truth"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the letter to the Philippians (4:6-7), Paul instructs believers to 'not be anxious about anything, but in everything by prayer and supplication with thanksgiving let your requests be made known to God.' What specific result does he promise will follow this practice?",
+    "options": {
+      "a": "You will receive whatever you ask for, if you ask in faith",
+      "b": "God will answer all your prayers according to His perfect will",
+      "c": "The peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus",
+      "d": "All your earthly needs will be met abundantly"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible suggests that fasting should primarily be a private discipline, not for public display.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Romans 12, gives instructions for Christian living. He advises, 'Do not be overcome by evil, but overcome evil with...' What specific virtue completes this statement?",
+    "options": {
+      "a": "Righteousness",
+      "b": "Love",
+      "c": "Faith",
+      "d": "Good"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul was shipwrecked on the island of Malta, he was bitten by a viper. What was the initial reaction of the native people regarding this event?",
+    "options": {
+      "a": "They believed he was a god",
+      "b": "They believed he was a murderer whom Justice was pursuing",
+      "c": "They fled in fear, thinking he was cursed",
+      "d": "They offered him sacrifices to appease their gods"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs gives advice on honesty in business. Proverbs 20:23 states, 'Unequal weights are an abomination to the LORD.' What specific ethical practice is mentioned as being abhorrent immediately before this?",
+    "options": {
+      "a": "A bribe in the bosom pacifies anger",
+      "b": "Divers weights are an abomination unto the LORD",
+      "c": "Dishonest scales are an abomination to the LORD",
+      "d": "He who walks in integrity walks securely"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 13, the 'love chapter,' Paul states that love 'bears all things, believes all things, hopes all things, endures all things.' What specific quality does he say love never does?",
+    "options": {
+      "a": "Never gives up",
+      "b": "Never envies",
+      "c": "Never fails",
+      "d": "Never judges"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to the book of Revelation, the church at Laodicea was commended for its fervent faith and zeal.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 18, Jesus gives instructions on church discipline. If a brother sins against you, and after speaking to him privately and then with two or three witnesses, he still refuses to listen, what is the next step Jesus commands?",
+    "options": {
+      "a": "Cut off all communication with him",
+      "b": "Report him to the Roman authorities",
+      "c": "Take it to the church",
+      "d": "Pray for his repentance and wait for God to act"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in 2 Corinthians 5:17, declares, 'Therefore, if anyone is in Christ, he is a new creation. The old has passed away; behold, the new has come.' What immediate implication does he then draw from this truth?",
+    "options": {
+      "a": "Therefore, we must strive to live a life worthy of our calling",
+      "b": "And all this is from God, who through Christ reconciled us to himself and gave us the ministry of reconciliation",
+      "c": "And we are no longer under law but under grace",
+      "d": "Therefore, we are ambassadors for Christ, God making his appeal through us"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul was imprisoned in Philippi, what specific act of worship were he and Silas engaged in at midnight that led to an earthquake and the opening of prison doors?",
+    "options": {
+      "a": "Fasting and weeping before God",
+      "b": "Confessing their sins and asking for deliverance",
+      "c": "Praying and singing hymns to God",
+      "d": "Preaching the gospel loudly to the other prisoners"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Romans 1:16, Paul boldly declares, 'For I am not ashamed of the gospel.' What specific reason does he immediately give for this unashamed proclamation?",
+    "options": {
+      "a": "For it brings light to those who walk in darkness",
+      "b": "For it is the only way to eternal life",
+      "c": "For it is the power of God for salvation to everyone who believes",
+      "d": "For it reveals God's righteousness from faith to faith"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that Christians should avoid working with non-believers in any capacity to prevent being unequally yoked.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Malachi speaks about bringing the whole tithe into the storehouse. What specific blessing does God promise to pour out upon those who test Him in this way?",
+    "options": {
+      "a": "Protect you from famine and pestilence in the land",
+      "b": "Blessings without measure, such that there will not be room enough to receive it",
+      "c": "Multiply your harvest and grant you prosperity in all your endeavors",
+      "d": "Open the windows of heaven and pour out on you a blessing until there is no more need"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In his farewell discourse in John 15, Jesus tells his disciples, 'Abide in me, and I in you.' What specific analogy does he use to explain this relationship and the necessity of abiding in him?",
+    "options": {
+      "a": "A master and his servants",
+      "b": "A vine and its branches",
+      "c": "A shepherd and his sheep",
+      "d": "A foundation and a building"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Ephesians 5:18, instructs believers not to get drunk with wine, which is debauchery. What positive command immediately follows this, indicating a contrasting spiritual filling?",
+    "options": {
+      "a": "But sing psalms and hymns and spiritual songs",
+      "b": "But be filled with the Spirit",
+      "c": "But be sober and watchful",
+      "d": "But redeem the time, because the days are evil"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT explicitly mentioned as a 'work of the flesh' by Paul in Galatians 5:19-21?",
+    "options": {
+      "a": "Discord",
+      "b": "Jealousy",
+      "c": "Envy",
+      "d": "Gluttony"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to 1 John 2:15, believers are explicitly commanded to love the world and the things in the world, as a demonstration of God's love.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Romans 12:3, Paul warns against thinking of oneself more highly than he ought to think. What specific measure does he suggest for a sober judgment of oneself?",
+    "options": {
+      "a": "According to your contributions to the body of Christ",
+      "b": "According to the gifts God has given you",
+      "c": "According to the example of Christ's humility",
+      "d": "According to the measure of faith that God has assigned"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul describes the qualifications for deacons in 1 Timothy 3, he states that they must be 'dignified, not double-tongued, not indulging in much wine, not greedy for dishonest gain.' What specific domestic qualification does he also include?",
+    "options": {
+      "a": "The husband of one wife, managing their children and their own households well",
+      "b": "Having believing children who are not open to the charge of debauchery or insubordination",
+      "c": "Known for their hospitality and generosity to strangers",
+      "d": "Able to teach and exhort others in sound doctrine"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of James warns against the dangers of the tongue, calling it a 'restless evil, full of deadly poison.' What specific, small part of a ship does James compare the tongue to, illustrating its power to steer the whole vessel?",
+    "options": {
+      "a": "The rudder",
+      "b": "The anchor",
+      "c": "The sail",
+      "d": "The mast"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in 2 Corinthians 6:14, warns against being 'unequally yoked with unbelievers.' What specific question does he use to illustrate the incompatibility of righteousness and lawlessness?",
+    "options": {
+      "a": "What agreement has the temple of God with idols?",
+      "b": "For what fellowship has light with darkness?",
+      "c": "What partnership has righteousness with lawlessness?",
+      "d": "What accord has Christ with Belial?"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus taught that true discipleship involves denying oneself, taking up one's cross, and following Him, even if it means earthly suffering.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, when Paul is in Ephesus, a silversmith named Demetrius incites a riot against him and his companions. What was Demetrius's main concern or complaint?",
+    "options": {
+      "a": "Paul was encouraging rebellion against Roman authority",
+      "b": "Paul was disrupting the peace of the city",
+      "c": "His trade of making silver shrines of Artemis was being diminished",
+      "d": "Paul was blaspheming the local gods"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The apostle Peter, in 1 Peter 4:10, states, 'As each has received a gift, use it to serve one another.' What specific purpose does he mention for this service?",
+    "options": {
+      "a": "To demonstrate your love for one another before the world",
+      "b": "So that in everything God may be glorified through Jesus Christ",
+      "c": "To build up the body of Christ until we all reach unity in the faith",
+      "d": "As good stewards of God's varied grace"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In his letter to the Romans (13:8), Paul writes, 'Owe no one anything, except to love each other.' What specific declaration does he then make about the one who loves another?",
+    "options": {
+      "a": "For he has fulfilled the law",
+      "b": "For love is the fulfillment of the law",
+      "c": "For love covers a multitude of sins",
+      "d": "For love never fails"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What specific characteristic does Paul say is essential for a Christian to be 'useful to the Master, prepared for every good work' in 2 Timothy 2:21?",
+    "options": {
+      "a": "If anyone cleanses himself from what is dishonorable",
+      "b": "If anyone has devoted himself to prayer and fasting",
+      "c": "If anyone has a deep understanding of Scripture",
+      "d": "If anyone has great faith and wisdom"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Proverbs 3:5-6, believers are instructed to trust in the Lord with all their heart and lean not on their own understanding, and He will make straight their paths.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Ananias was sent by God to restore Paul's sight after his conversion, what was Ananias's initial reaction and concern?",
+    "options": {
+      "a": "He questioned why God would choose him for such a dangerous mission",
+      "b": "He doubted that Paul had truly repented of his sins",
+      "c": "He was concerned that Paul would just pretend to be a Christian",
+      "d": "He was afraid of Paul, knowing his reputation as a persecutor of Christians"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Peter 3, Peter instructs wives to be submissive to their own husbands. What specific virtue does he say should be their adornment, rather than outward show?",
+    "options": {
+      "a": "A life of good works and fervent prayer",
+      "b": "The imperishable beauty of a gentle and quiet spirit",
+      "c": "A heart full of love and compassion",
+      "d": "Modest clothing and dignified demeanor"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 13:20 states, 'Whoever walks with the wise becomes wise.' What specific consequence does it say befalls a companion of fools?",
+    "options": {
+      "a": "He will suffer harm",
+      "b": "He will become poor",
+      "c": "He will be disciplined",
+      "d": "He will come to ruin"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in his letter to the Galatians, states, 'There is neither Jew nor Greek, there is neither slave nor free, there is no male and female, for you are all one in Christ Jesus.' What is the immediate context for this declaration of equality?",
+    "options": {
+      "a": "Receiving the Spirit by hearing with faith, not by works of the law",
+      "b": "Being baptized into Christ and having put on Christ",
+      "c": "Being justified by faith in Christ, not by works of the law",
+      "d": "Belonging to Abraham's offspring, heirs according to promise"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Jesus advised his disciples to store up treasures on earth in case of famine, as a prudent measure.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, when the Jerusalem Council met to discuss the inclusion of Gentiles into the church, what specific burden did they decide NOT to lay upon the Gentile believers?",
+    "options": {
+      "a": "Abstaining from eating meat sacrificed to idols",
+      "b": "Circumcision and adherence to the Mosaic Law",
+      "c": "Attending synagogue services every Sabbath",
+      "d": "Paying temple taxes to Jerusalem"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in 1 Thessalonians 4, gives instructions on how to live a life pleasing to God. He tells them to 'aspire to live quietly, and to mind your own affairs, and to work with your hands.' What specific reason does he give for this conduct?",
+    "options": {
+      "a": "So that you may walk properly before outsiders and be dependent on no one",
+      "b": "So that you may set an example of diligence for others",
+      "c": "So that you may have enough to share with those in need",
+      "d": "So that you may avoid being a burden to the church"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of James says that 'pure and undefiled religion before God the Father is this:' What specific actions does he then list as comprising this religion?",
+    "options": {
+      "a": "To fast and pray regularly, and to give generously to the poor",
+      "b": "To preach the gospel to every creature and make disciples of all nations",
+      "c": "To love your neighbor as yourself and worship God in spirit and truth",
+      "d": "To visit orphans and widows in their affliction, and to keep oneself unstained from the world"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Colossians 3, Paul instructs believers to 'put on then, as God’s chosen ones, holy and beloved, compassionate hearts, kindness, humility, meekness, and patience.' What specific virtue does he say should bind all these together?",
+    "options": {
+      "a": "Faith, which is the assurance of things hoped for",
+      "b": "Peace, which rules in your hearts",
+      "c": "Joy, which is the strength of the Lord",
+      "d": "Love, which binds everything together in perfect harmony"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that Christians should completely separate themselves from unbelievers to maintain their holiness.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Jesus sent out the twelve disciples in Matthew 10, he gave them authority over unclean spirits and to heal every disease and every affliction. What specific instruction did he give them regarding money and provisions for their journey?",
+    "options": {
+      "a": "Sell your possessions and give to the poor, then follow me",
+      "b": "Acquire no gold nor silver nor copper for your belts, nor a bag for your journey",
+      "c": "Take only what is necessary for one day's journey, trusting God for the rest",
+      "d": "Work diligently to earn your keep in each town you visit"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 8, Paul discusses eating food sacrificed to idols. He explains that while idols are nothing, believers should be careful not to cause a weaker brother to stumble. What specific principle does he state should guide their actions?",
+    "options": {
+      "a": "Each one should be fully convinced in his own mind",
+      "b": "If food causes my brother to stumble, I will never eat meat",
+      "c": "All things are lawful, but not all things are profitable",
+      "d": "Knowledge puffs up, but love builds up"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 17:17 states, 'A friend loves at all times.' What specific characteristic does it say a brother is born for?",
+    "options": {
+      "a": "Wisdom",
+      "b": "Adversity",
+      "c": "Prosperity",
+      "d": "Comfort"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Ephesians 4:29, instructs believers: 'Let no corrupting talk come out of your mouths.' What positive instruction immediately follows this, regarding what kind of talk should come out?",
+    "options": {
+      "a": "But only such as is good for building up, as fits the occasion, that it may give grace to those who hear",
+      "b": "But speak only that which is pure and honorable, bringing glory to God",
+      "c": "But rather let your conversation be seasoned with salt, to give grace to those who hear",
+      "d": "But rather speak the truth in love, that you may grow up in every way into him who is the head, into Christ"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Revelation 3, the church in Sardis was described as having a reputation for being alive, but in reality, it was dead.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Timothy 2, Paul instructs that prayers, intercessions, and thanksgivings should be made for 'all people.' For what specific categories of people does he then mention these prayers should be made?",
+    "options": {
+      "a": "For the sick and the suffering, and for children",
+      "b": "For the lost and for those who oppose the gospel",
+      "c": "For the poor and needy, and those who are persecuted",
+      "d": "For kings and all who are in high positions"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the proconsul of Cyprus who believed Paul's message after witnessing Elymas the sorcerer being temporarily blinded?",
+    "options": {
+      "a": "Sergius Paulus",
+      "b": "Felix",
+      "c": "Gallio",
+      "d": "Festus"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Hosea 6:6 declares, 'For I desire steadfast love and not sacrifice, the knowledge of God rather than burnt offerings.' What specific prophetic message does Jesus quote from Hosea in Matthew 9:13, when criticized for eating with tax collectors and sinners?",
+    "options": {
+      "a": "Return, O Israel, to the LORD your God",
+      "b": "I desire mercy, and not sacrifice",
+      "c": "My people are destroyed for lack of knowledge",
+      "d": "Sow for yourselves righteousness; reap steadfast love"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to the book of Nehemiah, the people of Israel confessed their sins and renewed their covenant with God after Ezra publicly read the Law for several days.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the young man in Troas who fell asleep during Paul's long sermon, fell from a third-story window, and was raised from the dead by Paul?",
+    "options": {
+      "a": "Tychicus",
+      "b": "Eutychus",
+      "c": "Demetrius",
+      "d": "Epaphroditus"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 6, Paul addresses lawsuits among believers. What specific advice does he give regarding resolving disputes, even suggesting an alternative to going to court?",
+    "options": {
+      "a": "Appoint someone among yourselves who is wise to settle disputes",
+      "b": "Forgive your brother and overlook the offense entirely",
+      "c": "Better to suffer wrong or be defrauded than to go to law with another believer",
+      "d": "Seek arbitration from pagan courts only as a last resort"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs often speaks about the value of wisdom. Proverbs 16:16 states, 'How much better to get wisdom than gold! To get understanding is to be chosen rather than silver.' What specific ethical advice immediately precedes this verse, concerning pride?",
+    "options": {
+      "a": "Haughty eyes and a proud heart, the lamp of the wicked, are sin",
+      "b": "Everyone who is arrogant in heart is an abomination to the LORD",
+      "c": "By steadfast love and faithfulness iniquity is atoned for, and by the fear of the LORD one turns away from evil",
+      "d": "Pride goes before destruction, and a haughty spirit before a fall"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Ephesians 5:15-16, warns believers to 'look carefully then how you walk, not as unwise but as wise.' What specific action does he then tell them to take, and for what reason?",
+    "options": {
+      "a": "Buying back the time, because life is short",
+      "b": "Making the best use of the time, because the days are evil",
+      "c": "Seizing the moment, because tomorrow is not promised",
+      "d": "Redeeming the time, because the opportunities are few"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible suggests that all Christians are called to be evangelists in the formal sense, preaching to large crowds.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Timothy 5, Paul gives instructions on how to treat various members of the church family. He tells Timothy not to rebuke an older man harshly, but to encourage him as a father. How does he say Timothy should treat older women, younger men, and younger women, respectively?",
+    "options": {
+      "a": "As aunts, nephews, nieces, with respect",
+      "b": "As elders, deacons, and widows, with honor",
+      "c": "As spiritual guides, fellow laborers, and new converts, with care",
+      "d": "As mothers, brothers, sisters, in all purity"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When instructing on the role of government in Romans 13, Paul states that governing authorities are God's servants. What specific role does he assign to them regarding those who do wrong?",
+    "options": {
+      "a": "A minister of justice to maintain order in society",
+      "b": "A protector of the innocent and weak",
+      "c": "An avenger who carries out God's wrath on the wrongdoer",
+      "d": "A judge to discern between right and wrong"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of James 4:17 states, 'So whoever knows the right thing to do and fails to do it, for him it is sin.' What specific ethical context does James primarily discuss immediately before this verse?",
+    "options": {
+      "a": "The evil use of the tongue in slander and gossip",
+      "b": "Disputes and quarrels among believers",
+      "c": "Boasting about future plans without acknowledging God's will",
+      "d": "Showing favoritism to the rich over the poor"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Philippians 2:14, instructs believers to 'do all things without grumbling or disputing.' What specific purpose does he give for this conduct?",
+    "options": {
+      "a": "Both A and C",
+      "b": "That you may shine as lights in the world, holding fast to the word of life",
+      "c": "That you may be blameless and innocent, children of God without blemish in the midst of a crooked and twisted generation",
+      "d": "That your joy may be full in the Lord always"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Deuteronomy 6, parents are commanded to teach God's commands diligently to their children when they sit, walk, lie down, and rise.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, when Paul is brought before Governor Felix in Caesarea, what specific reason does Felix give for adjourning Paul's case, while still hoping for a bribe?",
+    "options": {
+      "a": "He was waiting for the arrival of Agrippa and Bernice",
+      "b": "He needed to hear the testimony of more witnesses from Jerusalem",
+      "c": "He wanted to understand more about 'the Way'",
+      "d": "He wanted to wait until Lysias the tribune came down"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in his instructions to slaves in Ephesians 6:5-8, tells them to obey their earthly masters 'as you would Christ.' What specific motivation does he provide for their diligent and sincere service?",
+    "options": {
+      "a": "To avoid punishment from their masters and demonstrate their faith",
+      "b": "Because God judges the intentions of the heart, not just outward actions",
+      "c": "So that they may earn their freedom and a good reputation among men",
+      "d": "Knowing that whatever good anyone does, this he will receive back from the Lord, whether he is a slave or free"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 25:21-22 encourages generosity towards enemies: 'If your enemy is hungry, give him bread to eat, and if he is thirsty, give him water to drink.' What specific metaphorical consequence does it say this action will have?",
+    "options": {
+      "a": "For you will shame him before others, and he will repent",
+      "b": "For you will demonstrate God's love, and he will be drawn to Christ",
+      "c": "For you will soften his heart, and he may become your friend",
+      "d": "For you will heap burning coals on his head, and the LORD will reward you"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 12, Paul discusses spiritual gifts and the unity of the body. He compares the body of Christ to a human body with many members. Which specific body part does he mention as being seemingly weaker but indispensable?",
+    "options": {
+      "a": "The feet",
+      "b": "The head",
+      "c": "The eyes",
+      "d": "The stomach"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Paul's instructions in 2 Thessalonians 3, if anyone is unwilling to work, he should not eat.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Timothy is encouraged by Paul to 'flee youthful passions,' what specific virtues is he then instructed to pursue 'along with those who call on the Lord from a pure heart'?",
+    "options": {
+      "a": "Humility, gentleness, steadfastness, and joy",
+      "b": "Righteousness, faith, love, and peace",
+      "c": "Wisdom, understanding, counsel, and knowledge",
+      "d": "Patience, kindness, goodness, and self-control"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Philippians 4:11-13, Paul speaks about contentment. He states, 'I have learned in whatever situation I am to be content.' What specific secret does he reveal for being content in every circumstance?",
+    "options": {
+      "a": "I have learned to depend solely on God's provision",
+      "b": "I have found joy in Christ, regardless of my circumstances",
+      "c": "I can do all things through him who strengthens me",
+      "d": "I know how to be brought low, and I know how to abound"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 6:6-8 encourages diligence by observing a specific small creature. Which creature is used as an example of industriousness?",
+    "options": {
+      "a": "The spider",
+      "b": "The ant",
+      "c": "The bee",
+      "d": "The dove"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Romans 12:17-18, instructs believers to 'repay no one evil for evil.' What specific action should they pursue if possible, and with whom?",
+    "options": {
+      "a": "Both A and B",
+      "b": "Live peaceably with all",
+      "c": "Seek what is honorable in the sight of all",
+      "d": "Leave vengeance to God's wrath"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Revelation 3, Jesus warns the church in Philadelphia that he will remove their lampstand if they do not repent.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the man who Paul commended in Philippians 2:25, calling him 'my brother and fellow worker and fellow soldier, and your messenger and minister to my need'?",
+    "options": {
+      "a": "Titus",
+      "b": "Onesimus",
+      "c": "Epaphroditus",
+      "d": "Timothy"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In James 2:15-16, James illustrates dead faith with an example. If a brother or sister is poorly clothed and lacking in daily food, and someone says 'Go in peace, be warmed and filled,' but does not give them what they need, what does James say this faith is?",
+    "options": {
+      "a": "Dead",
+      "b": "Useless",
+      "c": "Hypocritical",
+      "d": "Weak"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 27:17 states, 'Iron sharpens iron.' What is the specific consequence or outcome of this, as mentioned in the proverb?",
+    "options": {
+      "a": "And a wise man sharpens his mind",
+      "b": "And a friend sharpens a friend",
+      "c": "And one man sharpens another",
+      "d": "And a godly man sharpens his brother"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in 2 Corinthians 9:7, instructs believers that 'each one must give as he has decided in his heart, not reluctantly or under compulsion.' What specific characteristic does he then attribute to the kind of giver God loves?",
+    "options": {
+      "a": "A cheerful giver",
+      "b": "A generous giver",
+      "c": "A sacrificial giver",
+      "d": "A willing giver"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Acts 19, the city of Ephesus was known for its worship of the goddess Diana (Artemis), and many citizens converted to Christianity after Paul's ministry there, leading to a significant economic disruption for idol makers.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 6, Jesus teaches about prayer, introducing the 'Lord's Prayer.' What specific instruction does he give about the location or manner of private prayer?",
+    "options": {
+      "a": "Go into your room and shut the door and pray to your Father who is in secret",
+      "b": "Pray aloud in a public place, but do not use empty phrases",
+      "c": "Pray together with other believers in a designated holy place",
+      "d": "Lift up holy hands to heaven and call upon the name of the Lord"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Hebrews 12:14 encourages believers to 'strive for peace with everyone, and for the holiness without which no one will see the Lord.' What specific historical example does the writer then warn against, regarding Esau?",
+    "options": {
+      "a": "That no one resents his brother, as Esau resented Jacob",
+      "b": "That no one is sexually immoral or unholy like Esau, who sold his birthright for a single meal",
+      "c": "That no one despises God's blessings, as Esau did",
+      "d": "That no one fails to obtain the grace of God, or that no bitter root springs up and causes trouble"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in his letter to the Colossians 3:23, instructs slaves to 'whatever you do, work heartily, as for the Lord and not for men.' What specific motivation does he then provide for this diligent work?",
+    "options": {
+      "a": "Knowing that God will bless your efforts and grant you favor",
+      "b": "Knowing that your service is pleasing to the Lord, Christ your Master",
+      "c": "Knowing that you are serving Christ, and He will not forget your labor",
+      "d": "Knowing that from the Lord you will receive the inheritance as your reward"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Romans 14, Paul advises believers regarding eating meat or abstaining. He states, 'For the kingdom of God is not eating and drinking, but...' What specific qualities does he say define the kingdom of God?",
+    "options": {
+      "a": "Righteousness and peace and joy in the Holy Spirit",
+      "b": "Power, glory, and dominion forever and ever",
+      "c": "Faith, hope, and love, the greatest of these is love",
+      "d": "Justice, mercy, and humility before God"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to John 13, Jesus teaches his disciples that they will be recognized as his disciples if they have love for one another.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the household in Rome that Paul greets in Romans 16, specifically mentioning 'those in Christ' who are of that household, suggesting they were among the earliest converts there?",
+    "options": {
+      "a": "The household of Narcissus",
+      "b": "The household of Caesar",
+      "c": "The household of Gaius",
+      "d": "The household of Aristobulus"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of James 5:16 states, 'Therefore, confess your sins to one another and pray for one another, that you may be healed.' What specific power does he then attribute to the prayer of a righteous person?",
+    "options": {
+      "a": "It has great power as it is working",
+      "b": "It can restore health and bring peace",
+      "c": "It is heard by God and brings miraculous results",
+      "d": "It can move mountains and calm storms"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in 2 Timothy 3:16, states that 'All Scripture is breathed out by God and profitable for teaching, for reproof, for correction, and for training in righteousness.' What specific purpose does he then state this is for?",
+    "options": {
+      "a": "That you may be wise for salvation through faith in Christ Jesus",
+      "b": "That the man of God may be complete, equipped for every good work",
+      "c": "That you may know the truth and be set free from error",
+      "d": "That you may grow in grace and in the knowledge of our Lord and Savior Jesus Christ"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In his letter to the Colossians, Paul encourages believers to 'let the peace of Christ rule in your hearts.' To what specific body or context does he apply this peace?",
+    "options": {
+      "a": "As members of the household of God",
+      "b": "To which indeed you were called in one body",
+      "c": "As a community of saints, set apart for God",
+      "d": "As individual believers walking in the Spirit"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that Christians should pay their taxes to governing authorities, even if those authorities are unjust.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul preached in Athens, he quoted from Greek poets to connect with his audience. Which specific statement from a poet did he quote to support the idea that 'in him we live and move and have our being'?",
+    "options": {
+      "a": "For we are indeed his offspring",
+      "b": "Everything flows, nothing stays still",
+      "c": "Man, know thyself",
+      "d": "The unexamined life is not worth living"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 10:4 states, 'A slack hand causes poverty.' What specific positive outcome does it contrast with this, achieved by the hand of the diligent?",
+    "options": {
+      "a": "The hand of the diligent makes rich",
+      "b": "The diligent find life and prosperity",
+      "c": "The diligent will inherit the earth",
+      "d": "The diligent will prosper in all their ways"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Peter 5, Peter exhorts elders to 'shepherd the flock of God that is among you, exercising oversight.' What specific negative motivations does he warn them against, regarding their service?",
+    "options": {
+      "a": "Both A and B",
+      "b": "Not under compulsion, but willingly, as God would have you; not for shameful gain, but eagerly",
+      "c": "Not seeking honor from men, but seeking the glory of God",
+      "d": "Not lording it over those entrusted to you, but being examples to the flock"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Romans 1:18, declares that 'the wrath of God is revealed from heaven against all ungodliness and unrighteousness of men, who by their unrighteousness suppress the truth.' What specific attribute of God does he say is 'clearly perceived' through the things that have been made, leaving people without excuse?",
+    "options": {
+      "a": "His justice and holiness, which demand righteousness",
+      "b": "His love and mercy, which are seen in creation",
+      "c": "His wisdom and knowledge, which are beyond human comprehension",
+      "d": "His invisible attributes, namely, his eternal power and divine nature"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that God's power is made perfect in weakness, as stated by Paul in 2 Corinthians.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the deaconess from Cenchreae whom Paul commends to the church in Rome in Romans 16, asking them to receive her in the Lord as is fitting for saints?",
+    "options": {
+      "a": "Priscilla",
+      "b": "Euodia",
+      "c": "Junia",
+      "d": "Phoebe"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the book of James 1:22, James instructs believers to 'be doers of the word, and not hearers only.' What specific consequence does he say befalls those who are hearers only?",
+    "options": {
+      "a": "Being swept away by false teachings",
+      "b": "Failing to bear fruit",
+      "c": "Deceiving yourselves",
+      "d": "Having a dead faith"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 22:6 famously states, 'Train up a child in the way he should go.' What specific promise does it then give regarding the child's later life?",
+    "options": {
+      "a": "He will be a blessing to his parents",
+      "b": "He will lead a life of righteousness and peace",
+      "c": "Even when he is old he will not depart from it",
+      "d": "He will find wisdom and favor with God and man"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Ephesians 4:32, encourages believers to 'be kind to one another, tenderhearted, forgiving one another.' After whose example does he say they should forgive?",
+    "options": {
+      "a": "As the Father in heaven forgives his children",
+      "b": "As Christ forgave his enemies on the cross",
+      "c": "As God in Christ forgave you",
+      "d": "As you want to be forgiven by others"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Proverbs 16:9, a person plans his way, but the Lord directs his steps.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul advises Timothy on how to conduct himself in 1 Timothy 4:12, he tells him to 'let no one despise you for your youth.' In what specific areas does he tell Timothy to set an example for believers?",
+    "options": {
+      "a": "In speech, in conduct, in love, in faith, in purity",
+      "b": "In teaching, in evangelism, in discipleship, in leadership, in godliness",
+      "c": "In knowledge, in perseverance, in patience, in grace, in truth",
+      "d": "In diligence, in wisdom, in humility, in prayer, in service"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of 1 John 4:7-8 declares that 'God is love.' What specific command does John give based on this truth?",
+    "options": {
+      "a": "Therefore, love your enemies and pray for those who persecute you",
+      "b": "Beloved, let us love one another, for love is from God",
+      "c": "Above all, keep loving one another earnestly, since love covers a multitude of sins",
+      "d": "Walk in love, just as Christ also loved us and gave himself up for us"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 15, Paul discusses the resurrection of the dead. He warns against being deceived, stating that 'Bad company ruins good morals.' What is the immediate context for this warning?",
+    "options": {
+      "a": "Those who deny the resurrection of the dead",
+      "b": "Those who promote immorality in the church",
+      "c": "Those who claim there is no eternal judgment",
+      "d": "Those who preach a different gospel"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 15:1 states, 'A soft answer turns away wrath.' What contrasting effect does it attribute to a harsh word?",
+    "options": {
+      "a": "But a harsh word causes strife",
+      "b": "But a harsh word drives friends away",
+      "c": "But a harsh word stirs up anger",
+      "d": "But a harsh word wounds the spirit"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that human beings are created in the image of God, and therefore possess inherent dignity and worth.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In his letter to Philemon, Paul specifically refers to Onesimus, the runaway slave, as being 'useful' to both himself and Philemon. What is the Greek meaning of the name 'Onesimus' that makes this a clever play on words?",
+    "options": {
+      "a": "Profitable",
+      "b": "Free",
+      "c": "Servant",
+      "d": "Beloved"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Philippians 1:9-10, prays for the Philippian believers that their love may abound more and more. For what specific purpose does he desire their love to abound?",
+    "options": {
+      "a": "So that you may be filled with the fruit of righteousness that comes through Jesus Christ",
+      "b": "With knowledge and all discernment, so that you may approve what is excellent",
+      "c": "All of the above",
+      "d": "So that you may be pure and blameless for the day of Christ"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "What specific virtue does Paul emphasize in Ephesians 4:2, alongside humility, gentleness, and patience, as essential for 'bearing with one another in love' and maintaining the unity of the Spirit?",
+    "options": {
+      "a": "Kindness",
+      "b": "Faithfulness",
+      "c": "Longsuffering",
+      "d": "Forgiveness"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, when Paul and Silas were in Thessalonica, some Jews became jealous and formed a mob, accusing Paul and Silas of turning the world upside down. To whose house did they drag Jason and some other brothers, seeking Paul and Silas?",
+    "options": {
+      "a": "Aquila and Priscilla's house",
+      "b": "Lydia's house",
+      "c": "Cornelius's house",
+      "d": "Jason's house"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that believers should strive to be perfect, just as their heavenly Father is perfect.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 3:9-10 instructs, 'Honor the LORD with your wealth and with the firstfruits of all your produce.' What specific blessing does it promise will result from this act of honoring God?",
+    "options": {
+      "a": "Then your barns will be filled with plenty, and your vats will overflow with new wine",
+      "b": "Then the LORD your God will bless you in all your work and in all that you undertake",
+      "c": "Then your stores will be full, and you will not lack any good thing",
+      "d": "Then you will have abundant provision for all your needs, and much left over for good works"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Romans 8:28, Paul states, 'And we know that for those who love God all things work together for good.' What specific group of people does he then identify, for whom this promise is true?",
+    "options": {
+      "a": "For those who have faith and persevere through trials",
+      "b": "For those who have been justified by faith and have peace with God",
+      "c": "For those who are in Christ Jesus, who walk not according to the flesh but according to the Spirit",
+      "d": "For those who are called according to his purpose"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in his letters, frequently mentions co-workers and disciples. Who was the young man, often called Paul's 'true child in the faith,' whom Paul left in Crete to put things in order and appoint elders in every town?",
+    "options": {
+      "a": "Luke",
+      "b": "Mark",
+      "c": "Titus",
+      "d": "Timothy"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Jesus taught about loving enemies in Matthew 5:43-48, he commanded his disciples to 'love your enemies and pray for those who persecute you.' What specific purpose does he say this fulfills?",
+    "options": {
+      "a": "So that you may demonstrate perfect love to the world",
+      "b": "So that your reward may be great in heaven",
+      "c": "So that you may be sons of your Father who is in heaven",
+      "d": "So that you may overcome evil with good"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible instructs Christians to use the law to condemn unbelievers so they recognize their need for salvation.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 14:34 states, 'Righteousness exalts a nation.' What specific contrasting effect does it attribute to sin?",
+    "options": {
+      "a": "But sin causes nations to fall",
+      "b": "But sin is a reproach to any people",
+      "c": "But sin leads to destruction",
+      "d": "But sin brings a people low"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in 1 Corinthians 14, discusses the spiritual gifts, particularly tongues and prophecy. He states that if an unbeliever enters the assembly where everyone is speaking in tongues, he will say that you are mad. What specific effect does he say prophecy has on an unbeliever?",
+    "options": {
+      "a": "He is confused and asks for an interpreter",
+      "b": "He is convicted by all and called to account by all",
+      "c": "He is amazed and glorifies God",
+      "d": "He understands the mysteries of God and believes"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Galatians 5, after listing the works of the flesh and the fruit of the Spirit, Paul makes a concluding statement about those who belong to Christ Jesus. What specific action does he say they have taken regarding the flesh?",
+    "options": {
+      "a": "Are no longer debtors to the flesh, to live according to the flesh",
+      "b": "Are led by the Spirit, and not by the desires of the flesh",
+      "c": "Have crucified the flesh with its passions and desires",
+      "d": "Have put off the old self with its practices"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible explicitly commands Christians to engage in a formal 'quiet time' of prayer and Bible reading every morning.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul writes to the Romans in chapter 12, he encourages them to love one another with brotherly affection. What specific quality does he say should characterize their honor for one another?",
+    "options": {
+      "a": "Honor one another above yourselves",
+      "b": "Show sincere honor, without hypocrisy",
+      "c": "Give honor to whom honor is due",
+      "d": "Outdo one another in showing honor"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs 19:17 states, 'Whoever lends to the poor lends to the LORD.' What specific promise does it then give regarding the LORD's response?",
+    "options": {
+      "a": "And he will multiply his harvest",
+      "b": "And he will repay him for his deed",
+      "c": "And he will show him favor in all his ways",
+      "d": "And he will bless him abundantly"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul, in his letter to the Ephesians (5:3), lists several sins that should 'not even be named among you, as is proper among saints.' Which specific sin is listed alongside sexual immorality and all impurity?",
+    "options": {
+      "a": "Covetousness",
+      "b": "Greed",
+      "c": "Malice",
+      "d": "Idolatry"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Hebrews 13:5, the author instructs believers to 'Keep your life free from love of money, and be content with what you have.' What specific reason does he immediately give for this contentment, referencing God's promise?",
+    "options": {
+      "a": "For he has said, 'I will never leave you nor forsake you.'",
+      "b": "For the LORD is your shepherd; you shall not want.",
+      "c": "For the love of money is a root of all kinds of evil.",
+      "d": "For God will supply every need of yours according to his riches in glory in Christ Jesus."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that believers should strive for complete spiritual perfection in this life, thereby eliminating all sin.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "discipleship_living",
+    "approved": true
+  }
+]

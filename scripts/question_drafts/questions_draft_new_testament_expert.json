@@ -1,0 +1,2452 @@
+[
+  {
+    "question": "In Philippians 2:6-7, Paul describes Christ as 'being in very nature God,' yet 'made himself nothing by taking the very nature of a servant.' Which Greek term is primarily associated with this act of 'emptying' or 'self-renunciation'?",
+    "options": {
+      "a": "Theosis",
+      "b": "Kenosis",
+      "c": "Apotheosis",
+      "d": "Kerygma"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The Apostle Paul, in 2 Corinthians 12:7, refers to a 'thorn in the flesh' given to him. Which of the following is NOT among the most commonly proposed interpretations or specific afflictions suggested by biblical scholars for this 'thorn'?",
+    "options": {
+      "a": "A speech impediment or unimpressive presence",
+      "b": "Recurring attacks from false apostles or Judaizers",
+      "c": "A debilitating eye disease",
+      "d": "A persistent chronic fever or migraine"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, what was the specific issue that prompted the apostles to appoint seven men to serve tables, leading to the selection of Stephen and others?",
+    "options": {
+      "a": "A complaint that the Hellenistic Jewish widows were being overlooked in the daily distribution of food.",
+      "b": "A dispute over the distribution of offerings to Gentile widows versus Hellenistic Jewish widows.",
+      "c": "A disagreement regarding the priority of ministering to the poor versus preaching the word of God.",
+      "d": "A need for more administrators to manage the increasing number of converts and their communal living."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to Hebrews 7, Melchizedek is described as being 'without father or mother, without genealogy, without beginning of days or end of life.' To what specific Old Testament figure or tradition is this description implicitly contrasted to underscore Melchizedek's superior priesthood?",
+    "options": {
+      "a": "Aaron, whose priesthood was established through a specific lineage and ritual.",
+      "b": "Abraham, who was the patriarch of a lineage but not a priest.",
+      "c": "The Levitical priests, whose legitimacy depended on their genealogical record.",
+      "d": "Moses, who was a lawgiver but not a priest by birth."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In Romans 16, Paul commends Phoebe as a 'deacon' (diakonos) of the church in Cenchrea and refers to her as a 'benefactor' (prostatis) of many, including himself, indicating a position of leadership and support.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 2:13, the church in Pergamum is noted for dwelling 'where Satan has his throne.' Which of the following historical aspects of Pergamum is most commonly associated with this description?",
+    "options": {
+      "a": "Its renowned library, which contained texts considered heretical by early Christians.",
+      "b": "Its extensive practice of magic and sorcery, as documented by ancient historians.",
+      "c": "Its status as the center of emperor worship in the Roman province of Asia.",
+      "d": "Its prominent temple dedicated to Zeus, known as the Great Altar of Pergamum."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Paul's instruction in 1 Corinthians 7:10-11 regarding divorce for believers is often interpreted as an absolute prohibition. However, what specific exception or concession, known as the 'Pauline Privilege,' does he introduce in subsequent verses (7:12-16) for mixed-faith marriages?",
+    "options": {
+      "a": "If the unbelieving spouse converts to Christianity within a certain period.",
+      "b": "If the unbelieving spouse initiates the divorce and desires to separate.",
+      "c": "If the believing spouse finds a more suitable partner who is also a believer.",
+      "d": "If both spouses agree to separate due to irreconcilable differences."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following New Testament books does NOT explicitly mention or allude to the concept of 'the Antichrist' or 'antichrists' in its warnings about deception and apostasy?",
+    "options": {
+      "a": "1 John",
+      "b": "Revelation",
+      "c": "2 John",
+      "d": "2 Thessalonians"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 27:3-5, Judas Iscariot is said to have returned the thirty pieces of silver and then hanged himself. According to Acts 1:18, what additional gruesome detail is given regarding his fate and the purchase of the 'Field of Blood'?",
+    "options": {
+      "a": "He purchased a field and, falling headlong, he burst open in the middle and all his intestines gushed out.",
+      "b": "He was discovered by the chief priests and elders, who then bought the field with the blood money.",
+      "c": "He was struck down by an angel in the field and his body became a public spectacle.",
+      "d": "He was found dead in a field, having been torn apart by wild animals, and the field was then consecrated."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The prologue of the Gospel of John (1:1-18) presents the 'Logos' (Word) as pre-existent and divine. Which of the following theological concepts, central to Nicene Christianity, is most directly supported by the opening verses, especially John 1:1 ('the Word was God')?",
+    "options": {
+      "a": "The hypostatic union of Christ's two natures.",
+      "b": "The kenotic emptying of Christ during his incarnation.",
+      "c": "The consubstantiality of the Son with the Father.",
+      "d": "The eternal generation of the Son from the Father."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which specific Old Testament prophet is quoted by Peter in Acts 2:17-21 to explain the phenomenon of speaking in tongues and the pouring out of the Holy Spirit on the Day of Pentecost?",
+    "options": {
+      "a": "Joel",
+      "b": "Jeremiah",
+      "c": "Zechariah",
+      "d": "Isaiah"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In his letter to Philemon, Paul appeals for the runaway slave Onesimus. What specific relationship does Paul state Onesimus now has to him, as a result of his conversion?",
+    "options": {
+      "a": "He has become 'my son,' whom I have begotten in my imprisonment.",
+      "b": "He is 'my fellow worker' in the gospel, a useful minister.",
+      "c": "He is now 'my brother,' no longer a slave but more than a slave.",
+      "d": "He is 'my companion in chains,' sharing in my suffering for Christ."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Revelation 21:12-14, the New Jerusalem has twelve gates inscribed with the names of the twelve tribes of Israel, and its twelve foundations are inscribed with the names of the twelve apostles of the Lamb.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which two of Paul's companions are specifically mentioned in Colossians 4:10-11 as being 'of the circumcision' (i.e., Jewish Christians) and working with him for the kingdom of God?",
+    "options": {
+      "a": "Epaphras and Tychicus",
+      "b": "Demas and Luke",
+      "c": "Aristarchus and Mark",
+      "d": "Silas and Timothy"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 19:28, Jesus tells his disciples, 'Truly I tell you, at the renewal of all things, when the Son of Man sits on his glorious throne, you who have followed me will also sit on twelve thrones, judging the twelve tribes of Israel.' What is the specific Greek term used here for 'renewal of all things'?",
+    "options": {
+      "a": "Soteria",
+      "b": "Palingenesia",
+      "c": "Anakainosis",
+      "d": "Apokatastasis"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What specific characteristic is NOT listed among the qualifications for elders (overseers) in 1 Timothy 3:1-7 or Titus 1:5-9?",
+    "options": {
+      "a": "Hospitable",
+      "b": "Not a recent convert",
+      "c": "Skilled in public speaking",
+      "d": "Able to teach"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the Sermon on the Mount, Jesus states in Matthew 5:17, 'Do not think that I have come to abolish the Law or the Prophets; I have not come to abolish them but to fulfill them.' Which of the following best captures the nuanced theological meaning of 'fulfill' in this context?",
+    "options": {
+      "a": "To replace the Old Covenant Law with a new, distinct set of commands.",
+      "b": "To complete their ethical demands and bring them to their intended purpose.",
+      "c": "To demonstrate adherence to every jot and tittle of the Mosaic Law.",
+      "d": "To abolish the ceremonial law but uphold the moral and civil laws."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'spirit of antichrist' mentioned in 1 John 4:3 specifically refers to any teaching that denies that Jesus Christ has come in the flesh.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What specific literary form or genre is widely considered to be the most appropriate classification for the book of Revelation, informing its interpretation?",
+    "options": {
+      "a": "Apocalyptic literature with elements of prophecy and epistle.",
+      "b": "Didactic theology presented in allegorical form.",
+      "c": "Historical narrative with predictive elements.",
+      "d": "Poetic wisdom literature with eschatological themes."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In John 6, following Jesus's discourse on himself as the 'bread of life,' many of his disciples turn away. What specific question does Jesus then pose to the Twelve, prompting Peter's famous confession?",
+    "options": {
+      "a": "'Are you also going to deny my words?'",
+      "b": "'Do you want to go away as well?'",
+      "c": "'Why do you not understand my teaching?'",
+      "d": "'Will you also leave me for another master?'"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The author of Hebrews argues for the superiority of Christ's priesthood over the Levitical priesthood based significantly on the order of Melchizedek. What specific characteristic of Melchizedek is highlighted as making his priesthood unique and a type of Christ's?",
+    "options": {
+      "a": "His priesthood was not based on human descent or law.",
+      "b": "He received tithes from Abraham, who was greater than Levi.",
+      "c": "He was both king and priest, unlike the Levitical priests.",
+      "d": "He blessed Abraham, signifying his superior authority."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In 1 Timothy 2:12, Paul states, 'I do not permit a woman to teach or to assume authority over a man,' and then immediately grounds this command in the order of creation (Adam formed first, then Eve) and Eve's deception.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 18:24-28, a prominent orator and biblical scholar named Apollos is introduced. Who were the two individuals who 'took him aside and explained to him the way of God more accurately' when they realized his knowledge of Jesus was incomplete?",
+    "options": {
+      "a": "Barnabas and John Mark",
+      "b": "Aquila and Priscilla",
+      "c": "Paul and Silas",
+      "d": "Timothy and Titus"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The 'mystery of lawlessness' is mentioned in 2 Thessalonians 2:7, foreshadowing the 'man of lawlessness.' What specific characteristic is given to this 'mystery' in Paul's description?",
+    "options": {
+      "a": "It is revealed to all nations.",
+      "b": "It will be fully unleashed after the resurrection.",
+      "c": "It is already at work.",
+      "d": "It has been hidden from ages past."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the specific, often debated, interpretation of the 'binding and loosing' authority granted to Peter in Matthew 16:19 and later to all the disciples in Matthew 18:18?",
+    "options": {
+      "a": "The ability to perform miracles and exorcisms as signs of the Kingdom.",
+      "b": "The power to forgive or retain sins through ecclesiastical judgment.",
+      "c": "The authority to declare what is permissible or forbidden based on God's word.",
+      "d": "The right to establish church doctrine and administrative policies."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In his farewell discourse in Acts 20, Paul warns the Ephesian elders about 'savage wolves' who would come in among them. To whom does he specifically liken these wolves?",
+    "options": {
+      "a": "Pagan philosophers who will lead believers astray.",
+      "b": "Roman authorities who will persecute the church.",
+      "c": "False teachers who will arise from their own ranks.",
+      "d": "Jewish zealots who reject the gospel."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle James, in his epistle, famously argues that 'faith without works is dead,' specifically citing Abraham's offering of Isaac on the altar as an example of faith perfected by works.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Luke 16:1-13, Jesus tells the parable of the shrewd manager. What specific commendation does Jesus give the manager, despite his dishonest actions, that often causes interpretive difficulty?",
+    "options": {
+      "a": "He is praised for his generosity in forgiving debts owed to his master.",
+      "b": "He is admired for his cleverness in avoiding punishment for his mismanagement.",
+      "c": "He is commended for his shrewdness in handling worldly wealth for his future security.",
+      "d": "He is recognized for his foresight in preparing for a time of future need."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The phrase 'already and not yet' is commonly used in New Testament theology to describe the tension between the inaugurated and future aspects of God's Kingdom. Which of the following concepts is most directly encapsulated by the 'not yet' aspect of this tension?",
+    "options": {
+      "a": "The final consummation of God's redemptive plan at Christ's second coming.",
+      "b": "The individual transformation and sanctification of believers in this life.",
+      "c": "The present spiritual blessings enjoyed by believers through the Holy Spirit.",
+      "d": "The historical fulfillment of Old Testament prophecies in Christ's first advent."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Paul, in Galatians 2:11-14, recounts an incident where he openly confronted Peter (Cephas) in Antioch. What was the specific issue over which Paul publicly rebuked Peter?",
+    "options": {
+      "a": "Peter's hypocrisy in withdrawing from eating with Gentiles when certain men came from James.",
+      "b": "Peter's denial of Christ before a crowd of unbelievers.",
+      "c": "Peter's insistence that Gentile converts must be circumcised to be saved.",
+      "d": "Peter's failure to uphold the authority of the Jerusalem Council's decrees."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 13, two beasts are described. The first beast rises from the sea, and the second beast rises from the earth. What specific action does the second beast perform to compel worship of the first beast?",
+    "options": {
+      "a": "It wields the authority of the first beast, compelling nations to obey.",
+      "b": "It speaks great boasts and blasphemies, deceiving the whole world.",
+      "c": "It forces all people, great and small, to receive a mark on their right hand or on their forehead.",
+      "d": "It performs great signs, even making fire come down from heaven to earth."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which specific spiritual gift is emphasized as superior to speaking in tongues if love is absent, according to Paul in 1 Corinthians 13?",
+    "options": {
+      "a": "Prophecy",
+      "b": "Faith",
+      "c": "Giving to the poor",
+      "d": "Knowledge"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The book of Jude warns against certain false teachers who had crept in unnoticed. Which of the following Old Testament figures or events is NOT explicitly cited by Jude as a warning against rebellion or apostasy?",
+    "options": {
+      "a": "Korach's rebellion against Moses and Aaron's authority.",
+      "b": "The Israelites who perished in the wilderness after being saved from Egypt.",
+      "c": "The angels who did not keep their own position but left their proper dwelling.",
+      "d": "Cain, for his murder of Abel motivated by jealousy and evil."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Romans 7, Paul describes an internal struggle: 'For I do not do the good I want to do, but the evil I do not want to do—this I keep on doing.' Which of the following theological concepts does this passage most directly address, particularly in its implications for the Christian life?",
+    "options": {
+      "a": "The ongoing struggle against indwelling sin (concupiscence) even after conversion.",
+      "b": "The inability of humanity to perfectly fulfill the Law's requirements.",
+      "c": "The tension between justification by faith and sanctification by works.",
+      "d": "The state of a person under the Law before receiving the Holy Spirit."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "To which specific Roman official did Paul make his final appeal, stating, 'I appeal to Caesar,' which ultimately led to his journey to Rome for trial?",
+    "options": {
+      "a": "Felix",
+      "b": "Festus",
+      "c": "Agrippa",
+      "d": "Gallio"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In John 10:16, Jesus states, 'I have other sheep that are not of this sheep pen. I must bring them also,' which is often interpreted as a prophetic reference to the inclusion of Gentiles into the Christian fold.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT among the specific 'fruits of the Spirit' listed in Galatians 5:22-23?",
+    "options": {
+      "a": "Patience",
+      "b": "Joy",
+      "c": "Self-control",
+      "d": "Humility"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 1:1, the book is introduced as 'the revelation of Jesus Christ, which God gave him to show his servants what must soon take place.' What is the specific Greek term for 'revelation' used here, from which the book derives its name?",
+    "options": {
+      "a": "Apokalypsis",
+      "b": "Prognosis",
+      "c": "Epiphaneia",
+      "d": "Phanerosis"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to Paul in 1 Corinthians 15:3-4, what are the two foundational elements of the gospel message that he 'received' and 'passed on'?",
+    "options": {
+      "a": "That Christ established a new covenant and that he appointed apostles to spread his message.",
+      "b": "That Christ was born of a virgin and that he will return to judge the living and the dead.",
+      "c": "That Christ taught ethical principles and that he performed miracles to authenticate his teaching.",
+      "d": "That Christ died for our sins according to the Scriptures and that he was raised on the third day according to the Scriptures."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the specific, and often debated, identity of 'the one who holds it back' (or 'restrainer') in 2 Thessalonians 2:6-7, preventing the full revelation of the 'man of lawlessness'?",
+    "options": {
+      "a": "The Church, through its evangelistic mission",
+      "b": "The Holy Spirit",
+      "c": "The Roman Empire or governmental authority",
+      "d": "The Archangel Michael"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In Matthew 10:5-6, when Jesus sends out the twelve disciples, he specifically instructs them, 'Do not go among the Gentiles or enter any town of the Samaritans. Go rather to the lost sheep of Israel.'",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the cities to which John addresses his letters (1, 2, 3 John)?",
+    "options": {
+      "a": "Smyrna",
+      "b": "Ephesus",
+      "c": "Pergamum",
+      "d": "Thyatira"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The term 'propitiation' (hilasterion or hilasmos) is used in Romans 3:25 and 1 John 2:2 to describe Christ's sacrifice. What is the specific nuance of this term in relation to God's wrath and human sin?",
+    "options": {
+      "a": "It describes the reconciliation of humanity to God through Christ's death.",
+      "b": "It denotes the act of making a sinner righteous before God through imputation.",
+      "c": "It refers to the satisfaction of God's justice through human repentance.",
+      "d": "It signifies the turning away or appeasement of divine wrath through an atoning sacrifice."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, Paul, after his conversion, travels to Jerusalem. Who was the specific individual who initially vouched for Paul to the apostles, who were naturally suspicious of him?",
+    "options": {
+      "a": "Peter",
+      "b": "Silas",
+      "c": "Barnabas",
+      "d": "Ananias"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Revelation 20, the 'first resurrection' refers to the bodily resurrection of all believers at Christ's second coming, prior to the thousand-year reign.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The specific historical context of the Colossian heresy, which Paul addresses in his epistle, involved a syncretistic blend of elements. Which of the following is NOT typically considered a significant component of this heresy?",
+    "options": {
+      "a": "Worship of angels.",
+      "b": "Ascetic practices and self-abasement.",
+      "c": "Observance of Jewish festivals and food laws.",
+      "d": "Legalism concerning baptism and communion."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In John 14:16, Jesus promises to send 'another Helper' (parakletos). Which of the following best describes the multifaceted meaning of this Greek term in its New Testament context?",
+    "options": {
+      "a": "Healer, Deliverer, Revealer, Sanctifier.",
+      "b": "Advocate, Counselor, Comforter, Intercessor.",
+      "c": "Teacher, Prophet, Spirit of Truth, Empowerer.",
+      "d": "Guide, Witness, Judge, Consoler."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 5:48, Jesus exhorts his disciples, 'Be perfect, therefore, as your heavenly Father is perfect.' What specific aspect of God's character is Jesus primarily calling his followers to emulate in the immediate context of this command?",
+    "options": {
+      "a": "God's ultimate power and sovereignty over all creation.",
+      "b": "God's impartial love and benevolence towards all, even enemies.",
+      "c": "God's comprehensive knowledge and wisdom in all matters.",
+      "d": "God's moral purity and freedom from all sin."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of Paul's letters is known for its strong emphasis on Christian liberty and freedom from the Law, in contrast to the error of the Judaizers who insisted on circumcision and adherence to Mosaic law for salvation?",
+    "options": {
+      "a": "Colossians",
+      "b": "Galatians",
+      "c": "Romans",
+      "d": "Philippians"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to 2 Peter 3:8, 'With the Lord a day is like a thousand years, and a thousand years are like a day,' as an explanation for the perceived delay of Christ's second coming.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 17, Paul preaches in Athens on Mars Hill. What specific object or inscription does he use as a bridge to introduce the unknown God to the Epicurean and Stoic philosophers?",
+    "options": {
+      "a": "The writings of a local Greek poet about divine presence",
+      "b": "A statue of Hermes with an obscure dedication",
+      "c": "An altar inscribed 'TO AN UNKNOWN GOD'",
+      "d": "The temple of Athena Parthenos, symbolizing human wisdom"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is the specific Old Testament event or concept that the author of Hebrews refers to when he describes Jesus as having entered 'behind the curtain' (or 'into the inner shrine')?",
+    "options": {
+      "a": "The Ark of the Covenant, representing God's presence among His people.",
+      "b": "The High Priest entering the Most Holy Place on the Day of Atonement.",
+      "c": "Moses entering the tent of meeting to speak with God.",
+      "d": "The burning bush where God spoke to Moses."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 11:2-16, Paul addresses the issue of head coverings in public worship. What specific reason does he give, beyond creation order, to emphasize the significance of a woman having 'authority on her head'?",
+    "options": {
+      "a": "To distinguish believers from pagan worshippers.",
+      "b": "Because of the angels.",
+      "c": "To avoid causing offense to her husband.",
+      "d": "As a sign of her spiritual maturity."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the specific Greek term that translates to 'witness' or 'testimony' and is the root of the English word 'martyr,' often used in Revelation to describe those who die for their faith?",
+    "options": {
+      "a": "Didachē",
+      "b": "Martyria",
+      "c": "Kerygma",
+      "d": "Euangelion"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In 1 Peter 3:19-20, Peter states that Christ, 'after being made alive... went and made proclamation to the imprisoned spirits,' referring to those who were disobedient in the days of Noah.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to the Synoptic Gospels, during Jesus's transfiguration on the mountain, which two specific Old Testament figures appeared and conversed with Him?",
+    "options": {
+      "a": "David and Isaiah",
+      "b": "Moses and Elijah",
+      "c": "Abraham and Isaac",
+      "d": "Enoch and Noah"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Romans 9:3, Paul expresses a profound desire, stating, 'For I could wish that I myself were accursed and cut off from Christ for the sake of my people, my kindred according to the flesh.' To whom is he referring as 'my people'?",
+    "options": {
+      "a": "The Gentiles, whom he was called to evangelize.",
+      "b": "The Jewish people, his fellow Israelites.",
+      "c": "The Roman Christians, to whom he was writing.",
+      "d": "The Corinthian church, who were struggling with division."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the explicit purposes for writing the Gospel of John, as stated by the author in John 20:31?",
+    "options": {
+      "a": "That you may believe that Jesus is the Christ, the Son of God.",
+      "b": "That you may know that you have eternal life.",
+      "c": "That you may understand the signs he performed.",
+      "d": "That you may have eternal life in his name."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The 'man of lawlessness' in 2 Thessalonians 2:3 is also described by another specific title. What is this title?",
+    "options": {
+      "a": "The one who opposes God.",
+      "b": "The adversary of Christ.",
+      "c": "The deceitful one.",
+      "d": "The son of destruction (or perdition)."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul explicitly states in 1 Corinthians 1:17 that Christ sent him not to baptize, but to preach the gospel, lest the cross of Christ be emptied of its power by eloquence.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 5, Ananias and Sapphira are struck dead after lying about the proceeds from selling a property. What specific sin is Peter's primary accusation against them?",
+    "options": {
+      "a": "They lied to the Holy Spirit.",
+      "b": "They coveted their own possessions over the needs of the church.",
+      "c": "They deceived the community of believers.",
+      "d": "They withheld a portion of their offering from God."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following Old Testament figures is specifically highlighted in Hebrews 11 as having been 'taken up' so that he should not see death, before the flood?",
+    "options": {
+      "a": "Elijah",
+      "b": "Enoch",
+      "c": "Moses",
+      "d": "Melchizedek"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Paul's letter to Titus, he instructs Titus to appoint elders in every town in Crete. What specific criterion for elders is given regarding their children?",
+    "options": {
+      "a": "He must have children who are already serving in ministry positions.",
+      "b": "His children must be grown and independent, not requiring his constant care.",
+      "c": "His children must be believers and not open to the charge of debauchery or insubordination.",
+      "d": "He must have at least two children to demonstrate his ability to manage a household."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which specific Old Testament book is most frequently quoted or alluded to in the book of Revelation?",
+    "options": {
+      "a": "Daniel",
+      "b": "Ezekiel",
+      "c": "Zechariah",
+      "d": "Isaiah"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'mystery' Paul speaks of in Ephesians 3:6 is that through the gospel the Gentiles are fellow heirs, members of the same body, and partakers of the promise in Christ Jesus.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Romans 11:25-26, Paul speaks of a 'mystery' concerning Israel. What is this mystery?",
+    "options": {
+      "a": "That Israel's rejection of Christ was part of God's plan to bring salvation to the Gentiles.",
+      "b": "That a partial hardening has come upon Israel until the full number of the Gentiles has come in, and then all Israel will be saved.",
+      "c": "That some individual Jews will be saved alongside Gentiles throughout history, but not the nation as a whole.",
+      "d": "That God will ultimately replace Israel with the Gentile church as His chosen people."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to Acts 19, what specific magical or occult practices were openly renounced and destroyed by new converts in Ephesus, demonstrating their repentance?",
+    "options": {
+      "a": "They publicly burned their expensive magic books and scrolls.",
+      "b": "They broke their idols and shrines dedicated to Artemis.",
+      "c": "They confessed their involvement in idolatrous temple prostitution.",
+      "d": "They renounced their membership in secret pagan mystery cults."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The 'synoptic problem' in New Testament studies primarily refers to the question of the literary relationship among which three Gospels?",
+    "options": {
+      "a": "Mark, Luke, and John",
+      "b": "Matthew, Mark, and John",
+      "c": "Matthew, Mark, and Luke",
+      "d": "Matthew, Luke, and John"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of James, what specific part of the human body is described as 'a small part of the body, but it makes great boasts,' and is likened to a fire that sets the whole course of one's life ablaze?",
+    "options": {
+      "a": "The tongue",
+      "b": "The hand",
+      "c": "The heart",
+      "d": "The eye"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: Paul explicitly states in 2 Timothy 3:16 that 'All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness,' referring specifically to the Old Testament scriptures known at the time.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following phrases is NOT found in the 'Christ Hymn' of Philippians 2:5-11, describing Jesus's humiliation and exaltation?",
+    "options": {
+      "a": "He became poor, so that by his poverty you might become rich.",
+      "b": "He was obedient to death—even death on a cross.",
+      "c": "He did not consider equality with God something to be grasped.",
+      "d": "God highly exalted him and gave him the name that is above every name."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 14:34-35, Paul instructs women to 'remain silent in the churches.' What specific contextual nuance is often debated by scholars to understand the scope and application of this command?",
+    "options": {
+      "a": "The prohibition against women teaching men in the assembly.",
+      "b": "The general principle of modesty and submission for women in public.",
+      "c": "The specific cultural context of Corinth and local synagogue practices.",
+      "d": "The distinction between spiritual gifts and church authority."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is the specific charge laid against Stephen before the Sanhedrin, leading to his martyrdom?",
+    "options": {
+      "a": "Denying the resurrection of the dead.",
+      "b": "Blasphemy against Moses and against God.",
+      "c": "Teaching rebellion against Roman authority.",
+      "d": "Performing magic by the power of Beelzebul."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Romans 6:4, Paul uses the analogy of baptism to describe identification with Christ's death and resurrection. What specific action during baptism does he liken to being buried with Christ?",
+    "options": {
+      "a": "Being marked with the sign of the cross.",
+      "b": "Being cleansed by the water.",
+      "c": "Being raised from the water.",
+      "d": "Being immersed in water."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to Mark 16:17-18 (in some ancient manuscripts), Jesus promises that believers will 'pick up snakes with their hands; and when they drink deadly poison, it will not hurt them at all; they will place their hands on sick people, and they will get well.'",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The 'Great White Throne Judgment' is described in Revelation 20:11-15. Who are primarily judged at this event?",
+    "options": {
+      "a": "The dead, both small and great, whose names are not found in the Book of Life.",
+      "b": "Satan and his demons, for their rebellion against God.",
+      "c": "All believers, to determine rewards for their service.",
+      "d": "The nations, based on how they treated 'the least of these' (Matthew 25)."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In his letter to the Colossians, Paul refers to Epaphras as a 'faithful minister of Christ,' and also gives him a specific unique description. What is it?",
+    "options": {
+      "a": "He is 'always struggling on your behalf in his prayers.'",
+      "b": "He is 'a true son in the faith.'",
+      "c": "He is 'my fellow prisoner for Christ Jesus.'",
+      "d": "He is 'my beloved fellow worker.'"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the 'four living creatures' (tetramorphs) described around the throne in Revelation 4:7, often associated with the four Gospels or aspects of Christ?",
+    "options": {
+      "a": "An eagle",
+      "b": "A lion",
+      "c": "A serpent",
+      "d": "An ox"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The parable of the sheep and the goats in Matthew 25:31-46 describes the judgment of the 'nations' (ethne). What is the specific criterion by which these nations are judged?",
+    "options": {
+      "a": "Their treatment of 'the least of these' (Jesus's brothers and sisters).",
+      "b": "Their belief in Jesus as the Son of God.",
+      "c": "Their moral conduct and righteousness according to natural law.",
+      "d": "Their adherence to the Mosaic Law and the Prophets."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In John 3, Jesus tells Nicodemus that 'unless one is born again, he cannot see the kingdom of God,' and clarifies that this rebirth is 'of water and the Spirit.'",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 15, the Jerusalem Council discusses whether Gentile converts must be circumcised. What specific, minimal set of prohibitions did the council decide to impose on Gentile believers to facilitate fellowship with Jewish believers?",
+    "options": {
+      "a": "To be baptized in the name of Jesus and refrain from all pagan practices.",
+      "b": "To abstain from food polluted by idols, from sexual immorality, from the meat of strangled animals, and from blood.",
+      "c": "To participate in regular synagogue worship and offer financial support to the temple.",
+      "d": "To keep the Sabbath, observe dietary laws, and avoid contact with Gentiles."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which specific Pauline epistle contains the famous passage about the 'armor of God' (Ephesians 6:10-18)?",
+    "options": {
+      "a": "Philippians",
+      "b": "2 Corinthians",
+      "c": "Colossians",
+      "d": "Ephesians"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The book of Philemon is a powerful plea for a runaway slave. What is the specific name of Philemon's city, which is also addressed in another Pauline epistle?",
+    "options": {
+      "a": "Philippi",
+      "b": "Ephesus",
+      "c": "Colossae",
+      "d": "Laodicea"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In 1 Timothy 6:10, Paul states, 'For the love of money is a root of all kinds of evil,' rather than 'money is the root of all evil.'",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to Paul in 2 Corinthians 5:17, what specific transformation occurs in those who are 'in Christ'?",
+    "options": {
+      "a": "They have received the Spirit of adoption, by whom they cry, 'Abba, Father!'",
+      "b": "They are a new creation; the old has gone, the new has come!",
+      "c": "They are justified by faith and have peace with God.",
+      "d": "They are sanctified by the Spirit and walk in newness of life."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The term 'parousia' is frequently used in New Testament eschatology. What does it specifically refer to?",
+    "options": {
+      "a": "The coming of the Holy Spirit at Pentecost.",
+      "b": "The establishment of the millennial kingdom.",
+      "c": "The second coming of Christ.",
+      "d": "The bodily resurrection of believers."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, who was the specific Roman centurion in Caesarea whose household became the first Gentile converts to receive the Holy Spirit after Peter's preaching?",
+    "options": {
+      "a": "Sergius Paulus",
+      "b": "Julius",
+      "c": "Festus",
+      "d": "Cornelius"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the three specific signs given by the angel to the shepherds in Luke 2:12 to identify the newborn Savior?",
+    "options": {
+      "a": "You will find him surrounded by heavenly hosts.",
+      "b": "You will find a baby wrapped in cloths.",
+      "c": "You will find him in the town of David.",
+      "d": "You will find him lying in a manger."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In Revelation 2:20, Jesus rebukes the church in Thyatira for tolerating the woman Jezebel, who calls herself a prophetess and teaches God’s servants to practice sexual immorality and eat food sacrificed to idols.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'imputed righteousness' is central to Pauline theology, particularly in Romans. What does this term specifically mean in the context of justification?",
+    "options": {
+      "a": "Believers are made righteous through the Holy Spirit's transforming power.",
+      "b": "God reckons Christ's righteousness to the account of believers.",
+      "c": "Christ's righteousness is infused into believers, making them inherently righteous.",
+      "d": "God declares believers righteous based on their faith and good works."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In his letter to the Galatians, Paul states that the Law was 'our guardian until Christ came' (Galatians 3:24). What is the specific Greek term for 'guardian' (paidagōgos) used here, referring to a household servant who supervised children?",
+    "options": {
+      "a": "Diakonos",
+      "b": "Didaskalos",
+      "c": "Paidagōgos",
+      "d": "Episkopos"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which specific Old Testament passage does Peter quote in 1 Peter 2:9, identifying believers as 'a chosen race, a royal priesthood, a holy nation, God’s special possession'?",
+    "options": {
+      "a": "Malachi 3:17-18",
+      "b": "Isaiah 43:20-21",
+      "c": "Deuteronomy 7:6-8",
+      "d": "Exodus 19:5-6"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to Acts 21, what specific ritual purification did Paul undertake in Jerusalem, following the advice of James and the elders, to demonstrate that he still walked in observance of the Law?",
+    "options": {
+      "a": "He joined four men who had made a vow and paid for their purification rites and offerings.",
+      "b": "He underwent a period of fasting and prayer in the Temple precincts.",
+      "c": "He offered sacrifices at the Temple, as was customary for Jewish pilgrims.",
+      "d": "He publicly declared his adherence to the Mosaic Law before the Sanhedrin."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The author of Hebrews specifically states that it is 'impossible for those who have once been enlightened, who have tasted the heavenly gift, who have shared in the Holy Spirit, who have tasted the goodness of the word of God and the powers of the coming age, if they fall away, to be brought back to repentance.'",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In John 8:58, Jesus declares, 'Very truly I tell you, before Abraham was born, I am!' This statement is understood by theologians as a direct allusion to what specific Old Testament divine self-disclosure?",
+    "options": {
+      "a": "God's revelation of His name 'I AM WHO I AM' to Moses at the burning bush (Exodus 3:14).",
+      "b": "God's covenant promise to Abraham in Genesis 12.",
+      "c": "The prophetic declaration of Emmanuel ('God with us') in Isaiah 7:14.",
+      "d": "The divine name Yahweh, revealed in the Old Testament as the covenant God."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is the specific city where Paul had his vision of a man from Macedonia pleading, 'Come over to Macedonia and help us,' prompting his first entry into Europe?",
+    "options": {
+      "a": "Antioch",
+      "b": "Corinth",
+      "c": "Troas",
+      "d": "Ephesus"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The 'pastoral epistles' are a traditional grouping of three Pauline letters. Which of the following is NOT included in this grouping?",
+    "options": {
+      "a": "Philemon",
+      "b": "2 Timothy",
+      "c": "1 Timothy",
+      "d": "Titus"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 17, the 'great prostitute' is described as sitting on many waters. What do these 'waters' specifically represent?",
+    "options": {
+      "a": "The spiritual abyss where demons reside.",
+      "b": "The vast oceans surrounding the earth.",
+      "c": "Peoples, multitudes, nations and languages.",
+      "d": "The nations conquered by the Roman Empire."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In John 1:45, Philip tells Nathanael, 'We have found the one Moses wrote about in the Law, and about whom the prophets also wrote—Jesus of Nazareth, the son of Joseph,' indicating an early belief that Jesus was literally Joseph's biological son.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the specific Greek philosophical school or worldview that emphasized the spiritual nature of reality as good and the material world as evil, often leading to asceticism or libertinism, which Paul addresses in Colossians?",
+    "options": {
+      "a": "Stoicism",
+      "b": "Platonism",
+      "c": "Gnosticism (proto-Gnosticism)",
+      "d": "Epicureanism"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 12:40, Jesus states, 'For just as Jonah was three days and three nights in the belly of a huge fish, so the Son of Man will be three days and three nights in the heart of the earth.' Which of the following is the most common theological interpretation of 'the heart of the earth'?",
+    "options": {
+      "a": "The physical tomb in which His body lay.",
+      "b": "The spiritual battleground where He conquered death.",
+      "c": "The realm of the dead (Hades or Sheol).",
+      "d": "The lowest depths of the earth, symbolizing His complete descent."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following books primarily addresses the issue of the delay of the Parousia (Christ's second coming) and encourages believers to persevere amidst persecution, reminding them that God's timing is different from human timing?",
+    "options": {
+      "a": "2 Peter",
+      "b": "Hebrews",
+      "c": "James",
+      "d": "1 Thessalonians"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to Acts 13:9, Saul is first referred to as 'Paul' during his encounter with a specific proconsul on Cyprus. What is the name of this proconsul?",
+    "options": {
+      "a": "Felix",
+      "b": "Gallio",
+      "c": "Sergius Paulus",
+      "d": "Festus"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle John explicitly refers to himself by name in the Gospel of John, specifically as 'the disciple whom Jesus loved' or 'the beloved disciple.'",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 8, Paul addresses the eating of food sacrificed to idols. What is his primary ethical consideration, even if the food itself is deemed permissible by a believer's conscience?",
+    "options": {
+      "a": "The potential for participation in idolatry, even unintentionally.",
+      "b": "The impact on a weaker brother or sister's conscience, causing them to stumble.",
+      "c": "The requirement to avoid giving offense to unbelievers.",
+      "d": "The need to uphold the authority of the Jerusalem Council's decree."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the specific groups or categories of people that Jesus pronounces 'woes' upon in Matthew 23, condemning their hypocrisy?",
+    "options": {
+      "a": "Sadducees",
+      "b": "Teachers of the Law",
+      "c": "Hypocrites",
+      "d": "Scribes and Pharisees"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The 'Lord's Supper' (or Eucharist) is described in 1 Corinthians 11:23-26. From whom does Paul state he received the tradition he is passing on to the Corinthians?",
+    "options": {
+      "a": "From the teachings of the early Jerusalem church.",
+      "b": "From Peter and the other apostles.",
+      "c": "From the Lord himself.",
+      "d": "From the traditions of the Jewish Passover meal."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 5:5, Christ is described as 'the Lion of the tribe of Judah, the Root of David.' Which specific figure from the Old Testament is alluded to by the title 'Lion of the tribe of Judah'?",
+    "options": {
+      "a": "Samson, known for his strength and lion encounter.",
+      "b": "Jacob, in his blessing of Judah (Genesis 49:9).",
+      "c": "Judah, the son of Jacob, progenitor of the royal tribe.",
+      "d": "David, as the king from Judah's lineage."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In 2 Timothy 4:10, Paul laments that Demas has deserted him 'because he loved this world,' and gone to Thessalonica.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT a specific element of the 'Great Commission' given by Jesus in Matthew 28:19-20?",
+    "options": {
+      "a": "Baptize them in the name of the Father and of the Son and of the Holy Spirit.",
+      "b": "Teach them to obey everything I have commanded you.",
+      "c": "Preach the gospel to all creation.",
+      "d": "Go and make disciples of all nations."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Hebrews 10:26-27, the author issues a severe warning against 'deliberately sinning after we have received the knowledge of the truth.' What specific consequence is stated for such a sin?",
+    "options": {
+      "a": "They will be cast out from the community of believers and excommunicated.",
+      "b": "They will be disciplined by the Lord, though not ultimately condemned.",
+      "c": "They risk losing their heavenly reward, though their salvation is secure.",
+      "d": "No sacrifice for sins is left, but only a fearful expectation of judgment and of raging fire."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The book of Acts records Paul's three major missionary journeys. Which of these journeys specifically includes a significant portion of his travels through Asia Minor (modern-day Turkey), including cities like Iconium, Lystra, and Derbe?",
+    "options": {
+      "a": "First missionary journey",
+      "b": "His journey to Rome",
+      "c": "Third missionary journey",
+      "d": "Second missionary journey"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 John 5:7-8 (in some manuscripts), the 'Johannine Comma' famously adds a Trinitarian clause. However, which three entities are consistently identified in all major Greek manuscripts as bearing witness on earth?",
+    "options": {
+      "a": "The Father, the Son, and the Holy Spirit.",
+      "b": "The angels, the prophets, and the apostles.",
+      "c": "The Spirit, the water, and the blood.",
+      "d": "The Law, the Prophets, and the Psalms."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In the Gospel of Luke, Jesus begins his public ministry by reading from the scroll of Isaiah in the synagogue in Nazareth, proclaiming, 'The Spirit of the Lord is on me, because he has anointed me to proclaim good news to the poor.'",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the cities specifically warned by Jesus in Matthew 11:20-24, despite having seen most of his miracles?",
+    "options": {
+      "a": "Bethsaida",
+      "b": "Chorazin",
+      "c": "Capernaum",
+      "d": "Nazareth"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Romans 1:18, Paul states that 'the wrath of God is being revealed from heaven against all godlessness and wickedness of people.' What specific type of wrath is he primarily describing here?",
+    "options": {
+      "a": "The present, ongoing consequence of sin and God's abandonment of sinners to their choices.",
+      "b": "The outpouring of God's vengeance during the tribulation period.",
+      "c": "The future, eschatological judgment of God at the end of time.",
+      "d": "The historical judgments of God on nations and individuals."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is the specific Old Testament example of faith that James uses in James 2:25, alongside Abraham, to illustrate that 'a person is considered righteous by what they do and not by faith alone'?",
+    "options": {
+      "a": "Moses, for leading the Israelites out of Egypt.",
+      "b": "Job, for enduring suffering without cursing God.",
+      "c": "David, for slaying Goliath.",
+      "d": "Rahab the prostitute, for harboring the spies."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The Apostle Paul, in 2 Corinthians 11:23-28, provides a lengthy list of his sufferings for Christ. Which of the following is NOT explicitly mentioned in this list?",
+    "options": {
+      "a": "Imprisoned in Rome",
+      "b": "Stoned",
+      "c": "Shipwrecks",
+      "d": "Beaten with rods"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In John 19:26-27, while on the cross, Jesus entrusts the care of his mother Mary to the 'beloved disciple,' identified as John.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 12, a 'great red dragon' is depicted, standing before a pregnant woman about to give birth. What is the specific action the dragon attempts immediately upon the child's birth?",
+    "options": {
+      "a": "To wage war against the woman and her offspring.",
+      "b": "To devour her child the moment it was born.",
+      "c": "To scatter the stars of heaven to prevent the child's reign.",
+      "d": "To deceive the woman and lead her astray."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the specific event or period that Paul refers to in 1 Thessalonians 4:16-17 as 'the snatching away' or 'being caught up' of believers?",
+    "options": {
+      "a": "The Second Coming of Christ.",
+      "b": "The Millennium.",
+      "c": "The Rapture of the Church.",
+      "d": "The Resurrection of the Dead."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is the specific charge Jesus makes against the church in Laodicea in Revelation 3:15-16?",
+    "options": {
+      "a": "You tolerate that woman Jezebel, who calls herself a prophetess.",
+      "b": "You have a reputation of being alive, but you are dead.",
+      "c": "You have forsaken your first love.",
+      "d": "You are neither cold nor hot; you are lukewarm, and I will spit you out of my mouth."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of Galatians, Paul declares that 'there is neither Jew nor Gentile, neither slave nor free, nor is there male and female, for you are all one in Christ Jesus.' What specific theological concept is this statement most directly supporting?",
+    "options": {
+      "a": "The unity of believers in the body of Christ, transcending social distinctions.",
+      "b": "The universal priesthood of all believers.",
+      "c": "The abolition of all gender and societal roles in the church.",
+      "d": "The equality of all people before God in creation."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In Matthew 18:20, Jesus says, 'For where two or three gather in my name, there am I with them,' in the immediate context of church discipline and resolution of conflict.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the specific governor before whom Paul appealed to Caesar, leading to his journey to Rome?",
+    "options": {
+      "a": "Felix",
+      "b": "Gallio",
+      "c": "Festus",
+      "d": "Agrippa"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Philippians 3:10-11, Paul expresses his desire 'that I may know Christ and the power of his resurrection, and the fellowship of his sufferings, becoming like him in his death.' What is the ultimate goal or outcome he mentions for this pursuit?",
+    "options": {
+      "a": "That I may be found in him, not having a righteousness of my own.",
+      "b": "That I may run the race and receive the prize of Christ.",
+      "c": "That I may share in his glorious inheritance.",
+      "d": "That somehow I may attain to the resurrection from the dead."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The specific theological concept of 'justification by faith alone' (sola fide) is most rigorously expounded by Paul in which of his epistles?",
+    "options": {
+      "a": "Galatians",
+      "b": "Ephesians",
+      "c": "Romans",
+      "d": "Philippians"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 21:1, John sees 'a new heaven and a new earth.' What specific characteristic of this new creation is explicitly mentioned as being absent?",
+    "options": {
+      "a": "The sun and moon",
+      "b": "Darkness",
+      "c": "Temples",
+      "d": "The sea"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The book of Hebrews identifies Jesus as 'the author and perfecter of our faith,' but never explicitly identifies the author of the epistle itself.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the 'I AM' statements of Jesus found in the Gospel of John?",
+    "options": {
+      "a": "I am the true vine.",
+      "b": "I am the good shepherd.",
+      "c": "I am the Alpha and the Omega.",
+      "d": "I am the light of the world."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, what specific event immediately preceded the riot in Ephesus instigated by Demetrius the silversmith?",
+    "options": {
+      "a": "The confrontation between Paul and Jewish exorcists, leading to their defeat.",
+      "b": "The healing of a lame man at the temple gate, sparking a large crowd.",
+      "c": "The public burning of magic books by new converts.",
+      "d": "Paul's extensive preaching against idolatry, leading many to abandon worship of Artemis."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Paul's argument in Romans 5:12-21 hinges on a comparison between two figures. Who are these two figures, representing humanity's fall and redemption?",
+    "options": {
+      "a": "Moses and Christ",
+      "b": "Noah and Christ",
+      "c": "Adam and Christ",
+      "d": "Abraham and Christ"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The specific phrase 'the elect lady and her children' appears in which New Testament epistle?",
+    "options": {
+      "a": "Philemon",
+      "b": "3 John",
+      "c": "2 John",
+      "d": "Jude"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In 1 Corinthians 15, Paul teaches that believers will be resurrected with their earthly bodies, but they will be transformed into imperishable, glorious, spiritual bodies.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 24, Jesus warns about false Christs and false prophets. What specific sign does he say will precede his actual coming, making it unmistakable?",
+    "options": {
+      "a": "The gospel of the kingdom will be proclaimed throughout the whole world.",
+      "b": "For as the lightning comes from the east and flashes to the west, so will be the coming of the Son of Man.",
+      "c": "The sun will be darkened, and the moon will not give its light.",
+      "d": "There will be wars and rumors of wars, but the end is not yet."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is the specific Old Testament prophecy quoted in Romans 10:9 to support the idea that 'everyone who calls on the name of the Lord will be saved'?",
+    "options": {
+      "a": "Jeremiah 31:33",
+      "b": "Joel 2:32",
+      "c": "Hosea 2:23",
+      "d": "Isaiah 28:16"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The book of Jude refers to an uncanonical Jewish writing, the 'Assumption of Moses,' to describe a dispute between Michael the archangel and the devil over whose body?",
+    "options": {
+      "a": "The body of Enoch.",
+      "b": "The body of Adam.",
+      "c": "The body of Moses.",
+      "d": "The body of Elijah."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 19:10, John attempts to worship an angel who is showing him visions. What specific instruction does the angel give to John?",
+    "options": {
+      "a": "Stand up; you must not worship me, for I am a creature like yourself.",
+      "b": "Do not do it! I am a fellow servant with you and with your brothers and sisters who hold to the testimony of Jesus. Worship God!",
+      "c": "I am sent to guide you, but worship is due only to the Lamb.",
+      "d": "Only God is to be worshiped; I am but a messenger."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to 1 Timothy 5:23, Paul advises Timothy to 'no longer drink only water, but use a little wine for the sake of your stomach and your frequent ailments.'",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following books is often considered to be a 'general epistle' or 'catholic epistle' because it is not addressed to a specific church or individual?",
+    "options": {
+      "a": "Philemon",
+      "b": "Colossians",
+      "c": "1 Thessalonians",
+      "d": "James"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 6, when the apostles decide to appoint seven deacons, what specific spiritual qualification do they require for these men, in addition to being of good repute?",
+    "options": {
+      "a": "Full of the Spirit and of wisdom.",
+      "b": "Able to teach and preach the word.",
+      "c": "Married and having children.",
+      "d": "Known for their generosity and hospitality."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The specific theological term for the doctrine of salvation, encompassing concepts like justification, sanctification, and glorification, is?",
+    "options": {
+      "a": "Pneumatology",
+      "b": "Eschatology",
+      "c": "Soteriology",
+      "d": "Christology"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the specific instructions or warnings given by Jesus regarding the Lord's Supper in 1 Corinthians 11?",
+    "options": {
+      "a": "Only those who are baptized should partake.",
+      "b": "Wait for one another when you come together.",
+      "c": "Examine yourselves before eating and drinking.",
+      "d": "Do this in remembrance of me."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In John 1:1, it states, 'In the beginning was the Word, and the Word was with God, and the Word was God,' clearly affirming the pre-existence and deity of Jesus.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which two epistles are often called 'prison epistles' because Paul wrote them while imprisoned?",
+    "options": {
+      "a": "1 Timothy and Titus",
+      "b": "1 Corinthians and 2 Corinthians",
+      "c": "Romans and Galatians",
+      "d": "Ephesians and Philippians"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Luke 24:49, after his resurrection, Jesus instructs his disciples to 'stay in the city until you have been clothed with power from on high.' What specific city is he referring to?",
+    "options": {
+      "a": "Bethany",
+      "b": "Galilee",
+      "c": "Jerusalem",
+      "d": "Nazareth"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The 'fullness of time' (pleroma tou chronou) is a phrase used by Paul in Galatians 4:4. What specific event is he referring to as occurring at this divinely appointed moment?",
+    "options": {
+      "a": "The giving of the Mosaic Law to Israel.",
+      "b": "Christ's second coming and the establishment of his kingdom.",
+      "c": "The Holy Spirit was poured out at Pentecost.",
+      "d": "God sent his Son, born of a woman, born under the law."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 20:4, a specific group is described as sitting on thrones and reigning with Christ for a thousand years. Who are they?",
+    "options": {
+      "a": "All believers who have died in faith.",
+      "b": "Those who had been beheaded because of their testimony about Jesus and because of the word of God.",
+      "c": "The twelve apostles of the Lamb.",
+      "d": "The saints who endured the Great Tribulation."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In John 11, when Mary and Martha send for Jesus because Lazarus is sick, Jesus deliberately delays his arrival for two days, knowing Lazarus will die, so that God's glory may be displayed.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following Old Testament books or figures is NOT explicitly referenced by the author of Hebrews in his argument for Christ's superiority?",
+    "options": {
+      "a": "Melchizedek, as a superior priest to Abraham.",
+      "b": "Joshua, as a type of entering God's rest.",
+      "c": "The Levitical priesthood, as inferior to Christ's.",
+      "d": "Jonah, as a foreshadowing of Christ's burial and resurrection."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Ephesians 2:8-9, Paul declares, 'For by grace you have been saved through faith. And this is not your own doing; it is the gift of God, not a result of works.' What specific theological error is Paul directly countering with this statement?",
+    "options": {
+      "a": "Docetism, the belief that Christ only appeared to be human.",
+      "b": "Antinomianism, the belief that grace allows for unrestrained sinful living.",
+      "c": "Legalism, the belief that salvation is earned through human effort or adherence to law.",
+      "d": "Gnosticism, the belief that salvation comes through secret knowledge."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the specific instructions given to slaves in the 'household codes' found in Ephesians 6:5-8 and Colossians 3:22-25?",
+    "options": {
+      "a": "Serve wholeheartedly, as if you were serving the Lord, not people.",
+      "b": "Remember that you will receive an inheritance from the Lord as a reward.",
+      "c": "Obey your earthly masters with respect and fear, and with sincerity of heart.",
+      "d": "Work hard, knowing that in the end, you will be set free by your master."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 16:18, Jesus tells Peter, 'You are Peter, and on this rock I will build my church.' What is the specific Greek wordplay involved between 'Peter' and 'rock' in this statement?",
+    "options": {
+      "a": "Simeon (Peter's original name) and petros (rock).",
+      "b": "Petros (Peter) and petra (rock).",
+      "c": "Petros (Peter) and skandalon (stumbling block).",
+      "d": "Kephas (Peter) and lithos (stone)."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to the book of Acts, Paul was martyred by beheading under the reign of Emperor Nero in Rome.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is the specific title used for the 'man of lawlessness' in 2 Thessalonians 2:3, in addition to 'son of destruction'?",
+    "options": {
+      "a": "The beast from the abyss",
+      "b": "The lawless one",
+      "c": "The man of sin",
+      "d": "The Antichrist"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Peter 5:8, believers are warned to be 'alert and of sober mind' because 'your enemy the devil prowls around like a roaring lion looking for someone to devour.' What specific temptation or spiritual danger is Peter most directly addressing in the surrounding context?",
+    "options": {
+      "a": "Suffering and persecution from external forces.",
+      "b": "Internal divisions and strife within the church.",
+      "c": "Complacency and spiritual laziness.",
+      "d": "False teaching and doctrinal error."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The 'mystery of godliness' (mysterion tēs eusebeias) is mentioned in 1 Timothy 3:16. Which of the following is presented as its central affirmation?",
+    "options": {
+      "a": "Christ died for our sins, was buried, and was raised on the third day according to the Scriptures.",
+      "b": "God was manifest in the flesh, justified in the Spirit, seen of angels, preached unto the Gentiles, believed on in the world, received up into glory.",
+      "c": "He appeared in the flesh, was vindicated by the Spirit, seen by angels, preached among the nations, believed on in the world, taken up in glory.",
+      "d": "There is one God and one mediator between God and mankind, the man Christ Jesus."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In his letter to Philemon, Paul asks Philemon to receive Onesimus back, not merely as a slave, but as what specific new relationship?",
+    "options": {
+      "a": "As a partner in the gospel.",
+      "b": "As a beloved brother.",
+      "c": "As a fellow bondservant of Christ.",
+      "d": "As a member of your household, but with full freedom."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle John, in Revelation 2:7, warns the church in Ephesus that if they do not repent and return to their first love, he will remove their lampstand from its place, symbolizing the end of their church.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which specific chapter in Romans presents a sustained argument for the future restoration of Israel, following their temporary hardening and the inclusion of the Gentiles?",
+    "options": {
+      "a": "Romans 10",
+      "b": "Romans 12",
+      "c": "Romans 9",
+      "d": "Romans 11"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The specific location where Jesus, according to Matthew 26:36, went with his disciples to pray before his arrest is called?",
+    "options": {
+      "a": "Gethsemane",
+      "b": "Kidron Valley",
+      "c": "Mount of Olives",
+      "d": "Bethphage"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Peter 2:24, it states that Jesus 'himself bore our sins in his body on the tree, that we might die to sin and live to righteousness.' Which specific Old Testament passage is this verse primarily alluding to?",
+    "options": {
+      "a": "Psalm 22:16",
+      "b": "Isaiah 53:4-5",
+      "c": "Jeremiah 31:31",
+      "d": "Zechariah 13:1"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the specific instructions given to husbands in Ephesians 5:25-33?",
+    "options": {
+      "a": "Give yourselves up for your wives.",
+      "b": "Be the spiritual head of your household.",
+      "c": "Cherish your wives as your own bodies.",
+      "d": "Love your wives, just as Christ loved the church."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In Acts 16, after Paul and Silas are miraculously released from prison in Philippi, the jailer asks, 'Sirs, what must I do to be saved?' and they reply, 'Believe in the Lord Jesus, and you will be saved—you and your household.'",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "The 'living creatures' in Revelation 4:6-8 are often identified with particular cherubic or seraphic beings from which Old Testament prophet's vision?",
+    "options": {
+      "a": "Daniel",
+      "b": "Isaiah",
+      "c": "Zechariah",
+      "d": "Ezekiel"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is the primary purpose of the 'spiritual gifts' (charismata) as described by Paul in 1 Corinthians 12 and Romans 12?",
+    "options": {
+      "a": "To build up the body of Christ and enable believers to serve one another.",
+      "b": "To bring personal spiritual experiences and edification to individuals.",
+      "c": "To confirm the truth of the gospel to unbelievers through miraculous signs.",
+      "d": "To demonstrate the power of the Holy Spirit in individual believers."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 27:6-10, the chief priests use the thirty pieces of silver returned by Judas to buy the 'Potter's Field.' Which specific Old Testament prophet is cited as predicting this event?",
+    "options": {
+      "a": "Jeremiah",
+      "b": "Zechariah",
+      "c": "Isaiah",
+      "d": "Malachi"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of Paul's letters is particularly known for its emphasis on the joy of the Lord, despite the apostle's imprisonment?",
+    "options": {
+      "a": "Ephesians",
+      "b": "Colossians",
+      "c": "2 Timothy",
+      "d": "Philippians"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'day of the Lord' in 1 Thessalonians 5:2 is described as coming 'like a thief in the night' for believers, meaning they will be caught by surprise.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 3:7, Jesus identifies himself to the church in Philadelphia with a specific authority linked to an Old Testament figure. What is it?",
+    "options": {
+      "a": "The true shepherd, who lays down his life for the sheep.",
+      "b": "The one who holds the key of David. What he opens no one can shut, and what he shuts no one can open.",
+      "c": "The faithful and true witness, the beginning of God’s creation.",
+      "d": "The one who sits on the throne of David, ruling over all nations."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the specific instructions given by Jesus in the Sermon on the Mount (Matthew 5-7) regarding prayer?",
+    "options": {
+      "a": "Always pray with others, for where two or three are gathered, I am there with them.",
+      "b": "Do not pray like the hypocrites, who love to pray standing in the synagogues and on the street corners.",
+      "c": "Pray in secret to your Father, who sees what is done in secret.",
+      "d": "Do not babble like pagans, thinking they will be heard because of their many words."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 1:11, after Jesus ascends into heaven, two men dressed in white tell the apostles, 'This same Jesus, who has been taken from you into heaven, will come back in the same way you have seen him go into heaven.' What specific theological term describes the manner of Christ's return anticipated here?",
+    "options": {
+      "a": "Spiritual and metaphorical.",
+      "b": "Glorious and powerful.",
+      "c": "Imminent and sudden.",
+      "d": "Visible and bodily."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "True or False: In 1 Timothy 3:1-7, Paul states that an overseer (episkopos) must be 'the husband of one wife' (mias gynaikos andra), which is often interpreted as either being married only once or being faithful to his one wife.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following New Testament figures is NOT explicitly identified as an apostle?",
+    "options": {
+      "a": "Barnabas",
+      "b": "James (the brother of Jesus)",
+      "c": "Silas",
+      "d": "Paul"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 22:18-19, a strong warning is given against adding to or taking away from the words of the prophecy of this book. What specific consequence is mentioned for someone who takes words away?",
+    "options": {
+      "a": "God will take away from that person any share in the tree of life and in the Holy City.",
+      "b": "Their name will be blotted out of the Book of Life.",
+      "c": "They will be cursed with the plagues described in this book.",
+      "d": "They will have no part in the first resurrection."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "new_testament",
+    "approved": true
+  }
+]

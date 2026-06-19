@@ -1,0 +1,2424 @@
+[
+  {
+    "question": "Which of these is NOT considered one of the three persons of the Holy Trinity?",
+    "options": {
+      "a": "The Father",
+      "b": "The Holy Spirit",
+      "c": "The Archangel Michael",
+      "d": "The Son"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christians believe that God is one being in three distinct persons.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What theological term describes God declaring a sinner righteous through faith in Christ?",
+    "options": {
+      "a": "Regeneration",
+      "b": "Justification",
+      "c": "Sanctification",
+      "d": "Atonement"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: Salvation in Christianity is primarily earned through good works.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the term for the universal body of believers in Christ throughout all time and places?",
+    "options": {
+      "a": "The priesthood",
+      "b": "The Church (universal)",
+      "c": "The local congregation",
+      "d": "The ecumenical council"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which event do Christians believe will mark the final return of Jesus Christ to Earth?",
+    "options": {
+      "a": "The first coming of Christ",
+      "b": "The resurrection of Moses",
+      "c": "The Second Coming",
+      "d": "The building of a third temple"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What does it mean for Christians when they say the Bible is 'inspired'?",
+    "options": {
+      "a": "It was written by very creative and thoughtful people.",
+      "b": "It contains many inspiring stories and poems.",
+      "c": "It was dictated word-for-word by angels.",
+      "d": "God superintended the human authors so that their writings were His very words."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which ancient creed begins with the affirmation, 'I believe in God, the Father Almighty, Creator of heaven and earth'?",
+    "options": {
+      "a": "The Apostles' Creed",
+      "b": "The Nicene Creed",
+      "c": "The Chalcedonian Creed",
+      "d": "The Athanasian Creed"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which historical figure is widely credited with initiating the Protestant Reformation?",
+    "options": {
+      "a": "Thomas Aquinas",
+      "b": "John Calvin",
+      "c": "Martin Luther",
+      "d": "Augustine of Hippo"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Holy Spirit is considered merely a force or power, not a distinct person, within the Trinity.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the process by which believers become more like Christ throughout their lives, guided by the Holy Spirit?",
+    "options": {
+      "a": "Sanctification",
+      "b": "Justification",
+      "c": "Glorification",
+      "d": "Redemption"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which book of the Bible is primarily associated with prophecies about the end times and Jesus' return?",
+    "options": {
+      "a": "Psalms",
+      "b": "Revelation",
+      "c": "Proverbs",
+      "d": "Genesis"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "According to Christian doctrine, what is the primary role of the Holy Spirit in a believer's life?",
+    "options": {
+      "a": "To force them into good works.",
+      "b": "To reveal secret knowledge only to a few.",
+      "c": "To empower, guide, and comfort them.",
+      "d": "To condemn them for their sins."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible is widely considered by Christians to be the infallible Word of God.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is NOT a common metaphor used in the Bible to describe the Church?",
+    "options": {
+      "a": "The Body of Christ",
+      "b": "The Temple of the Holy Spirit",
+      "c": "The Bride of Christ",
+      "d": "The Roman Empire"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the theological concept that describes Jesus Christ as both fully God and fully human?",
+    "options": {
+      "a": "Monotheism",
+      "b": "Docetism",
+      "c": "Hypostatic Union",
+      "d": "Arianism"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The Nicene Creed was primarily formulated to address disputes about the nature of which person of the Trinity?",
+    "options": {
+      "a": "God the Father",
+      "b": "God the Holy Spirit",
+      "c": "God the Son (Jesus Christ)",
+      "d": "The Archangel Gabriel"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: Martin Luther believed that salvation is achieved by faith alone, apart from works of the law.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the theological term for the belief that God knows all things?",
+    "options": {
+      "a": "Omnipotence",
+      "b": "Omnibenevolence",
+      "c": "Omnipresence",
+      "d": "Omniscience"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following describes the doctrine of original sin?",
+    "options": {
+      "a": "Humans inherit a sinful nature from Adam and Eve's disobedience.",
+      "b": "Only the first sin committed by each person is counted.",
+      "c": "Sin only affects our actions, not our nature.",
+      "d": "Everyone is born without sin, but chooses to sin later."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The New Testament was originally written in Hebrew.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the primary purpose of the Sacraments (like baptism and communion) in many Christian traditions?",
+    "options": {
+      "a": "To earn forgiveness for sins.",
+      "b": "To directly cause salvation for all who partake.",
+      "c": "To gain social status within the church.",
+      "d": "To act as visible signs of inward spiritual grace."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'Imago Dei' refers to the belief that humans are created in what?",
+    "options": {
+      "a": "The image of animals",
+      "b": "The image of God",
+      "c": "The image of angels",
+      "d": "The image of the sun"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological figure emphasized God's sovereignty and the doctrine of predestination, notably in his 'Institutes of the Christian Religion'?",
+    "options": {
+      "a": "Augustine of Hippo",
+      "b": "Karl Barth",
+      "c": "Martin Luther",
+      "d": "John Calvin"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Christian belief in the resurrection of the dead means that believers will receive new, glorified bodies after death.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the common term for the biblical teaching that Jesus willingly died on the cross to pay the penalty for humanity's sins?",
+    "options": {
+      "a": "Propitiation",
+      "b": "Atonement",
+      "c": "Reconciliation",
+      "d": "Justification"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'Grace' in Christian theology primarily refers to what?",
+    "options": {
+      "a": "God's unmerited favor and love towards humanity.",
+      "b": "The natural abilities and talents of humans.",
+      "c": "The elegance and beauty of creation.",
+      "d": "A state of purity achieved through spiritual discipline."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which early church father wrote 'Confessions' and 'City of God', profoundly influencing Western Christian thought?",
+    "options": {
+      "a": "Origen",
+      "b": "Augustine of Hippo",
+      "c": "Athanasius",
+      "d": "Tertullian"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible states that Jesus Christ is the only way to salvation.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the theological term for the study of the Church?",
+    "options": {
+      "a": "Eschatology",
+      "b": "Soteriology",
+      "c": "Ecclesiology",
+      "d": "Christology"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of the Trinity asserts that God is:",
+    "options": {
+      "a": "One God in three co-equal, co-eternal persons",
+      "b": "A spiritual force with three main aspects",
+      "c": "One person appearing in three different forms",
+      "d": "Three gods working together"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a central teaching of the Nicene Creed regarding Jesus Christ?",
+    "options": {
+      "a": "He was a great prophet, but not divine.",
+      "b": "He was created by God the Father before all ages.",
+      "c": "He is 'of one being with the Father'.",
+      "d": "He only appeared to be human."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christians believe that the Holy Spirit permanently indwells all believers from the moment of their conversion.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of 'heaven'?",
+    "options": {
+      "a": "A place of eternal separation from God.",
+      "b": "The dwelling place of God and the redeemed, often associated with a 'new heavens and new earth'.",
+      "c": "A temporary spiritual realm for ghosts.",
+      "d": "A mythical land with no basis in reality."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which Reformation doctrine emphasizes that Scripture alone is the ultimate authority for Christian faith and practice?",
+    "options": {
+      "a": "Solus Christus (Christ Alone)",
+      "b": "Sola Gratia (Grace Alone)",
+      "c": "Sola Scriptura (Scripture Alone)",
+      "d": "Sola Fide (Faith Alone)"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the term for God's sovereign control over all events, including human choices, without negating human responsibility?",
+    "options": {
+      "a": "Fatalism",
+      "b": "Determinism",
+      "c": "Omniscience",
+      "d": "Providence"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The book of Genesis describes the creation of the world by God in six literal 24-hour days.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'eschatology' is the study of what?",
+    "options": {
+      "a": "End times and final events",
+      "b": "The nature of God",
+      "c": "The doctrine of salvation",
+      "d": "The person of Christ"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which statement best describes the Christian doctrine of 'redemption'?",
+    "options": {
+      "a": "Being bought back from slavery to sin through Christ's sacrifice.",
+      "b": "The process of forgiving oneself for past mistakes.",
+      "c": "Earning favor with God through good deeds.",
+      "d": "Achieving enlightenment through meditation."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'total depravity' in some Reformed theology means what?",
+    "options": {
+      "a": "Every part of human nature is affected by sin, making us unable to save ourselves.",
+      "b": "Humans are as evil as they can possibly be.",
+      "c": "Only a select few are truly evil.",
+      "d": "Humans are incapable of doing any good whatsoever."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible explicitly states that Adam and Eve ate an apple from the Tree of Knowledge of Good and Evil.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the primary function of the Church in Christian theology?",
+    "options": {
+      "a": "To accumulate wealth and political power.",
+      "b": "To proclaim the Gospel, worship God, and disciple believers.",
+      "c": "To provide social services to the community.",
+      "d": "To serve as a moral police force for society."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is considered a 'mark' of the Church in traditional Christian theology?",
+    "options": {
+      "a": "It is politically influential.",
+      "b": "It is one, holy, catholic (universal), and apostolic.",
+      "c": "It is wealthy.",
+      "d": "It is large in number."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Karl Barth is a prominent theological figure associated with what 20th-century movement?",
+    "options": {
+      "a": "Process Theology",
+      "b": "Fundamentalism",
+      "c": "Neo-orthodoxy",
+      "d": "Liberation Theology"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that all humans are inherently good and capable of pleasing God on their own.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the meaning of 'imputation' in relation to justification?",
+    "options": {
+      "a": "A process of self-improvement to become righteous.",
+      "b": "Christ's righteousness is credited to believers' accounts.",
+      "c": "God judges a person based on their own good deeds.",
+      "d": "Sins are removed from a person's record."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Great Commission' refers to Jesus' command to His disciples to do what?",
+    "options": {
+      "a": "Establish a political kingdom on Earth.",
+      "b": "Write more books of scripture.",
+      "c": "Make disciples of all nations, baptizing and teaching them.",
+      "d": "Build a large temple in Jerusalem."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which historical event is central to Christian eschatology, signifying the defeat of death and the promise of eternal life?",
+    "options": {
+      "a": "The ascension of Jesus",
+      "b": "The birth of Jesus",
+      "c": "The resurrection of Jesus",
+      "d": "The crucifixion of Jesus"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The primary purpose of the Old Testament is to teach moral stories, not to point toward Jesus Christ.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'Divine Impassibility' traditionally refers to God's inability to do what?",
+    "options": {
+      "a": "Feel emotions or suffer.",
+      "b": "Create anything new.",
+      "c": "Forgive sins.",
+      "d": "Know the future."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of 'sin'?",
+    "options": {
+      "a": "Mistakes made out of ignorance.",
+      "b": "Merely breaking civil laws.",
+      "c": "Rebellion against God's will and nature, falling short of His glory.",
+      "d": "Any action that causes personal unhappiness."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological term describes the ultimate state of believers, fully glorified and free from sin, in the presence of God?",
+    "options": {
+      "a": "Sanctification",
+      "b": "Regeneration",
+      "c": "Glorification",
+      "d": "Justification"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible contains errors in its original manuscripts, therefore it cannot be fully trusted.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the core belief about Jesus Christ's identity according to orthodox Christian doctrine?",
+    "options": {
+      "a": "He was a human prophet chosen by God.",
+      "b": "He was a powerful angel.",
+      "c": "He is fully God and fully man.",
+      "d": "He was a mythical figure."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'common grace' refers to what?",
+    "options": {
+      "a": "The specific grace required for salvation.",
+      "b": "Grace given only to believers.",
+      "c": "The grace received during church communion.",
+      "d": "God's general favor and blessings extended to all humanity, believers and non-believers alike."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is NOT a primary way Christians believe God reveals Himself?",
+    "options": {
+      "a": "Through the Holy Spirit's illumination",
+      "b": "Through special revelation (Scripture, Jesus Christ)",
+      "c": "Through general revelation (creation, conscience)",
+      "d": "Through personal dreams and visions that contradict Scripture"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle's Creed was written directly by the twelve apostles themselves.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'covenant' in Christian theology primarily refers to what?",
+    "options": {
+      "a": "A binding agreement or promise initiated by God with humanity.",
+      "b": "A promise made between two human kings.",
+      "c": "A legal contract with specific penalties.",
+      "d": "A secret society with sacred rituals."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "According to Christian eschatology, what will be the ultimate destiny of Satan and his demons?",
+    "options": {
+      "a": "They will eventually be redeemed and join God in heaven.",
+      "b": "They will be given their own separate kingdom.",
+      "c": "Eternal punishment in the lake of fire.",
+      "d": "They will cease to exist entirely."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological figure is known for his systematic theology that became foundational for Reformed churches?",
+    "options": {
+      "a": "Augustine",
+      "b": "Thomas Aquinas",
+      "c": "Jonathan Edwards",
+      "d": "John Calvin"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'Resurrection of the Body' refers only to the spiritual resurrection, not a physical one.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of faith?",
+    "options": {
+      "a": "Belief in one's own abilities to achieve spiritual goals.",
+      "b": "Intellectual assent to certain facts, combined with personal trust in Christ.",
+      "c": "A feeling of optimism and hope.",
+      "d": "Blind trust without any evidence."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'atonement' refers to Christ's work on the cross that brings about:",
+    "options": {
+      "a": "An example of extreme sacrifice for moral instruction.",
+      "b": "The creation of a new religion.",
+      "c": "Reconciliation between God and humanity by dealing with sin.",
+      "d": "A temporary cease-fire with God."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which attribute of God means He is all-powerful?",
+    "options": {
+      "a": "Omnipotence",
+      "b": "Omnipresence",
+      "c": "Omniscience",
+      "d": "Immutability"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible encourages Christians to primarily seek earthly wealth and power.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'Incarnation' refers to what event in Christian theology?",
+    "options": {
+      "a": "The resurrection of Jesus.",
+      "b": "The creation of the world.",
+      "c": "The outpouring of the Holy Spirit at Pentecost.",
+      "d": "God becoming human in the person of Jesus Christ."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the doctrine that the Bible was written by human authors, but under the guidance and inspiration of God?",
+    "options": {
+      "a": "Human Ingenuity",
+      "b": "Mythology",
+      "c": "Verbal Plenary Inspiration",
+      "d": "Dictation"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a core belief about the Holy Spirit's role in the Trinity?",
+    "options": {
+      "a": "He is a separate god from the Father and Son.",
+      "b": "He is subordinate and lesser than the Father and Son.",
+      "c": "He is co-equal and co-eternal with the Father and the Son.",
+      "d": "He is merely a symbolic representation of God's power."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: Baptism is a salvific act that automatically grants eternal life to anyone who undergoes it, regardless of faith.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What does the term 'resurrection' primarily refer to in Christian theology?",
+    "options": {
+      "a": "A spiritual awakening or renewal.",
+      "b": "The memory of a person living on after death.",
+      "c": "The bodily rising from the dead.",
+      "d": "The revival of a dead person's spirit only."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'Christology' is the study of what?",
+    "options": {
+      "a": "The history of the Church.",
+      "b": "The end times.",
+      "c": "The person and work of Jesus Christ.",
+      "d": "The doctrine of salvation."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these statements best describes the Christian view of humanity's original state before the Fall?",
+    "options": {
+      "a": "Humans were animals with no moral compass.",
+      "b": "Humans were created as neutral beings, capable of both good and evil.",
+      "c": "Humans were inherently evil.",
+      "d": "Humans were created good, in God's image, and without sin."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible encourages believers to avoid participation in society and isolate themselves from the world.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is considered a 'means of grace' in many Christian traditions?",
+    "options": {
+      "a": "Reading horoscopes",
+      "b": "Prayer and Bible reading",
+      "c": "Astrology",
+      "d": "Good luck charms"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the primary message of the Gospel?",
+    "options": {
+      "a": "A historical account of ancient Israel.",
+      "b": "Instructions on how to live a perfectly moral life.",
+      "c": "The good news of salvation through Jesus Christ's death and resurrection.",
+      "d": "A collection of wise sayings and proverbs."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'election' (or predestination) means what?",
+    "options": {
+      "a": "God chooses certain people for salvation based on their foreseen good works.",
+      "b": "God sovereignly chooses individuals for salvation according to His own purpose, not based on merit.",
+      "c": "Only a specific group of people from one nation can be saved.",
+      "d": "Humans choose God completely independently of His will."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: All major Christian denominations agree on the exact timing and nature of events in the end times.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following best defines the term 'canon' when referring to Scripture?",
+    "options": {
+      "a": "A large church building.",
+      "b": "A type of ancient weapon.",
+      "c": "A form of religious music.",
+      "d": "The established list of books recognized as authoritative and inspired by God."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What does the term 'Adoption' mean in Christian soteriology?",
+    "options": {
+      "a": "God making believers His children and heirs through Christ.",
+      "b": "Being literally adopted into a Christian family.",
+      "c": "Choosing to follow a new set of moral principles.",
+      "d": "Adopting new customs and traditions."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Lord's Supper' or 'Communion' is a symbolic act recalling what?",
+    "options": {
+      "a": "The Last Supper of Jesus with His disciples and His atoning death.",
+      "b": "Jesus' temptation in the wilderness.",
+      "c": "The birth of Jesus in Bethlehem.",
+      "d": "The first miracle performed by Jesus."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that God's love is conditional and depends entirely on human performance.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which historical creed affirmed the full deity of the Holy Spirit, alongside the Father and Son?",
+    "options": {
+      "a": "Apostles' Creed",
+      "b": "Chalcedonian Creed",
+      "c": "Athanasian Creed",
+      "d": "Nicene Creed (as revised at Constantinople)"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the theological term for the belief that God is present everywhere at all times?",
+    "options": {
+      "a": "Omniscience",
+      "b": "Immanence",
+      "c": "Omnipotence",
+      "d": "Omnipresence"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "According to Christian doctrine, what is the ultimate consequence of unrepented sin?",
+    "options": {
+      "a": "Spiritual growth and self-discovery.",
+      "b": "Temporary separation from God, followed by automatic forgiveness.",
+      "c": "Eternal separation from God (hell).",
+      "d": "A slight inconvenience in daily life."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The doctrine of the 'perseverance of the saints' teaches that true believers will ultimately remain in faith until the end.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a characteristic of the 'New Covenant' established through Jesus Christ?",
+    "options": {
+      "a": "It focuses primarily on military conquest.",
+      "b": "It is exclusively for the nation of Israel.",
+      "c": "It requires perfect adherence to Old Testament ceremonial laws.",
+      "d": "It is based on God's grace and promises, written on believers' hearts."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the primary role of the Church's leadership (e.g., pastors, elders)?",
+    "options": {
+      "a": "To rule with absolute authority over all aspects of members' lives.",
+      "b": "To entertain the congregation with elaborate rituals.",
+      "c": "To accumulate personal wealth and status.",
+      "d": "To serve, teach, and equip believers for ministry."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The theological term 'Regeneration' refers to what spiritual experience?",
+    "options": {
+      "a": "Renewing one's commitment to a moral code.",
+      "b": "The spiritual new birth or being 'born again' by the Holy Spirit.",
+      "c": "A temporary emotional high during a worship service.",
+      "d": "A person deciding to start attending church regularly."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that marriage is a covenant between one man and one woman.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these describes the 'Parousia' in Christian eschatology?",
+    "options": {
+      "a": "The birth of Jesus.",
+      "b": "The day of Pentecost.",
+      "c": "The Last Supper.",
+      "d": "The Second Coming of Christ."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the primary significance of the 'empty tomb' in Christian doctrine?",
+    "options": {
+      "a": "It signified that Jesus had merely moved away.",
+      "b": "It proved Jesus was a master illusionist.",
+      "c": "It was a symbol for spiritual rebirth only.",
+      "d": "It confirms the physical resurrection of Jesus Christ."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological figure was a key leader in the Reformation in Geneva and developed a comprehensive system of Christian theology?",
+    "options": {
+      "a": "Ulrich Zwingli",
+      "b": "John Wesley",
+      "c": "John Calvin",
+      "d": "Martin Luther"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christians believe that repentance involves both a change of mind about sin and a turning away from it.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'priesthood of all believers' doctrine, advocated by Luther, means what?",
+    "options": {
+      "a": "Priesthood is a hereditary title.",
+      "b": "Only ordained priests can read the Bible.",
+      "c": "All believers have direct access to God through Christ, without needing an intermediary priest.",
+      "d": "Every Christian is called to become a pastor."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the traditional Christian view on the 'eternity' of God?",
+    "options": {
+      "a": "God was created at the beginning of the universe.",
+      "b": "God lives for a very long time.",
+      "c": "God exists outside of time, without beginning or end.",
+      "d": "God's existence is cyclical, with periods of beginning and end."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is NOT a traditional attribute of God in Christian theology?",
+    "options": {
+      "a": "Infinite (without limits)",
+      "b": "Partially knowing (limited knowledge)",
+      "c": "Holy (set apart, pure)",
+      "d": "Immutable (unchanging)"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The primary role of the Church is to replace governments and rule nations.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'propitiation' in soteriology means what?",
+    "options": {
+      "a": "Making a prophetic declaration.",
+      "b": "Making sacrifices to pagan gods.",
+      "c": "Forecasting future events.",
+      "d": "Appeasing divine wrath through an atoning sacrifice."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which Council in early church history affirmed the full humanity and full divinity of Christ, without confusion or separation?",
+    "options": {
+      "a": "Council of Ephesus",
+      "b": "Council of Chalcedon",
+      "c": "Council of Constantinople",
+      "d": "Council of Nicaea"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The Bible teaches that Jesus Christ will return to Earth how?",
+    "options": {
+      "a": "Secretly and unnoticed by most.",
+      "b": "As a new, enlightened philosopher.",
+      "c": "As a spiritual concept only.",
+      "d": "Visibly and bodily."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'Second Death' in Revelation refers to spiritual death and eternal separation from God.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the primary role of the Holy Spirit in making the Bible understandable to believers?",
+    "options": {
+      "a": "To replace the need for careful study.",
+      "b": "To ensure everyone interprets it the same way.",
+      "c": "To illuminate the text, helping believers to grasp its meaning and apply it.",
+      "d": "To reveal new, secret meanings not found in the text."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a key aspect of 'Discipleship' in Christian theology?",
+    "options": {
+      "a": "Following Jesus, learning from Him, and seeking to live like Him.",
+      "b": "Only memorizing Bible verses without understanding.",
+      "c": "Gaining power and influence over others.",
+      "d": "Becoming a strict follower of ancient customs."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'creation ex nihilo' means God created the universe from what?",
+    "options": {
+      "a": "His own being.",
+      "b": "Nothing (out of nothing).",
+      "c": "The materials He found in outer space.",
+      "d": "Pre-existing chaotic matter."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that suffering and evil in the world are ultimately due to God's direct creation and will, without human involvement.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the 'Great White Throne Judgment' described in Revelation?",
+    "options": {
+      "a": "A judgment of nations for their treatment of Israel.",
+      "b": "A judgment of unbelievers before they are cast into the lake of fire.",
+      "c": "A judgment of angels only.",
+      "d": "A judgment for believers' rewards."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological term describes the doctrine of God's existence and nature?",
+    "options": {
+      "a": "Anthropology",
+      "b": "Hamartiology",
+      "c": "Pneumatology",
+      "d": "Theology Proper"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT a common understanding of the 'Kingdom of God'?",
+    "options": {
+      "a": "A literal, political empire established by human effort.",
+      "b": "A future, physical reign of Christ on Earth.",
+      "c": "A present reality in the hearts of believers.",
+      "d": "God's sovereign rule over all creation."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The primary purpose of worship is to entertain the congregation.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian doctrine regarding the end of the physical universe?",
+    "options": {
+      "a": "It will merge with another dimension.",
+      "b": "It will be destroyed and cease to exist.",
+      "c": "It will be renewed and transformed into a 'new heavens and new earth'.",
+      "d": "It will continue forever in its current state."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these describes the concept of 'Divine Sovereignty'?",
+    "options": {
+      "a": "God has supreme authority and control over all things.",
+      "b": "God is a distant observer, not involved in creation.",
+      "c": "God is in charge of some things, but humans control their own destiny.",
+      "d": "God allows chaos to reign freely in the world."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The theological term 'Eschaton' refers to what?",
+    "options": {
+      "a": "The beginning of time.",
+      "b": "The present age.",
+      "c": "The last things or end times.",
+      "d": "A specific period of church history."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that human beings are fundamentally good and do not require redemption.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the role of faith in Christian salvation?",
+    "options": {
+      "a": "Faith is the instrument through which God's grace and Christ's work are received for salvation.",
+      "b": "Faith is simply believing in a god, any god.",
+      "c": "Faith is unnecessary if one is a good person.",
+      "d": "Faith is a work that earns salvation."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a characteristic of God's 'Holiness'?",
+    "options": {
+      "a": "He is morally imperfect.",
+      "b": "He is entirely separate from sin and evil, and perfectly righteous.",
+      "c": "He is only holy in certain situations.",
+      "d": "He occasionally makes mistakes."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological figure developed the idea of 'analogia entis' (analogy of being), a concept debated by Karl Barth?",
+    "options": {
+      "a": "Augustine of Hippo",
+      "b": "Thomas Aquinas",
+      "c": "Martin Luther",
+      "d": "John Calvin"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'Millennium' in Christian eschatology refers to a literal 1000-year reign of Christ on Earth.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the theological term for the study of angels and demons?",
+    "options": {
+      "a": "Anthropology",
+      "b": "Soteriology",
+      "c": "Ecclesiology",
+      "d": "Angelology"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Fall of Man' refers to what event?",
+    "options": {
+      "a": "Adam and Eve's disobedience in the Garden of Eden, bringing sin into the world.",
+      "b": "The defeat of Goliath by David.",
+      "c": "The collapse of the Roman Empire.",
+      "d": "The destruction of the Tower of Babel."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a primary reason why Christians believe in the authority of the Bible?",
+    "options": {
+      "a": "It is inspired by God and therefore trustworthy and true.",
+      "b": "It is a popular book that many people read.",
+      "c": "It contains many interesting stories and poetry.",
+      "d": "It is an ancient book with historical value."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Christian understanding of God is primarily monotheistic (belief in one God).",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What does the phrase 'Solus Christus' (Christ Alone) mean in Reformation theology?",
+    "options": {
+      "a": "Christ only saves a select few individuals.",
+      "b": "Christ's teachings are optional for salvation.",
+      "c": "Salvation is found in Christ alone, not through human intermediaries or good works.",
+      "d": "Only Christ existed at the beginning of time."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The Christian concept of 'Immutability' means that God is what?",
+    "options": {
+      "a": "Unchanging in His character, nature, and promises.",
+      "b": "Unable to perform miracles.",
+      "c": "Invisible to human eyes.",
+      "d": "Unable to interact with humanity."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is considered a 'spiritual gift' given by the Holy Spirit to believers for the building up of the Church?",
+    "options": {
+      "a": "Physical attractiveness",
+      "b": "Wealth accumulation",
+      "c": "Teaching, prophecy, healing, service",
+      "d": "Political power"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible states that God created evil as an equal and opposing force to Himself.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the primary role of the Church in relation to the world?",
+    "options": {
+      "a": "To condemn all non-believers.",
+      "b": "To be a light, salt, and witness to Christ in the world.",
+      "c": "To isolate itself from all worldly concerns.",
+      "d": "To establish a global political empire."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which early church heresy denied the full humanity of Jesus, claiming He only appeared to be human?",
+    "options": {
+      "a": "Docetism",
+      "b": "Nestorianism",
+      "c": "Modalism",
+      "d": "Arianism"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Second Coming' of Christ is also known by which Greek term?",
+    "options": {
+      "a": "Kerygma",
+      "b": "Agape",
+      "c": "Logos",
+      "d": "Parousia"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the significance of the 'virgin birth' of Jesus Christ?",
+    "options": {
+      "a": "It means Mary was the only perfect human.",
+      "b": "It highlights His unique divine nature and humanity without inherited sin.",
+      "c": "It is a mythical story with no theological importance.",
+      "d": "It suggests that marriage is unnecessary."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a key aspect of 'repentance'?",
+    "options": {
+      "a": "Feeling really bad about a mistake.",
+      "b": "Making financial restitution for all past wrongs.",
+      "c": "Publicly confessing sins without any internal change.",
+      "d": "A change of mind and heart, leading to a turning away from sin and toward God."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'pneumatology' is the study of what?",
+    "options": {
+      "a": "The doctrine of creation.",
+      "b": "The doctrine of humanity.",
+      "c": "The doctrine of sin.",
+      "d": "The doctrine of the Holy Spirit."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: Christians believe that the suffering of Christ on the cross was merely an example of martyrdom, not a substitutionary atonement for sin.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of 'hell'?",
+    "options": {
+      "a": "A place of complete annihilation where souls cease to exist.",
+      "b": "A metaphorical concept with no literal reality.",
+      "c": "Eternal conscious torment and separation from God.",
+      "d": "A temporary place of purification."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is an essential element of the doctrine of the Trinity?",
+    "options": {
+      "a": "The Trinity is a mystery that cannot be understood at all.",
+      "b": "The three persons are distinct yet indivisible and co-equal.",
+      "c": "The Father is superior to the Son and Holy Spirit.",
+      "d": "The Holy Spirit is a manifestation, not a person."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'Ascension' of Jesus refers to what event?",
+    "options": {
+      "a": "His public ministry beginning.",
+      "b": "His bodily return to heaven after His resurrection.",
+      "c": "His rising from the dead.",
+      "d": "His birth in Bethlehem."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that believers will spend eternity as disembodied spirits in heaven.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the primary significance of the 'Old Testament' for Christians?",
+    "options": {
+      "a": "It is a collection of fables and myths.",
+      "b": "It reveals God's character, law, and points forward to Christ.",
+      "c": "It is outdated and irrelevant after Jesus came.",
+      "d": "It provides historical context but no theological truth."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a theological teaching of the Apostles' Creed?",
+    "options": {
+      "a": "Detailed explanations of predestination.",
+      "b": "Affirmation of the literal 1000-year reign of Christ.",
+      "c": "Denial of the deity of the Holy Spirit.",
+      "d": "Belief in the communion of saints, the forgiveness of sins, and the resurrection of the body."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'Immanence' refers to God being what?",
+    "options": {
+      "a": "Completely separate and distant from creation.",
+      "b": "Only present in temples and churches.",
+      "c": "Actively involved and present within His creation.",
+      "d": "Limited by the laws of nature."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that humans are saved by grace alone through faith alone in Christ alone.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is 'Glorification' in the context of Christian salvation?",
+    "options": {
+      "a": "Receiving praise from others for good deeds.",
+      "b": "Becoming famous or wealthy.",
+      "c": "Achieving a state of perfect knowledge in this life.",
+      "d": "The final stage of salvation where believers are made perfectly like Christ, free from sin and death."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which early church father is famous for his argument against the Pelagian heresy, emphasizing human sinfulness and God's grace?",
+    "options": {
+      "a": "Clement of Alexandria",
+      "b": "Irenaeus",
+      "c": "Polycarp",
+      "d": "Augustine of Hippo"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The 'New Covenant' was primarily established through what event?",
+    "options": {
+      "a": "The giving of the Law on Mount Sinai.",
+      "b": "The construction of Solomon's Temple.",
+      "c": "The return of the Israelites from Babylonian exile.",
+      "d": "The death and resurrection of Jesus Christ."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible claims to be inspired by God, making it authoritative for life and faith.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian understanding of the 'New Heavens and New Earth'?",
+    "options": {
+      "a": "A return to the Garden of Eden as it was before the Fall.",
+      "b": "A completely different universe created from scratch.",
+      "c": "A metaphorical idea with no physical reality.",
+      "d": "The present creation renewed and glorified, where righteousness dwells."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a core belief about the 'Holy Spirit'?",
+    "options": {
+      "a": "He is an impersonal force.",
+      "b": "He is only active in the Old Testament.",
+      "c": "He is a created being, subordinate to God.",
+      "d": "He is the third person of the Trinity, fully God."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The doctrine of 'Inerrancy' concerning the Bible means what?",
+    "options": {
+      "a": "The Bible is without error in its original manuscripts.",
+      "b": "The Bible is completely error-free in all translations.",
+      "c": "The Bible contains some errors but is still inspiring.",
+      "d": "The Bible only contains errors in scientific statements."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Church is meant to be a perfect institution on Earth, without any flaws or sinful members.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian belief regarding the origin of evil?",
+    "options": {
+      "a": "Evil is a necessary component for good to exist.",
+      "b": "Evil originated from the free will choices of created beings (angels and humans) who rebelled against God.",
+      "c": "Evil is an illusion and does not truly exist.",
+      "d": "God created evil as part of His perfect plan."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a characteristic of God's 'Love' in Christian theology?",
+    "options": {
+      "a": "It is unconditional, self-sacrificial, and eternal (agape).",
+      "b": "It is limited to only a select few.",
+      "c": "It is primarily based on human merit.",
+      "d": "It is fickle and changes based on human behavior."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The theological term 'Theodicy' refers to the attempt to justify what?",
+    "options": {
+      "a": "The authority of the Bible.",
+      "b": "God's existence through philosophical argument.",
+      "c": "The doctrine of the Trinity.",
+      "d": "God's goodness and justice in light of the existence of evil and suffering."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that there is more than one path to salvation, as long as one is sincere.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the significance of Christ being called the 'Lamb of God'?",
+    "options": {
+      "a": "He was the sacrificial offering who takes away the sin of the world.",
+      "b": "He was gentle and meek.",
+      "c": "He led a flock of followers.",
+      "d": "He was born in a shepherd's field."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is a function of the Church as the 'pillar and buttress of the truth' (1 Tim 3:15)?",
+    "options": {
+      "a": "To hide the truth from the public.",
+      "b": "To compromise truth for unity.",
+      "c": "To uphold, defend, and proclaim the truth of God's Word.",
+      "d": "To invent new truths as needed."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The theological term 'Justification' means what?",
+    "options": {
+      "a": "Being legally acquitted of a crime without punishment.",
+      "b": "The process of becoming more like Christ over time.",
+      "c": "Making a person righteous through their own efforts.",
+      "d": "God declaring a sinner righteous based on Christ's righteousness, received by faith."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible is a collection of books written over approximately 1500 years by many different authors.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the significance of Jesus Christ being called 'Emmanuel'?",
+    "options": {
+      "a": "It means 'God with us', highlighting His divine presence among humanity.",
+      "b": "It means He was a great leader.",
+      "c": "It means He was born in the town of Emmanuel.",
+      "d": "It was a common name for Jewish boys."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these is NOT an aspect of the Holy Spirit's work in a believer's life?",
+    "options": {
+      "a": "Convicting of sin.",
+      "b": "Guaranteeing instant material wealth.",
+      "c": "Sanctifying and guiding into truth.",
+      "d": "Empowering for service."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The Christian doctrine of 'Transcendence' refers to God being what?",
+    "options": {
+      "a": "Limited by human understanding.",
+      "b": "Constantly changing and evolving.",
+      "c": "Beyond and distinct from His creation, superior to it.",
+      "d": "Only existing within the physical universe."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The purpose of the Church is solely for individual spiritual development, without a community aspect.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the Christian belief about the ultimate fate of those who die without faith in Christ?",
+    "options": {
+      "a": "They will be given another chance for salvation after death.",
+      "b": "They will enter a state of peaceful non-existence.",
+      "c": "They will be reincarnated into new lives.",
+      "d": "Eternal conscious punishment and separation from God."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of these best describes 'Divine Wrath' in Christian theology?",
+    "options": {
+      "a": "God's righteous and holy opposition to sin and injustice.",
+      "b": "A human emotion attributed to God metaphorically.",
+      "c": "A temporary feeling that God quickly overlooks.",
+      "d": "God's uncontrolled outbursts of anger."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'Mediator' in Christian theology primarily refers to whom?",
+    "options": {
+      "a": "A human priest who acts on behalf of God.",
+      "b": "A skilled negotiator in human conflicts.",
+      "c": "Jesus Christ, who bridges the gap between God and humanity.",
+      "d": "An angel who delivers messages from God."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible is a single book written by one author.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the theological concept of 'adoption' as it relates to Christians?",
+    "options": {
+      "a": "Taking on new cultural traditions.",
+      "b": "Being chosen to lead a church.",
+      "c": "The process of joining a new family.",
+      "d": "Spiritually becoming a child of God, with all rights and privileges."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which of the following describes the Christian understanding of 'grace'?",
+    "options": {
+      "a": "God's unmerited favor and love, freely given to sinners.",
+      "b": "A feeling of peace and tranquility.",
+      "c": "God's reward for our good deeds.",
+      "d": "A special ability granted only to church leaders."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The term 'Sola Gratia' (Grace Alone) in Reformation theology emphasizes what?",
+    "options": {
+      "a": "That only certain types of grace are effective.",
+      "b": "That grace is a powerful spiritual force.",
+      "c": "That salvation is entirely a gift of God's undeserved favor, not earned by human effort.",
+      "d": "That God only gives grace to those who deserve it."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that human beings are capable of saving themselves through their own moral efforts.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the primary role of the Church in 'missions'?",
+    "options": {
+      "a": "To spread the Gospel and make disciples among all peoples.",
+      "b": "To provide humanitarian aid only.",
+      "c": "To establish political dominance globally.",
+      "d": "To conquer foreign lands."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "Which theological figure was a key proponent of the doctrine of justification by faith alone?",
+    "options": {
+      "a": "Augustine of Hippo",
+      "b": "Thomas Aquinas",
+      "c": "John Wesley",
+      "d": "Martin Luther"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'Vicarious Atonement' means that Christ's death was what?",
+    "options": {
+      "a": "A substitutionary sacrifice, where He died in place of sinners.",
+      "b": "A symbolic act that didn't affect anyone's salvation.",
+      "c": "An example of how to live a good life.",
+      "d": "A demonstration of God's love without any real penalty."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Bible teaches that God is both just and merciful.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  },
+  {
+    "question": "What is the theological term for the study of salvation?",
+    "options": {
+      "a": "Ecclesiology",
+      "b": "Eschatology",
+      "c": "Soteriology",
+      "d": "Bibliology"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "theology_doctrine",
+    "approved": true
+  }
+]

@@ -1,0 +1,1528 @@
+[
+  {
+    "question": "In Matthew's genealogy of Jesus, who was the father of Salmon?",
+    "options": {
+      "a": "Amminadab",
+      "b": "Ram",
+      "c": "Nahshon",
+      "d": "Judah"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "What specific physical ailment did the two blind men call out to Jesus about in Matthew 9, after He left Capernaum?",
+    "options": {
+      "a": "They were demon-possessed",
+      "b": "They were sons of David",
+      "c": "They were born blind",
+      "d": "They were in need of healing"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 10, when Jesus sent out the twelve disciples, which of these instructions did He *not* give them?",
+    "options": {
+      "a": "Do not go among the Gentiles or enter any town of the Samaritans.",
+      "b": "Do not greet anyone along the road.",
+      "c": "Take no gold or silver or copper in your belts.",
+      "d": "Carry no bag for the journey, or two tunics, or sandals, or a staff."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 16, which of these did Jesus explicitly state the Son of Man must do?",
+    "options": {
+      "a": "Suffer many things and be killed, but not yet raised",
+      "b": "Suffer many things, be killed, and be raised on the third day",
+      "c": "Only be raised on the third day after a brief suffering",
+      "d": "Rule as King from Jerusalem"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to Mark's Gospel, what was the specific occupation of James and John, sons of Zebedee, when Jesus called them?",
+    "options": {
+      "a": "Fishermen mending nets",
+      "b": "Shepherds",
+      "c": "Carpenters",
+      "d": "Tax collectors"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Mark 5, when Jesus healed the Gerasene demoniac, what was the approximate number of pigs that drowned in the sea?",
+    "options": {
+      "a": "About 500",
+      "b": "About 2,000",
+      "c": "About 3,000",
+      "d": "About 1,000"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Mark's Gospel, what specific title did Bartimaeus use when he called out to Jesus for healing near Jericho?",
+    "options": {
+      "a": "Son of David, have mercy on me",
+      "b": "Rabbi, Son of God",
+      "c": "Lord, have mercy",
+      "d": "Prophet of Nazareth"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Luke 1, what was the name of the town where Zechariah and Elizabeth lived?",
+    "options": {
+      "a": "Nazareth",
+      "b": "A town in the hill country of Judah",
+      "c": "Bethlehem",
+      "d": "Capernaum"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Luke 2, during the census, what was the name of the governor of Syria mentioned by Luke?",
+    "options": {
+      "a": "Quirinius",
+      "b": "Pontius Pilate",
+      "c": "Herod Antipas",
+      "d": "Caesar Augustus"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In the parable of the Good Samaritan (Luke 10), how much money did the Samaritan give the innkeeper to care for the injured man?",
+    "options": {
+      "a": "Two denarii",
+      "b": "Three denarii",
+      "c": "One denarius",
+      "d": "Four denarii"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Luke 15, how many silver coins did the woman in the parable of the lost coin lose?",
+    "options": {
+      "a": "Four",
+      "b": "One",
+      "c": "Three",
+      "d": "Two"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to John 1, which of these individuals did Andrew *not* bring to Jesus?",
+    "options": {
+      "a": "His brother Simon",
+      "b": "Philip",
+      "c": "None of the above (he only brought Simon)",
+      "d": "Nathaniel"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In John 6, after Jesus fed the five thousand, what was the number of baskets of leftover pieces of barley loaves collected?",
+    "options": {
+      "a": "Fifteen",
+      "b": "Seven",
+      "c": "Ten",
+      "d": "Twelve"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "According to John's Gospel, at approximately what hour was Jesus delivered to be crucified?",
+    "options": {
+      "a": "The ninth hour",
+      "b": "The sixth hour",
+      "c": "The twelfth hour",
+      "d": "The third hour"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "After Judas Iscariot's death, who was chosen by lot to replace him among the twelve apostles?",
+    "options": {
+      "a": "Barnabas",
+      "b": "Justus",
+      "c": "Matthias",
+      "d": "Stephen"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 6, how many men were chosen by the disciples to serve tables and distribute food to the Hellenistic widows?",
+    "options": {
+      "a": "Seven",
+      "b": "Five",
+      "c": "Twelve",
+      "d": "Nine"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 9, when Paul (Saul) was blinded on the road to Damascus, who was the disciple in Damascus sent by the Lord to restore his sight?",
+    "options": {
+      "a": "Silas",
+      "b": "Barnabas",
+      "c": "Philip",
+      "d": "Ananias"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 10, Cornelius was a centurion of which specific Roman military cohort?",
+    "options": {
+      "a": "The Augustan Cohort",
+      "b": "The Praetorian Cohort",
+      "c": "The Syrian Cohort",
+      "d": "The Italian Cohort"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 13, Paul encountered a Jewish sorcerer and false prophet on the island of Cyprus. What was his other name, besides Bar-Jesus?",
+    "options": {
+      "a": "Sceva",
+      "b": "Elymas",
+      "c": "Simon",
+      "d": "Demetrius"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 16, what was the name of the fortune-telling slave girl in Philippi whom Paul cast a demon out of?",
+    "options": {
+      "a": "Priscilla",
+      "b": "Lydia",
+      "c": "No specific name is given",
+      "d": "Euodia"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 19, what was the name of the town clerk who quelled the riot started by Demetrius in Ephesus?",
+    "options": {
+      "a": "Aristarchus",
+      "b": "No specific name is given",
+      "c": "Gaius",
+      "d": "Alexander"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 21, what was the name of the Ephesian Gentile whom Jews from Asia falsely accused Paul of bringing into the temple?",
+    "options": {
+      "a": "Titus",
+      "b": "Erastus",
+      "c": "Trophimus",
+      "d": "Timothy"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Romans 16, Paul greets a woman named Phoebe, identifying her as a 'deacon' (or 'servant') of the church in what specific city?",
+    "options": {
+      "a": "Corinth",
+      "b": "Cenchreae",
+      "c": "Philippi",
+      "d": "Ephesus"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Romans 16, how many specific individuals does Paul greet by name, including Phoebe and Gaius?",
+    "options": {
+      "a": "More than 20",
+      "b": "Fewer than 10",
+      "c": "Between 15 and 20",
+      "d": "Between 10 and 15"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 1, which of these individuals did Paul explicitly state he had baptized?",
+    "options": {
+      "a": "The household of Stephanas",
+      "b": "Crispus",
+      "c": "Gaius",
+      "d": "All of the above"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 7, Paul provides specific instructions regarding marriage. For those who are married, he states that a husband should fulfill his marital duty to his wife, and likewise the wife to her husband, except for what specific reason?",
+    "options": {
+      "a": "If they are separated for a period",
+      "b": "For a time of fasting and prayer",
+      "c": "If one of them is an unbeliever",
+      "d": "For the sake of ministry"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 2 Corinthians 8, Paul encourages the Corinthians to excel in the grace of giving, citing the example of the churches in what specific region?",
+    "options": {
+      "a": "Asia",
+      "b": "Macedonia",
+      "c": "Achaia",
+      "d": "Galatia"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 2 Corinthians 12, to which specific \"heaven\" did Paul describe being caught up?",
+    "options": {
+      "a": "The third heaven",
+      "b": "The second heaven",
+      "c": "The first heaven",
+      "d": "The seventh heaven"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Galatians 2, Paul recounts confronting Peter in Antioch for withdrawing from Gentile believers due to fear of believers who came from what specific individual?",
+    "options": {
+      "a": "Apollos",
+      "b": "James",
+      "c": "Barnabas",
+      "d": "John"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Ephesians 6, Paul encourages children to obey their parents \"in the Lord,\" and then cites which of the Ten Commandments as the first commandment with a promise?",
+    "options": {
+      "a": "You shall not murder.",
+      "b": "You shall not steal.",
+      "c": "Honor your father and mother.",
+      "d": "You shall not bear false witness."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Philippians 2, when Christ Jesus, being in the form of God, emptied himself, what specific form did he take?",
+    "options": {
+      "a": "The form of a servant",
+      "b": "The form of a high priest",
+      "c": "The form of a king",
+      "d": "The form of an angel"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Colossians 4, Paul lists several co-workers and mentions that Aristarchus is his fellow prisoner. Which other person does he mention as a fellow prisoner?",
+    "options": {
+      "a": "Tychicus",
+      "b": "Epaphras",
+      "c": "Mark",
+      "d": "Jesus, who is called Justus"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Thessalonians 5, Paul instructs believers to \"greet one another with a holy kiss.\" What specific greeting does he mention in 2 Thessalonians 3?",
+    "options": {
+      "a": "Grace to you and peace.",
+      "b": "Grace be with you.",
+      "c": "The Lord be with you all.",
+      "d": "Our brother be with you."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Timothy 1, Paul warns against those who \"desire to be teachers of the law, without understanding either what they are saying or the things about which they make confident assertions.\" He then explicitly names two individuals who have rejected faith and a good conscience. Who are they?",
+    "options": {
+      "a": "Philetus and Hermogenes",
+      "b": "Demas and Crescens",
+      "c": "Phygelus and Hermogenes",
+      "d": "Hymenaeus and Alexander"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 2 Timothy 4, Paul states that Demas deserted him because he loved this present world.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Titus 1, Paul lists qualifications for elders. Which of these is *not* explicitly mentioned as a qualification?",
+    "options": {
+      "a": "Not given to much wine",
+      "b": "Hospitable",
+      "c": "Able to speak in tongues",
+      "d": "Self-controlled"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Philemon, Paul asks Philemon to receive Onesimus back, not as a slave, but as a beloved brother. What was the specific relationship between Philemon and Onesimus *before* Onesimus fled?",
+    "options": {
+      "a": "Master and slave",
+      "b": "Fellow believers",
+      "c": "Employer and employee",
+      "d": "Father and son"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Hebrews 11, the \"faith chapter,\" who is mentioned as being translated so that he should not see death?",
+    "options": {
+      "a": "Enoch",
+      "b": "Abraham",
+      "c": "Moses",
+      "d": "Elijah"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Hebrews 12 encourages believers to lay aside every weight and sin which clings so closely, and to run with endurance the race that is set before us, looking to Jesus, the founder and perfecter of our faith.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In James 5, what specific Old Testament prophet is given as an example of patient endurance and prayer?",
+    "options": {
+      "a": "Jeremiah",
+      "b": "Daniel",
+      "c": "Elijah",
+      "d": "Isaiah"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Peter 3, Peter instructs wives to be submissive to their husbands, and then presents which Old Testament woman as an example of obedience?",
+    "options": {
+      "a": "Rebekah",
+      "b": "Leah",
+      "c": "Rachel",
+      "d": "Sarah"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 2 Peter 2, Peter mentions Balaam as an example of those who follow destructive ways.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 John 2, the apostle writes about \"antichrists\" and says that they went out from \"us\" because they were not truly of \"us.\" What specific time period does he identify for the presence of these antichrists?",
+    "options": {
+      "a": "The last days",
+      "b": "The great tribulation",
+      "c": "The end of the age",
+      "d": "The last hour"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 3 John, John commends Gaius for his faithfulness and mentions a proud individual who does not acknowledge John's authority and even puts people out of the church. What is this individual's name?",
+    "options": {
+      "a": "Demetrius",
+      "b": "Diotrephes",
+      "c": "Alexander",
+      "d": "Artemas"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "Jude's epistle explicitly mentions that the archangel Michael contended with the devil over the body of Moses.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 2, Jesus addresses the church in Thyatira and rebukes them for tolerating a woman who calls herself a prophetess and leads His servants into sexual immorality and eating food sacrificed to idols. What name is given to this woman?",
+    "options": {
+      "a": "Delilah",
+      "b": "Jezebel",
+      "c": "Salome",
+      "d": "Athaliah"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 6, when the Lamb opens the sixth seal, a great earthquake occurs. The sun becomes black as sackcloth, and the moon becomes like blood. What specific fruit tree sheds its untimely fruit as part of this judgment?",
+    "options": {
+      "a": "Olive tree",
+      "b": "Grapevine",
+      "c": "Fig tree",
+      "d": "Cedar tree"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 9, the fifth trumpet judgment releases locusts that torment men for five months, and their king is named Abaddon in Hebrew and Apollyon in Greek.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 20, after the thousand years, Satan is released from his prison and goes out to deceive the nations at the four corners of the earth, Gog and Magog, to gather them for battle. What is the approximate number of these gathered armies?",
+    "options": {
+      "a": "As the stars of heaven",
+      "b": "As the dust of the earth",
+      "c": "As the leaves of the trees",
+      "d": "As the sands of the sea"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 20, when Jesus tells the parable of the laborers in the vineyard, what was the agreed-upon wage for those hired first?",
+    "options": {
+      "a": "A denarius",
+      "b": "A silver coin",
+      "c": "Two drachmas",
+      "d": "A shekel"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "For how many pieces of silver did Judas agree to betray Jesus?",
+    "options": {
+      "a": "30",
+      "b": "20",
+      "c": "40",
+      "d": "50"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Mark 7, Jesus declares all foods clean. He states that it is not what goes into a person that defiles them, but what comes out. What specific part of the body does He say these evil thoughts, sexual immorality, theft, murder, etc., come from?",
+    "options": {
+      "a": "The mind",
+      "b": "The heart",
+      "c": "The soul",
+      "d": "The spirit"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Luke 7, a Roman centurion sends elders of the Jews to Jesus to heal his servant. What specific reason do the elders give to Jesus as to why the centurion is worthy?",
+    "options": {
+      "a": "He has provided much charity to the poor.",
+      "b": "He is a man of great faith.",
+      "c": "He loves our nation and built us a synagogue.",
+      "d": "He is a Roman official."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Luke 12, Jesus tells the parable of the rich fool, whose land produced abundantly. The rich man decided to pull down his barns and build larger ones. How many new barns did he plan to build?",
+    "options": {
+      "a": "Four",
+      "b": "Two",
+      "c": "Three",
+      "d": "The text does not specify a number."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "For how many years had the paralytic at Bethesda been an invalid?",
+    "options": {
+      "a": "38",
+      "b": "28",
+      "c": "30",
+      "d": "40"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In John 11, when Lazarus was raised from the dead, which of his sisters explicitly stated, \"Lord, if you had been here, my brother would not have died\"?",
+    "options": {
+      "a": "Mary",
+      "b": "Joanna",
+      "c": "Martha",
+      "d": "Salome"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In John 18, when Jesus was arrested, which disciple drew a sword and cut off the right ear of the high priest's servant?",
+    "options": {
+      "a": "Thomas",
+      "b": "James",
+      "c": "Andrew",
+      "d": "Peter"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 14, after Paul healed a lame man in Lystra, the people thought Paul and Barnabas were gods. Which god did they mistake Barnabas for?",
+    "options": {
+      "a": "Apollo",
+      "b": "Hermes",
+      "c": "Zeus",
+      "d": "Ares"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "From which philosopher/poet did Paul quote on Mars Hill (Areopagus) in Athens, saying \"For in him we live and move and have our being\"?",
+    "options": {
+      "a": "Plato",
+      "b": "Socrates",
+      "c": "Epimenides",
+      "d": "Aratus"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 18, Aquila and Priscilla encountered a fervent preacher in Ephesus who was eloquent and had a thorough knowledge of the Scriptures, but only knew the baptism of John. What was his name?",
+    "options": {
+      "a": "Timothy",
+      "b": "Titus",
+      "c": "Silas",
+      "d": "Apollos"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 27, Paul was shipwrecked on the island of Malta. What was the name of the leading official of the island who received them hospitably and whose father Paul healed?",
+    "options": {
+      "a": "Agrippa",
+      "b": "Felix",
+      "c": "Publius",
+      "d": "Festus"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Romans 1, Paul states that he is eager to preach the gospel to those in Rome. What does he explicitly say is the power of God for salvation to everyone who believes?",
+    "options": {
+      "a": "The Gospel",
+      "b": "Righteousness",
+      "c": "Faith",
+      "d": "The Law"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Romans 12, Paul instructs believers to \"be transformed by the renewing of your mind,\" so that they may discern what is the will of God, what is good and acceptable and perfect.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 15, Paul refers to Christ appearing to Cephas, then to the twelve, then to more than how many brothers at one time?",
+    "options": {
+      "a": "500",
+      "b": "300",
+      "c": "1000",
+      "d": "400"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 2 Corinthians 11, Paul boasts about his sufferings for Christ. He mentions being shipwrecked how many times?",
+    "options": {
+      "a": "Four times",
+      "b": "Twice",
+      "c": "Three times",
+      "d": "Once"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Galatians 3, Paul argues that the Law was added because of transgressions, until the seed to whom the promise referred had come.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Ephesians 4, Paul lists different leadership gifts Christ gave to the church: apostles, prophets, evangelists, pastors, and what other role?",
+    "options": {
+      "a": "Deacons",
+      "b": "Bishops",
+      "c": "Teachers",
+      "d": "Elders"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Philippians 4, Paul urges two specific women in the church to agree in the Lord. What are their names?",
+    "options": {
+      "a": "Euodia and Syntyche",
+      "b": "Mary and Martha",
+      "c": "Priscilla and Phoebe",
+      "d": "Lois and Eunice"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Colossians 3, Paul instructs believers to \"set your minds on things that are above, not on things that are on earth.\" He then tells them their life is hidden with Christ in God. What does he say they have died to?",
+    "options": {
+      "a": "The world",
+      "b": "The Law",
+      "c": "Sin",
+      "d": "Former way of life"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Thessalonians 4, Paul instructs believers about those who have fallen asleep in Christ. He states that the dead in Christ will rise first, and then those who are alive and remain will be caught up together with them in the clouds to meet the Lord in the air. What is the specific Greek term used to describe this \"catching up\"?",
+    "options": {
+      "a": "Harpazo",
+      "b": "Parousia",
+      "c": "Apocalypse",
+      "d": "Kerygma"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 2 Thessalonians 2, Paul warns about the \"man of lawlessness\" who will be revealed, and states that this mystery of lawlessness is already at work.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Timothy 3, Paul gives qualifications for overseers (bishops) and deacons. For overseers, he states they must not be a recent convert, so that they may not become conceited and fall into what specific condemnation?",
+    "options": {
+      "a": "The condemnation of the world",
+      "b": "The condemnation of false teachers",
+      "c": "The condemnation of the devil",
+      "d": "The condemnation of the Law"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 2 Timothy 1, Paul reminds Timothy of the sincere faith that first lived in his grandmother, Lois, and then in his mother. What was his mother's name?",
+    "options": {
+      "a": "Phoebe",
+      "b": "Eunice",
+      "c": "Syntyche",
+      "d": "Priscilla"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Titus 3, Paul instructs Titus to remind believers to be submissive to rulers and authorities, to be obedient, to be ready for every good work, to speak evil of no one, to avoid quarreling, to be gentle, and to show perfect courtesy toward all people. He then says to warn a divisive person how many times before having nothing more to do with him?",
+    "options": {
+      "a": "Once",
+      "b": "Three times",
+      "c": "Four times",
+      "d": "Twice"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Philemon, Paul asks Philemon to prepare a guest room for him, hoping he will be restored to Philemon through Philemon's prayers.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Hebrews 1, the author lists several ways God spoke in the past. To whom does he say God spoke \"at many times and in various ways\"?",
+    "options": {
+      "a": "The priests",
+      "b": "The prophets",
+      "c": "The angels",
+      "d": "The patriarchs"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In James 1, James encourages believers to count it all joy when they meet trials of various kinds, knowing that the testing of their faith produces what specific quality?",
+    "options": {
+      "a": "Patience",
+      "b": "Perseverance",
+      "c": "Endurance",
+      "d": "Hope"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Peter 5, Peter instructs the elders to shepherd the flock of God among them, exercising oversight, not under compulsion, but willingly, as God would have you, not for shameful gain, but eagerly.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 2 Peter 3, Peter reminds believers that with the Lord one day is as a thousand years, and a thousand years as one day. He then states that the Lord is not slow to fulfill his promise as some count slowness, but is what?",
+    "options": {
+      "a": "Patient toward us",
+      "b": "Patient toward you",
+      "c": "Full of grace",
+      "d": "Long-suffering toward us"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 John 4, John encourages believers to test the spirits, for many false prophets have gone out into the world. What is the specific test he gives to discern a spirit from God?",
+    "options": {
+      "a": "Every spirit that confesses the resurrection of Jesus is from God.",
+      "b": "Every spirit that confesses that Jesus Christ has come in the flesh is from God.",
+      "c": "Every spirit that confesses Jesus Christ as God is from God.",
+      "d": "Every spirit that confesses that Jesus is Lord is from God."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 2 John, the Elder writes to \"the elect lady and her children.\" What does he say is the truth that abides in us and will be with us forever?",
+    "options": {
+      "a": "The Word",
+      "b": "Grace",
+      "c": "The Holy Spirit",
+      "d": "Love"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 1, John sees a vision of the glorified Christ. From His mouth came a sharp, double-edged sword, and His face was like what?",
+    "options": {
+      "a": "Pure gold",
+      "b": "The sun shining in full strength",
+      "c": "Blazing fire",
+      "d": "A brilliant star"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 3, Jesus addresses the church in Laodicea. He tells them they are neither hot nor cold, but lukewarm. What does he threaten to do to them because of this?",
+    "options": {
+      "a": "Remove their lampstand",
+      "b": "Take away their crown",
+      "c": "Send them into tribulation",
+      "d": "Vomit them out of His mouth"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 7, John hears the number of those who were sealed, 144,000, from every tribe of the sons of Israel.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 13, the beast from the earth, which has two horns like a lamb but speaks like a dragon, performs great signs, even making fire come down from heaven. What specific mark does it cause all people, both small and great, rich and poor, free and slave, to receive?",
+    "options": {
+      "a": "A mark on their forehead or on their left hand",
+      "b": "A mark on their left hand or on their neck",
+      "c": "A mark on their right hand or on their neck",
+      "d": "A mark on their forehead or on their right hand"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 14, John sees the Lamb standing on Mount Zion with the 144,000 who have his name and his Father's name written on their foreheads. What specific characteristic is attributed to these 144,000, indicating their purity?",
+    "options": {
+      "a": "All of the above",
+      "b": "They follow the Lamb wherever he goes",
+      "c": "They are virgins",
+      "d": "They have been redeemed from the earth"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 17, the great prostitute sits on a scarlet beast, full of blasphemous names, with seven heads and ten horns. The woman is arrayed in purple and scarlet, and adorned with gold, precious stones, and pearls, holding a golden cup full of abominations.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 21, the new Jerusalem is described. Its wall is great and high, with twelve gates, and at the gates, twelve angels. The wall has twelve foundations, and on them are the names of what?",
+    "options": {
+      "a": "The twelve tribes of Israel",
+      "b": "The twelve patriarchs",
+      "c": "The twelve apostles of the Lamb",
+      "d": "The twelve sons of Jacob"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 13, Jesus tells the parable of the sower. What specific bird is mentioned as coming and eating the seed sown along the path?",
+    "options": {
+      "a": "Crows",
+      "b": "Sparrows",
+      "c": "Ravens",
+      "d": "Birds of the air"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Mark 14, when Jesus was in Bethany at the house of Simon the leper, a woman came with an alabaster flask of very expensive ointment. What was the specific substance of this ointment?",
+    "options": {
+      "a": "Aloes",
+      "b": "Frankincense",
+      "c": "Pure nard",
+      "d": "Myrrh"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Luke 19, when Jesus entered Jericho, he encountered a chief tax collector who was short in stature and climbed a sycamore fig tree to see Jesus. What was his name?",
+    "options": {
+      "a": "Levi",
+      "b": "Zacchaeus",
+      "c": "Matthew",
+      "d": "Simon"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In John 21, after His resurrection, Jesus asked Peter three times, \"Do you love me?\"",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 20, as Paul was speaking in Troas, a young man named Eutychus fell asleep and fell out of a third-story window. What specific event, often associated with other New Testament miracles, *did not* happen next?",
+    "options": {
+      "a": "They broke bread and ate.",
+      "b": "Paul restored him to life.",
+      "c": "Paul continued his discourse until daybreak.",
+      "d": "A collection of food was taken."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Romans 14, Paul instructs believers not to pass judgment on one another over disputable matters. He states that \"one person esteems one day as better than another, while another esteems all days alike.\" To whom does each person do this?",
+    "options": {
+      "a": "To their conscience",
+      "b": "To themselves",
+      "c": "To God",
+      "d": "To the Lord"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 10, Paul warns against idolatry and uses Old Testament examples. He mentions that the Israelites provoked the Lord and how many fell in one day because of immorality?",
+    "options": {
+      "a": "24,000",
+      "b": "10,000",
+      "c": "3,000",
+      "d": "23,000"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Galatians 3, Paul states that the Law came how many years after the covenant with Abraham?",
+    "options": {
+      "a": "430 years",
+      "b": "330 years",
+      "c": "530 years",
+      "d": "630 years"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Ephesians 4, Paul encourages believers to \"be angry and do not sin; do not let the sun go down on your anger.\" What specific opportunity does he say unmanaged anger gives?",
+    "options": {
+      "a": "To the flesh",
+      "b": "To bitterness",
+      "c": "To the devil",
+      "d": "To temptation"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Hebrews 6, the author warns against falling away and mentions six foundational doctrines of Christ. Which of these is *not* one of the six mentioned?",
+    "options": {
+      "a": "The necessity of spiritual gifts",
+      "b": "Repentance from dead works",
+      "c": "Faith toward God",
+      "d": "Doctrine of baptisms"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 16, the seventh angel pours out his bowl into the air, and a loud voice from the throne cries out, \"It is done!\" What specific physical phenomenon is described as accompanying this final bowl judgment, unprecedented in human history?",
+    "options": {
+      "a": "Every mountain and island vanishes",
+      "b": "An earthquake so severe that no such earthquake has occurred since mankind has been on earth.",
+      "c": "A hailstorm with stones weighing about a talent each",
+      "d": "The sun scorches people with fire"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Matthew 22, Jesus tells the parable of the wedding feast. When the king sends his servants to invite guests, and they refuse, where does the king instruct his servants to go next to invite new guests?",
+    "options": {
+      "a": "To the surrounding villages",
+      "b": "To the marketplace",
+      "c": "To the temples",
+      "d": "To the highways and byways"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Mark 9, Jesus tells His disciples that if anyone would be first, he must be last of all and what else?",
+    "options": {
+      "a": "A friend to all",
+      "b": "A leader among all",
+      "c": "A teacher of all",
+      "d": "A servant of all"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Luke 14, Jesus tells a parable about inviting guests to a great banquet. He says that when you give a feast, you should not invite your friends, brothers, relatives, or rich neighbors. Who does he say you should invite instead?",
+    "options": {
+      "a": "The Gentiles and Samaritans",
+      "b": "The children and the elderly",
+      "c": "The poor, the crippled, the lame, the blind",
+      "d": "The tax collectors and sinners"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In John 10, Jesus declares, \"I am the good shepherd.\" What does He say the good shepherd does for his sheep?",
+    "options": {
+      "a": "He lays down his life for the sheep",
+      "b": "He protects them from wolves",
+      "c": "He leads them to green pastures",
+      "d": "He knows them by name"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Acts 16, Paul and Silas are in prison in Philippi. At midnight, what specific activity were they engaged in before the earthquake?",
+    "options": {
+      "a": "Praying and singing hymns to God",
+      "b": "Planning their escape",
+      "c": "Debating",
+      "d": "Sleeping"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Romans 15, Paul states his ambition was to preach the gospel where Christ had not been named. From what specific geographic location does he claim to have fully preached the gospel all the way to Illyricum?",
+    "options": {
+      "a": "Antioch",
+      "b": "Corinth",
+      "c": "Ephesus",
+      "d": "Jerusalem"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 12, Paul discusses spiritual gifts. How many different manifestations of the Spirit does he list in verses 8-10?",
+    "options": {
+      "a": "Ten",
+      "b": "Seven",
+      "c": "Eight",
+      "d": "Nine"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Galatians 5, Paul lists the fruit of the Spirit. Which of these is *not* explicitly listed among the fruit of the Spirit?",
+    "options": {
+      "a": "Humility",
+      "b": "Goodness",
+      "c": "Joy",
+      "d": "Peace"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Hebrews 10, the author encourages believers to hold fast to the confession of their hope without wavering. What specific Old Testament chapter is quoted to emphasize the need for endurance and faith in God's coming judgment and salvation?",
+    "options": {
+      "a": "Psalm 110",
+      "b": "Jeremiah 31",
+      "c": "Isaiah 53",
+      "d": "Habakkuk 2"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  },
+  {
+    "question": "In Revelation 19, John sees a vision of heaven opened and a white horse, whose rider is called \"Faithful and True.\" What is written on his robe and on his thigh?",
+    "options": {
+      "a": "King of Kings and Lord of Lords",
+      "b": "The Lamb of God",
+      "c": "Righteous Judge",
+      "d": "Alpha and Omega"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "challenger",
+    "category": "new_testament",
+    "approved": true
+  }
+]

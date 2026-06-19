@@ -1,0 +1,2298 @@
+[
+  {
+    "question": "Which of the following is NOT explicitly listed by Paul in Galatians 5:22-23 as a 'fruit of the Spirit', though it is a virtue highly valued in Christian discipleship?",
+    "options": {
+      "a": "Self-control",
+      "b": "Chastity",
+      "c": "Kindness",
+      "d": "Patience"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "According to the Didache, an early Christian manual, what specific days of the week were prescribed for fasting, distinguishing it from the Jewish custom?",
+    "options": {
+      "a": "Tuesdays and Thursdays",
+      "b": "Wednesdays and Fridays",
+      "c": "Sundays and Wednesdays",
+      "d": "Mondays and Fridays"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 8-10, Paul's primary concern regarding the eating of meat sacrificed to idols is rooted in what principle, distinct from a simple prohibition against idolatry?",
+    "options": {
+      "a": "The principle of maintaining ritual purity and avoiding defilement from pagan practices.",
+      "b": "The principle of distinguishing between food offered in private pagan rites and that sold openly in the market.",
+      "c": "The principle of not causing a weaker brother to stumble by exercising one's freedom.",
+      "d": "The principle that all food is permissible, as declared by Christ, and thus no food can be inherently evil."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which qualification for deacons listed in 1 Timothy 3:8-12 is explicitly NOT also listed as a qualification for overseers (elders) in the same chapter?",
+    "options": {
+      "a": "Not addicted to much wine.",
+      "b": "Not double-tongued.",
+      "c": "Husbands of one wife.",
+      "d": "Tested first; then let them serve as deacons if they prove themselves blameless."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to James 5:16, the prayer of a righteous person has great power as it is working, implying efficacy through an active and persistent practice.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In what specific context does Jesus commend the persistence of a widow in seeking justice, thereby teaching a principle about prayer?",
+    "options": {
+      "a": "The Parable of the Persistent Widow (Luke 18)",
+      "b": "The Parable of the Ten Virgins (Matthew 25)",
+      "c": "The Sermon on the Mount (Matthew 6)",
+      "d": "The Parable of the Friend at Midnight (Luke 11)"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which early church father controversially argued that the primary purpose of fasting is to subdue the flesh and make the body a more compliant instrument for the spirit, rather than primarily as an act of petition or mourning?",
+    "options": {
+      "a": "Augustine of Hippo",
+      "b": "Tertullian",
+      "c": "Clement of Alexandria",
+      "d": "Irenaeus of Lyons"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul writes in Philippians 2:5-8 about Christ 'emptying himself' (kenosis), what is the primary ethical implication he draws for Christian disciples?",
+    "options": {
+      "a": "The imperative to deny one's divine nature to fully embrace humanity.",
+      "b": "The rejection of all forms of worldly power and authority.",
+      "c": "The call to humble service and selfless regard for others.",
+      "d": "The necessity of absolute poverty for spiritual growth."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'mystery' of godliness, as described in 1 Timothy 3:16, primarily refers to the hidden and esoteric rituals practiced by the early Christian Gnostics.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which specific Old Testament book is most frequently cited in the New Testament to justify the principle of 'faith working through love' (Galatians 5:6) in practical ethics?",
+    "options": {
+      "a": "Isaiah",
+      "b": "Leviticus",
+      "c": "Hosea",
+      "d": "Deuteronomy"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the Sermon on the Mount, Jesus contrasts the righteousness of his followers with that of the Scribes and Pharisees, specifically warning against their practice of 'sounding a trumpet' during what spiritual discipline?",
+    "options": {
+      "a": "Prayer",
+      "b": "Public confession of sins",
+      "c": "Giving alms",
+      "d": "Fasting"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The concept of 'common grace' in Reformed theology asserts that God's benevolent provision and restraint of sin extends only to those who are elect.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Paul's instruction in 1 Corinthians 7 regarding marriage and celibacy for the sake of 'undivided devotion to the Lord' is best understood as:",
+    "options": {
+      "a": "A culturally conditioned recommendation for a specific period of distress.",
+      "b": "A universal command for all believers to remain single if possible.",
+      "c": "A theological argument for the inherent superiority of celibacy over marriage.",
+      "d": "A pragmatic exhortation for those called to intense ministry, allowing flexibility."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following descriptions best captures the essence of the 'disciple' (mathētēs) in the Gospels, particularly as distinct from a general 'follower'?",
+    "options": {
+      "a": "One who financially supports a religious teacher and promotes their message.",
+      "b": "One who has received special revelation or prophetic gifts from a divine figure.",
+      "c": "One who has entered into a covenant relationship of active learning and imitation of a master.",
+      "d": "One who merely adheres to the teachings of a master without personal commitment."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The early church's practice of 'holding all things in common' (Acts 2:44, 4:32) is most accurately described as:",
+    "options": {
+      "a": "An early form of socialism intended to abolish private property among Christians.",
+      "b": "A voluntary and Spirit-led sharing of resources to meet the needs within the community.",
+      "c": "Mandatory communal living and forced redistribution of wealth for all believers.",
+      "d": "A temporary measure during persecution that was not intended for long-term practice."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: John Calvin, in his Institutes, argued that the primary motive for Christian giving should be the expectation of material blessings in return, echoing the Old Testament prosperity promises.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following figures in the early church was specifically identified as having the primary responsibility of 'waiting on tables' (diakoneō) to ensure apostles could dedicate themselves to prayer and the ministry of the word?",
+    "options": {
+      "a": "Titus",
+      "b": "Timothy",
+      "c": "Stephen and the other seven appointed men",
+      "d": "Barnabas"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Jesus states, 'If anyone would come after me, let him deny himself and take up his cross daily and follow me' (Luke 9:23), the phrase 'take up his cross daily' primarily refers to:",
+    "options": {
+      "a": "Publicly identifying with Christ's suffering and potential martyrdom.",
+      "b": "Embracing a life of self-denial, submission to God's will, and radical obedience.",
+      "c": "Enduring minor inconveniences or personal annoyances in daily life.",
+      "d": "Engaging in acts of self-flagellation or ascetic practices to gain merit."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Peter, in his first epistle, encourages believers to be ready to make a defense (apologia) for their hope, but explicitly advises against doing so with gentleness and respect, as it might compromise conviction.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which specific passage in the New Testament contains an extended discussion on the spiritual discipline of 'discernment of spirits' as a gift and practice?",
+    "options": {
+      "a": "1 Corinthians 12:10",
+      "b": "Ephesians 6:10-18",
+      "c": "Hebrews 5:14",
+      "d": "Romans 12:6-8"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'adiaphora' in Christian ethics refers to:",
+    "options": {
+      "a": "Moral principles that are universally binding for all believers at all times.",
+      "b": "Practices or beliefs that are neither commanded nor forbidden by Scripture, thus morally indifferent.",
+      "c": "Divinely inspired truths that are revealed progressively through church tradition.",
+      "d": "Actions that are permissible for mature believers but forbidden for new converts."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul's counsel to the Thessalonians to 'not quench the Spirit' (1 Thessalonians 5:19) is primarily a warning against excessive emotionalism in worship, advocating for stoic self-control.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following best encapsulates the theological basis for 'discipleship relationships' (mentorship, accountability) as exemplified by Paul and Timothy?",
+    "options": {
+      "a": "A hierarchical structure designed to maintain apostolic authority and tradition.",
+      "b": "A system for ensuring financial support and social status for emerging ministry leaders.",
+      "c": "A formal induction process required for all who wish to enter full church membership.",
+      "d": "A practical means of transmitting sound doctrine and modeling Christian living for future leaders."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, the outpouring of the Holy Spirit at Pentecost leads to the apostles speaking in various languages, enabling them to communicate the Gospel to 'devout men from every nation under heaven.' This event most directly demonstrates which aspect of evangelism?",
+    "options": {
+      "a": "The necessity of miraculous signs to validate all evangelistic endeavors.",
+      "b": "The exclusive role of apostles in proclaiming the Gospel.",
+      "c": "The principle of contextualization in cross-cultural missions.",
+      "d": "The immediate and universal salvation of all who heard."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Desert Fathers, early Christian monastics, often emphasized a solitary life of asceticism and prayer as the exclusive path to spiritual perfection, discouraging communal worship.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which Roman Catholic theological concept, distinct from Protestant views of justification, emphasizes the ongoing process of transformation into Christ-likeness through cooperation with grace?",
+    "options": {
+      "a": "Sanctification",
+      "b": "Imputation",
+      "c": "Prevenient grace",
+      "d": "Infusion of grace"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The 'Great Commission' in Matthew 28:19-20 primarily emphasizes which two core components of discipleship?",
+    "options": {
+      "a": "Performing miracles and speaking in tongues to validate the message.",
+      "b": "Making disciples and teaching them to obey all of Christ's commands.",
+      "c": "Preaching the Gospel and establishing church hierarchies.",
+      "d": "Water baptism and strict adherence to Jewish law."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: In Ephesians 5:18, Paul's command to 'be filled with the Spirit' (plērousthe en Pneumati) is an imperative verb in the present continuous tense, suggesting a once-for-all event rather than an ongoing process.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which biblical book most extensively articulates the concept of 'spiritual warfare' as an aspect of daily Christian living, urging believers to 'put on the whole armor of God'?",
+    "options": {
+      "a": "Colossians",
+      "b": "2 Corinthians",
+      "c": "Romans",
+      "d": "Ephesians"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul writes in 2 Corinthians 9:7 that 'God loves a cheerful giver,' what is the broader context of his argument regarding generosity?",
+    "options": {
+      "a": "He is advocating for a system of tithing based on Old Testament law.",
+      "b": "He is establishing a new principle of proportional giving based on income.",
+      "c": "He is appealing for voluntary, joyful giving that springs from the heart, not compulsion.",
+      "d": "He is emphasizing that giving should primarily be for the support of apostles and missionaries."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The term 'hesed' in the Old Testament, often translated as 'steadfast love' or 'lovingkindness', primarily refers to an emotional feeling rather than a covenantal faithfulness expressed through actions.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The theological principle of 'vocation' in Protestant thought, particularly articulated by Martin Luther, primarily refers to:",
+    "options": {
+      "a": "The specific spiritual gifts given to individuals for service within the church.",
+      "b": "A call to full-time ministry as a pastor or missionary.",
+      "c": "The belief that all legitimate work, no matter how secular, can be a calling from God.",
+      "d": "The process of discerning God's extraordinary will for one's life through mystical experiences."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following hermeneutical approaches, often employed by early church fathers like Origen, sought to uncover a deeper, hidden spiritual meaning in Scripture beyond the literal text?",
+    "options": {
+      "a": "Contextual criticism",
+      "b": "Allegorical interpretation",
+      "c": "Narrative theology",
+      "d": "Historical-grammatical method"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: In Matthew 6, Jesus teaches his disciples to pray a 'Lord's Prayer' that is primarily a formulaic incantation to be repeated verbatim for maximum effect.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'eschatological tension' in Christian ethics refers to the believer living between what two realities?",
+    "options": {
+      "a": "The individual's personal salvation and the corporate salvation of the church.",
+      "b": "The Old Covenant Law and the New Covenant Grace.",
+      "c": "The 'already' of Christ's kingdom established and the 'not yet' of its full consummation.",
+      "d": "The spiritual realm and the material world."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, when Peter preaches at Pentecost, he directly quotes from which Old Testament prophet to explain the outpouring of the Holy Spirit?",
+    "options": {
+      "a": "Jeremiah",
+      "b": "Malachi",
+      "c": "Isaiah",
+      "d": "Joel"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The monastic movement, exemplified by figures like Benedict of Nursia, primarily sought to withdraw from all engagement with society, viewing it as inherently evil and irredeemable.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "According to Paul in Romans 12:1-2, the 'renewal of your mind' (anakainōsis tou noos) is essential for what practical outcome in Christian living?",
+    "options": {
+      "a": "To perform miraculous signs and wonders.",
+      "b": "To recall specific biblical passages verbatim.",
+      "c": "To achieve intellectual superiority over unbelievers.",
+      "d": "To discern the will of God and live transformed lives."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which passage in the Old Testament provides the primary context for Jesus' teaching on 'turning the other cheek' in the Sermon on the Mount, often mistakenly understood as a call to passive submission to evil?",
+    "options": {
+      "a": "Isaiah 50:6 ('I offered my back to those who beat me')",
+      "b": "Exodus 21:24 ('eye for an eye')",
+      "c": "Leviticus 19:18 ('love your neighbor')",
+      "d": "Deuteronomy 32:35 ('Vengeance is mine, says the Lord')"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The concept of 'spiritual disciplines' as a distinct category of practices for growth was largely systematized and popularized in the 20th century, though rooted in ancient Christian practices.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the Gospel of John, Jesus describes himself as 'the vine' and his disciples as 'the branches,' emphasizing which crucial aspect of spiritual growth?",
+    "options": {
+      "a": "The necessity of evangelism to spread the branches widely.",
+      "b": "The absolute dependence on Him for life and fruit-bearing.",
+      "c": "The importance of pruning through suffering for greater fruitfulness.",
+      "d": "The foundational role of rigorous theological study for disciples."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which significant early church council addressed the 'Arian controversy' and affirmed the full deity of Christ, a foundational theological truth for understanding Christian ethics and discipleship?",
+    "options": {
+      "a": "Council of Chalcedon",
+      "b": "Council of Constantinople",
+      "c": "Council of Ephesus",
+      "d": "Council of Nicaea"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The practice of 'lectio divina' involves primarily analytical and critical study of the biblical text to extract propositional truths.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "According to the Apostle John, 'perfect love casts out fear' (1 John 4:18). This statement primarily relates to:",
+    "options": {
+      "a": "A mystical experience of divine love that removes all emotional distress.",
+      "b": "The assurance of salvation and freedom from the fear of judgment.",
+      "c": "A call to eradicate all natural human fears through sheer willpower.",
+      "d": "The ability to perform acts of courage without any apprehension."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Jesus warns against serving two masters, God and 'Mammon' (Matthew 6:24), 'Mammon' is best understood as:",
+    "options": {
+      "a": "An impersonal force or personification of wealth and material possessions.",
+      "b": "The Roman economic system that oppressed the poor.",
+      "c": "A demonic entity responsible for tempting people with greed.",
+      "d": "A specific pagan deity worshipped in the ancient Near East."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The ethical teaching of 'lex talionis' ('an eye for an eye') in the Old Testament was intended to promote indiscriminate revenge rather than to limit retribution to proportionate justice.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'corporate responsibility' in the Old Testament, where the actions of an individual could affect an entire family or nation, is best exemplified by the story of:",
+    "options": {
+      "a": "Abraham's covenant with God.",
+      "b": "Noah and the flood.",
+      "c": "Achan's sin at Jericho.",
+      "d": "David and Goliath."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which early Christian apologist famously stated, 'The blood of the martyrs is seed,' emphasizing the evangelistic power of suffering and persecution?",
+    "options": {
+      "a": "Ignatius of Antioch",
+      "b": "Tertullian",
+      "c": "Polycarp of Smyrna",
+      "d": "Justin Martyr"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: According to the Westminster Confession of Faith, good works are meritorious and contribute to a believer's justification before God.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The Pauline concept of 'dying to self' (e.g., Romans 6, Galatians 2:20) is best understood as:",
+    "options": {
+      "a": "An ascetic denial of all pleasure and comfort.",
+      "b": "A passive resignation to fate and circumstance.",
+      "c": "A radical reorientation of one's desires and will from self to Christ.",
+      "d": "A literal spiritual death followed by instantaneous resurrection."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In what book and chapter does Paul discuss the spiritual gifts, emphasizing their diversity and unity within the body of Christ, and their purpose for building up the church?",
+    "options": {
+      "a": "Romans 8",
+      "b": "1 Corinthians 12",
+      "c": "Ephesians 4",
+      "d": "Hebrews 11"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Johannine imperative to 'love one another' (John 13:34-35) is presented as a distinguishing mark of Christian discipleship to the world, rather than solely an internal church matter.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following describes the theological tension addressed by Paul in Romans 7 regarding the believer's struggle with sin, even after conversion?",
+    "options": {
+      "a": "The ongoing battle between the regenerate spirit and the still-present sinful flesh.",
+      "b": "The tension between Old Testament law and New Testament grace.",
+      "c": "The struggle between communal harmony and individual spiritual pursuits.",
+      "d": "The conflict between justification by faith and justification by works."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'agape' love in the New Testament is often distinguished from 'eros' (romantic love) and 'philia' (brotherly love) by its primary characteristic of:",
+    "options": {
+      "a": "Self-sacrificing, benevolent, and unconditional regard for others.",
+      "b": "Reciprocal affection and mutual attraction.",
+      "c": "Passionate emotional attachment and desire.",
+      "d": "Loyalty and camaraderie among close friends."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The practice of 'tithing' in the New Testament is explicitly commanded for all believers as a universal and unchanging law for financial giving.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs frequently contrasts the 'wise' and the 'foolish,' primarily defining wisdom as:",
+    "options": {
+      "a": "Possession of worldly wealth and social influence.",
+      "b": "Skillful living in accordance with God's moral order and fear of the Lord.",
+      "c": "The ability to predict future events and interpret dreams.",
+      "d": "Accumulated intellectual knowledge and academic achievement."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following best describes the 'Great Commandment' as articulated by Jesus?",
+    "options": {
+      "a": "To go and make disciples of all nations.",
+      "b": "To love the Lord your God with all your heart, soul, mind, and strength, and to love your neighbor as yourself.",
+      "c": "To obey the Ten Commandments and the Mosaic Law.",
+      "d": "To believe in Him whom God has sent."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: In Reformed theology, the 'Marks of the Church' (pure preaching of the Gospel, proper administration of sacraments, exercise of church discipline) are primarily indicators of an individual's personal discipleship.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'theosis' or 'divinization' in Eastern Orthodox theology, related to sanctification and discipleship, refers to:",
+    "options": {
+      "a": "The deification of saints and their elevation to a status equal to the Holy Trinity.",
+      "b": "A philosophical doctrine about the inherent divinity of all creation.",
+      "c": "A process of becoming more like God through union with Christ and participation in divine energies.",
+      "d": "The belief that humans can become divine beings in the same way Christ is divine."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which Old Testament figure is highlighted in Hebrews 11 as a model of faith, specifically demonstrating obedience by offering his son, which is then connected to a concept of resurrection or divine provision?",
+    "options": {
+      "a": "Abraham",
+      "b": "Moses",
+      "c": "David",
+      "d": "Noah"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The book of Ecclesiastes advocates for a pessimistic and ultimately nihilistic view of life, concluding that all human effort is meaningless without any hope for purpose.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'anamnesis' in Christian worship and spiritual formation primarily refers to:",
+    "options": {
+      "a": "A powerful remembrance that makes a past event present and effective.",
+      "b": "A future prophetic vision of Christ's return.",
+      "c": "The ritualistic repetition of prayers without personal engagement.",
+      "d": "A psychological state of forgetfulness or spiritual amnesia."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which early church heresy denied the full humanity of Christ, thereby undermining the model for human discipleship and obedience?",
+    "options": {
+      "a": "Docetism",
+      "b": "Nestorianism",
+      "c": "Monophysitism",
+      "d": "Arianism"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The spiritual discipline of 'solitude' is primarily about physical isolation from others, implying a rejection of communal life as less spiritual.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In Philippians 4:8, Paul encourages believers to think about 'whatever is true, whatever is honorable, whatever is just, whatever is pure, whatever is lovely, whatever is commendable.' This exhortation directly relates to the spiritual discipline of:",
+    "options": {
+      "a": "Acts of service",
+      "b": "Fasting",
+      "c": "Contemplation and meditation",
+      "d": "Evangelism"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'the two kingdoms' (civic and spiritual), often associated with Martin Luther, primarily relates to how Christians should approach their engagement with:",
+    "options": {
+      "a": "Personal piety versus communal worship.",
+      "b": "The realm of secular government and the spiritual rule of Christ.",
+      "c": "Divine revelation versus natural reason.",
+      "d": "Church governance versus individual conscience."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul, in Romans 13, unequivocally states that Christians are obligated to obey all government authority without exception, even if those authorities command sinful acts.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following best describes the historical context and purpose of the 'Rule of St. Benedict'?",
+    "options": {
+      "a": "A practical guide for monastic living, emphasizing prayer, work, and community.",
+      "b": "A theological defense of papal supremacy and ecclesiastical authority.",
+      "c": "A detailed legal code for regulating secular society based on biblical principles.",
+      "d": "A political treatise advocating for Christian emperors to govern justly."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The specific admonition in Hebrews 10:25, 'not neglecting to meet together, as is the habit of some,' primarily underscores the importance of which spiritual discipline?",
+    "options": {
+      "a": "Corporate worship and fellowship",
+      "b": "Private devotion",
+      "c": "Biblical study for personal edification",
+      "d": "Evangelistic outreach"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: Augustine of Hippo's concept of 'ordo amoris' (the order of loves) suggests that rightly ordered love places love for God above all else, and love for neighbor as flowing from that primary love.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Jesus tells the rich young ruler to 'sell all that you have and give to the poor' (Matthew 19:21), this command is best interpreted as:",
+    "options": {
+      "a": "A universal command for all disciples to embrace absolute poverty.",
+      "b": "A temporary directive applicable only to first-century Jewish society.",
+      "c": "A specific command to expose the ruler's idolatry of wealth.",
+      "d": "An optional suggestion for those seeking extra spiritual merit."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The 'imago Dei' (image of God) in theological anthropology primarily provides the ethical basis for:",
+    "options": {
+      "a": "The human capacity for sin and rebellion against God.",
+      "b": "Human dominion over creation and exploitation of natural resources.",
+      "c": "The hierarchical structure of human society, with some having more divine favor.",
+      "d": "The inherent dignity and value of every human being, regardless of status."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'Parable of the Talents' (Matthew 25:14-30) primarily teaches that believers should invest their spiritual gifts solely for personal spiritual growth, rather than for the benefit of the Kingdom.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT typically considered a component of the classical 'spiritual disciplines' as outlined by authors like Richard Foster?",
+    "options": {
+      "a": "Simplicity",
+      "b": "Confession",
+      "c": "Celebration",
+      "d": "Apologetics"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the context of Christian ethics, 'Natural Law' refers to:",
+    "options": {
+      "a": "Philosophical concepts derived independently of any religious belief.",
+      "b": "The specific laws given to Moses on Mount Sinai.",
+      "c": "The moral principles universally discernible by human reason, reflecting God's created order.",
+      "d": "The innate human tendency towards sin and self-preservation."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Paul's use of military metaphors in Ephesians 6 ('put on the whole armor of God') is a call for Christians to engage in literal physical warfare against spiritual enemies.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which prophet, often referred to as the 'weeping prophet,' emphasized the importance of a 'new covenant' where God would write his law on the hearts of his people?",
+    "options": {
+      "a": "Jeremiah",
+      "b": "Hosea",
+      "c": "Ezekiel",
+      "d": "Isaiah"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The Puritan concept of 'holy living' (or 'practical godliness') primarily emphasized:",
+    "options": {
+      "a": "The attainment of sinless perfection in this life.",
+      "b": "A rigorous pursuit of personal holiness and moral purity in all areas of life.",
+      "c": "The exclusive focus on inner spiritual experience over outward behavior.",
+      "d": "Strict adherence to monastic vows and ascetic practices."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'fruit of the Spirit' (Galatians 5:22-23) are primarily external behaviors that can be perfectly imitated by human effort, regardless of inner spiritual transformation.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'hesychasm' in Eastern Orthodoxy is a form of contemplative prayer that specifically involves:",
+    "options": {
+      "a": "Chanting the 'Jesus Prayer' with rhythmic breathing to achieve inner stillness.",
+      "b": "Engaging in vigorous intellectual debates about theological doctrines.",
+      "c": "Public recitation of creeds and confessions.",
+      "d": "Performing acts of penance and self-flagellation."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which Old Testament book, traditionally attributed to Solomon, offers practical advice for navigating complex ethical situations and making wise life choices?",
+    "options": {
+      "a": "Proverbs",
+      "b": "Ecclesiastes",
+      "c": "Job",
+      "d": "Psalms"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The early church's practice of catechesis was primarily a spontaneous, informal sharing of personal testimonies rather than a structured process of instruction for new believers.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul describes believers as 'ambassadors for Christ' in 2 Corinthians 5:20, he emphasizes their role in:",
+    "options": {
+      "a": "Proclaiming God's message of reconciliation to the world.",
+      "b": "Exercising diplomatic power and authority over nations.",
+      "c": "Representing Christ's political interests to earthly governments.",
+      "d": "Establishing new church plants in foreign lands."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'moral injury' in contemporary discussions of Christian ethics often refers to:",
+    "options": {
+      "a": "Psychological, spiritual, and social harm resulting from transgressions of deeply held moral beliefs.",
+      "b": "Physical harm sustained during ethical activism.",
+      "c": "Legal penalties incurred due to civil disobedience.",
+      "d": "The erosion of moral standards in a society over time."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The biblical concept of 'shepherding' (e.g., Psalm 23, John 10) in discipleship primarily highlights aggressive leadership and forceful direction of followers.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which specific Old Testament command is fulfilled by Christ's death according to Paul in Galatians 3:13, thereby freeing believers from the 'curse of the law'?",
+    "options": {
+      "a": "The command to offer sacrifices for sin.",
+      "b": "The command to keep the Sabbath holy.",
+      "c": "The command that 'Cursed is everyone who is hanged on a tree.'",
+      "d": "The command to circumcise male infants."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The ethical teaching on forgiveness, as modeled by Christ and taught by apostles, primarily emphasizes:",
+    "options": {
+      "a": "Forgetting the offense entirely without any emotional residue.",
+      "b": "Absolving the perpetrator of all consequences for their actions.",
+      "c": "Granting forgiveness only after the offender has fully repented and made restitution.",
+      "d": "A deliberate, costly act of releasing resentment and seeking reconciliation where possible."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The concept of 'adiaphoristic controversy' in church history refers to disputes over core doctrines of salvation, rather than matters of indifference.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In John 4, Jesus' encounter with the Samaritan woman at the well provides a model for evangelism that highlights:",
+    "options": {
+      "a": "The immediate conversion of individuals without any prior spiritual preparation.",
+      "b": "The importance of large public crusades to reach many people at once.",
+      "c": "The primary role of miracles in validating the evangelistic message.",
+      "d": "The necessity of challenging cultural and social barriers in sharing the Gospel."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which patristic writer developed the concept of 'spiritual senses' (sensus spiritualis) in interpreting Scripture, suggesting that the Holy Spirit illuminates deeper meanings for the spiritually mature?",
+    "options": {
+      "a": "Augustine of Hippo",
+      "b": "Jerome",
+      "c": "John Chrysostom",
+      "d": "Origen"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'Lordship Salvation' controversy primarily debated whether a believer must consciously acknowledge Jesus as Lord to be saved, or if mere belief in His deity is sufficient for salvation.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul instructs believers to 'redeem the time' (Ephesians 5:16, Colossians 4:5), he is emphasizing:",
+    "options": {
+      "a": "The careful and wise use of every opportunity, especially for spiritual purposes, because days are evil.",
+      "b": "The financial investment in profitable ventures to accumulate wealth for God's kingdom.",
+      "c": "The importance of celebrating holidays and festivals to honor God's timing.",
+      "d": "The practice of buying back time lost to sin through diligent spiritual disciplines."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following phrases is most closely associated with the concept of 'Christian Hedonism' as articulated by John Piper?",
+    "options": {
+      "a": "'God is most glorified in us when we are most satisfied in Him.'",
+      "b": "'Enjoy God forever.'",
+      "c": "'Take delight in the Lord, and he will give you the desires of your heart.'",
+      "d": "'Seek first the kingdom of God and his righteousness.'"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The early church's practice of 'disciplina arcani' (discipline of the secret) involved concealing certain sacred Christian rites and doctrines from uninitiated catechumens and outsiders.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, the conversion of the Ethiopian eunuch, facilitated by Philip, highlights the importance of which aspect of evangelism?",
+    "options": {
+      "a": "The immediate availability of baptism upon confession of faith.",
+      "b": "The necessity of traveling to foreign lands to share the Gospel.",
+      "c": "The need for a personal interpreter of Scripture.",
+      "d": "The power of dramatic signs and wonders to convince unbelievers."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which patristic writer, known for his 'Confessions,' detailed his own journey of conversion and grappling with sin, providing a classic example of spiritual autobiography?",
+    "options": {
+      "a": "Jerome",
+      "b": "Athanasius",
+      "c": "Tertullian",
+      "d": "Augustine of Hippo"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The concept of 'total depravity' in Reformed theology means that humans are utterly incapable of performing any acts of goodness or kindness.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which biblical term, often translated as 'fear of the Lord' (yir'at YHWH), encompasses reverence, awe, and humble obedience to God?",
+    "options": {
+      "a": "Mishpat",
+      "b": "Shalom",
+      "c": "Yirah",
+      "d": "Hesed"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The theological term 'imago Dei' (image of God) is crucial for Christian ethics because it implies that:",
+    "options": {
+      "a": "God is a personal being with human-like characteristics.",
+      "b": "All human life possesses intrinsic dignity and is worthy of respect.",
+      "c": "Only those who believe in God bear His image.",
+      "d": "Humans are inherently perfect and sinless."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Apostle Peter, in his epistles, frequently uses the metaphor of 'living stones' to describe individual believers, emphasizing their solitary spiritual journey independent of the church's collective structure.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which book of the New Testament features a detailed exploration of Christian ethics in various household codes, addressing relationships between husbands/wives, parents/children, and masters/slaves?",
+    "options": {
+      "a": "Galatians",
+      "b": "Ephesians",
+      "c": "Revelation",
+      "d": "Romans"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'eschatological hope' in Christian discipleship primarily involves:",
+    "options": {
+      "a": "A passive waiting for Christ's return without active engagement in the world.",
+      "b": "The belief that individual salvation is the ultimate and sole goal of faith.",
+      "c": "A confident expectation of Christ's future reign and the new heavens and new earth, motivating present action.",
+      "d": "A longing for an idealized past 'golden age' of the church."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'missio Dei' (mission of God) primarily refers to the church's independent evangelistic efforts, separate from God's overarching redemptive plan.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following spiritual disciplines is most directly related to the practice of 'examen' developed by Ignatius of Loyola?",
+    "options": {
+      "a": "Fasting",
+      "b": "Service to the poor",
+      "c": "Sacramental worship",
+      "d": "Confession and self-examination"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The ethical dilemma of 'moral relativism' is fundamentally challenged by the Christian worldview's affirmation of:",
+    "options": {
+      "a": "The existence of objective moral truths grounded in God's character.",
+      "b": "The autonomy of individual conscience in determining right and wrong.",
+      "c": "The subjective nature of personal spiritual experiences.",
+      "d": "The diversity of human cultures and traditions."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The term 'prophetic imagination' in Christian ethics refers to the ability to foresee future events, especially those related to the end times.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following best describes the historical concept of 'spiritual direction' in Christian tradition?",
+    "options": {
+      "a": "A formal process of appointing church leaders through divine revelation.",
+      "b": "A method of discerning God's specific will for one's life through mystical visions.",
+      "c": "A mentoring relationship focused on guiding an individual's spiritual growth and discerning God's presence.",
+      "d": "A hierarchical system of control over lay people by ecclesiastical authorities."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The theological concept of 'adoption' (huiothesia) in Pauline theology primarily refers to:",
+    "options": {
+      "a": "The legal act by which God makes believers His children with all attendant rights and privileges.",
+      "b": "The process of adapting one's lifestyle to conform to biblical standards.",
+      "c": "A spiritual discipline of embracing new cultures and traditions.",
+      "d": "The practice of Christians adopting orphaned children."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'anamnesis' of the Eucharist primarily involves a simple recollection of past events without any sense of present participation or efficacy.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following figures is known for advocating for a 'third way' of Christian ethics, distinct from both legalism and antinomianism, emphasizing a Christ-centered obedience rooted in grace?",
+    "options": {
+      "a": "John Wesley",
+      "b": "Dietrich Bonhoeffer",
+      "c": "Reinhold Niebuhr",
+      "d": "Immanuel Kant"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the Sermon on the Mount, Jesus teaches about prayer, specifically warning against the 'babbling' (battalogēsēte) of the Gentiles, which primarily refers to:",
+    "options": {
+      "a": "Praying in public places to be seen by men.",
+      "b": "Using pagan invocations and incantations.",
+      "c": "Speaking in unknown tongues without an interpreter.",
+      "d": "Lengthy and repetitive prayers intended to impress others or manipulate God."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The early church's use of the term 'martyr' (martys) initially referred exclusively to those who died for their faith, without encompassing witness through suffering.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The 'Moral Argument' for the existence of God, often employed in apologetics and undergirding Christian ethics, posits that:",
+    "options": {
+      "a": "Objective moral values and duties exist, which require a transcendent lawgiver.",
+      "b": "Morality is a purely subjective construct of human societies.",
+      "c": "All humans are inherently good and capable of discerning right from wrong.",
+      "d": "Religious belief is necessary for anyone to behave ethically."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which early church father, known for his work 'On Christian Doctrine,' articulated principles of biblical interpretation that distinguished between 'things to be enjoyed' (God) and 'things to be used' (creation)?",
+    "options": {
+      "a": "Irenaeus of Lyons",
+      "b": "Jerome",
+      "c": "Clement of Alexandria",
+      "d": "Augustine of Hippo"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The Puritan ideal of the 'City on a Hill' primarily referred to a literal, geographically isolated community of perfect Christians, separate from the corrupting influence of the world.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "When Paul describes the church as the 'body of Christ' in 1 Corinthians 12, he uses this metaphor primarily to emphasize:",
+    "options": {
+      "a": "The organic unity, diversity, and interdependence of believers.",
+      "b": "The uniformity of spiritual gifts and ministries among believers.",
+      "c": "The physical perfection and sinlessness of the church.",
+      "d": "The hierarchical structure of church leadership."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The 'Parable of the Good Samaritan' primarily teaches a lesson about:",
+    "options": {
+      "a": "The proper way to administer religious rituals.",
+      "b": "The expansive definition of 'neighbor' and the call to compassionate action.",
+      "c": "The importance of racial and ethnic purity in religious practice.",
+      "d": "The legalistic requirements for gaining eternal life."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The early church's practice of 'agape feasts' (love feasts) was primarily a formal liturgical ritual indistinguishable from the Eucharist.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following best describes the 'disciplined grace' approach to spiritual formation, advocated by Dallas Willard?",
+    "options": {
+      "a": "Grace is given only to those who demonstrate perfect discipline and obedience.",
+      "b": "Grace is solely a divine gift, requiring no human effort or discipline.",
+      "c": "Spiritual disciplines are a means of earning God's grace and salvation.",
+      "d": "Disciplines are practices that place us before grace, making us receptive to God's transformative power."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'sanctification' in Wesleyan theology emphasizes:",
+    "options": {
+      "a": "The infusion of grace that allows for a deeper experience of God's love, but not necessarily moral transformation.",
+      "b": "A process of moral improvement driven entirely by human willpower.",
+      "c": "A gradual process of spiritual growth that culminates in sinless perfection in this life.",
+      "d": "A once-for-all act of God that declares a believer righteous, without any subsequent moral change."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: In the book of Revelation, the primary ethical instruction for believers is to withdraw from all societal engagement and await Christ's imminent return.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following New Testament passages is most often cited as the basis for the Christian ethical principle of 'love for enemies'?",
+    "options": {
+      "a": "All of the above",
+      "b": "Matthew 5:43-48",
+      "c": "1 Peter 3:9",
+      "d": "Romans 12:17-21"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The early church's concept of 'koinonia' (fellowship) primarily referred to:",
+    "options": {
+      "a": "Exclusive membership in a secret society.",
+      "b": "Informal social gatherings for entertainment.",
+      "c": "A deep spiritual partnership, sharing in the Gospel, resources, and suffering.",
+      "d": "A hierarchical structure of church governance."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'missional church' movement primarily advocates for the church to adapt its message to entirely conform to contemporary cultural norms to gain wider acceptance.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In what book of the Old Testament do we find the 'Shema,' a foundational declaration of monotheism and love for God, central to Jewish and Christian discipleship?",
+    "options": {
+      "a": "Exodus",
+      "b": "Genesis",
+      "c": "Deuteronomy",
+      "d": "Numbers"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'spiritual formation' is best defined as:",
+    "options": {
+      "a": "A process of acquiring new spiritual gifts and abilities.",
+      "b": "The initial conversion experience that marks one as a believer.",
+      "c": "The lifelong, Spirit-led process of being conformed to the image of Christ.",
+      "d": "The academic study of theology and biblical history."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'problem of evil' is a philosophical challenge that questions God's existence or attributes given the presence of suffering and wickedness in the world.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following best articulates the 'cosmic scope' of redemption in Pauline theology, impacting Christian ethics?",
+    "options": {
+      "a": "Redemption extends only to the elect, excluding the rest of humanity.",
+      "b": "Christ's work redeems all creation, not just humanity, promising a new heavens and new earth.",
+      "c": "Salvation is exclusively for individual human souls.",
+      "d": "The Gospel message is meant to be proclaimed to every nation, but its effect is limited to spiritual matters."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The 'kenosis' hymn in Philippians 2:5-11, describing Christ's self-emptying, is often presented as a paradigm for which Christian virtue?",
+    "options": {
+      "a": "Strict adherence to divine law.",
+      "b": "Intellectual pursuit of theological knowledge.",
+      "c": "Self-sacrificial humility and servanthood.",
+      "d": "Manifestation of divine power and glory."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'Book of Common Prayer' is primarily a guide for silent, unstructured contemplative prayer, characteristic of early monastic traditions.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which specific Old Testament covenant served as the legal framework for Israel's relationship with God, outlining blessings for obedience and curses for disobedience, and influencing later ethical thought?",
+    "options": {
+      "a": "The Davidic Covenant",
+      "b": "The Noahic Covenant",
+      "c": "The Abrahamic Covenant",
+      "d": "The Mosaic Covenant"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The concept of 'the kingdom of God' in the Gospels is best understood as:",
+    "options": {
+      "a": "A future apocalyptic event that has not yet begun.",
+      "b": "A purely spiritual reality that has no bearing on earthly life.",
+      "c": "A specific geographical location in the afterlife.",
+      "d": "God's sovereign reign and rule, both present and future, breaking into the world."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: In John 17, Jesus' high priestly prayer for the unity of believers implies that doctrinal differences are ultimately irrelevant for true Christian fellowship.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which early church heresy argued for a dualistic worldview, positing a good spiritual God and an evil material god, thereby impacting views on creation and the body?",
+    "options": {
+      "a": "Manichaeism",
+      "b": "Sabellianism",
+      "c": "Apollinarianism",
+      "d": "Pelagianism"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The discipline of 'confession' in Christian tradition is primarily understood as:",
+    "options": {
+      "a": "An acknowledgment of sin before God and sometimes others, seeking forgiveness and restoration.",
+      "b": "A public declaration of one's personal achievements and virtues.",
+      "c": "A legalistic requirement for maintaining one's salvation.",
+      "d": "A formal recitation of the Nicene Creed during worship services."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'Synoptic Problem' in biblical studies primarily concerns the ethical discrepancies between the Gospels of Matthew, Mark, and Luke.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The phrase 'missio Dei,' a core concept in contemporary missiology, emphasizes that:",
+    "options": {
+      "a": "Mission is primarily God's initiative, and the church participates in His redemptive activity.",
+      "b": "Evangelism should be limited to sending missionaries to unreached people groups.",
+      "c": "The church's mission is solely to establish Christian institutions and denominations.",
+      "d": "God's mission is entirely fulfilled through miraculous signs and wonders."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In the book of Acts, the conversion of Cornelius and his household (Acts 10) was significant because it demonstrated:",
+    "options": {
+      "a": "The immediate establishment of a Gentile-led church without apostolic oversight.",
+      "b": "The exclusive role of Peter in baptizing new converts.",
+      "c": "The necessity of Gentile conversion to Judaism before becoming Christian.",
+      "d": "The breaking down of ethnic and religious barriers in the early church's evangelism."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'Regula Fidei' (Rule of Faith) in early Christianity functioned as a rigid, unchangeable creed that stifled theological development.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT a primary purpose of corporate worship in Christian discipleship?",
+    "options": {
+      "a": "Glorification of God through praise and adoration.",
+      "b": "Edification of believers through preaching and teaching.",
+      "c": "Fellowship and mutual encouragement among believers.",
+      "d": "A display of the church's social status and influence in the community."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The 'Beatitudes' in Matthew 5, pronounced by Jesus, primarily describe:",
+    "options": {
+      "a": "The characteristics and blessings of those who live as citizens of God's kingdom.",
+      "b": "Prophetic pronouncements about the future judgment of the wicked.",
+      "c": "A set of legalistic rules for attaining righteousness.",
+      "d": "A mystical path to spiritual enlightenment and divine union."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The concept of 'adiaphora' in Christian ethics means that all moral decisions are ultimately left to individual preference, as there are no objective moral standards.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following figures was a prominent leader in the evangelical revival in 18th-century England, emphasizing personal conversion, holiness, and methodical spiritual disciplines?",
+    "options": {
+      "a": "Charles Spurgeon",
+      "b": "Jonathan Edwards",
+      "c": "George Whitefield",
+      "d": "John Wesley"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The theological concept of 'justification by faith alone' (sola fide), central to the Reformation, emphasizes that:",
+    "options": {
+      "a": "Only a specific type of faith, validated by miraculous signs, is salvific.",
+      "b": "Faith is a human work that earns salvation.",
+      "c": "Good works are entirely unnecessary for the Christian life.",
+      "d": "Righteousness is imputed to believers solely through faith in Christ, not by works."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'ordo salutis' (order of salvation) in systematic theology refers to the chronological sequence of human experiences in coming to faith.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "In 1 Corinthians 13, Paul describes 'love' (agape) as having numerous characteristics. Which of the following is NOT listed as a characteristic of agape love in this passage?",
+    "options": {
+      "a": "It does not envy.",
+      "b": "It is not boastful or proud.",
+      "c": "It always protects, trusts, hopes, perseveres.",
+      "d": "It is always triumphant and victorious."
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The spiritual discipline of 'submission' in Christian tradition primarily involves:",
+    "options": {
+      "a": "The suppression of all personal desires and ambitions.",
+      "b": "Passive acceptance of injustice and exploitation.",
+      "c": "A voluntary yielding of one's rights and preferences for the sake of Christ and others.",
+      "d": "Blind obedience to all earthly authorities without question."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The concept of 'spiritual formation' is synonymous with 'behavior modification,' implying that external changes are sufficient for genuine Christian growth.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which early church council affirmed the 'hypostatic union,' stating that Christ is one person with two natures (fully divine and fully human)?",
+    "options": {
+      "a": "Council of Nicaea",
+      "b": "Council of Ephesus",
+      "c": "Council of Constantinople",
+      "d": "Council of Chalcedon"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The ethical concept of 'virtue ethics,' contrasted with 'deontological' or 'consequentialist' ethics, primarily focuses on:",
+    "options": {
+      "a": "The character of the moral agent and the cultivation of virtuous habits.",
+      "b": "The outcomes or consequences of actions.",
+      "c": "Adherence to specific divine commands and laws.",
+      "d": "The inherent rightness or wrongness of actions themselves."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'Book of Discipline' in Methodism primarily outlines the theological doctrines specific to the denomination, rather than practical rules for Christian living and church governance.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following describes the 'Parable of the Sower' (Matthew 13, Mark 4, Luke 8) in terms of Christian discipleship?",
+    "options": {
+      "a": "It teaches that salvation is guaranteed for all who hear the Gospel.",
+      "b": "It emphasizes the need for miracles to prepare the soil of the heart.",
+      "c": "It illustrates the different responses to God's Word and the conditions for fruitful discipleship.",
+      "d": "It provides a blueprint for effective agricultural practices."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The phrase 'missio Dei' (mission of God) implies that:",
+    "options": {
+      "a": "The church's mission is entirely separate from God's own work in the world.",
+      "b": "God is a missionary God who takes the initiative in seeking to redeem creation.",
+      "c": "All humans are inherently capable of fulfilling God's mission on their own.",
+      "d": "Missionary work is exclusively focused on global evangelism, not local community engagement."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The concept of 'vocation' in Christian thought is limited to ordained ministry or full-time missionary work.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which specific Old Testament text is most frequently cited in the New Testament to establish the principle of 'love your neighbor as yourself' as a foundational ethical command?",
+    "options": {
+      "a": "Leviticus 19:18",
+      "b": "Deuteronomy 6 (Shema)",
+      "c": "Psalm 119",
+      "d": "Exodus 20 (Ten Commandments)"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The theological term 'imputation' in Protestant theology, especially concerning justification, refers to:",
+    "options": {
+      "a": "The divine act of crediting Christ's righteousness to the believer's account.",
+      "b": "The act of blaming original sin on Adam and Eve.",
+      "c": "The process by which a believer's sins are gradually removed.",
+      "d": "The infusion of grace that transforms a person's inner nature."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The 'eschatological reversal' emphasized in Jesus' teachings (e.g., 'the last will be first') primarily refers to a socio-economic revolution in this present age.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following best describes the ethical implications of the doctrine of 'original sin'?",
+    "options": {
+      "a": "Humans have a fallen nature that biases them towards sin, affecting all aspects of their being.",
+      "b": "Humans are inherently incapable of any good actions or moral choices.",
+      "c": "Sin is a social construct with no intrinsic reality.",
+      "d": "Each individual is solely responsible for their own sin, with no inherited propensity."
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The spiritual discipline of 'hospitality' in the early church, as described in Romans 12:13 and Hebrews 13:2, often involved:",
+    "options": {
+      "a": "Hosting elaborate feasts for the wealthy members of the community.",
+      "b": "Establishing large, publicly funded guest houses for all visitors.",
+      "c": "Providing shelter, food, and care for traveling believers and strangers.",
+      "d": "Exclusively inviting fellow church leaders into one's home."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The concept of 'spiritual disciplines' is a uniquely Protestant invention, with no roots in Catholic or Orthodox traditions.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which Old Testament wisdom book grapples with the problem of suffering and divine justice, ultimately concluding with a renewed trust in God's sovereignty despite unanswered questions?",
+    "options": {
+      "a": "Song of Songs",
+      "b": "Job",
+      "c": "Proverbs",
+      "d": "Ecclesiastes"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "The 'Great Co-mission' (a term used by some to emphasize partnership) in Christian missions refers to the idea that:",
+    "options": {
+      "a": "Missionary work is a human invention, not directly commanded by God.",
+      "b": "All mission efforts must be centrally controlled by a single ecclesiastical authority.",
+      "c": "God invites humanity to participate with Him in His ongoing redemptive work in the world.",
+      "d": "The church is the sole agent of God's mission, independent of the Holy Spirit's work."
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "True or False: The ethical implications of the 'Lord's Supper' (Eucharist) in the early church primarily focused on individual piety and personal communion with Christ, without significant communal or social dimensions.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  },
+  {
+    "question": "Which of the following best describes the concept of 'imitation of Christ' (imitatio Christi) in Christian spirituality?",
+    "options": {
+      "a": "A call to replicate Christ's miracles and supernatural powers.",
+      "b": "A life-long pursuit of conforming one's character, actions, and attitudes to those of Jesus.",
+      "c": "A theological doctrine asserting that believers become divine like Christ.",
+      "d": "The historical study of Jesus' life and ministry without personal application."
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "expert",
+    "category": "discipleship_living",
+    "approved": true
+  }
+]

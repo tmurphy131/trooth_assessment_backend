@@ -30,6 +30,7 @@ from app.routes import push_notifications
 from app.routes import scheduled_tasks
 from app.routes import campaigns
 from app.routes import redirect as redirect_routes
+from app.routes import trivia
 from app.routes import spiritual_gifts
 from app.routes import generic_assessments
 from app.routes import master_trooth
@@ -127,7 +128,7 @@ jinja_templates = Jinja2Templates(directory="app/templates")
 app.add_middleware(LoggingMiddleware)
 
 if settings.rate_limit_enabled:
-    app.add_middleware(RateLimitMiddleware, calls_per_minute=60)
+    app.add_middleware(RateLimitMiddleware, calls_per_minute=300)
 
 app.add_middleware(
     CORSMiddleware,
@@ -199,6 +200,7 @@ app.include_router(subscriptions.admin_router, tags=["Admin - Subscriptions"])
 app.include_router(push_notifications.router, prefix="/push-notifications", tags=["Push Notifications"])
 app.include_router(scheduled_tasks.router, prefix="/scheduled", tags=["Scheduled Tasks"])
 app.include_router(campaigns.router, prefix="/campaigns", tags=["Campaigns"])
+app.include_router(trivia.router, prefix="/trivia", tags=["Trivia"])
 app.include_router(redirect_routes.router, prefix="/r", tags=["Redirects"])
 
 # Static assets (logo etc.) – map /assets to ./assets if present

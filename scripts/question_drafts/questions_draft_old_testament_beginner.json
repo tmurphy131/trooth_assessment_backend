@@ -1,0 +1,1976 @@
+[
+  {
+    "question": "Who was the first man created by God in the Bible?",
+    "options": {
+      "a": "Adam",
+      "b": "Abraham",
+      "c": "Noah",
+      "d": "Moses"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the garden where Adam and Eve lived?",
+    "options": {
+      "a": "Eden",
+      "b": "Canaan",
+      "c": "Goshen",
+      "d": "Babylon"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What did God command Adam and Eve not to eat from in the Garden of Eden?",
+    "options": {
+      "a": "The tree of the knowledge of good and evil",
+      "b": "The fruit of the vine",
+      "c": "Any fruit from the garden",
+      "d": "The tree of life"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who built the ark to save his family and animals from the great flood?",
+    "options": {
+      "a": "Abraham",
+      "b": "Moses",
+      "c": "Noah",
+      "d": "Joseph"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "How many days and nights did it rain during the great flood in Noah's time?",
+    "options": {
+      "a": "3 days and 3 nights",
+      "b": "150 days and 150 nights",
+      "c": "40 days and 40 nights",
+      "d": "7 days and 7 nights"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the sign of God's covenant with Noah after the flood?",
+    "options": {
+      "a": "A pillar of cloud",
+      "b": "A rainbow",
+      "c": "A stone tablet",
+      "d": "A burning bush"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "God called this man to leave his country and promised to make him into a great nation. Who was he?",
+    "options": {
+      "a": "Abraham",
+      "b": "Isaac",
+      "c": "Jacob",
+      "d": "Joseph"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of Abraham's wife?",
+    "options": {
+      "a": "Rachel",
+      "b": "Sarah",
+      "c": "Leah",
+      "d": "Rebekah"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was Abraham's son, born to him and Sarah in their old age?",
+    "options": {
+      "a": "Ishmael",
+      "b": "Jacob",
+      "c": "Esau",
+      "d": "Isaac"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was Jacob's name changed to after wrestling with an angel?",
+    "options": {
+      "a": "Judah",
+      "b": "Israel",
+      "c": "Benjamin",
+      "d": "Ephraim"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "How many sons did Jacob have, who became the patriarchs of the twelve tribes of Israel?",
+    "options": {
+      "a": "10",
+      "b": "14",
+      "c": "12",
+      "d": "7"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of Joseph's brothers plotted to kill him but eventually sold him into slavery?",
+    "options": {
+      "a": "Simeon",
+      "b": "Reuben",
+      "c": "Judah",
+      "d": "Benjamin"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Joseph was able to interpret the dreams of which Egyptian leader?",
+    "options": {
+      "a": "King David",
+      "b": "King Nebuchadnezzar",
+      "c": "King Xerxes",
+      "d": "Pharaoh"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Joseph's brothers recognized him immediately when they first came to Egypt for grain.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who led the Israelites out of slavery in Egypt?",
+    "options": {
+      "a": "Caleb",
+      "b": "Moses",
+      "c": "Joshua",
+      "d": "Aaron"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What did God use to speak to Moses from a bush that was burning but not consumed?",
+    "options": {
+      "a": "A whirlwind",
+      "b": "An angel",
+      "c": "The fire itself",
+      "d": "His own voice"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "How many plagues did God send upon Egypt before Pharaoh let the Israelites go?",
+    "options": {
+      "a": "7",
+      "b": "3",
+      "c": "12",
+      "d": "10"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What event commemorates the final plague and the Israelites' deliverance from Egypt?",
+    "options": {
+      "a": "The Festival of Booths",
+      "b": "The Feast of Weeks",
+      "c": "The Day of Atonement",
+      "d": "The Passover"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Through which body of water did Moses lead the Israelites, parting it miraculously?",
+    "options": {
+      "a": "The Nile River",
+      "b": "The Red Sea",
+      "c": "The Jordan River",
+      "d": "The Dead Sea"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "On what mountain did Moses receive the Ten Commandments from God?",
+    "options": {
+      "a": "Mount Zion",
+      "b": "Mount Hermon",
+      "c": "Mount Carmel",
+      "d": "Mount Sinai"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The Israelites built a golden calf to worship while Moses was on Mount Sinai.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "How long did the Israelites wander in the wilderness before entering the Promised Land?",
+    "options": {
+      "a": "7 years",
+      "b": "120 years",
+      "c": "40 years",
+      "d": "10 years"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the miraculous bread God provided for the Israelites in the wilderness?",
+    "options": {
+      "a": "Honey",
+      "b": "Unleavened bread",
+      "c": "Quail",
+      "d": "Manna"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was chosen to succeed Moses as the leader of the Israelites to enter the Promised Land?",
+    "options": {
+      "a": "Aaron",
+      "b": "Joshua",
+      "c": "Caleb",
+      "d": "Eleazar"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What city did the Israelites conquer by marching around it for seven days, causing its walls to fall?",
+    "options": {
+      "a": "Shechem",
+      "b": "Jericho",
+      "c": "Jerusalem",
+      "d": "Ai"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The sun stood still for Joshua during a battle against the Amorites.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which female judge led Israel in battle against Sisera and his army?",
+    "options": {
+      "a": "Abigail",
+      "b": "Ruth",
+      "c": "Esther",
+      "d": "Deborah"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the source of Samson's great strength?",
+    "options": {
+      "a": "A magical sword",
+      "b": "A special anointing oil",
+      "c": "A divine blessing on his arm",
+      "d": "His long hair"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which judge defeated the Midianites with an army of only 300 men, using trumpets and torches?",
+    "options": {
+      "a": "Samson",
+      "b": "Gideon",
+      "c": "Othniel",
+      "d": "Jephthah"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was Ruth's mother-in-law, whom she refused to leave?",
+    "options": {
+      "a": "Leah",
+      "b": "Naomi",
+      "c": "Orpah",
+      "d": "Hannah"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the kinsman-redeemer who married Ruth?",
+    "options": {
+      "a": "Mahlon",
+      "b": "Elimelech",
+      "c": "Boaz",
+      "d": "Jesse"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the last judge of Israel and also a prophet who anointed the first two kings?",
+    "options": {
+      "a": "Nathan",
+      "b": "Elijah",
+      "c": "Elisha",
+      "d": "Samuel"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the first king of Israel?",
+    "options": {
+      "a": "Saul",
+      "b": "Rehoboam",
+      "c": "David",
+      "d": "Solomon"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What young shepherd boy defeated the giant Goliath?",
+    "options": {
+      "a": "David",
+      "b": "Jesse",
+      "c": "Absalom",
+      "d": "Jonathan"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "King Saul consistently obeyed God's commands throughout his reign.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which city did King David establish as the capital of Israel?",
+    "options": {
+      "a": "Hebron",
+      "b": "Jerusalem",
+      "c": "Bethlehem",
+      "d": "Shiloh"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the prophet who confronted King David about his sin with Bathsheba?",
+    "options": {
+      "a": "Nathan",
+      "b": "Elijah",
+      "c": "Isaiah",
+      "d": "Samuel"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of King David's son who succeeded him and was known for his great wisdom?",
+    "options": {
+      "a": "Adonijah",
+      "b": "Absalom",
+      "c": "Rehoboam",
+      "d": "Solomon"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What grand structure did King Solomon build for God in Jerusalem?",
+    "options": {
+      "a": "The Temple",
+      "b": "A palace",
+      "c": "The Tabernacle",
+      "d": "The Tower of Babel"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "After Solomon's reign, the kingdom of Israel split into two. What were the two kingdoms called?",
+    "options": {
+      "a": "North and South",
+      "b": "Judah and Benjamin",
+      "c": "Israel and Judah",
+      "d": "Ephraim and Manasseh"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet challenged the prophets of Baal on Mount Carmel, proving God's power?",
+    "options": {
+      "a": "Elisha",
+      "b": "Jeremiah",
+      "c": "Amos",
+      "d": "Elijah"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet performed many miracles, including healing Naaman the leper?",
+    "options": {
+      "a": "Daniel",
+      "b": "Hosea",
+      "c": "Isaiah",
+      "d": "Elisha"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet prophesied about a suffering servant who would bear the sins of many?",
+    "options": {
+      "a": "Ezekiel",
+      "b": "Isaiah",
+      "c": "Malachi",
+      "d": "Jeremiah"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet is known as the 'weeping prophet' because of his laments over Judah's sin and impending destruction?",
+    "options": {
+      "a": "Jonah",
+      "b": "Jeremiah",
+      "c": "Habakkuk",
+      "d": "Zechariah"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet had a vision of a valley of dry bones coming back to life?",
+    "options": {
+      "a": "Nahum",
+      "b": "Joel",
+      "c": "Daniel",
+      "d": "Ezekiel"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "In which foreign country did Daniel serve during the exile?",
+    "options": {
+      "a": "Egypt",
+      "b": "Assyria",
+      "c": "Persia",
+      "d": "Babylon"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What happened to Daniel when he was thrown into the lion's den for praying to God?",
+    "options": {
+      "a": "He was rescued before the lions could reach him",
+      "b": "The lions were hostile but didn't harm him",
+      "c": "An angel shut the mouths of the lions",
+      "d": "He was devoured by the lions"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Shadrach, Meshach, and Abednego were thrown into a fiery furnace for refusing to worship a golden image. What happened to them?",
+    "options": {
+      "a": "The fire was extinguished before they entered",
+      "b": "They were rescued by Daniel",
+      "c": "They were consumed by the flames",
+      "d": "They were unharmed, and a fourth figure was seen with them"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The book of Psalms is primarily a collection of laws and historical narratives.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The book of Proverbs is primarily a collection of what?",
+    "options": {
+      "a": "Prophecies",
+      "b": "Love poems",
+      "c": "Genealogies",
+      "d": "Wise sayings and instructions"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The book of Job deals primarily with the question of:",
+    "options": {
+      "a": "The history of the Israelite monarchy",
+      "b": "The origin of evil",
+      "c": "The problem of suffering and God's justice",
+      "d": "The proper way to worship God"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet was swallowed by a great fish after trying to flee from God's command to go to Nineveh?",
+    "options": {
+      "a": "Micah",
+      "b": "Elijah",
+      "c": "Amos",
+      "d": "Jonah"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the main message Jonah was sent to deliver to the city of Nineveh?",
+    "options": {
+      "a": "A call to repentance or impending destruction",
+      "b": "A message of hope and restoration",
+      "c": "A warning against idolatry",
+      "d": "Instructions for building a temple"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet married a prostitute named Gomer as an illustration of God's covenant love for unfaithful Israel?",
+    "options": {
+      "a": "Isaiah",
+      "b": "Ezekiel",
+      "c": "Jeremiah",
+      "d": "Hosea"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who led the first group of exiles back to Jerusalem to rebuild the Temple?",
+    "options": {
+      "a": "Nehemiah",
+      "b": "Ezra",
+      "c": "Malachi",
+      "d": "Zerubbabel"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who led the effort to rebuild the walls of Jerusalem after the exile?",
+    "options": {
+      "a": "Haggai",
+      "b": "Nehemiah",
+      "c": "Ezra",
+      "d": "Zerubbabel"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "For whom did Queen Esther intercede to save her people from destruction?",
+    "options": {
+      "a": "The Jews",
+      "b": "The Babylonians",
+      "c": "The Egyptians",
+      "d": "The Assyrians"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the wicked official who plotted to destroy all the Jews in Persia, but was ultimately hanged on the gallows he prepared for Mordecai?",
+    "options": {
+      "a": "Xerxes",
+      "b": "Vashti",
+      "c": "Ahasuerus",
+      "d": "Haman"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet spoke of a messenger who would prepare the way before the Lord, often understood as John the Baptist?",
+    "options": {
+      "a": "Joel",
+      "b": "Isaiah",
+      "c": "Malachi",
+      "d": "Zechariah"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the primary purpose of the Tabernacle in the wilderness?",
+    "options": {
+      "a": "A place for God to dwell among His people",
+      "b": "A school for priests",
+      "c": "A fortress for defense",
+      "d": "A place for the Israelites to live"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the primary focus of the book of Leviticus?",
+    "options": {
+      "a": "Prophecies about the Messiah",
+      "b": "Wisdom sayings",
+      "c": "Laws for holy living and worship",
+      "d": "Historical accounts of the judges"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the first high priest of Israel?",
+    "options": {
+      "a": "Moses",
+      "b": "Samuel",
+      "c": "Aaron",
+      "d": "Eleazar"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The Old Testament concludes with the birth of Jesus Christ.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of the following is NOT one of the Ten Commandments?",
+    "options": {
+      "a": "You shall not steal",
+      "b": "You shall not eat pork",
+      "c": "You shall not murder",
+      "d": "You shall not lie about your neighbor"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the land God promised to Abraham and his descendants?",
+    "options": {
+      "a": "Egypt",
+      "b": "Mesopotamia",
+      "c": "Philistia",
+      "d": "Canaan"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was Cain's brother, whom he murdered?",
+    "options": {
+      "a": "Abel",
+      "b": "Seth",
+      "c": "Enoch",
+      "d": "Lamech"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What animal tempted Eve in the Garden of Eden?",
+    "options": {
+      "a": "A raven",
+      "b": "A dove",
+      "c": "A lion",
+      "d": "A serpent"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "After the flood, Noah sent out two types of birds from the ark. What were they?",
+    "options": {
+      "a": "Owl and Eagle",
+      "b": "Hawk and Falcon",
+      "c": "Sparrow and Robin",
+      "d": "Raven and Dove"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was Abraham's original name before God changed it?",
+    "options": {
+      "a": "Abram",
+      "b": "Israel",
+      "c": "Isaac",
+      "d": "Jacob"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What city did God destroy with fire and brimstone due to its wickedness?",
+    "options": {
+      "a": "Ur",
+      "b": "Sodom",
+      "c": "Nineveh",
+      "d": "Jericho"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who tricked his brother Esau out of his birthright and blessing?",
+    "options": {
+      "a": "Laban",
+      "b": "Jacob",
+      "c": "Ishmael",
+      "d": "Reuben"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What annual event involves a lamb sacrifice and unleavened bread?",
+    "options": {
+      "a": "Rosh Hashanah",
+      "b": "Passover",
+      "c": "Purim",
+      "d": "Hanukkah"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of Moses' brother, who often spoke for him?",
+    "options": {
+      "a": "Caleb",
+      "b": "Joshua",
+      "c": "Aaron",
+      "d": "Hur"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Moses was allowed to enter the Promised Land.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the prostitute in Jericho who helped the Israelite spies and was saved from destruction?",
+    "options": {
+      "a": "Delilah",
+      "b": "Jezebel",
+      "c": "Rahab",
+      "d": "Abigail"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What did Gideon use to test God's will before going into battle?",
+    "options": {
+      "a": "A fleece of wool",
+      "b": "A burning bush",
+      "c": "A staff",
+      "d": "A flock of sheep"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What woman was instrumental in betraying Samson's secret of strength?",
+    "options": {
+      "a": "Delilah",
+      "b": "Potiphar's wife",
+      "c": "Jezebel",
+      "d": "Bathsheba"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of David's best friend, who was King Saul's son?",
+    "options": {
+      "a": "Absalom",
+      "b": "Joab",
+      "c": "Jonathan",
+      "d": "Nathan"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Where was David born?",
+    "options": {
+      "a": "Bethlehem",
+      "b": "Nazareth",
+      "c": "Hebron",
+      "d": "Jerusalem"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "David united the twelve tribes of Israel under his rule.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the queen who visited Solomon to test his wisdom with hard questions?",
+    "options": {
+      "a": "Queen of Sheba",
+      "b": "Queen Vashti",
+      "c": "Queen Jezebel",
+      "d": "Queen Esther"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What prophet was fed by ravens during a drought?",
+    "options": {
+      "a": "Elijah",
+      "b": "Elisha",
+      "c": "Jeremiah",
+      "d": "Amos"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which Assyrian king laid siege to Jerusalem during the reign of King Hezekiah, but was miraculously repelled?",
+    "options": {
+      "a": "Sennacherib",
+      "b": "Tiglath-Pileser III",
+      "c": "Sargon II",
+      "d": "Shalmaneser V"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Isaiah prophesied that a virgin would conceive and give birth to a son, whose name would be Immanuel. What does Immanuel mean?",
+    "options": {
+      "a": "God is strong",
+      "b": "God is love",
+      "c": "God saves",
+      "d": "God with us"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Jeremiah encouraged the people of Judah to resist the Babylonian invasion.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What did Ezekiel see in his vision that represented God's glory departing from the Temple due to Israel's idolatry?",
+    "options": {
+      "a": "A fiery cloud",
+      "b": "A pillar of fire",
+      "c": "A rainbow",
+      "d": "A cherubim-borne throne chariot"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the interpretation of the writing on the wall ('Mene, Mene, Tekel, Parsin') seen by King Belshazzar?",
+    "options": {
+      "a": "God has blessed your rule",
+      "b": "Your days are numbered, you have been weighed and found wanting",
+      "c": "Your kingdom is established forever",
+      "d": "A new king will rise to power"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Many Psalms are attributed to which Israelite king?",
+    "options": {
+      "a": "Saul",
+      "b": "Hezekiah",
+      "c": "Solomon",
+      "d": "David"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What common theme is found throughout the book of Proverbs?",
+    "options": {
+      "a": "The coming of the Messiah",
+      "b": "The history of Israel's kings",
+      "c": "The fear of the Lord is the beginning of knowledge",
+      "d": "The importance of sacrifice"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The book of Ecclesiastes famously explores the meaninglessness of life 'under the sun.' Who is traditionally considered its author?",
+    "options": {
+      "a": "Solomon",
+      "b": "David",
+      "c": "Job",
+      "d": "Moses"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet was told by God to 'go, marry a promiscuous woman and have children with her' to symbolize Israel's unfaithfulness?",
+    "options": {
+      "a": "Joel",
+      "b": "Micah",
+      "c": "Hosea",
+      "d": "Amos"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet spoke of a future day when the Lord would pour out His Spirit on all people, and sons and daughters would prophesy?",
+    "options": {
+      "a": "Joel",
+      "b": "Nahum",
+      "c": "Obadiah",
+      "d": "Zephaniah"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet was a shepherd and a fig-picker from Judah, called to prophesy against the northern kingdom of Israel?",
+    "options": {
+      "a": "Hosea",
+      "b": "Micah",
+      "c": "Habakkuk",
+      "d": "Amos"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The first five books of the Old Testament are known as the Gospels.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Most of the Old Testament was originally written in Hebrew.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "On the seventh day of creation, God rested.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which book begins with 'In the beginning, God created the heavens and the earth'?",
+    "options": {
+      "a": "Genesis",
+      "b": "Psalms",
+      "c": "Exodus",
+      "d": "Job"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Malachi prophesied the coming of which important figure before the 'great and dreadful day of the Lord'?",
+    "options": {
+      "a": "Moses",
+      "b": "Elijah",
+      "c": "Samuel",
+      "d": "David"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "God made a covenant with Abraham, promising him descendants as numerous as the stars.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "King David built the first Temple for God in Jerusalem.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The prophet Daniel was thrown into a fiery furnace for refusing to worship an idol.",
+    "options": {
+      "a": "False",
+      "b": "True",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "All the books of the Old Testament were originally written in Hebrew.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The Old Testament is primarily about the history and covenant relationship between God and the nation of Israel.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "a",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The Old Testament contains books such as Isaiah, Jeremiah, and Ezekiel, which are known as the Minor Prophets.",
+    "options": {
+      "a": "True",
+      "b": "False",
+      "c": null,
+      "d": null
+    },
+    "correct": "b",
+    "type": "true_false",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the father of Abraham?",
+    "options": {
+      "a": "Terah",
+      "b": "Nahor",
+      "c": "Shem",
+      "d": "Haran"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of Noah's sons was cursed after seeing his father's nakedness?",
+    "options": {
+      "a": "Ham",
+      "b": "Cain",
+      "c": "Japheth",
+      "d": "Shem"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the tower the people tried to build to reach heaven?",
+    "options": {
+      "a": "Tower of Babel",
+      "b": "Tower of Ur",
+      "c": "Tower of Zion",
+      "d": "Tower of Jericho"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "God changed the language of the people at the Tower of Babel to scatter them. What was their original language?",
+    "options": {
+      "a": "Egyptian",
+      "b": "A single common language",
+      "c": "Hebrew",
+      "d": "Aramaic"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "To what land did Abraham migrate from Ur of the Chaldeans at God's command?",
+    "options": {
+      "a": "Babylon",
+      "b": "Egypt",
+      "c": "Canaan",
+      "d": "Assyria"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What city was Lot living in when angels visited and warned him of its impending destruction?",
+    "options": {
+      "a": "Damascus",
+      "b": "Sodom",
+      "c": "Hebron",
+      "d": "Gomorrah"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was Isaac's wife?",
+    "options": {
+      "a": "Sarah",
+      "b": "Rachel",
+      "c": "Rebekah",
+      "d": "Leah"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of Jacob's sons had a coat of many colors?",
+    "options": {
+      "a": "Joseph",
+      "b": "Judah",
+      "c": "Benjamin",
+      "d": "Reuben"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What did Pharaoh's dreams, interpreted by Joseph, predict for Egypt?",
+    "options": {
+      "a": "A change in dynasty",
+      "b": "Seven years of plenty followed by seven years of famine",
+      "c": "Seven years of famine followed by seven years of plenty",
+      "d": "A great war, then peace"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which tribe was set apart for priestly duties in Israel?",
+    "options": {
+      "a": "Levi",
+      "b": "Ephraim",
+      "c": "Judah",
+      "d": "Benjamin"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the golden chest that contained the Ten Commandments and other sacred items?",
+    "options": {
+      "a": "The Ark of the Covenant",
+      "b": "The Laver",
+      "c": "The Altar of Incense",
+      "d": "The Table of Showbread"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What did the Israelites complain about wanting in the wilderness, leading God to send them quail?",
+    "options": {
+      "a": "Meat",
+      "b": "Water",
+      "c": "Wine",
+      "d": "Bread"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "How many spies did Moses send to scout the land of Canaan?",
+    "options": {
+      "a": "2",
+      "b": "12",
+      "c": "7",
+      "d": "10"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who were the two spies who brought back a good report and encouraged the Israelites to enter the Promised Land?",
+    "options": {
+      "a": "Aaron and Hur",
+      "b": "Nadab and Abihu",
+      "c": "Eleazar and Phinehas",
+      "d": "Joshua and Caleb"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Before his death, Moses delivered a series of farewell speeches to the Israelites, recorded in which book?",
+    "options": {
+      "a": "Exodus",
+      "b": "Leviticus",
+      "c": "Numbers",
+      "d": "Deuteronomy"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which river did the Israelites cross on dry ground to enter the Promised Land?",
+    "options": {
+      "a": "Euphrates River",
+      "b": "Nile River",
+      "c": "Kishon River",
+      "d": "Jordan River"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the place where the Israelites renewed their covenant with God after entering Canaan, following Joshua's death?",
+    "options": {
+      "a": "Bethel",
+      "b": "Shechem",
+      "c": "Gilgal",
+      "d": "Shiloh"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "In the book of Judges, what pattern consistently repeated among the Israelites?",
+    "options": {
+      "a": "War, conquest, prosperity",
+      "b": "Sin, oppression, cry out, deliverance, peace",
+      "c": "Obedience, blessing, peace",
+      "d": "Innovation, expansion, trade"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "From which nation did Ruth come, demonstrating loyalty to Naomi and the God of Israel?",
+    "options": {
+      "a": "Moab",
+      "b": "Philistia",
+      "c": "Egypt",
+      "d": "Ammon"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was Hannah's son, born after her fervent prayer, whom she dedicated to the Lord?",
+    "options": {
+      "a": "Eli",
+      "b": "Saul",
+      "c": "Nathan",
+      "d": "Samuel"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was King Saul's main failing that led to God rejecting him as king?",
+    "options": {
+      "a": "His military weakness",
+      "b": "His great wisdom",
+      "c": "His humility",
+      "d": "His disobedience and pride"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who anointed both Saul and David as kings over Israel?",
+    "options": {
+      "a": "Gad",
+      "b": "Nathan",
+      "c": "Samuel",
+      "d": "Ahimelech"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What musical instrument did David play for King Saul?",
+    "options": {
+      "a": "Cymbals",
+      "b": "Harp",
+      "c": "Trumpet",
+      "d": "Flute"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of David's first wife, who was Saul's daughter?",
+    "options": {
+      "a": "Ahinoam",
+      "b": "Bathsheba",
+      "c": "Michal",
+      "d": "Abigail"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the name of the giant Philistine warrior whom David defeated?",
+    "options": {
+      "a": "Goliath",
+      "b": "Sihon",
+      "c": "Achish",
+      "d": "Og"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What promise did God make to David about his dynasty?",
+    "options": {
+      "a": "He would conquer all surrounding nations",
+      "b": "His kingdom would endure forever",
+      "c": "His son would build the Temple",
+      "d": "He would never experience war"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which of Solomon's actions caused God's judgment and the eventual division of the kingdom?",
+    "options": {
+      "a": "His building of the Temple",
+      "b": "His love for wisdom",
+      "c": "His military campaigns",
+      "d": "His many foreign wives and their idols"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Who was the first king of the northern kingdom of Israel after the split?",
+    "options": {
+      "a": "Rehoboam",
+      "b": "Omri",
+      "c": "Ahab",
+      "d": "Jeroboam"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which king of Judah discovered the Book of the Law during Temple repairs and initiated reforms?",
+    "options": {
+      "a": "Manasseh",
+      "b": "Hezekiah",
+      "c": "Josiah",
+      "d": "Ahaz"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which empire conquered the northern kingdom of Israel?",
+    "options": {
+      "a": "Assyria",
+      "b": "Persia",
+      "c": "Babylon",
+      "d": "Egypt"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which empire conquered the southern kingdom of Judah, leading to the Babylonian exile?",
+    "options": {
+      "a": "Persia",
+      "b": "Babylon",
+      "c": "Egypt",
+      "d": "Assyria"
+    },
+    "correct": "b",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What is the book of Lamentations about?",
+    "options": {
+      "a": "Laments over the destruction of Jerusalem",
+      "b": "Wisdom sayings",
+      "c": "Songs of praise",
+      "d": "Prophecies of hope"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which king of Persia issued a decree allowing the Jews to return to Jerusalem and rebuild their Temple?",
+    "options": {
+      "a": "Artaxerxes",
+      "b": "Darius",
+      "c": "Xerxes",
+      "d": "Cyrus"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "What was the purpose of the book of Esther?",
+    "options": {
+      "a": "To prophesy about the coming Messiah",
+      "b": "To describe the rebuilding of the Temple",
+      "c": "To record the laws of Persia",
+      "d": "To explain the origin of the Feast of Purim"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which book of the Old Testament is a long poem about the search for meaning in life, concluding that fearing God is paramount?",
+    "options": {
+      "a": "Ecclesiastes",
+      "b": "Song of Solomon",
+      "c": "Proverbs",
+      "d": "Job"
+    },
+    "correct": "a",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "The book of Song of Solomon is primarily a collection of what?",
+    "options": {
+      "a": "War hymns",
+      "b": "Royal decrees",
+      "c": "Love poems",
+      "d": "Prophecies"
+    },
+    "correct": "c",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  },
+  {
+    "question": "Which prophet was a priest who served among the exiles in Babylon, known for his dramatic acted-out prophecies?",
+    "options": {
+      "a": "Daniel",
+      "b": "Isaiah",
+      "c": "Jeremiah",
+      "d": "Ezekiel"
+    },
+    "correct": "d",
+    "type": "multiple_choice",
+    "difficulty": "beginner",
+    "category": "old_testament",
+    "approved": true
+  }
+]
