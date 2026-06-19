@@ -72,9 +72,9 @@
   {
     "question": "Augustine of Hippo's comprehensive work 'City of God' was written primarily in response to which historical event or accusation?",
     "options": {
-      "a": "The Pelagian controversy",
-      "b": "The Donatist schism",
-      "c": "The Arian controversy",
+      "a": "The theological disputes of the Pelagian controversy",
+      "b": "The internal divisions of the Donatist schism",
+      "c": "The Christological debates of the Arian controversy",
       "d": "The sack of Rome by the Visigoths in 410 AD"
     },
     "correct": "d",
@@ -198,10 +198,10 @@
   {
     "question": "The 'anamnesis' component of the Eucharist primarily emphasizes which aspect of Christ's sacrifice?",
     "options": {
-      "a": "A future hope for Christ's return",
+      "a": "A future hope for the glorious return of Christ",
       "b": "A memorial or remembrance of Christ's sacrifice",
-      "c": "A re-sacrificing of Christ",
-      "d": "A mystical union with Christ's body"
+      "c": "A literal re-presentation of Christ's sacrifice",
+      "d": "A spiritual union with Christ's resurrected body"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -240,9 +240,9 @@
   {
     "question": "The theological debate between Luther and Zwingli at the Marburg Colloquy primarily concerned the doctrine of:",
     "options": {
-      "a": "Infant baptism",
-      "b": "Justification by faith alone",
-      "c": "Predestination",
+      "a": "The proper administration of infant baptism",
+      "b": "The doctrine of justification by faith alone",
+      "c": "The divine decree of unconditional predestination",
       "d": "The real presence of Christ in the Eucharist"
     },
     "correct": "d",
@@ -310,9 +310,9 @@
   {
     "question": "The term 'parousia' in eschatology most directly refers to:",
     "options": {
-      "a": "The final judgment",
-      "b": "The rapture of the church",
-      "c": "The tribulation period",
+      "a": "The final judgment of all humanity",
+      "b": "The sudden rapture of the church",
+      "c": "The severe tribulation period",
       "d": "The physical return of Christ"
     },
     "correct": "d",
@@ -395,9 +395,9 @@
     "question": "Jonathan Edwards' 'Freedom of the Will' was a significant work defending which theological concept?",
     "options": {
       "a": "Compatibilistic freedom (Reformed view)",
-      "b": "Arminian free will",
-      "c": "Absolute indeterminism",
-      "d": "Pelagian self-determination"
+      "b": "The concept of Arminian free will",
+      "c": "The philosophical doctrine of indeterminism",
+      "d": "The Pelagian doctrine of self-determination"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -408,10 +408,10 @@
   {
     "question": "Which of the following describes the 'Anabaptist' view of baptism?",
     "options": {
-      "a": "Infant baptism by pouring",
+      "a": "The practice of infant baptism by pouring",
       "b": "Believer's baptism (regardless of mode)",
-      "c": "Believer's baptism by immersion only",
-      "d": "No baptism is necessary"
+      "c": "Believer's baptism requiring full immersion",
+      "d": "The spiritual rejection of all outward baptism"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -436,10 +436,10 @@
   {
     "question": "The term 'eschaton' broadly refers to:",
     "options": {
-      "a": "The beginning of creation",
+      "a": "The primordial beginning of all creation",
       "b": "The end times or final events of history",
-      "c": "The incarnation of Christ",
-      "d": "The middle period of human history"
+      "c": "The divine incarnation of Jesus Christ",
+      "d": "The current middle period of human history"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -450,9 +450,9 @@
   {
     "question": "Which theologian is often associated with the phrase 'lex orandi, lex credendi' (the law of prayer is the law of belief), highlighting the relationship between worship and doctrine?",
     "options": {
-      "a": "John Damascene",
-      "b": "Thomas Aquinas",
-      "c": "Augustine of Hippo",
+      "a": "Bernard of Clairvaux",
+      "b": "Richard of Saint-Victor",
+      "c": "Bonaventure of Bagnoregio",
       "d": "Prosper of Aquitaine"
     },
     "correct": "d",
@@ -758,10 +758,10 @@
   {
     "question": "Which of the following best describes the 'governmental theory' of atonement?",
     "options": {
-      "a": "Christ's death inspires us to live morally.",
+      "a": "Christ's death provides a moral example for humanity, inspiring us to live righteously and love God.",
       "b": "Christ's death demonstrated God's righteous governance and the seriousness of sin, making forgiveness possible.",
-      "c": "Christ's death was a payment to Satan.",
-      "d": "Christ suffered the penalty due to us."
+      "c": "Christ's death was a ransom payment made to Satan, liberating humanity from his bondage and power.",
+      "d": "Christ suffered the full legal penalty for humanity's sins, satisfying divine justice completely."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -800,10 +800,10 @@
   {
     "question": "The 'ontological argument' for the existence of God was first formulated by which medieval theologian?",
     "options": {
-      "a": "Peter Abelard",
-      "b": "John Duns Scotus",
+      "a": "Bernard of Clairvaux",
+      "b": "Richard of Saint-Victor",
       "c": "Anselm of Canterbury",
-      "d": "Thomas Aquinas"
+      "d": "Bonaventure of Bagnoregio"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -982,10 +982,10 @@
   {
     "question": "Which of the following is most associated with the 'Pietist' movement?",
     "options": {
-      "a": "Emphasis on systematic theology and scholasticism",
-      "b": "Strict adherence to liturgical traditions",
+      "a": "Emphasis on strict dogmatic formulations and academic scholasticism",
+      "b": "Strong emphasis on strict adherence to established liturgical traditions",
       "c": "Focus on personal devotion, experience, and practical holiness",
-      "d": "Rejection of infant baptism"
+      "d": "A primary focus on the rejection of infant baptism practices"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1067,9 +1067,9 @@
     "question": "The theological view that baptism is a sign of the covenant, similar to circumcision in the Old Testament, is characteristic of:",
     "options": {
       "a": "Covenant Theology (Reformed/Presbyterian)",
-      "b": "Baptists",
-      "c": "Anabaptists",
-      "d": "Dispensationalism"
+      "b": "Believer's baptism as a public declaration of personal faith",
+      "c": "Rejection of infant baptism in favor of adult believer's immersion",
+      "d": "Dispensational theology, separating God's plans for Israel and the Church"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1094,9 +1094,9 @@
   {
     "question": "Which of the following describes the Roman Catholic doctrine of 'transubstantiation' regarding the Eucharist?",
     "options": {
-      "a": "Christ's body and blood are present 'in, with, and under' the elements.",
-      "b": "The bread and wine remain unchanged but symbolize Christ's body and blood.",
-      "c": "Christ is spiritually present in the elements.",
+      "a": "The true body and blood of Christ are truly present 'in, with, and under' the elements.",
+      "b": "The bread and wine remain unchanged, serving as mere symbols of Christ's sacrifice.",
+      "c": "Christ's spiritual presence is truly received by faith through the elements.",
       "d": "The substance of the bread and wine changes into the body and blood of Christ, while the accidents remain."
     },
     "correct": "d",
@@ -1220,10 +1220,10 @@
   {
     "question": "Which Roman Catholic concept refers to a state or place of temporary punishment for those who die in God's grace but are not yet perfectly purified?",
     "options": {
-      "a": "Limbo",
-      "b": "Sheol",
+      "a": "Limbo State",
+      "b": "Mortal Sin",
       "c": "Purgatory",
-      "d": "Hades"
+      "d": "Venial Sin"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1347,9 +1347,9 @@
     "question": "The 'fivefold ministry' (apostle, prophet, evangelist, pastor, teacher) is primarily emphasized in which theological movement?",
     "options": {
       "a": "Charismatic/Pentecostal circles",
-      "b": "Lutheran orthodoxy",
-      "c": "Reformed scholasticism",
-      "d": "Traditional Anglicanism"
+      "b": "Classical Lutheran orthodoxy and its historical confessions",
+      "c": "The rigorous systematic theology of Reformed scholasticism",
+      "d": "The established hierarchical structures of Traditional Anglicanism"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1444,10 +1444,10 @@
   {
     "question": "Which of the following describes the 'semper reformanda' principle in Reformed theology?",
     "options": {
-      "a": "The church must always return to its first century form.",
-      "b": "The church must never change its traditions.",
+      "a": "The church should always strive to return to its original first century form.",
+      "b": "The church must maintain its established traditions without any alteration.",
       "c": "The church must always be reforming according to the Word of God.",
-      "d": "The church must always be seeking new revelations."
+      "d": "The church should always be seeking new and progressive divine revelations."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1514,9 +1514,9 @@
   {
     "question": "Which influential theologian defined theology as 'faith seeking understanding' (fides quaerens intellectum)?",
     "options": {
-      "a": "John Calvin",
+      "a": "John Calvin of Geneva",
       "b": "Augustine of Hippo",
-      "c": "Thomas Aquinas",
+      "c": "Thomas Aquinas of Naples",
       "d": "Anselm of Canterbury"
     },
     "correct": "d",
@@ -1626,10 +1626,10 @@
   {
     "question": "Which early ecumenical council (381 AD) expanded the Nicene Creed to include a more robust statement on the divinity of the Holy Spirit?",
     "options": {
-      "a": "Council of Nicaea",
-      "b": "Council of Chalcedon",
+      "a": "Council of Nicaea in 325 AD",
+      "b": "Council of Chalcedon in 451 AD",
       "c": "Council of Constantinople",
-      "d": "Council of Ephesus"
+      "d": "Council of Ephesus in 431 AD"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1682,10 +1682,10 @@
   {
     "question": "Which view of the end times typically expects a secret rapture of the church before the Great Tribulation?",
     "options": {
-      "a": "Post-tribulational Premillennialism",
+      "a": "Post-tribulational Premillennialism, where the church endures the tribulation.",
       "b": "Pre-tribulational Dispensational Premillennialism",
-      "c": "Amillennialism",
-      "d": "Historic Premillennialism"
+      "c": "Amillennialism, viewing the millennium as a spiritual reign in the present age.",
+      "d": "Historic Premillennialism, which anticipates Christ's return before a literal millennium."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1780,10 +1780,10 @@
   {
     "question": "The 'moral influence theory' of atonement was also significantly developed by which 19th-century Scottish pastor?",
     "options": {
-      "a": "Thomas Chalmers",
-      "b": "Andrew Fuller",
+      "a": "Alexander MacLaren",
+      "b": "James Denney",
       "c": "John McLeod Campbell",
-      "d": "Robert Candlish"
+      "d": "William Robertson Smith"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1948,10 +1948,10 @@
   {
     "question": "Which early church council formally established the canon of the New Testament books for the entire Christian church?",
     "options": {
-      "a": "Council of Chalcedon",
+      "a": "The Council of Chalcedon affirmed the divine inspiration of all prophetic writings.",
       "b": "No single ecumenical council definitively established the canon for the entire church at once.",
-      "c": "Council of Hippo",
-      "d": "Council of Nicaea"
+      "c": "The Council of Hippo ratified a list of books, but its authority was regional and not universal.",
+      "d": "The Council of Nicaea decreed the official collection of gospels and apostolic letters for all believers."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2032,9 +2032,9 @@
   {
     "question": "Which 19th-century theologian is known for his work 'The Christian Faith' and for emphasizing feeling and intuition over reason in religious experience?",
     "options": {
-      "a": "Albrecht Ritschl",
-      "b": "Adolf von Harnack",
-      "c": "Søren Kierkegaard",
+      "a": "Albrecht Ritschl of Göttingen",
+      "b": "Adolf von Harnack on Dogma",
+      "c": "Søren Kierkegaard, Danish philosopher",
       "d": "Friedrich Schleiermacher"
     },
     "correct": "d",
@@ -2088,10 +2088,10 @@
   {
     "question": "Which of the following describes the 'communicatio operationum' (communication of operations) in Christology?",
     "options": {
-      "a": "The divine nature performs human actions.",
+      "a": "The divine nature of Christ fully assumes and performs all human actions.",
       "b": "The one person of Christ performs actions attributable to both natures.",
-      "c": "The human nature performs divine actions.",
-      "d": "The Father, Son, and Spirit operate as one."
+      "c": "The human nature of Christ is empowered to perform all divine and miraculous actions.",
+      "d": "The three persons of the Trinity unite in all their divine operations and manifestations."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2228,10 +2228,10 @@
   {
     "question": "Which theologian famously debated with Augustine on the nature of grace and free will, arguing for greater human capacity in salvation?",
     "options": {
-      "a": "Arius",
-      "b": "Donatus",
+      "a": "Nestorius",
+      "b": "Apollinaris",
       "c": "Pelagius",
-      "d": "Mani"
+      "d": "Eutyches"
     },
     "correct": "c",
     "type": "multiple_choice",

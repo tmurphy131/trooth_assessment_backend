@@ -2,10 +2,10 @@
   {
     "question": "What is often considered the primary purpose of prayer for a Christian?",
     "options": {
-      "a": "To show others how spiritual we are",
+      "a": "To display our piety before other believers",
       "b": "To communicate with God and build a relationship",
-      "c": "To fulfill a religious duty",
-      "d": "To get God to do what we want"
+      "c": "To perform a required religious observance",
+      "d": "To influence divine will for personal desires"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -16,9 +16,9 @@
   {
     "question": "Which of these is NOT typically considered one of the spiritual disciplines?",
     "options": {
-      "a": "Fasting",
-      "b": "Serving others",
-      "c": "Meditation on Scripture",
+      "a": "Abstaining from food for spiritual focus",
+      "b": "Ministering to the needs of fellow believers",
+      "c": "Deep reflection and study of God's Word",
       "d": "Gossiping about others"
     },
     "correct": "d",
@@ -44,10 +44,10 @@
   {
     "question": "In the Bible, what is often associated with the practice of fasting?",
     "options": {
-      "a": "Avoiding household chores",
-      "b": "Attending social parties",
+      "a": "Neglecting daily responsibilities and duties",
+      "b": "Engaging in worldly feasts and celebrations",
       "c": "Seeking God's guidance and spiritual focus",
-      "d": "Losing weight quickly"
+      "d": "Achieving physical discipline and bodily health"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -73,9 +73,9 @@
     "question": "What is the primary reason Christians are encouraged to serve others?",
     "options": {
       "a": "To imitate Christ's love and demonstrate faith",
-      "b": "To earn salvation or favor from God",
-      "c": "To avoid feelings of guilt",
-      "d": "To gain recognition and praise from people"
+      "b": "To achieve merit or earn divine blessing",
+      "c": "To alleviate personal conviction or remorse",
+      "d": "To receive public acclaim and human approval"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -100,10 +100,10 @@
   {
     "question": "When Jesus taught His disciples to pray (The Lord's Prayer), what was one of the first things He instructed them to do?",
     "options": {
-      "a": "Ask for daily bread",
+      "a": "Requesting provision for daily necessities",
       "b": "Praise and hallow God's name",
-      "c": "Confess their sins",
-      "d": "Pray for their enemies"
+      "c": "Acknowledging personal transgressions and faults",
+      "d": "Interceding for those who persecute them"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -157,9 +157,9 @@
     "question": "What is a common benefit of consistently practicing spiritual disciplines?",
     "options": {
       "a": "Increased spiritual growth and maturity",
-      "b": "Gaining social popularity",
-      "c": "Avoiding all life challenges",
-      "d": "Guaranteed financial prosperity"
+      "b": "Achieving worldly acclaim and social acceptance",
+      "c": "Eliminating all difficulties and earthly trials",
+      "d": "Ensuring material wealth and earthly blessings"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -170,9 +170,9 @@
   {
     "question": "Which spiritual discipline involves intentionally setting aside time to listen to God and reflect on His Word?",
     "options": {
-      "a": "Fasting",
-      "b": "Giving",
-      "c": "Evangelism",
+      "a": "Abstinence from food for spiritual focus",
+      "b": "Generous offering of resources to the church",
+      "c": "Proclaiming the Gospel message to unbelievers",
       "d": "Meditation"
     },
     "correct": "d",
@@ -240,9 +240,9 @@
   {
     "question": "'Gentleness' as a Fruit of the Spirit primarily means:",
     "options": {
-      "a": "Avoiding all forms of confrontation",
-      "b": "Being weak and easily manipulated",
-      "c": "Being soft-spoken and quiet",
+      "a": "Refraining from any kind of strong disagreement or challenge",
+      "b": "Exhibiting a lack of inner fortitude and being easily swayed",
+      "c": "Possessing a quiet demeanor and a reserved manner of speaking",
       "d": "Having controlled strength and considerate behavior"
     },
     "correct": "d",
@@ -282,9 +282,9 @@
   {
     "question": "'Goodness' as a Fruit of the Spirit refers to:",
     "options": {
-      "a": "Being popular among friends",
-      "b": "Being physically attractive",
-      "c": "Having good fortune in life",
+      "a": "Achieving social approval and widespread acceptance",
+      "b": "Possessing outward beauty and appealing physical traits",
+      "c": "Experiencing prosperity and favorable circumstances in life",
       "d": "Moral excellence and active kindness"
     },
     "correct": "d",
@@ -296,9 +296,9 @@
   {
     "question": "What does 'self-control' in the Fruit of the Spirit refer to?",
     "options": {
-      "a": "Being very reserved and quiet in public",
-      "b": "Having no desires or emotions",
-      "c": "Trying to control other people's actions",
+      "a": "Maintaining a quiet and reserved outward demeanor",
+      "b": "The complete absence of all personal desires and human emotions",
+      "c": "Attempting to influence and govern the choices of others",
       "d": "Mastery over one's own desires, impulses, and actions"
     },
     "correct": "d",
@@ -352,10 +352,10 @@
   {
     "question": "What did Jesus identify as the greatest commandment?",
     "options": {
-      "a": "To keep the Sabbath holy",
+      "a": "To diligently observe the Sabbath day and keep it sacred",
       "b": "To love the Lord your God with all your heart, soul, and mind",
-      "c": "To honor your father and mother",
-      "d": "To not murder"
+      "c": "To show proper respect to one's parents and authorities",
+      "d": "To refrain from taking an innocent human life"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -366,10 +366,10 @@
   {
     "question": "What is the second greatest commandment, according to Jesus?",
     "options": {
-      "a": "To forgive your enemies",
-      "b": "To give to the poor",
+      "a": "To extend forgiveness to those who have wronged you",
+      "b": "To generously share one's possessions with the needy",
       "c": "To love your neighbor as yourself",
-      "d": "To tell the truth at all times"
+      "d": "To speak truthfully in all circumstances and interactions"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -394,10 +394,10 @@
   {
     "question": "What does Christian ethics primarily base its principles on?",
     "options": {
-      "a": "Ancient philosophical traditions",
+      "a": "Long-standing ancient philosophical wisdom and human reasoning",
       "b": "God's character revealed in the Bible and His commands",
-      "c": "Current societal norms and popular opinion",
-      "d": "Personal feelings and intuition"
+      "c": "Prevailing cultural standards and widespread public consensus",
+      "d": "Individual subjective emotions and inner personal discernment"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -464,9 +464,9 @@
   {
     "question": "What is stewardship in a Christian sense?",
     "options": {
-      "a": "Managing only one's money and finances",
-      "b": "Donating a small portion of income to charity",
-      "c": "Owning as many possessions as possible",
+      "a": "Faithfully tithing a portion of income to the church and supporting its ministries regularly",
+      "b": "Wisely investing personal wealth to generate profit and increase financial influence",
+      "c": "Generously distributing all personal assets to the poor and living a life of voluntary poverty",
       "d": "Caring for and responsibly managing all resources God entrusts to us (time, talents, possessions, etc.)"
     },
     "correct": "d",
@@ -506,10 +506,10 @@
   {
     "question": "What is a key Christian response to someone who wrongs you?",
     "options": {
-      "a": "Ignoring them completely",
+      "a": "Deliberately avoiding all contact with the person who caused harm",
       "b": "Seeking reconciliation and offering forgiveness",
-      "c": "Seeking revenge or retaliation",
-      "d": "Holding a grudge indefinitely"
+      "c": "Actively pursuing retribution or inflicting punishment in return",
+      "d": "Maintaining persistent resentment and bitterness over time"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -520,9 +520,9 @@
   {
     "question": "What is a primary benefit of Christian fellowship and community?",
     "options": {
-      "a": "Only for socializing and entertainment",
-      "b": "Competing for spiritual gifts",
-      "c": "Networking for career opportunities",
+      "a": "Primarily for casual social gatherings and enjoyable leisure activities",
+      "b": "Striving to outdo others in demonstrating various spiritual abilities",
+      "c": "Building connections for professional advancement and job prospects",
       "d": "Mutual encouragement, support, and accountability"
     },
     "correct": "d",
@@ -562,10 +562,10 @@
   {
     "question": "What does 'accountability' typically mean in a Christian discipleship relationship?",
     "options": {
-      "a": "Reporting every single action to another person",
+      "a": "Providing detailed reports of all personal actions and daily activities",
       "b": "Being answerable for one's choices and spiritual growth, often with a trusted mentor",
-      "c": "Being judged by others for every mistake",
-      "d": "Comparing spiritual progress with others"
+      "c": "Constantly facing criticism and condemnation for any errors made",
+      "d": "Evaluating one's own spiritual journey against the advancement of peers"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -577,9 +577,9 @@
     "question": "Why is it important for Christians to have relationships with other believers?",
     "options": {
       "a": "For shared worship, mutual support, and encouragement",
-      "b": "To make the local church grow numerically",
-      "c": "To form a larger social group",
-      "d": "To avoid all contact with non-Christians"
+      "b": "To increase the total number of members within the local congregation",
+      "c": "To establish an extensive social network and broader circle of friends",
+      "d": "To completely isolate oneself from those outside the Christian faith"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -618,10 +618,10 @@
   {
     "question": "What is often a crucial element for healthy discipleship relationships?",
     "options": {
-      "a": "Competition and rivalry",
+      "a": "A spirit of striving against others and seeking to surpass them",
       "b": "Trust, vulnerability, and open communication",
-      "c": "Strict financial arrangements",
-      "d": "Secrecy and isolation"
+      "c": "Rigid agreements concerning monetary contributions and shared expenses",
+      "d": "Maintaining hidden aspects of life and remaining emotionally detached"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -646,10 +646,10 @@
   {
     "question": "What does the Bible mean by 'bearing one another's burdens'?",
     "options": {
-      "a": "Doing all of someone else's work for them",
-      "b": "Taking responsibility for someone else's sins",
+      "a": "Assuming full responsibility for another's duties and daily tasks",
+      "b": "Confessing the transgressions of others and taking their judgment",
       "c": "Sharing sorrows, offering support, and helping each other",
-      "d": "Physically carrying someone's belongings"
+      "d": "Providing physical assistance for heavy loads or difficult journeys"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -661,9 +661,9 @@
     "question": "What is the 'Great Commission' in Matthew 28?",
     "options": {
       "a": "To make disciples of all nations, baptizing and teaching them",
-      "b": "To establish a human kingdom on earth",
-      "c": "To gather all wealth for the church",
-      "d": "To build a great temple in Jerusalem"
+      "b": "To establish a powerful and visible kingdom for Christ on the earth",
+      "c": "To collect all earthly riches and resources for the church's treasury",
+      "d": "To reconstruct the holy temple in Jerusalem for future worship"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -674,9 +674,9 @@
   {
     "question": "What is a common way for a Christian to 'witness' their faith?",
     "options": {
-      "a": "Only by preaching loudly in public places",
-      "b": "By wearing Christian symbols without speaking",
-      "c": "By distributing religious pamphlets only",
+      "a": "Exclusively through public declarations and forceful evangelistic sermons",
+      "b": "Displaying outward religious symbols and avoiding direct verbal communication",
+      "c": "Primarily by sharing printed materials and written testimonies with others",
       "d": "By living a Christ-like life and sharing the Gospel verbally when appropriate"
     },
     "correct": "d",
@@ -702,9 +702,9 @@
   {
     "question": "When applying faith to everyday decisions, what is a primary guide for Christians?",
     "options": {
-      "a": "Personal feelings and emotions alone",
-      "b": "Public opinion and trends",
-      "c": "Immediate convenience and comfort",
+      "a": "Relying solely on one's own subjective feelings and emotional responses",
+      "b": "Following the prevailing cultural norms and societal expectations of the day",
+      "c": "Choosing paths that offer the most immediate ease and personal gratification",
       "d": "God's Word (Scripture) and prayer for guidance"
     },
     "correct": "d",
@@ -716,10 +716,10 @@
   {
     "question": "How should a Christian typically approach ethical dilemmas at work?",
     "options": {
-      "a": "Prioritize personal financial gain above all else",
-      "b": "Avoid making any decisions that involve ethics",
+      "a": "Emphasize personal career advancement and maximize individual financial rewards",
+      "b": "Refuse to engage in any complex decisions that might involve moral considerations",
       "c": "Seek to honor God and apply biblical principles to the situation",
-      "d": "Do what everyone else is doing, regardless of ethics"
+      "d": "Conform to the general practices of colleagues, ignoring personal conviction"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -731,9 +731,9 @@
     "question": "What is a Christian perspective on how to use their money?",
     "options": {
       "a": "Steward it for God's glory, to meet needs, and for others",
-      "b": "Spend it all quickly on personal desires",
-      "c": "Save it all and never spend it",
-      "d": "Only use it for church contributions"
+      "b": "Indulge in immediate gratification and fulfill all personal wants without restraint",
+      "c": "Accumulate all available resources and refrain from any distribution or spending",
+      "d": "Designate all financial resources solely for institutional church offerings and building funds"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -758,10 +758,10 @@
   {
     "question": "When making a major life decision, what is a key step for a Christian?",
     "options": {
-      "a": "Flip a coin and let chance decide",
+      "a": "Rely on random chance or superstitious signs to determine the outcome",
       "b": "Seek God's will through prayer and studying Scripture",
-      "c": "Ask a friend to make the decision for them",
-      "d": "Follow the most popular trend without question"
+      "c": "Delegate the responsibility to a trusted friend or family member for their input",
+      "d": "Adopt the prevailing societal norms and popular opinions as the definitive guide"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -772,10 +772,10 @@
   {
     "question": "What does 'living out your faith' in daily life primarily involve?",
     "options": {
-      "a": "Performing religious rituals only",
-      "b": "Avoiding all non-Christian friends and activities",
+      "a": "Strict adherence to formal religious ceremonies and traditional practices",
+      "b": "Withdrawing from all interactions with non-believers and secular engagements",
       "c": "Integrating biblical values into all actions, choices, and relationships",
-      "d": "Discussing theology constantly with everyone you meet"
+      "d": "Engaging in continuous theological debates and doctrinal discussions with all acquaintances"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -800,10 +800,10 @@
   {
     "question": "What does the Bible say about how Christians should generally respond to governing authorities?",
     "options": {
-      "a": "Ignore them completely",
+      "a": "Disregard their laws and regulations, living independently of civil structures",
       "b": "Obey them, unless they command something contrary to God's will",
-      "c": "Always agree with every decision they make",
-      "d": "Rebel against them whenever possible"
+      "c": "Unquestioningly affirm and support every single policy and directive they issue",
+      "d": "Actively resist and seek to overthrow any established government at every opportunity"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -828,10 +828,10 @@
   {
     "question": "What does 'abiding in Christ' primarily mean for a Christian?",
     "options": {
-      "a": "Physically staying in a church building",
-      "b": "Never leaving your home or community",
+      "a": "Literally remaining within the physical confines of a consecrated church structure",
+      "b": "Refraining from all travel and staying exclusively within one's local congregation",
       "c": "Maintaining a close, dependent relationship with Jesus through prayer and His Word",
-      "d": "Strictly following all church traditions"
+      "d": "Adhering meticulously to all established denominational customs and rituals"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -856,9 +856,9 @@
   {
     "question": "What is the Christian concept of 'redemption'?",
     "options": {
-      "a": "Receiving a large inheritance",
-      "b": "Earning enough money to buy freedom",
-      "c": "Redecorating a church building",
+      "a": "Gaining eternal salvation and a place in God's heavenly kingdom through good works",
+      "b": "The act of purchasing a slave's freedom from their master, as practiced in ancient times",
+      "c": "Restoring a broken relationship with another person through forgiveness and reconciliation",
       "d": "Being bought back or set free from sin's bondage through Christ"
     },
     "correct": "d",
@@ -871,9 +871,9 @@
     "question": "What does it mean to be 'born again' in a Christian context?",
     "options": {
       "a": "To have a spiritual transformation and new life in Christ",
-      "b": "To repeat baptism multiple times",
-      "c": "To be physically reborn as a baby",
-      "d": "To start a new career path"
+      "b": "To physically return to infancy for a fresh start",
+      "c": "To experience a renewed sense of earthly purpose",
+      "d": "To undergo a second ritual of water immersion"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -885,9 +885,9 @@
     "question": "What is the significance of baptism for a Christian?",
     "options": {
       "a": "It is a public declaration of faith and identification with Christ's death and resurrection",
-      "b": "It earns salvation",
-      "c": "It is merely a traditional ritual",
-      "d": "It guarantees entry into heaven"
+      "b": "It is a ritual required for entry into a specific denomination or church membership",
+      "c": "It is a sacrament that grants automatic forgiveness of all past sins upon completion",
+      "d": "It symbolizes a person's personal commitment to follow all biblical commandments and laws"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -912,10 +912,10 @@
   {
     "question": "What is the Christian view on vengeance or 'getting even'?",
     "options": {
-      "a": "It strengthens one's character",
+      "a": "It is a just and necessary action to right a wrong",
       "b": "Christians should leave vengeance to God and seek peace",
-      "c": "It is sometimes necessary for self-defense",
-      "d": "It is a natural and just response to being wronged"
+      "c": "It is permitted only for the protection of one's family",
+      "d": "It demonstrates strength and resolve against injustice"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -926,10 +926,10 @@
   {
     "question": "Which of these best describes 'agape' love in Christianity?",
     "options": {
-      "a": "Brotherly love or friendship",
-      "b": "Love based on mutual attraction",
+      "a": "The deep affection shared among close family members",
+      "b": "Affection rooted in shared interests and mutual benefit",
       "c": "Unconditional, self-sacrificing love",
-      "d": "Romantic love"
+      "d": "Passionate and intimate devotion between spouses"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -940,10 +940,10 @@
   {
     "question": "What is the role of the Holy Spirit in a believer's life?",
     "options": {
-      "a": "To replace the need for personal effort",
+      "a": "To remove all struggles and difficulties from life",
       "b": "To empower, guide, comfort, and convict believers",
-      "c": "To make life easy and problem-free",
-      "d": "To grant instant wealth and fame"
+      "c": "To provide a direct line to divine financial prosperity",
+      "d": "To perform all spiritual work on behalf of the individual"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -982,10 +982,10 @@
   {
     "question": "What does the phrase 'deny himself and take up his cross' mean for a follower of Christ?",
     "options": {
-      "a": "To literally carry a wooden cross",
-      "b": "To avoid all difficult situations",
+      "a": "To strictly adhere to dietary restrictions and rigorous spiritual disciplines as a sign of devotion",
+      "b": "To avoid all difficult situations and seek only comfort and prosperity in this earthly life",
       "c": "To give up personal desires and follow Christ's will, even through suffering",
-      "d": "To reject all worldly possessions"
+      "d": "To sell all possessions and dedicate one's entire life to a monastic order or ministry"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -997,9 +997,9 @@
     "question": "What is the purpose of Christian confession?",
     "options": {
       "a": "To acknowledge sin, seek God's forgiveness, and restore relationship",
-      "b": "To make oneself feel guilty",
-      "c": "To tell others about one's faults",
-      "d": "To earn forgiveness from God"
+      "b": "To publicly declare one's failings to the entire congregation",
+      "c": "To perform a ritual act that automatically absolves guilt",
+      "d": "To demonstrate remorse and attain merit for salvation"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1025,9 +1025,9 @@
     "question": "What is the importance of perseverance in the Christian faith?",
     "options": {
       "a": "It helps believers endure trials and remain faithful to the end",
-      "b": "It means never facing difficulties",
-      "c": "It guarantees immediate success in earthly matters",
-      "d": "It is only for those with strong personalities"
+      "b": "It ensures a path devoid of any form of struggle or hardship",
+      "c": "It promises instant material blessings and worldly achievements",
+      "d": "It is a spiritual gift granted only to a select few"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1038,10 +1038,10 @@
   {
     "question": "What does it mean for a Christian to be 'salt and light' in the world?",
     "options": {
-      "a": "To avoid all worldly influence",
+      "a": "To withdraw entirely from societal engagement and interaction",
       "b": "To preserve goodness and illuminate truth in a dark world",
-      "c": "To only eat salty foods and use bright lights",
-      "d": "To be physically healthier than non-believers"
+      "c": "To literally season food and provide light for others' homes",
+      "d": "To maintain a superior physical condition and health status"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1052,9 +1052,9 @@
   {
     "question": "Which spiritual discipline involves intentionally seeking to hear God's voice and guidance for one's life?",
     "options": {
-      "a": "Church attendance",
-      "b": "Solitude",
-      "c": "Tithing",
+      "a": "Consistent church attendance for spiritual growth",
+      "b": "Practicing spiritual solitude for quiet reflection",
+      "c": "Generous financial tithing as an act of worship",
       "d": "Listening Prayer"
     },
     "correct": "d",
@@ -1080,10 +1080,10 @@
   {
     "question": "What is the Christian perspective on caring for the poor and needy?",
     "options": {
-      "a": "It is a waste of resources",
-      "b": "Only give if you have an abundance",
+      "a": "Providing for the poor distracts from the primary mission of evangelism",
+      "b": "Assistance should only be given to those who demonstrate genuine self-improvement",
       "c": "Christians have a responsibility to show compassion and provide assistance",
-      "d": "It is solely the government's responsibility"
+      "d": "Responsibility for the poor rests entirely with government welfare programs and agencies"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1094,10 +1094,10 @@
   {
     "question": "What does it mean to 'take every thought captive to obey Christ'?",
     "options": {
-      "a": "To suppress all negative thoughts without processing them",
+      "a": "To suppress all negative or worldly thoughts without proper evaluation",
       "b": "To evaluate thoughts against biblical truth and align them with Christ",
-      "c": "To only think about religious topics",
-      "d": "To stop thinking entirely"
+      "c": "To focus exclusively on spiritual and religious topics at all times",
+      "d": "To cease all conscious thought and enter a state of spiritual emptiness"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1108,10 +1108,10 @@
   {
     "question": "What is the purpose of Christian fasting beyond abstaining from food?",
     "options": {
-      "a": "To impress other believers",
+      "a": "To demonstrate one's superior piety and devotion to other believers",
       "b": "To draw closer to God and focus on spiritual matters",
-      "c": "To improve physical health",
-      "d": "To punish oneself for sins"
+      "c": "To achieve physical purification and improved health through self-denial",
+      "d": "To atone for past sins or cleanse oneself through self-inflicted punishment"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1136,10 +1136,10 @@
   {
     "question": "What is the Christian call to 'peacemaking'?",
     "options": {
-      "a": "To avoid all conflict at any cost",
+      "a": "To completely avoid all forms of disagreement and confrontation at any cost",
       "b": "To actively seek reconciliation and resolution in conflicts",
-      "c": "To only make peace when it benefits oneself",
-      "d": "To ignore disputes and hope they go away"
+      "c": "To only pursue peaceful outcomes when it provides a personal advantage",
+      "d": "To simply ignore all disputes and hope that the problems will resolve themselves"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1150,10 +1150,10 @@
   {
     "question": "How should Christians view their work or profession?",
     "options": {
-      "a": "As separate from their faith life",
+      "a": "As a completely separate sphere, detached from their spiritual faith life",
       "b": "As an opportunity to serve God and others, and bring Him glory",
-      "c": "As a means to gain power and influence",
-      "d": "As a necessary evil to earn money"
+      "c": "As a primary means to accumulate personal wealth, power, and influence",
+      "d": "As a necessary burden to endure solely for the purpose of earning money"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1164,10 +1164,10 @@
   {
     "question": "What is the Christian approach to worry and anxiety?",
     "options": {
-      "a": "To ignore problems and pretend they don't exist",
-      "b": "To embrace it as part of life",
+      "a": "To completely ignore all problems and pretend that they do not exist",
+      "b": "To simply accept worry and anxiety as an unavoidable part of human life",
       "c": "To trust God with concerns and pray instead of worrying",
-      "d": "To try to control every outcome"
+      "d": "To diligently attempt to control every possible outcome and future circumstance"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1192,9 +1192,9 @@
   {
     "question": "What does the Bible teach about showing hospitality?",
     "options": {
-      "a": "It should only be extended to close friends and family",
-      "b": "It is an outdated practice",
-      "c": "It is only for wealthy people",
+      "a": "It should only be extended to close personal friends and family members",
+      "b": "It is an outdated cultural practice from ancient times, no longer relevant",
+      "c": "It is a practice reserved solely for those with abundant financial resources",
       "d": "It is an important way to show love and welcome others"
     },
     "correct": "d",
@@ -1206,9 +1206,9 @@
   {
     "question": "Which of these phrases best describes what it means to 'walk by faith'?",
     "options": {
-      "a": "To rely solely on personal feelings and experiences",
-      "b": "To have perfect understanding of everything",
-      "c": "To avoid all risks and challenges",
+      "a": "To rely solely on one's personal feelings and subjective spiritual experiences",
+      "b": "To possess a complete and perfect understanding of all divine mysteries",
+      "c": "To carefully avoid all potential risks and difficult challenges in life",
       "d": "To trust in God's promises and character, even when circumstances are uncertain"
     },
     "correct": "d",
@@ -1220,10 +1220,10 @@
   {
     "question": "What is the Christian understanding of self-denial?",
     "options": {
-      "a": "Hating oneself and one's body",
+      "a": "Hating one's own physical body and denying its natural human needs",
       "b": "Prioritizing God's will and the needs of others over personal desires",
-      "c": "Never enjoying anything pleasurable",
-      "d": "Living a life of extreme poverty"
+      "c": "Abstaining from all forms of enjoyment or pleasurable experiences in life",
+      "d": "Voluntarily choosing to live a life of extreme material deprivation and poverty"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1248,10 +1248,10 @@
   {
     "question": "How does a Christian typically seek wisdom for difficult decisions?",
     "options": {
-      "a": "By relying solely on their own intellect",
-      "b": "By making impulsive choices",
+      "a": "By diligently studying ancient philosophical texts and human reason alone",
+      "b": "By consulting only their immediate feelings and personal desires for direction",
       "c": "By seeking God through prayer, Scripture, and wise counsel from other believers",
-      "d": "By consulting horoscopes or fortune tellers"
+      "d": "By seeking guidance through dreams, visions, or spiritual mediums and signs"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1263,9 +1263,9 @@
     "question": "What is the significance of the Lord's Supper (Communion) for believers?",
     "options": {
       "a": "It is a symbolic remembrance of Christ's sacrifice and a proclamation of His return",
-      "b": "It is a regular meal to enjoy with friends",
-      "c": "It is a meal to earn God's favor",
-      "d": "It is a tradition without deeper meaning"
+      "b": "It is a communal meal for fellowship and strengthening social bonds among members",
+      "c": "It is a ritualistic act performed to merit divine blessings or secure forgiveness",
+      "d": "It is merely an ancient custom passed down through generations with no spiritual import"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1276,10 +1276,10 @@
   {
     "question": "What does the Bible teach about giving thanks?",
     "options": {
-      "a": "It is a sign of weakness",
-      "b": "It is primarily for public display",
+      "a": "It demonstrates a lack of self-reliance and personal strength of character",
+      "b": "It is mainly an outward expression for others to witness and admire one's piety",
       "c": "Believers should give thanks in all circumstances",
-      "d": "It is only necessary for big blessings"
+      "d": "It is reserved only for significant achievements or large, noticeable provisions"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1304,10 +1304,10 @@
   {
     "question": "What is the Christian understanding of 'hope'?",
     "options": {
-      "a": "A wishful thinking or desire",
+      "a": "A mere desire for good outcomes, with no real certainty of fulfillment",
       "b": "A confident expectation and assurance in God's promises for the future",
-      "c": "A feeling that comes and goes",
-      "d": "Only hoping for earthly possessions"
+      "c": "An ephemeral emotion that fluctuates with life's changing circumstances",
+      "d": "Primarily focused on accumulating worldly goods and material prosperity"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1319,9 +1319,9 @@
     "question": "What does it mean to 'put on the new self' in Christian living?",
     "options": {
       "a": "To live according to our new identity in Christ, reflecting righteousness and holiness",
-      "b": "To forget one's past completely",
-      "c": "To adopt a new personality",
-      "d": "To get new clothes"
+      "b": "To completely erase all memories and experiences from one's former life",
+      "c": "To fundamentally alter one's inherent temperament or outward character traits",
+      "d": "To outwardly display one's faith through specific garments or religious attire"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1360,10 +1360,10 @@
   {
     "question": "What is the Christian ethical stance on integrity?",
     "options": {
-      "a": "Only being honest in church",
+      "a": "Confining honesty and moral conduct strictly within religious gatherings",
       "b": "Acting consistently with moral principles, even when no one is watching",
-      "c": "It's important only when others are watching",
-      "d": "Being flexible with truth for personal gain"
+      "c": "Maintaining a good reputation primarily for public perception and approval",
+      "d": "Adjusting moral standards to achieve personal advantage or avoid inconvenience"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1374,9 +1374,9 @@
   {
     "question": "What does the Bible teach about prayer for leaders and authorities?",
     "options": {
-      "a": "Pray against them if they are not Christian",
-      "b": "It is unnecessary",
-      "c": "Only pray for leaders you agree with",
+      "a": "To pray for their removal if they do not share our Christian beliefs",
+      "b": "It holds no real spiritual benefit or practical impact on their leadership",
+      "c": "To offer prayers only for those whose policies align with personal preferences",
       "d": "Believers should pray for them for wise governance and peace"
     },
     "correct": "d",
@@ -1388,10 +1388,10 @@
   {
     "question": "How should a Christian respond to suffering or trials?",
     "options": {
-      "a": "Believe it is always a sign of personal sin",
-      "b": "Try to escape all suffering by any means necessary",
+      "a": "Conclude that all hardship is a direct consequence of unconfessed personal sin",
+      "b": "Employ all available resources to avoid discomfort and eliminate all difficulties",
       "c": "Endure with patience, seeking God's strength and learning from the experience",
-      "d": "Blame God and lose faith"
+      "d": "Question God's goodness and abandon their trust in His divine providence"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1416,9 +1416,9 @@
   {
     "question": "What is the Christian understanding of 'submission' within relationships (e.g., marriage, church)?",
     "options": {
-      "a": "Blind obedience and loss of personal will",
-      "b": "Inferiority and weakness",
-      "c": "Allowing others to control all decisions",
+      "a": "An unquestioning surrender to authority, devoid of personal judgment or choice",
+      "b": "A sign of lesser value or a position of inherent powerlessness and disadvantage",
+      "c": "Relinquishing all personal decision-making power to another individual completely",
       "d": "A voluntary act of respect and cooperation, recognizing God-given roles"
     },
     "correct": "d",
@@ -1430,10 +1430,10 @@
   {
     "question": "What is the importance of 'confessing sins to one another' as mentioned in James 5:16?",
     "options": {
-      "a": "To gossip about each other's failures",
+      "a": "To publicly disclose faults and weaknesses for the purpose of idle talk or slander",
       "b": "To seek prayer, accountability, and healing within a trusting community",
-      "c": "To earn forgiveness from others",
-      "d": "To prove one is holier than others"
+      "c": "To obtain absolution or pardon from fellow believers, rather than from God directly",
+      "d": "To demonstrate spiritual superiority or an advanced state of personal piety"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1444,10 +1444,10 @@
   {
     "question": "What does the Bible mean by 'walking in the Spirit'?",
     "options": {
-      "a": "Literally walking while thinking about the Holy Spirit",
+      "a": "Engaging in daily spiritual disciplines and meditations consistently",
       "b": "Living a life guided and empowered by the Holy Spirit, not by sinful desires",
-      "c": "Having mystical experiences frequently",
-      "d": "Attending spiritual gatherings often"
+      "c": "Seeking supernatural visions and prophetic dreams from God",
+      "d": "Participating in communal worship and fellowship regularly"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1486,10 +1486,10 @@
   {
     "question": "When faced with personal suffering, what is a biblical response?",
     "options": {
-      "a": "Question God's goodness and justice",
-      "b": "Believe God is punishing them for a specific sin",
+      "a": "Challenge God's sovereign plan and question His divine will",
+      "b": "Conclude that all suffering is a direct consequence of personal sin",
       "c": "Turn to God in prayer, seeking comfort and strength",
-      "d": "Isolate oneself from others"
+      "d": "Withdraw from the community and avoid all human interaction"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1500,9 +1500,9 @@
   {
     "question": "What does it mean to 'set your mind on things above, not on earthly things'?",
     "options": {
-      "a": "To ignore all responsibilities on earth",
-      "b": "To avoid all physical activities",
-      "c": "To become financially wealthy",
+      "a": "To neglect earthly duties and civic responsibilities entirely",
+      "b": "To withdraw from society and abstain from all worldly pleasures",
+      "c": "To strive for material prosperity and earthly comforts above all else",
       "d": "To focus on eternal values and God's kingdom rather than fleeting worldly concerns"
     },
     "correct": "d",
@@ -1514,10 +1514,10 @@
   {
     "question": "What is the primary motivation for Christians to live a holy life?",
     "options": {
-      "a": "To earn salvation",
-      "b": "To impress other people",
+      "a": "To achieve personal righteousness and merit divine favor",
+      "b": "To gain the approval of the church community and religious leaders",
       "c": "Out of gratitude for God's salvation and to honor Him",
-      "d": "To avoid punishment"
+      "d": "To escape the eternal consequences of sin and divine judgment"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1543,9 +1543,9 @@
     "question": "What does the Bible teach about the importance of worshipping God?",
     "options": {
       "a": "It is a vital response to God's worthiness and love, involving adoration and reverence",
-      "b": "It is a way to gain personal power",
-      "c": "It is optional and can be skipped",
-      "d": "It is only about singing songs in church"
+      "b": "It is a means to acquire spiritual authority and influence over others",
+      "c": "It is a cultural tradition that can be observed or disregarded freely",
+      "d": "It consists primarily of ritualistic practices and liturgical performances"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1556,10 +1556,10 @@
   {
     "question": "What is the Christian concept of 'spiritual warfare'?",
     "options": {
-      "a": "Physical fighting between religious groups",
+      "a": "Actual armed conflicts among different religious denominations",
       "b": "The unseen struggle against spiritual forces of evil and temptation",
-      "c": "Debating theological points aggressively",
-      "d": "Struggling with personal doubts about faith"
+      "c": "Vigorous intellectual arguments concerning doctrinal interpretations",
+      "d": "Internal conflict arising from personal moral failings and weaknesses"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1570,10 +1570,10 @@
   {
     "question": "What is the 'armor of God' described in Ephesians 6 meant for?",
     "options": {
-      "a": "Only for pastors and church leaders",
+      "a": "Exclusively for those in positions of ecclesiastical authority",
       "b": "Spiritual protection and readiness for spiritual warfare",
-      "c": "A metaphorical way to describe good behavior",
-      "d": "Physical protection in battle"
+      "c": "A symbolic representation of ethical conduct and moral uprightness",
+      "d": "Literal armor for soldiers fighting earthly enemies and conflicts"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1599,9 +1599,9 @@
     "question": "What does 'dying to self' mean in a spiritual sense?",
     "options": {
       "a": "Putting aside selfish desires and ambitions to live for Christ",
-      "b": "Ending one's life",
-      "c": "Becoming physically ill",
-      "d": "Avoiding all pleasure"
+      "b": "Giving up one's earthly existence for a spiritual cause",
+      "c": "Experiencing severe bodily affliction or chronic infirmity",
+      "d": "Rejecting all forms of enjoyment and worldly gratification"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1612,10 +1612,10 @@
   {
     "question": "What is the Christian view on the use of time?",
     "options": {
-      "a": "Time should be spent solely on personal enjoyment",
-      "b": "Time should always be filled with religious activities",
+      "a": "Time is primarily for personal gratification and self-fulfillment",
+      "b": "Time must be exclusively devoted to church services and spiritual rituals",
       "c": "Time is a gift from God to be stewarded wisely for His glory and purposes",
-      "d": "Time is irrelevant in the long run"
+      "d": "Time holds no ultimate significance in the grand scheme of eternity"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1626,10 +1626,10 @@
   {
     "question": "What does the 'peace of God' refer to for believers?",
     "options": {
-      "a": "A feeling of indifference",
+      "a": "A feeling of spiritual indifference and emotional numbness to worldly concerns and trials",
       "b": "An inner tranquility and confidence that surpasses understanding, even amidst difficulties",
-      "c": "Peace negotiations between nations",
-      "d": "The absence of all conflict in life"
+      "c": "The cessation of all armed conflicts and establishment of universal harmony among nations",
+      "d": "An assured guarantee of a trouble-free existence, free from any personal suffering or adversity"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1655,9 +1655,9 @@
     "question": "What is the Christian understanding of 'purity of heart'?",
     "options": {
       "a": "Having motives and intentions that are undivided and devoted to God",
-      "b": "Never having any negative thoughts",
-      "c": "Being outwardly flawless in appearance",
-      "d": "Only engaging in religious activities"
+      "b": "Achieving a state of sinlessness through rigorous self-discipline and fasting",
+      "c": "Maintaining an outward appearance of righteousness, free from public scandal",
+      "d": "Focusing solely on prayer and meditation, withdrawing from worldly distractions"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1668,10 +1668,10 @@
   {
     "question": "What role does 'praise' play in a Christian's spiritual life?",
     "options": {
-      "a": "It is a form of self-promotion",
-      "b": "It is a means to get what one wants from God",
+      "a": "It serves primarily as a public declaration of one's faith and commitment to the church",
+      "b": "It is a powerful tool for intercessory prayer, compelling God to act on our behalf",
       "c": "It is an expression of worship and gratitude to God, shifting focus from self to Him",
-      "d": "It is only for special church services"
+      "d": "It is a preparation for future blessings, ensuring divine favor and material prosperity"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1682,10 +1682,10 @@
   {
     "question": "What is the Christian view on the importance of rest and Sabbath?",
     "options": {
-      "a": "It is an outdated command not applicable today",
+      "a": "It is primarily a legalistic observance from the Old Covenant, superseded by grace",
       "b": "It is a vital discipline for physical, mental, and spiritual renewal, trusting God's provision",
-      "c": "It is a suggestion, not a command",
-      "d": "It is only for those who are tired"
+      "c": "It is a cultural tradition to be observed only if it doesn't interfere with productivity",
+      "d": "It is a time for quiet reflection and personal devotion, separate from communal worship"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1710,9 +1710,9 @@
   {
     "question": "What is the Christian approach to consumerism and materialism?",
     "options": {
-      "a": "Believe that God wants everyone to be rich",
-      "b": "Judge others based on their possessions",
-      "c": "Accumulate as much as possible for personal enjoyment",
+      "a": "Seek to acquire wealth to fund church ministries and support charitable causes",
+      "b": "Strive for financial prosperity as a sign of God's blessing and personal diligence",
+      "c": "Utilize all resources for personal comfort and enjoyment, as God provides abundantly",
       "d": "Be content with what one has and prioritize generosity over accumulation"
     },
     "correct": "d",
@@ -1724,10 +1724,10 @@
   {
     "question": "What does 'walking humbly with your God' imply?",
     "options": {
-      "a": "Never expressing an opinion",
+      "a": "Remaining silent in all situations and deferring to the opinions of spiritual leaders",
       "b": "Recognizing one's dependence on God and acting with modesty and justice",
-      "c": "Always seeking personal recognition for good deeds",
-      "d": "Avoiding eye contact with others"
+      "c": "Performing acts of service in secret, ensuring no one knows of your good works",
+      "d": "Accepting a subordinate role in society, never challenging authority or established norms"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1738,10 +1738,10 @@
   {
     "question": "What is the Christian view on vengeance or 'an eye for an eye' from the Old Testament?",
     "options": {
-      "a": "It applies only to criminal law, not personal relationships.",
-      "b": "It is the primary principle for justice in all situations.",
+      "a": "It is a foundational principle for retributive justice, ensuring fair and proportional punishment.",
+      "b": "It represents God's unchangeable law of equitable recompense for all transgressions.",
       "c": "Jesus taught a higher standard of turning the other cheek and loving enemies.",
-      "d": "It means punishing offenders as harshly as possible."
+      "d": "It emphasizes the importance of civil authority to exact punishment for severe offenses."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1766,10 +1766,10 @@
   {
     "question": "What is the importance of 'listening' in Christian relationships?",
     "options": {
-      "a": "To wait for your turn to speak",
+      "a": "To discern the spiritual state of another person and offer appropriate correction",
       "b": "To understand, empathize, and show love and respect to others",
-      "c": "To find flaws in others' arguments",
-      "d": "It is less important than speaking one's mind"
+      "c": "To gather information about others, which can be useful for prayer and intercession",
+      "d": "To absorb the wisdom and counsel of elders and those with more spiritual experience"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1780,9 +1780,9 @@
   {
     "question": "What does 'blessed are the merciful' imply for Christian living?",
     "options": {
-      "a": "Avoid making tough decisions",
-      "b": "Mercy is only for those who deserve it",
-      "c": "Only give mercy if you are sure to receive it back",
+      "a": "It means forgiving all sins without requiring repentance or consequences for actions",
+      "b": "It is a call to exercise leniency in judgment, even when justice might demand otherwise",
+      "c": "It refers to extending grace to fellow believers, but not necessarily to outsiders or enemies",
       "d": "Show compassion and kindness to others, as God has shown mercy to us"
     },
     "correct": "d",
@@ -1794,9 +1794,9 @@
   {
     "question": "What is the role of spiritual mentors in Christian discipleship?",
     "options": {
-      "a": "To be worshipped and revered",
-      "b": "To provide financial support",
-      "c": "To make all decisions for the mentee",
+      "a": "To serve as an infallible authority on all matters of faith and personal conduct",
+      "b": "To provide a direct line to God's will, bypassing personal prayer and discernment",
+      "c": "To ensure conformity to specific denominational doctrines and traditions above all else",
       "d": "To offer guidance, wisdom, and prayerful support based on experience and scripture"
     },
     "correct": "d",
@@ -1823,9 +1823,9 @@
     "question": "What is the Christian perspective on caring for the environment (creation care)?",
     "options": {
       "a": "Humans are called to be responsible stewards of God's creation",
-      "b": "It's a secular concern, not a Christian one",
-      "c": "Nature exists only for human exploitation",
-      "d": "It's irrelevant to faith"
+      "b": "It is a secondary concern, as spiritual matters and evangelism take precedence",
+      "c": "The earth is destined for destruction, so preserving it is ultimately futile",
+      "d": "God will supernaturally preserve creation, rendering human efforts unnecessary"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1836,10 +1836,10 @@
   {
     "question": "What does 'bearing good fruit' refer to in a Christian context?",
     "options": {
-      "a": "Being financially successful",
+      "a": "Achieving worldly success and material prosperity in all endeavors",
       "b": "Demonstrating Christ-like character and actions in one's life",
-      "c": "Literally growing fruit in a garden",
-      "d": "Having many children"
+      "c": "Engaging in agricultural practices to produce literal fruit for sustenance",
+      "d": "Establishing a large family line to increase the number of believers"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1850,9 +1850,9 @@
   {
     "question": "What is the primary motive for Christian obedience to God's commands?",
     "options": {
-      "a": "To earn a place in heaven",
-      "b": "Fear of punishment",
-      "c": "To gain approval from other Christians",
+      "a": "To secure one's eternal salvation and ensure a place in heaven",
+      "b": "A profound fear of divine judgment and eternal condemnation",
+      "c": "The desire for social acceptance and commendation within the church community",
       "d": "Love for God and gratitude for His grace"
     },
     "correct": "d",
@@ -1878,10 +1878,10 @@
   {
     "question": "What is the Christian understanding of 'repentance'?",
     "options": {
-      "a": "Feeling sorry for a moment",
-      "b": "Performing a religious ritual",
+      "a": "A momentary feeling of sorrow or regret over past transgressions",
+      "b": "Observing specific religious ceremonies or acts of penance for forgiveness",
       "c": "A change of mind and heart leading to a turning away from sin and toward God",
-      "d": "Blaming others for one's sins"
+      "d": "Shifting responsibility for one's wrongdoings onto other individuals or circumstances"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1892,10 +1892,10 @@
   {
     "question": "How should a Christian approach conflicts within the church community?",
     "options": {
-      "a": "Ignore them and hope they disappear",
-      "b": "Take sides immediately",
+      "a": "Overlook the issues entirely, trusting that they will resolve themselves over time",
+      "b": "Quickly align with one faction, defending its position without full understanding",
       "c": "Address them with humility, love, and a desire for reconciliation",
-      "d": "Spread rumors about the conflict"
+      "d": "Disseminate unverified information or gossip to other members of the community"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1906,9 +1906,9 @@
   {
     "question": "What does it mean for a Christian to live by 'faith, hope, and love'?",
     "options": {
-      "a": "To avoid all difficult decisions",
-      "b": "To only focus on these three things and nothing else",
-      "c": "To prioritize personal happiness above all",
+      "a": "To sidestep all challenging choices and responsibilities in daily existence",
+      "b": "To exclusively concentrate on these virtues, neglecting other important aspects of life",
+      "c": "To place one's own emotional well-being and personal joy as the ultimate life objective",
       "d": "To base life on trust in God, confident expectation, and unconditional love as guiding principles"
     },
     "correct": "d",
@@ -1934,9 +1934,9 @@
   {
     "question": "What is the importance of 'remembering God's faithfulness' in times of doubt or struggle?",
     "options": {
-      "a": "It causes one to dwell on negative memories",
-      "b": "It is a pointless exercise in the past",
-      "c": "It is a distraction from present problems",
+      "a": "It can lead to an unhealthy obsession with past failures and personal shortcomings",
+      "b": "It represents a fruitless endeavor, focusing on historical events with no current relevance",
+      "c": "It diverts attention from the urgent challenges and difficulties faced in the current moment",
       "d": "It strengthens faith and provides encouragement by recalling His past actions"
     },
     "correct": "d",
@@ -1948,10 +1948,10 @@
   {
     "question": "What does it mean to 'seek first the kingdom of God and His righteousness'?",
     "options": {
-      "a": "To only care about heaven and ignore earthly matters",
+      "a": "To exclusively focus on eternal rewards, disregarding responsibilities in the present world",
       "b": "To prioritize God's reign and His moral standards above all else in life",
-      "c": "To join a political movement",
-      "d": "To become a king or queen"
+      "c": "To actively participate in governmental affairs to establish Christian rule on Earth",
+      "d": "To aspire to positions of worldly power and authority, like a monarch or ruler"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1962,9 +1962,9 @@
   {
     "question": "How should Christians approach decisions about entertainment and media?",
     "options": {
-      "a": "Judge others based on their media choices",
-      "b": "Only watch religious programming",
-      "c": "Consume everything without discernment",
+      "a": "Critique and condemn the media selections made by other individuals in the community",
+      "b": "Limit one's consumption solely to content explicitly labeled as religious or spiritual",
+      "c": "Engage with all forms of entertainment and media without any critical evaluation",
       "d": "Seek what is wholesome, truthful, and glorifies God, avoiding what is harmful"
     },
     "correct": "d",
@@ -1990,10 +1990,10 @@
   {
     "question": "What is the Christian understanding of 'spiritual maturity'?",
     "options": {
-      "a": "Being old in age",
+      "a": "Achieving a significant number of years in one's earthly existence or spiritual journey",
       "b": "Growing in Christ-like character, discernment, and obedience to God's will",
-      "c": "Having perfect knowledge of the Bible",
-      "d": "Never asking questions about faith"
+      "c": "Possessing a comprehensive and infallible understanding of all biblical texts and doctrines",
+      "d": "Maintaining an unwavering belief system without ever raising doubts or seeking deeper understanding"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2005,9 +2005,9 @@
     "question": "What is the purpose of Christian worship beyond singing?",
     "options": {
       "a": "To express adoration, reverence, and submission to God through all aspects of life",
-      "b": "To entertain the congregation",
-      "c": "To showcase musical talents",
-      "d": "To fulfill a requirement for church membership"
+      "b": "To provide an enjoyable and engaging experience for those gathered in the assembly",
+      "c": "To demonstrate the musical abilities and artistic skills of individual church members",
+      "d": "To satisfy a mandatory condition for maintaining one's active status within the church community"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2018,10 +2018,10 @@
   {
     "question": "What does the Bible teach about being a 'good neighbor'?",
     "options": {
-      "a": "Only be good to neighbors who are also Christian",
+      "a": "Limit acts of kindness to those who share your faith and values",
       "b": "Love and serve all neighbors, regardless of their beliefs or background",
-      "c": "Avoid interacting with neighbors who are different",
-      "d": "Only help neighbors if you expect something in return"
+      "c": "Maintain distance from those whose lifestyles do not align with scripture",
+      "d": "Offer assistance only when it benefits your own spiritual or material well-being"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2047,9 +2047,9 @@
     "question": "What is the Christian view on gratitude?",
     "options": {
       "a": "It is an essential attitude for all circumstances, recognizing God's goodness",
-      "b": "It is only necessary for large blessings",
-      "c": "It is a sign of weakness to express thanks",
-      "d": "It can be faked for social approval"
+      "b": "Gratitude should be reserved for significant blessings and answered prayers",
+      "c": "Expressing thanks too often diminishes the glory due to God's sovereign plan",
+      "d": "It is a cultural practice that holds little spiritual significance for believers"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2061,9 +2061,9 @@
     "question": "What does it mean to be 'transformed by the renewing of your mind'?",
     "options": {
       "a": "To allow God's Word and the Holy Spirit to change one's thoughts and perspectives",
-      "b": "To simply try harder to be good",
-      "c": "To get a higher education",
-      "d": "To forget everything you once knew"
+      "b": "To simply commit to moral improvement through personal discipline and effort",
+      "c": "To acquire extensive theological knowledge through dedicated academic study",
+      "d": "To discard all former beliefs and embrace a completely new set of doctrines"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2074,10 +2074,10 @@
   {
     "question": "How should a Christian approach financial debt?",
     "options": {
-      "a": "Ignore debt and hope it goes away",
-      "b": "Believe God will miraculously pay all debts regardless of personal action",
+      "a": "Trust that divine provision will always cover financial obligations without personal planning",
+      "b": "Rely on the Lord to supernaturally erase all financial burdens as a sign of faith",
       "c": "Strive to live within means, avoid unnecessary debt, and honor financial commitments",
-      "d": "Accumulate as much debt as possible"
+      "d": "Utilize credit as a tool to expand ministry reach and kingdom influence"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2102,10 +2102,10 @@
   {
     "question": "What is the purpose of spiritual disciplines in a Christian's life?",
     "options": {
-      "a": "To make life easier and more comfortable",
+      "a": "To ensure a life free from suffering and earthly trials through consistent practice",
       "b": "To train and equip believers for spiritual growth and effectiveness",
-      "c": "To earn God's love and approval",
-      "d": "To showcase one's religious devotion to others"
+      "c": "To merit divine favor and secure a higher standing in the heavenly kingdom",
+      "d": "To outwardly demonstrate one's piety and commitment before the congregation"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2117,9 +2117,9 @@
     "question": "What does the Bible teach about exercising spiritual gifts?",
     "options": {
       "a": "Every believer has gifts to be used for the building up of the church and glory of God",
-      "b": "Spiritual gifts are no longer active today",
-      "c": "Only a select few Christians have spiritual gifts",
-      "d": "Spiritual gifts are for personal gain only"
+      "b": "These supernatural endowments ceased with the apostolic age and are not for today",
+      "c": "Only those specifically chosen by God for leadership roles receive spiritual abilities",
+      "d": "They are primarily given for individual edification and personal spiritual enrichment"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2130,9 +2130,9 @@
   {
     "question": "What is the Christian view on seeking justice?",
     "options": {
-      "a": "Justice is only for personal grievances",
-      "b": "Justice contradicts mercy",
-      "c": "It is solely a secular pursuit",
+      "a": "Focus on personal holiness and leave societal issues to worldly authorities",
+      "b": "Divine mercy always supersedes any human need for earthly justice or fairness",
+      "c": "The pursuit of social equity is outside the primary mission of the Christian church",
       "d": "Believers are called to pursue justice and righteousness, especially for the oppressed"
     },
     "correct": "d",
@@ -2158,10 +2158,10 @@
   {
     "question": "What is the Christian understanding of 'reconciliation'?",
     "options": {
-      "a": "Only possible if both parties are perfect",
+      "a": "It can only occur when all parties involved have achieved spiritual maturity",
       "b": "Restoring broken relationships through forgiveness and seeking peace",
-      "c": "Making sure the other person admits they were wrong",
-      "d": "Ignoring past wrongs and moving on"
+      "c": "Requiring the offender to fully acknowledge their sin and make complete restitution",
+      "d": "Simply forgetting past offenses and avoiding any further discussion of the issue"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2173,9 +2173,9 @@
     "question": "What does the Bible teach about being a 'cheerful giver'?",
     "options": {
       "a": "Give generously and willingly, not under compulsion or grudgingly",
-      "b": "Give only a small amount with a smile",
-      "c": "Only give to those who can give back",
-      "d": "Give only if you feel like it"
+      "b": "Contribute a modest portion with a joyful heart, regardless of the need",
+      "c": "Offer resources to those who are able to reciprocate or further your own interests",
+      "d": "Donate only when moved by strong emotion, not as a matter of consistent principle"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2186,9 +2186,9 @@
   {
     "question": "What is the Christian view on the value of human life?",
     "options": {
-      "a": "Life's value diminishes with age",
-      "b": "Only the lives of believers are valuable",
-      "c": "Its value depends on a person's achievements",
+      "a": "The sanctity of life decreases gradually as an individual approaches their final years",
+      "b": "Only those who have accepted Christ as Savior hold true spiritual worth and significance",
+      "c": "A person's worth is primarily determined by their contributions to society or ministry",
       "d": "All human life is sacred and created in God's image, possessing inherent dignity"
     },
     "correct": "d",
@@ -2214,10 +2214,10 @@
   {
     "question": "What does 'making disciples' involve according to the Great Commission?",
     "options": {
-      "a": "Only sharing personal testimonies",
+      "a": "Sharing personal testimonies and inviting others to church fellowship",
       "b": "Teaching others to obey Christ's commands and grow in their faith",
-      "c": "Only baptizing new believers",
-      "d": "Forcing people to convert"
+      "c": "Baptizing new believers and leading them in corporate worship services",
+      "d": "Preaching the Gospel message and performing miracles to convince unbelievers"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2243,9 +2243,9 @@
     "question": "How should a Christian respond to criticism or rebuke?",
     "options": {
       "a": "Listen humbly, discern if it's true, and learn from it",
-      "b": "Retaliate with criticism of their own",
-      "c": "Ignore it completely",
-      "d": "Become defensive and angry"
+      "b": "Respond with an immediate defense and highlight the other person's flaws",
+      "c": "Dismiss the feedback as irrelevant and continue in one's own chosen path",
+      "d": "Feel indignant about the perceived attack and withdraw from the conversation"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2270,9 +2270,9 @@
   {
     "question": "What is the Christian view on the importance of family relationships?",
     "options": {
-      "a": "Family exists only to provide support for personal needs",
-      "b": "Family ties are unimportant after conversion",
-      "c": "Family is secondary to personal ambitions",
+      "a": "Family is primarily for mutual support, providing practical assistance and meeting personal needs for security and belonging",
+      "b": "Family relationships become secondary once one has joined the larger Christian community of believers",
+      "c": "Individual spiritual development and pursuit of personal ministry are often more important than family obligations",
       "d": "Family is a sacred institution, to be honored, loved, and discipled according to God's Word"
     },
     "correct": "d",
@@ -2284,9 +2284,9 @@
   {
     "question": "What does 'perseverance of the saints' refer to?",
     "options": {
-      "a": "Saints never face difficulties",
-      "b": "Only very special saints have perseverance",
-      "c": "The ability to withstand physical pain",
+      "a": "The idea that genuine believers are exempt from trials and temptations in this life",
+      "b": "That only a select few highly spiritual individuals are capable of maintaining their faith",
+      "c": "The strength to endure physical suffering and hardship without wavering in one's commitment",
       "d": "The belief that those truly saved by God will endure in faith until the end"
     },
     "correct": "d",
@@ -2298,10 +2298,10 @@
   {
     "question": "What is the Christian ethical principle regarding self-care?",
     "options": {
-      "a": "It is selfish and should be avoided",
-      "b": "It means never asking for help",
+      "a": "That focusing on personal needs is a form of selfishness and should be completely avoided by believers",
+      "b": "That true self-reliance in Christ means never seeking assistance or support from fellow believers or others",
       "c": "It is important for sustaining one's ability to serve God and others, but not to the exclusion of others",
-      "d": "It involves indulging every desire"
+      "d": "That self-care is about fulfilling all personal desires and pursuing comfort and pleasure above all else"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2326,10 +2326,10 @@
   {
     "question": "What is the Christian approach to worry about the future?",
     "options": {
-      "a": "To ignore any planning for the future",
-      "b": "To constantly dwell on potential negative outcomes",
+      "a": "To refrain from making any plans or preparations, relying solely on spontaneous divine intervention",
+      "b": "To analyze every possible risk and constantly worry about what might go wrong ahead of time",
       "c": "To trust God's sovereignty and provision, bringing concerns to Him in prayer",
-      "d": "To control every aspect of the future"
+      "d": "To meticulously plan and attempt to control all circumstances to ensure favorable results"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2340,10 +2340,10 @@
   {
     "question": "What does the Bible teach about the power of the tongue?",
     "options": {
-      "a": "Only religious words have power",
-      "b": "It is always best to speak one's mind without filter",
+      "a": "That only words spoken in prayer or scripture possess spiritual authority and impact",
+      "b": "That honesty requires speaking every thought openly, regardless of its potential impact on others",
       "c": "The tongue has power to build up or tear down, and should be used to bless",
-      "d": "Words have little effect on others"
+      "d": "That spoken words are transient and rarely have a lasting or significant impact on people's lives"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2355,9 +2355,9 @@
     "question": "What is the Christian ethical stance on bearing false witness?",
     "options": {
       "a": "It is a serious sin to lie or give false testimony against another",
-      "b": "It can be justified in difficult situations",
-      "c": "It is acceptable if it protects a friend",
-      "d": "It is only wrong in a court of law"
+      "b": "That bearing false witness is sometimes necessary to prevent greater harm or achieve a good outcome",
+      "c": "That one may lie to shield a loved one or friend from consequences, prioritizing loyalty over truth",
+      "d": "That dishonesty is only morally objectionable when given under oath in a formal legal setting"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2382,10 +2382,10 @@
   {
     "question": "What does the Bible teach about the importance of generosity?",
     "options": {
-      "a": "Generosity is a sign of weakness",
+      "a": "That giving away possessions or time indicates a lack of wisdom or personal strength",
       "b": "Believers are called to be generous with their resources, time, and talents",
-      "c": "It is a way to earn salvation",
-      "d": "It is only for the wealthy"
+      "c": "That acts of giving and charity are necessary works to merit favor with God for eternal life",
+      "d": "That only those with abundant financial means are truly expected to practice significant generosity"
     },
     "correct": "b",
     "type": "multiple_choice",

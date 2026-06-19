@@ -31,9 +31,9 @@
     "question": "What did God command Adam and Eve not to eat from in the Garden of Eden?",
     "options": {
       "a": "The tree of the knowledge of good and evil",
-      "b": "The fruit of the vine",
-      "c": "Any fruit from the garden",
-      "d": "The tree of life"
+      "b": "The fruit of the tree of life in the garden",
+      "c": "The fruit of every tree in the garden",
+      "d": "The tree that was in the midst of the garden"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -660,9 +660,9 @@
   {
     "question": "Shadrach, Meshach, and Abednego were thrown into a fiery furnace for refusing to worship a golden image. What happened to them?",
     "options": {
-      "a": "The fire was extinguished before they entered",
-      "b": "They were rescued by Daniel",
-      "c": "They were consumed by the flames",
+      "a": "The fire was miraculously extinguished by an angel",
+      "b": "They were rescued from the flames by the prophet Daniel",
+      "c": "They were consumed by the intense flames of the furnace",
       "d": "They were unharmed, and a fourth figure was seen with them"
     },
     "correct": "d",
@@ -688,9 +688,9 @@
   {
     "question": "The book of Proverbs is primarily a collection of what?",
     "options": {
-      "a": "Prophecies",
-      "b": "Love poems",
-      "c": "Genealogies",
+      "a": "Prophecies of future events",
+      "b": "Songs of worship and praise",
+      "c": "Genealogies of ancient patriarchs",
       "d": "Wise sayings and instructions"
     },
     "correct": "d",
@@ -702,10 +702,10 @@
   {
     "question": "The book of Job deals primarily with the question of:",
     "options": {
-      "a": "The history of the Israelite monarchy",
-      "b": "The origin of evil",
+      "a": "The historical accounts of the Israelite monarchy",
+      "b": "The origin of evil and its consequences for humanity",
       "c": "The problem of suffering and God's justice",
-      "d": "The proper way to worship God"
+      "d": "The proper way to worship God through sacrifices"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -731,9 +731,9 @@
     "question": "What was the main message Jonah was sent to deliver to the city of Nineveh?",
     "options": {
       "a": "A call to repentance or impending destruction",
-      "b": "A message of hope and restoration",
-      "c": "A warning against idolatry",
-      "d": "Instructions for building a temple"
+      "b": "A message of hope and restoration for the exiles",
+      "c": "A strong warning against the practice of idolatry",
+      "d": "Detailed instructions for building a new temple"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -829,9 +829,9 @@
     "question": "What was the primary purpose of the Tabernacle in the wilderness?",
     "options": {
       "a": "A place for God to dwell among His people",
-      "b": "A school for priests",
-      "c": "A fortress for defense",
-      "d": "A place for the Israelites to live"
+      "b": "A training school for all Levitical priests",
+      "c": "A fortified structure for the defense of the camp",
+      "d": "A designated place for the Israelite families to live"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1192,9 +1192,9 @@
   {
     "question": "What did Ezekiel see in his vision that represented God's glory departing from the Temple due to Israel's idolatry?",
     "options": {
-      "a": "A fiery cloud",
-      "b": "A pillar of fire",
-      "c": "A rainbow",
+      "a": "A fiery cloud encompassing the holy place",
+      "b": "A pillar of fire and a pillar of cloud",
+      "c": "A rainbow surrounding the heavenly throne",
       "d": "A cherubim-borne throne chariot"
     },
     "correct": "d",
@@ -1206,10 +1206,10 @@
   {
     "question": "What was the interpretation of the writing on the wall ('Mene, Mene, Tekel, Parsin') seen by King Belshazzar?",
     "options": {
-      "a": "God has blessed your rule",
+      "a": "God has blessed your rule and will expand your dominion",
       "b": "Your days are numbered, you have been weighed and found wanting",
-      "c": "Your kingdom is established forever",
-      "d": "A new king will rise to power"
+      "c": "Your kingdom is established forever and will not be overthrown",
+      "d": "A new king will rise to power and bring a time of peace"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1234,10 +1234,10 @@
   {
     "question": "What common theme is found throughout the book of Proverbs?",
     "options": {
-      "a": "The coming of the Messiah",
-      "b": "The history of Israel's kings",
+      "a": "The coming of the Messiah and his eternal reign",
+      "b": "The history of Israel's kings and their covenant with God",
       "c": "The fear of the Lord is the beginning of knowledge",
-      "d": "The importance of sacrifice"
+      "d": "The importance of sacrifice for the forgiveness of sins"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1500,10 +1500,10 @@
   {
     "question": "God changed the language of the people at the Tower of Babel to scatter them. What was their original language?",
     "options": {
-      "a": "Egyptian",
+      "a": "An ancient Egyptian tongue for all people",
       "b": "A single common language",
-      "c": "Hebrew",
-      "d": "Aramaic"
+      "c": "The sacred Hebrew language of the patriarchs",
+      "d": "An early form of Aramaic understood by many"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1570,10 +1570,10 @@
   {
     "question": "What did Pharaoh's dreams, interpreted by Joseph, predict for Egypt?",
     "options": {
-      "a": "A change in dynasty",
+      "a": "A significant change in the ruling dynasty of Egypt",
       "b": "Seven years of plenty followed by seven years of famine",
       "c": "Seven years of famine followed by seven years of plenty",
-      "d": "A great war, then peace"
+      "d": "A great war followed by a long period of lasting peace"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1599,9 +1599,9 @@
     "question": "What was the name of the golden chest that contained the Ten Commandments and other sacred items?",
     "options": {
       "a": "The Ark of the Covenant",
-      "b": "The Laver",
-      "c": "The Altar of Incense",
-      "d": "The Table of Showbread"
+      "b": "The Bronze Laver for washing",
+      "c": "The Golden Altar of Incense",
+      "d": "The Table for the Showbread"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1654,9 +1654,9 @@
   {
     "question": "Before his death, Moses delivered a series of farewell speeches to the Israelites, recorded in which book?",
     "options": {
-      "a": "Exodus",
-      "b": "Leviticus",
-      "c": "Numbers",
+      "a": "Book of Exodus",
+      "b": "Book of Joshua",
+      "c": "Book of Judges",
       "d": "Deuteronomy"
     },
     "correct": "d",
@@ -1696,10 +1696,10 @@
   {
     "question": "In the book of Judges, what pattern consistently repeated among the Israelites?",
     "options": {
-      "a": "War, conquest, prosperity",
+      "a": "Military victories, land acquisition, and wealth",
       "b": "Sin, oppression, cry out, deliverance, peace",
-      "c": "Obedience, blessing, peace",
-      "d": "Innovation, expansion, trade"
+      "c": "Following God's law, blessings, and rest",
+      "d": "Righteous leadership, national unity, and divine favor"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1724,8 +1724,8 @@
   {
     "question": "Who was Hannah's son, born after her fervent prayer, whom she dedicated to the Lord?",
     "options": {
-      "a": "Eli",
-      "b": "Saul",
+      "a": "Elkanah",
+      "b": "Solomon",
       "c": "Nathan",
       "d": "Samuel"
     },
@@ -1738,9 +1738,9 @@
   {
     "question": "What was King Saul's main failing that led to God rejecting him as king?",
     "options": {
-      "a": "His military weakness",
-      "b": "His great wisdom",
-      "c": "His humility",
+      "a": "His lack of military strategy",
+      "b": "His reliance on his own counsel",
+      "c": "His fear of the people's judgment",
       "d": "His disobedience and pride"
     },
     "correct": "d",
@@ -1795,9 +1795,9 @@
     "question": "What was the name of the giant Philistine warrior whom David defeated?",
     "options": {
       "a": "Goliath",
-      "b": "Sihon",
-      "c": "Achish",
-      "d": "Og"
+      "b": "King Sihon",
+      "c": "King Achish",
+      "d": "King Og"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1822,9 +1822,9 @@
   {
     "question": "Which of Solomon's actions caused God's judgment and the eventual division of the kingdom?",
     "options": {
-      "a": "His building of the Temple",
-      "b": "His love for wisdom",
-      "c": "His military campaigns",
+      "a": "His extensive construction projects",
+      "b": "His pursuit of vast earthly riches",
+      "c": "His heavy taxation of the people",
       "d": "His many foreign wives and their idols"
     },
     "correct": "d",
@@ -1837,8 +1837,8 @@
     "question": "Who was the first king of the northern kingdom of Israel after the split?",
     "options": {
       "a": "Rehoboam",
-      "b": "Omri",
-      "c": "Ahab",
+      "b": "King Omri",
+      "c": "King Ahab",
       "d": "Jeroboam"
     },
     "correct": "d",
@@ -1893,9 +1893,9 @@
     "question": "What is the book of Lamentations about?",
     "options": {
       "a": "Laments over the destruction of Jerusalem",
-      "b": "Wisdom sayings",
-      "c": "Songs of praise",
-      "d": "Prophecies of hope"
+      "b": "Proverbial sayings and counsel for living",
+      "c": "Joyful psalms and hymns of devotion",
+      "d": "Visions of future restoration and revival"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1935,9 +1935,9 @@
     "question": "Which book of the Old Testament is a long poem about the search for meaning in life, concluding that fearing God is paramount?",
     "options": {
       "a": "Ecclesiastes",
-      "b": "Song of Solomon",
-      "c": "Proverbs",
-      "d": "Job"
+      "b": "Lamentations",
+      "c": "Deuteronomy",
+      "d": "Habakkuk"
     },
     "correct": "a",
     "type": "multiple_choice",

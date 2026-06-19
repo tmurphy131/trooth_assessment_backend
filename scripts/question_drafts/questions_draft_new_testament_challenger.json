@@ -44,10 +44,10 @@
   {
     "question": "In Matthew 16, which of these did Jesus explicitly state the Son of Man must do?",
     "options": {
-      "a": "Suffer many things and be killed, but not yet raised",
+      "a": "Suffer many things, be killed, and ascend into heavenly glory",
       "b": "Suffer many things, be killed, and be raised on the third day",
-      "c": "Only be raised on the third day after a brief suffering",
-      "d": "Rule as King from Jerusalem"
+      "c": "Suffer many things, be raised on the third day, and sit at God's right hand",
+      "d": "Be recognized as the Messiah, and establish His glorious kingdom"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -59,9 +59,9 @@
     "question": "According to Mark's Gospel, what was the specific occupation of James and John, sons of Zebedee, when Jesus called them?",
     "options": {
       "a": "Fishermen mending nets",
-      "b": "Shepherds",
-      "c": "Carpenters",
-      "d": "Tax collectors"
+      "b": "Shepherds tending their flocks by the sea",
+      "c": "Carpenters working diligently in their shop",
+      "d": "Tax collectors collecting tolls by the roadside"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -87,9 +87,9 @@
     "question": "In Mark's Gospel, what specific title did Bartimaeus use when he called out to Jesus for healing near Jericho?",
     "options": {
       "a": "Son of David, have mercy on me",
-      "b": "Rabbi, Son of God",
-      "c": "Lord, have mercy",
-      "d": "Prophet of Nazareth"
+      "b": "Rabbi, Son of God, heal my blindness",
+      "c": "Lord, have mercy on me, a poor sinner",
+      "d": "Prophet of Nazareth, restore my sight now"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -100,10 +100,10 @@
   {
     "question": "In Luke 1, what was the name of the town where Zechariah and Elizabeth lived?",
     "options": {
-      "a": "Nazareth",
+      "a": "Nazareth, a city in the region of Galilee",
       "b": "A town in the hill country of Judah",
-      "c": "Bethlehem",
-      "d": "Capernaum"
+      "c": "Bethlehem, the city of David in Judea",
+      "d": "Capernaum, a fishing village by the Sea of Galilee"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -156,10 +156,10 @@
   {
     "question": "According to John 1, which of these individuals did Andrew *not* bring to Jesus?",
     "options": {
-      "a": "His brother Simon",
-      "b": "Philip",
+      "a": "His brother Simon, whom he found by the Jordan",
+      "b": "Philip, who was from Bethsaida, their own city",
       "c": "None of the above (he only brought Simon)",
-      "d": "Nathaniel"
+      "d": "Nathaniel, who was sitting under the fig tree"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -268,10 +268,10 @@
   {
     "question": "In Acts 16, what was the name of the fortune-telling slave girl in Philippi whom Paul cast a demon out of?",
     "options": {
-      "a": "Priscilla",
-      "b": "Lydia",
+      "a": "Priscilla, the tentmaker and fellow worker with Paul",
+      "b": "Lydia, a seller of purple from Thyatira",
       "c": "No specific name is given",
-      "d": "Euodia"
+      "d": "Euodia, a prominent woman in the church at Philippi"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -282,10 +282,10 @@
   {
     "question": "In Acts 19, what was the name of the town clerk who quelled the riot started by Demetrius in Ephesus?",
     "options": {
-      "a": "Aristarchus",
+      "a": "Aristarchus, a Macedonian traveling companion of Paul",
       "b": "No specific name is given",
-      "c": "Gaius",
-      "d": "Alexander"
+      "c": "Gaius, a host to Paul and the whole church",
+      "d": "Alexander, a Jewish man who tried to speak to the crowd"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -436,9 +436,9 @@
   {
     "question": "In Colossians 4, Paul lists several co-workers and mentions that Aristarchus is his fellow prisoner. Which other person does he mention as a fellow prisoner?",
     "options": {
-      "a": "Tychicus",
-      "b": "Epaphras",
-      "c": "Mark",
+      "a": "Tychicus, a faithful minister and fellow servant",
+      "b": "Epaphras, a servant of Christ Jesus from Colossae",
+      "c": "Mark, the cousin of Barnabas and useful to Paul",
       "d": "Jesus, who is called Justus"
     },
     "correct": "d",
@@ -492,10 +492,10 @@
   {
     "question": "In Titus 1, Paul lists qualifications for elders. Which of these is *not* explicitly mentioned as a qualification?",
     "options": {
-      "a": "Not given to much wine",
-      "b": "Hospitable",
+      "a": "Not given to excessive drinking",
+      "b": "Known for being hospitable",
       "c": "Able to speak in tongues",
-      "d": "Self-controlled"
+      "d": "One who is self-controlled"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -730,10 +730,10 @@
   {
     "question": "In Luke 7, a Roman centurion sends elders of the Jews to Jesus to heal his servant. What specific reason do the elders give to Jesus as to why the centurion is worthy?",
     "options": {
-      "a": "He has provided much charity to the poor.",
-      "b": "He is a man of great faith.",
+      "a": "He has provided much charity to the poor and needy.",
+      "b": "He is a man of great faith and devout in his prayers.",
       "c": "He loves our nation and built us a synagogue.",
-      "d": "He is a Roman official."
+      "d": "He is a Roman official who shows great respect to our laws."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -744,9 +744,9 @@
   {
     "question": "In Luke 12, Jesus tells the parable of the rich fool, whose land produced abundantly. The rich man decided to pull down his barns and build larger ones. How many new barns did he plan to build?",
     "options": {
-      "a": "Four",
-      "b": "Two",
-      "c": "Three",
+      "a": "Four new barns, each larger than the previous ones.",
+      "b": "Two additional barns, to store all his abundant harvest.",
+      "c": "Three grand structures, to house his overflowing produce.",
       "d": "The text does not specify a number."
     },
     "correct": "d",
@@ -899,9 +899,9 @@
     "question": "In 2 Corinthians 11, Paul boasts about his sufferings for Christ. He mentions being shipwrecked how many times?",
     "options": {
       "a": "Four times",
-      "b": "Twice",
+      "b": "Two separate occasions",
       "c": "Three times",
-      "d": "Once"
+      "d": "Only one time"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1136,10 +1136,10 @@
   {
     "question": "In Revelation 1, John sees a vision of the glorified Christ. From His mouth came a sharp, double-edged sword, and His face was like what?",
     "options": {
-      "a": "Pure gold",
+      "a": "Like fine pure gold, refined in a furnace.",
       "b": "The sun shining in full strength",
-      "c": "Blazing fire",
-      "d": "A brilliant star"
+      "c": "Like a blazing fire, intense and consuming.",
+      "d": "As a brilliant morning star, shining brightly."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1234,9 +1234,9 @@
   {
     "question": "In Matthew 13, Jesus tells the parable of the sower. What specific bird is mentioned as coming and eating the seed sown along the path?",
     "options": {
-      "a": "Crows",
-      "b": "Sparrows",
-      "c": "Ravens",
+      "a": "Large black crows from the field.",
+      "b": "Small common sparrows of the region.",
+      "c": "Dark ravens that feast on carrion.",
       "d": "Birds of the air"
     },
     "correct": "d",
@@ -1362,7 +1362,7 @@
     "options": {
       "a": "The necessity of spiritual gifts",
       "b": "Repentance from dead works",
-      "c": "Faith toward God",
+      "c": "Faith toward God and His promises",
       "d": "Doctrine of baptisms"
     },
     "correct": "a",
@@ -1374,10 +1374,10 @@
   {
     "question": "In Revelation 16, the seventh angel pours out his bowl into the air, and a loud voice from the throne cries out, \"It is done!\" What specific physical phenomenon is described as accompanying this final bowl judgment, unprecedented in human history?",
     "options": {
-      "a": "Every mountain and island vanishes",
+      "a": "Every mountain and island is moved from its place and completely vanishes.",
       "b": "An earthquake so severe that no such earthquake has occurred since mankind has been on earth.",
-      "c": "A hailstorm with stones weighing about a talent each",
-      "d": "The sun scorches people with fire"
+      "c": "A massive hailstorm descends, with each stone weighing about a talent.",
+      "d": "The sun becomes intensely hot and scorches people with its fierce fire."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1388,9 +1388,9 @@
   {
     "question": "In Matthew 22, Jesus tells the parable of the wedding feast. When the king sends his servants to invite guests, and they refuse, where does the king instruct his servants to go next to invite new guests?",
     "options": {
-      "a": "To the surrounding villages",
-      "b": "To the marketplace",
-      "c": "To the temples",
+      "a": "To the surrounding villages and towns",
+      "b": "To the city squares and markets",
+      "c": "To the synagogues and temple courts",
       "d": "To the highways and byways"
     },
     "correct": "d",
@@ -1416,10 +1416,10 @@
   {
     "question": "In Luke 14, Jesus tells a parable about inviting guests to a great banquet. He says that when you give a feast, you should not invite your friends, brothers, relatives, or rich neighbors. Who does he say you should invite instead?",
     "options": {
-      "a": "The Gentiles and Samaritans",
-      "b": "The children and the elderly",
+      "a": "The outcasts, the foreigners, the unclean",
+      "b": "The widows, the orphans, the strangers",
       "c": "The poor, the crippled, the lame, the blind",
-      "d": "The tax collectors and sinners"
+      "d": "The publicans, the prostitutes, the unrighteous"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1431,9 +1431,9 @@
     "question": "In John 10, Jesus declares, \"I am the good shepherd.\" What does He say the good shepherd does for his sheep?",
     "options": {
       "a": "He lays down his life for the sheep",
-      "b": "He protects them from wolves",
-      "c": "He leads them to green pastures",
-      "d": "He knows them by name"
+      "b": "He guards them from the ravenous wolves",
+      "c": "He guides them to abundant green pastures",
+      "d": "He calls each one by their own true name"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1445,9 +1445,9 @@
     "question": "In Acts 16, Paul and Silas are in prison in Philippi. At midnight, what specific activity were they engaged in before the earthquake?",
     "options": {
       "a": "Praying and singing hymns to God",
-      "b": "Planning their escape",
-      "c": "Debating",
-      "d": "Sleeping"
+      "b": "Discussing the gospel with the guards",
+      "c": "Sharing the good news with fellow prisoners",
+      "d": "Meditating on the scriptures of the Lord"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1515,9 +1515,9 @@
     "question": "In Revelation 19, John sees a vision of heaven opened and a white horse, whose rider is called \"Faithful and True.\" What is written on his robe and on his thigh?",
     "options": {
       "a": "King of Kings and Lord of Lords",
-      "b": "The Lamb of God",
-      "c": "Righteous Judge",
-      "d": "Alpha and Omega"
+      "b": "The Lion of Judah and the Root of David",
+      "c": "The Faithful Witness and the True One",
+      "d": "The Beginning and the End, the Almighty"
     },
     "correct": "a",
     "type": "multiple_choice",

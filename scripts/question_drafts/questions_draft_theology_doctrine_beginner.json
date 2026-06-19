@@ -2,10 +2,10 @@
   {
     "question": "Which of these is NOT considered one of the three persons of the Holy Trinity?",
     "options": {
-      "a": "The Father",
-      "b": "The Holy Spirit",
+      "a": "God the Father Almighty",
+      "b": "The Holy Spirit, the Comforter",
       "c": "The Archangel Michael",
-      "d": "The Son"
+      "d": "God the Son, Jesus Christ"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -86,9 +86,9 @@
   {
     "question": "What does it mean for Christians when they say the Bible is 'inspired'?",
     "options": {
-      "a": "It was written by very creative and thoughtful people.",
-      "b": "It contains many inspiring stories and poems.",
-      "c": "It was dictated word-for-word by angels.",
+      "a": "It was penned by gifted human authors, reflecting their deep spiritual wisdom.",
+      "b": "It offers profound moral lessons and uplifting narratives for all believers.",
+      "c": "It was directly dictated by God, word for word, to human scribes.",
       "d": "God superintended the human authors so that their writings were His very words."
     },
     "correct": "d",
@@ -156,10 +156,10 @@
   {
     "question": "Which book of the Bible is primarily associated with prophecies about the end times and Jesus' return?",
     "options": {
-      "a": "Psalms",
+      "a": "The Book of Psalms",
       "b": "Revelation",
-      "c": "Proverbs",
-      "d": "Genesis"
+      "c": "The Book of Proverbs",
+      "d": "The Book of Genesis"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -212,10 +212,10 @@
   {
     "question": "What is the theological concept that describes Jesus Christ as both fully God and fully human?",
     "options": {
-      "a": "Monotheism",
-      "b": "Docetism",
+      "a": "The Incarnation",
+      "b": "The Docetic Heresy",
       "c": "Hypostatic Union",
-      "d": "Arianism"
+      "d": "The Arian Doctrine"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -226,10 +226,10 @@
   {
     "question": "The Nicene Creed was primarily formulated to address disputes about the nature of which person of the Trinity?",
     "options": {
-      "a": "God the Father",
-      "b": "God the Holy Spirit",
+      "a": "God the Father, the Almighty Creator",
+      "b": "God the Holy Spirit, the Divine Comforter",
       "c": "God the Son (Jesus Christ)",
-      "d": "The Archangel Gabriel"
+      "d": "The Archangel Gabriel, God's heavenly messenger"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -380,10 +380,10 @@
   {
     "question": "Which early church father wrote 'Confessions' and 'City of God', profoundly influencing Western Christian thought?",
     "options": {
-      "a": "Origen",
+      "a": "Origen of Alexandria",
       "b": "Augustine of Hippo",
-      "c": "Athanasius",
-      "d": "Tertullian"
+      "c": "Athanasius of Alexandria",
+      "d": "Tertullian of Carthage"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -464,10 +464,10 @@
   {
     "question": "What is the Christian understanding of 'heaven'?",
     "options": {
-      "a": "A place of eternal separation from God.",
+      "a": "A realm of eternal punishment and separation from God's holy presence.",
       "b": "The dwelling place of God and the redeemed, often associated with a 'new heavens and new earth'.",
-      "c": "A temporary spiritual realm for ghosts.",
-      "d": "A mythical land with no basis in reality."
+      "c": "A transient spiritual dimension where disembodied human spirits temporarily reside.",
+      "d": "A purely symbolic concept with no literal existence or future heavenly hope."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -535,9 +535,9 @@
     "question": "Which statement best describes the Christian doctrine of 'redemption'?",
     "options": {
       "a": "Being bought back from slavery to sin through Christ's sacrifice.",
-      "b": "The process of forgiving oneself for past mistakes.",
-      "c": "Earning favor with God through good deeds.",
-      "d": "Achieving enlightenment through meditation."
+      "b": "The personal journey of self-forgiveness and overcoming past moral mistakes.",
+      "c": "Attaining God's favor and acceptance through righteous actions and good works.",
+      "d": "Reaching spiritual enlightenment through deep contemplation and inner peace practices."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -549,9 +549,9 @@
     "question": "The concept of 'total depravity' in some Reformed theology means what?",
     "options": {
       "a": "Every part of human nature is affected by sin, making us unable to save ourselves.",
-      "b": "Humans are as evil as they can possibly be.",
-      "c": "Only a select few are truly evil.",
-      "d": "Humans are incapable of doing any good whatsoever."
+      "b": "Humanity is utterly and completely wicked, incapable of any moral good.",
+      "c": "Only a select group of individuals are inherently evil from their birth.",
+      "d": "Humans are entirely unable to perform any actions that are pleasing to God."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -576,10 +576,10 @@
   {
     "question": "What is the primary function of the Church in Christian theology?",
     "options": {
-      "a": "To accumulate wealth and political power.",
+      "a": "To establish a powerful earthly kingdom and gather vast spiritual and material resources.",
       "b": "To proclaim the Gospel, worship God, and disciple believers.",
-      "c": "To provide social services to the community.",
-      "d": "To serve as a moral police force for society."
+      "c": "To primarily offer humanitarian aid and social welfare services to all people.",
+      "d": "To enforce ethical standards and act as a disciplinary moral authority for society."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -590,10 +590,10 @@
   {
     "question": "Which of these is considered a 'mark' of the Church in traditional Christian theology?",
     "options": {
-      "a": "It is politically influential.",
+      "a": "It is a community of believers, active in social justice.",
       "b": "It is one, holy, catholic (universal), and apostolic.",
-      "c": "It is wealthy.",
-      "d": "It is large in number."
+      "c": "It is a visible institution, with clear hierarchical leadership.",
+      "d": "It is a gathering of saints, actively engaged in evangelism."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -646,10 +646,10 @@
   {
     "question": "The 'Great Commission' refers to Jesus' command to His disciples to do what?",
     "options": {
-      "a": "Establish a political kingdom on Earth.",
-      "b": "Write more books of scripture.",
+      "a": "Proclaim the coming of the Kingdom of God to the Roman Empire.",
+      "b": "Distribute all their possessions to the poor and follow Him.",
       "c": "Make disciples of all nations, baptizing and teaching them.",
-      "d": "Build a large temple in Jerusalem."
+      "d": "Await the coming of the Holy Spirit in Jerusalem, then preach."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -689,9 +689,9 @@
     "question": "The concept of 'Divine Impassibility' traditionally refers to God's inability to do what?",
     "options": {
       "a": "Feel emotions or suffer.",
-      "b": "Create anything new.",
-      "c": "Forgive sins.",
-      "d": "Know the future."
+      "b": "Change His mind or His eternal decrees.",
+      "c": "Be tempted by evil or commit any form of sin.",
+      "d": "Be fully understood by human reason and finite minds."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -702,10 +702,10 @@
   {
     "question": "What is the Christian understanding of 'sin'?",
     "options": {
-      "a": "Mistakes made out of ignorance.",
-      "b": "Merely breaking civil laws.",
+      "a": "Any act that harms another person or the community.",
+      "b": "Transgression of the Mosaic Law, requiring specific sacrifices.",
       "c": "Rebellion against God's will and nature, falling short of His glory.",
-      "d": "Any action that causes personal unhappiness."
+      "d": "A moral failing that results from human weakness or temptation."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -758,9 +758,9 @@
   {
     "question": "The doctrine of 'common grace' refers to what?",
     "options": {
-      "a": "The specific grace required for salvation.",
-      "b": "Grace given only to believers.",
-      "c": "The grace received during church communion.",
+      "a": "The specific grace given to elect individuals for their eternal redemption from sin.",
+      "b": "The transformative grace that enables believers to grow in Christ-like holiness and obedience.",
+      "c": "The divine grace that leads to spiritual regeneration and the immediate forgiveness of past transgressions.",
       "d": "God's general favor and blessings extended to all humanity, believers and non-believers alike."
     },
     "correct": "d",
@@ -772,9 +772,9 @@
   {
     "question": "Which of these is NOT a primary way Christians believe God reveals Himself?",
     "options": {
-      "a": "Through the Holy Spirit's illumination",
-      "b": "Through special revelation (Scripture, Jesus Christ)",
-      "c": "Through general revelation (creation, conscience)",
+      "a": "Through the Holy Spirit's inner illumination and guidance in believers' lives.",
+      "b": "Through special revelation, such as the inspired Word of God and Jesus Christ Himself.",
+      "c": "Through general revelation, evident in the natural creation and human conscience.",
       "d": "Through personal dreams and visions that contradict Scripture"
     },
     "correct": "d",
@@ -801,9 +801,9 @@
     "question": "The term 'covenant' in Christian theology primarily refers to what?",
     "options": {
       "a": "A binding agreement or promise initiated by God with humanity.",
-      "b": "A promise made between two human kings.",
-      "c": "A legal contract with specific penalties.",
-      "d": "A secret society with sacred rituals."
+      "b": "A solemn oath sworn between individuals to establish kinship bonds.",
+      "c": "A conditional legal contract between parties, with stipulated obligations.",
+      "d": "A formal declaration of allegiance and loyalty to a specific ruler."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -856,10 +856,10 @@
   {
     "question": "What is the Christian understanding of faith?",
     "options": {
-      "a": "Belief in one's own abilities to achieve spiritual goals.",
+      "a": "Strong conviction in the unseen, often based on personal experiences.",
       "b": "Intellectual assent to certain facts, combined with personal trust in Christ.",
-      "c": "A feeling of optimism and hope.",
-      "d": "Blind trust without any evidence."
+      "c": "A confident expectation of future blessings and divine intervention.",
+      "d": "An unwavering belief in God's existence, regardless of personal understanding."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -870,10 +870,10 @@
   {
     "question": "The 'atonement' refers to Christ's work on the cross that brings about:",
     "options": {
-      "a": "An example of extreme sacrifice for moral instruction.",
-      "b": "The creation of a new religion.",
+      "a": "A moral example of selfless love and obedience to God's will.",
+      "b": "A demonstration of God's power over death and the forces of evil.",
       "c": "Reconciliation between God and humanity by dealing with sin.",
-      "d": "A temporary cease-fire with God."
+      "d": "The establishment of a new covenant, replacing the old Mosaic Law."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -912,9 +912,9 @@
   {
     "question": "The term 'Incarnation' refers to what event in Christian theology?",
     "options": {
-      "a": "The resurrection of Jesus.",
-      "b": "The creation of the world.",
-      "c": "The outpouring of the Holy Spirit at Pentecost.",
+      "a": "The bodily resurrection of Jesus from the dead on the third day.",
+      "b": "The divine act of bringing all existence into being from nothingness.",
+      "c": "The descent of the Holy Spirit upon the disciples in Jerusalem.",
       "d": "God becoming human in the person of Jesus Christ."
     },
     "correct": "d",
@@ -926,10 +926,10 @@
   {
     "question": "What is the doctrine that the Bible was written by human authors, but under the guidance and inspiration of God?",
     "options": {
-      "a": "Human Ingenuity",
-      "b": "Mythology",
+      "a": "Divine Illumination of the Human Mind",
+      "b": "Progressive Revelation of God's Will",
       "c": "Verbal Plenary Inspiration",
-      "d": "Dictation"
+      "d": "Direct Mechanical Dictation by God"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -982,10 +982,10 @@
   {
     "question": "The concept of 'Christology' is the study of what?",
     "options": {
-      "a": "The history of the Church.",
-      "b": "The end times.",
+      "a": "The historical formation of the Church of Christ.",
+      "b": "The prophetic teachings about the end of days.",
       "c": "The person and work of Jesus Christ.",
-      "d": "The doctrine of salvation."
+      "d": "The theological understanding of human salvation."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1024,10 +1024,10 @@
   {
     "question": "Which of the following is considered a 'means of grace' in many Christian traditions?",
     "options": {
-      "a": "Reading horoscopes",
+      "a": "Observing Old Testament Feasts",
       "b": "Prayer and Bible reading",
-      "c": "Astrology",
-      "d": "Good luck charms"
+      "c": "Strict Adherence to Mosaic Law",
+      "d": "Performing Good Deeds and Charity"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1038,10 +1038,10 @@
   {
     "question": "What is the primary message of the Gospel?",
     "options": {
-      "a": "A historical account of ancient Israel.",
-      "b": "Instructions on how to live a perfectly moral life.",
+      "a": "A comprehensive historical account detailing God's covenant relationship with the nation of Israel.",
+      "b": "The foundational divine principles and commands guiding believers towards ethical and righteous conduct.",
       "c": "The good news of salvation through Jesus Christ's death and resurrection.",
-      "d": "A collection of wise sayings and proverbs."
+      "d": "A compilation of divinely inspired wisdom literature providing guidance for practical daily living."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1052,10 +1052,10 @@
   {
     "question": "The doctrine of 'election' (or predestination) means what?",
     "options": {
-      "a": "God chooses certain people for salvation based on their foreseen good works.",
+      "a": "God's selection of individuals for salvation is primarily determined by His foreknowledge of their future faith and righteous actions.",
       "b": "God sovereignly chooses individuals for salvation according to His own purpose, not based on merit.",
-      "c": "Only a specific group of people from one nation can be saved.",
-      "d": "Humans choose God completely independently of His will."
+      "c": "The exclusive spiritual privilege and promise of salvation is solely extended to the physical descendants of Abraham.",
+      "d": "The ultimate decision for salvation rests entirely upon human free will and personal choice, independent of any divine intervention."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1080,9 +1080,9 @@
   {
     "question": "Which of the following best defines the term 'canon' when referring to Scripture?",
     "options": {
-      "a": "A large church building.",
-      "b": "A type of ancient weapon.",
-      "c": "A form of religious music.",
+      "a": "A vast collection of ancient religious manuscripts and writings, often including apocryphal and pseudepigraphal texts.",
+      "b": "The core foundational theological doctrines and ethical principles that define a particular religious tradition.",
+      "c": "The comprehensive compilation encompassing every sacred text and spiritual writing produced throughout history.",
       "d": "The established list of books recognized as authoritative and inspired by God."
     },
     "correct": "d",
@@ -1095,9 +1095,9 @@
     "question": "What does the term 'Adoption' mean in Christian soteriology?",
     "options": {
       "a": "God making believers His children and heirs through Christ.",
-      "b": "Being literally adopted into a Christian family.",
-      "c": "Choosing to follow a new set of moral principles.",
-      "d": "Adopting new customs and traditions."
+      "b": "The act of formally joining a specific Christian denomination.",
+      "c": "A commitment to live by the moral teachings of Jesus Christ.",
+      "d": "Embracing new spiritual disciplines and religious practices."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1109,9 +1109,9 @@
     "question": "The 'Lord's Supper' or 'Communion' is a symbolic act recalling what?",
     "options": {
       "a": "The Last Supper of Jesus with His disciples and His atoning death.",
-      "b": "Jesus' temptation in the wilderness.",
-      "c": "The birth of Jesus in Bethlehem.",
-      "d": "The first miracle performed by Jesus."
+      "b": "Jesus' forty days of temptation by Satan in the desert.",
+      "c": "The miraculous birth of Jesus Christ in the town of Bethlehem.",
+      "d": "The first public miracle performed by Jesus at Cana."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1136,9 +1136,9 @@
   {
     "question": "Which historical creed affirmed the full deity of the Holy Spirit, alongside the Father and Son?",
     "options": {
-      "a": "Apostles' Creed",
-      "b": "Chalcedonian Creed",
-      "c": "Athanasian Creed",
+      "a": "Apostles' Creed (earliest summary of faith)",
+      "b": "Chalcedonian Creed (defining Christ's two natures)",
+      "c": "Athanasian Creed (detailed Trinitarian statement)",
       "d": "Nicene Creed (as revised at Constantinople)"
     },
     "correct": "d",
@@ -1192,9 +1192,9 @@
   {
     "question": "Which of these is a characteristic of the 'New Covenant' established through Jesus Christ?",
     "options": {
-      "a": "It focuses primarily on military conquest.",
-      "b": "It is exclusively for the nation of Israel.",
-      "c": "It requires perfect adherence to Old Testament ceremonial laws.",
+      "a": "It primarily focuses on the physical conquest of the Promised Land.",
+      "b": "It is exclusively given to the descendants of Abraham through lineage.",
+      "c": "It demands perfect obedience to all Mosaic ceremonial and dietary laws.",
       "d": "It is based on God's grace and promises, written on believers' hearts."
     },
     "correct": "d",
@@ -1220,10 +1220,10 @@
   {
     "question": "The theological term 'Regeneration' refers to what spiritual experience?",
     "options": {
-      "a": "Renewing one's commitment to a moral code.",
+      "a": "A profound renewal of one's ethical conduct and commitment to the Law of Moses.",
       "b": "The spiritual new birth or being 'born again' by the Holy Spirit.",
-      "c": "A temporary emotional high during a worship service.",
-      "d": "A person deciding to start attending church regularly."
+      "c": "A transient emotional awakening experienced during a powerful worship gathering or sermon.",
+      "d": "An individual's conscious decision to regularly participate in communal worship and church ordinances."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1248,9 +1248,9 @@
   {
     "question": "Which of these describes the 'Parousia' in Christian eschatology?",
     "options": {
-      "a": "The birth of Jesus.",
-      "b": "The day of Pentecost.",
-      "c": "The Last Supper.",
+      "a": "The miraculous nativity event marking the Messiah's first arrival on earth.",
+      "b": "The outpouring of the Holy Spirit upon the apostles after Christ's ascension.",
+      "c": "The final Passover meal shared by Jesus with His disciples before His crucifixion.",
       "d": "The Second Coming of Christ."
     },
     "correct": "d",
@@ -1304,10 +1304,10 @@
   {
     "question": "The 'priesthood of all believers' doctrine, advocated by Luther, means what?",
     "options": {
-      "a": "Priesthood is a hereditary title.",
-      "b": "Only ordained priests can read the Bible.",
+      "a": "The belief that the office of priesthood is passed down through specific family bloodlines, as in the Old Testament.",
+      "b": "The teaching that only formally ordained clergy are authorized to interpret and understand Holy Scripture.",
       "c": "All believers have direct access to God through Christ, without needing an intermediary priest.",
-      "d": "Every Christian is called to become a pastor."
+      "d": "The idea that every single follower of Christ is personally obligated to enter into full-time pastoral ministry."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1332,10 +1332,10 @@
   {
     "question": "Which of these is NOT a traditional attribute of God in Christian theology?",
     "options": {
-      "a": "Infinite (without limits)",
+      "a": "Boundless and without any constraints or limitations in His divine being and power.",
       "b": "Partially knowing (limited knowledge)",
-      "c": "Holy (set apart, pure)",
-      "d": "Immutable (unchanging)"
+      "c": "Uniquely consecrated, morally perfect, and entirely separate from all sin and imperfection.",
+      "d": "Unchanging in His character, promises, and divine nature throughout all of eternity."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1360,9 +1360,9 @@
   {
     "question": "The term 'propitiation' in soteriology means what?",
     "options": {
-      "a": "Making a prophetic declaration.",
-      "b": "Making sacrifices to pagan gods.",
-      "c": "Forecasting future events.",
+      "a": "Delivering an inspired prophetic message concerning God's future plans and judgments.",
+      "b": "Offering ritualistic sacrifices to idols and false deities, as practiced in ancient cultures.",
+      "c": "Predicting forthcoming occurrences with precise details, based on divine revelation or human wisdom.",
       "d": "Appeasing divine wrath through an atoning sacrifice."
     },
     "correct": "d",
@@ -1416,10 +1416,10 @@
   {
     "question": "What is the primary role of the Holy Spirit in making the Bible understandable to believers?",
     "options": {
-      "a": "To replace the need for careful study.",
-      "b": "To ensure everyone interprets it the same way.",
+      "a": "To eliminate the necessity for diligent academic or personal study of the scriptural passages.",
+      "b": "To guarantee a universal, identical interpretation of every passage for all believers worldwide.",
       "c": "To illuminate the text, helping believers to grasp its meaning and apply it.",
-      "d": "To reveal new, secret meanings not found in the text."
+      "d": "To disclose hidden, esoteric interpretations and novel truths absent from the original scriptural content."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1431,9 +1431,9 @@
     "question": "Which of these is a key aspect of 'Discipleship' in Christian theology?",
     "options": {
       "a": "Following Jesus, learning from Him, and seeking to live like Him.",
-      "b": "Only memorizing Bible verses without understanding.",
-      "c": "Gaining power and influence over others.",
-      "d": "Becoming a strict follower of ancient customs."
+      "b": "Solely committing large portions of scripture to memory, neglecting deeper comprehension or application.",
+      "c": "Acquiring significant authority and exerting control over other individuals within the church community.",
+      "d": "Adhering rigidly to traditional practices and cultural norms from ancient biblical times."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1472,10 +1472,10 @@
   {
     "question": "What is the 'Great White Throne Judgment' described in Revelation?",
     "options": {
-      "a": "A judgment of nations for their treatment of Israel.",
+      "a": "A divine reckoning for all gentile nations based on their historical actions towards the people of Israel.",
       "b": "A judgment of unbelievers before they are cast into the lake of fire.",
-      "c": "A judgment of angels only.",
-      "d": "A judgment for believers' rewards."
+      "c": "A specific divine judgment reserved exclusively for fallen angelic beings and their demonic counterparts.",
+      "d": "A separate judgment seat where faithful believers receive rewards for their service and deeds."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1501,9 +1501,9 @@
     "question": "Which of the following is NOT a common understanding of the 'Kingdom of God'?",
     "options": {
       "a": "A literal, political empire established by human effort.",
-      "b": "A future, physical reign of Christ on Earth.",
-      "c": "A present reality in the hearts of believers.",
-      "d": "God's sovereign rule over all creation."
+      "b": "A future, tangible, and physical thousand-year reign of Jesus Christ upon the earth.",
+      "c": "A spiritual dominion currently experienced within the hearts and lives of those who believe.",
+      "d": "The overarching, absolute, and universal authority of God extending throughout all of His creation."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1528,10 +1528,10 @@
   {
     "question": "What is the Christian doctrine regarding the end of the physical universe?",
     "options": {
-      "a": "It will merge with another dimension.",
-      "b": "It will be destroyed and cease to exist.",
+      "a": "It will physically combine or intertwine with an entirely different spiritual or cosmic dimension.",
+      "b": "It will be utterly annihilated and completely vanish from existence, leaving no trace.",
       "c": "It will be renewed and transformed into a 'new heavens and new earth'.",
-      "d": "It will continue forever in its current state."
+      "d": "It will perpetually endure in its present physical form and material condition, without alteration."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1585,9 +1585,9 @@
     "question": "What is the role of faith in Christian salvation?",
     "options": {
       "a": "Faith is the instrument through which God's grace and Christ's work are received for salvation.",
-      "b": "Faith is simply believing in a god, any god.",
-      "c": "Faith is unnecessary if one is a good person.",
-      "d": "Faith is a work that earns salvation."
+      "b": "Faith is primarily an intellectual assent to historical facts about Jesus of Nazareth.",
+      "c": "Faith is a human effort that must be combined with good deeds to merit God's favor.",
+      "d": "Faith is the initial step, but continuous obedience to the Law is required for salvation."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1598,10 +1598,10 @@
   {
     "question": "Which of these is a characteristic of God's 'Holiness'?",
     "options": {
-      "a": "He is morally imperfect.",
+      "a": "He is primarily known for His wrath and judgment against all unrighteousness.",
       "b": "He is entirely separate from sin and evil, and perfectly righteous.",
-      "c": "He is only holy in certain situations.",
-      "d": "He occasionally makes mistakes."
+      "c": "He is holy only in His divine nature, but not in His interaction with humanity.",
+      "d": "He is holy in His power, but His moral attributes are subject to human interpretation."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1655,9 +1655,9 @@
     "question": "The 'Fall of Man' refers to what event?",
     "options": {
       "a": "Adam and Eve's disobedience in the Garden of Eden, bringing sin into the world.",
-      "b": "The defeat of Goliath by David.",
-      "c": "The collapse of the Roman Empire.",
-      "d": "The destruction of the Tower of Babel."
+      "b": "The destruction of Sodom and Gomorrah due to their pervasive wickedness before the Lord.",
+      "c": "The great flood in Noah's time, which wiped out all life on earth except for those on the ark.",
+      "d": "The division of languages at the Tower of Babel, scattering humanity across the face of the earth."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1696,10 +1696,10 @@
   {
     "question": "What does the phrase 'Solus Christus' (Christ Alone) mean in Reformation theology?",
     "options": {
-      "a": "Christ only saves a select few individuals.",
-      "b": "Christ's teachings are optional for salvation.",
+      "a": "Christ is the only member of the Trinity actively involved in the process of redemption.",
+      "b": "Only Christ's earthly ministry is relevant for understanding God's plan for humanity.",
       "c": "Salvation is found in Christ alone, not through human intermediaries or good works.",
-      "d": "Only Christ existed at the beginning of time."
+      "d": "Christ is the sole focus of worship, excluding the Father and the Holy Spirit in devotion."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1711,9 +1711,9 @@
     "question": "The Christian concept of 'Immutability' means that God is what?",
     "options": {
       "a": "Unchanging in His character, nature, and promises.",
-      "b": "Unable to perform miracles.",
-      "c": "Invisible to human eyes.",
-      "d": "Unable to interact with humanity."
+      "b": "Unchanging in His physical form, always appearing as He did to Moses on Mount Sinai.",
+      "c": "Unchanging in His decrees, meaning He never forgives or alters any of His judgments.",
+      "d": "Unchanging in His divine sovereignty, always exercising His power without any human free will."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1724,10 +1724,10 @@
   {
     "question": "Which of these is considered a 'spiritual gift' given by the Holy Spirit to believers for the building up of the Church?",
     "options": {
-      "a": "Physical attractiveness",
-      "b": "Wealth accumulation",
+      "a": "Eloquence in speech, personal charisma, and a strong sense of worldly justice.",
+      "b": "Financial prosperity, significant social influence, and a comfortable life in the community.",
       "c": "Teaching, prophecy, healing, service",
-      "d": "Political power"
+      "d": "Military prowess, leadership in secular government, and the ability to conquer nations."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1752,10 +1752,10 @@
   {
     "question": "What is the primary role of the Church in relation to the world?",
     "options": {
-      "a": "To condemn all non-believers.",
+      "a": "To maintain strict doctrinal purity and exclude all who do not conform to its standards.",
       "b": "To be a light, salt, and witness to Christ in the world.",
-      "c": "To isolate itself from all worldly concerns.",
-      "d": "To establish a global political empire."
+      "c": "To withdraw from society and live in secluded communities dedicated to prayer and contemplation.",
+      "d": "To convert every individual on earth through evangelism, achieving universal salvation for all."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1794,10 +1794,10 @@
   {
     "question": "What is the significance of the 'virgin birth' of Jesus Christ?",
     "options": {
-      "a": "It means Mary was the only perfect human.",
+      "a": "It signifies that human procreation is inherently flawed and requires divine intervention.",
       "b": "It highlights His unique divine nature and humanity without inherited sin.",
-      "c": "It is a mythical story with no theological importance.",
-      "d": "It suggests that marriage is unnecessary."
+      "c": "It demonstrates God's power to create life without human involvement, setting Jesus apart.",
+      "d": "It establishes a precedent for celibacy in religious leadership, as exemplified by Mary's purity."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1808,9 +1808,9 @@
   {
     "question": "Which of these is a key aspect of 'repentance'?",
     "options": {
-      "a": "Feeling really bad about a mistake.",
-      "b": "Making financial restitution for all past wrongs.",
-      "c": "Publicly confessing sins without any internal change.",
+      "a": "An emotional state of deep remorse for past actions, followed by a desire for forgiveness.",
+      "b": "Performing penance or good works to atone for one's transgressions against God's law.",
+      "c": "A formal declaration of one's sins to a religious authority to receive absolution and grace.",
       "d": "A change of mind and heart, leading to a turning away from sin and toward God."
     },
     "correct": "d",
@@ -1822,9 +1822,9 @@
   {
     "question": "The term 'pneumatology' is the study of what?",
     "options": {
-      "a": "The doctrine of creation.",
-      "b": "The doctrine of humanity.",
-      "c": "The doctrine of sin.",
+      "a": "The theological study concerning the divine act of creation and the origin of the universe.",
+      "b": "The systematic study of human nature, purpose, and condition in relation to God.",
+      "c": "The comprehensive theological understanding of sin, its origin, nature, and consequences.",
       "d": "The doctrine of the Holy Spirit."
     },
     "correct": "d",
@@ -1878,10 +1878,10 @@
   {
     "question": "The 'Ascension' of Jesus refers to what event?",
     "options": {
-      "a": "His public ministry beginning.",
+      "a": "His public ministry after His baptism.",
       "b": "His bodily return to heaven after His resurrection.",
-      "c": "His rising from the dead.",
-      "d": "His birth in Bethlehem."
+      "c": "His rising from the tomb on the third day.",
+      "d": "His miraculous birth in the town of Bethlehem."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1906,10 +1906,10 @@
   {
     "question": "What is the primary significance of the 'Old Testament' for Christians?",
     "options": {
-      "a": "It is a collection of fables and myths.",
+      "a": "It is merely a collection of ancient historical narratives.",
       "b": "It reveals God's character, law, and points forward to Christ.",
-      "c": "It is outdated and irrelevant after Jesus came.",
-      "d": "It provides historical context but no theological truth."
+      "c": "It contains outdated laws and is superseded by the New Covenant.",
+      "d": "It primarily offers historical context for Israel, not theological truth."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1920,9 +1920,9 @@
   {
     "question": "Which of these is a theological teaching of the Apostles' Creed?",
     "options": {
-      "a": "Detailed explanations of predestination.",
-      "b": "Affirmation of the literal 1000-year reign of Christ.",
-      "c": "Denial of the deity of the Holy Spirit.",
+      "a": "Explicit and detailed explanations regarding God's sovereign predestination and the election of specific individuals for salvation.",
+      "b": "A clear and unambiguous affirmation of the literal, physical thousand-year earthly reign of Jesus Christ.",
+      "c": "An explicit theological denial of the full deity, personhood, and divine attributes of the Holy Spirit.",
       "d": "Belief in the communion of saints, the forgiveness of sins, and the resurrection of the body."
     },
     "correct": "d",
@@ -1934,10 +1934,10 @@
   {
     "question": "The doctrine of 'Immanence' refers to God being what?",
     "options": {
-      "a": "Completely separate and distant from creation.",
-      "b": "Only present in temples and churches.",
+      "a": "Completely separate and transcendent, detached from His creation.",
+      "b": "Only present in sacred spaces like temples and holy places.",
       "c": "Actively involved and present within His creation.",
-      "d": "Limited by the laws of nature."
+      "d": "Limited by the physical laws and boundaries of the universe."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1962,9 +1962,9 @@
   {
     "question": "What is 'Glorification' in the context of Christian salvation?",
     "options": {
-      "a": "Receiving praise from others for good deeds.",
-      "b": "Becoming famous or wealthy.",
-      "c": "Achieving a state of perfect knowledge in this life.",
+      "a": "The act of receiving public commendation and high recognition from the Christian community for one's exemplary good works and service.",
+      "b": "Attaining significant earthly fame, material prosperity, or widespread influence as a direct result of one's spiritual efforts and devotion.",
+      "c": "The process of reaching a state of complete and perfect spiritual knowledge and ultimate wisdom through rigorous spiritual disciplines and mystical practices.",
       "d": "The final stage of salvation where believers are made perfectly like Christ, free from sin and death."
     },
     "correct": "d",
@@ -1977,8 +1977,8 @@
     "question": "Which early church father is famous for his argument against the Pelagian heresy, emphasizing human sinfulness and God's grace?",
     "options": {
       "a": "Clement of Alexandria",
-      "b": "Irenaeus",
-      "c": "Polycarp",
+      "b": "Irenaeus of Lyons",
+      "c": "Polycarp of Smyrna",
       "d": "Augustine of Hippo"
     },
     "correct": "d",
@@ -2018,9 +2018,9 @@
   {
     "question": "What is the Christian understanding of the 'New Heavens and New Earth'?",
     "options": {
-      "a": "A return to the Garden of Eden as it was before the Fall.",
-      "b": "A completely different universe created from scratch.",
-      "c": "A metaphorical idea with no physical reality.",
+      "a": "A perfect return to the original Garden of Eden before the Fall of humanity.",
+      "b": "A completely different universe, newly created from nothing, replacing the old.",
+      "c": "A purely metaphorical idea, signifying spiritual renewal, with no physical reality.",
       "d": "The present creation renewed and glorified, where righteousness dwells."
     },
     "correct": "d",
@@ -2032,9 +2032,9 @@
   {
     "question": "Which of these is a core belief about the 'Holy Spirit'?",
     "options": {
-      "a": "He is an impersonal force.",
-      "b": "He is only active in the Old Testament.",
-      "c": "He is a created being, subordinate to God.",
+      "a": "He is an impersonal divine force, not a distinct person.",
+      "b": "He was only active during the Old Testament era and among the prophets.",
+      "c": "He is a created being, subordinate to God the Father and Jesus Christ.",
       "d": "He is the third person of the Trinity, fully God."
     },
     "correct": "d",
@@ -2074,10 +2074,10 @@
   {
     "question": "What is the Christian belief regarding the origin of evil?",
     "options": {
-      "a": "Evil is a necessary component for good to exist.",
+      "a": "Evil is an unavoidable byproduct of a world where God allows for genuine free will, enabling the development of moral character.",
       "b": "Evil originated from the free will choices of created beings (angels and humans) who rebelled against God.",
-      "c": "Evil is an illusion and does not truly exist.",
-      "d": "God created evil as part of His perfect plan."
+      "c": "Evil is not a created entity but rather the absence or corruption of the good that God originally established in His creation.",
+      "d": "God, in His ultimate sovereignty, permitted the introduction of evil to fulfill a deeper purpose within His unfolding eternal plan for humanity."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2089,9 +2089,9 @@
     "question": "Which of these is a characteristic of God's 'Love' in Christian theology?",
     "options": {
       "a": "It is unconditional, self-sacrificial, and eternal (agape).",
-      "b": "It is limited to only a select few.",
-      "c": "It is primarily based on human merit.",
-      "d": "It is fickle and changes based on human behavior."
+      "b": "It is limited to only a select few, those who are righteous.",
+      "c": "It is primarily based on human merit, earned through good works.",
+      "d": "It is fickle and changes based on human behavior or obedience."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2102,9 +2102,9 @@
   {
     "question": "The theological term 'Theodicy' refers to the attempt to justify what?",
     "options": {
-      "a": "The authority of the Bible.",
-      "b": "God's existence through philosophical argument.",
-      "c": "The doctrine of the Trinity.",
+      "a": "The absolute authority of the Holy Bible as God's inspired Word.",
+      "b": "God's divine existence through deep philosophical arguments and reason.",
+      "c": "The profound mystery of the Christian doctrine of the Holy Trinity.",
       "d": "God's goodness and justice in light of the existence of evil and suffering."
     },
     "correct": "d",
@@ -2131,9 +2131,9 @@
     "question": "What is the significance of Christ being called the 'Lamb of God'?",
     "options": {
       "a": "He was the sacrificial offering who takes away the sin of the world.",
-      "b": "He was gentle and meek.",
-      "c": "He led a flock of followers.",
-      "d": "He was born in a shepherd's field."
+      "b": "He was gentle, meek, and pure, reflecting the nature of a lamb.",
+      "c": "He was a shepherd who led a large flock of faithful disciples.",
+      "d": "He was miraculously born in a humble shepherd's field near Bethlehem."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2144,10 +2144,10 @@
   {
     "question": "Which of these is a function of the Church as the 'pillar and buttress of the truth' (1 Tim 3:15)?",
     "options": {
-      "a": "To hide the truth from the public.",
-      "b": "To compromise truth for unity.",
+      "a": "To carefully guard and conceal the truth from the unrighteous.",
+      "b": "To seek harmonious unity by compromising certain difficult truths.",
       "c": "To uphold, defend, and proclaim the truth of God's Word.",
-      "d": "To invent new truths as needed."
+      "d": "To dynamically invent new theological truths as culture evolves."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2158,9 +2158,9 @@
   {
     "question": "The theological term 'Justification' means what?",
     "options": {
-      "a": "Being legally acquitted of a crime without punishment.",
-      "b": "The process of becoming more like Christ over time.",
-      "c": "Making a person righteous through their own efforts.",
+      "a": "Being legally acquitted of all crimes, without any need for punishment.",
+      "b": "The transformative process of becoming more like Christ over time.",
+      "c": "Achieving personal righteousness through a lifetime of good works and efforts.",
       "d": "God declaring a sinner righteous based on Christ's righteousness, received by faith."
     },
     "correct": "d",
@@ -2187,9 +2187,9 @@
     "question": "What is the significance of Jesus Christ being called 'Emmanuel'?",
     "options": {
       "a": "It means 'God with us', highlighting His divine presence among humanity.",
-      "b": "It means He was a great leader.",
-      "c": "It means He was born in the town of Emmanuel.",
-      "d": "It was a common name for Jewish boys."
+      "b": "It signifies that He was destined to be a great and powerful leader.",
+      "c": "It indicates that He was born in the ancient town of Emmanuel in Judea.",
+      "d": "It was a widely accepted and very common name for Jewish boys at that time."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2200,10 +2200,10 @@
   {
     "question": "Which of these is NOT an aspect of the Holy Spirit's work in a believer's life?",
     "options": {
-      "a": "Convicting of sin.",
+      "a": "Bringing deep conviction regarding personal sin, righteousness, and the judgment to come.",
       "b": "Guaranteeing instant material wealth.",
-      "c": "Sanctifying and guiding into truth.",
-      "d": "Empowering for service."
+      "c": "Working to sanctify believers, transforming them into Christ's likeness, and leading them into all spiritual truth.",
+      "d": "Imparting spiritual gifts and divine power to equip believers for effective ministry and witness."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2214,10 +2214,10 @@
   {
     "question": "The Christian doctrine of 'Transcendence' refers to God being what?",
     "options": {
-      "a": "Limited by human understanding.",
-      "b": "Constantly changing and evolving.",
+      "a": "Limited entirely by human understanding and perception.",
+      "b": "Constantly changing and evolving in His nature and character.",
       "c": "Beyond and distinct from His creation, superior to it.",
-      "d": "Only existing within the physical universe."
+      "d": "Only existing within the bounds of the physical material universe."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2270,10 +2270,10 @@
   {
     "question": "The term 'Mediator' in Christian theology primarily refers to whom?",
     "options": {
-      "a": "A human priest who acts on behalf of God.",
-      "b": "A skilled negotiator in human conflicts.",
+      "a": "A human priest or prophet who acts as an intermediary for God.",
+      "b": "A wise and skilled negotiator who resolves human conflicts.",
       "c": "Jesus Christ, who bridges the gap between God and humanity.",
-      "d": "An angel who delivers messages from God."
+      "d": "An angelic being who frequently delivers messages from God."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2298,9 +2298,9 @@
   {
     "question": "What is the theological concept of 'adoption' as it relates to Christians?",
     "options": {
-      "a": "Taking on new cultural traditions.",
-      "b": "Being chosen to lead a church.",
-      "c": "The process of joining a new family.",
+      "a": "Taking on new cultural traditions and religious practices.",
+      "b": "Being chosen by the Holy Spirit to lead a local church body.",
+      "c": "The legal and social process of joining a new human family.",
       "d": "Spiritually becoming a child of God, with all rights and privileges."
     },
     "correct": "d",
@@ -2313,9 +2313,9 @@
     "question": "Which of the following describes the Christian understanding of 'grace'?",
     "options": {
       "a": "God's unmerited favor and love, freely given to sinners.",
-      "b": "A feeling of peace and tranquility.",
-      "c": "God's reward for our good deeds.",
-      "d": "A special ability granted only to church leaders."
+      "b": "The divine assistance and spiritual strength given to believers.",
+      "c": "God's blessings bestowed upon those who live a righteous life.",
+      "d": "A supernatural gift enabling believers to speak in various tongues."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2326,10 +2326,10 @@
   {
     "question": "The term 'Sola Gratia' (Grace Alone) in Reformation theology emphasizes what?",
     "options": {
-      "a": "That only certain types of grace are effective.",
-      "b": "That grace is a powerful spiritual force.",
+      "a": "That God's saving grace is primarily received through participation in the Church's ordinances.",
+      "b": "That the power of God's grace transforms human nature and enables good works.",
       "c": "That salvation is entirely a gift of God's undeserved favor, not earned by human effort.",
-      "d": "That God only gives grace to those who deserve it."
+      "d": "That salvation is achieved through human free will cooperating with divine grace."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2355,9 +2355,9 @@
     "question": "What is the primary role of the Church in 'missions'?",
     "options": {
       "a": "To spread the Gospel and make disciples among all peoples.",
-      "b": "To provide humanitarian aid only.",
-      "c": "To establish political dominance globally.",
-      "d": "To conquer foreign lands."
+      "b": "To provide essential social services and alleviate suffering worldwide.",
+      "c": "To exert moral influence on global governments and international policies.",
+      "d": "To expand the Church's institutional presence and membership across nations."
     },
     "correct": "a",
     "type": "multiple_choice",

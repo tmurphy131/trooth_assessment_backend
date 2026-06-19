@@ -212,10 +212,10 @@
   {
     "question": "What specific characteristic is NOT listed among the qualifications for elders (overseers) in 1 Timothy 3:1-7 or Titus 1:5-9?",
     "options": {
-      "a": "Hospitable",
+      "a": "A lover of guests and strangers",
       "b": "Not a recent convert",
       "c": "Skilled in public speaking",
-      "d": "Able to teach"
+      "d": "Apt to teach and explain the Scriptures"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -409,9 +409,9 @@
     "question": "Paul, in Galatians 2:11-14, recounts an incident where he openly confronted Peter (Cephas) in Antioch. What was the specific issue over which Paul publicly rebuked Peter?",
     "options": {
       "a": "Peter's hypocrisy in withdrawing from eating with Gentiles when certain men came from James.",
-      "b": "Peter's denial of Christ before a crowd of unbelievers.",
-      "c": "Peter's insistence that Gentile converts must be circumcised to be saved.",
-      "d": "Peter's failure to uphold the authority of the Jerusalem Council's decrees."
+      "b": "Peter's initial hesitation to accept the full inclusion of uncircumcised Gentiles into the church.",
+      "c": "Peter's teaching that Gentile believers must still observe elements of the Mosaic Law.",
+      "d": "Peter's dispute with Paul regarding the necessity of ritual purity for all believers."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -534,9 +534,9 @@
   {
     "question": "According to Paul in 1 Corinthians 15:3-4, what are the two foundational elements of the gospel message that he 'received' and 'passed on'?",
     "options": {
-      "a": "That Christ established a new covenant and that he appointed apostles to spread his message.",
-      "b": "That Christ was born of a virgin and that he will return to judge the living and the dead.",
-      "c": "That Christ taught ethical principles and that he performed miracles to authenticate his teaching.",
+      "a": "That Christ established a new covenant and that he appointed twelve apostles to spread his message to all nations.",
+      "b": "That Christ was born of a virgin in Bethlehem and that he will return in glory to judge the living and the dead.",
+      "c": "That Christ taught ethical principles in the Sermon on the Mount and that he performed many miracles to authenticate his divine teaching.",
       "d": "That Christ died for our sins according to the Scriptures and that he was raised on the third day according to the Scriptures."
     },
     "correct": "d",
@@ -814,9 +814,9 @@
   {
     "question": "The 'man of lawlessness' in 2 Thessalonians 2:3 is also described by another specific title. What is this title?",
     "options": {
-      "a": "The one who opposes God.",
-      "b": "The adversary of Christ.",
-      "c": "The deceitful one.",
+      "a": "The one who opposes God and exalts himself.",
+      "b": "The adversary of Christ who leads many astray.",
+      "c": "The one who performs signs and false wonders.",
       "d": "The son of destruction (or perdition)."
     },
     "correct": "d",
@@ -912,10 +912,10 @@
   {
     "question": "In Romans 11:25-26, Paul speaks of a 'mystery' concerning Israel. What is this mystery?",
     "options": {
-      "a": "That Israel's rejection of Christ was part of God's plan to bring salvation to the Gentiles.",
+      "a": "That Israel's rejection of Christ was part of God's sovereign plan to bring salvation to the Gentiles through the gospel.",
       "b": "That a partial hardening has come upon Israel until the full number of the Gentiles has come in, and then all Israel will be saved.",
-      "c": "That some individual Jews will be saved alongside Gentiles throughout history, but not the nation as a whole.",
-      "d": "That God will ultimately replace Israel with the Gentile church as His chosen people."
+      "c": "That some individual Jews will be saved alongside Gentiles throughout history, but the nation itself will not be restored to prominence.",
+      "d": "That God will ultimately replace Israel with the Gentile church, which now inherits all the promises made to Abraham and his descendants."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1067,9 +1067,9 @@
     "question": "In his letter to the Colossians, Paul refers to Epaphras as a 'faithful minister of Christ,' and also gives him a specific unique description. What is it?",
     "options": {
       "a": "He is 'always struggling on your behalf in his prayers.'",
-      "b": "He is 'a true son in the faith.'",
-      "c": "He is 'my fellow prisoner for Christ Jesus.'",
-      "d": "He is 'my beloved fellow worker.'"
+      "b": "He is 'a true son in the faith, devoted to the work of the Lord.'",
+      "c": "He is 'my fellow prisoner for Christ Jesus, sharing in my sufferings for the gospel.'",
+      "d": "He is 'my beloved fellow worker in the gospel, laboring faithfully among you.'"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1095,9 +1095,9 @@
     "question": "The parable of the sheep and the goats in Matthew 25:31-46 describes the judgment of the 'nations' (ethne). What is the specific criterion by which these nations are judged?",
     "options": {
       "a": "Their treatment of 'the least of these' (Jesus's brothers and sisters).",
-      "b": "Their belief in Jesus as the Son of God.",
-      "c": "Their moral conduct and righteousness according to natural law.",
-      "d": "Their adherence to the Mosaic Law and the Prophets."
+      "b": "Their belief in Jesus as the Son of God and their confession of His name before men.",
+      "c": "Their moral conduct and righteousness according to the conscience and natural law given by God.",
+      "d": "Their adherence to the Mosaic Law, the commands of the Prophets, and the traditions of the elders."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1122,10 +1122,10 @@
   {
     "question": "In Acts 15, the Jerusalem Council discusses whether Gentile converts must be circumcised. What specific, minimal set of prohibitions did the council decide to impose on Gentile believers to facilitate fellowship with Jewish believers?",
     "options": {
-      "a": "To be baptized in the name of Jesus and refrain from all pagan practices.",
+      "a": "To be baptized in the name of Jesus Christ and to refrain from all forms of idolatry and pagan practices.",
       "b": "To abstain from food polluted by idols, from sexual immorality, from the meat of strangled animals, and from blood.",
-      "c": "To participate in regular synagogue worship and offer financial support to the temple.",
-      "d": "To keep the Sabbath, observe dietary laws, and avoid contact with Gentiles."
+      "c": "To participate in regular synagogue worship, observe the major Jewish festivals, and offer financial support to the temple in Jerusalem.",
+      "d": "To keep the Sabbath, observe the Mosaic dietary laws, and avoid all social contact with uncircumcised Gentiles."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1319,9 +1319,9 @@
     "question": "In John 8:58, Jesus declares, 'Very truly I tell you, before Abraham was born, I am!' This statement is understood by theologians as a direct allusion to what specific Old Testament divine self-disclosure?",
     "options": {
       "a": "God's revelation of His name 'I AM WHO I AM' to Moses at the burning bush (Exodus 3:14).",
-      "b": "God's covenant promise to Abraham in Genesis 12.",
-      "c": "The prophetic declaration of Emmanuel ('God with us') in Isaiah 7:14.",
-      "d": "The divine name Yahweh, revealed in the Old Testament as the covenant God."
+      "b": "God's solemn covenant promise to Abraham, establishing him as the father of many nations (Genesis 12:1-3).",
+      "c": "The prophetic declaration of Emmanuel, meaning 'God with us,' as a sign to King Ahaz (Isaiah 7:14).",
+      "d": "The explicit revelation of the divine name Yahweh, signifying His eternal and unchanging nature to Israel."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1388,10 +1388,10 @@
   {
     "question": "What is the specific Greek philosophical school or worldview that emphasized the spiritual nature of reality as good and the material world as evil, often leading to asceticism or libertinism, which Paul addresses in Colossians?",
     "options": {
-      "a": "Stoicism",
-      "b": "Platonism",
+      "a": "Stoicism, which emphasized virtue, reason, and living in harmony with divine will.",
+      "b": "Platonism, which posited a world of ideal forms separate from the material world.",
       "c": "Gnosticism (proto-Gnosticism)",
-      "d": "Epicureanism"
+      "d": "Epicureanism, which sought pleasure and tranquility through the absence of pain and fear."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1430,10 +1430,10 @@
   {
     "question": "According to Acts 13:9, Saul is first referred to as 'Paul' during his encounter with a specific proconsul on Cyprus. What is the name of this proconsul?",
     "options": {
-      "a": "Felix",
-      "b": "Gallio",
+      "a": "Antonius Felix, the Roman procurator who held Paul captive for two years.",
+      "b": "Lucius Junius Gallio Annaeanus, the proconsul of Achaia who dismissed charges against Paul.",
       "c": "Sergius Paulus",
-      "d": "Festus"
+      "d": "Porcius Festus, the procurator who succeeded Felix and heard Paul's appeal to Caesar."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1613,9 +1613,9 @@
     "question": "In Romans 1:18, Paul states that 'the wrath of God is being revealed from heaven against all godlessness and wickedness of people.' What specific type of wrath is he primarily describing here?",
     "options": {
       "a": "The present, ongoing consequence of sin and God's abandonment of sinners to their choices.",
-      "b": "The outpouring of God's vengeance during the tribulation period.",
-      "c": "The future, eschatological judgment of God at the end of time.",
-      "d": "The historical judgments of God on nations and individuals."
+      "b": "The cataclysmic outpouring of God's final vengeance during the great tribulation period.",
+      "c": "The future, ultimate eschatological judgment of God that will occur at the very end of time.",
+      "d": "The historical and visible judgments of God manifested on sinful nations and individuals."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1641,9 +1641,9 @@
     "question": "The Apostle Paul, in 2 Corinthians 11:23-28, provides a lengthy list of his sufferings for Christ. Which of the following is NOT explicitly mentioned in this list?",
     "options": {
       "a": "Imprisoned in Rome",
-      "b": "Stoned",
-      "c": "Shipwrecks",
-      "d": "Beaten with rods"
+      "b": "Stoned and left for dead",
+      "c": "Suffered multiple shipwrecks",
+      "d": "Beaten with rods repeatedly"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1696,9 +1696,9 @@
   {
     "question": "Which of the following is the specific charge Jesus makes against the church in Laodicea in Revelation 3:15-16?",
     "options": {
-      "a": "You tolerate that woman Jezebel, who calls herself a prophetess.",
-      "b": "You have a reputation of being alive, but you are dead.",
-      "c": "You have forsaken your first love.",
+      "a": "You tolerate that woman Jezebel, who calls herself a prophetess and leads my servants astray.",
+      "b": "You have a reputation of being alive and active, but in reality, you are spiritually dead.",
+      "c": "You have forsaken your first love, the fervent devotion you once had for me.",
       "d": "You are neither cold nor hot; you are lukewarm, and I will spit you out of my mouth."
     },
     "correct": "d",
@@ -1711,9 +1711,9 @@
     "question": "In the book of Galatians, Paul declares that 'there is neither Jew nor Gentile, neither slave nor free, nor is there male and female, for you are all one in Christ Jesus.' What specific theological concept is this statement most directly supporting?",
     "options": {
       "a": "The unity of believers in the body of Christ, transcending social distinctions.",
-      "b": "The universal priesthood of all believers.",
-      "c": "The abolition of all gender and societal roles in the church.",
-      "d": "The equality of all people before God in creation."
+      "b": "The universal priesthood of all believers, allowing direct access to God without intermediaries.",
+      "c": "The complete abolition of all traditional gender and societal roles within the Christian church.",
+      "d": "The inherent equality of all people before God, based on their common creation in His image."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1822,9 +1822,9 @@
   {
     "question": "In the book of Acts, what specific event immediately preceded the riot in Ephesus instigated by Demetrius the silversmith?",
     "options": {
-      "a": "The confrontation between Paul and Jewish exorcists, leading to their defeat.",
-      "b": "The healing of a lame man at the temple gate, sparking a large crowd.",
-      "c": "The public burning of magic books by new converts.",
+      "a": "The public confrontation between Paul and Jewish exorcists, resulting in their humiliation and defeat.",
+      "b": "The miraculous healing of a lame man at the temple gate, which sparked a large and curious crowd.",
+      "c": "The public burning of numerous magic books by new converts who renounced their former practices.",
       "d": "Paul's extensive preaching against idolatry, leading many to abandon worship of Artemis."
     },
     "correct": "d",
@@ -1878,10 +1878,10 @@
   {
     "question": "In Matthew 24, Jesus warns about false Christs and false prophets. What specific sign does he say will precede his actual coming, making it unmistakable?",
     "options": {
-      "a": "The gospel of the kingdom will be proclaimed throughout the whole world.",
+      "a": "The gospel of the kingdom must first be proclaimed throughout the whole world as a testimony to all nations.",
       "b": "For as the lightning comes from the east and flashes to the west, so will be the coming of the Son of Man.",
-      "c": "The sun will be darkened, and the moon will not give its light.",
-      "d": "There will be wars and rumors of wars, but the end is not yet."
+      "c": "Immediately after the distress of those days, the sun will be darkened, and the moon will not give its light.",
+      "d": "You will hear of wars and rumors of wars in many places, but do not be alarmed, for the end is not yet."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1920,10 +1920,10 @@
   {
     "question": "In Revelation 19:10, John attempts to worship an angel who is showing him visions. What specific instruction does the angel give to John?",
     "options": {
-      "a": "Stand up; you must not worship me, for I am a creature like yourself.",
+      "a": "Stand up and do not worship me, for I am merely a fellow creature and servant of God, just like you.",
       "b": "Do not do it! I am a fellow servant with you and with your brothers and sisters who hold to the testimony of Jesus. Worship God!",
-      "c": "I am sent to guide you, but worship is due only to the Lamb.",
-      "d": "Only God is to be worshiped; I am but a messenger."
+      "c": "I am a messenger sent to guide you through these revelations, but all worship is due only to the Lamb of God.",
+      "d": "Worship only God alone, for I am nothing more than a humble messenger sent from His presence."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2060,10 +2060,10 @@
   {
     "question": "In Revelation 20:4, a specific group is described as sitting on thrones and reigning with Christ for a thousand years. Who are they?",
     "options": {
-      "a": "All believers who have died in faith.",
+      "a": "All the faithful servants of God, both small and great, whose names are written in the Book of Life.",
       "b": "Those who had been beheaded because of their testimony about Jesus and because of the word of God.",
-      "c": "The twelve apostles of the Lamb.",
-      "d": "The saints who endured the Great Tribulation."
+      "c": "The twenty-four elders who sit on thrones around the throne of God, clothed in white and wearing crowns of gold.",
+      "d": "Those who kept God’s commands and held fast their testimony about Jesus, enduring to the very end."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2088,9 +2088,9 @@
   {
     "question": "Which of the following Old Testament books or figures is NOT explicitly referenced by the author of Hebrews in his argument for Christ's superiority?",
     "options": {
-      "a": "Melchizedek, as a superior priest to Abraham.",
-      "b": "Joshua, as a type of entering God's rest.",
-      "c": "The Levitical priesthood, as inferior to Christ's.",
+      "a": "Melchizedek, portrayed as a king-priest whose priesthood predates and is superior to Abraham's.",
+      "b": "Joshua, who led Israel into the promised land, but whose rest was incomplete, unlike Christ's.",
+      "c": "The Levitical priesthood, described as temporary and imperfect, unable to truly cleanse sins.",
       "d": "Jonah, as a foreshadowing of Christ's burial and resurrection."
     },
     "correct": "d",
@@ -2186,10 +2186,10 @@
   {
     "question": "The 'mystery of godliness' (mysterion tēs eusebeias) is mentioned in 1 Timothy 3:16. Which of the following is presented as its central affirmation?",
     "options": {
-      "a": "Christ died for our sins, was buried, and was raised on the third day according to the Scriptures.",
+      "a": "Jesus Christ, who gave himself for our sins to rescue us from the present evil age, according to the will of our God and Father.",
       "b": "God was manifest in the flesh, justified in the Spirit, seen of angels, preached unto the Gentiles, believed on in the world, received up into glory.",
       "c": "He appeared in the flesh, was vindicated by the Spirit, seen by angels, preached among the nations, believed on in the world, taken up in glory.",
-      "d": "There is one God and one mediator between God and mankind, the man Christ Jesus."
+      "d": "He is the image of the invisible God, the firstborn over all creation, for by him all things were created in heaven and on earth."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2368,10 +2368,10 @@
   {
     "question": "In Revelation 3:7, Jesus identifies himself to the church in Philadelphia with a specific authority linked to an Old Testament figure. What is it?",
     "options": {
-      "a": "The true shepherd, who lays down his life for the sheep.",
+      "a": "The good shepherd who knows his sheep and his sheep know him, and who gives his life for the sheep.",
       "b": "The one who holds the key of David. What he opens no one can shut, and what he shuts no one can open.",
-      "c": "The faithful and true witness, the beginning of God’s creation.",
-      "d": "The one who sits on the throne of David, ruling over all nations."
+      "c": "The Amen, the faithful and true witness, the ruler of God’s creation, who stands at the door and knocks.",
+      "d": "The Lion of the tribe of Judah, the Root of David, who has triumphed and is worthy to open the scroll."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2439,9 +2439,9 @@
     "question": "In Revelation 22:18-19, a strong warning is given against adding to or taking away from the words of the prophecy of this book. What specific consequence is mentioned for someone who takes words away?",
     "options": {
       "a": "God will take away from that person any share in the tree of life and in the Holy City.",
-      "b": "Their name will be blotted out of the Book of Life.",
-      "c": "They will be cursed with the plagues described in this book.",
-      "d": "They will have no part in the first resurrection."
+      "b": "Their name will be blotted out from the Book of Life, and they will not enter the New Jerusalem.",
+      "c": "God will add to them the plagues described in this book, which are written in this scroll of prophecy.",
+      "d": "They will have no part in the first resurrection, but will be judged at the great white throne."
     },
     "correct": "a",
     "type": "multiple_choice",

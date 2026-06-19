@@ -131,6 +131,7 @@ def main():
     parser = argparse.ArgumentParser(description="Import approved trivia questions into the DB")
     parser.add_argument("--file", nargs="+", required=True, help="One or more draft JSON files to import")
     parser.add_argument("--dry-run", action="store_true", help="Show what would be imported without writing to DB")
+    parser.add_argument("--wipe", action="store_true", help="DELETE all existing trivia questions before importing (use to replace updated drafts)")
     args = parser.parse_args()
 
     files = []
@@ -151,6 +152,15 @@ def main():
         db = SessionLocal()
     else:
         db = None
+
+    if args.wipe and not args.dry_run:
+        from app.models.trivia import TriviaQuestion
+        from app.models.device_token import DeviceToken  # noqa: F401 — satisfies User.device_tokens relationship
+        count = db.query(TriviaQuestion).count()
+        print(f"--wipe: deleting {count} existing trivia questions...")
+        db.query(TriviaQuestion).delete()
+        db.commit()
+        print(f"  Deleted {count} rows.")
 
     total_imported = 0
     total_errors = 0

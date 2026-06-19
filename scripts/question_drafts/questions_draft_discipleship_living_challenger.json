@@ -2,10 +2,10 @@
   {
     "question": "In the book of Acts, Stephen, before his martyrdom, recounts much of Israel's history. He mentions that Moses was instructed to build the tabernacle according to a 'pattern' shown to him. To which specific Old Testament figure does Stephen compare Moses' role as a prophet, stating God would raise up a prophet like him?",
     "options": {
-      "a": "Abraham",
-      "b": "Joseph",
+      "a": "Abraham, the father of many nations",
+      "b": "Joseph, who interpreted dreams for Pharaoh",
       "c": "Moses himself",
-      "d": "Joshua"
+      "d": "Joshua, his faithful successor"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -100,10 +100,10 @@
   {
     "question": "Paul, in his letter to the Colossians (3:16), instructs believers to 'let the word of Christ dwell in you richly.' What specific actions does he say this rich indwelling of the word enables them to do?",
     "options": {
-      "a": "To speak in tongues and interpret",
+      "a": "To speak in unknown tongues and provide an interpretation for the church",
       "b": "To teach and admonish one another with all wisdom, singing psalms, hymns, and spiritual songs",
-      "c": "To perform miracles and heal the sick",
-      "d": "To debate with non-believers and win arguments"
+      "c": "To perform signs and wonders, healing the sick and raising the dead in His name",
+      "d": "To preach the gospel boldly to all nations and to defend the faith against adversaries"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -170,10 +170,10 @@
   {
     "question": "Paul commends the Berean Jews in Acts 17 for their noble character. What specific action did they take that earned them this commendation regarding Paul's teaching?",
     "options": {
-      "a": "They provided Paul with generous financial support",
-      "b": "They immediately believed and were baptized",
+      "a": "They offered Paul and his companions generous provisions and financial assistance for their work",
+      "b": "They confessed their faith in the Lord Jesus and were immediately immersed in water",
       "c": "They eagerly received the word and examined the Scriptures daily to see if these things were so",
-      "d": "They challenged Paul to a public debate"
+      "d": "They requested Paul to publicly defend his teachings against the local synagogue leaders"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -185,9 +185,9 @@
     "question": "In Romans 14, Paul discusses eating practices among believers, cautioning against judging one another over disputable matters. What specific dietary practice does Paul mention as an example of such a disputable matter that some consider defiling?",
     "options": {
       "a": "Eating all things, while others eat only vegetables",
-      "b": "Eating pork",
-      "c": "Eating shellfish",
-      "d": "Eating meat sacrificed to idols"
+      "b": "Consuming the flesh of swine, deemed an unclean animal by Jewish tradition",
+      "c": "Partaking of any seafood, which was prohibited under the Old Testament dietary laws",
+      "d": "Eating meat that had been offered to pagan idols in heathen temples"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -199,9 +199,9 @@
     "question": "Paul instructs the Corinthian church on the proper administration of the Lord's Supper, warning against partaking in an 'unworthy manner.' What specific consequence does he say may befall those who do so, leading to weakness, illness, and even death?",
     "options": {
       "a": "Many among you are weak and sick, and some have fallen asleep",
-      "b": "They become possessed by demons",
-      "c": "They lose their salvation",
-      "d": "They are publicly excommunicated from the church"
+      "b": "They will be tormented by evil spirits and experience a season of demonic affliction",
+      "c": "They will surely forfeit their eternal reward and experience the loss of salvation",
+      "d": "They will face public discipline and be removed from the communion of the saints"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -240,9 +240,9 @@
   {
     "question": "Before his ascension, Jesus gave the Great Commission to his disciples. In Matthew 28, he instructs them to 'make disciples of all nations.' What specific action immediately follows this instruction?",
     "options": {
-      "a": "Teaching them to observe all that I have commanded you",
-      "b": "Healing the sick and casting out demons",
-      "c": "Proclaiming the gospel to every creature",
+      "a": "Teaching them to obey all things that I have commanded you throughout your lives",
+      "b": "Healing the infirm and casting out evil spirits in My name for all to see",
+      "c": "Proclaiming the good news of the kingdom to every nation and tribe on earth",
       "d": "Baptizing them in the name of the Father and of the Son and of the Holy Spirit"
     },
     "correct": "d",
@@ -268,10 +268,10 @@
   {
     "question": "In Ephesians 4, Paul encourages believers to 'walk in a manner worthy of the calling to which you have been called.' He lists several virtues essential for unity. Which specific pair of virtues are mentioned alongside humility, gentleness, and patience?",
     "options": {
-      "a": "Faithfulness and goodness",
+      "a": "Manifesting steadfast faithfulness and demonstrating moral goodness in all their deeds",
       "b": "Bearing with one another in love and eagerness to maintain the unity of the Spirit",
-      "c": "Love and joy",
-      "d": "Peace and self-control"
+      "c": "Cultivating genuine agape love and experiencing an enduring spiritual joy within their hearts",
+      "d": "Seeking inner tranquility and exercising strict discipline over their carnal passions"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -296,10 +296,10 @@
   {
     "question": "Paul, speaking of the dangers of false teachers and love of money in 1 Timothy 6, warns that 'those who desire to be rich fall into temptation, into a snare, into many foolish and harmful desires that plunge people into ruin and destruction.' What specific vice does he then declare to be 'a root of all kinds of evil'?",
     "options": {
-      "a": "Greed",
+      "a": "The sin of covetousness",
       "b": "Love of money",
-      "c": "Materialism",
-      "d": "Idolatry"
+      "c": "An attachment to material possessions",
+      "d": "The worship of worldly things"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -338,9 +338,9 @@
   {
     "question": "Paul, in Galatians 6:10, instructs believers to 'do good to everyone, and especially to those who are of the household of faith.' This specific instruction comes directly after a statement about what principle?",
     "options": {
-      "a": "Bearing one another's burdens",
-      "b": "Restoring a brother caught in sin with gentleness",
-      "c": "Testing one's own work",
+      "a": "Helping to carry one another's heavy burdens",
+      "b": "Gently restoring a brother caught in a transgression",
+      "c": "Examining and proving one's own personal work",
       "d": "Sowing to the Spirit and reaping eternal life"
     },
     "correct": "d",
@@ -380,9 +380,9 @@
   {
     "question": "The book of Titus outlines qualifications for elders. Which of the following is NOT explicitly listed as a qualification for an elder/overseer in Titus 1?",
     "options": {
-      "a": "Hospitable",
-      "b": "Self-controlled",
-      "c": "A lover of good",
+      "a": "Given to acts of hospitality",
+      "b": "Exercising sound self-control",
+      "c": "Having a love for what is good",
       "d": "Able to speak in tongues"
     },
     "correct": "d",
@@ -395,9 +395,9 @@
     "question": "In Philippians 2, Paul encourages believers to have the same mind as Christ, who 'emptied himself.' What specific action did Christ take that immediately followed his emptying himself and taking the form of a servant?",
     "options": {
       "a": "Becoming obedient to the point of death",
-      "b": "Dying on a cross",
-      "c": "Being born in the likeness of men",
-      "d": "Being found in human form"
+      "b": "Humbled himself by taking the form of a servant",
+      "c": "Being born in the likeness of mortal men",
+      "d": "Being found in the appearance of a man"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -436,10 +436,10 @@
   {
     "question": "When Paul visited Athens in Acts 17, he observed their many objects of worship. He then used an altar dedicated to a specific deity as a starting point for his evangelistic message. Which deity was this altar dedicated to?",
     "options": {
-      "a": "Athena",
+      "a": "The Goddess of Wisdom and War",
       "b": "The Unknown God",
-      "c": "Zeus",
-      "d": "Ares"
+      "c": "The Father of Gods and Men",
+      "d": "The God of War and Battle"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -450,10 +450,10 @@
   {
     "question": "In the Sermon on the Mount, Jesus teaches about giving to the needy. What is the specific instruction he gives regarding the secrecy of one's giving?",
     "options": {
-      "a": "Do not give in order to be seen by others",
+      "a": "Do not perform your acts of righteousness before others to be seen",
       "b": "Do not let your left hand know what your right hand is doing",
-      "c": "Give generously, and it will be given back to you",
-      "d": "Give to everyone who begs from you"
+      "c": "Give your alms in secret, and your Father will reward you openly",
+      "d": "Do not sound a trumpet before you, as the hypocrites do in the synagogues"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -465,9 +465,9 @@
     "question": "The apostle Paul encourages believers to be transformed by the renewal of their minds in Romans 12:2. What is the explicit purpose he states for this transformation?",
     "options": {
       "a": "So that you may discern the will of God, what is good and acceptable and perfect",
-      "b": "So that you may offer your bodies as a living sacrifice",
-      "c": "So that you may have unity with other believers",
-      "d": "So that you may not be conformed to this world"
+      "b": "So that you may not conform yourselves to the patterns of this present evil age",
+      "c": "So that you may present your bodies as a living sacrifice, holy and pleasing to God",
+      "d": "So that you may prove what is the good, acceptable, and perfect will of the Lord"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -479,9 +479,9 @@
     "question": "In Colossians 3:5-9, Paul lists vices that believers should put to death or put off. Which specific vice is mentioned alongside covetousness, which is described as idolatry?",
     "options": {
       "a": "All of the above",
-      "b": "Evil desire",
-      "c": "Impurity",
-      "d": "Fornication"
+      "b": "Uncontrolled evil desire",
+      "c": "Moral impurity in actions",
+      "d": "Sexual immorality and passion"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -604,10 +604,10 @@
   {
     "question": "In 2 Timothy 2, Paul encourages Timothy to be a good soldier of Christ Jesus. What specific action does he say a soldier does not do, indicating a principle of focused dedication?",
     "options": {
-      "a": "He does not seek to please men",
+      "a": "He does not strive to please those outside his military service",
       "b": "He does not get entangled in civilian pursuits",
-      "c": "He does not disobey his commander",
-      "d": "He does not complain about his rations"
+      "c": "He does not stray from the direct commands of his commanding officer",
+      "d": "He does not concern himself with the affairs of daily life"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -619,9 +619,9 @@
     "question": "When instructing servants (slaves) in Ephesians 6, Paul tells them to obey their earthly masters 'with fear and trembling, with a sincere heart, as you would Christ.' What is the specific motivation he gives for their diligent service?",
     "options": {
       "a": "Knowing that whatever good anyone does, this he will receive back from the Lord",
-      "b": "To avoid punishment from their masters",
-      "c": "So that they may earn their freedom",
-      "d": "To set a good example for other servants"
+      "b": "Serving not with eye-service, as those who merely please men",
+      "c": "Knowing that they are truly serving the Lord Christ and not merely human masters",
+      "d": "Doing the will of God from the heart, rendering service with a good will"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -674,10 +674,10 @@
   {
     "question": "Paul, in Romans 13:7, instructs believers to 'pay to all what is owed to them.' What specific governmental obligations does he list immediately after this general command?",
     "options": {
-      "a": "Taxes to the emperor, service to the community, loyalty to the state, obedience to the laws",
+      "a": "Paying due taxes to authorities, giving customs to those who collect them, and reverence to those in high positions",
       "b": "Taxes to whom taxes are owed, revenue to whom revenue is owed, respect to whom respect is owed, honor to whom honor is owed",
-      "c": "Tribute to the officials, tithes to the temple, offerings to the poor, kindness to all",
-      "d": "Service to your masters, respect to your elders, love to your neighbors, fear to your God"
+      "c": "Offering tribute to governing rulers, providing income to public servants, and showing deference to all leaders",
+      "d": "Submitting to governing authorities, paying all customs, and giving honor to whom it is due"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -717,9 +717,9 @@
     "question": "The book of Proverbs 18:24 states, 'A man of many companions may come to ruin.' What specific positive statement immediately follows this warning, highlighting the value of a certain kind of relationship?",
     "options": {
       "a": "But there is a friend who sticks closer than a brother",
-      "b": "But the righteous will never be forsaken",
-      "c": "But a faithful friend is a strong defense",
-      "d": "But a wise man seeks wise counsel"
+      "b": "But a true companion will always remain steadfast in times of adversity",
+      "c": "But a loyal friend offers constant support and is a strong tower of refuge",
+      "d": "But a discerning person will choose a friend who brings true understanding"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -828,10 +828,10 @@
   {
     "question": "In the letter to the Philippians (4:6-7), Paul instructs believers to 'not be anxious about anything, but in everything by prayer and supplication with thanksgiving let your requests be made known to God.' What specific result does he promise will follow this practice?",
     "options": {
-      "a": "You will receive whatever you ask for, if you ask in faith",
-      "b": "God will answer all your prayers according to His perfect will",
+      "a": "Your petitions will be granted by God, according to His divine and perfect purpose",
+      "b": "The Lord will hear your supplications and respond to your earnest requests",
       "c": "The peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus",
-      "d": "All your earthly needs will be met abundantly"
+      "d": "God's divine tranquility will settle upon your spirit, bringing inner calm and reassurance"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -870,10 +870,10 @@
   {
     "question": "When Paul was shipwrecked on the island of Malta, he was bitten by a viper. What was the initial reaction of the native people regarding this event?",
     "options": {
-      "a": "They believed he was a god",
+      "a": "They declared he was a wicked man, deserving of punishment",
       "b": "They believed he was a murderer whom Justice was pursuing",
-      "c": "They fled in fear, thinking he was cursed",
-      "d": "They offered him sacrifices to appease their gods"
+      "c": "They fled in fear, thinking he was cursed by their gods",
+      "d": "They sought to appease their gods, who had sent the serpent"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -940,10 +940,10 @@
   {
     "question": "Paul, in 2 Corinthians 5:17, declares, 'Therefore, if anyone is in Christ, he is a new creation. The old has passed away; behold, the new has come.' What immediate implication does he then draw from this truth?",
     "options": {
-      "a": "Therefore, we must strive to live a life worthy of our calling",
+      "a": "Therefore, we must strive to live a life worthy of the gospel, reflecting our new identity in Christ",
       "b": "And all this is from God, who through Christ reconciled us to himself and gave us the ministry of reconciliation",
-      "c": "And we are no longer under law but under grace",
-      "d": "Therefore, we are ambassadors for Christ, God making his appeal through us"
+      "c": "And we are no longer under the condemnation of the law but live freely under God's abundant grace",
+      "d": "Therefore, we are now ambassadors for Christ, through whom God makes His urgent appeal to a lost world"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -968,10 +968,10 @@
   {
     "question": "In Romans 1:16, Paul boldly declares, 'For I am not ashamed of the gospel.' What specific reason does he immediately give for this unashamed proclamation?",
     "options": {
-      "a": "For it brings light to those who walk in darkness",
-      "b": "For it is the only way to eternal life",
+      "a": "For it brings the glorious light of truth to all those who walk in spiritual darkness",
+      "b": "For it is the only divinely appointed path leading to eternal life for all mankind",
       "c": "For it is the power of God for salvation to everyone who believes",
-      "d": "For it reveals God's righteousness from faith to faith"
+      "d": "For it fully reveals God's saving righteousness, which is received by faith from beginning to end"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1136,10 +1136,10 @@
   {
     "question": "In the book of Acts, when Paul is in Ephesus, a silversmith named Demetrius incites a riot against him and his companions. What was Demetrius's main concern or complaint?",
     "options": {
-      "a": "Paul was encouraging rebellion against Roman authority",
-      "b": "Paul was disrupting the peace of the city",
+      "a": "Paul was encouraging the people to rebel against the established Roman authority and laws",
+      "b": "Paul was disrupting the peace and order of the city, causing much unrest",
       "c": "His trade of making silver shrines of Artemis was being diminished",
-      "d": "Paul was blaspheming the local gods"
+      "d": "Paul was blaspheming the local gods, especially their great goddess Artemis"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1164,10 +1164,10 @@
   {
     "question": "In his letter to the Romans (13:8), Paul writes, 'Owe no one anything, except to love each other.' What specific declaration does he then make about the one who loves another?",
     "options": {
-      "a": "For he has fulfilled the law",
+      "a": "For the one who genuinely loves has fulfilled the whole law",
       "b": "For love is the fulfillment of the law",
-      "c": "For love covers a multitude of sins",
-      "d": "For love never fails"
+      "c": "For true love will cover a multitude of faults and sins",
+      "d": "For genuine love will never fail to endure all things"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1220,10 +1220,10 @@
   {
     "question": "In 1 Peter 3, Peter instructs wives to be submissive to their own husbands. What specific virtue does he say should be their adornment, rather than outward show?",
     "options": {
-      "a": "A life of good works and fervent prayer",
+      "a": "A life of diligent good works and sincere, fervent prayer to God",
       "b": "The imperishable beauty of a gentle and quiet spirit",
-      "c": "A heart full of love and compassion",
-      "d": "Modest clothing and dignified demeanor"
+      "c": "A heart full of genuine love and deep compassion for all others",
+      "d": "Modest clothing and a dignified demeanor, reflecting inner humility"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1291,9 +1291,9 @@
     "question": "Paul, in 1 Thessalonians 4, gives instructions on how to live a life pleasing to God. He tells them to 'aspire to live quietly, and to mind your own affairs, and to work with your hands.' What specific reason does he give for this conduct?",
     "options": {
       "a": "So that you may walk properly before outsiders and be dependent on no one",
-      "b": "So that you may set an example of diligence for others",
-      "c": "So that you may have enough to share with those in need",
-      "d": "So that you may avoid being a burden to the church"
+      "b": "So that you may set a strong example of diligence and hard work for all others to follow",
+      "c": "So that you may always have enough resources to share generously with those who are truly in need",
+      "d": "So that you may avoid becoming an unnecessary burden or responsibility to the local church"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1304,9 +1304,9 @@
   {
     "question": "The book of James says that 'pure and undefiled religion before God the Father is this:' What specific actions does he then list as comprising this religion?",
     "options": {
-      "a": "To fast and pray regularly, and to give generously to the poor",
-      "b": "To preach the gospel to every creature and make disciples of all nations",
-      "c": "To love your neighbor as yourself and worship God in spirit and truth",
+      "a": "To fast and pray regularly, and to give generously from one's abundance to the poor",
+      "b": "To preach the gospel message to every creature and faithfully make disciples of all nations",
+      "c": "To love your neighbor as yourself, and to worship God in spirit and in truth always",
       "d": "To visit orphans and widows in their affliction, and to keep oneself unstained from the world"
     },
     "correct": "d",
@@ -1318,9 +1318,9 @@
   {
     "question": "In Colossians 3, Paul instructs believers to 'put on then, as God’s chosen ones, holy and beloved, compassionate hearts, kindness, humility, meekness, and patience.' What specific virtue does he say should bind all these together?",
     "options": {
-      "a": "Faith, which is the assurance of things hoped for",
-      "b": "Peace, which rules in your hearts",
-      "c": "Joy, which is the strength of the Lord",
+      "a": "Faith, which is the firm assurance of things hoped for, even unseen",
+      "b": "Peace, which should rule supremely in your hearts, guiding all your decisions",
+      "c": "Joy, which is the very strength of the Lord, enabling you to persevere",
       "d": "Love, which binds everything together in perfect harmony"
     },
     "correct": "d",
@@ -1431,9 +1431,9 @@
     "question": "What was the name of the proconsul of Cyprus who believed Paul's message after witnessing Elymas the sorcerer being temporarily blinded?",
     "options": {
       "a": "Sergius Paulus",
-      "b": "Felix",
-      "c": "Gallio",
-      "d": "Festus"
+      "b": "Antonius Felix",
+      "c": "Junius Gallio",
+      "d": "Porcius Festus"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1486,10 +1486,10 @@
   {
     "question": "In 1 Corinthians 6, Paul addresses lawsuits among believers. What specific advice does he give regarding resolving disputes, even suggesting an alternative to going to court?",
     "options": {
-      "a": "Appoint someone among yourselves who is wise to settle disputes",
-      "b": "Forgive your brother and overlook the offense entirely",
+      "a": "Appoint brethren among you who are wise, capable of judging disputes, to settle all matters",
+      "b": "Seek reconciliation privately with your brother, overlooking offenses, before involving others in the matter",
       "c": "Better to suffer wrong or be defrauded than to go to law with another believer",
-      "d": "Seek arbitration from pagan courts only as a last resort"
+      "d": "Endure minor injustices from one another for the sake of peace and the testimony of Christ"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1570,10 +1570,10 @@
   {
     "question": "The book of James 4:17 states, 'So whoever knows the right thing to do and fails to do it, for him it is sin.' What specific ethical context does James primarily discuss immediately before this verse?",
     "options": {
-      "a": "The evil use of the tongue in slander and gossip",
-      "b": "Disputes and quarrels among believers",
+      "a": "The destructive power of the tongue used for slander, cursing, and gossip against others",
+      "b": "The source of quarrels and conflicts that arise from worldly desires and selfish ambition",
       "c": "Boasting about future plans without acknowledging God's will",
-      "d": "Showing favoritism to the rich over the poor"
+      "d": "The sin of showing partiality and preference to the wealthy over the needy in the assembly"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1626,9 +1626,9 @@
   {
     "question": "Paul, in his instructions to slaves in Ephesians 6:5-8, tells them to obey their earthly masters 'as you would Christ.' What specific motivation does he provide for their diligent and sincere service?",
     "options": {
-      "a": "To avoid punishment from their masters and demonstrate their faith",
-      "b": "Because God judges the intentions of the heart, not just outward actions",
-      "c": "So that they may earn their freedom and a good reputation among men",
+      "a": "To honor Christ in their service, ensuring that their obedience will not be in vain before God",
+      "b": "Because the Lord knows the heart of every servant and will reward their faithful service accordingly",
+      "c": "So that their good deeds might shine before men, bringing glory to their Father in heaven",
       "d": "Knowing that whatever good anyone does, this he will receive back from the Lord, whether he is a slave or free"
     },
     "correct": "d",
@@ -1655,8 +1655,8 @@
     "question": "In 1 Corinthians 12, Paul discusses spiritual gifts and the unity of the body. He compares the body of Christ to a human body with many members. Which specific body part does he mention as being seemingly weaker but indispensable?",
     "options": {
       "a": "The feet",
-      "b": "The head",
-      "c": "The eyes",
+      "b": "The ears",
+      "c": "The back",
       "d": "The stomach"
     },
     "correct": "d",
@@ -1752,10 +1752,10 @@
   {
     "question": "What was the name of the man who Paul commended in Philippians 2:25, calling him 'my brother and fellow worker and fellow soldier, and your messenger and minister to my need'?",
     "options": {
-      "a": "Titus",
-      "b": "Onesimus",
+      "a": "Aristarchus",
+      "b": "Tychicus",
       "c": "Epaphroditus",
-      "d": "Timothy"
+      "d": "Sosthenes"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1836,10 +1836,10 @@
   {
     "question": "The book of Hebrews 12:14 encourages believers to 'strive for peace with everyone, and for the holiness without which no one will see the Lord.' What specific historical example does the writer then warn against, regarding Esau?",
     "options": {
-      "a": "That no one resents his brother, as Esau resented Jacob",
+      "a": "That no one should fail to value the spiritual over the carnal, like Esau despising his inheritance",
       "b": "That no one is sexually immoral or unholy like Esau, who sold his birthright for a single meal",
-      "c": "That no one despises God's blessings, as Esau did",
-      "d": "That no one fails to obtain the grace of God, or that no bitter root springs up and causes trouble"
+      "c": "That no one should allow a root of bitterness to spring up, causing defilement to many",
+      "d": "That no one should be found to have fallen short of God's grace by pursuing worldly desires"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2173,9 +2173,9 @@
     "question": "In his letter to Philemon, Paul specifically refers to Onesimus, the runaway slave, as being 'useful' to both himself and Philemon. What is the Greek meaning of the name 'Onesimus' that makes this a clever play on words?",
     "options": {
       "a": "Profitable",
-      "b": "Free",
-      "c": "Servant",
-      "d": "Beloved"
+      "b": "Beneficial",
+      "c": "Valuable",
+      "d": "Redeemed"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2397,9 +2397,9 @@
     "question": "Paul, in his letter to the Ephesians (5:3), lists several sins that should 'not even be named among you, as is proper among saints.' Which specific sin is listed alongside sexual immorality and all impurity?",
     "options": {
       "a": "Covetousness",
-      "b": "Greed",
-      "c": "Malice",
-      "d": "Idolatry"
+      "b": "Drunkenness",
+      "c": "Debauchery",
+      "d": "Blasphemy"
     },
     "correct": "a",
     "type": "multiple_choice",

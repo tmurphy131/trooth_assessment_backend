@@ -30,9 +30,9 @@
   {
     "question": "Who baptized Jesus in the Jordan River?",
     "options": {
-      "a": "An angel",
-      "b": "A Roman priest",
-      "c": "Peter",
+      "a": "The angel Gabriel",
+      "b": "A priest from Judea",
+      "c": "Simon Peter",
       "d": "John the Baptist"
     },
     "correct": "d",
@@ -59,9 +59,9 @@
     "question": "Which disciple was a tax collector before Jesus called him?",
     "options": {
       "a": "Matthew (Levi)",
-      "b": "Andrew",
-      "c": "Simon Peter",
-      "d": "James"
+      "b": "Andrew, Peter's brother",
+      "c": "Simon Peter, the fisherman",
+      "d": "James, son of Zebedee"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -156,10 +156,10 @@
   {
     "question": "Who betrayed Jesus for 30 pieces of silver?",
     "options": {
-      "a": "Peter",
+      "a": "Simon Peter, the apostle",
       "b": "Judas Iscariot",
       "c": "Simon the Zealot",
-      "d": "Thomas"
+      "d": "Thomas, called Didymus"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -171,9 +171,9 @@
     "question": "Where did Jesus pray to the Father before his crucifixion, asking for the cup to be taken from him?",
     "options": {
       "a": "Garden of Gethsemane",
-      "b": "Mount Zion",
-      "c": "Mount of Olives",
-      "d": "Kidron Valley"
+      "b": "On Mount Zion",
+      "c": "On the Mount of Olives",
+      "d": "In the Kidron Valley"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -478,10 +478,10 @@
   {
     "question": "Which of these women was among the first to witness the empty tomb of Jesus?",
     "options": {
-      "a": "Martha",
+      "a": "Martha, sister of Mary",
       "b": "Mary Magdalene",
-      "c": "Joanna",
-      "d": "Salome"
+      "c": "Joanna, wife of Chuza",
+      "d": "Salome, a follower of Jesus"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -842,10 +842,10 @@
   {
     "question": "What did Jesus say was the 'sign of Jonah'?",
     "options": {
-      "a": "His coming baptism by John",
-      "b": "His feeding of the five thousand",
+      "a": "His baptism by John in the Jordan",
+      "b": "His miraculous feeding of the five thousand",
       "c": "His death and resurrection after three days and nights",
-      "d": "His ability to calm storms"
+      "d": "His power to calm the raging storm"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -898,10 +898,10 @@
   {
     "question": "What vision did Peter have on a rooftop in Joppa, teaching him that God accepts both Jews and Gentiles?",
     "options": {
-      "a": "A ladder reaching to heaven",
-      "b": "An angel with a message",
+      "a": "A ladder reaching up to heaven",
+      "b": "An angel bringing a divine message",
       "c": "A sheet descending with all kinds of animals",
-      "d": "A burning bush"
+      "d": "A bush that burned but was not consumed"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1052,10 +1052,10 @@
   {
     "question": "What was the name of the garden where Jesus was buried?",
     "options": {
-      "a": "Garden of Eden",
-      "b": "Mount of Olives Garden",
+      "a": "Garden of Nicodemus the Pharisee",
+      "b": "Garden of Mary Magdalene's House",
       "c": "Garden of Joseph of Arimathea",
-      "d": "Garden of Gethsemane"
+      "d": "Garden of Simon the Leper's Home"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1136,10 +1136,10 @@
   {
     "question": "What did Jesus say about paying taxes to Caesar?",
     "options": {
-      "a": "Do not pay them, as they are unjust.",
+      "a": "The Roman taxes are an oppressive burden, do not pay them.",
       "b": "Give to Caesar what is Caesar's, and to God what is God's.",
-      "c": "Only pay them if you are a Roman citizen.",
-      "d": "Pay only what you can afford."
+      "c": "Render unto the Roman authorities only a portion of your earnings.",
+      "d": "The kingdom of God is not of this world, so ignore earthly taxes."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1220,9 +1220,9 @@
   {
     "question": "What is the primary message of the book of Romans?",
     "options": {
-      "a": "Encouragement during persecution",
-      "b": "Warnings against false doctrines",
-      "c": "Instructions for communal worship",
+      "a": "The importance of the Mosaic Law for all Gentile believers",
+      "b": "The supremacy of Christ over all angelic and human authorities",
+      "c": "The necessity of good works as evidence of true saving faith",
       "d": "The righteousness of God revealed through faith in Christ"
     },
     "correct": "d",
@@ -1304,10 +1304,10 @@
   {
     "question": "Which of these women was known for choosing to sit at Jesus' feet and listen to his teaching, rather than helping Martha with housework?",
     "options": {
-      "a": "Salome",
+      "a": "Salome, mother of James and John",
       "b": "Mary (sister of Martha)",
-      "c": "Mary Magdalene",
-      "d": "Joanna"
+      "c": "Mary Magdalene, a devoted follower",
+      "d": "Joanna, wife of Chuza Herod's steward"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1374,10 +1374,10 @@
   {
     "question": "What is the 'good news' or 'gospel' that the New Testament proclaims?",
     "options": {
-      "a": "The establishment of an earthly kingdom",
-      "b": "The promise of worldly prosperity",
+      "a": "The fulfillment of all Old Testament prophetic writings",
+      "b": "The coming of the Holy Spirit to empower all believers",
       "c": "Salvation through Jesus Christ's death and resurrection",
-      "d": "God's strict laws for humanity"
+      "d": "The imminent return of Jesus Christ to judge the living and dead"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1878,10 +1878,10 @@
   {
     "question": "Which Gospel begins with a long genealogy tracing Jesus' lineage back to Abraham?",
     "options": {
-      "a": "Mark",
+      "a": "Acts",
       "b": "Matthew",
-      "c": "John",
-      "d": "Luke"
+      "c": "Romans",
+      "d": "Psalms"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1920,8 +1920,8 @@
   {
     "question": "Who was the governor of Judea who released Barabbas instead of Jesus?",
     "options": {
-      "a": "Felix",
-      "b": "Agrippa",
+      "a": "Governor Felix",
+      "b": "King Agrippa",
       "c": "Herod Antipas",
       "d": "Pontius Pilate"
     },
@@ -1962,10 +1962,10 @@
   {
     "question": "What is the primary theme of the book of Colossians?",
     "options": {
-      "a": "Warnings against legalism",
-      "b": "The importance of good works",
+      "a": "Warnings against legalistic practices and false doctrines",
+      "b": "The importance of living a life of good works and charity",
       "c": "The supremacy and sufficiency of Christ",
-      "d": "Instructions for family life"
+      "d": "Instructions for Christian family life and household order"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2004,10 +2004,10 @@
   {
     "question": "What did Jesus tell the rich young ruler he must do to inherit eternal life?",
     "options": {
-      "a": "Become a priest in the Temple",
-      "b": "Perform many good deeds",
+      "a": "Become a priest in the Jerusalem Temple and offer sacrifices",
+      "b": "Perform many good deeds for the community and the needy",
       "c": "Sell all his possessions and give to the poor",
-      "d": "Follow the Ten Commandments perfectly"
+      "d": "Follow the Ten Commandments perfectly and without fail"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2046,9 +2046,9 @@
   {
     "question": "Which of these is a key theme of 1 Thessalonians?",
     "options": {
-      "a": "The importance of the resurrection",
-      "b": "Warnings against legalism",
-      "c": "The qualifications for church leaders",
+      "a": "The importance of the resurrection and spiritual renewal",
+      "b": "Warnings against legalism and reliance on human laws",
+      "c": "The qualifications for church leaders and deacons in the assembly",
       "d": "Comfort and instruction regarding Christ's second coming"
     },
     "correct": "d",
@@ -2158,10 +2158,10 @@
   {
     "question": "In the book of Revelation, what does 'Alpha and Omega' signify about Jesus?",
     "options": {
-      "a": "His authority over the nations",
+      "a": "His authority over all the nations and earthly kingdoms",
       "b": "His eternal nature as the beginning and the end",
-      "c": "His role as a powerful judge",
-      "d": "His leadership over the angels"
+      "c": "His role as a powerful judge of all humanity and creation",
+      "d": "His leadership over the heavenly angels and spiritual beings"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2256,10 +2256,10 @@
   {
     "question": "Which letter of Paul addresses divisions and factions within the church, emphasizing unity in Christ?",
     "options": {
-      "a": "Philippians",
+      "a": "Epistle to Philippians",
       "b": "1 Corinthians",
-      "c": "Galatians",
-      "d": "Romans"
+      "c": "Epistle to Galatians",
+      "d": "Epistle to Romans"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2340,10 +2340,10 @@
   {
     "question": "Which of these is a key teaching of Jesus found in Matthew 5-7 (Sermon on the Mount)?",
     "options": {
-      "a": "Seek personal revenge for wrongs committed",
-      "b": "An eye for an eye, and a tooth for a tooth",
+      "a": "Seek personal revenge for wrongs committed against you",
+      "b": "An eye for an eye, and a tooth for a tooth for justice",
       "c": "Love your enemies and pray for those who persecute you",
-      "d": "Only righteous people deserve kindness"
+      "d": "Only righteous people deserve kindness and merciful treatment"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2382,9 +2382,9 @@
   {
     "question": "What was the occupation of Zacchaeus before he met Jesus?",
     "options": {
-      "a": "Shepherd",
-      "b": "Fisherman",
-      "c": "Carpenter",
+      "a": "Temple Guard",
+      "b": "Roman Soldier",
+      "c": "Olive Grower",
       "d": "Tax Collector"
     },
     "correct": "d",
@@ -2452,9 +2452,9 @@
   {
     "question": "Who accompanied Paul on his first missionary journey?",
     "options": {
-      "a": "Luke and Titus",
-      "b": "Timothy and Silas",
-      "c": "Peter and John",
+      "a": "Luke, the beloved physician, and Titus",
+      "b": "Timothy, a young convert, and Silas",
+      "c": "Peter, the chief apostle, and John",
       "d": "Barnabas and John Mark"
     },
     "correct": "d",
@@ -2494,9 +2494,9 @@
   {
     "question": "What is the primary theme of the book of Jude?",
     "options": {
-      "a": "The superiority of Christ",
-      "b": "Encouragement during persecution",
-      "c": "Instructions for church organization",
+      "a": "The superiority of Christ over angels and the old covenant",
+      "b": "Encouragement for believers enduring suffering and persecution",
+      "c": "Instructions for elders, deacons, and proper church order",
       "d": "Contending for the faith against false teachers"
     },
     "correct": "d",
@@ -2550,10 +2550,10 @@
   {
     "question": "Which of these is a key theme in the book of Ephesians?",
     "options": {
-      "a": "Instructions for communal living in Jerusalem",
+      "a": "Instructions for the early church regarding communal living and sharing",
       "b": "The unity of believers in Christ and the church as His body",
-      "c": "Warnings against backsliding",
-      "d": "The proper way to conduct evangelistic campaigns"
+      "c": "Warnings against apostasy and the dangers of spiritual backsliding",
+      "d": "The proper way to conduct evangelistic outreach and spread the Gospel message"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2578,10 +2578,10 @@
   {
     "question": "Which of these events is recorded in all four Gospels?",
     "options": {
-      "a": "The transfiguration",
+      "a": "The transfiguration of Jesus on the mountain",
       "b": "The feeding of the five thousand",
-      "c": "The birth of Jesus",
-      "d": "The temptation of Jesus"
+      "c": "The birth of Jesus in the town of Bethlehem",
+      "d": "The temptation of Jesus in the wilderness"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2592,10 +2592,10 @@
   {
     "question": "What is the primary focus of the book of 1 John?",
     "options": {
-      "a": "Detailed prophecies of the end times",
-      "b": "Warnings about the mark of the beast",
+      "a": "Detailed prophecies concerning the events of the end times",
+      "b": "Warnings about the mark of the beast and the final judgment",
       "c": "Assurance of salvation and the nature of true faith and love",
-      "d": "Instructions for church governance"
+      "d": "Instructions for church leadership, order, and pastoral care"
     },
     "correct": "c",
     "type": "multiple_choice",

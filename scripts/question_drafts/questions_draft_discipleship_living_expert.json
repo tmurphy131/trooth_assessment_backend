@@ -44,9 +44,9 @@
   {
     "question": "Which qualification for deacons listed in 1 Timothy 3:8-12 is explicitly NOT also listed as a qualification for overseers (elders) in the same chapter?",
     "options": {
-      "a": "Not addicted to much wine.",
-      "b": "Not double-tongued.",
-      "c": "Husbands of one wife.",
+      "a": "Not given to excessive consumption of wine or other intoxicating drinks.",
+      "b": "Not speaking with deceit or saying one thing to one person and another to someone else.",
+      "c": "Faithful to their wives, being the husband of only one woman.",
       "d": "Tested first; then let them serve as deacons if they prove themselves blameless."
     },
     "correct": "d",
@@ -226,10 +226,10 @@
   {
     "question": "Which of the following figures in the early church was specifically identified as having the primary responsibility of 'waiting on tables' (diakoneō) to ensure apostles could dedicate themselves to prayer and the ministry of the word?",
     "options": {
-      "a": "Titus",
-      "b": "Timothy",
+      "a": "Titus, who was left in Crete to set things in order and appoint elders.",
+      "b": "Timothy, a trusted young disciple sent to various churches to strengthen them.",
       "c": "Stephen and the other seven appointed men",
-      "d": "Barnabas"
+      "d": "Barnabas, who was known as an encourager and accompanied Paul on his first journey."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -269,9 +269,9 @@
     "question": "Which specific passage in the New Testament contains an extended discussion on the spiritual discipline of 'discernment of spirits' as a gift and practice?",
     "options": {
       "a": "1 Corinthians 12:10",
-      "b": "Ephesians 6:10-18",
+      "b": "Ephesians 4:7",
       "c": "Hebrews 5:14",
-      "d": "Romans 12:6-8"
+      "d": "Romans 12:6"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -478,10 +478,10 @@
   {
     "question": "The concept of 'eschatological tension' in Christian ethics refers to the believer living between what two realities?",
     "options": {
-      "a": "The individual's personal salvation and the corporate salvation of the church.",
-      "b": "The Old Covenant Law and the New Covenant Grace.",
+      "a": "The personal salvation experienced by individuals and the corporate salvation of the entire church body.",
+      "b": "The demands of the Old Covenant Law and the liberating grace of the New Covenant.",
       "c": "The 'already' of Christ's kingdom established and the 'not yet' of its full consummation.",
-      "d": "The spiritual realm and the material world."
+      "d": "The unseen spiritual realm and the tangible realities of the material world."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -535,9 +535,9 @@
     "question": "Which passage in the Old Testament provides the primary context for Jesus' teaching on 'turning the other cheek' in the Sermon on the Mount, often mistakenly understood as a call to passive submission to evil?",
     "options": {
       "a": "Isaiah 50:6 ('I offered my back to those who beat me')",
-      "b": "Exodus 21:24 ('eye for an eye')",
-      "c": "Leviticus 19:18 ('love your neighbor')",
-      "d": "Deuteronomy 32:35 ('Vengeance is mine, says the Lord')"
+      "b": "Exodus 21:24, which states the principle of 'an eye for an eye, a tooth for a tooth'.",
+      "c": "Leviticus 19:18, commanding believers to 'love your neighbor as yourself'.",
+      "d": "Deuteronomy 32:35, proclaiming that 'Vengeance is mine, says the Lord, I will repay'."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -619,9 +619,9 @@
     "question": "When Jesus warns against serving two masters, God and 'Mammon' (Matthew 6:24), 'Mammon' is best understood as:",
     "options": {
       "a": "An impersonal force or personification of wealth and material possessions.",
-      "b": "The Roman economic system that oppressed the poor.",
-      "c": "A demonic entity responsible for tempting people with greed.",
-      "d": "A specific pagan deity worshipped in the ancient Near East."
+      "b": "The prevailing Roman economic system that often led to the oppression of the poor and marginalized.",
+      "c": "A malevolent demonic entity specifically responsible for tempting humanity with insatiable greed.",
+      "d": "A distinct pagan deity, widely worshipped for prosperity in the ancient Near Eastern cultures."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -688,10 +688,10 @@
   {
     "question": "The Pauline concept of 'dying to self' (e.g., Romans 6, Galatians 2:20) is best understood as:",
     "options": {
-      "a": "An ascetic denial of all pleasure and comfort.",
-      "b": "A passive resignation to fate and circumstance.",
+      "a": "An extreme ascetic denial of all worldly pleasures and personal comforts.",
+      "b": "A complete and passive resignation to unavoidable fate and life's challenging circumstances.",
       "c": "A radical reorientation of one's desires and will from self to Christ.",
-      "d": "A literal spiritual death followed by instantaneous resurrection."
+      "d": "A literal spiritual death experience followed by an instantaneous spiritual resurrection."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -702,10 +702,10 @@
   {
     "question": "In what book and chapter does Paul discuss the spiritual gifts, emphasizing their diversity and unity within the body of Christ, and their purpose for building up the church?",
     "options": {
-      "a": "Romans 8",
+      "a": "Romans 12",
       "b": "1 Corinthians 12",
       "c": "Ephesians 4",
-      "d": "Hebrews 11"
+      "d": "1 Peter 4"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -745,9 +745,9 @@
     "question": "The concept of 'agape' love in the New Testament is often distinguished from 'eros' (romantic love) and 'philia' (brotherly love) by its primary characteristic of:",
     "options": {
       "a": "Self-sacrificing, benevolent, and unconditional regard for others.",
-      "b": "Reciprocal affection and mutual attraction.",
-      "c": "Passionate emotional attachment and desire.",
-      "d": "Loyalty and camaraderie among close friends."
+      "b": "A reciprocal affection based on mutual attraction and shared interests.",
+      "c": "An intense passionate emotional attachment and strong personal desire.",
+      "d": "Deep loyalty and strong camaraderie shared exclusively among close friends."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -772,10 +772,10 @@
   {
     "question": "The book of Proverbs frequently contrasts the 'wise' and the 'foolish,' primarily defining wisdom as:",
     "options": {
-      "a": "Possession of worldly wealth and social influence.",
+      "a": "The accumulation of significant worldly wealth and considerable social influence.",
       "b": "Skillful living in accordance with God's moral order and fear of the Lord.",
-      "c": "The ability to predict future events and interpret dreams.",
-      "d": "Accumulated intellectual knowledge and academic achievement."
+      "c": "A supernatural ability to accurately predict future events and interpret complex dreams.",
+      "d": "Vast accumulated intellectual knowledge and high academic achievement."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -786,10 +786,10 @@
   {
     "question": "Which of the following best describes the 'Great Commandment' as articulated by Jesus?",
     "options": {
-      "a": "To go and make disciples of all nations.",
+      "a": "To go and make disciples of all nations, baptizing them and teaching them all that I have commanded you.",
       "b": "To love the Lord your God with all your heart, soul, mind, and strength, and to love your neighbor as yourself.",
-      "c": "To obey the Ten Commandments and the Mosaic Law.",
-      "d": "To believe in Him whom God has sent."
+      "c": "To obey all the statutes and commands given by God through Moses, including the Ten Commandments.",
+      "d": "To believe in the Son whom God has sent, for whoever believes in Him shall not perish but have eternal life."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -898,10 +898,10 @@
   {
     "question": "In Philippians 4:8, Paul encourages believers to think about 'whatever is true, whatever is honorable, whatever is just, whatever is pure, whatever is lovely, whatever is commendable.' This exhortation directly relates to the spiritual discipline of:",
     "options": {
-      "a": "Acts of service",
-      "b": "Fasting",
+      "a": "Diligent engagement in acts of service and charity towards others.",
+      "b": "Disciplined practice of fasting and self-denial for spiritual growth.",
       "c": "Contemplation and meditation",
-      "d": "Evangelism"
+      "d": "Passionate pursuit of evangelism and sharing the good news of Christ."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -912,10 +912,10 @@
   {
     "question": "The concept of 'the two kingdoms' (civic and spiritual), often associated with Martin Luther, primarily relates to how Christians should approach their engagement with:",
     "options": {
-      "a": "Personal piety versus communal worship.",
+      "a": "The distinction between personal piety and the practices of communal worship.",
       "b": "The realm of secular government and the spiritual rule of Christ.",
-      "c": "Divine revelation versus natural reason.",
-      "d": "Church governance versus individual conscience."
+      "c": "The relationship between divine revelation and human natural reason or philosophy.",
+      "d": "The balance between hierarchical church governance and individual believer's conscience."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1038,10 +1038,10 @@
   {
     "question": "In the context of Christian ethics, 'Natural Law' refers to:",
     "options": {
-      "a": "Philosophical concepts derived independently of any religious belief.",
-      "b": "The specific laws given to Moses on Mount Sinai.",
+      "a": "Philosophical concepts of right and wrong derived independently of specific religious doctrines.",
+      "b": "The specific laws and statutes given by God to Moses on Mount Sinai for Israel.",
       "c": "The moral principles universally discernible by human reason, reflecting God's created order.",
-      "d": "The innate human tendency towards sin and self-preservation."
+      "d": "The innate human tendency towards sin and self-preservation due to the fall of mankind."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1080,10 +1080,10 @@
   {
     "question": "The Puritan concept of 'holy living' (or 'practical godliness') primarily emphasized:",
     "options": {
-      "a": "The attainment of sinless perfection in this life.",
+      "a": "The attainment of sinless perfection and complete sanctification during one's earthly life.",
       "b": "A rigorous pursuit of personal holiness and moral purity in all areas of life.",
-      "c": "The exclusive focus on inner spiritual experience over outward behavior.",
-      "d": "Strict adherence to monastic vows and ascetic practices."
+      "c": "An exclusive focus on inner spiritual experience, prioritizing it over outward moral behavior.",
+      "d": "Strict adherence to monastic vows, ascetic practices, and withdrawal from worldly society."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1109,9 +1109,9 @@
     "question": "The concept of 'hesychasm' in Eastern Orthodoxy is a form of contemplative prayer that specifically involves:",
     "options": {
       "a": "Chanting the 'Jesus Prayer' with rhythmic breathing to achieve inner stillness.",
-      "b": "Engaging in vigorous intellectual debates about theological doctrines.",
-      "c": "Public recitation of creeds and confessions.",
-      "d": "Performing acts of penance and self-flagellation."
+      "b": "Engaging in vigorous intellectual debates and systematic study of complex theological doctrines.",
+      "c": "Public and communal recitation of established creeds, confessions, and liturgical prayers.",
+      "d": "Performing acts of penance, self-denial, and physical mortification to atone for sins."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1165,9 +1165,9 @@
     "question": "The concept of 'moral injury' in contemporary discussions of Christian ethics often refers to:",
     "options": {
       "a": "Psychological, spiritual, and social harm resulting from transgressions of deeply held moral beliefs.",
-      "b": "Physical harm sustained during ethical activism.",
-      "c": "Legal penalties incurred due to civil disobedience.",
-      "d": "The erosion of moral standards in a society over time."
+      "b": "Physical harm or injury sustained by individuals while engaging in ethical activism or protest.",
+      "c": "Legal penalties, fines, or imprisonment incurred by individuals due to acts of civil disobedience.",
+      "d": "The gradual erosion of traditional moral standards and values within a society over time."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1192,10 +1192,10 @@
   {
     "question": "Which specific Old Testament command is fulfilled by Christ's death according to Paul in Galatians 3:13, thereby freeing believers from the 'curse of the law'?",
     "options": {
-      "a": "The command to offer sacrifices for sin.",
-      "b": "The command to keep the Sabbath holy.",
+      "a": "The command requiring the offering of various sacrifices for the atonement of sin.",
+      "b": "The command to keep the Sabbath day holy, refraining from all manner of work.",
       "c": "The command that 'Cursed is everyone who is hanged on a tree.'",
-      "d": "The command to circumcise male infants."
+      "d": "The command to circumcise all male infants as a sign of the covenant with God."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1332,9 +1332,9 @@
   {
     "question": "Which patristic writer, known for his 'Confessions,' detailed his own journey of conversion and grappling with sin, providing a classic example of spiritual autobiography?",
     "options": {
-      "a": "Jerome",
-      "b": "Athanasius",
-      "c": "Tertullian",
+      "a": "Jerome of Stridon",
+      "b": "Athanasius of Alexandria",
+      "c": "Tertullian of Carthage",
       "d": "Augustine of Hippo"
     },
     "correct": "d",
@@ -1374,10 +1374,10 @@
   {
     "question": "The theological term 'imago Dei' (image of God) is crucial for Christian ethics because it implies that:",
     "options": {
-      "a": "God is a personal being with human-like characteristics.",
+      "a": "God's creative power is demonstrated through human intellectual capabilities.",
       "b": "All human life possesses intrinsic dignity and is worthy of respect.",
-      "c": "Only those who believe in God bear His image.",
-      "d": "Humans are inherently perfect and sinless."
+      "c": "Only individuals who have received the Holy Spirit truly reflect God's image.",
+      "d": "Humanity's original state was perfect, reflecting God's sinless character."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1416,10 +1416,10 @@
   {
     "question": "The concept of 'eschatological hope' in Christian discipleship primarily involves:",
     "options": {
-      "a": "A passive waiting for Christ's return without active engagement in the world.",
-      "b": "The belief that individual salvation is the ultimate and sole goal of faith.",
+      "a": "A patient endurance of present sufferings while awaiting Christ's glorious return.",
+      "b": "The primary focus on personal redemption and securing eternal life for one's own soul.",
       "c": "A confident expectation of Christ's future reign and the new heavens and new earth, motivating present action.",
-      "d": "A longing for an idealized past 'golden age' of the church."
+      "d": "A nostalgic desire for the pristine purity and doctrinal clarity of the early apostolic church."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1444,9 +1444,9 @@
   {
     "question": "Which of the following spiritual disciplines is most directly related to the practice of 'examen' developed by Ignatius of Loyola?",
     "options": {
-      "a": "Fasting",
-      "b": "Service to the poor",
-      "c": "Sacramental worship",
+      "a": "Disciplined abstinence from food or other pleasures for spiritual focus.",
+      "b": "Active engagement in charitable acts and ministries for the marginalized.",
+      "c": "Participation in the rites and ordinances of the church, such as communion.",
       "d": "Confession and self-examination"
     },
     "correct": "d",
@@ -1486,10 +1486,10 @@
   {
     "question": "Which of the following best describes the historical concept of 'spiritual direction' in Christian tradition?",
     "options": {
-      "a": "A formal process of appointing church leaders through divine revelation.",
-      "b": "A method of discerning God's specific will for one's life through mystical visions.",
+      "a": "A structured system for selecting and ordaining clergy based on prophetic insight.",
+      "b": "A contemplative journey to receive personal revelations and prophetic guidance from God.",
       "c": "A mentoring relationship focused on guiding an individual's spiritual growth and discerning God's presence.",
-      "d": "A hierarchical system of control over lay people by ecclesiastical authorities."
+      "d": "A system of oversight where religious leaders dictate the spiritual practices of their congregants."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1501,9 +1501,9 @@
     "question": "The theological concept of 'adoption' (huiothesia) in Pauline theology primarily refers to:",
     "options": {
       "a": "The legal act by which God makes believers His children with all attendant rights and privileges.",
-      "b": "The process of adapting one's lifestyle to conform to biblical standards.",
-      "c": "A spiritual discipline of embracing new cultures and traditions.",
-      "d": "The practice of Christians adopting orphaned children."
+      "b": "The transformative journey of aligning one's daily conduct with the moral teachings of Scripture.",
+      "c": "A missional strategy for contextualizing the Gospel message within diverse societal frameworks.",
+      "d": "A compassionate ministry focused on providing parental care and a stable environment for parentless youth."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1531,7 +1531,7 @@
       "a": "John Wesley",
       "b": "Dietrich Bonhoeffer",
       "c": "Reinhold Niebuhr",
-      "d": "Immanuel Kant"
+      "d": "C.S. Lewis"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1542,9 +1542,9 @@
   {
     "question": "In the Sermon on the Mount, Jesus teaches about prayer, specifically warning against the 'babbling' (battalogēsēte) of the Gentiles, which primarily refers to:",
     "options": {
-      "a": "Praying in public places to be seen by men.",
-      "b": "Using pagan invocations and incantations.",
-      "c": "Speaking in unknown tongues without an interpreter.",
+      "a": "Public displays of piety designed to attract human praise and recognition.",
+      "b": "Reciting magical formulas or empty rituals common in non-Christian religious practices.",
+      "c": "Unintelligible utterances during prayer without accompanying spiritual interpretation.",
       "d": "Lengthy and repetitive prayers intended to impress others or manipulate God."
     },
     "correct": "d",
@@ -1626,10 +1626,10 @@
   {
     "question": "The 'Parable of the Good Samaritan' primarily teaches a lesson about:",
     "options": {
-      "a": "The proper way to administer religious rituals.",
+      "a": "The correct performance of priestly duties and temple sacrifices according to the Law.",
       "b": "The expansive definition of 'neighbor' and the call to compassionate action.",
-      "c": "The importance of racial and ethnic purity in religious practice.",
-      "d": "The legalistic requirements for gaining eternal life."
+      "c": "The necessity of maintaining social distance from outsiders and those considered unclean.",
+      "d": "The meticulous fulfillment of every commandment to inherit everlasting life."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1654,9 +1654,9 @@
   {
     "question": "Which of the following best describes the 'disciplined grace' approach to spiritual formation, advocated by Dallas Willard?",
     "options": {
-      "a": "Grace is given only to those who demonstrate perfect discipline and obedience.",
-      "b": "Grace is solely a divine gift, requiring no human effort or discipline.",
-      "c": "Spiritual disciplines are a means of earning God's grace and salvation.",
+      "a": "Divine favor is bestowed exclusively upon individuals who achieve rigorous spiritual perfection.",
+      "b": "God's unearned favor is entirely a sovereign bestowal, demanding no human participation.",
+      "c": "Engaging in spiritual exercises is a prerequisite for meriting God's divine blessing and redemption.",
       "d": "Disciplines are practices that place us before grace, making us receptive to God's transformative power."
     },
     "correct": "d",
@@ -1710,10 +1710,10 @@
   {
     "question": "The early church's concept of 'koinonia' (fellowship) primarily referred to:",
     "options": {
-      "a": "Exclusive membership in a secret society.",
-      "b": "Informal social gatherings for entertainment.",
+      "a": "An exclusive society for those with privileged spiritual insight and hidden traditions.",
+      "b": "Casual social gatherings primarily for entertainment and communal feasting.",
       "c": "A deep spiritual partnership, sharing in the Gospel, resources, and suffering.",
-      "d": "A hierarchical structure of church governance."
+      "d": "A rigid hierarchical structure defining church authority and administrative control."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1752,10 +1752,10 @@
   {
     "question": "The concept of 'spiritual formation' is best defined as:",
     "options": {
-      "a": "A process of acquiring new spiritual gifts and abilities.",
-      "b": "The initial conversion experience that marks one as a believer.",
+      "a": "A continuous process of acquiring various spiritual gifts and supernatural abilities.",
+      "b": "The singular, transformative conversion experience that initiates one into Christian belief.",
       "c": "The lifelong, Spirit-led process of being conformed to the image of Christ.",
-      "d": "The academic study of theology and biblical history."
+      "d": "The rigorous academic study of theological doctrines and ancient biblical history."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1836,9 +1836,9 @@
   {
     "question": "The concept of 'the kingdom of God' in the Gospels is best understood as:",
     "options": {
-      "a": "A future apocalyptic event that has not yet begun.",
-      "b": "A purely spiritual reality that has no bearing on earthly life.",
-      "c": "A specific geographical location in the afterlife.",
+      "a": "A purely future apocalyptic event, not yet realized, awaiting a final cosmic intervention.",
+      "b": "An entirely spiritual reality, devoid of any tangible impact or influence on earthly existence.",
+      "c": "A designated heavenly dwelling or a specific geographical location in the eternal afterlife.",
       "d": "God's sovereign reign and rule, both present and future, breaking into the world."
     },
     "correct": "d",
@@ -1879,9 +1879,9 @@
     "question": "The discipline of 'confession' in Christian tradition is primarily understood as:",
     "options": {
       "a": "An acknowledgment of sin before God and sometimes others, seeking forgiveness and restoration.",
-      "b": "A public declaration of one's personal achievements and virtues.",
-      "c": "A legalistic requirement for maintaining one's salvation.",
-      "d": "A formal recitation of the Nicene Creed during worship services."
+      "b": "A public declaration of one's spiritual progress, personal achievements, and moral virtues.",
+      "c": "A burdensome legalistic requirement for believers to maintain their standing and ensure salvation.",
+      "d": "A formal liturgical recitation of established creeds, such as the Nicene Creed, during worship services."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1948,9 +1948,9 @@
   {
     "question": "Which of the following is NOT a primary purpose of corporate worship in Christian discipleship?",
     "options": {
-      "a": "Glorification of God through praise and adoration.",
-      "b": "Edification of believers through preaching and teaching.",
-      "c": "Fellowship and mutual encouragement among believers.",
+      "a": "The collective glorification of God through fervent praise, worship, and heartfelt adoration.",
+      "b": "The spiritual edification and growth of believers through biblical preaching and systematic teaching.",
+      "c": "Fostering deep fellowship and providing mutual encouragement among all congregational believers.",
       "d": "A display of the church's social status and influence in the community."
     },
     "correct": "d",
@@ -1963,9 +1963,9 @@
     "question": "The 'Beatitudes' in Matthew 5, pronounced by Jesus, primarily describe:",
     "options": {
       "a": "The characteristics and blessings of those who live as citizens of God's kingdom.",
-      "b": "Prophetic pronouncements about the future judgment of the wicked.",
-      "c": "A set of legalistic rules for attaining righteousness.",
-      "d": "A mystical path to spiritual enlightenment and divine union."
+      "b": "Apocalyptic prophetic pronouncements detailing the future judgment upon all the unrighteous wicked.",
+      "c": "A rigorous set of legalistic rules and moral codes for achieving personal righteousness.",
+      "d": "A contemplative mystical path leading to spiritual enlightenment and ultimate divine union."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2004,9 +2004,9 @@
   {
     "question": "The theological concept of 'justification by faith alone' (sola fide), central to the Reformation, emphasizes that:",
     "options": {
-      "a": "Only a specific type of faith, validated by miraculous signs, is salvific.",
-      "b": "Faith is a human work that earns salvation.",
-      "c": "Good works are entirely unnecessary for the Christian life.",
+      "a": "Only a specific, demonstrative type of faith, validated by visible miraculous signs, can be salvific.",
+      "b": "Faith itself is considered a human work or effort that merits and earns salvation.",
+      "c": "Good works and ethical living become entirely unnecessary for the Christian's ongoing life.",
       "d": "Righteousness is imputed to believers solely through faith in Christ, not by works."
     },
     "correct": "d",
@@ -2046,10 +2046,10 @@
   {
     "question": "The spiritual discipline of 'submission' in Christian tradition primarily involves:",
     "options": {
-      "a": "The suppression of all personal desires and ambitions.",
-      "b": "Passive acceptance of injustice and exploitation.",
+      "a": "The complete suppression of all personal desires, individual ambitions, and natural inclinations.",
+      "b": "A passive, unquestioning acceptance of all forms of injustice, oppression, and exploitation.",
       "c": "A voluntary yielding of one's rights and preferences for the sake of Christ and others.",
-      "d": "Blind obedience to all earthly authorities without question."
+      "d": "Blind, unquestioning obedience to all earthly authorities, regardless of moral implications."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2089,9 +2089,9 @@
     "question": "The ethical concept of 'virtue ethics,' contrasted with 'deontological' or 'consequentialist' ethics, primarily focuses on:",
     "options": {
       "a": "The character of the moral agent and the cultivation of virtuous habits.",
-      "b": "The outcomes or consequences of actions.",
-      "c": "Adherence to specific divine commands and laws.",
-      "d": "The inherent rightness or wrongness of actions themselves."
+      "b": "The ultimate outcomes or the foreseeable consequences resulting from specific actions.",
+      "c": "Strict adherence to specific divine commands, established moral codes, and religious laws.",
+      "d": "The intrinsic rightness or inherent wrongness of actions, independent of context."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2116,10 +2116,10 @@
   {
     "question": "Which of the following describes the 'Parable of the Sower' (Matthew 13, Mark 4, Luke 8) in terms of Christian discipleship?",
     "options": {
-      "a": "It teaches that salvation is guaranteed for all who hear the Gospel.",
-      "b": "It emphasizes the need for miracles to prepare the soil of the heart.",
+      "a": "It suggests that all who hear the Gospel message will immediately bear spiritual fruit.",
+      "b": "It primarily focuses on the importance of human effort in preparing one's heart for God's grace.",
       "c": "It illustrates the different responses to God's Word and the conditions for fruitful discipleship.",
-      "d": "It provides a blueprint for effective agricultural practices."
+      "d": "It reveals that only a select few are predestined to receive and understand the divine message."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2173,9 +2173,9 @@
     "question": "The theological term 'imputation' in Protestant theology, especially concerning justification, refers to:",
     "options": {
       "a": "The divine act of crediting Christ's righteousness to the believer's account.",
-      "b": "The act of blaming original sin on Adam and Eve.",
-      "c": "The process by which a believer's sins are gradually removed.",
-      "d": "The infusion of grace that transforms a person's inner nature."
+      "b": "The theological concept of humanity's sinfulness being inherited from Adam's transgression.",
+      "c": "The progressive work of the Holy Spirit in transforming the believer into Christ's likeness.",
+      "d": "The internal spiritual renewal that infuses grace and makes one inherently righteous."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2201,9 +2201,9 @@
     "question": "Which of the following best describes the ethical implications of the doctrine of 'original sin'?",
     "options": {
       "a": "Humans have a fallen nature that biases them towards sin, affecting all aspects of their being.",
-      "b": "Humans are inherently incapable of any good actions or moral choices.",
-      "c": "Sin is a social construct with no intrinsic reality.",
-      "d": "Each individual is solely responsible for their own sin, with no inherited propensity."
+      "b": "Individuals are utterly depraved, lacking any capacity for free will or moral discernment whatsoever.",
+      "c": "Sin is primarily a result of societal pressures and poor upbringing, not an inherent human condition.",
+      "d": "Every person is born morally neutral, possessing the full ability to choose righteousness or sin independently."
     },
     "correct": "a",
     "type": "multiple_choice",

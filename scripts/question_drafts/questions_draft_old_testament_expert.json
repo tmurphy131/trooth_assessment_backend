@@ -283,9 +283,9 @@
     "question": "What was the specific sign Gideon requested from God involving a fleece, *after* the initial signs of fire consuming the offering and the angel disappearing?",
     "options": {
       "a": "That the fleece be wet with dew but the ground dry, and then the reverse.",
-      "b": "That only the fleece be wet with dew.",
-      "c": "That only the ground around the fleece be wet with dew.",
-      "d": "That he receive a dream confirming victory."
+      "b": "That the fleece alone would be saturated with dew, while the entire ground around it stayed dry.",
+      "c": "That the ground surrounding the fleece would be wet with dew, but the fleece itself remained entirely dry.",
+      "d": "That the fleece would be found completely dry, even if the surrounding ground was soaked with dew."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -324,9 +324,9 @@
   {
     "question": "What was the specific role Boaz performed for Naomi's family, described in the book of Ruth?",
     "options": {
-      "a": "Priest",
-      "b": "Judge",
-      "c": "Elder",
+      "a": "A respected spiritual leader and temple priest for the community.",
+      "b": "A wise and authoritative tribal judge, settling all local disputes.",
+      "c": "A prominent elder of the city gate, ruling on civic and legal matters.",
       "d": "Kinsman-redeemer (goel)"
     },
     "correct": "d",
@@ -422,9 +422,9 @@
   {
     "question": "What was the specific promise Nathan gave to David concerning his dynasty?",
     "options": {
-      "a": "You yourself shall build a house for my name, and I will be with you.",
-      "b": "You will conquer all nations, and your rule will extend to the ends of the earth.",
-      "c": "Your son will never sin against me, and I will establish his kingdom.",
+      "a": "You will personally build a magnificent temple for my name, and I will dwell there among your people.",
+      "b": "Your military might will overcome all surrounding nations, extending your rule to distant lands.",
+      "c": "Your son, Solomon, will never fall away from me, and his kingdom will be eternally secure.",
       "d": "Your house and your kingdom shall be made sure forever before me; your throne shall be established forever."
     },
     "correct": "d",
@@ -450,10 +450,10 @@
   {
     "question": "What was the specific command given to the man of God from Judah who prophesied against Jeroboam's altar at Bethel?",
     "options": {
-      "a": "To confront Jeroboam publicly about his idolatry.",
-      "b": "To anoint a new king for Israel.",
+      "a": "To boldly confront King Jeroboam publicly concerning his idolatrous practices and false worship.",
+      "b": "To secretly anoint a new king for the Northern Kingdom of Israel from Judah's lineage.",
       "c": "Not to eat bread or drink water, nor return by the way he came.",
-      "d": "To burn the altar with fire and scatter ashes."
+      "d": "To miraculously cause the altar to be consumed by fire and its ashes scattered across the land."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -814,10 +814,10 @@
   {
     "question": "What is the recurring thematic phrase in Ecclesiastes that summarizes the author's observation about life under the sun?",
     "options": {
-      "a": "All is meaningless.",
+      "a": "Truly, everything under the sun is utterly meaningless.",
       "b": "Vanity of vanities, all is vanity.",
-      "c": "Life is futile.",
-      "d": "There is nothing new under the sun."
+      "c": "Indeed, all human striving and life itself are ultimately futile.",
+      "d": "Absolutely nothing that occurs on earth is truly new under the sun."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -842,10 +842,10 @@
   {
     "question": "Which perspective, besides the Shulammite and her beloved, is frequently voiced in the Song of Solomon, representing a chorus or observers?",
     "options": {
-      "a": "The Temple priests",
-      "b": "The King's counselors",
+      "a": "The esteemed Temple priests offering sage advice.",
+      "b": "The wise counselors and advisors to King Solomon.",
       "c": "The Daughters of Jerusalem",
-      "d": "The prophets"
+      "d": "The inspired prophets delivering divine messages."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -940,9 +940,9 @@
   {
     "question": "In Lamentations 3, the 'man who has seen affliction' describes his suffering and then pivots to a declaration of God's faithfulness; what specific attribute of God does he praise as new every morning?",
     "options": {
-      "a": "His power and might",
-      "b": "His wisdom and understanding",
-      "c": "His justice and righteousness",
+      "a": "His overwhelming power and incomparable divine might.",
+      "b": "His profound wisdom and boundless understanding of all things.",
+      "c": "His unwavering justice and perfect righteousness in all His ways.",
       "d": "His steadfast love (hesed) and mercies"
     },
     "correct": "d",
@@ -996,10 +996,10 @@
   {
     "question": "In Ezekiel's vision of the new temple and land division, what is the specific name given to the city within the holy district, distinct from the tribal allotments?",
     "options": {
-      "a": "Zion",
+      "a": "The sacred mountain of Zion, God's chosen dwelling place.",
       "b": "The LORD Is There (Yahweh Shammah)",
-      "c": "New Jerusalem",
-      "d": "City of God"
+      "c": "The glorious New Jerusalem, descending from heaven above.",
+      "d": "The holy City of God, established for His eternal presence."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1080,9 +1080,9 @@
   {
     "question": "What was Amos's primary occupation before God called him to prophesy to Israel?",
     "options": {
-      "a": "A farmer of grain and vineyards",
-      "b": "A craftsman working with metal",
-      "c": "A priest serving at Bethel",
+      "a": "A farmer who cultivated grain and tended vineyards",
+      "b": "A skilled craftsman working with precious metals",
+      "c": "A recognized priest serving at the altar in Bethel",
       "d": "A shepherd and a dresser of sycamore figs"
     },
     "correct": "d",
@@ -1108,10 +1108,10 @@
   {
     "question": "What was the primary reason for God's severe judgment against Edom, as detailed in the book of Obadiah?",
     "options": {
-      "a": "Their refusal to let Israel pass through their land during the exodus",
+      "a": "Their refusal to grant passage to Israel through their land in the exodus",
       "b": "Their violence against their brother Jacob (Judah) during Jerusalem's distress",
-      "c": "Their idolatry and worship of false gods",
-      "d": "Their practice of human sacrifice"
+      "c": "Their widespread practice of idolatry and worship of foreign gods",
+      "d": "Their heinous practice of sacrificing their children to pagan deities"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1122,9 +1122,9 @@
   {
     "question": "What was Jonah's explicit reason for fleeing from the LORD's command to go to Nineveh, as he later states in his prayer (Jonah 4)?",
     "options": {
-      "a": "He doubted God's power to actually save Nineveh.",
-      "b": "He was afraid of the Assyrians and their cruel reputation.",
-      "c": "He preferred to prophesy to Israel, his own people.",
+      "a": "He believed the Ninevites were too wicked to ever truly repent, and God would not spare such a violent nation.",
+      "b": "He feared that if he preached, God would indeed destroy them, proving his prophecy false in the eyes of the people.",
+      "c": "He was concerned that Nineveh's repentance would diminish Israel's standing as God's uniquely chosen people.",
       "d": "He knew the LORD was a gracious and compassionate God, slow to anger and abounding in love, who relents from sending calamity."
     },
     "correct": "d",
@@ -1151,9 +1151,9 @@
     "question": "In what regard does Nahum's prophecy stand in stark contrast to Jonah's message concerning Nineveh?",
     "options": {
       "a": "Nahum prophesies Nineveh's irreversible destruction, while Jonah preached repentance leading to God's mercy.",
-      "b": "Nahum predicts Nineveh's ultimate conversion to the God of Israel.",
-      "c": "Nahum praises Nineveh's strength and military might.",
-      "d": "Nahum focuses on Nineveh's extensive trade networks."
+      "b": "Nahum foretells Nineveh's complete and ultimate conversion to the one true God of Israel.",
+      "c": "Nahum extols Nineveh's formidable military strength and impressive imperial might.",
+      "d": "Nahum primarily emphasizes Nineveh's vast and extensive international trade networks."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1164,9 +1164,9 @@
   {
     "question": "What is the primary theological tension Habakkuk grapples with in the opening chapters of his book?",
     "options": {
-      "a": "The nature of free will versus divine sovereignty.",
-      "b": "The problem of God's existence in the face of human suffering.",
-      "c": "The timing of the Messiah's arrival and the restoration of Israel.",
+      "a": "The apparent delay in God's judgment upon the nations, despite their pervasive idolatry and oppressive practices.",
+      "b": "The contradiction between God's covenant promises to Israel and their current state of moral corruption and political weakness.",
+      "c": "The question of how God's perfect justice can coexist with His boundless mercy, especially towards unrepentant sinners.",
       "d": "Why God allows evil to go unpunished and why He uses a more wicked nation (Babylon) to punish a less wicked one (Judah)."
     },
     "correct": "d",
@@ -1221,9 +1221,9 @@
     "question": "What was the primary complaint God lodged against the people through the prophet Haggai regarding the Temple rebuilding?",
     "options": {
       "a": "They were living in paneled houses while God's house lay in ruins.",
-      "b": "They were worshiping idols and foreign gods.",
-      "c": "They were not paying their tithes and offerings.",
-      "d": "They were intermarrying with foreign women."
+      "b": "They were persistently worshiping pagan idols and foreign gods.",
+      "c": "They were consistently failing to bring their required tithes and offerings.",
+      "d": "They were unlawfully intermarrying with women from foreign nations."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1416,9 +1416,9 @@
   {
     "question": "What were the specific requirements for a person to be considered clean after touching the carcass of an unclean animal?",
     "options": {
-      "a": "He must be unclean for seven days.",
-      "b": "He must wash and offer a sacrifice.",
-      "c": "He must wash himself only.",
+      "a": "He must cleanse himself and offer a purification sacrifice.",
+      "b": "He must immerse his body and remain outside the camp.",
+      "c": "He must wash his hands and be unclean for seven days.",
       "d": "He must wash his clothes and be unclean until evening."
     },
     "correct": "d",
@@ -1458,10 +1458,10 @@
   {
     "question": "Which specific prohibition in Deuteronomy 22:30 relates to familial sexual conduct?",
     "options": {
-      "a": "A man shall not marry a divorced woman.",
-      "b": "You shall not commit adultery with your neighbor's wife.",
+      "a": "A man shall not marry a woman divorced by another, nor shall he take her as his own.",
+      "b": "You shall not commit adultery with your neighbor's wife, for it defiles the marriage bed.",
       "c": "A man shall not take his father's wife, nor shall he uncover her who is his father's.",
-      "d": "You shall not lie with your mother-in-law."
+      "d": "You shall not lie with your mother-in-law, for it is an abomination to the Lord."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1696,9 +1696,9 @@
   {
     "question": "Which of the following is an example of a theological nuance where precise knowledge distinguishes the correct answer from plausible distractors?",
     "options": {
-      "a": "The location of Mount Sinai.",
-      "b": "The exact number of days of creation.",
-      "c": "The identity of the first king of Israel.",
+      "a": "The precise geographical location of Mount Sinai, whether in the wilderness of Paran or Midian.",
+      "b": "The exact chronological duration of the creation days, whether literal 24-hour periods or epochs.",
+      "c": "The identity of the true king of Israel, whether a human ruler or God's direct reign.",
       "d": "The nature of Samson's strength, whether it was inherent in his hair or symbolized by his Nazirite vow."
     },
     "correct": "d",
@@ -1836,10 +1836,10 @@
   {
     "question": "According to the book of Nehemiah, which specific social injustice did Nehemiah confront among the Jews that involved their fellow countrymen?",
     "options": {
-      "a": "Neglecting to pay tithes to the temple.",
-      "b": "Intermarriage with foreign women.",
+      "a": "Neglecting to pay tithes and offerings to the temple treasury, thus robbing God.",
+      "b": "Intermarriage with foreign women, which led to idolatry and defiled the holy lineage.",
       "c": "Charging exorbitant interest on loans to their brothers, leading to slavery.",
-      "d": "Ignoring the Sabbath laws."
+      "d": "Ignoring the Sabbath laws, by buying and selling on the holy day of rest."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1906,10 +1906,10 @@
   {
     "question": "In Daniel's interpretation of Nebuchadnezzar's dream of the great statue, what material represented the final kingdom, which would be partly strong and partly brittle?",
     "options": {
-      "a": "Bronze",
+      "a": "Bronze of the belly and thighs",
       "b": "Iron mixed with clay",
-      "c": "Silver",
-      "d": "Gold"
+      "c": "Silver of the chest and arms",
+      "d": "Gold of the head and shoulders"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2061,9 +2061,9 @@
     "question": "Which specific king of Israel was struck with leprosy as a consequence of his disobedience, despite being a successful military leader?",
     "options": {
       "a": "Uzziah of Judah was struck with leprosy; no king of Israel (Northern Kingdom) is recorded with leprosy for disobedience in this manner.",
-      "b": "Jeroboam I",
-      "c": "Jehoash",
-      "d": "Ahab"
+      "b": "Jeroboam I, who established idol worship in Dan and Bethel, suffered the curse of a withered hand.",
+      "c": "Manasseh of Judah, who rebuilt high places and practiced idolatry, was taken captive to Babylon in chains.",
+      "d": "Ahaziah of Israel, who consulted Baal-Zebub in Ekron for healing, died from his injuries as prophesied."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2173,9 +2173,9 @@
     "question": "What symbolic act did Ezekiel perform by shaving his head and beard, dividing the hair into three parts, and dealing with each part differently?",
     "options": {
       "a": "To symbolize the fate of the inhabitants of Jerusalem during the siege and exile.",
-      "b": "To symbolize a new Nazirite vow for the exiles.",
-      "c": "To represent the three divisions of the Israelite tribes.",
-      "d": "To show the defilement of the priesthood."
+      "b": "To signify the beginning of a new Nazirite vow for the returning exiles from Babylon.",
+      "c": "To represent the three distinct divisions of the twelve Israelite tribes for future restoration.",
+      "d": "To demonstrate the utter defilement and unholiness of the priesthood during the time of corruption."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2200,9 +2200,9 @@
   {
     "question": "Which of the following is an example of a theological nuance that requires deep study?",
     "options": {
-      "a": "The specific names of the twelve tribes of Israel.",
-      "b": "The location of the Garden of Eden.",
-      "c": "The order of the books of the Old Testament.",
+      "a": "The precise enumeration of the twelve tribes of Israel, considering variations in different biblical lists.",
+      "b": "The exact geographical location of the Garden of Eden, considering ancient river systems and modern geography.",
+      "c": "The traditional canonical order of the books within the Old Testament, and its historical development.",
       "d": "The difference between the 'Day of the LORD' in various prophetic books, and whether it refers to a single event or a recurring theme."
     },
     "correct": "d",
@@ -2215,9 +2215,9 @@
     "question": "What is the primary message of the book of Obadiah?",
     "options": {
       "a": "A prophecy of judgment against Edom for their pride and mistreatment of Judah.",
-      "b": "A call for Israel to repent and return to the LORD.",
-      "c": "A historical account of a minor prophet's life.",
-      "d": "A vision of the restoration of Jerusalem."
+      "b": "A fervent call for the nation of Israel to repent from their sins and return wholeheartedly to the LORD.",
+      "c": "A detailed historical account of the life and ministry of a minor prophet, including his personal struggles.",
+      "d": "A prophetic vision detailing the glorious future restoration and rebuilding of the city of Jerusalem."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2284,10 +2284,10 @@
   {
     "question": "What specific imagery does Zechariah use to describe the removal of the high priest Joshua's guilt?",
     "options": {
-      "a": "Washing him in pure water from a bronze basin.",
-      "b": "Offering a specific sin offering on his behalf.",
+      "a": "Ritually washing him completely in pure water drawn from a large bronze basin.",
+      "b": "Presenting a specific and prescribed sin offering on the altar on his behalf for atonement.",
       "c": "Removing his filthy garments and clothing him with rich robes and a clean turban.",
-      "d": "Anointing him with holy oil."
+      "d": "Solemnly anointing his head and hands with sacred, specially prepared holy oil."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2326,10 +2326,10 @@
   {
     "question": "According to the Law in Deuteronomy, what was a specific command regarding the firstfruits of the harvest?",
     "options": {
-      "a": "To burn the firstfruits as a sin offering.",
-      "b": "To share the firstfruits with the poor and needy in your community.",
+      "a": "To completely burn the firstfruits upon the altar as a required sin offering for the entire community.",
+      "b": "To diligently share the firstfruits of the harvest with the poor, the needy, and the resident aliens in your community.",
       "c": "To bring the firstfruits to the place the Lord would choose and present them to the priest.",
-      "d": "To store the firstfruits for a year before consuming them."
+      "d": "To meticulously store the firstfruits for a full year in the temple treasury before they could be consumed."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2495,9 +2495,9 @@
     "question": "What specific act did Jeremiah perform to symbolize the complete ruin of Judah and Jerusalem, involving a waistband?",
     "options": {
       "a": "Burying a linen waistband until it was ruined, representing Judah's defilement.",
-      "b": "Wearing an iron yoke on his neck.",
-      "c": "Breaking a clay jar in the presence of the elders.",
-      "d": "Writing a scroll and then having it burned by the king."
+      "b": "Wearing an iron yoke on his neck, symbolizing Babylonian servitude and inescapable judgment.",
+      "c": "Breaking a clay jar in the presence of the elders, signifying God's irreversible shattering of Jerusalem.",
+      "d": "Writing a scroll and then having it burned by the king, foretelling the destruction of Jehoiakim's dynasty."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2550,9 +2550,9 @@
   {
     "question": "What was the specific message of Amos's vision of a basket of summer fruit?",
     "options": {
-      "a": "The harvest season, symbolizing God's faithfulness.",
-      "b": "A warning of impending drought and famine.",
-      "c": "A time of abundance and blessing for Israel.",
+      "a": "The harvest season had arrived, symbolizing God's abundant provision and faithfulness to His covenant.",
+      "b": "A clear warning of impending drought and widespread famine, a judgment for Israel's unfaithfulness.",
+      "c": "A promise of a future time of great abundance and blessing for Israel, following their repentance.",
       "d": "The end has come for my people Israel; I will not pass by them again."
     },
     "correct": "d",
@@ -2874,7 +2874,7 @@
     "options": {
       "a": "Numbers",
       "b": "Deuteronomy",
-      "c": "Exodus",
+      "c": "Genesis",
       "d": "Leviticus"
     },
     "correct": "b",
@@ -2957,9 +2957,9 @@
     "question": "What was the specific dream of Nebuchadnezzar that Daniel interpreted, involving a large tree that was cut down?",
     "options": {
       "a": "A dream about Nebuchadnezzar's future madness and temporary dethronement.",
-      "b": "A dream about a divine judgment on Babylon.",
-      "c": "A dream about the succession of world empires.",
-      "d": "A dream about a harvest and famine."
+      "b": "A dream foretelling a divine judgment on Babylon and its eventual destruction by Medo-Persia.",
+      "c": "A dream revealing the succession of world empires that would rise and fall, culminating in God's eternal kingdom.",
+      "d": "A dream concerning a season of abundant harvest followed by a severe famine, signifying national prosperity and decline."
     },
     "correct": "a",
     "type": "multiple_choice",

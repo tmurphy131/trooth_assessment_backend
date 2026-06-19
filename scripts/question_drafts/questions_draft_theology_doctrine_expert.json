@@ -30,10 +30,10 @@
   {
     "question": "Which of the following best describes the classical Reformed understanding of the 'perspicuity' or 'clarity' of Scripture?",
     "options": {
-      "a": "Scripture is clear only when interpreted through the infallible magisterium of the church.",
+      "a": "Scripture's clarity is entirely dependent on the authoritative interpretation provided by the church's magisterium.",
       "b": "The essential truths for salvation are sufficiently clear for all who earnestly seek them, though some passages require deeper study.",
-      "c": "All parts of Scripture are equally easy to understand for any believer.",
-      "d": "The Spirit illuminates all believers such that no external aid or study is necessary for understanding any biblical text."
+      "c": "Every single passage of Scripture is immediately comprehensible to all believers without any special effort or guidance.",
+      "d": "The Holy Spirit grants an immediate and complete understanding of all biblical texts, negating the need for scholarly study."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -72,9 +72,9 @@
   {
     "question": "Which ecumenical council explicitly condemned Monothelitism, the doctrine that Christ had two natures but only one will?",
     "options": {
-      "a": "Council of Chalcedon",
-      "b": "Second Council of Ephesus",
-      "c": "First Council of Nicaea",
+      "a": "The Council of Chalcedon, which defined Christ's two natures in one person.",
+      "b": "The Second Council of Ephesus, often called the 'Robber Council' for its controversial actions.",
+      "c": "The First Council of Nicaea, known for addressing the Arian controversy and the Nicene Creed.",
       "d": "Third Council of Constantinople"
     },
     "correct": "d",
@@ -86,10 +86,10 @@
   {
     "question": "Which eschatological view posits that the resurrection of believers occurs at the beginning of Christ's literal thousand-year reign on Earth, followed by the resurrection of unbelievers at the end of that reign?",
     "options": {
-      "a": "Amillennialism",
+      "a": "Amillennialism, which interprets the thousand-year reign symbolically rather than literally.",
       "b": "Historic Premillennialism",
-      "c": "Postmillennialism",
-      "d": "Covenant Eschatology"
+      "c": "Postmillennialism, anticipating a golden age of righteousness before Christ's return.",
+      "d": "Covenant Eschatology, which focuses on the fulfillment of God's covenant promises through the church."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -129,9 +129,9 @@
     "question": "The concept of 'communicatio idiomatum' is crucial in understanding the hypostatic union. What does it describe?",
     "options": {
       "a": "The exchange of divine and human attributes between the two natures of Christ, so that what is true of one nature can be predicated of the Person.",
-      "b": "The shared characteristics between the Old and New Covenants, demonstrating God's consistent plan of salvation.",
-      "c": "The process by which the divine essence is communicated from the Father to the Son in eternal generation.",
-      "d": "The communication of the Holy Spirit's gifts to believers, enabling them to understand Scripture."
+      "b": "The fundamental continuity and shared characteristics between the Old and New Covenants in God's redemptive plan.",
+      "c": "The eternal procession of the Holy Spirit from the Father and the Son, a key doctrine of Trinitarian theology.",
+      "d": "The indwelling of the Holy Spirit in believers, imparting spiritual gifts and enabling divine communication."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -156,10 +156,10 @@
   {
     "question": "In the Reformed tradition, the 'keys of the kingdom' (Matthew 16:19) are understood to symbolize what primary function of the church?",
     "options": {
-      "a": "The unique ability of individual believers to unlock spiritual mysteries through personal revelation.",
+      "a": "The individual believer's personal spiritual authority to discern and apply biblical truths for their own life.",
       "b": "The authority to open and shut the kingdom of heaven by declarative judgment (preaching, discipline).",
-      "c": "The authority of the Pope to bind and loose in spiritual matters.",
-      "d": "The power to administer sacraments and preach the Word."
+      "c": "The exclusive jurisdictional power granted to the Roman Pontiff to forgive sins and define doctrine for the whole church.",
+      "d": "The power given to ordained ministers to effectively administer the holy sacraments and proclaim God's authoritative Word."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -171,9 +171,9 @@
     "question": "Which specific heresy taught that the Father, Son, and Holy Spirit are merely different 'modes' or 'manifestations' of the one God, rather than three distinct persons?",
     "options": {
       "a": "Monarchianism (specifically Modalism)",
-      "b": "Arianism",
-      "c": "Nestorianism",
-      "d": "Adoptionism"
+      "b": "Arianism, which claimed that Jesus Christ was created by God the Father and thus not co-eternal.",
+      "c": "Nestorianism, which separated the divine and human natures of Christ into two distinct persons.",
+      "d": "Adoptionism, which proposed that Jesus was born a mere man and later adopted by God at his baptism."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -213,9 +213,9 @@
     "question": "The concept of 'fides implicita' (implicit faith) was historically used in Roman Catholic theology to describe:",
     "options": {
       "a": "The belief in the doctrines of the Church without full intellectual comprehension, trusting the Church's authority.",
-      "b": "A faith that is not explicitly stated but is evident through one's good works.",
-      "c": "A faith based purely on personal spiritual experience, independent of formal doctrine.",
-      "d": "The innate human capacity for faith, present in all people prior to evangelization."
+      "b": "A saving faith that is demonstrated not by verbal confession but by consistent and observable righteous actions.",
+      "c": "A deeply personal and subjective spiritual conviction, formed through mystical encounters rather than intellectual assent.",
+      "d": "The universal human inclination towards spirituality and transcendence, predisposing individuals to religious belief."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -240,10 +240,10 @@
   {
     "question": "Which early Church Father is most closely associated with developing the 'Rule of Faith' (Regula Fidei) as a hermeneutical guide for interpreting Scripture against Gnostic errors?",
     "options": {
-      "a": "Tertullian",
+      "a": "Tertullian of Carthage, a significant early Latin Church Father and apologist.",
       "b": "Irenaeus of Lyons",
-      "c": "Clement of Alexandria",
-      "d": "Origen"
+      "c": "Clement of Alexandria, who sought to integrate Christian theology with Greek philosophy.",
+      "d": "Origen of Alexandria, a prolific writer and controversial figure known for allegorical interpretation."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -254,9 +254,9 @@
   {
     "question": "The term 'Donatism' refers to a 4th-century schism primarily concerning:",
     "options": {
-      "a": "The proper date for celebrating Easter.",
-      "b": "The question of infant baptism versus believer's baptism.",
-      "c": "The nature of Christ's divine and human wills.",
+      "a": "The precise calendrical calculation for determining the annual celebration of the Paschal feast.",
+      "b": "The theological debate concerning the appropriate age and mode for receiving the sacrament of baptism.",
+      "c": "The intricate theological discussion regarding the presence of one or two wills within the person of Jesus Christ.",
       "d": "The validity of sacraments administered by clergy who had apostatized during persecution."
     },
     "correct": "d",
@@ -296,10 +296,10 @@
   {
     "question": "Which of the following is NOT typically considered part of the 'ordo salutis' (order of salvation) in classical Reformed theology?",
     "options": {
-      "a": "Justification",
-      "b": "Regeneration",
+      "a": "Justification by faith alone",
+      "b": "Regeneration by the Holy Spirit",
       "c": "Synergistic cooperation",
-      "d": "Glorification"
+      "d": "Glorification in Christ's presence"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -366,10 +366,10 @@
   {
     "question": "According to the Council of Trent, what is the role of 'cooperating grace' in the process of justification?",
     "options": {
-      "a": "It is the grace that precedes any human response, making a response possible.",
-      "b": "It is the grace that irresistibly draws the elect to God, ensuring their conversion.",
+      "a": "It is the preparatory grace that enables a person to respond to God's call, preceding any meritorious human action or choice.",
+      "b": "It is the efficacious grace that sovereignly and infallibly draws the chosen elect to Christ, guaranteeing their spiritual renewal and faith.",
       "c": "It is the grace that works with human free will once initial faith has been exercised, leading to growth in righteousness.",
-      "d": "It refers to the grace received through participation in the sacraments, which is independent of human cooperation."
+      "d": "It is the grace conferred ex opere operato through the valid reception of sacraments, providing spiritual benefits irrespective of the recipient's disposition."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -450,9 +450,9 @@
   {
     "question": "The doctrine of 'imputed righteousness' is central to Protestant justification. What does it fundamentally entail?",
     "options": {
-      "a": "God's overlooking of sin through an act of divine amnesty.",
-      "b": "God's transforming the believer internally to make them righteous.",
-      "c": "God's infusion of grace into the believer, making them progressively more righteous.",
+      "a": "God's merciful decision to forgive past transgressions without requiring a change in the individual's spiritual state or behavior.",
+      "b": "God's internal work within the believer, renewing their nature and progressively conforming them to the moral image of Christ.",
+      "c": "God's imparting of supernatural grace into the soul, enabling the believer to perform good works and grow in inherent holiness.",
       "d": "God's declaration of a sinner as righteous based on Christ's perfect righteousness being credited to their account."
     },
     "correct": "d",
@@ -479,9 +479,9 @@
     "question": "In the Anglican tradition, the 'via media' (middle way) is often used to describe its position between which two theological poles?",
     "options": {
       "a": "Roman Catholicism and Continental Reformed Protestantism",
-      "b": "Presbyterianism and Congregationalism",
-      "c": "Lutheranism and Anabaptism",
-      "d": "Eastern Orthodoxy and Wesleyan Arminianism"
+      "b": "Eastern Orthodoxy and Radical Anabaptist Sects",
+      "c": "Lutheran Confessionalism and Zwinglian Sacramental Views",
+      "d": "Methodist Revivalism and Strict Calvinist Predestinarianism"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -534,9 +534,9 @@
   {
     "question": "What is the meaning of 'union with Christ' in Reformed theology, particularly as foundational to justification and sanctification?",
     "options": {
-      "a": "A temporary relationship established at baptism, which must be continually renewed through good works.",
-      "b": "A purely legal declaration that imputes righteousness to the believer.",
-      "c": "A mystical experience achieved through intense contemplation.",
+      "a": "A covenantal relationship initiated through infant baptism, requiring ongoing human effort and sacramental participation to maintain its efficacy and spiritual benefits.",
+      "b": "A forensic declaration by God, unilaterally crediting Christ's perfect righteousness to the elect, establishing their justified standing before the divine court.",
+      "c": "A profound, unitive spiritual encounter with the divine, often attained through ascetic practices and deep meditative states, leading to an experience of God's presence.",
       "d": "An organic, spiritual, and indissoluble bond between Christ and the believer, through the Holy Spirit, encompassing all benefits of salvation."
     },
     "correct": "d",
@@ -576,10 +576,10 @@
   {
     "question": "The doctrine of 'plenary verbal inspiration' means that:",
     "options": {
-      "a": "Only the overall message or main ideas of Scripture are inspired by God.",
-      "b": "Scripture is inspired in its moral teachings, but not necessarily in its historical or scientific details.",
+      "a": "The divine inspiration primarily ensures the theological truth and salvific message of the Bible, rather than its precise historical or scientific accuracy in every detail.",
+      "b": "The Bible's inspiration guarantees the infallibility of its ethical and spiritual guidance, while allowing for potential human error in secondary matters like history or natural science.",
       "c": "The Holy Spirit inspired the human authors in such a way that every word of the original autographs is God's Word, without error.",
-      "d": "God dictated every word of Scripture to the human authors, who acted as passive scribes."
+      "d": "God verbally transmitted each word of the biblical text directly to the human writers, who merely transcribed the divine message without personal input or stylistic influence."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -606,7 +606,7 @@
     "options": {
       "a": "The universal church as the body of Christ",
       "b": "The consubstantial Trinity (God as three persons in one substance)",
-      "c": "The resurrection of the body",
+      "c": "The physical resurrection of all believers for eternal life with God",
       "d": "The two natures of Christ (fully God and fully man)"
     },
     "correct": "b",
@@ -660,10 +660,10 @@
   {
     "question": "The concept of 'mixed body' (corpus permixtum) in Augustine's ecclesiology refers to:",
     "options": {
-      "a": "The church's mission to all nations, mixing different cultures.",
+      "a": "The church's universal call to integrate diverse peoples and languages into one spiritual body.",
       "b": "The presence of both true believers and hypocrites within the visible church.",
-      "c": "The unity of the divine and human natures in Christ.",
-      "d": "The church's composition of both male and female members."
+      "c": "The mystical blending of the divine essence and human will in the process of sanctification.",
+      "d": "The spiritual communion of believers and the saints in heaven, forming one mystical body."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -689,9 +689,9 @@
     "question": "In classical Amillennialism, the 'binding of Satan' (Revelation 20:1-3) is understood to refer to:",
     "options": {
       "a": "Satan's limited power during Christ's earthly ministry and the present church age, preventing him from deceiving the nations concerning the gospel.",
-      "b": "A future literal event preceding the millennium.",
-      "c": "A metaphorical description of the ultimate victory of good over evil.",
-      "d": "Satan's complete incapacitation until the final judgment."
+      "b": "A future literal binding of Satan in the abyss for a thousand years, allowing for an earthly golden age before the final resurrection and judgment.",
+      "c": "A symbolic representation of the church's spiritual authority over demonic forces, progressively diminishing Satan's influence through the spread of the gospel.",
+      "d": "Satan's complete and permanent defeat through Christ's atoning work, rendering him powerless to tempt believers or hinder God's sovereign purposes for redemption."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -702,9 +702,9 @@
   {
     "question": "The Heidelberg Catechism famously begins with Q&A 1, asking: 'What is your only comfort in life and in death?' What is the essence of its answer?",
     "options": {
-      "a": "That God has chosen me for salvation through Christ.",
-      "b": "That I have been justified by faith alone in Christ alone.",
-      "c": "That the Holy Spirit indwells me and guarantees my perseverance.",
+      "a": "That God, in His eternal counsel, has graciously chosen me for salvation through the atoning work of Jesus Christ, His only Son.",
+      "b": "That I am declared righteous before God solely by His grace through faith in the perfect obedience and sacrifice of Jesus Christ, my Lord.",
+      "c": "That the Holy Spirit, the Comforter, indwells me, empowering me for good works and guaranteeing my secure perseverance in faith until the day of Christ's return.",
       "d": "That I am not my own, but belong—body and soul, in life and in death—to my faithful Savior Jesus Christ."
     },
     "correct": "d",
@@ -730,9 +730,9 @@
   {
     "question": "Which of the following best describes the 'historical-critical method' of biblical interpretation?",
     "options": {
-      "a": "It critically evaluates the ethical teachings of the Bible against modern moral standards.",
-      "b": "It interprets the Bible as a collection of historical documents, denying any divine inspiration.",
-      "c": "It prioritizes the spiritual and allegorical meaning of the text over its literal historical meaning.",
+      "a": "It primarily functions to critically evaluate the ethical and moral teachings found within the biblical narratives according to contemporary societal values and norms.",
+      "b": "It views the Bible exclusively as a collection of ancient human documents, analyzing them with scholarly rigor but inherently denying their divine origin or supernatural inspiration.",
+      "c": "It predominantly focuses on uncovering the deeper spiritual and allegorical meanings of the biblical text, often subordinating its literal historical claims to symbolic interpretations.",
       "d": "It seeks to understand the text in light of its original historical, cultural, and literary contexts, often employing critical tools."
     },
     "correct": "d",
@@ -758,10 +758,10 @@
   {
     "question": "In Molinism, how is divine foreknowledge reconciled with human free will?",
     "options": {
-      "a": "Human free will is an illusion, and all events are causally determined by God's will.",
+      "a": "Human free will is ultimately an illusion, as all events, including human choices, are meticulously and causally determined by God's omnipotent and sovereign will.",
       "b": "God knows what free creatures *would* do in any given circumstance (middle knowledge), and His decrees are based on this knowledge.",
-      "c": "God decrees all future events, including human choices, without coercion.",
-      "d": "God's foreknowledge is limited to what He has predetermined, not what free agents will choose."
+      "c": "God's eternal decrees encompass all future events, including the free choices of humanity, which He ordains to come to pass without compelling the will.",
+      "d": "God's knowledge of future free actions is restricted to what He has chosen to determine, meaning He does not know truly undetermined future human choices."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -772,10 +772,10 @@
   {
     "question": "The 'regulative principle of worship,' characteristic of some Reformed churches, asserts that:",
     "options": {
-      "a": "All elements of worship not explicitly forbidden by Scripture are permissible.",
+      "a": "All elements of worship not specifically forbidden by the clear teaching of Holy Scripture are permissible, allowing for Christian liberty in practice.",
       "b": "Only those elements of worship explicitly commanded or clearly derived from Scripture are permissible.",
-      "c": "The Holy Spirit directly dictates the form and content of worship services.",
-      "d": "Worship should be regulated by the traditions of the early church fathers."
+      "c": "The Holy Spirit directly inspires and dictates the specific forms and content of worship services for each congregation, leading to diverse practices.",
+      "d": "Worship practices ought to be primarily regulated and guided by the established traditions and liturgical forms handed down from the early church fathers."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -814,9 +814,9 @@
   {
     "question": "Karl Rahner, a prominent 20th-century Catholic theologian, developed the concept of 'anonymous Christians.' What does this concept suggest?",
     "options": {
-      "a": "That only those who explicitly confess Christ can be saved, but their identity remains anonymous to the Church.",
-      "b": "That Christianity is the only true religion, and all others are false paths to God.",
-      "c": "That all non-Christians are implicitly Christian, regardless of their beliefs, due to general revelation.",
+      "a": "That salvation is exclusively for those who explicitly confess Christ as Lord, though their personal identity may remain unknown to the visible Church.",
+      "b": "That Christianity stands as the singular, divinely revealed true religion, and all other religious paths are ultimately insufficient for salvation or knowledge of God.",
+      "c": "That all humanity is implicitly Christian by virtue of creation and general revelation, meaning their beliefs are Christian in essence, even if unrecognized.",
       "d": "That individuals who, through no fault of their own, do not explicitly know Christ but live according to God's grace in their conscience, can still be saved."
     },
     "correct": "d",
@@ -842,9 +842,9 @@
   {
     "question": "In what specific way did the Council of Orange (529 AD) affirm Augustine's teachings on grace, particularly against semi-Pelagianism?",
     "options": {
-      "a": "It stated that baptism automatically regenerates and saves individuals, regardless of their subsequent actions.",
-      "b": "It affirmed irresistible grace and limited atonement.",
-      "c": "It denied the concept of original sin, emphasizing human free will.",
+      "a": "It affirmed that sacramental baptism is the sole and sufficient means of regeneration, automatically conferring salvation irrespective of personal faith or subsequent works.",
+      "b": "It unequivocally affirmed the doctrines of irresistible grace and limited atonement, establishing the full scope of Augustinian predestination.",
+      "c": "It explicitly denied the Augustinian doctrine of original sin, asserting that human free will remains entirely uncorrupted and capable of initiating salvation.",
       "d": "It declared that the beginning of faith and salvation is an unmerited gift of God, rejecting human initiative."
     },
     "correct": "d",
@@ -856,10 +856,10 @@
   {
     "question": "The concept of 'sola Scriptura' does NOT imply which of the following?",
     "options": {
-      "a": "Scripture is the sole infallible rule of faith and practice.",
+      "a": "Scripture, as the inspired Word of God, stands as the sole infallible rule and ultimate authority for all matters of faith, doctrine, and Christian practice.",
       "b": "Individual believers can interpret Scripture entirely independently of the church or tradition.",
-      "c": "Scripture is sufficiently clear on all matters necessary for salvation.",
-      "d": "Tradition can be helpful but is always subordinate to Scripture."
+      "c": "Scripture is inherently clear and understandable (perspicuous) in all essential doctrines and matters necessary for salvation, accessible to all believers.",
+      "d": "Tradition, though valuable for historical insight and understanding, is always to be evaluated by and remain subordinate to the supreme authority of Scripture."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -885,9 +885,9 @@
     "question": "Jonathan Edwards, a key figure in the Great Awakening, is famous for his philosophical-theological defense of:",
     "options": {
       "a": "Determinism and the absolute sovereignty of God",
-      "b": "Open theism and libertarian free will",
-      "c": "Dualistic metaphysics (mind-body split)",
-      "d": "Utilitarian ethics"
+      "b": "Open theism, emphasizing God's limited foreknowledge, alongside the concept of absolute libertarian free will for humanity.",
+      "c": "A robust dualistic metaphysics, positing a fundamental separation and distinctness between the human mind and physical body.",
+      "d": "A comprehensive system of utilitarian ethics, where moral actions are judged solely by their outcomes in maximizing overall happiness."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -926,10 +926,10 @@
   {
     "question": "What is the core distinction between 'forensic justification' (Protestant) and 'infused justification' (Roman Catholic)?",
     "options": {
-      "a": "Forensic justification refers to the initial act of salvation, while infused justification refers to subsequent sanctification.",
-      "b": "Forensic justification is a process, while infused justification is a single event.",
+      "a": "Forensic justification describes the initial moment of salvation, whereas infused justification details the ongoing, progressive process of sanctification in a believer's life.",
+      "b": "Forensic justification is understood as a continuous process of God's grace, while infused justification is a singular, decisive event of receiving righteousness.",
       "c": "Forensic justification is God's declarative act of righteousness, while infused justification is an internal transformation making one righteous.",
-      "d": "Forensic justification is based on human merit, while infused justification is based on divine grace."
+      "d": "Forensic justification is grounded in human works and merit, whereas infused justification is entirely a gracious gift of God, independent of human effort."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1025,9 +1025,9 @@
     "question": "Gregory of Nyssa, one of the Cappadocian Fathers, made significant contributions to Trinitarian theology by emphasizing:",
     "options": {
       "a": "The distinct personal properties (hypostases) of the Father, Son, and Holy Spirit within the one divine essence (ousia).",
-      "b": "The strict unity of God to the exclusion of distinct persons.",
-      "c": "The creation of the Son by the Father as a lesser divine being.",
-      "d": "The subordination of the Son to the Father."
+      "b": "The singular divine person of God, manifesting as Father, Son, and Spirit in different modes or roles.",
+      "c": "The teaching that the Son was created by the Father as a being subordinate in nature, not co-eternal or co-equal.",
+      "d": "The hierarchical ordering within the Godhead where the Son is subordinate in essence or being to the Father."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1052,10 +1052,10 @@
   {
     "question": "The concept of 'active obedience of Christ' in Reformed theology refers to:",
     "options": {
-      "a": "Christ's willing submission to the cross and suffering for sins.",
+      "a": "Christ's sacrificial death on the cross, enduring God's wrath and suffering the penalty for human sin.",
       "b": "Christ's perfect conformity to the Law of God throughout His earthly life, which is imputed to believers.",
-      "c": "Christ's active role in empowering believers to obey God's commands.",
-      "d": "Christ's obedience to the Father's will in His pre-incarnate state."
+      "c": "Christ's ongoing work through the Holy Spirit to enable and strengthen believers for righteous living.",
+      "d": "Christ's submission to the Father's plan for redemption even before His incarnation and earthly ministry."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1108,10 +1108,10 @@
   {
     "question": "The theological controversy surrounding the 'Arian controversy' centered on the nature of the Son. Arius taught that the Son was:",
     "options": {
-      "a": "Merely a manifestation of the Father.",
+      "a": "One of three temporary modes or roles through which the singular divine person of God reveals himself.",
       "b": "A created being, subordinate to the Father, though divine.",
-      "c": "Fully human but not divine.",
-      "d": "Co-eternal and co-equal with the Father."
+      "c": "A human being adopted by God at his baptism or resurrection, lacking inherent divinity.",
+      "d": "Co-eternal and of the same divine substance (homoousios) with the Father, sharing full deity."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1136,10 +1136,10 @@
   {
     "question": "The concept of 'analogia fidei' (analogy of faith) in biblical interpretation refers to the principle that:",
     "options": {
-      "a": "Faith is necessary to understand any aspect of Scripture.",
+      "a": "The spiritual understanding of Scripture is only accessible through the illuminating work of the Holy Spirit in a believer's heart.",
       "b": "Difficult passages of Scripture should be interpreted in light of clearer passages, ensuring consistency with the overall teaching of Scripture.",
-      "c": "Scripture should be interpreted in light of the consensus of the church fathers.",
-      "d": "Scripture's primary purpose is to build up faith, not provide historical facts."
+      "c": "The interpretation of biblical texts must always be guided by the authoritative traditions and doctrines established by the early Church.",
+      "d": "The primary aim of biblical revelation is to nurture personal piety and devotion, rather than to convey historical or scientific data."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1178,10 +1178,10 @@
   {
     "question": "In theological discussions of hell, what is 'annihilationism' or 'conditional immortality'?",
     "options": {
-      "a": "The belief that all people will eventually be saved (universalism).",
+      "a": "The theological position affirming that all rational beings will ultimately be reconciled to God and attain salvation.",
       "b": "The belief that the wicked will be utterly destroyed or cease to exist after judgment, rather than enduring eternal torment.",
-      "c": "The belief that hell is a temporary purgatorial state.",
-      "d": "The belief that the wicked will suffer eternal conscious torment."
+      "c": "The doctrine that hell serves as a temporal state of purification for the souls of the unrighteous before their final redemption.",
+      "d": "The traditional view that the unsaved will experience endless, conscious suffering and punishment in hell."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1234,10 +1234,10 @@
   {
     "question": "Joseph Smith is the founder of which religious movement, claiming to restore lost doctrines and practices of early Christianity?",
     "options": {
-      "a": "Christian Science",
-      "b": "Seventh-day Adventism",
+      "a": "The Church of Christ, Scientist, which teaches that spiritual healing comes through understanding divine truth.",
+      "b": "The Adventist Church, known for its emphasis on the Sabbath, health principles, and the second coming of Christ.",
       "c": "The Church of Jesus Christ of Latter-day Saints (Mormonism)",
-      "d": "Jehovah's Witnesses"
+      "d": "The Watchtower Bible and Tract Society, which rejects the Trinity and believes in a coming earthly paradise."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1277,9 +1277,9 @@
     "question": "Which of the following is NOT typically considered a feature of the 'Great Tribulation' in dispensational eschatology?",
     "options": {
       "a": "The widespread conversion of Gentiles to Christianity, leading to the full ingathering of the nations before Christ's return.",
-      "b": "A seven-year period of unprecedented global distress.",
-      "c": "The Antichrist's reign and persecution of saints.",
-      "d": "The outpouring of God's wrath upon the earth."
+      "b": "A future seven-year period marked by intense global tribulation, suffering, and divine judgment on the world.",
+      "c": "The rise of a powerful, deceptive world leader who persecutes believers and demands worship during the latter days.",
+      "d": "Divine judgments unleashed upon humanity, including plagues and natural disasters, as described in the book of Revelation."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1291,9 +1291,9 @@
     "question": "In his work *On Christian Liberty*, Martin Luther famously argued for 'the freedom of a Christian.' What was the essence of this freedom?",
     "options": {
       "a": "Freedom from the necessity of earning salvation through works, yet bound to serve one's neighbor in love.",
-      "b": "Freedom to interpret Scripture independently of any ecclesiastical authority.",
-      "c": "Freedom from all moral laws and obligations.",
-      "d": "Freedom to choose one's own religious beliefs without coercion."
+      "b": "The right of every believer to read and interpret the Holy Scriptures for themselves, guided by the Holy Spirit.",
+      "c": "A release from the moral law and ethical responsibilities, as believers are no longer under condemnation or legalistic demands.",
+      "d": "The liberty of conscience to individually select and adhere to one's preferred theological doctrines, unhindered by external pressure."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1332,9 +1332,9 @@
   {
     "question": "The theological concept of 'appropriation' within Trinitarian doctrine refers to:",
     "options": {
-      "a": "The process by which the Holy Spirit applies the benefits of Christ's work to believers.",
-      "b": "The belief that humans can appropriate divine attributes through spiritual disciplines.",
-      "c": "The proper way to approach and worship each Person of the Trinity.",
+      "a": "The subjective experience of salvation where the Holy Spirit makes effective the atoning work of Christ in an individual's life.",
+      "b": "The spiritual practice of drawing closer to God to partake in divine nature and receive supernatural grace through mystical union.",
+      "c": "The appropriate manner of offering praise and reverence to each distinct Person of the Godhead in accordance with their divine roles.",
       "d": "The attribution of certain divine works or characteristics predominantly to one Person of the Trinity, while acknowledging all three are involved."
     },
     "correct": "d",
@@ -1374,9 +1374,9 @@
   {
     "question": "In traditional Reformed theology, what is the proper relationship between justification and sanctification?",
     "options": {
-      "a": "Justification is an internal process that leads to sanctification.",
-      "b": "Justification and sanctification are essentially the same process, differing only in terminology.",
-      "c": "Sanctification is a prerequisite for justification.",
+      "a": "Justification is an internal process that leads to sanctification, primarily through the Holy Spirit's work within the believer.",
+      "b": "Justification and sanctification are essentially the same process, differing only in terminology and the outward manifestation of grace.",
+      "c": "Sanctification is a prerequisite for justification, demonstrating a changed life before God grants forgiveness of sins.",
       "d": "Justification is a forensic act that initiates the process of sanctification, but they are distinct benefits of union with Christ."
     },
     "correct": "d",
@@ -1402,9 +1402,9 @@
   {
     "question": "The term 'impassibility' when applied to God in classical theology primarily means that God:",
     "options": {
-      "a": "Is beyond human comprehension and therefore unaffected by human actions.",
-      "b": "Does not experience pain or pleasure like humans do.",
-      "c": "Cannot feel emotions or suffer in any way.",
+      "a": "Is beyond human comprehension and therefore unaffected by human actions, remaining eternally transcendent above creation.",
+      "b": "Does not experience pain or pleasure like humans do, maintaining a divine emotional state distinct from created beings.",
+      "c": "Cannot feel emotions or suffer in any way, as any change would imply imperfection or dependence upon creation.",
       "d": "Is incapable of being overwhelmed by suffering or changing due to external influences."
     },
     "correct": "d",
@@ -1487,9 +1487,9 @@
     "question": "Which of the following best characterizes the theological concept of 'adoptionism' regarding Christ?",
     "options": {
       "a": "Jesus was a human being who was 'adopted' by God as His Son at His baptism or resurrection, not divine by nature.",
-      "b": "The Holy Spirit adopts believers into Christ's body at conversion.",
-      "c": "God adopted humanity into His family through Christ's sacrifice.",
-      "d": "The Father adopted the Son as His co-equal in eternity."
+      "b": "The Holy Spirit adopts believers into Christ's body at conversion, granting them the full rights and privileges of sons and daughters.",
+      "c": "God adopted humanity into His family through Christ's sacrifice, thereby making them heirs to the kingdom of heaven and eternal life.",
+      "d": "The Father adopted the Son as His co-equal in eternity, establishing a unique and eternal relationship within the Godhead."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1514,10 +1514,10 @@
   {
     "question": "What is the primary function of the 'hypostatic union' in orthodox Christology?",
     "options": {
-      "a": "To define the process by which God became human at the incarnation.",
-      "b": "To distinguish Christ's divine nature from the Father's divine nature.",
+      "a": "To define the process by which God became human at the incarnation, taking on flesh without ceasing to be divine.",
+      "b": "To distinguish Christ's divine nature from the Father's divine nature, asserting His full deity while maintaining distinct personhood.",
       "c": "To describe the complete and inseparable union of Christ's divine and human natures in one person.",
-      "d": "To explain the relationship between the three persons of the Trinity."
+      "d": "To explain the relationship between the three persons of the Trinity, emphasizing their co-equality and co-eternality in essence."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1557,9 +1557,9 @@
     "question": "The term 'theosis' or 'deification' in Eastern Orthodox theology primarily refers to:",
     "options": {
       "a": "The process of transformation into the likeness of God through participation in divine life by grace.",
-      "b": "The belief that humans can become divine in their essence, like God.",
-      "c": "The divine nature of Christ becoming fully human at the incarnation.",
-      "d": "The worship of God as the ultimate divine being."
+      "b": "The belief that humans can become divine in their essence, sharing in God's attributes and power through spiritual discipline.",
+      "c": "The divine nature of Christ becoming fully human at the incarnation, uniting the two natures without confusion or separation.",
+      "d": "The worship of God as the ultimate divine being, acknowledging His sovereignty and unique status as Creator of all things."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1612,10 +1612,10 @@
   {
     "question": "What is the primary argument of the 'recapitulation theory' of the atonement, often associated with Irenaeus?",
     "options": {
-      "a": "Christ's life served as a moral example for believers to follow.",
-      "b": "Christ's death paid a ransom to Satan for humanity.",
+      "a": "Christ's life served as a moral example for believers to follow, demonstrating the path to righteousness and true discipleship.",
+      "b": "Christ's death paid a ransom to Satan for humanity, freeing them from the bondage of sin and eternal condemnation.",
       "c": "Christ's perfect obedience and life 'summed up' and reversed the disobedience of Adam, inaugurating a new humanity.",
-      "d": "Christ's death satisfied the just demands of God's law."
+      "d": "Christ's death satisfied the just demands of God's law, appeasing divine wrath and providing propitiation for human sin."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1640,10 +1640,10 @@
   {
     "question": "Which of the following terms describes the Roman Catholic teaching that sacraments are effective 'ex opere operato'?",
     "options": {
-      "a": "Their efficacy depends on the moral purity of the minister.",
-      "b": "Their efficacy is purely symbolic and depends on God's direct act.",
+      "a": "Their efficacy depends on the moral purity of the minister, as only a righteous priest can consecrate valid sacraments.",
+      "b": "Their efficacy is purely symbolic and depends on God's direct act, rather than any inherent power within the physical elements.",
       "c": "Their efficacy is inherent in the sacrament itself, independent of the minister or recipient's faith (though faith is needed for beneficial reception).",
-      "d": "Their efficacy depends on the faith of the recipient."
+      "d": "Their efficacy depends on the faith of the recipient, as without saving faith, the sacraments offer no spiritual benefit."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1668,10 +1668,10 @@
   {
     "question": "The doctrine of 'common grace' in Reformed theology refers to:",
     "options": {
-      "a": "Saving grace offered to all humanity.",
+      "a": "Saving grace offered to all humanity, enabling every individual to respond to the gospel message and receive eternal life.",
       "b": "God's general benevolence and restraint of sin in the world, extended to all people, elect and non-elect.",
-      "c": "The grace of the Holy Spirit given to all believers to perform good works.",
-      "d": "The grace shared by all members of the Christian community through the sacraments."
+      "c": "The grace of the Holy Spirit given to all believers to perform good works, empowering them for sanctification and service to God.",
+      "d": "The grace shared by all members of the Christian community through the sacraments, uniting them in Christ's body and spiritual blessings."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1682,10 +1682,10 @@
   {
     "question": "The 'moral government theory' of the atonement, often associated with Hugo Grotius, argues that Christ's death was primarily a:",
     "options": {
-      "a": "Ransom paid to Satan to free humanity.",
+      "a": "Ransom paid to Satan to free humanity, thereby conquering the power of evil and securing redemption for believers.",
       "b": "Demonstration of God's wrath against sin, establishing God's moral governance.",
-      "c": "Satisfaction of God's justice through substitution.",
-      "d": "Moral influence to inspire love and repentance."
+      "c": "Satisfaction of God's justice through substitution, where Christ bore the penalty for human sin in our place.",
+      "d": "Moral influence to inspire love and repentance, demonstrating God's sacrificial love to draw humanity into a changed life."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1696,9 +1696,9 @@
   {
     "question": "Which of the following is most associated with the theological position known as 'open theism'?",
     "options": {
-      "a": "God has predetermined all events, making the future entirely closed.",
-      "b": "God's knowledge is limited to past and present, not the future.",
-      "c": "God's knowledge of the future is exhaustive, including all free choices.",
+      "a": "God has eternally decreed all events, both good and evil, making the future entirely closed to genuine change.",
+      "b": "God's knowledge is primarily limited to past and present actions, as the future remains truly undetermined by Him.",
+      "c": "God's knowledge of all future events is exhaustive, encompassing every free choice and action of His creation.",
       "d": "God knows all future possibilities, but the future is partly 'open' as He genuinely responds to creaturely choices."
     },
     "correct": "d",
@@ -1710,10 +1710,10 @@
   {
     "question": "The 'Macedonian heresy' (Pneumatomachianism) specifically denied the full divinity of which person of the Trinity?",
     "options": {
-      "a": "All three persons",
-      "b": "The Son",
+      "a": "All persons of the Trinity",
+      "b": "The Son of God",
       "c": "The Holy Spirit",
-      "d": "The Father"
+      "d": "The Father Almighty"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1724,9 +1724,9 @@
   {
     "question": "What is the key difference between 'amillennialism' and 'postmillennialism' concerning the millennium?",
     "options": {
-      "a": "Amillennialism believes in no millennium, while postmillennialism believes in a future literal millennium.",
-      "b": "Amillennialism denies the spiritual reign of Christ, while postmillennialism affirms it.",
-      "c": "Amillennialism believes Christ returns after the millennium, while postmillennialism believes He returns before.",
+      "a": "Amillennialism posits no literal millennium, whereas postmillennialism anticipates a future thousand-year reign after Christ's return.",
+      "b": "Amillennialism rejects Christ's current spiritual reign on earth, while postmillennialism emphasizes its eventual universal triumph.",
+      "c": "Amillennialism asserts Christ's return will initiate the millennium, while postmillennialism expects His return at the millennium's end.",
       "d": "Amillennialism sees the millennium as the present church age, while postmillennialism sees it as a future golden age before Christ's return."
     },
     "correct": "d",
@@ -1738,10 +1738,10 @@
   {
     "question": "The doctrine of 'total depravity' in Calvinism means that humans are:",
     "options": {
-      "a": "Unable to do any good whatsoever.",
+      "a": "So corrupted by sin that they are utterly incapable of performing any truly good or righteous act in God's sight.",
       "b": "Affected by sin in every part of their being, rendering them unable to save themselves.",
-      "c": "As evil as they could possibly be.",
-      "d": "Inherently evil and deserving of damnation without any possibility of redemption."
+      "c": "Completely and utterly depraved in their actions, making them as evil as humanly possible in their daily lives.",
+      "d": "Entirely enslaved by sin, resulting in a complete inability to choose God or desire spiritual good without divine intervention."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1752,9 +1752,9 @@
   {
     "question": "Which of the following is a primary characteristic of 'process theology'?",
     "options": {
-      "a": "God is immutable and unaffected by creation.",
-      "b": "God's will is the sole determining factor in all events, eliminating creaturely freedom.",
-      "c": "God is entirely transcendent and separate from the world.",
+      "a": "God is entirely transcendent and utterly immutable, remaining completely unaffected by the events or choices within creation.",
+      "b": "God's sovereign will is the absolute determining factor in all events, thereby negating any genuine creaturely freedom or contingency.",
+      "c": "God is wholly separate from the world, maintaining a purely transcendent existence without any immanent involvement in its processes.",
       "d": "God is in a dynamic, evolving relationship with the world, changing and growing with it."
     },
     "correct": "d",
@@ -1766,10 +1766,10 @@
   {
     "question": "In the context of the Reformation, the term 'adiaphora' referred to:",
     "options": {
-      "a": "Specific liturgical forms mandated by the Reformers.",
-      "b": "Core doctrines essential for salvation.",
+      "a": "Specific liturgical forms or ceremonial regulations that were strictly mandated by the Reformers for church worship.",
+      "b": "Foundational theological principles or core doctrines considered absolutely essential for an individual's salvation and faith.",
       "c": "Practices or beliefs not commanded or forbidden by Scripture, and thus indifferent.",
-      "d": "Heresies that threatened the purity of the gospel."
+      "d": "Grave theological errors or heresies that posed a significant threat to the purity and integrity of the gospel message."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1780,10 +1780,10 @@
   {
     "question": "The doctrine of 'Apollinarianism,' condemned at the First Council of Constantinople, taught that Christ:",
     "options": {
-      "a": "Had two distinct persons, one divine and one human.",
-      "b": "Was only divine, with a phantom human body.",
+      "a": "Possessed two entirely distinct and separate persons, one fully divine and the other fully human, loosely conjoined.",
+      "b": "Was solely divine in nature, merely appearing to have a human body that was not truly physical or substantial.",
       "c": "Had a human body and soul, but a divine mind (Logos) instead of a human mind.",
-      "d": "Was a human being adopted by God at His baptism."
+      "d": "Was merely a human being who was later adopted by God as His Son at the moment of His baptism or resurrection."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1822,10 +1822,10 @@
   {
     "question": "The concept of 'eschatological reversal' in biblical theology refers to:",
     "options": {
-      "a": "The temporary defeat of God's people before ultimate victory.",
-      "b": "A cyclical view of history where events repeat themselves.",
+      "a": "The concept of a temporary spiritual defeat or suffering for God's people before their eventual and ultimate triumph.",
+      "b": "A philosophical perspective on history where major events and patterns are believed to continually repeat themselves over time.",
       "c": "The idea that the last will be first, and the first last, in the Kingdom of God.",
-      "d": "The reversal of God's original plan due to human sin."
+      "d": "The theological notion that God's perfect original plan was completely overturned or altered due to the fall of humanity."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1850,10 +1850,10 @@
   {
     "question": "The 'Second Helvetic Confession' (1566) is a foundational doctrinal statement for which Protestant tradition?",
     "options": {
-      "a": "Anabaptism",
-      "b": "Lutheranism",
+      "a": "Anabaptist (Radical Reformation)",
+      "b": "Lutheran (Germanic Protestantism)",
       "c": "Reformed (Continental)",
-      "d": "Anglicanism"
+      "d": "Anglican (English Reformation)"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1865,9 +1865,9 @@
     "question": "What is the primary significance of the term 'homoousios' (of the same substance) in the Nicene Creed?",
     "options": {
       "a": "It clarified that Christ shares the exact same divine essence as the Father, refuting Arianism.",
-      "b": "It declared the Holy Spirit to be of the same substance as the Father and Son.",
-      "c": "It affirmed the distinct personhood of the Father, Son, and Holy Spirit.",
-      "d": "It emphasized the unity of Christ's divine and human natures."
+      "b": "It formally declared the Holy Spirit to possess the identical divine substance as both the Father and the Son.",
+      "c": "It rigorously affirmed the distinct and separate personhood of the Father, Son, and Holy Spirit within the Trinity.",
+      "d": "It strongly emphasized the inseparable unity of Christ's two natures, both fully divine and truly human, in one person."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1878,9 +1878,9 @@
   {
     "question": "The doctrine of 'creation ex nihilo' (creation out of nothing) primarily emphasizes:",
     "options": {
-      "a": "God created the world through natural evolutionary processes.",
-      "b": "God creates continually, maintaining the universe moment by moment.",
-      "c": "God created the world from pre-existing chaotic matter.",
+      "a": "God's ongoing involvement in the world through natural and gradual evolutionary processes.",
+      "b": "God's continuous work of sustaining and maintaining the entire universe in every moment.",
+      "c": "God's formation of the cosmos from pre-existing, unformed, and chaotic primordial matter.",
       "d": "God's absolute sovereignty and power in bringing the universe into existence without any prior material."
     },
     "correct": "d",
@@ -1906,9 +1906,9 @@
   {
     "question": "Which of the following describes the 'Christological controversy' of Nestorianism?",
     "options": {
-      "a": "It denied the divinity of Christ, asserting He was merely human.",
-      "b": "It taught that Christ had only one divine nature.",
-      "c": "It denied the humanity of Christ, asserting He only appeared human.",
+      "a": "It asserted that Christ was merely a created being, not truly divine, and subordinate to God the Father.",
+      "b": "It maintained that Christ possessed only a single, divine nature, absorbing His human nature entirely.",
+      "c": "It contended that Christ's human body was an illusion, denying His true physical and material humanity.",
       "d": "It taught that Christ was two separate persons (divine and human) rather than one person with two natures."
     },
     "correct": "d",
@@ -1962,10 +1962,10 @@
   {
     "question": "The term 'imago Dei' (image of God) in classical theology primarily refers to:",
     "options": {
-      "a": "The physical resemblance of humanity to God.",
-      "b": "The collective image of the church as the body of Christ.",
+      "a": "The outward physical form and bodily characteristics shared by humanity and God Himself.",
+      "b": "The unified spiritual presence and collective representation of believers within the church.",
       "c": "Humanity's spiritual, rational, and moral capacities that reflect God's nature.",
-      "d": "The ability of humanity to achieve perfection through good works."
+      "d": "The inherent potential for humanity to achieve moral and spiritual perfection through righteous deeds."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1976,10 +1976,10 @@
   {
     "question": "In Reformed theology, the 'Power of Jurisdiction' (potestas iurisdictionis) refers to the church's authority to:",
     "options": {
-      "a": "Administer the sacraments.",
+      "a": "Rightly administer the sacred sacraments and conduct public worship services.",
       "b": "Exercise church discipline and govern its affairs.",
-      "c": "Preach the Gospel and teach doctrine.",
-      "d": "Influence civil laws and policies."
+      "c": "Authoritatively preach the Gospel, interpret Scripture, and teach sound doctrine.",
+      "d": "Legitimately influence and shape the civil laws and governmental policies of the state."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2019,9 +2019,9 @@
     "question": "The doctrine of 'particular providence' means that God's governance extends to:",
     "options": {
       "a": "All events, great and small, and all creatures without exception.",
-      "b": "Only the elect, guiding them to salvation.",
-      "c": "Only major historical events, not individual lives.",
-      "d": "Natural laws, but not human free will."
+      "b": "Only the chosen elect, specifically guiding their lives towards eternal salvation.",
+      "c": "Primarily major historical milestones and societal developments, not personal individual choices.",
+      "d": "The established natural laws of the universe, but not the free moral choices of humanity."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2032,10 +2032,10 @@
   {
     "question": "In Roman Catholic theology, the term 'merit' primarily refers to:",
     "options": {
-      "a": "The merit of Christ alone, which is imputed to believers.",
+      "a": "The perfect righteousness and sacrificial atonement of Christ, which is credited to faithful believers.",
       "b": "A claim to reward that arises from good works performed by grace, entitling a person to eternal life.",
-      "c": "A reward given by God solely based on His grace, unrelated to human action.",
-      "d": "The inherent goodness of humanity, even after the Fall."
+      "c": "A divine favor and unearned gift from God, bestowed independently of any human performance or deeds.",
+      "d": "The intrinsic moral worth and natural goodness retained by humanity, even following the Fall of Adam."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2102,10 +2102,10 @@
   {
     "question": "The term 'monergism' in soteriology refers to the belief that:",
     "options": {
-      "a": "Only one God is involved in salvation.",
-      "b": "Salvation is primarily the result of human free will.",
+      "a": "The process of salvation is exclusively performed by one divine person of the Trinity alone.",
+      "b": "Salvation primarily originates from and depends upon the exercise of human free will and choice.",
       "c": "Salvation is entirely the work of God, without human cooperation.",
-      "d": "Salvation is a cooperative effort between God and humanity."
+      "d": "Salvation is a cooperative and joint effort involving both God's grace and human response."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2172,10 +2172,10 @@
   {
     "question": "In dispensational theology, the 'Church Age' is understood as:",
     "options": {
-      "a": "A fulfillment of Old Testament prophecies for Israel.",
+      "a": "The direct fulfillment of specific Old Testament prophecies concerning the restoration of Israel.",
       "b": "A parenthetical period between God's dealings with Israel, not directly prophesied in the Old Testament.",
-      "c": "The final stage of salvation history before the new heavens and new earth.",
-      "d": "A continuation of God's covenant with Abraham."
+      "c": "The ultimate and final era of God's redemptive plan before Christ's eternal kingdom.",
+      "d": "A direct and unbroken continuation of God's eternal covenant promises made to Abraham."
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2200,10 +2200,10 @@
   {
     "question": "The 'ontological argument' for God's existence attempts to prove God's existence from:",
     "options": {
-      "a": "The necessity of a first cause.",
-      "b": "Universal human experience of morality.",
+      "a": "The absolute necessity of an uncaused first cause for all contingent existence.",
+      "b": "The widespread and inherent human awareness of objective moral laws and duties.",
       "c": "The very concept or definition of God as a perfect being.",
-      "d": "The order and design of the universe."
+      "d": "The intricate order, complex design, and purposeful nature observed in the cosmos."
     },
     "correct": "c",
     "type": "multiple_choice",

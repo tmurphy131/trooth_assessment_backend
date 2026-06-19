@@ -72,10 +72,10 @@
   {
     "question": "To which king did Abraham famously lie about his wife Sarah, claiming she was his sister, and was rebuked?",
     "options": {
-      "a": "Pharaoh",
+      "a": "Pharaoh, king of Egypt",
       "b": "Abimelech of Gerar",
-      "c": "Lot",
-      "d": "Melchizedek"
+      "c": "Bera, king of Sodom",
+      "d": "Melchizedek, king of Salem"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -142,9 +142,9 @@
   {
     "question": "Which of the following was NOT one of the plagues God brought upon Egypt?",
     "options": {
-      "a": "Gnats",
-      "b": "Boils",
-      "c": "Frogs",
+      "a": "Swarm of gnats",
+      "b": "Painful skin boils",
+      "c": "Invasion of frogs",
       "d": "Fire from heaven"
     },
     "correct": "d",
@@ -156,10 +156,10 @@
   {
     "question": "How many days did Moses stay on Mount Sinai to receive the Ten Commandments the first time?",
     "options": {
-      "a": "Seven days",
-      "b": "Ten days",
+      "a": "Seven days and seven nights",
+      "b": "Ten days and ten nights",
       "c": "Forty days and forty nights",
-      "d": "Thirty days"
+      "d": "Thirty days and thirty nights"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -212,9 +212,9 @@
   {
     "question": "What was the penalty for an Israelite who had a discharge that rendered him ceremonially unclean, if he did not purify himself according to the law?",
     "options": {
-      "a": "Death",
-      "b": "Stoning",
-      "c": "Financial fine",
+      "a": "Punishable by death",
+      "b": "Stoned by the community",
+      "c": "Payment of a heavy fine",
       "d": "Cut off from the assembly"
     },
     "correct": "d",
@@ -465,9 +465,9 @@
     "question": "How many years did David reign over Judah in Hebron before becoming king over all Israel?",
     "options": {
       "a": "Seven years and six months",
-      "b": "Forty years",
-      "c": "Five years",
-      "d": "Three years"
+      "b": "Forty years and six months",
+      "c": "Five years and six months",
+      "d": "Three years and three months"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -535,9 +535,9 @@
     "question": "Which prophet predicted the death of Jeroboam's son Abijah and prophesied the downfall of Jeroboam's dynasty?",
     "options": {
       "a": "Ahijah the Shilonite",
-      "b": "Elijah",
-      "c": "Elisha",
-      "d": "Shemaiah"
+      "b": "Elijah the Tishbite",
+      "c": "Elisha the prophet",
+      "d": "Shemaiah the man of God"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -590,10 +590,10 @@
   {
     "question": "In whose field was the body of Jezebel thrown to be devoured by dogs?",
     "options": {
-      "a": "In Samaria",
-      "b": "Near Naboth's vineyard",
+      "a": "In the streets of the city of Samaria",
+      "b": "Within the boundaries of Naboth's vineyard",
       "c": "In the plot of ground at Jezreel",
-      "d": "Outside the city walls"
+      "d": "Beyond the gates of the royal palace"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -731,9 +731,9 @@
     "question": "Who were the main adversaries who opposed Nehemiah's efforts to rebuild the walls of Jerusalem?",
     "options": {
       "a": "Sanballat the Horonite, Tobiah the Ammonite, and Geshem the Arab",
-      "b": "King Artaxerxes",
-      "c": "Tattenai, Shethar-Bozenai",
-      "d": "Haman, Zeresh"
+      "b": "The officials of Samaria and the people of Ashdod",
+      "c": "Tattenai, the governor of the province Beyond the River",
+      "d": "The priests of the land and the nobles of Tekoa"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -899,9 +899,9 @@
     "question": "Proverbs 31 describes the excellent wife. What is her worth compared to?",
     "options": {
       "a": "Far more precious than jewels",
-      "b": "A king's crown",
-      "c": "Gold",
-      "d": "Many servants"
+      "b": "More valuable than all a king's treasures",
+      "c": "Rarer than the purest gold and silver",
+      "d": "A blessing surpassing many faithful servants"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -926,10 +926,10 @@
   {
     "question": "In Song of Solomon 2:1, the beloved describes herself as \"the rose of Sharon\" and what other flower?",
     "options": {
-      "a": "Rose of Jericho",
-      "b": "Hyacinth",
+      "a": "The fragrant blossom of Jericho",
+      "b": "The blossoming crocus of Sharon",
       "c": "Lily of the valleys",
-      "d": "Daffodil"
+      "d": "The beautiful flower of the garden"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1010,10 +1010,10 @@
   {
     "question": "In which town was Jeremiah commanded by God to buy a field as a sign of future hope for Judah, even while Jerusalem was under siege?",
     "options": {
-      "a": "Gibeah",
+      "a": "The town of Gibeah in Benjamin",
       "b": "Anathoth",
-      "c": "Nob",
-      "d": "Ramah"
+      "c": "The priestly city of Nob",
+      "d": "The prophetic center of Ramah"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1052,10 +1052,10 @@
   {
     "question": "In Ezekiel's vision of the dry bones, what did the bones represent?",
     "options": {
-      "a": "The armies of Babylon",
+      "a": "The defeated armies of Babylon",
       "b": "The whole house of Israel",
-      "c": "The Gentiles",
-      "d": "The righteous remnant"
+      "c": "The unfaithful nations of the Gentiles",
+      "d": "The scattered remnant of Judah"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1094,9 +1094,9 @@
   {
     "question": "How many times did Daniel pray daily, even after the decree was issued forbidding prayer to any god or man other than King Darius?",
     "options": {
-      "a": "Seven times",
-      "b": "Twice",
-      "c": "Once",
+      "a": "Seven times each and every day",
+      "b": "Two times, morning and evening",
+      "c": "Just once, in secret",
       "d": "Three times"
     },
     "correct": "d",
@@ -1108,10 +1108,10 @@
   {
     "question": "What did the writing on the wall, interpreted by Daniel for King Belshazzar, famously mean for his kingdom?",
     "options": {
-      "a": "You will conquer the known world",
-      "b": "You will rebuild Jerusalem's temple",
+      "a": "Your royal power will be established, and your dominion shall reach the ends of the earth.",
+      "b": "The Most High God has blessed you, and His favor rests upon your royal house.",
       "c": "Your kingdom has been numbered, weighed, and given to the Medes and Persians",
-      "d": "You will reign for many more years"
+      "d": "Your throne is secured for generations, and your prosperity shall know no end."
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1136,9 +1136,9 @@
   {
     "question": "What natural disaster did Joel use as a vivid metaphor for the coming judgment and devastation?",
     "options": {
-      "a": "Flood",
-      "b": "Earthquake",
-      "c": "Famine",
+      "a": "A devastating flood of waters",
+      "b": "A great and terrible earthquake",
+      "c": "A severe and widespread famine",
       "d": "A locust plague"
     },
     "correct": "d",
@@ -1164,9 +1164,9 @@
   {
     "question": "What was Amos's original occupation before being called as a prophet?",
     "options": {
-      "a": "Carpenter",
-      "b": "Scribe",
-      "c": "Fisherman",
+      "a": "A skilled carpenter and builder",
+      "b": "A learned scribe and interpreter of the law",
+      "c": "A humble fisherman from Galilee",
       "d": "Shepherd and a dresser of sycamore-fig trees"
     },
     "correct": "d",
@@ -1206,10 +1206,10 @@
   {
     "question": "How many days and nights was Jonah in the belly of the great fish?",
     "options": {
-      "a": "One day",
-      "b": "Forty days",
+      "a": "One day and one night",
+      "b": "Forty days and forty nights",
       "c": "Three days and three nights",
-      "d": "Seven days"
+      "d": "Seven days and seven nights"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1220,9 +1220,9 @@
   {
     "question": "From which small town did Micah prophesy that the ruler of Israel would come forth?",
     "options": {
-      "a": "Nazareth",
-      "b": "Capernaum",
-      "c": "Jerusalem",
+      "a": "Nazareth of Galilee",
+      "b": "Capernaum by the Sea",
+      "c": "Jerusalem of Judah",
       "d": "Bethlehem Ephrathah"
     },
     "correct": "d",
@@ -1277,9 +1277,9 @@
     "question": "What is the unique structural characteristic of the book of Habakkuk?",
     "options": {
       "a": "It is a dialogue between the prophet and God, where Habakkuk questions God's justice",
-      "b": "It is a historical narrative interspersed with poetic laments",
-      "c": "It is a series of visions interpreted by an angel",
-      "d": "It is a collection of prophetic sermons against specific nations"
+      "b": "It presents a series of prophetic oracles concerning the nations, structured as a grand epic poem.",
+      "c": "It contains a detailed account of future events, revealed through symbolic visions and heavenly interpreters.",
+      "d": "It compiles various pronouncements of judgment and restoration, delivered as fervent messages to Israel and its neighbors."
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1332,10 +1332,10 @@
   {
     "question": "In Zechariah's visions, what do the two olive trees, standing by the lampstand, represent?",
     "options": {
-      "a": "The two greatest commandments",
+      "a": "The two great laws of love for God and neighbor",
       "b": "The two anointed ones who serve the Lord of all the earth",
-      "c": "The two witnesses in Revelation",
-      "d": "The two houses of Israel and Judah"
+      "c": "The two prophetic figures prophesied in the book of Revelation",
+      "d": "The two separated kingdoms of Israel and the house of Judah"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1347,9 +1347,9 @@
     "question": "Zechariah prophesied that the Messiah would be betrayed for how many pieces of silver?",
     "options": {
       "a": "Thirty pieces of silver",
-      "b": "Fifty pieces",
-      "c": "Twenty pieces",
-      "d": "Ten pieces"
+      "b": "Fifty pieces of silver",
+      "c": "Twenty pieces of silver",
+      "d": "Ten pieces of silver"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -1556,7 +1556,7 @@
   {
     "question": "Which king of Judah was taken captive to Babylon in the first deportation, along with many nobles and craftsmen?",
     "options": {
-      "a": "Josiah",
+      "a": "Hezekiah",
       "b": "Jehoiakim",
       "c": "Zedekiah",
       "d": "Jehoiachin"
@@ -1654,10 +1654,10 @@
   {
     "question": "How many days did Esther, her maids, and all the Jews in Susa fast before she went to the king uninvited?",
     "options": {
-      "a": "Forty days",
-      "b": "One day",
+      "a": "Seven days and seven nights",
+      "b": "One day and one night",
       "c": "Three days and three nights",
-      "d": "Seven days"
+      "d": "Forty days and forty nights"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1766,9 +1766,9 @@
   {
     "question": "What was the name of Isaiah's second son, whose name means \"Speed the spoil, hasten the booty,\" a prophetic warning to Judah?",
     "options": {
-      "a": "Immanuel",
-      "b": "Jeshua",
-      "c": "Shear-Jashub",
+      "a": "Lo-Ammi, signifying 'not my people'",
+      "b": "Lo-Ruhamah, meaning 'not loved' by God",
+      "c": "Shear-Jashub, meaning 'a remnant returns'",
       "d": "Maher-Shalal-Hash-Baz"
     },
     "correct": "d",
@@ -1794,10 +1794,10 @@
   {
     "question": "In Jeremiah 13, God commanded Jeremiah to hide a linen belt in a crevice of the rock near the Euphrates. What did this belt symbolize?",
     "options": {
-      "a": "The strength and righteousness of the Lord",
+      "a": "The unwavering faithfulness of God's chosen people",
       "b": "The corruption and uselessness of Judah and Jerusalem",
-      "c": "The covenant between God and Israel",
-      "d": "The coming prosperity of the nation"
+      "c": "The unbreakable covenant established with Abraham and Moses",
+      "d": "The future restoration and glorious return from exile"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1880,7 +1880,7 @@
     "options": {
       "a": "Lo-Ammi",
       "b": "Jezreel",
-      "c": "Gomer",
+      "c": "Shear-Jashub",
       "d": "Lo-Ruhamah"
     },
     "correct": "d",
@@ -1934,10 +1934,10 @@
   {
     "question": "According to Amos 7:14, Amos denies being a prophet by profession, stating he was a shepherd and what else?",
     "options": {
-      "a": "A stone mason",
-      "b": "A woodcutter",
+      "a": "A tender of flocks and herds",
+      "b": "A cultivator of olive groves",
       "c": "A dresser of sycamore-fig trees",
-      "d": "A gatherer of grapes"
+      "d": "A harvester of summer fruit"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1948,10 +1948,10 @@
   {
     "question": "In Obadiah, what specific sin of Edom is highlighted as the reason for God's severe judgment?",
     "options": {
-      "a": "Their refusal to let Israel pass through their land",
-      "b": "Their pride and self-sufficiency",
+      "a": "Their consistent refusal to provide passage or aid to the Israelites",
+      "b": "Their arrogant pride and self-exaltation among the nations",
       "c": "Their gloating over Judah's calamity and violence against their brother Jacob",
-      "d": "Their idolatry and worship of foreign gods"
+      "d": "Their widespread idolatry and adoption of pagan worship practices"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -1962,10 +1962,10 @@
   {
     "question": "What was the name of the king of Nineveh who repented along with his city after Jonah's preaching?",
     "options": {
-      "a": "Esarhaddon",
+      "a": "Esarhaddon, a powerful king of Assyria",
       "b": "The text does not name him, only 'the king of Nineveh'",
-      "c": "Sennacherib",
-      "d": "Ashurbanipal"
+      "c": "Sennacherib, known for his siege of Jerusalem",
+      "d": "Ashurbanipal, a learned Assyrian ruler"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -1976,10 +1976,10 @@
   {
     "question": "What plant did God cause to grow over Jonah to provide shade, which later withered?",
     "options": {
-      "a": "A fig tree",
-      "b": "A willow",
+      "a": "A sprawling fig tree, providing abundant shade",
+      "b": "A leafy willow, growing by the water's edge",
       "c": "A plant (gourd)",
-      "d": "A vine"
+      "d": "A strong grapevine, bearing much fruit"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2033,9 +2033,9 @@
     "question": "Zephaniah prophecies extensively about \"the day of the Lord.\" How is this day primarily characterized in his book?",
     "options": {
       "a": "A day of wrath, distress, and darkness for Judah and the nations",
-      "b": "A day of joy, feasting, and celebration for God's people",
-      "c": "A day of revelation of God's hidden wisdom",
-      "d": "A day of restoration and rebuilding for Jerusalem"
+      "b": "A day of abundant joy, feasting, and celebration for God's people",
+      "c": "A day of profound revelation of God's hidden wisdom and future plans",
+      "d": "A day of complete restoration and magnificent rebuilding for Jerusalem"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2130,10 +2130,10 @@
   {
     "question": "What was the name of the place where Abraham buried Sarah?",
     "options": {
-      "a": "Shechem",
+      "a": "The ancient city of Shechem, near Jacob's well",
       "b": "Cave of Machpelah",
-      "c": "Hebron",
-      "d": "Mamre"
+      "c": "The fields near Hebron, a city in Canaan",
+      "d": "The plains of Mamre, where Abraham built an altar"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2186,9 +2186,9 @@
   {
     "question": "What was the name of the first city conquered by the Israelites in Canaan after crossing the Jordan?",
     "options": {
-      "a": "Ai",
-      "b": "Shechem",
-      "c": "Gilgal",
+      "a": "The strategic city of Ai, known for its defeat",
+      "b": "The ancient city of Shechem, a significant tribal center",
+      "c": "The camp at Gilgal, where the covenant was renewed",
       "d": "Jericho"
     },
     "correct": "d",
@@ -2215,9 +2215,9 @@
     "question": "Which judge led Israel for 20 years and delivered them from Jabin, king of Canaan, and his commander Sisera?",
     "options": {
       "a": "Deborah",
-      "b": "Barak",
-      "c": "Ehud",
-      "d": "Gideon"
+      "b": "Barak, the military commander who fought Sisera",
+      "c": "Ehud, the left-handed judge who killed Eglon",
+      "d": "Gideon, who defeated the Midianites with 300 men"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2369,9 +2369,9 @@
     "question": "What was the name of the prophet who anointed Jehu as king over Israel to execute judgment on the house of Ahab?",
     "options": {
       "a": "A young prophet sent by Elisha",
-      "b": "Micaiah",
-      "c": "Elisha himself",
-      "d": "Elijah"
+      "b": "Micaiah, who prophesied against King Ahab",
+      "c": "Elisha himself, the successor to Elijah",
+      "d": "Elijah, the prophet who called down fire from heaven"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2438,10 +2438,10 @@
   {
     "question": "After the return from exile, to which Persian king did the adversaries of Judah write letters of accusation to stop the rebuilding of the temple?",
     "options": {
-      "a": "Ahasuerus",
+      "a": "Ahasuerus, the king who married Esther",
       "b": "Artaxerxes",
-      "c": "Darius",
-      "d": "Cyrus"
+      "c": "Darius, who decreed the rebuilding of the temple",
+      "d": "Cyrus, who first allowed the exiles to return"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2480,10 +2480,10 @@
   {
     "question": "What was Nehemiah's solution to the people being burdened by debt and high interest rates during the rebuilding of the wall?",
     "options": {
-      "a": "He imposed a new tax on the wealthy to pay off the debts of the poor",
+      "a": "He imposed a new and substantial tax on the wealthy landowners to pay off the debts of the poor",
       "b": "He rebuked the nobles and officials and demanded they return the collateral and remit the interest",
-      "c": "He appealed to King Artaxerxes for financial relief",
-      "d": "He initiated a system of public works to employ the poor"
+      "c": "He appealed directly to King Artaxerxes of Persia for a grant of financial relief for the people",
+      "d": "He initiated a large-scale system of public works projects to employ the poor and pay them wages"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2522,10 +2522,10 @@
   {
     "question": "What was the name of Job's wife, who advised him to curse God and die?",
     "options": {
-      "a": "Zillah",
-      "b": "Naamah",
+      "a": "Zillah, one of Lamech's wives mentioned in Genesis",
+      "b": "Naamah, the daughter of Lamech and Zillah",
       "c": "Her name is not mentioned in the Bible",
-      "d": "Adah"
+      "d": "Adah, another of Lamech's wives from the early chapters of Genesis"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2578,9 +2578,9 @@
   {
     "question": "According to Proverbs 25:11, \"A word fitly spoken is like what?\"",
     "options": {
-      "a": "A healing balm to the bones",
-      "b": "A fountain of life",
-      "c": "Precious jewels",
+      "a": "A healing balm to the weary spirit",
+      "b": "A fountain of life in a parched land",
+      "c": "Precious jewels set in finest gold",
       "d": "Apples of gold in settings of silver"
     },
     "correct": "d",
@@ -2620,10 +2620,10 @@
   {
     "question": "In Isaiah 14, which king of Babylon is symbolically addressed as 'Day Star, son of Dawn,' and described as falling from heaven?",
     "options": {
-      "a": "Belshazzar",
+      "a": "Belshazzar, the king who witnessed the ominous writing on the wall",
       "b": "The king of Babylon (often interpreted as Lucifer/Satan)",
-      "c": "Nebuchadnezzar",
-      "d": "Darius"
+      "c": "Nebuchadnezzar, the king driven from his throne to eat grass",
+      "d": "Darius the Mede, who became king after the fall of Babylon"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2634,9 +2634,9 @@
   {
     "question": "What is the name of the valley where Isaiah prophesies that the slaughtered bodies of those who rebelled against God will be a abhorrence to all mankind?",
     "options": {
-      "a": "Valley of Achor",
-      "b": "Valley of Beracah",
-      "c": "Valley of Rephaim",
+      "a": "Valley of Achor, a place of trouble",
+      "b": "Valley of Beracah, a place of blessing",
+      "c": "Valley of Rephaim, a valley of giants",
       "d": "Valley of Hinnom (Gehenna)"
     },
     "correct": "d",
@@ -2690,9 +2690,9 @@
   {
     "question": "In Ezekiel's vision of the New Temple, what is the name of the city at its southern boundary?",
     "options": {
-      "a": "Hebron",
-      "b": "Zion",
-      "c": "Jerusalem",
+      "a": "Hebron, where David was anointed",
+      "b": "Zion, the holy mount of God",
+      "c": "Jerusalem, the capital of Judah",
       "d": "The Lord Is There (Yahweh-Shammah)"
     },
     "correct": "d",
@@ -2718,8 +2718,8 @@
   {
     "question": "What was the name of the king of Media who took over the kingdom after Belshazzar's death, according to Daniel 5:31?",
     "options": {
-      "a": "Artaxerxes",
-      "b": "Xerxes",
+      "a": "Artaxerxes, king of Persia",
+      "b": "Xerxes, who ruled a vast empire",
       "c": "Darius the Mede",
       "d": "Cyrus the Persian"
     },
@@ -2774,10 +2774,10 @@
   {
     "question": "Joel calls for a solemn assembly and a fast. To which specific groups of people does he call for repentance?",
     "options": {
-      "a": "Farmers, merchants, and craftsmen",
+      "a": "Farmers, merchants, and all the laborers in the fields",
       "b": "Priests, elders, and all the inhabitants of the land",
-      "c": "Young men, young women, and children",
-      "d": "Kings, judges, and military leaders"
+      "c": "Young men, young women, and the little children",
+      "d": "Kings, judges, and all the leaders of the people"
     },
     "correct": "b",
     "type": "multiple_choice",
@@ -2830,10 +2830,10 @@
   {
     "question": "Jonah attempts to flee from the Lord's command to go to Nineveh by taking a ship to which city?",
     "options": {
-      "a": "Sidon",
-      "b": "Joppa",
+      "a": "Damascus",
+      "b": "Jerusalem",
       "c": "Tarshish",
-      "d": "Tyre"
+      "d": "Samaria"
     },
     "correct": "c",
     "type": "multiple_choice",
@@ -2845,9 +2845,9 @@
     "question": "In Micah 4, where does the prophet say that in the last days, the mountain of the Lord's temple will be established?",
     "options": {
       "a": "As the highest of the mountains",
-      "b": "By the sea of Galilee",
-      "c": "Above the hills of Galilee",
-      "d": "In the valley of Kidron"
+      "b": "By the sea of Galilee, a place of ministry",
+      "c": "Above the hills of Samaria, a place of worship",
+      "d": "In the valley of Kidron, near the temple"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2859,9 +2859,9 @@
     "question": "Nahum describes Nineveh's destruction as a punishment for its cruelty and particularly compares it to the fate of which Egyptian city that was also destroyed?",
     "options": {
       "a": "Thebes (No Amon)",
-      "b": "Memphis",
-      "c": "Luxor",
-      "d": "Aswan"
+      "b": "Memphis (Noph in Jeremiah)",
+      "c": "Luxor (city of Karnak)",
+      "d": "Aswan (ancient Syene)"
     },
     "correct": "a",
     "type": "multiple_choice",
@@ -2886,9 +2886,9 @@
   {
     "question": "What is the primary message of Zephaniah?",
     "options": {
-      "a": "A vision of a new heaven and new earth",
-      "b": "Prophecies against the surrounding nations only",
-      "c": "A call to rebuild the temple",
+      "a": "A call for national repentance and a return to the covenant laws of God for purification",
+      "b": "Detailed pronouncements of judgment against all the idolatrous nations surrounding Judah",
+      "c": "An urgent command to reconstruct the Jerusalem temple and restore faithful worship",
       "d": "The coming Day of the Lord and its universal judgment and ultimate restoration"
     },
     "correct": "d",
@@ -2942,10 +2942,10 @@
   {
     "question": "In Malachi 2:10-16, God condemns the people for breaking faith, particularly by divorcing the wives of their youth and marrying whom?",
     "options": {
-      "a": "Women from other tribes",
+      "a": "Women from neighboring pagan nations and their customs",
       "b": "Daughters of foreign gods",
-      "c": "Younger women",
-      "d": "Wealthy women"
+      "c": "Younger women who had no regard for the covenant",
+      "d": "Wealthy women from foreign lands who enticed men"
     },
     "correct": "b",
     "type": "multiple_choice",
