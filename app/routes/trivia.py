@@ -235,6 +235,44 @@ def cancel_challenge(
     return {"status": "cancelled"}
 
 
+@router.post("/challenges/{challenge_id}/forfeit")
+def forfeit_challenge(
+    challenge_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    challenge = db.query(TriviaChallenge).filter(TriviaChallenge.id == challenge_id).first()
+    if not challenge:
+        raise HTTPException(status_code=404, detail="Challenge not found")
+
+    is_challenger = challenge.challenger_id == current_user.id
+    is_challenged = challenge.challenged_id == current_user.id
+    if not is_challenger and not is_challenged:
+        raise HTTPException(status_code=403, detail="Not a participant")
+
+    if challenge.status not in (TriviaChallengeStatus.active, TriviaChallengeStatus.pending):
+        raise HTTPException(status_code=400, detail="Challenge cannot be quit")
+
+    opponent_id = challenge.challenged_id if is_challenger else challenge.challenger_id
+
+    # Game started = both players answered at least one question (index advanced past 0)
+    game_started = challenge.status == TriviaChallengeStatus.active and challenge.current_question_index > 0
+
+    if game_started:
+        # Forfeit: quitter loses, opponent wins
+        challenge.winner_id = opponent_id
+        challenge.status = TriviaChallengeStatus.complete
+    else:
+        challenge.status = TriviaChallengeStatus.cancelled
+
+    db.commit()
+
+    if game_started:
+        notify_trivia_challenge_result(db, user_id=opponent_id, challenge_id=challenge_id, result="won")
+
+    return {"status": "forfeited", "counted": game_started}
+
+
 @router.post("/challenges/{challenge_id}/nudge")
 def nudge_opponent(
     challenge_id: str,

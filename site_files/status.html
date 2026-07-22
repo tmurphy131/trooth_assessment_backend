@@ -623,6 +623,102 @@
             </div>
           </div>
         </section>
+
+        <!-- Mentorship Health -->
+        <section class="section">
+          <h3 class="section-title">Mentorship Health</h3>
+          <div class="metrics-table">
+            <div class="metric-row">
+              <span class="metric-label">Mentor Utilization</span>
+              <span class="metric-value gold" id="mentor-utilization">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Mentors With Apprentices</span>
+              <span class="metric-value" id="mentors-with-apprentices">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Avg Apprentices / Mentor</span>
+              <span class="metric-value" id="avg-apprentices">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Active Mentors (added notes)</span>
+              <span class="metric-value" id="active-mentors">-</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Invitations -->
+        <section class="section">
+          <h3 class="section-title">Invitations</h3>
+          <div class="metrics-table">
+            <div class="metric-row">
+              <span class="metric-label">Total Sent</span>
+              <span class="metric-value" id="inv-total">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Accepted</span>
+              <span class="metric-value green" id="inv-accepted">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Pending</span>
+              <span class="metric-value gold" id="inv-pending">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Expired</span>
+              <span class="metric-value red" id="inv-expired">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Acceptance Rate</span>
+              <span class="metric-value gold" id="inv-acceptance-rate">-</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Agreements -->
+        <section class="section">
+          <h3 class="section-title">Agreements</h3>
+          <div class="metrics-table">
+            <div class="metric-row">
+              <span class="metric-label">Fully Signed</span>
+              <span class="metric-value green" id="agr-fully-signed">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Awaiting Apprentice</span>
+              <span class="metric-value gold" id="agr-awaiting-apprentice">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Awaiting Parent</span>
+              <span class="metric-value gold" id="agr-awaiting-parent">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Draft</span>
+              <span class="metric-value" id="agr-draft">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Completion Rate</span>
+              <span class="metric-value gold" id="agr-completion-rate">-</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Assessment Quality -->
+        <section class="section">
+          <h3 class="section-title">Assessment Quality</h3>
+          <div class="metrics-table">
+            <div class="metric-row">
+              <span class="metric-label">Completion Rate (this week)</span>
+              <span class="metric-value gold" id="asmt-completion-rate">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Processing</span>
+              <span class="metric-value" id="asmt-processing">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Errors</span>
+              <span class="metric-value red" id="asmt-errors">-</span>
+            </div>
+          </div>
+        </section>
       </div>
       <!-- END DISCIPLESHIP TAB -->
 
@@ -630,7 +726,7 @@
       <div class="tab-panel" id="tab-accountability">
         <!-- Big Numbers -->
         <div class="big-numbers">
-          <div class="big-number-card acc-highlight">
+          <div class="big-number-card acc-highlight clickable" onclick="openAccUserModal()">
             <div class="big-number-value" id="acc-total-users">-</div>
             <div class="big-number-label">Total Users</div>
           </div>
@@ -703,6 +799,14 @@
               <span class="metric-label">Linked Partners (in-app)</span>
               <span class="metric-value" id="acc-linked-partners">-</span>
             </div>
+            <div class="metric-row">
+              <span class="metric-label">Avg Partners / User</span>
+              <span class="metric-value" id="acc-avg-partners">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Avg Response Time</span>
+              <span class="metric-value green" id="acc-avg-response-time">-</span>
+            </div>
           </div>
         </section>
 
@@ -763,6 +867,7 @@
       ? 'http://localhost:8000'
       : 'https://trooth-discipleship-api.onlyblv.com';
     const ACCOUNTABILITY_API = 'https://us-central1-troothaccoutability.cloudfunctions.net/getAccountabilityMetrics';
+    const ACCOUNTABILITY_USERS_API = 'https://us-central1-troothaccoutability.cloudfunctions.net/getAccountabilityUsers';
 
     let currentTab = 'discipleship';
 
@@ -830,12 +935,54 @@
         loadingState.style.display = 'none';
         panel.style.display = 'block';
 
+        // Enrich with the richer /metrics/full data (non-fatal)
+        loadDiscipleshipFullMetrics();
+
       } catch (error) {
         console.error('Failed to load discipleship metrics:', error);
         loadingState.style.display = 'none';
         errorState.style.display = 'block';
         statusBadge.classList.add('error');
         statusText.textContent = 'Connection Error';
+      }
+    }
+
+    // Enrich discipleship tab with richer metrics from /metrics/full.
+    // Non-fatal: if this fails, the core dashboard still shows.
+    async function loadDiscipleshipFullMetrics() {
+      try {
+        const response = await fetch(`${DISCIPLESHIP_API}/metrics/full?period=week`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const result = await response.json();
+        if (result.status !== 'success') throw new Error(result.message || 'Failed');
+        const d = result.data;
+
+        // Mentorship health
+        document.getElementById('mentor-utilization').textContent = d.mentorship.mentor_utilization_percent + '%';
+        document.getElementById('mentors-with-apprentices').textContent = d.mentorship.mentors_with_apprentices;
+        document.getElementById('avg-apprentices').textContent = d.mentorship.avg_apprentices_per_mentor;
+        document.getElementById('active-mentors').textContent = d.mentor_activity.active_mentors;
+
+        // Invitations
+        document.getElementById('inv-total').textContent = d.invitations.total_invitations;
+        document.getElementById('inv-accepted').textContent = d.invitations.accepted;
+        document.getElementById('inv-pending').textContent = d.invitations.pending;
+        document.getElementById('inv-expired').textContent = d.invitations.expired;
+        document.getElementById('inv-acceptance-rate').textContent = d.invitations.acceptance_rate + '%';
+
+        // Agreements
+        document.getElementById('agr-fully-signed').textContent = d.agreements.fully_signed;
+        document.getElementById('agr-awaiting-apprentice').textContent = d.agreements.awaiting_apprentice;
+        document.getElementById('agr-awaiting-parent').textContent = d.agreements.awaiting_parent;
+        document.getElementById('agr-draft').textContent = d.agreements.draft;
+        document.getElementById('agr-completion-rate').textContent = d.agreements.completion_rate + '%';
+
+        // Assessment quality
+        document.getElementById('asmt-completion-rate').textContent = d.assessments.completion_rate + '%';
+        document.getElementById('asmt-processing').textContent = d.assessments.processing;
+        document.getElementById('asmt-errors').textContent = d.assessments.errors;
+      } catch (err) {
+        console.warn('Full discipleship metrics unavailable:', err);
       }
     }
 
@@ -879,6 +1026,8 @@
         document.getElementById('acc-alerts-responded-total').textContent = data.totals.alerts_responded;
         document.getElementById('acc-alerts-expired').textContent = data.totals.alerts_expired;
         document.getElementById('acc-linked-partners').textContent = data.totals.linked_partners;
+        document.getElementById('acc-avg-partners').textContent = data.totals.avg_partners_per_user;
+        document.getElementById('acc-avg-response-time').textContent = formatMinutes(data.totals.avg_response_time_minutes);
 
         // Notifications
         document.getElementById('acc-sms-sent').textContent = data.notifications.sms_sent;
@@ -902,6 +1051,15 @@
     }
 
     // ========== HELPERS ==========
+    function formatMinutes(mins) {
+      if (mins === null || mins === undefined || isNaN(mins)) return '—';
+      if (mins <= 0) return '—';
+      if (mins < 60) return `${mins}m`;
+      const h = Math.floor(mins / 60);
+      const m = mins % 60;
+      return m > 0 ? `${h}h ${m}m` : `${h}h`;
+    }
+
     function updateTimestamp(isoString) {
       const generatedAt = new Date(isoString);
       document.getElementById('last-updated').textContent = generatedAt.toLocaleString('en-US', {
@@ -989,6 +1147,48 @@
         }
       } catch (err) {
         console.error('Failed to load user list:', err);
+        body.innerHTML = '<p style="color:var(--red);text-align:center;padding:24px 0;">Failed to load users. Try again.</p>';
+      }
+    }
+
+    // ---- Accountability user list modal ----
+    function openAccUserModal() {
+      const overlay = document.getElementById('user-modal');
+      document.getElementById('modal-title').textContent = 'Accountability Users';
+      document.getElementById('modal-body').innerHTML = `
+        <div class="modal-loading">
+          <div class="loading-spinner"></div>
+          <p>Loading...</p>
+        </div>`;
+      overlay.classList.add('open');
+      fetchAccUserList();
+    }
+
+    async function fetchAccUserList() {
+      const body = document.getElementById('modal-body');
+      try {
+        const res = await fetch(ACCOUNTABILITY_USERS_API);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        if (json.status !== 'success') throw new Error(json.message || 'Failed');
+        const data = json.data;
+
+        if (!data.length) {
+          body.innerHTML = '<p style="color:var(--muted);text-align:center;padding:24px 0;">No users found.</p>';
+          return;
+        }
+
+        body.innerHTML = `
+          <div class="modal-count">${data.length} user${data.length !== 1 ? 's' : ''}</div>
+          <ul class="user-list">
+            ${data.map(u => `
+              <li>
+                <span class="user-name">${escapeHtml(u.name)}</span>
+                <span class="user-meta">${escapeHtml(u.joined)}</span>
+              </li>`).join('')}
+          </ul>`;
+      } catch (err) {
+        console.error('Failed to load accountability users:', err);
         body.innerHTML = '<p style="color:var(--red);text-align:center;padding:24px 0;">Failed to load users. Try again.</p>';
       }
     }
