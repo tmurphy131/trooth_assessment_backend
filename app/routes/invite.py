@@ -55,7 +55,11 @@ def accept_invitation_page(
             }
         )
     
-    if invitation.expires_at < datetime.now(UTC).replace(tzinfo=None):
+    # Ensure both datetimes are naive for comparison
+    now_naive = datetime.now(UTC).replace(tzinfo=None)
+    expires_at_naive = invitation.expires_at.replace(tzinfo=None) if invitation.expires_at.tzinfo else invitation.expires_at
+    
+    if expires_at_naive < now_naive:
         return templates.TemplateResponse(
             "invitations/accept_invitation.html",
             {
@@ -113,11 +117,13 @@ def invite_apprentice(
     # Lowercase email to match Firebase storage
     apprentice_email = invite.apprentice_email.lower().strip()
     
+    # Use naive datetime for database comparison
+    now_naive = datetime.now(UTC).replace(tzinfo=None)
     existing = db.query(ApprenticeInvitation).filter(
         ApprenticeInvitation.apprentice_email == apprentice_email,
         ApprenticeInvitation.mentor_id == mentor_id,
         ApprenticeInvitation.accepted == False,
-        ApprenticeInvitation.expires_at > datetime.now(UTC)
+        ApprenticeInvitation.expires_at > now_naive
     ).first()
     if existing:
         raise HTTPException(status_code=400, detail="An invitation is already pending for this apprentice")
@@ -155,10 +161,11 @@ def get_pending_invites(
     db: Session = Depends(get_db)
 ):
     """Get all pending invitations sent by the current mentor."""
+    now_naive = datetime.now(UTC).replace(tzinfo=None)
     invitations = db.query(ApprenticeInvitation).filter(
         ApprenticeInvitation.mentor_id == current_user.id,
         ApprenticeInvitation.accepted == False,
-        ApprenticeInvitation.expires_at > datetime.now(UTC)
+        ApprenticeInvitation.expires_at > now_naive
     ).all()
     return invitations
 
@@ -190,7 +197,11 @@ def validate_invitation_token(token: str, db: Session = Depends(get_db)):
     if not invitation:
         raise NotFoundException("Invalid invitation token")
     
-    if invitation.expires_at < datetime.now(UTC).replace(tzinfo=None):
+    # Ensure both datetimes are naive for comparison
+    now_naive = datetime.now(UTC).replace(tzinfo=None)
+    expires_at_naive = invitation.expires_at.replace(tzinfo=None) if invitation.expires_at.tzinfo else invitation.expires_at
+    
+    if expires_at_naive < now_naive:
         raise ValidationException("This invitation has expired")
     
     if invitation.accepted:
@@ -214,8 +225,12 @@ def accept_invite(data: InviteAccept, db: Session = Depends(get_db)):
     invitation = db.query(ApprenticeInvitation).filter_by(token=data.token).first()
     if not invitation:
         raise HTTPException(status_code=400, detail="Invitation is invalid or expired")
-    # Compare as naive datetimes (DB stores naive, so strip tz from now())
-    if invitation.expires_at < datetime.now(UTC).replace(tzinfo=None):
+    
+    # Ensure both datetimes are naive for comparison
+    now_naive = datetime.now(UTC).replace(tzinfo=None)
+    expires_at_naive = invitation.expires_at.replace(tzinfo=None) if invitation.expires_at.tzinfo else invitation.expires_at
+    
+    if expires_at_naive < now_naive:
         raise ValidationException("This invitation has expired.")
 
     if invitation.accepted:
@@ -226,26 +241,22 @@ def accept_invite(data: InviteAccept, db: Session = Depends(get_db)):
     if not apprentice:
         raise NotFoundException("Apprentice not found")
 
-    # Check if apprentice already has any mentor relationship (active or previously terminated)
-    existing_relationship = db.query(MentorApprentice).filter(
-        MentorApprentice.apprentice_id == data.apprentice_id
-    ).first()
-
     invitation.accepted = True
 
+    # Check if this exact (apprentice, mentor) pair already exists
+    existing_relationship = db.query(MentorApprentice).filter_by(
+        apprentice_id=data.apprentice_id,
+        mentor_id=invitation.mentor_id
+    ).first()
+
     if existing_relationship:
-        # Re-assign to the new mentor (handles terminated relationships switching mentors)
-        existing_relationship.mentor_id = invitation.mentor_id
+        # Reactivate a previously terminated relationship with this same mentor
         existing_relationship.active = True
         db.commit()
-        return {"message": "Invitation accepted, relationship updated"}
+        return {"message": "Invitation accepted, relationship reactivated"}
 
-    # No prior relationship — create one
-    relationship = MentorApprentice(
-        mentor_id=invitation.mentor_id,
-        apprentice_id=data.apprentice_id
-    )
-    db.add(relationship)
+    # New mentor pairing — create a row without touching any other mentor relationships
+    db.add(MentorApprentice(mentor_id=invitation.mentor_id, apprentice_id=data.apprentice_id))
     db.commit()
 
     return {"message": "Invitation accepted, relationship created"}
@@ -263,10 +274,11 @@ def get_apprentice_invites(
     if current_user.email != email:
         raise HTTPException(status_code=403, detail="You can only view your own invitations")
     
+    now_naive = datetime.now(UTC).replace(tzinfo=None)
     invitations = db.query(ApprenticeInvitation).filter(
         ApprenticeInvitation.apprentice_email == email,
         ApprenticeInvitation.accepted == False,
-        ApprenticeInvitation.expires_at > datetime.now(UTC)
+        ApprenticeInvitation.expires_at > now_naive
     ).all()
     
     # Enrich with mentor details

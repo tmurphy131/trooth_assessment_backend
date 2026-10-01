@@ -11,5 +11,6 @@ class ApprenticeInvitation(Base):
     apprentice_email = Column(String, nullable=False)
     apprentice_name = Column(String, nullable=False)
     token = Column(String, unique=True, nullable=False)
-    expires_at = Column(DateTime, default=lambda: datetime.now(UTC) + timedelta(days=7))
+    # Store as naive datetime (PostgreSQL TIMESTAMP WITHOUT TIME ZONE)
+    expires_at = Column(DateTime, default=lambda: (datetime.now(UTC) + timedelta(days=7)).replace(tzinfo=None))
     accepted = Column(Boolean, default=False)

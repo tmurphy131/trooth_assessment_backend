@@ -936,15 +936,13 @@ def integrity_check(agreement_id: str, db: Session = Depends(get_db), user: User
 def _activate_relationship(db: Session, ag: Agreement):
     if not ag.apprentice_id:
         return
-    # apprentice_id is the PK — at most one row per apprentice
-    existing = db.query(MentorApprentice).filter_by(apprentice_id=ag.apprentice_id).first()
+    existing = db.query(MentorApprentice).filter_by(
+        apprentice_id=ag.apprentice_id, mentor_id=ag.mentor_id
+    ).first()
     if existing:
-        # Update to new mentor (handles re-assignment after revoke) and reactivate
-        existing.mentor_id = ag.mentor_id
         existing.active = True
         return
-    rel = MentorApprentice(mentor_id=ag.mentor_id, apprentice_id=ag.apprentice_id, active=True)
-    db.add(rel)
+    db.add(MentorApprentice(mentor_id=ag.mentor_id, apprentice_id=ag.apprentice_id, active=True))
 
 # ---------------------------------------------------------------------------
 # Simple HTML signing page to support pretty email links without separate web app

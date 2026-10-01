@@ -4,7 +4,8 @@ Rate limiting middleware and utilities.
 import time
 import logging
 from typing import Dict, Optional
-from fastapi import Request, HTTPException
+from fastapi import Request
+from fastapi.responses import JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 from app.core.settings import settings
 
@@ -24,14 +25,21 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
     
     def get_client_id(self, request: Request) -> str:
         """Get client identifier for rate limiting."""
-        # Try to get user ID from request state (set by auth middleware)
-        if hasattr(request.state, 'user_id'):
-            return f"user:{request.state.user_id}"
-        
-        # Fall back to IP address
+        # Use the Authorization token as the key so each user gets their own bucket.
+        # Middleware runs before route auth, so we read the raw header here.
+        auth = request.headers.get("Authorization", "")
+        if auth.startswith("Bearer ") and len(auth) > 20:
+            # Use the last 32 chars of the token — unique per user, avoids storing full JWT
+            return f"token:{auth[-32:]}"
+
+        # Fall back to forwarded IP (X-Forwarded-For is set by Cloud Run)
+        forwarded_for = request.headers.get("X-Forwarded-For", "")
+        if forwarded_for:
+            return f"ip:{forwarded_for.split(',')[0].strip()}"
+
         if request.client:
             return f"ip:{request.client.host}"
-        
+
         return "anonymous"
     
     def is_rate_limited(self, client_id: str) -> bool:
@@ -69,9 +77,9 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
 
         if self.is_rate_limited(client_id):
             logger.warning(f"Rate limit exceeded for {client_id}")
-            raise HTTPException(
+            return JSONResponse(
                 status_code=429,
-                detail="Rate limit exceeded. Please try again later.",
+                content={"detail": "Rate limit exceeded. Please try again later."},
                 headers={"Retry-After": "60"}
             )
 

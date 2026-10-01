@@ -51,10 +51,10 @@ Available Models:
         - gpt-4-turbo
     
     Gemini:
-        - gemini-2.5-flash (default, best price-performance)
-        - gemini-2.5-flash-lite (cheapest)
-        - gemini-2.5-pro (best quality)
-        - gemini-3-flash-preview (newest)
+        - gemini-3.5-flash (default, GA Flash tier)
+        - gemini-3.5-flash-lite (cheaper)
+        - gemini-3.1-flash-lite (cheapest)
+        - gemini-2.5-flash (deprecated Oct 2026; rollback only)
 """
 
 from .base import LLMProvider, LLMResponse, LLMConfig

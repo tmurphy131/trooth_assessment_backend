@@ -18,21 +18,24 @@ class GeminiProvider(LLMProvider):
     """Google Gemini model provider via Vertex AI."""
     
     PROVIDER_NAME = "gemini"
-    DEFAULT_MODEL = "gemini-2.5-flash"  # Best price-performance, hybrid reasoning
-    
-    # Pricing per 1M tokens (as of Jan 2026)
-    # gemini-2.5-flash: $0.30 input, $2.50 output
-    INPUT_PRICE_PER_1M = 0.30
-    OUTPUT_PRICE_PER_1M = 2.50
-    
+    DEFAULT_MODEL = "gemini-3.5-flash"  # GA Flash tier; successor to deprecated gemini-2.5-flash
+
+    # Pricing per 1M tokens (as of Jul 2026)
+    # gemini-3.5-flash: $1.50 input, $9.00 output
+    INPUT_PRICE_PER_1M = 1.50
+    OUTPUT_PRICE_PER_1M = 9.00
+
     # Model-specific pricing overrides
     MODEL_PRICING = {
+        # GA Gemini 3.x (recommended migration targets)
+        "gemini-3.5-flash": {"input": 1.50, "output": 9.00},
+        "gemini-3.5-flash-lite": {"input": 0.30, "output": 2.50},
+        "gemini-3.1-flash-lite": {"input": 0.25, "output": 1.50},
+        # Gemini 2.5 (deprecated Oct 20, 2026 → ELA; kept for rollback during ELA)
         "gemini-2.5-flash": {"input": 0.30, "output": 2.50},
         "gemini-2.5-flash-lite": {"input": 0.10, "output": 0.40},
         "gemini-2.5-pro": {"input": 1.25, "output": 10.00},
         "gemini-2.0-flash": {"input": 0.10, "output": 0.40},  # Deprecated Mar 2026
-        "gemini-3-flash-preview": {"input": 0.50, "output": 3.00},
-        "gemini-3-pro-preview": {"input": 2.00, "output": 12.00},
     }
     
     def _init_client(
@@ -118,7 +121,7 @@ class GeminiProvider(LLMProvider):
             finish_reason = getattr(candidate, 'finish_reason', None)
             # Common finish reasons: STOP (normal), MAX_TOKENS (truncated), SAFETY, etc.
             # finish_reason values: 1=STOP, 2=MAX_TOKENS, 3=SAFETY, 4=RECITATION, 5=OTHER
-            # For Gemini 2.x, finish_reason is an enum: FinishReason.STOP, FinishReason.MAX_TOKENS, etc.
+            # For Gemini 2.x/3.x, finish_reason is an enum: FinishReason.STOP, FinishReason.MAX_TOKENS, etc.
             finish_reason_str = str(finish_reason).upper() if finish_reason else ""
             logger.debug(f"[gemini] finish_reason={finish_reason} (str={finish_reason_str})")
             

@@ -751,6 +751,7 @@ def get_apprentice_profile(
 
 class TerminationRequest(BaseModel):
     reason: str
+    mentor_id: str | None = None  # Required for admin path when apprentice has multiple mentors
 
 @router.post("/apprentice/{apprentice_id}/terminate")
 def terminate_apprenticeship(
@@ -783,9 +784,16 @@ def terminate_apprenticeship(
 
     mapping = None
     if effective_mentor_id is None:
-        mapping = db.query(MentorApprentice).filter_by(
-            apprentice_id=apprentice_id
-        ).first()
+        # Admin path: use mentor_id from payload when apprentice may have multiple mentors
+        admin_mentor_id = payload.mentor_id
+        if admin_mentor_id:
+            mapping = db.query(MentorApprentice).filter_by(
+                mentor_id=admin_mentor_id, apprentice_id=apprentice_id
+            ).first()
+        else:
+            mapping = db.query(MentorApprentice).filter_by(
+                apprentice_id=apprentice_id, active=True
+            ).first()
     else:
         mapping = db.query(MentorApprentice).filter_by(
             mentor_id=effective_mentor_id, apprentice_id=apprentice_id

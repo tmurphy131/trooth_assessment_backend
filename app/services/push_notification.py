@@ -256,7 +256,95 @@ class PushNotificationService:
             logger.info(f"Deactivated token for user {token.user_id}")
 
 
-# Convenience functions for common notification types
+# ---------------------------------------------------------------------------
+# Campaign push notification functions
+# ---------------------------------------------------------------------------
+
+def notify_draft_reminder_push(
+    db: Session,
+    user_id: str,
+    draft_id: str,
+    progress_pct: int,
+    days_since_start: int,
+) -> dict:
+    """Send push reminder for an incomplete assessment draft."""
+    if days_since_start >= 14:
+        body = "Complete your assessment today — your mentor is waiting!"
+    elif days_since_start >= 10:
+        body = f"Your mentor is waiting! You're {progress_pct}% through. Finish today!"
+    else:
+        body = f"You're {progress_pct}% through your assessment. Just a few minutes to finish!"
+
+    payload = PushNotificationPayload(
+        title="Finish Your Assessment!",
+        body=body,
+        data={
+            "type": "draft_reminder",
+            "draft_id": draft_id,
+            "screen": "assessment_draft",
+        },
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_new_template_push(
+    db: Session,
+    user_id: str,
+    template_name: str,
+    template_id: str,
+) -> dict:
+    """Send push notification when a new assessment template is published."""
+    payload = PushNotificationPayload(
+        title="New Assessment Available!",
+        body=f"Start '{template_name}' and continue your growth journey",
+        data={
+            "type": "new_template",
+            "template_id": template_id,
+            "screen": "assessment_templates",
+        },
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_welcome_push(db: Session, user_id: str, is_mentor: bool) -> dict:
+    """Send welcome push on first login after signup."""
+    if is_mentor:
+        body = "Invite your first apprentice and start making a difference!"
+    else:
+        body = "Take your first assessment and start your growth journey!"
+
+    payload = PushNotificationPayload(
+        title="Welcome to T[root]H!",
+        body=body,
+        data={
+            "type": "welcome",
+            "screen": "home",
+        },
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_milestone_push(
+    db: Session,
+    user_id: str,
+    milestone_title: str,
+    milestone_body: str,
+) -> dict:
+    """Send push notification when a user hits a milestone (first assessment, 5th, etc.)."""
+    payload = PushNotificationPayload(
+        title=milestone_title,
+        body=milestone_body,
+        data={
+            "type": "milestone",
+            "screen": "progress",
+        },
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+# ---------------------------------------------------------------------------
+# Existing convenience functions for common notification types
+# ---------------------------------------------------------------------------
 
 def notify_assessment_submitted(
     db: Session,
@@ -329,7 +417,8 @@ def notify_weekly_tip(
         body=tip_title,
         data={
             "type": "weekly_tip",
-            "screen": "resources"
+            "screen": "resources",
+            "is_mentor": "true" if is_mentor else "false"
         }
     )
     return PushNotificationService.send_to_user(db, user_id, payload)
@@ -349,7 +438,7 @@ def notify_weekly_tips_batch(
         mentor_payload = PushNotificationPayload(
             title="Weekly Mentor Tip",
             body=mentor_tip_title,
-            data={"type": "weekly_tip", "screen": "resources"}
+            data={"type": "weekly_tip", "screen": "resources", "is_mentor": "true"}
         )
         results["mentors"] = PushNotificationService.send_to_users(
             db, mentor_ids, mentor_payload
@@ -359,7 +448,7 @@ def notify_weekly_tips_batch(
         apprentice_payload = PushNotificationPayload(
             title="Weekly Apprentice Tip",
             body=apprentice_tip_title,
-            data={"type": "weekly_tip", "screen": "resources"}
+            data={"type": "weekly_tip", "screen": "resources", "is_mentor": "false"}
         )
         results["apprentices"] = PushNotificationService.send_to_users(
             db, apprentice_ids, apprentice_payload
@@ -419,3 +508,111 @@ def notify_assessment_started(
         }
     )
     return PushNotificationService.send_to_user(db, mentor_id, payload)
+
+
+# ---------------------------------------------------------------------------
+# Trivia push notification functions
+# ---------------------------------------------------------------------------
+
+def notify_trivia_challenge_received(
+    db: Session,
+    user_id: str,
+    challenger_name: str,
+    challenge_id: str,
+) -> Dict[str, Any]:
+    """Notify user they have been challenged to a trivia game."""
+    payload = PushNotificationPayload(
+        title="Trivia Challenge!",
+        body=f"{challenger_name} challenged you to a trivia match",
+        data={
+            "type": "trivia_challenge_received",
+            "challenge_id": challenge_id,
+            "screen": "trivia_challenges",
+        }
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_trivia_question_unlocked(
+    db: Session,
+    challenger_id: str,
+    challenged_id: str,
+    challenge_id: str,
+    question_index: int,
+) -> None:
+    """Notify both players that the next trivia question has unlocked."""
+    payload = PushNotificationPayload(
+        title="Next Question Unlocked",
+        body="Both players answered — see the results and answer the next question!",
+        data={
+            "type": "trivia_question_unlocked",
+            "challenge_id": challenge_id,
+            "question_index": str(question_index),
+            "screen": "trivia_challenge_detail",
+        }
+    )
+    PushNotificationService.send_to_users(db, [challenger_id, challenged_id], payload)
+
+
+def notify_trivia_challenge_result(
+    db: Session,
+    user_id: str,
+    challenge_id: str,
+    result: str,  # "won" | "lost" | "tied"
+) -> Dict[str, Any]:
+    """Notify a user of the final trivia challenge result."""
+    messages = {
+        "won": ("You Won! 🏆", "Congratulations — you won the trivia challenge!"),
+        "lost": ("Challenge Complete", "Your trivia challenge is over — check the results."),
+        "tied": ("It's a Tie!", "You and your opponent finished with the same score!"),
+    }
+    title, body = messages.get(result, ("Challenge Complete", "Your trivia challenge has ended."))
+    payload = PushNotificationPayload(
+        title=title,
+        body=body,
+        data={
+            "type": "trivia_challenge_result",
+            "challenge_id": challenge_id,
+            "result": result,
+            "screen": "trivia_challenge_detail",
+        }
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_trivia_nudge(
+    db: Session,
+    user_id: str,
+    nudger_name: str,
+    challenge_id: str,
+) -> Dict[str, Any]:
+    """Notify a user that their trivia opponent nudged them."""
+    payload = PushNotificationPayload(
+        title="Trivia Nudge 👋",
+        body=f"{nudger_name} is waiting for you to answer your trivia question!",
+        data={
+            "type": "trivia_nudge",
+            "challenge_id": challenge_id,
+            "screen": "trivia_challenge_detail",
+        }
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_trivia_challenge_expired(
+    db: Session,
+    challenger_id: str,
+    challenged_id: str,
+    challenge_id: str,
+) -> None:
+    """Notify both players that a trivia challenge expired with no winner."""
+    payload = PushNotificationPayload(
+        title="Trivia Challenge Expired",
+        body="Your trivia challenge expired — no winner was declared.",
+        data={
+            "type": "trivia_challenge_expired",
+            "challenge_id": challenge_id,
+            "screen": "trivia_challenges",
+        }
+    )
+    PushNotificationService.send_to_users(db, [challenger_id, challenged_id], payload)

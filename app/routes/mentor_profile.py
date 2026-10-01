@@ -77,16 +77,48 @@ def update_my_profile(
     )
 
 
-@router.get("/for-apprentice", response_model=MentorProfileOut)
-def get_profile_for_apprentice(
+@router.get("/for-apprentice", response_model=list[MentorProfileOut])
+def get_profiles_for_apprentice(
     current_user: User = Depends(require_apprentice),
     db: Session = Depends(get_db)
 ):
-    # Find active mentor link
-    link = db.query(MentorApprentice).filter_by(apprentice_id=current_user.id, active=True).first()
+    """Return profiles for all active mentors of this apprentice."""
+    links = db.query(MentorApprentice).filter_by(apprentice_id=current_user.id, active=True).all()
+    if not links:
+        return []
+    result = []
+    for link in links:
+        mentor = db.query(User).filter_by(id=link.mentor_id).first()
+        if not mentor:
+            continue
+        prof = db.query(MentorProfile).filter_by(user_id=mentor.id).first()
+        result.append(MentorProfileOut(
+            user_id=mentor.id,
+            name=mentor.name,
+            email=mentor.email,
+            avatar_url=prof.avatar_url if prof else None,
+            role_title=prof.role_title if prof else None,
+            organization=prof.organization if prof else None,
+            phone=prof.phone if prof else None,
+            bio=prof.bio if prof else None,
+            updated_at=prof.updated_at.isoformat() if prof and prof.updated_at else None,
+        ))
+    return result
+
+
+@router.get("/for-apprentice/{mentor_id}", response_model=MentorProfileOut)
+def get_profile_for_apprentice_by_mentor(
+    mentor_id: str,
+    current_user: User = Depends(require_apprentice),
+    db: Session = Depends(get_db)
+):
+    """Return the profile for a specific active mentor of this apprentice."""
+    link = db.query(MentorApprentice).filter_by(
+        apprentice_id=current_user.id, mentor_id=mentor_id, active=True
+    ).first()
     if not link:
-        raise HTTPException(status_code=404, detail="No active mentor")
-    mentor = db.query(User).filter_by(id=link.mentor_id).first()
+        raise HTTPException(status_code=404, detail="No active mentor relationship with this mentor")
+    mentor = db.query(User).filter_by(id=mentor_id).first()
     if not mentor:
         raise HTTPException(status_code=404, detail="Mentor not found")
     prof = db.query(MentorProfile).filter_by(user_id=mentor.id).first()

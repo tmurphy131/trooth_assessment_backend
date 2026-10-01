@@ -16,25 +16,28 @@ import logging
 logger = logging.getLogger(__name__)
 
 class RevokeMentorBody(BaseModel):
+    mentor_id: str
     reason: str | None = None
 
 router = APIRouter(prefix="/apprentice", tags=["apprentice"])
 
 @router.post("/mentor/revoke", response_model=dict)
 def revoke_current_mentor(
-    body: RevokeMentorBody | None = None,
+    body: RevokeMentorBody,
     db: Session = Depends(get_db),
     apprentice: User = Depends(require_apprentice)
 ):
-    """Allow an apprentice to revoke (deactivate) their active mentor relationship.
+    """Allow an apprentice to revoke (deactivate) a specific active mentor relationship.
 
     Behavior:
-    - Finds active MentorApprentice row for apprentice.
+    - Requires mentor_id in request body to identify which mentor to revoke.
     - Sets active = False (soft revoke) rather than delete for audit trail.
-    - Creates a notification for former mentor (optional) so they are aware.
-    - Returns status with previous mentor_id if existed.
+    - Creates a notification for former mentor so they are aware.
+    - Returns status with previous mentor_id.
     """
-    mapping = db.query(MentorApprentice).filter_by(apprentice_id=apprentice.id, active=True).first()
+    mapping = db.query(MentorApprentice).filter_by(
+        apprentice_id=apprentice.id, mentor_id=body.mentor_id, active=True
+    ).first()
     if not mapping:
         raise HTTPException(status_code=404, detail="No active mentor relationship to revoke")
     # Prevent revoke if there is a pending (awaiting signatures) agreement with this mentor
@@ -86,19 +89,23 @@ def get_mentor_status(
     db: Session = Depends(get_db),
     apprentice: User = Depends(require_apprentice)
 ):
-    """Return the apprentice's current mentor relationship status.
+    """Return all active mentor relationships for the apprentice.
 
     Response shape:
-    { "has_active": bool, "mentor": { "id": str, "name": str, "email": str } | None }
+    { "has_active": bool, "mentors": [{ "id": str, "name": str, "email": str }, ...] }
     """
-    mapping = db.query(MentorApprentice).filter_by(apprentice_id=apprentice.id, active=True).first()
-    if not mapping:
-        return {"has_active": False, "mentor": None}
-    mentor_user = db.query(User).filter_by(id=mapping.mentor_id).first()
-    mentor_info = None
-    if mentor_user:
-        mentor_info = {"id": mentor_user.id, "name": mentor_user.name, "email": mentor_user.email}
-    return {"has_active": True, "mentor": mentor_info}
+    mappings = db.query(MentorApprentice).filter_by(apprentice_id=apprentice.id, active=True).all()
+    if not mappings:
+        return {"has_active": False, "mentors": []}
+    mentor_ids = [m.mentor_id for m in mappings]
+    mentor_users = db.query(User).filter(User.id.in_(mentor_ids)).all()
+    mentor_map = {u.id: u for u in mentor_users}
+    mentors = [
+        {"id": u.id, "name": u.name, "email": u.email}
+        for mid in mentor_ids
+        if (u := mentor_map.get(mid))
+    ]
+    return {"has_active": bool(mentors), "mentors": mentors}
 
 
 @router.get("/agreements/pending", response_model=list[dict])

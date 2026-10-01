@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+{% block title %}New Assessment Available — T[root]H{% endblock %}
+{% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">New: {{ template_name }} is now available. Start your next growth assessment today.</span>{% endblock %}
+{% block content %}
+<h2>New Assessment Available!</h2>
+
+<p>Hi {{ name }},</p>
+
+<p>A new assessment has just been published on T[root]H:</p>
+
+<div class="highlight-box" style="text-align:center;">
+  {% if category %}<span class="pill">{{ category }}</span>{% endif %}
+  <h3 style="margin:12px 0 8px;">{{ template_name }}</h3>
+  {% if description %}<p style="color:#ccc;margin:0;">{{ description }}</p>{% endif %}
+  {% if estimated_minutes %}<p class="muted" style="margin-top:8px;">~{{ estimated_minutes }} minutes to complete</p>{% endif %}
+</div>
+
+<p>Each assessment gives you and your mentor a clearer picture of where you are in your growth — and where God may be calling you to stretch.</p>
+
+<div class="btn-row">
+  <a href="{{ app_url }}" class="brand-btn">Start This Assessment →</a>
+</div>
+
+<p class="muted" style="text-align:center;">If you're not ready right now, the assessment will be waiting for you in the app.<br>To stop receiving these notifications, <a href="{{ unsubscribe_link }}">unsubscribe here</a>.</p>
+{% endblock %}

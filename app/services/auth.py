@@ -6,12 +6,26 @@ from firebase_admin import auth as firebase_auth
 from app.db import get_db
 from app.models.user import User, UserRole, SubscriptionTier
 from sqlalchemy.orm import Session
-from datetime import UTC, datetime
-from app.utils.datetime import utc_now
+from datetime import UTC, datetime, timedelta
+from app.utils.datetime import utc_now, to_naive_utc
 from app.schemas.user import UserSchema
 from app.core.settings import settings
 
 security = HTTPBearer(auto_error=False)  # auto_error=False allows optional auth
+
+_ACTIVITY_COOLDOWN = timedelta(minutes=15)
+
+
+def _track_user_activity(user: User, db: Session) -> None:
+    """Write last_activity_at at most once per 15 minutes to avoid per-request DB writes."""
+    now = to_naive_utc(utc_now())
+    last = user.last_activity_at
+    if last is None or (now - last) > _ACTIVITY_COOLDOWN:
+        try:
+            user.last_activity_at = now
+            db.commit()
+        except Exception:
+            db.rollback()
 
 def verify_token(request: Request):
     auth_header = request.headers.get("Authorization")
@@ -98,6 +112,7 @@ def get_current_user(
             # Update the user's ID to match Firebase UID
             user.id = user_id
             db.commit()
+            _track_user_activity(user, db)
             return user
     
     # If still not found, do NOT auto-create - require explicit POST /users/ call
@@ -107,7 +122,8 @@ def get_current_user(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="User not found. Please complete registration first.",
         )
-    
+
+    _track_user_activity(user, db)
     return user
 
 def get_current_user_optional(

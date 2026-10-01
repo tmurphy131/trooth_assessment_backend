@@ -171,7 +171,7 @@ def get_invitation_metrics(db: Session, period: str = "all") -> Dict[str, Any]:
     ).count()
     
     # Pending (not accepted, not expired)
-    now = datetime.now(UTC)
+    now = datetime.now(UTC).replace(tzinfo=None)  # Use naive datetime for comparison
     pending = db.query(ApprenticeInvitation).filter(
         and_(
             ApprenticeInvitation.accepted == False,
@@ -341,7 +341,7 @@ def get_dashboard_summary(db: Session) -> Dict[str, Any]:
     ).count()
     
     # Pending invitations
-    now = datetime.now(UTC)
+    now = datetime.now(UTC).replace(tzinfo=None)  # Use naive datetime for comparison
     pending_invitations = db.query(ApprenticeInvitation).filter(
         and_(
             ApprenticeInvitation.accepted == False,
