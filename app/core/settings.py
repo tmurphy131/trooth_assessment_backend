@@ -56,7 +56,7 @@ class Settings:
         # Provider: 'gemini' (default, faster/cheaper) or 'openai'
         self.llm_provider = os.getenv("LLM_PROVIDER", "gemini")
         # Model: optional, uses provider default if not set
-        # Gemini models: gemini-2.5-flash (default), gemini-2.5-pro, gemini-2.5-flash-lite
+        # Gemini models: gemini-3.5-flash (default), gemini-3.5-flash-lite, gemini-3.1-flash-lite
         # OpenAI models: gpt-4o-mini (default), gpt-4o
         self.llm_model = os.getenv("LLM_MODEL", "")
         # Enable automatic fallback to secondary provider on failure

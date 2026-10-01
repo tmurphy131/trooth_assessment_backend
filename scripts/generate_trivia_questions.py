@@ -127,14 +127,14 @@ def call_gemini(category: str, difficulty: str, count: int) -> list[dict]:
     from app.services.llm.gemini_provider import GeminiProvider
     from app.services.llm.base import LLMConfig
 
-    provider = GeminiProvider(model="gemini-2.5-flash")
+    provider = GeminiProvider(model="gemini-3.5-flash")
     config = LLMConfig(
         temperature=0.9,
-        max_tokens=65536,  # gemini-2.5-flash max output tokens
+        max_tokens=65536,  # gemini-3.5-flash max output tokens
         json_mode=True,
     )
 
-    print(f"  Calling Gemini (gemini-2.5-flash via Vertex AI)...")
+    print(f"  Calling Gemini (gemini-3.5-flash via Vertex AI)...")
     response = provider.generate(
         system_prompt=SYSTEM_PROMPT,
         user_content=build_prompt(category, difficulty, count),

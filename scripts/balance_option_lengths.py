@@ -92,7 +92,7 @@ def call_gemini_batch(batch: list[dict]) -> list[dict]:
         for item in batch
     ]
 
-    provider = GeminiProvider(model="gemini-2.5-flash")
+    provider = GeminiProvider(model="gemini-3.5-flash")
     config = LLMConfig(temperature=0.7, max_tokens=8192, json_mode=True)
 
     response = provider.generate(
