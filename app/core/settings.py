@@ -75,6 +75,10 @@ class Settings:
         
         # RevenueCat settings
         self.revenuecat_webhook_secret = os.getenv("REVENUECAT_WEBHOOK_SECRET", "")
+        # Used to verify purchases server-side (GET /v1/subscribers). Prefer a
+        # secret key; the public SDK key also works for that read-only call.
+        self.revenuecat_secret_api_key = os.getenv("REVENUECAT_SECRET_API_KEY", "")
+        self.revenuecat_api_key = os.getenv("REVENUECAT_API_KEY", "")
 
         # Printful API (for shop availability)
         self.printful_api_token = os.getenv("PRINTFUL_API_TOKEN", "")

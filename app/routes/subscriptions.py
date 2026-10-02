@@ -35,6 +35,7 @@ from app.services.auth import (
     PREMIUM_TIERS,
 )
 from app.core.settings import settings
+from app.services import revenuecat
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/subscriptions", tags=["Subscriptions"])
@@ -158,68 +159,51 @@ def restore_purchases(
     db: Session = Depends(get_db),
 ):
     """
-    Restore / sync subscription from RevenueCat client SDK.
-    
-    The client should:
-    1. Call RevenueCat.restorePurchases() on the SDK
-    2. Read the active entitlements from CustomerInfo
-    3. POST them here so the backend can update the user record
-       (in case the webhook was missed or delayed)
-    4. Call GET /subscriptions/status to confirm updated status
-    
-    If no body is provided, returns current status (backward compatible).
+    Restore / sync the user's subscription from RevenueCat.
+
+    Purchase state is fetched from RevenueCat server-side for the caller's own
+    user ID. Entitlement fields in the request body are accepted for backward
+    compatibility but ignored: a client can't grant itself premium.
     """
     updated = False
-    
-    if body:
-        # Store RevenueCat customer ID
-        if body.revenuecat_customer_id and not user.revenuecat_customer_id:
-            user.revenuecat_customer_id = body.revenuecat_customer_id
-            updated = True
-            logger.info(f"Restore: set revenuecat_customer_id for {user.email}: {body.revenuecat_customer_id}")
-        
-        # If the client reports an active premium entitlement, sync it
-        if body.is_active and body.product_id:
-            tier = map_product_to_tier(body.product_id)
-            platform = map_product_to_platform(body.product_id)
-            
-            # Parse store from client if available
-            if body.store:
-                store_lower = body.store.lower()
-                if "play" in store_lower or "google" in store_lower:
-                    platform = SubscriptionPlatform.google
-                elif "app_store" in store_lower or "apple" in store_lower:
-                    platform = SubscriptionPlatform.apple
-            
-            # Parse expiration
-            expires_at = None
-            if body.expiration_date:
-                try:
-                    expires_at = datetime.fromisoformat(body.expiration_date.replace("Z", "+00:00"))
-                except ValueError:
-                    logger.warning(f"Could not parse expiration_date: {body.expiration_date}")
-            
-            # Only update if current tier is free or expired
-            current_premium = check_premium_access(user)
-            if not current_premium.get("has_premium", False):
-                user.subscription_tier = tier
-                user.subscription_platform = platform
-                user.subscription_expires_at = expires_at
-                user.subscription_auto_renew = True
-                updated = True
-                
-                log_subscription_event(
-                    db, user.id, EventTypes.INITIAL_PURCHASE,
-                    {"product_id": body.product_id, "source": "client_restore", "store": body.store}
-                )
-                logger.info(f"Restore: synced subscription for {user.email} from client: tier={tier.value}, product={body.product_id}")
-            else:
-                logger.info(f"Restore: user {user.email} already has premium, skipping tier update")
-        
-        if updated:
-            db.commit()
-            db.refresh(user)
-    
+
+    if not user.revenuecat_customer_id:
+        # Same rule as the webhook: the RevenueCat app user ID is our user ID.
+        user.revenuecat_customer_id = user.id
+        updated = True
+
+    try:
+        customer = revenuecat.fetch_customer(user.id)
+    except revenuecat.RevenueCatUnavailable as e:
+        logger.warning(f"Restore: could not verify purchases for {user.id}: {e}")
+        customer = None
+
+    premium = customer.premium if customer else None
+    if premium and not check_premium_access(user).get("has_premium", False):
+        tier = map_product_to_tier(premium.product_id)
+        platform = map_product_to_platform(premium.product_id)
+        store = (premium.store or "").lower()
+        if "play" in store:
+            platform = SubscriptionPlatform.google
+        elif "app_store" in store or "mac_app_store" in store:
+            platform = SubscriptionPlatform.apple
+
+        user.subscription_tier = tier
+        user.subscription_platform = platform
+        user.subscription_expires_at = premium.expires_at
+        user.subscription_auto_renew = True
+        updated = True
+
+        log_subscription_event(
+            db, user.id, EventTypes.INITIAL_PURCHASE,
+            {"product_id": premium.product_id, "source": "verified_restore", "store": premium.store}
+        )
+        logger.info(f"Restore: synced verified subscription for {user.id}: tier={tier.value}, product={premium.product_id}")
+
+    if updated:
+        db.commit()
+        db.refresh(user)
+
     return {
         "message": "Restore completed." if updated else "Restore initiated. Please refresh subscription status after a moment.",
         "updated": updated,
@@ -240,7 +224,7 @@ class SetSubscriptionRequest(BaseModel):
 @router.post("/admin/set-tier")
 def admin_set_subscription_tier(
     request: SetSubscriptionRequest,
-    user: User = Depends(get_current_user),
+    user: User = Depends(require_admin),
     db: Session = Depends(get_db),
 ):
     """
@@ -251,6 +235,12 @@ def admin_set_subscription_tier(
     
     Valid tiers: free, mentor_premium, apprentice_premium, mentor_gifted
     """
+    if settings.environment.lower() in ("production", "prod"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not available in production"
+        )
+
     valid_tiers = ["free", "mentor_premium", "apprentice_premium", "mentor_gifted"]
     if request.tier not in valid_tiers:
         raise HTTPException(
@@ -558,8 +548,30 @@ def confirm_seat_purchase(
             expires_at=existing_seat.expires_at.isoformat() if existing_seat.expires_at else None,
         )
     
-    # Seat not found - create it (webhook hasn't arrived yet)
-    # This handles race conditions between client and webhook
+    # Seat not found - create it (webhook hasn't arrived yet).
+    # Only if RevenueCat shows more gift-seat purchases than this mentor has
+    # seats, so a client can't mint seats by sending made-up IDs.
+    try:
+        customer = revenuecat.fetch_customer(user.id)
+    except revenuecat.RevenueCatUnavailable as e:
+        logger.warning(f"Seat confirm: could not verify purchase for {user.id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Purchase not verified yet. Your seat will appear once it's processed.",
+        )
+    active_seats = db.query(func.count(MentorPremiumSeat.id)).filter(
+        MentorPremiumSeat.mentor_id == user.id,
+        MentorPremiumSeat.is_active == True,
+    ).scalar() or 0
+    if customer.gift_seat_purchases <= active_seats:
+        logger.warning(
+            f"Seat confirm rejected for {user.id}: {customer.gift_seat_purchases} verified purchases, {active_seats} active seats"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Purchase not verified yet. Your seat will appear once it's processed.",
+        )
+
     from app.models.mentor_premium_seat import generate_redemption_code as gen_code
     
     code = gen_code()

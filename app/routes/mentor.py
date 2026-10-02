@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import func
-from app.services.auth import require_mentor, get_current_user
+from app.services.auth import require_mentor, get_current_user, is_premium_user
 from app.db import get_db
 from app.models.user import User
 from app.models.notification import Notification
@@ -21,6 +21,40 @@ from app.exceptions import ForbiddenException, NotFoundException
 from pydantic import BaseModel
 
 router = APIRouter()
+
+
+def _ordered_active_apprentice_users(db: Session, mentor_id: str) -> list:
+    """Active apprentices for a mentor, oldest account first.
+
+    The order is the contract for the free tier: the client treats index 0
+    as the one apprentice a free mentor may view.
+    """
+    apprentice_ids = [
+        a.apprentice_id
+        for a in db.query(MentorApprentice)
+        .filter(MentorApprentice.mentor_id == mentor_id, MentorApprentice.active.is_(True))
+        .all()
+    ]
+    if not apprentice_ids:
+        return []
+    return (
+        db.query(UserModel)
+        .filter(UserModel.id.in_(apprentice_ids))
+        .order_by(UserModel.created_at.asc(), UserModel.id.asc())
+        .all()
+    )
+
+
+def _ensure_free_tier_apprentice_access(db: Session, mentor: User, apprentice_id: str) -> None:
+    """Free mentors (not premium, not grandfathered) may only view their first apprentice."""
+    if is_premium_user(mentor) or getattr(mentor, "is_grandfathered_mentor", False):
+        return
+    apprentices = _ordered_active_apprentice_users(db, mentor.id)
+    if apprentices and apprentices[0].id != apprentice_id:
+        raise HTTPException(
+            status_code=403,
+            detail="Premium subscription required to view additional apprentices",
+        )
 @router.get("/notifications", response_model=list[dict])
 def list_notifications(
     current_user: User = Depends(require_mentor),
@@ -116,18 +150,7 @@ def list_apprentices(
     current_user: User = Depends(require_mentor),
     db: Session = Depends(get_db)
 ):
-    apprentices = (
-        db.query(MentorApprentice)
-        .filter(MentorApprentice.mentor_id == current_user.id, MentorApprentice.active.is_(True))
-        .all()
-    )
-
-    apprentice_ids = [a.apprentice_id for a in apprentices]
-    apprentice_users = (
-        db.query(UserModel)
-        .filter(UserModel.id.in_(apprentice_ids))
-        .all()
-    )
+    apprentice_users = _ordered_active_apprentice_users(db, current_user.id)
 
     return [
         {
@@ -152,6 +175,7 @@ def get_apprentice_draft(
     ).first()
     if not mapping:
         raise ForbiddenException("Not authorized to view this apprentice")
+    _ensure_free_tier_apprentice_access(db, current_user, apprentice_id)
 
     draft = (
         db.query(AssessmentDraft)
@@ -195,7 +219,7 @@ def get_submitted_assessments_for_apprentice(
     start_date: datetime = Query(None),
     end_date: datetime = Query(None),
     skip: int = Query(0, ge=0),
-    limit: int = Query(10, ge=1),
+    limit: int = Query(10, ge=1, le=200),
     current_user: User = Depends(require_mentor),
     db: Session = Depends(get_db)
 ):
@@ -206,6 +230,7 @@ def get_submitted_assessments_for_apprentice(
     ).first()
     if not mapping:
         raise ForbiddenException("Not authorized to view this apprentice")
+    _ensure_free_tier_apprentice_access(db, current_user, apprentice_id)
 
     query = db.query(Assessment).filter_by(apprentice_id=apprentice_id)
 
