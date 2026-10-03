@@ -616,3 +616,24 @@ def notify_trivia_challenge_expired(
         }
     )
     PushNotificationService.send_to_users(db, [challenger_id, challenged_id], payload)
+
+
+def notify_trivia_competition_won(
+    db: Session,
+    user_id: str,
+    place: int,
+    competition_name: str,
+) -> Dict[str, Any]:
+    """Tell a competition winner they placed and their prize code was emailed."""
+    medal = {1: "🥇", 2: "🥈", 3: "🥉"}.get(place, "🏆")
+    place_name = {1: "1st", 2: "2nd", 3: "3rd"}.get(place, f"#{place}")
+    payload = PushNotificationPayload(
+        title=f"{medal} You placed {place_name}!",
+        body=f"You won the Trivia {competition_name}. Check your email for your merch code.",
+        data={
+            "type": "trivia_competition_won",
+            "place": place,
+            "screen": "trivia_home",
+        }
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
