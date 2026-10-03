@@ -88,6 +88,32 @@ class Settings:
         self.shopify_store_domain = os.getenv("SHOPIFY_STORE_DOMAIN", "0jpspx-qv.myshopify.com")
         self.shopify_storefront_token = os.getenv("SHOPIFY_STOREFRONT_TOKEN", "51d92ea63e7a18e8a8a01c2d080fe813")
 
+        # Shopify Admin API (Dev Dashboard app, client credentials grant) — used to
+        # create trivia competition prize codes. Leave unset outside prod: the
+        # client then runs in dry-run mode and never touches the real store.
+        self.shopify_client_id = os.getenv("SHOPIFY_CLIENT_ID", "")
+        self.shopify_client_secret = os.getenv("SHOPIFY_CLIENT_SECRET", "")
+        self.shopify_admin_api_version = os.getenv("SHOPIFY_ADMIN_API_VERSION", "2026-10")
+        # Collection the prize codes apply to ("All Products – Trivia Prizes")
+        self.shopify_prize_collection_id = os.getenv(
+            "SHOPIFY_PRIZE_COLLECTION_ID", "gid://shopify/Collection/663277830328"
+        )
+        self.shop_url = os.getenv("SHOP_URL", "https://shop.onlyblv.com")
+
+        # Trivia competition
+        # Comma-separated emails or "@domain" entries that can't win prizes
+        self.trivia_competition_excluded_emails = [
+            e.strip().lower()
+            for e in os.getenv("TRIVIA_COMPETITION_EXCLUDED_EMAILS", "").split(",")
+            if e.strip()
+        ]
+        # Who gets the winners/codes summary when a competition is finalized
+        self.trivia_competition_admin_emails = [
+            e.strip()
+            for e in os.getenv("TRIVIA_COMPETITION_ADMIN_EMAILS", "taylor.murphy@onlyblv.com").split(",")
+            if e.strip()
+        ]
+
     def _parse_cors_origins(self, v: str) -> List[str]:
         if v == "*":
             return ["*"]

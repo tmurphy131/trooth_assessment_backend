@@ -25,6 +25,13 @@ from app.models.assessment_score_history import AssessmentScoreHistory
 from app.models.email_send_event import EmailSendEvent
 from app.models.mentor_profile import MentorProfile
 from app.models.prayer_entry import PrayerEntry
+from app.models.agreement import AgreementTemplate
+from app.models.assessment_template import AssessmentTemplate
+from app.models.subscription_event import SubscriptionEvent
+from app.models.mentor_premium_seat import MentorPremiumSeat, generate_redemption_code
+from app.models.trivia import (
+    TriviaSingleScore, TriviaBadge, TriviaChallenge, TriviaCompetitionWinner,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +39,9 @@ logger = logging.getLogger(__name__)
 def _table_exists(db: Session, table_name: str) -> bool:
     """Check if a table exists in the database."""
     try:
-        inspector = inspect(db.bind)
+        # Inspect on the session's own connection: checking out a separate one
+        # can reset (roll back) a shared connection's in-progress deletes
+        inspector = inspect(db.connection())
         return table_name in inspector.get_table_names()
     except Exception as e:
         logger.warning(f"Could not check if table {table_name} exists: {e}")
@@ -71,6 +80,86 @@ def _safe_delete_by_ids(db: Session, model, id_column, ids: list, table_name: st
     except Exception as e:
         logger.warning(f"Could not delete from {table_name}: {e}")
         return 0
+
+
+def _safe_update(db: Session, model, filter_condition, values: dict, table_name: str) -> int:
+    """Safely bulk-update records, handling cases where the table doesn't exist."""
+    try:
+        if not _table_exists(db, table_name):
+            logger.info(f"Table {table_name} does not exist, skipping update")
+            return 0
+        return db.query(model).filter(filter_condition).update(values, synchronize_session=False)
+    except Exception as e:
+        logger.warning(f"Could not update {table_name}: {e}")
+        return 0
+
+
+def _clear_shared_user_references(db: Session, user_id: str, deleted_counts: dict) -> None:
+    """Remove or detach every remaining row that references the user, for any role.
+
+    Every users.id foreign key is NO ACTION in Postgres, so any leftover row
+    blocks the final user delete. Personal data is deleted; rows that belong to
+    someone else only drop their link to this user.
+    """
+    # Trivia: personal history is deleted. A challenge can't exist without both
+    # players, so challenges the user was in go too (winner_id is always one of them).
+    deleted_counts["trivia_challenges"] = _safe_delete(
+        db, TriviaChallenge,
+        or_(TriviaChallenge.challenger_id == user_id, TriviaChallenge.challenged_id == user_id),
+        "trivia_challenges",
+    )
+    deleted_counts["trivia_single_scores"] = _safe_delete(
+        db, TriviaSingleScore, TriviaSingleScore.user_id == user_id, "trivia_single_scores")
+    deleted_counts["trivia_badges"] = _safe_delete(
+        db, TriviaBadge, TriviaBadge.user_id == user_id, "trivia_badges")
+    # Competition podiums keep the (snapshotted) name but lose the account link
+    deleted_counts["trivia_competition_winners_detached"] = _safe_update(
+        db, TriviaCompetitionWinner, TriviaCompetitionWinner.user_id == user_id,
+        {"user_id": None}, "trivia_competition_winners")
+
+    # Email logs (campaign emails use the user as both sender and target)
+    deleted_counts["email_send_events_user"] = _safe_delete(
+        db, EmailSendEvent,
+        or_(EmailSendEvent.sender_user_id == user_id, EmailSendEvent.target_user_id == user_id),
+        "email_send_events",
+    )
+
+    # Subscription history: the user's own events go; events they triggered for
+    # someone else (e.g. a mentor assigning a gift seat) stay without the link
+    deleted_counts["subscription_events"] = _safe_delete(
+        db, SubscriptionEvent, SubscriptionEvent.user_id == user_id, "subscription_events")
+    _safe_update(db, SubscriptionEvent, SubscriptionEvent.triggered_by_user_id == user_id,
+                 {"triggered_by_user_id": None}, "subscription_events")
+
+    # Gift seats: a mentor's seats go with them; a seat held by a deleted
+    # apprentice is freed for the mentor to reuse (same reset as revoking it)
+    deleted_counts["mentor_premium_seats"] = _safe_delete(
+        db, MentorPremiumSeat, MentorPremiumSeat.mentor_id == user_id, "mentor_premium_seats")
+    if _table_exists(db, "mentor_premium_seats"):
+        held = db.query(MentorPremiumSeat).filter(MentorPremiumSeat.apprentice_id == user_id).all()
+        for seat in held:
+            seat.apprentice_id = None
+            seat.apprentice_email = None
+            seat.apprentice_name = None
+            seat.is_redeemed = False
+            seat.redeemed_at = None
+            seat.redemption_code = generate_redemption_code()
+        db.flush()
+        deleted_counts["gift_seats_freed"] = len(held)
+
+    # Score history rows not already removed with the user's assessments
+    deleted_counts["score_history_remaining"] = _safe_delete(
+        db, AssessmentScoreHistory, AssessmentScoreHistory.apprentice_id == user_id,
+        "assessment_score_history")
+    _safe_update(db, AssessmentScoreHistory, AssessmentScoreHistory.triggered_by_user_id == user_id,
+                 {"triggered_by_user_id": None}, "assessment_score_history")
+
+    # Authorship/audit links on shared records
+    _safe_update(db, Agreement, Agreement.revoked_by == user_id, {"revoked_by": None}, "agreements")
+    _safe_update(db, AgreementTemplate, AgreementTemplate.author_user_id == user_id,
+                 {"author_user_id": None}, "agreement_templates")
+    _safe_update(db, AssessmentTemplate, AssessmentTemplate.created_by == user_id,
+                 {"created_by": None}, "assessment_templates")
 
 
 def get_account_deletion_summary(db: Session, user: User) -> dict:
@@ -147,7 +236,9 @@ def delete_apprentice_account(db: Session, user_id: str, user_email: str = None)
     11. Mentor-apprentice relationships
     12. Notifications
     13. Prayer journal entries
-    14. User record
+    14. Shared references: trivia history, email logs, subscription events,
+        gift seats (freed), score history, authorship links
+    15. User record
     """
     deleted_counts = {}
     
@@ -218,7 +309,10 @@ def delete_apprentice_account(db: Session, user_id: str, user_email: str = None)
         count = _safe_delete(db, PrayerEntry, PrayerEntry.apprentice_id == user_id, "prayer_entries")
         deleted_counts["prayer_entries"] = count
         
-        # 13. Delete the user (this table must exist)
+        # 13. Trivia, email logs, subscriptions, gift seats and other shared references
+        _clear_shared_user_references(db, user_id, deleted_counts)
+
+        # 14. Delete the user (this table must exist)
         count = db.query(User).filter(User.id == user_id).delete(synchronize_session=False)
         deleted_counts["user"] = count
         
@@ -250,7 +344,9 @@ def delete_mentor_account(db: Session, user_id: str) -> dict:
     7. Email send events (where mentor is sender)
     8. Notifications
     9. Mentor profile
-    10. User record
+    10. Shared references: trivia history, email logs, subscription events,
+        gift seats, score history, authorship links
+    11. User record
     
     Note: This does NOT delete apprentice assessments - those belong to the apprentice.
     """
@@ -295,7 +391,10 @@ def delete_mentor_account(db: Session, user_id: str) -> dict:
         count = _safe_delete(db, MentorProfile, MentorProfile.user_id == user_id, "mentor_profiles")
         deleted_counts["mentor_profile"] = count
         
-        # 10. Delete the user (this table must exist)
+        # 10. Trivia, email logs, subscriptions, gift seats and other shared references
+        _clear_shared_user_references(db, user_id, deleted_counts)
+
+        # 11. Delete the user (this table must exist)
         count = db.query(User).filter(User.id == user_id).delete(synchronize_session=False)
         deleted_counts["user"] = count
         

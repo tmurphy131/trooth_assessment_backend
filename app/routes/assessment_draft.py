@@ -512,6 +512,12 @@ def list_drafts(
     ).all()
     print(f"DEBUG: Found {len(drafts)} in-progress drafts")
 
+    template_names = dict(
+        db.query(AssessmentTemplate.id, AssessmentTemplate.name)
+        .filter(AssessmentTemplate.id.in_({d.template_id for d in drafts}))
+        .all()
+    ) if drafts else {}
+
     draft_responses = []
     for draft in drafts:
         try:
@@ -535,7 +541,8 @@ def list_drafts(
                 answers=draft.answers,
                 last_question_id=draft.last_question_id,
                 is_submitted=draft.is_submitted,
-                questions=questions_out
+                questions=questions_out,
+                template_name=template_names.get(draft.template_id),
             )
             draft_responses.append(draft_response)
             print(f"DEBUG: Successfully processed draft {draft.id}")

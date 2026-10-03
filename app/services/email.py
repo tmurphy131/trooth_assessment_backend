@@ -5,6 +5,7 @@ from typing import Dict, Optional, Tuple
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail, To, From, Subject, HtmlContent, PlainTextContent, Attachment, FileContent, FileName, FileType, Disposition
 from datetime import datetime
+from html import escape
 
 try:
     from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -582,6 +583,79 @@ def send_new_template_email(db, user, template) -> bool:
     if success:
         _log_campaign_email(db, user.id, "new_template", {"template_id": template.id})
     return success
+
+
+_PLACE_NAMES = {1: "1st", 2: "2nd", 3: "3rd"}
+
+
+def send_trivia_prize_email(db, user, winner, competition, prize_label: str) -> bool:
+    """Email a trivia competition winner their one-time merch discount code."""
+    env = get_email_template_env()
+    if not env:
+        return False
+
+    place_name = _PLACE_NAMES.get(winner.place, f"#{winner.place}")
+    expires = winner.code_expires_at.strftime("%B %-d, %Y") if winner.code_expires_at else None
+    ctx = {
+        "name": user.name,
+        "competition_name": competition.name,
+        "place_name": place_name,
+        "medal": {1: "🥇", 2: "🥈", 3: "🥉"}.get(winner.place, "🏆"),
+        "score": f"{winner.score:,}",
+        "prize_label": prize_label,
+        "discount_code": winner.discount_code,
+        "expires": expires,
+        "shop_url": settings.shop_url,
+        "logo_url": settings.logo_url,
+    }
+
+    try:
+        html_content = env.get_template("campaigns/trivia_prize.html").render(**ctx)
+    except Exception as e:
+        logger.error(f"[email] Failed to render trivia_prize template: {e}")
+        return False
+
+    plain_content = (
+        f"Hi {user.name},\n\nCongratulations! You finished {place_name} in the T[root]H "
+        f"{competition.name} with {winner.score:,} points.\n\n"
+        f"Your prize: {prize_label}\nYour code: {winner.discount_code}\n"
+        f"Use it once at checkout on {settings.shop_url}."
+        + (f" It expires {expires}." if expires else "")
+        + "\n\nThank you for playing!\nT[root]H Discipleship Team"
+    )
+    subject = f"{ctx['medal']} You placed {place_name} in the T[root]H Trivia {competition.name}!"
+
+    success = send_email(user.email, subject, html_content, plain_content)
+    if success:
+        _log_campaign_email(db, user.id, "trivia_prize",
+                            {"competition": competition.slug, "place": winner.place})
+    return success
+
+
+def send_trivia_competition_admin_summary(competition) -> bool:
+    """Send the admin a plain summary of a finalized competition's winners and codes."""
+    recipients = settings.trivia_competition_admin_emails
+    if not recipients:
+        return False
+
+    lines = [f"{competition.name} ({competition.slug}) has been finalized.", ""]
+    if not competition.winners:
+        lines.append("No eligible players scored during the competition window.")
+    for w in competition.winners:
+        lines.append(
+            f"{_PLACE_NAMES.get(w.place, w.place)} — {w.display_name} — {w.score:,} pts — "
+            f"code {w.discount_code} — emailed {w.emailed_at:%Y-%m-%d %H:%M} UTC"
+            if w.emailed_at else
+            f"{_PLACE_NAMES.get(w.place, w.place)} — {w.display_name} — {w.score:,} pts — code {w.discount_code}"
+        )
+    plain = "\n".join(lines)
+    html = "<pre style=\"font-family:monospace\">" + escape(plain) + "</pre>"
+    subject = f"[T[root]H] Trivia {competition.name} winners"
+
+    ok = True
+    for to in recipients:
+        ok = send_email(to, subject, html, plain) and ok
+    return ok
 
 
 def send_inactive_reengagement_email(db, user, days_inactive: int,

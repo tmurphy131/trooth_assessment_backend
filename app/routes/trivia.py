@@ -11,9 +11,10 @@ from app.models.mentor_apprentice import MentorApprentice
 from app.schemas.trivia import (
     TriviaQuestionOut, SingleGameSubmit, SingleGameResult,
     LeaderboardEntry, ChallengeCreate, ChallengeAnswerSubmit,
-    ChallengeListItem, ChallengeDetail, TriviaProfileOut,
+    ChallengeListItem, ChallengeDetail, TriviaProfileOut, CompetitionOut,
 )
 from app.services import trivia as trivia_svc
+from app.services import trivia_competition as competition_svc
 from app.services.push_notification import (
     notify_trivia_challenge_received,
     notify_trivia_question_unlocked,
@@ -76,6 +77,19 @@ def get_leaderboard(
     current_user: User = Depends(get_current_user),
 ):
     return trivia_svc.get_leaderboard(db, category, difficulty, limit)
+
+
+
+@router.get("/competition", response_model=Optional[CompetitionOut])
+def get_competition(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Current (else upcoming, else most recent) leaderboard competition, or null."""
+    comp = competition_svc.get_current_competition(db)
+    if comp is None:
+        return None
+    return competition_svc.build_competition_out(db, comp, current_user)
 
 
 # ---------- Multiplayer ----------

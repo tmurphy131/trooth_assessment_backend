@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Boolean, DateTime, Enum, JSON, ForeignKey
+from sqlalchemy import Column, String, Integer, Boolean, DateTime, Enum, JSON, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
 from datetime import datetime, UTC, timedelta
 import enum
@@ -140,3 +140,48 @@ BADGE_DISPLAY_NAMES = {
     "the_overcomer": "The Overcomer",
     "the_chosen": "The Chosen",
 }
+
+
+class TriviaCompetition(Base):
+    """A time-boxed leaderboard competition with prizes for the top places."""
+    __tablename__ = "trivia_competitions"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    slug = Column(String, unique=True, nullable=False)
+    name = Column(String, nullable=False)
+    difficulty = Column(String, nullable=False)   # TriviaDifficulty value, e.g. "challenger"
+    starts_at = Column(DateTime(timezone=True), nullable=False)
+    ends_at = Column(DateTime(timezone=True), nullable=False)
+    # [{"place": 1, "percent": 100, "label": "100% off one merch item"}, ...]
+    prizes = Column(JSON, nullable=False)
+    code_valid_days = Column(Integer, nullable=False, default=90)
+    finalized_at = Column(DateTime(timezone=True), nullable=True)
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
+
+    winners = relationship(
+        "TriviaCompetitionWinner",
+        back_populates="competition",
+        order_by="TriviaCompetitionWinner.place",
+    )
+
+
+class TriviaCompetitionWinner(Base):
+    __tablename__ = "trivia_competition_winners"
+    __table_args__ = (UniqueConstraint("competition_id", "user_id", name="uq_trivia_competition_winner"),)
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    competition_id = Column(Integer, ForeignKey("trivia_competitions.id"), nullable=False, index=True)
+    # SET NULL so a winner deleting their account doesn't erase the podium
+    user_id = Column(String, ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    display_name = Column(String, nullable=False)
+    place = Column(Integer, nullable=False)
+    score = Column(Integer, nullable=False)
+    discount_code = Column(String, nullable=True)
+    shopify_discount_id = Column(String, nullable=True)
+    code_expires_at = Column(DateTime(timezone=True), nullable=True)
+    emailed_at = Column(DateTime(timezone=True), nullable=True)
+    pushed_at = Column(DateTime(timezone=True), nullable=True)
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
+
+    competition = relationship("TriviaCompetition", back_populates="winners")
+    user = relationship("User", foreign_keys=[user_id])

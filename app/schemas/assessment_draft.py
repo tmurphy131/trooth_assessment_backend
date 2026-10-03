@@ -57,6 +57,7 @@ class AssessmentDraftOut(BaseModel):
     last_question_id: Optional[str]
     is_submitted: bool
     questions: List[QuestionItem]
+    template_name: Optional[str] = None
     model_config = {'from_attributes': True}
 
 class AssessmentAnswerOut(BaseModel):

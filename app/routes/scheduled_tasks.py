@@ -16,6 +16,7 @@ from app.models.user import User, UserRole
 from app.services.push_notification import notify_weekly_tips_batch, PushNotificationService
 from app.schemas.push_notification import PushNotificationPayload
 from app.services.trivia import expire_stale_challenges
+from app.services.trivia_competition import finalize_due_competitions
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -97,6 +98,21 @@ def trigger_trivia_expiry(
     expired_ids = expire_stale_challenges(db)
     logger.info(f"Trivia expiry: {len(expired_ids)} challenges expired")
     return {"message": "Trivia expiry check complete", "expired_count": len(expired_ids), "expired_ids": expired_ids}
+
+
+
+@router.post("/trivia-competition-finalize")
+def trigger_trivia_competition_finalize(
+    db: Session = Depends(get_db),
+    _verified: bool = Depends(verify_cron_secret)
+):
+    """Finalize ended trivia competitions: record winners, create Shopify prize
+    codes, email + push winners. Idempotent — safe to call every hour.
+
+    Cloud Scheduler job: trivia-competition-finalize-prod (0 * * * *, UTC)
+    """
+    results = finalize_due_competitions(db)
+    return {"message": "Trivia competition finalize complete", "results": results}
 
 
 @router.post("/test-push/{user_id}")

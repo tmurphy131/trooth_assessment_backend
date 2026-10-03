@@ -145,3 +145,52 @@ class TriviaProfileOut(BaseModel):
     ties: int
     personal_best_score: Optional[int]
     badges: list[BadgeOut]
+
+
+# ---------- Competition ----------
+
+class CompetitionPrize(BaseModel):
+    place: int
+    amount: int                 # USD off the order
+    label: str
+
+
+class CompetitionStanding(BaseModel):
+    rank: int
+    user_id: str
+    display_name: str
+    score: int
+    streak_length: int
+
+
+class CompetitionWinnerOut(BaseModel):
+    place: int
+    display_name: str
+    score: int
+    is_me: bool = False
+
+
+class CompetitionMyPrize(BaseModel):
+    place: int
+    label: str
+    discount_code: str
+    code_expires_at: Optional[datetime] = None
+    shop_url: str
+
+
+class CompetitionOut(BaseModel):
+    slug: str
+    name: str
+    status: str                 # upcoming | active | ended
+    difficulty: str
+    starts_at: datetime
+    ends_at: datetime
+    server_now: datetime
+    prizes: list[CompetitionPrize]
+    standings: list[CompetitionStanding] = []
+    my_rank: Optional[int] = None
+    my_score: Optional[int] = None
+    is_eligible: bool = True
+    finalized: bool = False
+    winners: list[CompetitionWinnerOut] = []
+    my_prize: Optional[CompetitionMyPrize] = None
