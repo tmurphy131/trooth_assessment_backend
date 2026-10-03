@@ -24,6 +24,7 @@ from app.models.notification import Notification
 from app.models.assessment_score_history import AssessmentScoreHistory
 from app.models.email_send_event import EmailSendEvent
 from app.models.mentor_profile import MentorProfile
+from app.models.prayer_entry import PrayerEntry
 
 logger = logging.getLogger(__name__)
 
@@ -109,6 +110,7 @@ def get_account_deletion_summary(db: Session, user: User) -> dict:
             "pending_invitations": safe_count(ApprenticeInvitation, ApprenticeInvitation.apprentice_email == user.email, "apprentice_invitations"),
             "shared_resources": safe_count(MentorResource, MentorResource.apprentice_id == user.id, "mentor_resources"),
             "mentor_relationships": safe_count(MentorApprentice, MentorApprentice.apprentice_id == user.id, "mentor_apprentice"),
+            "prayer_entries": safe_count(PrayerEntry, PrayerEntry.apprentice_id == user.id, "prayer_entries"),
         }
         
     elif user.role == UserRole.mentor or str(user.role) == "mentor":
@@ -144,7 +146,8 @@ def delete_apprentice_account(db: Session, user_id: str, user_email: str = None)
     10. Mentor resources shared with this apprentice
     11. Mentor-apprentice relationships
     12. Notifications
-    13. User record
+    13. Prayer journal entries
+    14. User record
     """
     deleted_counts = {}
     
@@ -211,7 +214,11 @@ def delete_apprentice_account(db: Session, user_id: str, user_email: str = None)
         count = _safe_delete(db, Notification, Notification.user_id == user_id, "notifications")
         deleted_counts["notifications"] = count
         
-        # 12. Delete the user (this table must exist)
+        # 12. Delete prayer journal entries
+        count = _safe_delete(db, PrayerEntry, PrayerEntry.apprentice_id == user_id, "prayer_entries")
+        deleted_counts["prayer_entries"] = count
+        
+        # 13. Delete the user (this table must exist)
         count = db.query(User).filter(User.id == user_id).delete(synchronize_session=False)
         deleted_counts["user"] = count
         

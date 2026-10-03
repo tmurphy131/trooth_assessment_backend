@@ -13,3 +13,4 @@ from .mentor_note import MentorNote
 from .notification import Notification
 from .spiritual_gift_definition import SpiritualGiftDefinition
 from .email_send_event import EmailSendEvent
+from .prayer_entry import PrayerEntry
