@@ -138,7 +138,7 @@ app.add_middleware(
         "https://onlyblv.com",
         "https://www.onlyblv.com",
         "https://trooth-discipleship-api.onlyblv.com",
-        "https://trooth-discipleship-api-dev.onlyblv.com/"
+        "https://trooth-discipleship-api-dev.onlyblv.com",
         # Local development
         "http://localhost:3000",
         "http://127.0.0.1:3000", 
