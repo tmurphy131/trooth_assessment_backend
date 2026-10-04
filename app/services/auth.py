@@ -1,3 +1,4 @@
+import os
 from typing import Optional
 from firebase_admin import auth
 from fastapi import Request, HTTPException, status, Depends
@@ -64,13 +65,14 @@ def get_current_user(
         )
     
     token = credentials.credentials
-    # Test tokens for development (ensure persistence so FK constraints pass)
+    # Test tokens for the pytest suite only (ensure persistence so FK constraints pass).
+    # Outside ENV=test they fall through to Firebase verification and are rejected.
     mock_map = {
         "mock-mentor-token": ("mentor-1", "Mentor One", "mentor@example.com", UserRole.mentor),
         "mock-apprentice-token": ("apprentice-1", "Apprentice One", "apprentice@example.com", UserRole.apprentice),
         "mock-admin-token": ("admin-1", "Admin One", "admin@example.com", UserRole.admin),
     }
-    if token in mock_map:
+    if os.getenv("ENV") == "test" and token in mock_map:
         uid, name, email, role = mock_map[token]
         user = db.query(User).filter(User.id == uid).first()
         if not user:
