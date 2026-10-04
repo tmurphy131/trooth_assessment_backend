@@ -56,7 +56,7 @@ Every change reaches `main` through a GitHub pull request.
   - Say how you verified the change: `pytest`, plus the dev deploy result.
 - **Before requesting review:**
   - `pytest` passes.
-  - Touched files are formatted with `black` and `isort`.
+  - No unrelated reformatting of existing files (see constitution Principle XI).
 - **New config or secrets:** update both deploy skills in the frontend repo, `/deploy-dev` and
   `/deploy-prod`, with the **complete** env and secret lists.
 - **Separate PRs:**
@@ -69,7 +69,7 @@ Every change reaches `main` through a GitHub pull request.
 |---|---|
 | Full suite | `.venv/bin/python -m pytest -q` |
 | One file | `.venv/bin/python -m pytest tests/test_<domain>.py -v` |
-| Formatting (touched files) | `black <files> && isort <files>` |
+| Formatting (optional, new files only) | `.venv/bin/python -m black <files> && .venv/bin/python -m isort <files>` |
 
 Tests use an in-memory SQLite database and auth overrides from `tests/conftest.py`, which sets
 `ENV=test`.

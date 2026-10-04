@@ -53,7 +53,7 @@ Complexity Tracking.
 - [ ] **VIII. Tests**: success + authz-failure tests per endpoint; no live external calls; `pytest` passes
 - [ ] **IX. Deploy**: verified on dev before prod; prod from `main`
 - [ ] **X. Contract**: `contracts/` documents endpoints, shapes and status codes; frontend spec links it
-- [ ] **XI. Formatting**: `black` + `isort` on touched files
+- [ ] **XI. Formatting**: no unrelated reformatting of existing files (formatting not yet required)
 
 ## Project Structure
 

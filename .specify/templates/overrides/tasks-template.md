@@ -157,7 +157,7 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] TXXX [P] Additional tests in tests/
 - [ ] TXXX Security hardening
 - [ ] TXXX Run quickstart.md validation
-- [ ] TXXX `black` + `isort` on touched files; `pytest` passes
+- [ ] TXXX `pytest` passes
 - [ ] TXXX If schema changed: migration has `downgrade()`; run `alembic upgrade head` locally
 - [ ] TXXX Deploy to dev (`/deploy-dev`, runs migrations first) and verify; update deploy env/secret lists if new config
 - [ ] TXXX Contract in `contracts/` matches the implemented responses and status codes

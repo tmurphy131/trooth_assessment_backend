@@ -108,11 +108,15 @@ formats for exactly this reason; breaking a live app version strands users.
 
 ### XI. Formatting
 
-- Files you change SHOULD be formatted with `black` and `isort`. Repo-wide reformatting MUST
-  be its own PR.
+- Automated formatting is **not required** yet. New files MAY be formatted with `black` and
+  `isort`. Existing files SHOULD NOT be reformatted as part of an unrelated change.
+- Recommended for the future (not yet adopted): one dedicated PR that runs `black` and
+  `isort` over the whole repo, records that commit in `.git-blame-ignore-revs`, and then
+  amends this principle to require `black --check` and `isort --check` on every change.
 
-**Rationale**: both tools are already in `requirements.txt`; formatting only touched files
-keeps diffs reviewable.
+**Rationale**: the codebase has never been formatted, so formatting files as they are touched
+would bury small fixes under hundreds of layout-only lines. A one-time reformat is the clean
+path when the team is ready.
 
 ## Technology Constraints & Known Debt
 
