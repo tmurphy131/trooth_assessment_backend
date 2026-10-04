@@ -235,7 +235,7 @@ def admin_set_subscription_tier(
     
     Valid tiers: free, mentor_premium, apprentice_premium, mentor_gifted
     """
-    if settings.environment.lower() in ("production", "prod"):
+    if settings.is_production:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Not available in production"

@@ -1,7 +1,16 @@
 """Application settings with environment validation."""
 
+import logging
 import os
 from typing import List
+
+logger = logging.getLogger(__name__)
+
+# ENV values: "development" (local), "test" (pytest), "dev" (Cloud Run dev), "production".
+# "dev" is deliberately neither development nor production: it is publicly reachable, so it
+# must not return stack traces, but it is not prod either.
+KNOWN_ENVIRONMENTS = {"development", "test", "dev", "production"}
+_ENV_ALIASES = {"prod": "production"}
 
 
 class Settings:
@@ -38,7 +47,12 @@ class Settings:
         self.email_from_address = os.getenv(
             "EMAIL_FROM_ADDRESS", "no-reply@trooth-app.com"
         )
-        self.environment = os.getenv("ENV", "development")
+        raw_env = os.getenv("ENV", "development").strip().lower()
+        self.environment = _ENV_ALIASES.get(raw_env, raw_env)
+        if self.environment not in KNOWN_ENVIRONMENTS:
+            logger.warning(
+                "Unknown ENV %r; expected one of %s", raw_env, sorted(KNOWN_ENVIRONMENTS)
+            )
         self.log_level = os.getenv("LOG_LEVEL", "INFO")
 
         # Security
