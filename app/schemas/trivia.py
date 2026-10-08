@@ -14,7 +14,7 @@ class TriviaQuestionOut(BaseModel):
     option_c: Optional[str] = None
     option_d: Optional[str] = None
     question_type: str
-    correct_option: Optional[str] = None  # included for single player draw; omitted for multiplayer
+    correct_option: Optional[str] = None  # legacy single-player draw only (removed at app 2.2.0)
 
     model_config = {'from_attributes': True}
 
@@ -55,6 +55,59 @@ class SingleGameResult(BaseModel):
     previous_best: Optional[int]
     leaderboard_rank: Optional[int]
     badges_earned: list[BadgeOut]
+
+
+# ---------- Server-run single player sessions ----------
+
+class SingleStartIn(BaseModel):
+    category: TriviaCategory
+    difficulty: TriviaDifficulty
+
+
+class SessionAnswerIn(BaseModel):
+    question_id: int
+    selected: Optional[str] = None   # a / b / c / d; null when the player's timer ran out
+
+
+class GraceIn(BaseModel):
+    use: bool
+
+
+class SessionQuestion(BaseModel):
+    # Deliberately has no correct_option field
+    index: int
+    id: int
+    question_text: str
+    question_type: str
+    option_a: str
+    option_b: str
+    option_c: Optional[str] = None
+    option_d: Optional[str] = None
+
+
+class LastAnswer(BaseModel):
+    question_id: int
+    selected: Optional[str] = None
+    correct: bool
+    correct_option: str
+    timed_out: bool
+
+
+class SingleSessionState(BaseModel):
+    session_id: str
+    status: str                       # active | awaiting_grace | finished
+    score: int
+    streak: int
+    correct_count: int
+    grace_tokens: int
+    grace_tokens_used: int
+    question_number: int              # 1-based number of `question`
+    total_questions: int
+    time_limit_ms: int
+    question: Optional[SessionQuestion] = None
+    last_answer: Optional[LastAnswer] = None
+    grace_expires_in_ms: Optional[int] = None
+    result: Optional[SingleGameResult] = None
 
 
 class LeaderboardEntry(BaseModel):

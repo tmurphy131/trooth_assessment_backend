@@ -18,6 +18,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.core.settings import settings
+from app.services import trivia_session
 from app.models.trivia import (
     TriviaCompetition, TriviaCompetitionWinner, TriviaSingleScore, TriviaDifficulty,
 )
@@ -111,6 +112,8 @@ def compute_standings(db: Session, comp: TriviaCompetition) -> list[Standing]:
             TriviaSingleScore.created_at >= _aware(comp.starts_at),
             TriviaSingleScore.created_at < _aware(comp.ends_at),
             TriviaSingleScore.score > 0,
+            # Only server-run games count; client-graded legacy scores never win prizes
+            TriviaSingleScore.verified == True,
         )
         .group_by(TriviaSingleScore.user_id)
         .all()
@@ -271,7 +274,21 @@ def finalize_competition(db: Session, comp_id: int, now: Optional[datetime] = No
         return {"slug": comp.slug, "status": "not_ended"}
 
     if not comp.winners:
-        _record_winners(db, comp)
+        # A game started before the end counts (dated by its start). Close abandoned
+        # ones; if someone is still mid-game, try again next hour.
+        db.commit()
+        if trivia_session.games_in_progress_before(db, comp.ends_at, now):
+            return {"slug": comp.slug, "status": "waiting_for_games"}
+        comp = (
+            db.query(TriviaCompetition)
+            .filter(TriviaCompetition.id == comp_id)
+            .with_for_update()
+            .one()
+        )
+        if not comp.winners:   # re-check: another run may have recorded them meanwhile
+            _record_winners(db, comp)
+        else:
+            db.commit()
         db.refresh(comp)
     else:
         db.commit()

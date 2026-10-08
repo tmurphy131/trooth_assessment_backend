@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Boolean, DateTime, Enum, JSON, ForeignKey, UniqueConstraint
+from sqlalchemy import Column, String, Integer, Boolean, DateTime, Enum, JSON, ForeignKey, UniqueConstraint, false
 from sqlalchemy.orm import relationship
 from datetime import datetime, UTC, timedelta
 import enum
@@ -40,6 +40,12 @@ class TriviaChallengeStatus(enum.Enum):
     expired = "expired"        # 7-day inactivity
     declined = "declined"
     cancelled = "cancelled"
+
+
+class TriviaSessionStatus(enum.Enum):
+    active = "active"                  # waiting for an answer to the current question
+    awaiting_grace = "awaiting_grace"  # answered wrong, may spend a grace token
+    finished = "finished"              # score recorded; terminal
 
 
 class TriviaQuestion(Base):
@@ -98,7 +104,40 @@ class TriviaSingleScore(Base):
     streak_length = Column(Integer, nullable=False)
     correct_count = Column(Integer, nullable=False)
     grace_tokens_used = Column(Integer, nullable=False, default=0)
+    # True only for scores produced by a server-run TriviaSingleSession
+    verified = Column(Boolean, nullable=False, default=False, server_default=false())
+    session_id = Column(String, ForeignKey("trivia_single_sessions.id"), nullable=True)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
+
+    user = relationship("User", foreign_keys=[user_id])
+
+
+class TriviaSingleSession(Base):
+    """A single-player game run and graded by the server."""
+    __tablename__ = "trivia_single_sessions"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id = Column(String, ForeignKey("users.id"), nullable=False, index=True)
+    category = Column(Enum(TriviaCategory), nullable=False)
+    difficulty = Column(Enum(TriviaDifficulty), nullable=False)
+    question_ids = Column(JSON, nullable=False)           # whole approved pool, shuffled
+    current_index = Column(Integer, nullable=False, default=0)
+    # {id, question_text, question_type, options: {a..d}, correct}; never sent to clients as-is
+    current_question = Column(JSON, nullable=True)
+    current_served_at = Column(DateTime(timezone=True), nullable=True)
+    answers = Column(JSON, nullable=False, default=list)  # [{index, question_id, selected, correct, timed_out, graced, elapsed_ms}]
+    score = Column(Integer, nullable=False, default=0)
+    streak = Column(Integer, nullable=False, default=0)
+    max_streak = Column(Integer, nullable=False, default=0)
+    correct_count = Column(Integer, nullable=False, default=0)
+    grace_tokens = Column(Integer, nullable=False, default=0)
+    grace_tokens_used = Column(Integer, nullable=False, default=0)
+    grace_deadline = Column(DateTime(timezone=True), nullable=True)
+    status = Column(Enum(TriviaSessionStatus), nullable=False, default=TriviaSessionStatus.active, index=True)
+    result = Column(JSON, nullable=True)                  # stored SingleGameResult once finished
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
+    last_activity_at = Column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
+    finished_at = Column(DateTime(timezone=True), nullable=True)
 
     user = relationship("User", foreign_keys=[user_id])
 

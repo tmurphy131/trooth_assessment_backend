@@ -121,6 +121,10 @@ class Settings:
             for e in os.getenv("TRIVIA_COMPETITION_EXCLUDED_EMAILS", "").split(",")
             if e.strip()
         ]
+        # Old /trivia/questions/draw and /single/submit; set false once app 2.2.0 is in both stores
+        self.trivia_legacy_single_enabled = self._parse_bool(
+            os.getenv("TRIVIA_LEGACY_SINGLE_ENABLED", "true")
+        )
         # Who gets the winners/codes summary when a competition is finalized
         self.trivia_competition_admin_emails = [
             e.strip()

@@ -8,7 +8,7 @@ from app.core.settings import settings
 from app.models.user import User, UserRole
 from app.models.trivia import (
     TriviaCompetition, TriviaCompetitionWinner, TriviaSingleScore,
-    TriviaCategory, TriviaDifficulty,
+    TriviaCategory, TriviaDifficulty, TriviaQuestion, TriviaCorrectOption, TriviaSingleSession,
 )
 from app.services import trivia_competition as comp_svc
 from app.services import shopify_admin
@@ -82,12 +82,68 @@ def _user(db, name, role=UserRole.apprentice, email=None):
     return u
 
 
-def _score(db, user, score, at=DURING, difficulty=TriviaDifficulty.challenger):
+def _score(db, user, score, at=DURING, difficulty=TriviaDifficulty.challenger, verified=True):
     db.add(TriviaSingleScore(
         user_id=user.id, category=TriviaCategory.old_testament, difficulty=difficulty,
         score=score, streak_length=score // 100, correct_count=score // 100, created_at=at,
+        verified=verified,
     ))
     db.commit()
+
+
+def test_standings_ignore_unverified_scores(db_session):
+    comp = _competition(db_session)
+    a, b = _user(db_session, "Alice"), _user(db_session, "Bob")
+    _score(db_session, a, 9900, verified=False)   # legacy client-graded submit
+    _score(db_session, a, 400)
+    _score(db_session, b, 700)
+
+    standings = comp_svc.compute_standings(db_session, comp)
+    assert [(s.user.id, s.score) for s in standings] == [(b.id, 700), (a.id, 400)]
+
+
+def _open_session(db, user, started_at, last_activity_at, served_at=None):
+    db.add(TriviaQuestion(
+        category=TriviaCategory.old_testament, difficulty=TriviaDifficulty.challenger,
+        question_text="Q?", option_a="A", option_b="B", option_c="C", option_d="D",
+        correct_option=TriviaCorrectOption.a,
+    ))
+    db.flush()
+    s = TriviaSingleSession(
+        user_id=user.id, category=TriviaCategory.old_testament, difficulty=TriviaDifficulty.challenger,
+        question_ids=[1], answers=[
+            {"index": 0, "question_id": 1, "selected": "a", "correct": True, "correct_option": "a",
+             "timed_out": False, "graced": False, "elapsed_ms": 1000},
+        ],
+        current_index=1, score=100, streak=1, max_streak=1, correct_count=1,
+        created_at=started_at, last_activity_at=last_activity_at, current_served_at=served_at,
+    )
+    db.add(s)
+    db.commit()
+    return s
+
+
+def test_finalize_waits_for_game_in_progress_then_counts_it(db_session, pushes, emails):
+    comp = _competition(db_session)
+    player = _user(db_session, "Late")
+    started = END - timedelta(minutes=10)
+    check = END + timedelta(minutes=5)
+    session = _open_session(db_session, player, started_at=started,
+                            last_activity_at=check - timedelta(seconds=10),
+                            served_at=check - timedelta(seconds=10))
+
+    # Still mid-question when the job runs: wait
+    first = comp_svc.finalize_competition(db_session, comp.id, now=check)
+    assert first["status"] == "waiting_for_games"
+
+    # A minute later the question has expired: closed, dated by its start, and it wins
+    result = comp_svc.finalize_competition(db_session, comp.id, now=check + timedelta(minutes=1))
+    assert result["status"] == "finalized"
+    db_session.expire_all()
+    score = db_session.query(TriviaSingleScore).filter_by(session_id=session.id).one()
+    assert score.verified is True
+    assert comp_svc._aware(score.created_at) == started
+    assert [w["display_name"] for w in result["winners"]] == ["Late"]
 
 
 # ---------- Standings ----------

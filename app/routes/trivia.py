@@ -4,7 +4,8 @@ from datetime import datetime, UTC, timedelta
 from typing import Optional
 
 from app.db import get_db
-from app.services.auth import get_current_user
+from app.core.settings import settings
+from app.services.auth import get_current_user, is_premium_user
 from app.models.user import User
 from app.models.trivia import TriviaChallenge, TriviaChallengeStatus
 from app.models.mentor_apprentice import MentorApprentice
@@ -12,8 +13,10 @@ from app.schemas.trivia import (
     TriviaQuestionOut, SingleGameSubmit, SingleGameResult,
     LeaderboardEntry, ChallengeCreate, ChallengeAnswerSubmit,
     ChallengeListItem, ChallengeDetail, TriviaProfileOut, CompetitionOut,
+    SingleStartIn, SessionAnswerIn, GraceIn, SingleSessionState,
 )
 from app.services import trivia as trivia_svc
+from app.services import trivia_session as session_svc
 from app.services import trivia_competition as competition_svc
 from app.services.push_notification import (
     notify_trivia_challenge_received,
@@ -26,9 +29,16 @@ from app.services.push_notification import (
 router = APIRouter()
 
 
-# ---------- Single Player ----------
+# ---------- Single Player (legacy, client-graded) ----------
 
-@router.get("/questions/draw", response_model=list[TriviaQuestionOut])
+def _require_legacy_single() -> None:
+    """Old draw/submit flow; switched off once app 2.2.0 is in both stores (spec 001)."""
+    if not settings.trivia_legacy_single_enabled:
+        raise HTTPException(status_code=426, detail="Please update the app to keep playing trivia.")
+
+
+@router.get("/questions/draw", response_model=list[TriviaQuestionOut],
+            dependencies=[Depends(_require_legacy_single)])
 def draw_questions(
     category: str = Query(...),
     difficulty: str = Query(...),
@@ -52,7 +62,8 @@ def draw_questions(
     ]
 
 
-@router.post("/single/submit", response_model=SingleGameResult)
+@router.post("/single/submit", response_model=SingleGameResult,
+             dependencies=[Depends(_require_legacy_single)])
 def submit_single_game(
     body: SingleGameSubmit,
     db: Session = Depends(get_db),
@@ -66,6 +77,46 @@ def submit_single_game(
         answers=[a.model_dump() for a in body.answers],
         grace_tokens_used=body.grace_tokens_used,
     )
+
+
+# ---------- Single Player (server-run sessions) ----------
+
+@router.post("/single/start", response_model=SingleSessionState)
+def start_single_session(
+    body: SingleStartIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    return session_svc.start(db, current_user, body.category, body.difficulty)
+
+
+@router.post("/single/{session_id}/answer", response_model=SingleSessionState)
+def answer_single_session(
+    session_id: str,
+    body: SessionAnswerIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    return session_svc.answer(db, current_user, session_id, body.question_id, body.selected)
+
+
+@router.post("/single/{session_id}/grace", response_model=SingleSessionState)
+def grace_single_session(
+    session_id: str,
+    body: GraceIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    return session_svc.use_grace(db, current_user, session_id, body.use)
+
+
+@router.post("/single/{session_id}/finish", response_model=SingleGameResult)
+def finish_single_session(
+    session_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    return session_svc.finish(db, current_user, session_id)
 
 
 @router.get("/leaderboard", response_model=list[LeaderboardEntry])
@@ -100,6 +151,15 @@ def create_challenge(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    if not is_premium_user(current_user):
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "error": "premium_required",
+                "message": "Premium subscription required to create challenges",
+                "upgrade_url": "/settings/subscription",
+            },
+        )
     if body.num_questions not in (20, 25, 30):
         raise HTTPException(status_code=400, detail="num_questions must be 20, 25, or 30")
 
