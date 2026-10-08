@@ -32,6 +32,7 @@ from app.models.mentor_premium_seat import MentorPremiumSeat, generate_redemptio
 from app.models.trivia import (
     TriviaSingleScore, TriviaBadge, TriviaChallenge, TriviaCompetitionWinner,
 )
+from app.models.daily_trivia import DailyTriviaAnswer, DailyTriviaStreak, DailyTriviaReward
 
 logger = logging.getLogger(__name__)
 
@@ -112,6 +113,12 @@ def _clear_shared_user_references(db: Session, user_id: str, deleted_counts: dic
         db, TriviaSingleScore, TriviaSingleScore.user_id == user_id, "trivia_single_scores")
     deleted_counts["trivia_badges"] = _safe_delete(
         db, TriviaBadge, TriviaBadge.user_id == user_id, "trivia_badges")
+    deleted_counts["daily_trivia_answers"] = _safe_delete(
+        db, DailyTriviaAnswer, DailyTriviaAnswer.user_id == user_id, "daily_trivia_answers")
+    deleted_counts["daily_trivia_streaks"] = _safe_delete(
+        db, DailyTriviaStreak, DailyTriviaStreak.user_id == user_id, "daily_trivia_streaks")
+    deleted_counts["daily_trivia_rewards"] = _safe_delete(
+        db, DailyTriviaReward, DailyTriviaReward.user_id == user_id, "daily_trivia_rewards")
     # Competition podiums keep the (snapshotted) name but lose the account link
     deleted_counts["trivia_competition_winners_detached"] = _safe_update(
         db, TriviaCompetitionWinner, TriviaCompetitionWinner.user_id == user_id,

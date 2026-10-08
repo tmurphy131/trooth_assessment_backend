@@ -632,6 +632,49 @@ def send_trivia_prize_email(db, user, winner, competition, prize_label: str) -> 
     return success
 
 
+def send_daily_trivia_reward_email(db, user, reward, replaced_percent=None) -> bool:
+    """Email a daily-trivia streak milestone reward code (spec 002)."""
+    env = get_email_template_env()
+    if not env:
+        return False
+
+    expires = reward.expires_at.strftime("%B %-d, %Y") if reward.expires_at else None
+    ctx = {
+        "name": user.name,
+        "tier": reward.tier,
+        "percent": reward.percent,
+        "perfect": reward.perfect,
+        "replaced_percent": replaced_percent,
+        "discount_code": reward.discount_code,
+        "expires": expires,
+        "shop_url": settings.shop_url,
+        "logo_url": settings.logo_url,
+    }
+
+    try:
+        html_content = env.get_template("campaigns/daily_trivia_reward.html").render(**ctx)
+    except Exception as e:
+        logger.error(f"[email] Failed to render daily_trivia_reward template: {e}")
+        return False
+
+    plain_content = (
+        f"Hi {user.name},\n\nYou answered the T[root]H daily question {reward.tier} days in a row"
+        + (" and got every one right" if reward.perfect else "")
+        + f"!\n\nYour reward: {reward.percent}% off ONLY BLV merch\nYour code: {reward.discount_code}\n"
+        + (f"This replaces your earlier {replaced_percent}% code, which no longer works.\n" if replaced_percent else "")
+        + f"Use it once at checkout on {settings.shop_url}."
+        + (f" It expires {expires}." if expires else "")
+        + "\n\nKeep your streak going!\nT[root]H Discipleship Team"
+    )
+    subject = f"🔥 {reward.tier}-day streak! Here's {reward.percent}% off merch"
+
+    success = send_email(user.email, subject, html_content, plain_content)
+    if success:
+        _log_campaign_email(db, user.id, "daily_trivia_reward",
+                            {"reward_id": reward.id, "tier": reward.tier, "percent": reward.percent})
+    return success
+
+
 def send_trivia_competition_admin_summary(competition) -> bool:
     """Send the admin a plain summary of a finalized competition's winners and codes."""
     recipients = settings.trivia_competition_admin_emails

@@ -11,6 +11,8 @@ from firebase_admin import auth, firestore
 from app.models.mentor_apprentice import MentorApprentice
 from app.models.user import User
 from app.exceptions import NotFoundException
+from app.schemas.daily_trivia import TimezoneIn, TimezoneOut
+from app.services.daily_trivia import is_valid_timezone
 
 router = APIRouter()
 
@@ -120,6 +122,22 @@ def get_user_by_id(user_id: str, db: Session = Depends(get_db), decoded_token=De
 def get_me(current_user: User = Depends(get_current_user)):
     # get_current_user handles token verification & user retrieval
     return current_user
+
+@router.put("/me/timezone", response_model=TimezoneOut)
+def set_my_timezone(
+    body: TimezoneIn,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Save the caller's IANA timezone; used for the daily trivia date and 9am reminder (spec 002)."""
+    if not is_valid_timezone(body.timezone):
+        raise HTTPException(status_code=422, detail="invalid_timezone")
+    user = db.query(User).filter(User.id == current_user.id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    user.timezone = body.timezone
+    db.commit()
+    return {"timezone": user.timezone}
 
 @router.get("/admin-only")
 def test_admin_only(decoded_token=Depends(require_roles(["admin"]))):

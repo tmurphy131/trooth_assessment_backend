@@ -130,3 +130,83 @@ def create_prize_code(place: int, amount: int, title: str, starts_at: datetime, 
     discount_id = result["codeDiscountNode"]["id"]
     logger.info(f"[shopify] Created prize code {code} (${amount} off, place {place}) id={discount_id}")
     return PrizeCode(code=code, discount_id=discount_id)
+
+
+# ---------- Daily trivia streak rewards (spec 002) ----------
+
+_DEACTIVATE = """
+mutation DeactivateCode($id: ID!) {
+  discountCodeDeactivate(id: $id) {
+    codeDiscountNode { id }
+    userErrors { field message code }
+  }
+}
+"""
+
+
+def generate_streak_code(tier: int) -> str:
+    suffix = "".join(secrets.choice(_CODE_ALPHABET) for _ in range(6))
+    return f"TROOTH-STREAK{tier}-{suffix}"
+
+
+def build_percentage_input(code: str, title: str, percent: int, starts_at: datetime, ends_at: datetime) -> dict:
+    """Percentage off the whole merch order, single use.
+
+    Not capped in dollars: Shopify basic codes can't cap a percentage discount
+    (research R6). Add a minimum/collection rule here if that becomes a problem.
+    """
+    return {
+        "title": title,
+        "code": code,
+        "startsAt": starts_at.isoformat(),
+        "endsAt": ends_at.isoformat(),
+        "context": {"all": "ALL"},
+        "customerGets": {
+            "value": {"percentage": round(percent / 100, 4)},
+            "items": {"all": True},
+        },
+        "usageLimit": 1,
+        "appliesOncePerCustomer": True,
+    }
+
+
+def create_percentage_code(tier: int, percent: int, title: str, starts_at: datetime, ends_at: datetime) -> PrizeCode:
+    code = generate_streak_code(tier)
+
+    if not is_configured():
+        if settings.is_production:
+            raise ShopifyAdminError("Shopify Admin credentials are not configured in production")
+        logger.warning(f"[shopify] DRY RUN — would create {percent}% streak code for tier {tier}")
+        return PrizeCode(code=f"DRYRUN-{code}", discount_id="dry-run", dry_run=True)
+
+    variables = {"input": build_percentage_input(code, title, percent, starts_at, ends_at)}
+    with httpx.Client(timeout=30) as client:
+        token = _get_access_token(client)
+        data = _graphql(client, token, _BASIC_CREATE, variables)
+
+    result = data["discountCodeBasicCreate"]
+    if result.get("userErrors"):
+        raise ShopifyAdminError(f"discountCodeBasicCreate userErrors: {result['userErrors']}")
+    discount_id = result["codeDiscountNode"]["id"]
+    logger.info(f"[shopify] Created {percent}% streak code (tier {tier}) id={discount_id}")
+    return PrizeCode(code=code, discount_id=discount_id)
+
+
+def deactivate_code(discount_id: str) -> None:
+    """Switch off a code so it can no longer be used. Harmless if it was already used."""
+    if discount_id == "dry-run":
+        return
+    if not is_configured():
+        if settings.is_production:
+            raise ShopifyAdminError("Shopify Admin credentials are not configured in production")
+        logger.warning(f"[shopify] DRY RUN — would deactivate {discount_id}")
+        return
+
+    with httpx.Client(timeout=30) as client:
+        token = _get_access_token(client)
+        data = _graphql(client, token, _DEACTIVATE, {"id": discount_id})
+
+    result = data["discountCodeDeactivate"]
+    if result.get("userErrors"):
+        raise ShopifyAdminError(f"discountCodeDeactivate userErrors: {result['userErrors']}")
+    logger.info(f"[shopify] Deactivated discount {discount_id}")

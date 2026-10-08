@@ -637,3 +637,48 @@ def notify_trivia_competition_won(
         }
     )
     return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_daily_trivia_reminder(
+    db: Session,
+    user_id: str,
+    streak: int,
+    category_label: str,
+    difficulty_label: str,
+    date_iso: str,
+) -> Dict[str, Any]:
+    """9am local reminder that today's daily question is waiting (spec 002)."""
+    if streak > 0:
+        title = f"🔥 Keep your {streak}-day streak going"
+    else:
+        title = "📖 Today's trivia question is ready"
+    payload = PushNotificationPayload(
+        title=title,
+        body=f"Today's question: {category_label} · {difficulty_label}",
+        data={
+            "type": "daily_trivia",
+            "screen": "daily_trivia",
+            "date": date_iso,
+        }
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)
+
+
+def notify_daily_trivia_reward(
+    db: Session,
+    user_id: str,
+    tier: int,
+    percent: int,
+) -> Dict[str, Any]:
+    """Tell a user their streak milestone code is ready (spec 002)."""
+    payload = PushNotificationPayload(
+        title=f"🔥 {tier}-day streak! {percent}% off merch",
+        body="Your discount code is ready. Tap to see it.",
+        data={
+            "type": "daily_trivia_reward",
+            "screen": "daily_trivia",
+            "tier": tier,
+            "percent": percent,
+        }
+    )
+    return PushNotificationService.send_to_user(db, user_id, payload)

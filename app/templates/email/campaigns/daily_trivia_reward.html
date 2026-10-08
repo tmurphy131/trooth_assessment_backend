@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+{% block title %}{{ tier }}-day streak! — T[root]H Daily Trivia{% endblock %}
+{% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">You reached a {{ tier }}-day daily trivia streak. Your {{ percent }}% merch code is inside.</span>{% endblock %}
+{% block content %}
+<h2>🔥 {{ tier }} days in a row!</h2>
+
+<p>Hi {{ name }},</p>
+
+<p>You've answered the T[root]H daily question <strong>{{ tier }} days in a row</strong>{% if perfect %}, and you got <strong>every single one right</strong>, so we added an extra 10%{% endif %}. "Let us not grow weary of doing good" (Galatians 6:9). Here's a thank-you.</p>
+
+<div class="highlight-box" style="text-align:center;">
+  <span class="pill">Your reward</span>
+  <h3 style="margin:12px 0 4px;">{{ percent }}% off</h3>
+  <p class="muted" style="margin:0 0 16px;">at the ONLY BLV merch shop</p>
+  <div style="font-family:'Courier New',monospace;font-size:24px;font-weight:700;letter-spacing:2px;color:#d4af37;background:#0a0a0a;border:1px dashed #d4af37;border-radius:10px;padding:14px 18px;display:inline-block;">{{ discount_code }}</div>
+  <p class="muted" style="margin-top:12px;">One-time use. Add your merch to the cart and enter this code at checkout.{% if expires %}<br>Expires {{ expires }}.{% endif %}</p>
+</div>
+
+{% if replaced_percent %}
+<p class="muted" style="text-align:center;">This code replaces your earlier {{ replaced_percent }}% code, which no longer works.</p>
+{% endif %}
+
+<div class="btn-row">
+  <a href="{{ shop_url }}" class="brand-btn">Shop Now →</a>
+</div>
+
+<p class="muted" style="text-align:center;">Keep your streak going: the next milestone earns a bigger discount, and it replaces this code if you haven't used it. Your code is also shown on the daily trivia screen in the app.</p>
+{% endblock %}
