@@ -130,7 +130,39 @@ def submit_single_game(
     score, streak_length = compute_score_for_answers(graded)
     correct_count = sum(1 for g in graded if g["correct"])
 
-    # Persist score
+    # Client-graded flow: never counts toward competitions
+    return record_single_score(
+        db,
+        user_id=user_id,
+        category=category,
+        difficulty=difficulty,
+        score=score,
+        streak_length=streak_length,
+        correct_count=correct_count,
+        grace_tokens_used=grace_tokens_used,
+        verified=False,
+    )
+
+
+def record_single_score(
+    db: Session,
+    user_id: str,
+    category: str,
+    difficulty: str,
+    score: int,
+    streak_length: int,
+    correct_count: int,
+    grace_tokens_used: int,
+    verified: bool,
+    session_id: Optional[str] = None,
+    created_at: Optional[datetime] = None,
+    commit: bool = True,
+) -> SingleGameResult:
+    """Persist a finished single-player game; award badges; report best and rank.
+
+    commit=False leaves the transaction open so a caller holding a row lock
+    (trivia_session) can store the result in the same commit.
+    """
     record = TriviaSingleScore(
         user_id=user_id,
         category=TriviaCategory(category),
@@ -139,7 +171,11 @@ def submit_single_game(
         streak_length=streak_length,
         correct_count=correct_count,
         grace_tokens_used=grace_tokens_used,
+        verified=verified,
+        session_id=session_id,
     )
+    if created_at is not None:
+        record.created_at = created_at
     db.add(record)
     db.flush()
 
@@ -191,7 +227,10 @@ def submit_single_game(
                     earned_at=new_badge.earned_at or datetime.now(UTC),
                 ))
 
-    db.commit()
+    if commit:
+        db.commit()
+    else:
+        db.flush()
 
     return SingleGameResult(
         score=score,
@@ -303,6 +342,12 @@ def submit_challenge_answer(
     if not is_challenger and not is_challenged:
         from fastapi import HTTPException
         raise HTTPException(status_code=403, detail="Not a participant")
+
+    idx = challenge.current_question_index
+    if idx >= len(challenge.question_ids) or question_id != challenge.question_ids[idx]:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=400, detail="Answer is not for the current question")
+    time_used_ms = max(0, min(time_used_ms, 30000))
 
     q = db.query(TriviaQuestion).filter(TriviaQuestion.id == question_id).first()
     is_correct = q is not None and q.correct_option.value == selected
@@ -525,7 +570,8 @@ def get_trivia_profile(db: Session, user_id: str) -> TriviaProfileOut:
     )
 
 
-def expire_stale_challenges(db: Session) -> int:
+def expire_stale_challenges(db: Session) -> list[str]:
+    """Expire challenges idle for 7 days. Returns the expired challenge ids."""
     now = datetime.now(UTC)
     expired = db.query(TriviaChallenge).filter(
         TriviaChallenge.status.in_([TriviaChallengeStatus.pending, TriviaChallengeStatus.active]),
@@ -536,4 +582,4 @@ def expire_stale_challenges(db: Session) -> int:
         c.status = TriviaChallengeStatus.expired
 
     db.commit()
-    return len(expired)
+    return [c.id for c in expired]
