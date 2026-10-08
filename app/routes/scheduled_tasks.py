@@ -18,6 +18,8 @@ from app.schemas.push_notification import PushNotificationPayload
 from app.services.trivia import expire_stale_challenges
 from app.services import trivia_session
 from app.services.trivia_competition import finalize_due_competitions
+from app.services import daily_trivia as daily_trivia_svc
+from app.schemas.daily_trivia import DailyCronOut
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -120,6 +122,19 @@ def trigger_trivia_competition_finalize(
     """
     results = finalize_due_competitions(db)
     return {"message": "Trivia competition finalize complete", "results": results}
+
+
+@router.post("/daily-trivia", response_model=DailyCronOut)
+def trigger_daily_trivia(
+    db: Session = Depends(get_db),
+    _verified: bool = Depends(verify_cron_secret)
+):
+    """Send 9am-local daily trivia reminders, retry unfinished streak rewards and
+    expire old ones. Idempotent — safe to call every hour (spec 002).
+
+    Cloud Scheduler job: daily-trivia-<env> (0 * * * *)
+    """
+    return daily_trivia_svc.run_hourly(db)
 
 
 @router.post("/test-push/{user_id}")

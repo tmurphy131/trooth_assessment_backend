@@ -31,6 +31,7 @@ from app.routes import scheduled_tasks
 from app.routes import campaigns
 from app.routes import redirect as redirect_routes
 from app.routes import trivia
+from app.routes import daily_trivia
 from app.routes import prayer_journal
 from app.routes import spiritual_gifts
 from app.routes import generic_assessments
@@ -201,6 +202,8 @@ app.include_router(subscriptions.admin_router, tags=["Admin - Subscriptions"])
 app.include_router(push_notifications.router, prefix="/push-notifications", tags=["Push Notifications"])
 app.include_router(scheduled_tasks.router, prefix="/scheduled", tags=["Scheduled Tasks"])
 app.include_router(campaigns.router, prefix="/campaigns", tags=["Campaigns"])
+# Mounted before /trivia so its paths are matched first
+app.include_router(daily_trivia.router, prefix="/trivia/daily", tags=["Daily Trivia"])
 app.include_router(trivia.router, prefix="/trivia", tags=["Trivia"])
 app.include_router(prayer_journal.router)
 app.include_router(redirect_routes.router, prefix="/r", tags=["Redirects"])
