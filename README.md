@@ -1,527 +1,279 @@
 # T[root]H Discipleship API
 
-Backend for the **T[root]H Discipleship** platform — a spiritual mentorship app connecting mentors with apprentices through Bible-based assessments, AI-powered scoring, and growth tracking.
+The FastAPI backend for **T[root]H Discipleship**, a spiritual mentorship platform. Mentors guide
+apprentices through Bible-based assessments, AI-generated growth reports, a shared prayer journal
+and Bible trivia.
 
-## Table of Contents
+The iOS and Android app is the Flutter repo
+[`trooth_assessment_frontend`](https://github.com/tmurphy131/trooth_assessment_frontend).
 
-- [Overview](#overview)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
-- [Database Setup](#database-setup)
-- [Running the Server](#running-the-server)
-- [API Overview](#api-overview)
-- [Assessment System](#assessment-system)
-- [AI Scoring](#ai-scoring)
-- [Email Notifications](#email-notifications)
+**Rules for this codebase live in the [constitution](.specify/memory/constitution.md).** Day-to-day
+workflow is in [CONTRIBUTING.md](CONTRIBUTING.md). If anything here disagrees with them, they win.
+
+## Contents
+
+- [Features](#features)
+- [Tech stack](#tech-stack)
+- [Project layout](#project-layout)
+- [Local setup](#local-setup)
+- [Configuration](#configuration)
+- [Database and migrations](#database-and-migrations)
+- [API](#api)
+- [Scheduled jobs](#scheduled-jobs)
 - [Testing](#testing)
-- [Deployment](#deployment)
-- [Seeding Data](#seeding-data)
+- [Deploying](#deploying)
+- [Seeding data](#seeding-data)
 - [Contributing](#contributing)
-- [License](#license)
+- [Other docs](#other-docs)
 
----
+## Features
 
-## Overview
+- **Mentors and apprentices:** invitations, multi-mentor links, mentorship agreements with
+  multi-party signatures, mentor notes and resources.
+- **Assessments:** Master T[root]H, Spiritual Gifts (72 questions), Bible book assessments and
+  mentor-created templates. Drafts auto-save, and submissions are scored in the background.
+- **AI scoring and reports:** LLM-scored answers with full mentor and apprentice reports, sent by
+  email and as PDFs.
+- **Prayer journal:** private entries, with optional sharing to a mentor.
+- **Bible trivia:**
+  - server-run single player (graded and timed on the server);
+  - head-to-head challenges (creating one is premium);
+  - a daily question with streaks, freezes and reward codes;
+  - leaderboard competitions with Shopify prize codes.
+- **Premium:** RevenueCat subscriptions, mentor-gifted seats and admin grants. Premium is enforced
+  here, with HTTP 403 when a user doesn't have it.
+- **Engagement:** push notifications, weekly tips, email reminder campaigns, and weekly and monthly
+  metrics reports.
 
-T[root]H Discipleship enables:
-- **Mentors** to guide apprentices through spiritual growth journeys
-- **Apprentices** to take Bible-based assessments and track progress
-- **AI-powered scoring** with personalized feedback and recommendations
-- **Mentorship agreements** with multi-party digital signatures
-- **Progress tracking** across multiple assessment categories
+## Tech stack
 
-## Tech Stack
+| Area | Technology |
+|---|---|
+| Framework | FastAPI on Python 3.11 |
+| Database | PostgreSQL (Cloud SQL), SQLAlchemy 2.0 (sync sessions), Alembic |
+| Auth | Firebase Admin SDK (Firebase ID tokens) |
+| AI | `app/services/llm/` provider layer: Vertex AI Gemini by default, OpenAI as fallback |
+| Email | SendGrid with Jinja2 templates |
+| Push | Firebase Cloud Messaging |
+| Payments | RevenueCat (webhooks and server-side verification) |
+| Shop and prizes | Shopify Admin API (discount codes), Shopify Storefront and Printful (product listings) |
+| Hosting | Docker on Google Cloud Run, Secret Manager, Cloud Scheduler |
+| Tests | pytest with SQLite in memory |
 
-| Component | Technology |
-|-----------|------------|
-| Framework | FastAPI (Python 3.11+) |
-| Database | PostgreSQL + SQLAlchemy 2.0 ORM |
-| Migrations | Alembic |
-| Authentication | Firebase Admin SDK |
-| AI Scoring | OpenAI API (gpt-4o-mini) |
-| Email | SendGrid |
-| Deployment | Docker + Google Cloud Run |
-| Testing | pytest |
+## Project layout
 
-## Project Structure
-
+```text
+app/
+  main.py                FastAPI app and router registration
+  core/settings.py       all configuration, read from environment variables
+  db.py                  session factory
+  models/                SQLAlchemy models
+  schemas/               Pydantic request and response models
+  routes/                API routers (keep them thin)
+  services/              business logic and integrations
+    llm/                 provider factory (Gemini, OpenAI) with timeouts, retries, fallback
+  templates/             Jinja2 email templates
+  middleware/            correlation IDs, rate limiting
+alembic/versions/        migrations (YYYYMMDD_description.py)
+scripts/                 seeding and import scripts and Cloud Run job helpers
+specs/NNN-name/          Spec Kit specs; contracts/ is the API source of truth
+tests/                   pytest suite
 ```
-trooth_assessment_backend/
-├── app/
-│   ├── main.py                 # FastAPI app initialization
-│   ├── config.py               # Firebase initialization
-│   ├── db.py                   # Database session factory
-│   ├── exceptions.py           # Custom exception classes
-│   ├── core/
-│   │   ├── settings.py         # Environment-based configuration
-│   │   └── logging_config.py   # Structured logging
-│   ├── middleware/
-│   │   ├── logging.py          # Request correlation IDs
-│   │   └── rate_limit.py       # Rate limiting (slowapi)
-│   ├── models/                 # SQLAlchemy ORM models
-│   ├── schemas/                # Pydantic request/response schemas
-│   ├── routes/                 # API endpoint modules
-│   ├── services/               # Business logic (AI, email, auth)
-│   └── templates/              # Jinja2 email templates
-├── alembic/                    # Database migrations
-├── scripts/                    # Utility scripts (seeding, etc.)
-├── tests/                      # pytest test suite
-├── Dockerfile                  # Container definition
-├── entrypoint.sh               # Container startup script
-├── requirements.txt            # Python dependencies
-└── DEPLOYMENT.md               # Detailed deployment guide
-```
 
-## Getting Started
+## Local setup
 
-### Prerequisites
+**Prerequisites:** Python 3.11, PostgreSQL 14+, and a Firebase service account key.
 
-- Python 3.11+
-- PostgreSQL 14+
-- Firebase project with service account
-- (Optional) OpenAI API key for AI scoring
-- (Optional) SendGrid API key for emails
+1. **Create a virtual environment and install dependencies:**
+   ```bash
+   python3.11 -m venv .venv && source .venv/bin/activate
+   pip install -r requirements.txt
+   ```
+2. **Create the database:**
+   ```bash
+   createdb trooth_db
+   ```
+3. **Add a `.env` file** (see [Configuration](#configuration)). The minimum is:
+   ```env
+   ENV=development
+   DATABASE_URL=postgresql://trooth_user:password@localhost:5432/trooth_db
+   FIREBASE_CERT_PATH=./firebase_key.json
+   LLM_PROVIDER=openai          # or gemini, with `gcloud auth application-default login`
+   OPENAI_API_KEY=sk-...
+   ```
+4. **Run migrations and start the server:**
+   ```bash
+   alembic upgrade head
+   uvicorn app.main:app --reload --port 8000
+   ```
 
-### 1. Clone and Setup Virtual Environment
+Interactive docs are at `http://localhost:8000/docs`. Never commit `.env` or `firebase_key.json`.
 
+To run in Docker instead:
 ```bash
-git clone https://github.com/your-org/trooth_assessment_backend.git
-cd trooth_assessment_backend
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-### 2. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Configure Environment
-
-Create a `.env` file in the project root:
-
-```env
-# Database
-DATABASE_URL=postgresql://trooth_user:your_password@localhost:5432/trooth_db
-
-# Firebase (path to service account JSON)
-FIREBASE_CERT_PATH=./firebase_key.json
-
-# OpenAI (optional - falls back to mock scoring if not set)
-OPENAI_API_KEY=sk-your-openai-api-key
-
-# SendGrid (optional - logs emails if not set)
-SENDGRID_API_KEY=SG.your-sendgrid-api-key
-SENDGRID_FROM_EMAIL=noreply@yourdomain.com
-SENDGRID_FROM_NAME=T[root]H Discipleship
-
-# App Settings
-ENV=development
-APP_URL=http://localhost:8000
-CORS_ORIGINS=http://localhost:3000,http://localhost:5000
-```
-
-### 4. Setup Firebase
-
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a project or use an existing one
-3. Go to Project Settings → Service Accounts
-4. Generate a new private key
-5. Save as `firebase_key.json` in project root
-
-### 5. Run Database Migrations
-
-```bash
-# Create the database first
-createdb trooth_db
-
-# Run migrations
-alembic upgrade head
-```
-
-### 6. Start the Server
-
-```bash
-uvicorn app.main:app --reload --port 8000
-```
-
-Visit `http://localhost:8000/docs` for interactive API documentation.
-
----
-
-## Environment Variables
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `DATABASE_URL` | ✅ | PostgreSQL connection string |
-| `FIREBASE_CERT_PATH` | ✅* | Path to Firebase service account JSON |
-| `FIREBASE_CERT_JSON` | ✅* | Firebase service account as JSON string (alternative to path) |
-| `OPENAI_API_KEY` | ❌ | OpenAI API key for AI scoring |
-| `SENDGRID_API_KEY` | ❌ | SendGrid API key for emails |
-| `SENDGRID_FROM_EMAIL` | ❌ | Sender email address |
-| `SENDGRID_FROM_NAME` | ❌ | Sender display name |
-| `ENV` | ❌ | Environment: `development`, `staging`, `production` |
-| `APP_URL` | ❌ | Base URL for email links |
-| `CORS_ORIGINS` | ❌ | Comma-separated allowed origins |
-| `SHOW_DOCS` | ❌ | Set to `true` to enable Swagger docs in production |
-
-*One of `FIREBASE_CERT_PATH` or `FIREBASE_CERT_JSON` is required.
-
----
-
-## Database Setup
-
-### Local PostgreSQL
-
-```bash
-# Create user and database
-psql -U postgres
-CREATE USER trooth_user WITH PASSWORD 'your_password';
-CREATE DATABASE trooth_db OWNER trooth_user;
-GRANT ALL PRIVILEGES ON DATABASE trooth_db TO trooth_user;
-\q
-
-# Run migrations
-alembic upgrade head
-```
-
-### Cloud SQL (Production)
-
-Use Cloud SQL Auth Proxy for local development against production DB:
-
-```bash
-# Start the proxy
-./cloud-sql-proxy PROJECT:REGION:INSTANCE --port=5432
-
-# Export connection string
-export DATABASE_URL=postgresql://user:pass@127.0.0.1:5432/trooth_db
-
-# Run backend
-uvicorn app.main:app --reload
-```
-
-### Creating New Migrations
-
-```bash
-# Auto-generate migration from model changes
-alembic revision --autogenerate -m "Add new column"
-
-# Apply migration
-alembic upgrade head
-
-# Rollback
-alembic downgrade -1
-```
-
----
-
-## Running the Server
-
-### Development
-
-```bash
-uvicorn app.main:app --reload --port 8000
-```
-
-### With Docker
-
-```bash
-# Build
 docker build -t trooth-backend:local .
-
-# Run
-docker run -p 8000:8000 \
-  -e DATABASE_URL=postgresql://... \
-  -e FIREBASE_CERT_PATH=/secrets/firebase_key.json \
-  -v $(pwd)/firebase_key.json:/secrets/firebase_key.json:ro \
-  trooth-backend:local
+docker run -p 8000:8000 --env-file .env \
+  -v $(pwd)/firebase_key.json:/app/firebase_key.json:ro trooth-backend:local
 ```
 
----
+## Configuration
 
-## API Overview
+All settings are read from environment variables in `app/core/settings.py`. Secrets come from
+Secret Manager in Cloud Run; nothing secret belongs in source.
 
-### Authentication
+| Group | Variables |
+|---|---|
+| Core | `ENV` (`development`, `dev`, `production`), `DATABASE_URL`, `CORS_ORIGINS`, `APP_URL`, `BACKEND_API_URL`, `SHOW_DOCS`, `LOG_LEVEL`, `RATE_LIMIT_ENABLED` |
+| Database pool / Cloud SQL | `DB_POOL_SIZE`, `DB_MAX_OVERFLOW`, `DB_POOL_RECYCLE`, `CLOUD_SQL_INSTANCE`, `CLOUD_SQL_IAM_AUTH`, `CLOUD_SQL_USE_PRIVATE_IP`, `DB_USER`, `DB_PASS`, `DB_NAME` |
+| Auth | `FIREBASE_CERT_JSON` (Cloud Run) or `FIREBASE_CERT_PATH` (local) |
+| AI | `LLM_PROVIDER` (`gemini` default), `LLM_MODEL`, `LLM_FALLBACK_ENABLED`, `OPENAI_API_KEY`, `GOOGLE_CLOUD_PROJECT`, `GOOGLE_CLOUD_LOCATION` |
+| Email | `SENDGRID_API_KEY`, `EMAIL_FROM_ADDRESS`, `METRICS_REPORT_RECIPIENTS` |
+| Premium | `REVENUECAT_WEBHOOK_SECRET`, `REVENUECAT_SECRET_API_KEY`, `REVENUECAT_API_KEY`, `PREMIUM_FEATURES_ENABLED` (testing only) |
+| Shop and prizes | `SHOPIFY_CLIENT_ID`, `SHOPIFY_CLIENT_SECRET`, `SHOPIFY_ADMIN_API_VERSION`, `SHOPIFY_PRIZE_COLLECTION_ID`, `SHOPIFY_STORE_DOMAIN`, `SHOPIFY_STOREFRONT_TOKEN`, `SHOP_URL`, `PRINTFUL_API_TOKEN`, `PRINTFUL_STORE_ID` |
+| Trivia | `TRIVIA_COMPETITION_EXCLUDED_EMAILS`, `TRIVIA_COMPETITION_ADMIN_EMAILS`, `TRIVIA_LEGACY_SINGLE_ENABLED` (`false` in prod since app 2.2.0) |
+| Scheduled jobs | `CRON_SECRET` (sent as `X-Cron-Secret` by Cloud Scheduler) |
 
-All authenticated endpoints require a Firebase ID token in the `Authorization` header:
+When the Shopify credentials are missing, prize and reward codes run in dry-run mode outside prod and
+are refused in prod. Without `SENDGRID_API_KEY`, emails are logged instead of sent.
 
-```
-Authorization: Bearer <firebase_id_token>
-```
+> **Deploys replace the whole list.** `gcloud run deploy --set-env-vars/--set-secrets` replaces
+> everything on the service. The deploy skills keep complete lists; a dropped entry silently turns a
+> feature off. For example, missing Shopify secrets stop prize codes, and a missing
+> `TRIVIA_LEGACY_SINGLE_ENABLED=false` reopens the old trivia endpoints.
 
-### Main Endpoint Groups
+## Database and migrations
 
-| Prefix | Description |
-|--------|-------------|
-| `/health` | Health check endpoint |
-| `/users` | User registration and profile |
-| `/mentor` | Mentor-specific operations |
-| `/apprentice` | Apprentice-specific operations |
-| `/templates` | Assessment templates (published) |
-| `/admin/templates` | Template management (admin only) |
-| `/assessment-drafts` | In-progress assessments |
-| `/assessments` | Completed assessments |
-| `/generic-assessments` | Generic assessment workflow |
-| `/spiritual-gifts` | Spiritual gifts assessment |
-| `/master-trooth` | Master T[root]H assessment |
-| `/agreements` | Mentorship agreements |
-| `/invitations` | Apprentice invitations |
-| `/mentor-notes` | Mentor notes on apprentices |
-| `/progress` | Progress tracking |
-| `/resources/mentor` | Mentor resource guides |
-| `/resources/apprentice` | Apprentice growth guides |
+- **Every model change needs a migration** in `alembic/versions/`, named `YYYYMMDD_description.py`,
+  with a working `downgrade()`.
+- **Migrations run before the new image serves traffic.** The deploy skills run the
+  `migrate-and-populate` (prod) or `migrate-and-populate-dev` Cloud Run job first.
+- **Autogenerate misses some models.** `alembic/env.py` doesn't import every model, including the
+  trivia ones, so write those migrations by hand. Reuse existing Postgres enum types with
+  `postgresql.ENUM(..., create_type=False)`; creating them again fails on Cloud SQL.
+- **Commands:**
+  ```bash
+  alembic revision -m "describe change"   # then edit; use --autogenerate only if the models are imported
+  alembic upgrade head
+  alembic downgrade -1
+  ```
+- **Connect to Cloud SQL locally** with `scripts/start_cloud_sql_proxy.sh`.
 
-### Key Endpoints
+## API
 
-```bash
-# Health check
-GET /health
+- **Auth:** endpoints need `Authorization: Bearer <Firebase ID token>`, except health, public
+  token links, webhooks and `/scheduled/*`, which checks `X-Cron-Secret` instead.
+- **Contracts:** the API contract for each feature is in `specs/NNN-name/contracts/`. That is the
+  source of truth for the app. `MOBILE_API_GUIDE.md` is legacy.
+- **Compatibility:** released app versions can't be forced to update, so changes are additive.
+  Removing anything requires a spec that names the minimum app version.
 
-# User registration (creates user from Firebase token)
-POST /users/
+| Prefix | Area |
+|---|---|
+| `/health` | Health check |
+| `/users` | Registration, profile, timezone |
+| `/mentor`, `/apprentice` | Role dashboards, reports, links; `/mentor/seats` for gifted seats |
+| `/invitations`, `/agreements` | Apprentice invitations, mentorship agreements |
+| `/templates`, `/admin` | Published assessment templates; template and admin management |
+| `/assessment-drafts`, `/assessments`, `/question` | Draft, submit and score assessments |
+| `/spiritual-gifts`, `/master-trooth`, `/generic-assessments` | Assessment-specific flows and reports |
+| `/progress` | Progress and score history |
+| `/prayer-journal` | Prayer journal |
+| `/trivia` | Single player sessions, challenges, leaderboard, competitions, profiles |
+| `/trivia/daily` | Daily question and streaks |
+| `/subscriptions`, `/admin/subscriptions` | Status, restore, RevenueCat webhook, admin grants |
+| `/push-notifications` | Device tokens, test pushes |
+| `/shop`, `/support` | Merch listings; support requests |
+| `/campaigns`, `/metrics`, `/scheduled` | Engagement campaigns, metrics reports, cron entry points |
+| `/r` | Redirect links |
 
-# Get current user profile
-GET /apprentice/me
-GET /mentor/profile
+Mentor, apprentice and resource routes are registered without a prefix in `app/main.py`; see `/docs`
+for the full list.
 
-# List published assessment templates
-GET /templates/published
+## Scheduled jobs
 
-# Start an assessment
-POST /assessment-drafts/start
-Body: {"template_id": "uuid"}
+Cloud Scheduler (us-east4) calls these endpoints with `X-Cron-Secret`:
 
-# Auto-save answers
-PATCH /assessment-drafts
-Body: {"draft_id": "uuid", "answers": {"Q1": "answer"}}
+| Job | Schedule | Endpoint |
+|---|---|---|
+| `daily-trivia-prod` | hourly | `/scheduled/daily-trivia` (9am local reminders, streak rewards) |
+| `trivia-competition-finalize-prod` | hourly | `/scheduled/trivia-competition-finalize` |
+| `trivia-expiry-prod` | daily 03:00 ET | `/scheduled/trivia-expiry` (expires challenges idle 7 days, closes abandoned single player games) |
+| `trooth-weekly-tips` | Sun 09:00 ET | `/scheduled/weekly-tips` |
+| `weekly-metrics-report` / `monthly-metrics-report` | Mon 14:00 ET / 1st 14:00 ET | `/metrics/send-report` |
+| `campaigns-draft-reminders-{prod,dev}` | daily 19:00 UTC | `/campaigns/run-draft-reminders` |
+| `campaigns-inactive-reminders-{prod,dev}` | daily 08:00 UTC | `/campaigns/run-inactive-reminders` |
 
-# Submit for scoring
-POST /assessment-drafts/submit
-Body: {"draft_id": "uuid"}
-
-# View completed assessment
-GET /assessments/{assessment_id}
-
-# Invite apprentice (mentor)
-POST /invitations/invite-apprentice
-Body: {"apprentice_email": "email@example.com", "apprentice_name": "Name"}
-```
-
----
-
-## Assessment System
-
-### Assessment Types
-
-1. **Master T[root]H Assessment** - Comprehensive spiritual assessment
-2. **Spiritual Gifts Assessment** - 72 questions identifying spiritual gifts
-3. **Bible Book Assessments** - Romans, Samuel, Ephesians, Galatians, etc.
-
-### Assessment Workflow
-
-```
-1. Apprentice selects template
-         ↓
-2. Frontend shows preview (title, description, history)
-         ↓
-3. POST /assessment-drafts/start → Creates draft
-         ↓
-4. Apprentice answers questions
-         ↓
-5. PATCH /assessment-drafts (auto-save on each answer)
-         ↓
-6. POST /assessment-drafts/submit → Triggers AI scoring
-         ↓
-7. Backend scores asynchronously
-         ↓
-8. Assessment status: "done"
-         ↓
-9. Mentor notified via email
-```
-
-### Template Structure
-
-Templates contain:
-- Name, description, category
-- Questions (multiple choice or open-ended)
-- Scoring rubrics for AI evaluation
-- `is_master_assessment` flag for official assessments
-
----
-
-## AI Scoring
-
-### How It Works
-
-1. Assessment submitted → Background task triggered
-2. Questions grouped by category
-3. Each category scored via OpenAI API call
-4. Scoring prompt evaluates:
-   - Multiple choice: correct/incorrect
-   - Open-ended: qualitative analysis against rubric
-5. Returns JSON with scores, recommendations, feedback
-
-### Configuration
-
-```python
-# Uses gpt-4o-mini by default
-# Temperature: 0.3 for consistency
-# Response format: JSON
-```
-
-### Fallback
-
-If `OPENAI_API_KEY` is not set, the system uses deterministic mock scoring based on answer length. This allows development/testing without API costs.
-
----
-
-## Email Notifications
-
-### Email Types
-
-- **Invitation emails** - When mentor invites apprentice
-- **Assessment completion** - Mentor notified when apprentice finishes
-- **Agreement signing** - Multi-party signature notifications
-- **Password reset** - Via Firebase (not backend)
-
-### Configuration
-
-```env
-SENDGRID_API_KEY=SG.xxx
-SENDGRID_FROM_EMAIL=noreply@yourdomain.com
-SENDGRID_FROM_NAME=T[root]H Discipleship
-```
-
-If SendGrid is not configured, emails are logged but not sent.
-
----
 
 ## Testing
 
-### Run All Tests
-
 ```bash
-pytest
+pytest -q
 ```
 
-### Run Specific Tests
+`pytest` must pass before every merge and deploy; there is no CI here, so the local suite is the
+only gate.
 
-```bash
-# Single file
-pytest tests/test_invitations.py
+- **Database:** tests use an in-memory SQLite database (`tests/conftest.py`). Note that SQLite
+  returns naive datetimes.
+- **Auth:** override `get_current_user` in tests.
+- **External services:** never call live services (LLM, SendGrid, Firebase, RevenueCat, Shopify);
+  mock them.
+- **Coverage for new or changed endpoints:** test the success path and every authorization failure
+  that applies (wrong role, not the owner, not premium).
 
-# With verbose output
-pytest -v -s
+## Deploying
 
-# With coverage
-pytest --cov=app --cov-report=html
-```
+Deploys use Claude Code skills in the frontend repo:
 
-### Test Database
+| Skill | What it does |
+|---|---|
+| `/deploy-dev` | Cloud Build image → `migrate-and-populate-dev` job → deploy `trooth-backend-dev` |
+| `/deploy-prod` | Cloud Build image tagged with the commit → `migrate-and-populate` job → deploy `trooth-backend` |
 
-Tests use SQLite in-memory database with `StaticPool` for connection sharing. No external database required.
+- Deploy to **dev** first and verify there.
+- **Prod** is built from `main`.
+- The gcloud project must be `trooth-prod` (`gcloud config set project trooth-prod`).
 
-### Test Fixtures
+| Env | URL |
+|---|---|
+| Dev | `https://trooth-discipleship-api-dev.onlyblv.com/` |
+| Prod | `https://trooth-discipleship-api.onlyblv.com/` |
 
-```python
-# Available fixtures in tests/conftest.py
-@pytest.fixture
-def client():      # TestClient with test DB
-@pytest.fixture
-def admin_user():  # User with role=admin
-@pytest.fixture
-def mentor_user(): # User with role=mentor
-@pytest.fixture
-def apprentice_user(): # User with role=apprentice
-```
+Secret creation and one-time setup are in [DEPLOYMENT.md](DEPLOYMENT.md).
 
----
+## Seeding data
 
-## Deployment
+| What | How |
+|---|---|
+| Spiritual Gifts assessment | `python scripts/seed_spiritual_gifts.py --version 1 --publish` (or `scripts/create_and_run_spiritual_gifts_seed_job.sh`) |
+| Master T[root]H mini | `python scripts/seed_master_mini.py` |
+| Trivia questions | `scripts/import_trivia_questions.py`; Cloud Run jobs via `scripts/run_import_trivia_questions_job.sh` (prod) and `scripts/run_trivia_import_dev_job.sh` (dev) |
+| Mentorship agreement template | Seeded on first startup from `MENTOR_AGREEMENT.md` |
 
-Full deployment instructions are in [DEPLOYMENT.md](DEPLOYMENT.md).
-
-### Quick Summary
-
-1. **Build image** (on Apple Silicon, use `--platform linux/amd64`)
-   ```bash
-   docker buildx build --platform linux/amd64 -t gcr.io/PROJECT/trooth-backend:latest --push .
-   ```
-
-2. **Create secrets** in Secret Manager:
-   - `DATABASE_URL`
-   - `FIREBASE_CERT_JSON`
-   - `SENDGRID_API_KEY`
-   - `OPENAI_API_KEY`
-
-3. **Deploy to Cloud Run**
-   ```bash
-   gcloud run deploy trooth-backend \
-     --image=gcr.io/PROJECT/trooth-backend:latest \
-     --region=us-east4 \
-     --set-secrets=DATABASE_URL=DATABASE_URL:latest,... \
-     --allow-unauthenticated
-   ```
-
----
-
-## Seeding Data
-
-### Seed Assessment Templates
-
-Assessment templates are seeded via Python scripts that can run locally or as Cloud Run Jobs.
-
-```bash
-# Spiritual Gifts Assessment (72 questions)
-python scripts/seed_spiritual_gifts.py --version 1 --publish
-
-# Master T[root]H Assessment
-python setup_master_assessment.py
-
-# Bible Book Assessments (examples)
-python setup_romans_assessment.py
-python setup_galatians_philippians_assessment.py
-python setup_ephesians_colossians_assessment.py
-```
-
-### Run Seeder as Cloud Run Job
-
-```bash
-gcloud run jobs create seed-assessment \
-  --image gcr.io/PROJECT/trooth-backend:latest \
-  --region us-east4 \
-  --command python \
-  --args setup_galatians_philippians_assessment.py \
-  --set-secrets DATABASE_URL=DATABASE_URL:latest \
-  --max-retries=1
-
-gcloud run jobs execute seed-assessment --region us-east4
-```
-
-### Seed Agreement Template
-
-The mentorship agreement template is auto-seeded on first startup from `MENTOR_AGREEMENT.md`.
-
----
+Seed scripts are idempotent. They skip rows that already exist.
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Run tests (`pytest`)
-4. Run linter (`black . && isort .`)
-5. Commit changes (`git commit -m 'Add amazing feature'`)
-6. Push to branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
+Read [CONTRIBUTING.md](CONTRIBUTING.md). In short:
 
-### Code Style
+- **Specs first:** features go through [GitHub Spec Kit](https://github.com/github/spec-kit), with
+  artifacts in `specs/NNN-name/`. Bug fixes and chores can skip the spec.
+- **Branches and PRs:** branch from `main` as `feature/`, `fix/` or `chore/`. Use Conventional
+  Commits (`type(scope): summary`). Every change reaches `main` through a PR that links its spec and
+  says how it was verified (pytest, dev deploy).
+- **Formatting:** `black` and `isort` are optional for new files. Don't reformat existing files in
+  an unrelated change.
 
-- Use `black` for formatting
-- Use `isort` for import sorting
-- Follow FastAPI conventions for route handlers
-- Add tests for new endpoints
+## Other docs
 
+| Doc | Topic |
+|---|---|
+| [DEPLOYMENT.md](DEPLOYMENT.md), [DEV_ENVIRONMENT_SETUP.md](DEV_ENVIRONMENT_SETUP.md) | Infrastructure setup |
+| [AI_SCORING_DETAILS.md](AI_SCORING_DETAILS.md) | How scoring prompts and reports work |
+| [METRICS_SYSTEM.md](METRICS_SYSTEM.md) | Metrics and reports |
+| [EMAIL_SETUP_GUIDE.md](EMAIL_SETUP_GUIDE.md), [ENGAGEMENT_EMAIL_STRATEGY.md](ENGAGEMENT_EMAIL_STRATEGY.md) | Email and engagement campaigns |
+| [SPIRITUAL_GIFT_ASSESSMENT.md](SPIRITUAL_GIFT_ASSESSMENT.md), [MULTI_MENTOR_DESIGN.md](MULTI_MENTOR_DESIGN.md) | Feature design notes |
+| [SCALING_GUIDE.md](SCALING_GUIDE.md) | Scaling notes |
 
+Root-level `*_COMPLETE.md` and `PHASE_*.md` files are historical status reports. Current features are
+specified in `specs/`.
