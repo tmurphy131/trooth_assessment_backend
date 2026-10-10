@@ -46,7 +46,7 @@ class GeminiProvider(LLMProvider):
     ) -> None:
         """Initialize Gemini client via google-genai SDK."""
         self._project_id = project_id or os.getenv("GOOGLE_CLOUD_PROJECT", "trooth-prod")
-        self._location = location or os.getenv("GOOGLE_CLOUD_LOCATION", "us-east4")
+        self._location = location or os.getenv("GOOGLE_CLOUD_LOCATION", "global")
         self._client = None
         
         # Update pricing based on model
