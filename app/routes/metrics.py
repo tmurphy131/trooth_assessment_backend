@@ -9,6 +9,7 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
 from app.db import get_db
+from app.services.auth import require_cron_secret
 from app.services.metrics import get_all_metrics, get_dashboard_summary
 from app.services.metrics_reports import send_report_now
 from app.models.user import User, UserRole
@@ -16,14 +17,16 @@ from app.models.mentor_apprentice import MentorApprentice
 
 logger = logging.getLogger("app.routes.metrics")
 
-router = APIRouter()
+# Every metrics endpoint exposes user data or sends email: callers must send X-Cron-Secret
+# (the scheduler jobs and the owner's onlyblv.com/status.html dashboard).
+router = APIRouter(dependencies=[Depends(require_cron_secret)])
 
 
 @router.get("/dashboard")
 def get_dashboard_metrics(db: Session = Depends(get_db)):
     """
     Get simplified metrics for the status dashboard.
-    This endpoint is PUBLIC (no auth) for the hidden status page.
+    Requires X-Cron-Secret (used by the owner's status page).
     Returns big numbers for quick health check.
     """
     logger.info("Dashboard metrics requested")
@@ -41,7 +44,7 @@ def get_user_list(
     db: Session = Depends(get_db),
 ):
     """
-    Get user names for a given category. PUBLIC (hidden status page).
+    Get user names for a given category. Requires X-Cron-Secret (owner's status page).
     """
     logger.info(f"User list requested for category: {category}")
     try:
@@ -92,7 +95,7 @@ def get_full_metrics(
 ):
     """
     Get full metrics report for the specified period.
-    This endpoint is PUBLIC (no auth) for the hidden status page.
+    Requires X-Cron-Secret (used by the owner's status page).
     
     Args:
         period: "day", "week", "month", or "all"
@@ -117,7 +120,7 @@ def trigger_report_send(
 ):
     """
     Manually trigger sending a metrics report email.
-    This endpoint is PUBLIC (hidden page access) but requires knowing the URL.
+    Requires X-Cron-Secret (Cloud Scheduler report jobs and the owner's status page).
     
     Args:
         report_type: "weekly" or "monthly"

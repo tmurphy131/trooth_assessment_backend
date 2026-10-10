@@ -871,6 +871,32 @@
 
     let currentTab = 'discipleship';
 
+    // ========== DASHBOARD KEY ==========
+    // The Discipleship metrics endpoints require the key (X-Cron-Secret). It's asked for once and
+    // kept in this browser only; a rejected key is cleared and asked for again.
+    const STATUS_KEY_STORAGE = 'onlyblv_status_key';
+
+    function getStatusKey() {
+      try { return localStorage.getItem(STATUS_KEY_STORAGE) || ''; } catch (e) { return ''; }
+    }
+
+    function askStatusKey() {
+      const key = (window.prompt('Enter the dashboard key') || '').trim();
+      if (key) { try { localStorage.setItem(STATUS_KEY_STORAGE, key); } catch (e) {} }
+      return key;
+    }
+
+    async function discipleshipFetch(path) {
+      let key = getStatusKey() || askStatusKey();
+      let res = await fetch(`${DISCIPLESHIP_API}${path}`, { headers: { 'X-Cron-Secret': key } });
+      if (res.status === 401 || res.status === 403) {
+        try { localStorage.removeItem(STATUS_KEY_STORAGE); } catch (e) {}
+        key = askStatusKey();
+        if (key) res = await fetch(`${DISCIPLESHIP_API}${path}`, { headers: { 'X-Cron-Secret': key } });
+      }
+      return res;
+    }
+
     // ========== TAB SWITCHING ==========
     function switchTab(tab) {
       currentTab = tab;
@@ -907,7 +933,7 @@
       errorState.style.display = 'none';
 
       try {
-        const response = await fetch(`${DISCIPLESHIP_API}/metrics/dashboard`);
+        const response = await discipleshipFetch('/metrics/dashboard');
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const result = await response.json();
         if (result.status !== 'success') throw new Error(result.message || 'Failed to load metrics');
@@ -951,7 +977,7 @@
     // Non-fatal: if this fails, the core dashboard still shows.
     async function loadDiscipleshipFullMetrics() {
       try {
-        const response = await fetch(`${DISCIPLESHIP_API}/metrics/full?period=week`);
+        const response = await discipleshipFetch('/metrics/full?period=week');
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const result = await response.json();
         if (result.status !== 'success') throw new Error(result.message || 'Failed');
@@ -1104,7 +1130,7 @@
     async function fetchUserList(category) {
       const body = document.getElementById('modal-body');
       try {
-        const res = await fetch(`${DISCIPLESHIP_API}/metrics/users?category=${category}`);
+        const res = await discipleshipFetch(`/metrics/users?category=${encodeURIComponent(category)}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
         if (json.status !== 'success') throw new Error(json.message || 'Failed');
