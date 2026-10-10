@@ -194,3 +194,17 @@ def test_submitted_assessments_requires_relationship(db_session, people):
     assert client.get(f"/assessment-drafts/submitted-assessments/{apprentice.id}").status_code == 200
     _as(apprentice)
     assert client.get(f"/assessment-drafts/submitted-assessments/{apprentice.id}").status_code == 200
+
+
+def test_premium_report_email_shows_canonical_health_score():
+    """The mentor email reads Health Score from the blob, not the LLM's executive summary."""
+    from app.services.email import render_premium_report_email
+    from app.services.master_trooth_report import build_report_context
+
+    scores = {"overall_score": 7, "category_scores": {"Prayer Life": 7}, "full_report_v1": _full_report(health=81)}
+    context = build_report_context({"apprentice": {"name": "Jordan"}}, scores, _blob())
+    assert (context["health_score"], context["full_report"]["executive_summary"]["health_score"]) == (80, 80)
+
+    html, plain = render_premium_report_email(context, scores["full_report_v1"])
+    assert ">80<" in html.replace(" ", "") and ">81<" not in html.replace(" ", "")
+    assert "gemini" not in html.lower()
