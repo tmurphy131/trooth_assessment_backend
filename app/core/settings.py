@@ -77,9 +77,10 @@ class Settings:
         self.llm_fallback_enabled = self._parse_bool(
             os.getenv("LLM_FALLBACK_ENABLED", "true")
         )
-        # GCP settings for Vertex AI (Gemini)
+        # GCP settings for Vertex AI (Gemini). gemini-3.x models are only served
+        # from the "global" location; regional endpoints (e.g. us-east4) return 404.
         self.google_cloud_project = os.getenv("GOOGLE_CLOUD_PROJECT", "trooth-prod")
-        self.google_cloud_location = os.getenv("GOOGLE_CLOUD_LOCATION", "us-east4")
+        self.google_cloud_location = os.getenv("GOOGLE_CLOUD_LOCATION", "global")
 
         # Feature flags / Premium tier (placeholder for RevenueCat integration)
         # When true, enables premium features for testing without subscription check

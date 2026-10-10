@@ -11,7 +11,7 @@ Configuration:
 
 For Gemini (Vertex AI):
 - GOOGLE_CLOUD_PROJECT: GCP project ID (default: 'trooth-prod')
-- GOOGLE_CLOUD_LOCATION: GCP region (default: 'us-east4')
+- GOOGLE_CLOUD_LOCATION: Vertex AI location (default: 'global'; gemini-3.x models are only served there)
 
 For OpenAI:
 - OPENAI_API_KEY: OpenAI API key
