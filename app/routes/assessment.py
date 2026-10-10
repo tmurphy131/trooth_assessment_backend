@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from app.services.report_summary import public_full_report
 from app.schemas import assessment as assessment_schema
 from app.models import assessment as assessment_model, user as user_model, mentor_apprentice as mentor_model
 from app.db import get_db
@@ -249,11 +250,13 @@ def get_own_full_report(
 
     # Return cached report if available
     scores = draft.score or {}
-    cached = scores.get("full_report_v1")
-    if not cached and assessment and assessment.scores:
-        cached = assessment.scores.get("full_report_v1")
+    # The assessment's own copy first; the draft cache is keyed by template, not assessment
+    cached = (assessment.scores or {}).get("full_report_v1") if assessment else None
+    if not cached:
+        cached = scores.get("full_report_v1")
+    blob = assessment.mentor_report_v2 if assessment else None
     if cached:
-        return {"report": cached, "cached": True, "draft_id": draft.id,
+        return {"report": public_full_report(cached, blob), "cached": True, "draft_id": draft.id,
                 "generated_at": scores.get("full_report_generated_at")}
 
     # Build questions list
@@ -333,7 +336,7 @@ def get_own_full_report(
             a_scores["full_report_generated_at"] = datetime.now(UTC).isoformat()
             assessment.scores = a_scores
         db.commit()
-        return {"report": full_report, "cached": False, "draft_id": draft.id,
+        return {"report": public_full_report(full_report, blob), "cached": False, "draft_id": draft.id,
                 "generated_at": full_report.get("_meta", {}).get("generated_at")}
     except Exception as e:
         logger.error(f"Failed to generate full report for {assessment_id}: {e}")

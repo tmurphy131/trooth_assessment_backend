@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import func
+from app.services.report_summary import public_full_report, summarize_mentor_blob
 from app.services.auth import require_mentor, get_current_user, is_premium_user
 from app.db import get_db
 from app.models.user import User
@@ -264,6 +265,8 @@ def get_submitted_assessments_for_apprentice(
             category=getattr(a, 'category', None),
             answers=a.answers or {},
             scores=a.scores or {},
+            health_score=summarize_mentor_blob(a.mentor_report_v2)["health_score"] if a.mentor_report_v2 else None,
+            health_band=summarize_mentor_blob(a.mentor_report_v2)["health_band"] if a.mentor_report_v2 else None,
             created_at=a.created_at,
         ))
     return result
@@ -504,6 +507,7 @@ def get_full_report(
         )
     
     # Get the submitted draft - try direct lookup first
+    assessment = None
     draft = db.query(AssessmentDraft).filter_by(id=draft_id, is_submitted=True).first()
     
     # If not found, the ID might be an Assessment ID - look up the corresponding draft
@@ -529,13 +533,23 @@ def get_full_report(
     if not mapping:
         raise ForbiddenException("Not authorized to view this draft")
     
-    # Check if we have a cached full report
+    if assessment is None:
+        assessment = db.query(Assessment).filter_by(
+            apprentice_id=draft.apprentice_id,
+            template_id=draft.template_id
+        ).order_by(Assessment.created_at.desc()).first()
+    blob = assessment.mentor_report_v2 if assessment else None
+
+    # Check for a cached full report: the assessment's own copy first (the draft cache is keyed by template)
     scores = draft.score or {}
-    if scores.get('full_report_v1'):
+    cached = (assessment.scores or {}).get('full_report_v1') if assessment else None
+    cached = cached or scores.get('full_report_v1')
+    if cached:
         return {
-            "report": scores.get('full_report_v1'),
+            "report": public_full_report(cached, blob),
             "cached": True,
-            "cached_at": scores.get('full_report_generated_at')
+            "cached_at": ((assessment.scores or {}) if assessment else scores).get('full_report_generated_at')
+                         or scores.get('full_report_generated_at')
         }
     
     # Get apprentice info
@@ -630,7 +644,7 @@ def get_full_report(
         db.commit()
         
         return {
-            "report": full_report,
+            "report": public_full_report(full_report, blob),
             "cached": False
         }
         
@@ -973,8 +987,9 @@ def get_simplified_mentor_report(
     
     if is_v21:
         # v2.1 format (from ai_prompt_master_assessment_v2_optimized.txt)
-        health_score = int(mentor_blob.get('health_score', 0))
-        health_band = mentor_blob.get('health_band', 'Unknown')
+        summary = summarize_mentor_blob(mentor_blob)
+        health_score = summary['health_score']
+        health_band = summary['health_band']
         strengths = (mentor_blob.get('strengths') or [])[:3]
         gaps = (mentor_blob.get('gaps') or [])[:3]
         

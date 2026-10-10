@@ -15,6 +15,7 @@ except ImportError:
     logging.warning("Jinja2 not available, using simple templates")
 
 from app.core.settings import settings
+from app.services.report_summary import public_full_report
 
 logger = logging.getLogger("app.email")
 
@@ -86,10 +87,11 @@ def render_premium_report_email(context: dict, full_report: dict) -> tuple[str, 
     # Merge full_report data into context for template rendering
     premium_context = {**context}
     
-    # Add executive summary
+    # Add executive summary (Health Score/band come from the canonical mentor blob)
+    full_report = public_full_report(full_report, context.get('mentor_blob_v2')) or {}
     exec_summary = full_report.get('executive_summary', {})
-    premium_context['health_score'] = exec_summary.get('health_score', context.get('overall_score', 0))
-    premium_context['health_band'] = exec_summary.get('health_band', 'Developing')
+    premium_context['health_score'] = context.get('health_score', exec_summary.get('health_score', 0))
+    premium_context['health_band'] = context.get('health_band', exec_summary.get('health_band', 'Developing'))
     premium_context['one_liner'] = exec_summary.get('one_liner', '')
     premium_context['trajectory'] = exec_summary.get('trajectory', '')
     premium_context['trajectory_note'] = exec_summary.get('trajectory_note', '')
