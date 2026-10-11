@@ -32,8 +32,11 @@ delivery, and check the spam folder.
 | Alert policy | `[<env>] AI generation failures`, `Scoring fallback`, `Email send failures` | real-traffic failures in a 10-minute window |
 | Alert policy | `[<env>] Server errors` | more than 5 responses with status 5xx in 5 minutes |
 
-Every policy re-notifies every 30 minutes while open and closes automatically 30 minutes after
-recovery.
+Every policy re-notifies every 30 minutes while open. Uptime and 5xx alerts close once the
+condition clears. Log-based alerts (integration down, AI, scoring, email) close **30 minutes
+after the last failure**: a counter with no failures sends no data, so Monitoring closes them
+through auto-close rather than seeing the condition clear. To check sooner, run the check (see
+below).
 
 Filter check on 2026-10-10, against dev logs from the previous 7 days:
 - `llm_provider_error`: 18 matches (the October 10 AI outage).
