@@ -172,3 +172,13 @@ def mock_email_send(monkeypatch):
     monkeypatch.setattr(email_mod, 'send_notification_email', _fake_send_notification_email, raising=False)
     monkeypatch.setattr(email_mod, 'send_email', _fake_send_email, raising=False)
     yield
+
+# --- Scheduler/diagnostic secret (autouse) ---
+TEST_CRON_SECRET = "test-cron-secret"
+
+
+@pytest.fixture(autouse=True)
+def cron_secret_env(monkeypatch):
+    """require_cron_secret fails closed without CRON_SECRET; give every test a known value."""
+    monkeypatch.setenv("CRON_SECRET", TEST_CRON_SECRET)
+    return TEST_CRON_SECRET

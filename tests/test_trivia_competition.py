@@ -332,7 +332,7 @@ def test_scheduled_endpoint_requires_cron_secret_and_finalizes(client, db_sessio
     assert client.post("/scheduled/trivia-competition-finalize").status_code == 403
 
     r = client.post("/scheduled/trivia-competition-finalize",
-                    headers={"X-Cron-Secret": scheduled_tasks.CRON_SECRET})
+                    headers={"X-Cron-Secret": "test-cron-secret"})
     assert r.status_code == 200, r.text
     assert r.json()["results"][0]["status"] == "finalized"
     db_session.expire_all()

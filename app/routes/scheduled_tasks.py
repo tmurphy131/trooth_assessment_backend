@@ -12,6 +12,7 @@ import os
 from datetime import datetime, UTC
 
 from app.db import get_db
+from app.services.auth import require_cron_secret
 from app.models.user import User, UserRole
 from app.services.push_notification import notify_weekly_tips_batch, PushNotificationService
 from app.schemas.push_notification import PushNotificationPayload
@@ -24,22 +25,13 @@ from app.schemas.daily_trivia import DailyCronOut
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-# Secret token for cron job authentication
-# Set CRON_SECRET in environment to secure these endpoints
-CRON_SECRET = os.getenv("CRON_SECRET", "dev-cron-secret-change-in-prod")
-
-
-def verify_cron_secret(x_cron_secret: Optional[str] = Header(None)):
-    """Verify the cron secret header for scheduled job authentication."""
-    if x_cron_secret != CRON_SECRET:
-        raise HTTPException(status_code=403, detail="Invalid cron secret")
-    return True
+# Every route requires X-Cron-Secret (require_cron_secret fails closed when it is unset).
 
 
 @router.post("/weekly-tips")
 def trigger_weekly_tips(
     db: Session = Depends(get_db),
-    _verified: bool = Depends(verify_cron_secret)
+    _verified: bool = Depends(require_cron_secret)
 ):
     """Send weekly tip push notifications to all mentors and apprentices.
     
@@ -91,7 +83,7 @@ def trigger_weekly_tips(
 @router.post("/trivia-expiry")
 def trigger_trivia_expiry(
     db: Session = Depends(get_db),
-    _verified: bool = Depends(verify_cron_secret)
+    _verified: bool = Depends(require_cron_secret)
 ):
     """Expire stale trivia challenges and notify both players.
 
@@ -113,7 +105,7 @@ def trigger_trivia_expiry(
 @router.post("/trivia-competition-finalize")
 def trigger_trivia_competition_finalize(
     db: Session = Depends(get_db),
-    _verified: bool = Depends(verify_cron_secret)
+    _verified: bool = Depends(require_cron_secret)
 ):
     """Finalize ended trivia competitions: record winners, create Shopify prize
     codes, email + push winners. Idempotent — safe to call every hour.
@@ -127,7 +119,7 @@ def trigger_trivia_competition_finalize(
 @router.post("/daily-trivia", response_model=DailyCronOut)
 def trigger_daily_trivia(
     db: Session = Depends(get_db),
-    _verified: bool = Depends(verify_cron_secret)
+    _verified: bool = Depends(require_cron_secret)
 ):
     """Send 9am-local daily trivia reminders, retry unfinished streak rewards and
     expire old ones. Idempotent — safe to call every hour (spec 002).
@@ -141,7 +133,7 @@ def trigger_daily_trivia(
 def test_push_notification(
     user_id: str,
     db: Session = Depends(get_db),
-    _verified: bool = Depends(verify_cron_secret)
+    _verified: bool = Depends(require_cron_secret)
 ):
     """Send a test push notification to a specific user (for debugging).
     

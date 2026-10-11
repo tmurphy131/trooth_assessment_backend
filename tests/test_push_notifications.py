@@ -130,12 +130,11 @@ class TestScheduledTasks:
 
     def test_weekly_tips_with_valid_secret(self, client, db_session):
         """Test weekly tips with valid cron secret."""
-        # Patch the CRON_SECRET to a known value
-        with patch("app.routes.scheduled_tasks.CRON_SECRET", "test-secret"):
-            response = client.post(
-                "/scheduled/weekly-tips",
-                headers={"X-Cron-Secret": "test-secret"}
-            )
+        # conftest sets CRON_SECRET for every test
+        response = client.post(
+            "/scheduled/weekly-tips",
+            headers={"X-Cron-Secret": "test-cron-secret"}
+        )
         assert response.status_code == 200
         data = response.json()
         assert "week_number" in data

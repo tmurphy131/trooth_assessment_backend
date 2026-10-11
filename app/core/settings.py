@@ -94,6 +94,11 @@ class Settings:
         # secret key; the public SDK key also works for that read-only call.
         self.revenuecat_secret_api_key = os.getenv("REVENUECAT_SECRET_API_KEY", "")
         self.revenuecat_api_key = os.getenv("REVENUECAT_API_KEY", "")
+        # Fixed, inert RevenueCat customer id the integration health check reads (not a secret)
+        self.revenuecat_healthcheck_app_user_id = os.getenv("REVENUECAT_HEALTHCHECK_APP_USER_ID", "healthcheck-probe")
+        # Integrations the health check reports as "skipped" (never probed or alerted), comma-separated.
+        # llm_fallback is skipped while the OpenAI fallback has no credit; set HEALTHCHECK_SKIP="" to re-enable.
+        self.healthcheck_skip = {s.strip() for s in os.getenv("HEALTHCHECK_SKIP", "llm_fallback").split(",") if s.strip()}
 
         # Printful API (for shop availability)
         self.printful_api_token = os.getenv("PRINTFUL_API_TOKEN", "")

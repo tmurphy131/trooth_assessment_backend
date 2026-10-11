@@ -22,7 +22,7 @@ from app.services.account_deletion import _clear_shared_user_references
 # 15:00 UTC on Nov 5 2026 is 10:00 in New York (EST, UTC-5)
 T0 = datetime(2026, 11, 5, 15, 0, tzinfo=UTC)
 D0 = date(2026, 11, 5)
-CRON = {"X-Cron-Secret": "dev-cron-secret-change-in-prod"}
+CRON = {"X-Cron-Secret": "test-cron-secret"}
 
 
 class Clock:
