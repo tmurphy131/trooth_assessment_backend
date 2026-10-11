@@ -107,6 +107,9 @@ class GeminiProvider(LLMProvider):
         # Add JSON response mode if requested
         if config.json_mode:
             gen_config.response_mime_type = "application/json"
+        if getattr(config, "response_schema", None) is not None:
+            gen_config.response_mime_type = "application/json"
+            gen_config.response_schema = config.response_schema
         
         # Make the API call
         response = client.models.generate_content(

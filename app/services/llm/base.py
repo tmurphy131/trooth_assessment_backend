@@ -47,6 +47,9 @@ class LLMConfig:
     json_mode: bool = True  # Request JSON response format
     timeout_seconds: int = 60
     max_retries: int = 3
+    # Optional structured-output schema (e.g. a pydantic model). Gemini enforces it; OpenAI ignores it
+    # and stays in JSON mode, so callers must still validate.
+    response_schema: Optional[Any] = None
 
 
 class LLMProvider(ABC):

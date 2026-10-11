@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.services.report_summary import public_full_report
+from app.services.report_summary import public_full_report, summarize_mentor_blob
 from app.schemas import assessment as assessment_schema
 from app.models import assessment as assessment_model, user as user_model, mentor_apprentice as mentor_model
 from app.db import get_db
@@ -147,13 +147,22 @@ def check_assessment_status(
             raise ForbiddenException("Not allowed.")
         scores = a.scores or {}
         overall = scores.get('overall_score') if isinstance(scores, dict) else None
-        return {
+        status = getattr(a, 'status', None) or ("done" if a.scores else "processing")
+        body = {
             "id": a.id,
-            "status": getattr(a, 'status', None) or ("done" if a.scores else "processing"),
+            "status": status,
             "has_scores": bool(a.scores),
             "overall_score": overall,
+            # Headline number once AI scoring is done (specs/004-reliable-ai-reports)
+            "health_score": summarize_mentor_blob(a.mentor_report_v2)["health_score"]
+            if status == "done" and a.mentor_report_v2 else None,
             "updated_at": getattr(a, 'updated_at', None) or a.created_at,
         }
+        if status == "failed":
+            body["reason"] = a.failure_reason or "The report could not be generated"
+        return body
+    except HTTPException:
+        raise  # 403/404 keep their status codes
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
