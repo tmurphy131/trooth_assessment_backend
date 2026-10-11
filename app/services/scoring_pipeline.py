@@ -113,7 +113,7 @@ def _previous_assessments(session, assess) -> list[dict]:
     prev = session.query(Assessment).filter_by(id=assess.previous_assessment_id).first()
     if prev and prev.scores:
         return [{"id": prev.id, "created_at": str(prev.created_at) if prev.created_at else None,
-                 "scores": prev.scores}]
+                 "scores": prev.scores, "mentor_report_v2": prev.mentor_report_v2}]
     return []
 
 
@@ -137,8 +137,22 @@ def _is_fallback(scoring: dict, answers: dict, questions: list[dict]) -> Optiona
     return None
 
 
-def _run_scorer(answers: dict, questions: list[dict], previous: list[dict]) -> dict:
-    from app.services.ai_scoring import score_assessment_by_category
+def _is_master(session, assess) -> bool:
+    if assess.category == "master_trooth":
+        return True
+    if not assess.template_id:
+        return False
+    from app.models.assessment_template import AssessmentTemplate
+
+    tpl = session.query(AssessmentTemplate).filter_by(id=assess.template_id).first()
+    return bool(tpl and tpl.is_master_assessment)
+
+
+def _run_scorer(answers: dict, questions: list[dict], previous: list[dict], master: bool = False) -> dict:
+    from app.services.ai_scoring import score_assessment_by_category, score_master_v3
+
+    if master:  # one structured AI call; numbers computed in code
+        return score_master_v3(answers, questions, previous)
 
     loop = asyncio.new_event_loop()
     try:
@@ -171,9 +185,9 @@ def score_assessment(assessment_id: str, attempt_info: Optional[dict] = None) ->
             questions = _build_questions(session, assess)
             previous = _previous_assessments(session, assess)
             try:
-                scoring = _run_scorer(assess.answers or {}, questions, previous)
+                scoring = _run_scorer(assess.answers or {}, questions, previous, _is_master(session, assess))
             except Exception as e:
-                raise ScoringRetryable(f"scorer error: {e}", code="ai_unavailable") from e
+                raise ScoringRetryable(f"scorer error: {e}", code=getattr(e, "code", "ai_unavailable")) from e
             why = _is_fallback(scoring, assess.answers or {}, questions)
             if why:
                 # Same text feature 003's "Scoring fallback" alert matches
@@ -202,7 +216,8 @@ def score_assessment(assessment_id: str, attempt_info: Optional[dict] = None) ->
             _release_lease(session, assessment_id)
             raise
 
-        logger.info("scoring done assessment=%s attempts=%s", assessment_id, (assess.scoring_attempts or 0))
+        logger.info("scoring done assessment=%s attempts=%s version=%s", assessment_id,
+                    (assess.scoring_attempts or 0), scoring.get("scoring_version", "v2"))
         session.refresh(assess)
         try:
             notify_mentors(session, assess, questions, previous)
