@@ -148,11 +148,12 @@ def _is_master(session, assess) -> bool:
     return bool(tpl and tpl.is_master_assessment)
 
 
-def _run_scorer(answers: dict, questions: list[dict], previous: list[dict], master: bool = False) -> dict:
+def _run_scorer(answers: dict, questions: list[dict], previous: list[dict], master: bool = False,
+                assessment_id: Optional[str] = None) -> dict:
     from app.services.ai_scoring import score_assessment_by_category, score_master_v3
 
     if master:  # one structured AI call; numbers computed in code
-        return score_master_v3(answers, questions, previous)
+        return score_master_v3(answers, questions, previous, assessment_id=assessment_id)
 
     loop = asyncio.new_event_loop()
     try:
@@ -185,7 +186,8 @@ def score_assessment(assessment_id: str, attempt_info: Optional[dict] = None) ->
             questions = _build_questions(session, assess)
             previous = _previous_assessments(session, assess)
             try:
-                scoring = _run_scorer(assess.answers or {}, questions, previous, _is_master(session, assess))
+                scoring = _run_scorer(assess.answers or {}, questions, previous, _is_master(session, assess),
+                                      assessment_id)
             except Exception as e:
                 raise ScoringRetryable(f"scorer error: {e}", code=getattr(e, "code", "ai_unavailable")) from e
             why = _is_fallback(scoring, assess.answers or {}, questions)
@@ -312,7 +314,7 @@ def _ensure_full_report(session, assess, apprentice_name, questions, previous) -
         assessment_id=assess.id, template_id=assess.template_id,
         submitted_at=assess.created_at.isoformat() if assess.created_at else None,
         answers=assess.answers or {}, questions=questions, previous_assessments=previous)
-    full_report = generate_full_report(payload, previous)
+    full_report = generate_full_report(payload, previous, computed_facts=(assess.scores or {}).get("computed_facts"))
     scores = dict(assess.scores or {})
     scores["full_report_v1"] = full_report
     scores["full_report_generated_at"] = _now().isoformat()

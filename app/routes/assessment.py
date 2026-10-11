@@ -333,7 +333,9 @@ def get_own_full_report(
     )
 
     try:
-        full_report = generate_full_report(payload, previous_assessments)
+        full_report = generate_full_report(
+            payload, previous_assessments,
+            computed_facts=(assessment.scores or {}).get("computed_facts") if assessment else None)
         # Cache in draft
         scores["full_report_v1"] = full_report
         scores["full_report_generated_at"] = datetime.now(UTC).isoformat()
