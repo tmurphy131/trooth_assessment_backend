@@ -187,11 +187,11 @@ description: "Task list for Reliable, Fast, Consistent AI Assessment Reports"
 
 ### Tests for User Story 4
 
-- [ ] T030 [P] [US4] `tests/test_scoring_pipeline.py`:
+- [X] T030 [P] [US4] `tests/test_scoring_pipeline.py`:
   - after `done`, when the apprentice or an active mentor is premium, the pipeline generates and stores `full_report_v1` with `full_report_status='ready'`;
   - a Premium failure leaves `status='done'` and sets `full_report_status='failed'`;
   - the mentor email is sent once after the Premium step.
-- [ ] T031 [P] [US4] `tests/test_scoring_pipeline.py`, on-demand helper:
+- [X] T031 [P] [US4] `tests/test_scoring_pipeline.py`, on-demand helper:
   - `ready` → returned without generating;
   - two concurrent claims (simulate by pre-setting `generating` with a fresh `full_report_claimed_at`) → the second caller waits and gets the report when the first stores it, or `{"status":"generating"}` after the wait;
   - a stale claim (> 5 min) is re-claimed;
@@ -201,14 +201,14 @@ description: "Task list for Reliable, Fast, Consistent AI Assessment Reports"
 
 ### Implementation for User Story 4
 
-- [ ] T032 [US4] Create `get_or_generate_full_report(db, assessment, requester, wait_s=90) -> dict` in a new `app/services/full_report.py`:
+- [X] T032 [US4] Create `get_or_generate_full_report(db, assessment, requester, wait_s=90) -> dict` in a new `app/services/full_report.py`:
   - claim via a conditional UPDATE on `full_report_status`/`full_report_claimed_at`;
   - the winner generates (≤ 2 retries on malformed output), stores it in `assessment.scores['full_report_v1']` with `full_report_status='ready'`, and stops writing the draft copy;
   - waiters poll every 2 s;
   - returns `{"report": public_full_report(...), "cached": bool}` or `{"status": "generating", "cached": false}`;
   - raises a 503 `HTTPException` on final failure.
-- [ ] T033 [US4] Replace the generate/cache code in `app/routes/assessment.py` (`get_own_full_report`), `app/routes/apprentice.py` (`get_my_full_report`) and `app/routes/mentor.py` (`get_full_report`) with `get_or_generate_full_report`, keeping their auth, premium and lookup logic and response keys
-- [ ] T034 [US4] In `app/services/scoring_pipeline.py`, after the free report is persisted, determine premium (apprentice or any active mentor, via `is_premium_user`), call the generation path of `full_report.py` (claim then generate), and catch failures (`full_report_status='failed'`); then send the mentor email (Premium template when the report is ready, else the free template)
+- [X] T033 [US4] Replace the generate/cache code in `app/routes/assessment.py` (`get_own_full_report`), `app/routes/apprentice.py` (`get_my_full_report`) and `app/routes/mentor.py` (`get_full_report`) with `get_or_generate_full_report`, keeping their auth, premium and lookup logic and response keys
+- [X] T034 [US4] In `app/services/scoring_pipeline.py`, after the free report is persisted, determine premium (apprentice or any active mentor, via `is_premium_user`), call the generation path of `full_report.py` (claim then generate), and catch failures (`full_report_status='failed'`); then send the mentor email (Premium template when the report is ready, else the free template)
 
 ---
 

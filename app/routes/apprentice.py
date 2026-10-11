@@ -11,7 +11,6 @@ from app.models.agreement import Agreement
 from pydantic import BaseModel
 from app.services.email import send_notification_email
 from app.services.push_notification import notify_mentorship_revoked
-from datetime import datetime, UTC
 import logging
 
 logger = logging.getLogger(__name__)
@@ -169,11 +168,7 @@ def get_my_full_report(
     Returns 404 if not found or not owned by this apprentice.
     Returns 400 if assessment not yet completed/scored.
     """
-    from app.services.ai_scoring import generate_full_report, _build_v2_prompt_input
-    from app.models.assessment_template import AssessmentTemplate
-    from app.models.question import Question
-    from app.models.category import Category
-    from app.models.assessment_template_question import AssessmentTemplateQuestion
+    from app.services.full_report import get_or_generate_full_report
     from app.services.auth import is_premium_user
     from app.models.assessment import Assessment
     
@@ -218,124 +213,15 @@ def get_my_full_report(
     if not draft.is_submitted:
         raise HTTPException(status_code=400, detail="Assessment not yet completed")
     
-    # Check if full report is cached: the assessment's own copy first (the draft cache is keyed by
-    # template, so for an older assessment it can hold a newer assessment's report)
-    scores = draft.score or {}
-    cached_full_report = (assessment.scores or {}).get("full_report_v1") if assessment else None
-    if not cached_full_report:
-        cached_full_report = scores.get("full_report_v1")
-    
-    if cached_full_report:
-        logger.info(f"Returning cached full report for id {id}")
-        return {
-            "report": public_full_report(cached_full_report, assessment.mentor_report_v2 if assessment else None),
-            "cached": True,
-            "draft_id": draft.id,
-            "generated_at": scores.get("full_report_generated_at")
-        }
-    
-    # Generate full report on demand
-    logger.info(f"Generating full report on demand for id {id}")
-    
-    # Get questions for this template (with eager loading of question relationship)
-    from sqlalchemy.orm import joinedload
-    template_questions = db.query(AssessmentTemplateQuestion)\
-        .options(joinedload(AssessmentTemplateQuestion.question))\
-        .filter_by(template_id=draft.template_id)\
-        .order_by(AssessmentTemplateQuestion.order)\
-        .all()
-    
-    questions_list = []
-    for tq in template_questions:
-        q = tq.question
-        if not q:
-            continue
-        category_name = 'General'
-        if q.category_id:
-            cat = db.query(Category).filter_by(id=q.category_id).first()
-            if cat:
-                category_name = cat.name
-        q_dict = {
-            'id': str(q.id),
-            'text': q.text,
-            'question_type': q.question_type.value if hasattr(q.question_type, 'value') else str(q.question_type),
-            'category': category_name,
-        }
-        if q.options:
-            q_dict['options'] = [
-                {'id': str(opt.id), 'text': opt.option_text, 'is_correct': opt.is_correct}
-                for opt in q.options
-            ]
-        questions_list.append(q_dict)
-    
-    # Get previous assessments for trend analysis
-    previous_drafts = db.query(AssessmentDraft).filter(
-        AssessmentDraft.apprentice_id == apprentice.id,
-        AssessmentDraft.is_submitted == True,
-        AssessmentDraft.id != draft.id
-    ).order_by(AssessmentDraft.updated_at.desc()).limit(5).all()
-    
-    previous_assessments = []
-    for pd in previous_drafts:
-        if pd.score:
-            previous_assessments.append({
-                'date': pd.updated_at.isoformat() if pd.updated_at else None,
-                'health_score': pd.score.get('mentor_blob_v2', {}).get('health_score'),
-                'strengths': pd.score.get('mentor_blob_v2', {}).get('strengths', []),
-                'gaps': pd.score.get('mentor_blob_v2', {}).get('gaps', [])
-            })
-    
-    # Build the payload for the full report
-    apprentice_info = {
-        'id': str(apprentice.id),
-        'name': apprentice.name if apprentice.name else 'Apprentice',
-        'age': None,
-        'church': None
-    }
-    
-    payload, _ = _build_v2_prompt_input(
-        apprentice=apprentice_info,
-        assessment_id=draft.id,
-        template_id=str(draft.template_id),
-        submitted_at=draft.updated_at.isoformat() if draft.updated_at else None,
-        answers=draft.answers or {},
-        questions=questions_list,
-        previous_assessments=previous_assessments
-    )
-    
-    try:
-        # Generate the full report
-        full_report = generate_full_report(
-            payload, previous_assessments,
-            computed_facts=(assessment.scores or {}).get("computed_facts") if assessment else None)
-        
-        # Cache the report in BOTH draft.score AND Assessment.scores
-        if not scores:
-            scores = {}
-        scores['full_report_v1'] = full_report
-        scores['full_report_generated_at'] = datetime.now(UTC).isoformat()
-        draft.score = scores
-        
-        # Also save to Assessment.scores for email/PDF endpoints
-        # (assessment already loaded above if it existed)
-        if assessment:
-            assess_scores = dict(assessment.scores or {})
-            assess_scores['full_report_v1'] = full_report
-            assess_scores['full_report_generated_at'] = datetime.now(UTC).isoformat()
-            assessment.scores = assess_scores
-        
-        db.commit()
-        
-        return {
-            "report": public_full_report(full_report, assessment.mentor_report_v2 if assessment else None),
-            "cached": False,
-            "draft_id": draft.id,
-            "generated_at": full_report.get("_meta", {}).get("generated_at")
-        }
-        
-    except Exception as e:
-        logger.error(f"Failed to generate full report for id {id}: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to generate full report: {str(e)}"
-        )
+    if assessment is None:  # legacy draft-only submission: serve its stored copy, never generate
+        cached = (draft.score or {}).get("full_report_v1")
+        if not cached:
+            raise HTTPException(status_code=404, detail="Assessment not found")
+        return {"report": public_full_report(cached, None), "cached": True, "draft_id": draft.id,
+                "generated_at": (draft.score or {}).get("full_report_generated_at")}
+    # Stored copy, or generate once (concurrent callers wait); 503 instead of 500 on failure
+    result = get_or_generate_full_report(db, assessment)
+    result["draft_id"] = draft.id
+    return result
+
+
