@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ONLY BLV — Discipleship Apps</title>
-  <meta name="description" content="ONLY BLV builds tools to help people grow in their walk with Jesus. Discipleship, accountability, and Scripture-based guidance—all in one app suite." />
+  <meta name="description" content="ONLY BLV builds tools to help people grow in their walk with Jesus. T[root]H Discipleship, T[root]H Accountability, and T[root]H Armory: discipleship, accountability, and Scripture for every battle." />
   <link rel="icon" type="image/png" href="onlyblv_logo.png" />
 
   <style>
@@ -266,6 +266,19 @@
       height: 18px;
     }
 
+    .app-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+      margin-top: 14px;
+    }
+    .app-links a {
+      font-size: 13px;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .app-links a:hover { color: var(--gold-light); }
+
     /* Screenshots Section */
     .screenshots {
       margin-top: 24px;
@@ -494,6 +507,8 @@
               <span>Mentor/Apprentice</span>
               <span>Spiritual Gifts</span>
               <span>Progress Tracking</span>
+              <span>Prayer Journal</span>
+              <span>Bible Trivia</span>
             </div>
             <div class="store-buttons">
               <a class="store-btn" href="https://apps.apple.com/app/t-root-h-discipleship/id6757311543" target="_blank" rel="noopener">
@@ -505,37 +520,43 @@
                 Google Play
               </a>
             </div>
+            <div class="app-links">
+              <a href="guides.html#discipleship">User Guide</a>
+              <a href="support.html">Support</a>
+              <a href="privacy.html">Privacy</a>
+              <a href="terms.html">Terms</a>
+            </div>
 
             <!-- Screenshots -->
             <div class="screenshots">
               <div class="screenshots-label">Preview the App</div>
               <div class="screenshots-grid">
                 <div class="screenshot">
-                  <img src="dashboard.png" alt="Dashboard" />
+                  <img src="guides/discipleship/apprentice_dashboard.jpg" alt="Dashboard" loading="lazy" />
                   <div class="screenshot-caption">
                     <h4>Dashboard</h4>
                     <p>Your home for quick actions & progress</p>
                   </div>
                 </div>
                 <div class="screenshot">
-                  <img src="assessmentResults.png" alt="Assessment Results" />
+                  <img src="guides/discipleship/report_free_summary.jpg" alt="Assessment Results" loading="lazy" />
                   <div class="screenshot-caption">
                     <h4>Assessment Results</h4>
                     <p>Health score with actionable next steps</p>
                   </div>
                 </div>
                 <div class="screenshot">
-                  <img src="spiritualGiftsScreen.png" alt="Spiritual Gifts" />
+                  <img src="guides/discipleship/gifts_results.jpg" alt="Spiritual Gifts" loading="lazy" />
                   <div class="screenshot-caption">
                     <h4>Spiritual Gifts</h4>
                     <p>Discover your God-given strengths</p>
                   </div>
                 </div>
                 <div class="screenshot">
-                  <img src="mentorApprenticeRelationship.png" alt="Mentor Connection" />
+                  <img src="guides/discipleship/trivia_home.jpg" alt="Bible Trivia" loading="lazy" />
                   <div class="screenshot-caption">
-                    <h4>Mentor Connection</h4>
-                    <p>Grow together with guidance</p>
+                    <h4>Bible Trivia</h4>
+                    <p>Daily questions & head-to-head play</p>
                   </div>
                 </div>
               </div>
@@ -573,34 +594,40 @@
                 Google Play
               </a>
             </div>
+            <div class="app-links">
+              <a href="guides.html#accountability">User Guide</a>
+              <a href="support.html">Support</a>
+              <a href="accountability-privacy.html">Privacy</a>
+              <a href="accountability-terms.html">Terms</a>
+            </div>
 
             <!-- Screenshots -->
             <div class="screenshots">
               <div class="screenshots-label">Preview the App</div>
               <div class="screenshots-grid">
                 <div class="screenshot">
-                  <img src="HomePage.png" alt="Home Page" />
+                  <img loading="lazy" src="HomePage.png" alt="Home Page" />
                   <div class="screenshot-caption">
                     <h4>Home</h4>
                     <p>One-tap alert when you need backup</p>
                   </div>
                 </div>
                 <div class="screenshot">
-                  <img src="AccountabilityResources.png" alt="Accountability Resources" />
+                  <img loading="lazy" src="AccountabilityResources.png" alt="Accountability Resources" />
                   <div class="screenshot-caption">
                     <h4>Resources</h4>
                     <p>Scripture & tools for the fight</p>
                   </div>
                 </div>
                 <div class="screenshot">
-                  <img src="HelpExplanation.png" alt="Help Explanation" />
+                  <img loading="lazy" src="HelpExplanation.png" alt="Help Explanation" />
                   <div class="screenshot-caption">
                     <h4>How It Works</h4>
                     <p>Simple setup, instant support</p>
                   </div>
                 </div>
                 <div class="screenshot">
-                  <img src="ResourcesExplanation.png" alt="Resources Explanation" />
+                  <img loading="lazy" src="ResourcesExplanation.png" alt="Resources Explanation" />
                   <div class="screenshot-caption">
                     <h4>Resource Guide</h4>
                     <p>Curated content for real battles</p>
@@ -610,26 +637,79 @@
             </div>
           </div>
 
-          <!-- T[root]H War Handbook -->
-          <div class="app-card">
+          <!-- T[root]H Armory -->
+          <div class="app-card featured">
             <div class="app-header">
               <div class="app-icon">
-                <img src="troothwarbook_icon.png" alt="T[root]H Warbook" />
+                <img src="trooth_armory_icon.png" alt="T[root]H Armory" />
               </div>
               <div class="app-info">
-                <h3>T[root]H Warbook</h3>
-                <span class="status coming">Coming Soon</span>
+                <h3>T[root]H Armory</h3>
+                <span class="status">Available Now</span>
               </div>
             </div>
             <p>
-              A curated collection of Scripture and wisdom for life's battles. Whether you're facing 
-              anxiety, grief, doubt, or joy—find truth-based guidance and practical takeaways.
+              Scripture for every battle. The free companion to <em>The T[root]H Prayer &amp; Scripture Directory</em>,
+              with Scripture, a Bible story, a prayer, and a T[root]H Takeaway for whatever you're facing:
+              anxiety, grief, temptation, waiting, or growing in faith.
             </p>
             <div class="app-features">
-              <span>50+ Topics</span>
-              <span>Scripture Reference</span>
-              <span>T[root]H Takeaways</span>
-              <span>Offline Access</span>
+              <span>32 Topics</span>
+              <span>479 Verses</span>
+              <span>Daily Verse</span>
+              <span>Works Offline</span>
+              <span>No Account Needed</span>
+            </div>
+            <div class="store-buttons">
+              <a class="store-btn" href="https://apps.apple.com/us/app/t-root-h-armory/id6816811007" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+              </a>
+              <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.onlyblv.trootharmory" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.59.69.59 1.19s-.22.9-.57 1.18l-2.29 1.32-2.5-2.5 2.5-2.5 2.27 1.31M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/></svg>
+                Google Play
+              </a>
+            </div>
+            <div class="app-links">
+              <a href="guides.html#armory">User Guide</a>
+              <a href="armory-support.html">Support</a>
+              <a href="armory-privacy.html">Privacy</a>
+              <a href="armory-terms.html">Terms</a>
+            </div>
+
+            <!-- Screenshots -->
+            <div class="screenshots">
+              <div class="screenshots-label">Preview the App</div>
+              <div class="screenshots-grid">
+                <div class="screenshot">
+                  <img src="guides/armory/home.jpg" alt="T[root]H Armory home screen" loading="lazy" />
+                  <div class="screenshot-caption">
+                    <h4>Today</h4>
+                    <p>A new verse every day</p>
+                  </div>
+                </div>
+                <div class="screenshot">
+                  <img src="guides/armory/topic.jpg" alt="Anxiety &amp; Worry topic" loading="lazy" />
+                  <div class="screenshot-caption">
+                    <h4>Topics</h4>
+                    <p>Find the words you need</p>
+                  </div>
+                </div>
+                <div class="screenshot">
+                  <img src="guides/armory/search.jpg" alt="Search by reference" loading="lazy" />
+                  <div class="screenshot-caption">
+                    <h4>Search</h4>
+                    <p>By topic, word, or verse</p>
+                  </div>
+                </div>
+                <div class="screenshot">
+                  <img src="guides/armory/share_card.jpg" alt="Shareable verse card" loading="lazy" />
+                  <div class="screenshot-caption">
+                    <h4>Share</h4>
+                    <p>Send what helped you</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
