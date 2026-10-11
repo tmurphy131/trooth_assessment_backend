@@ -886,6 +886,26 @@
       return key;
     }
 
+    // The Accountability endpoints use their own key (X-Dashboard-Key), remembered separately.
+    const ACCOUNTABILITY_KEY_STORAGE = 'onlyblv_status_key_accountability';
+
+    async function accountabilityFetch(url) {
+      const read = () => { try { return localStorage.getItem(ACCOUNTABILITY_KEY_STORAGE) || ''; } catch (e) { return ''; } };
+      const ask = () => {
+        const k = (window.prompt('Enter the Accountability dashboard key') || '').trim();
+        if (k) { try { localStorage.setItem(ACCOUNTABILITY_KEY_STORAGE, k); } catch (e) {} }
+        return k;
+      };
+      let key = read() || ask();
+      let res = await fetch(url, { headers: { 'X-Dashboard-Key': key } });
+      if (res.status === 401 || res.status === 403) {
+        try { localStorage.removeItem(ACCOUNTABILITY_KEY_STORAGE); } catch (e) {}
+        key = ask();
+        if (key) res = await fetch(url, { headers: { 'X-Dashboard-Key': key } });
+      }
+      return res;
+    }
+
     async function discipleshipFetch(path) {
       let key = getStatusKey() || askStatusKey();
       let res = await fetch(`${DISCIPLESHIP_API}${path}`, { headers: { 'X-Cron-Secret': key } });
@@ -1026,7 +1046,7 @@
       errorState.style.display = 'none';
 
       try {
-        const response = await fetch(ACCOUNTABILITY_API);
+        const response = await accountabilityFetch(ACCOUNTABILITY_API);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const result = await response.json();
         if (result.status !== 'success') throw new Error(result.message || 'Failed to load metrics');
@@ -1193,7 +1213,7 @@
     async function fetchAccUserList() {
       const body = document.getElementById('modal-body');
       try {
-        const res = await fetch(ACCOUNTABILITY_USERS_API);
+        const res = await accountabilityFetch(ACCOUNTABILITY_USERS_API);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
         if (json.status !== 'success') throw new Error(json.message || 'Failed');
