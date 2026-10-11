@@ -11,6 +11,7 @@ from datetime import datetime, UTC
 from pydantic import BaseModel, ValidationError
 from app.core.cache import cache_result
 from app.services.llm import get_llm_service, LLMConfig
+from app.services.report_summary import apply_canonical_scores, health_band
 
 logger = logging.getLogger(__name__)
 
@@ -168,11 +169,7 @@ def _knowledge_band(percent: float) -> str:
 
 def _health_band(score: int) -> str:
     """v2.1 health band calculation"""
-    if score >= 85: return "Flourishing"
-    if score >= 70: return "Maturing"
-    if score >= 55: return "Stable"
-    if score >= 40: return "Developing"
-    return "Beginning"
+    return health_band(score)
 
 
 def _safe_minimal_blob(overall_percent: float, by_topic: list[dict]) -> dict:
@@ -869,6 +866,8 @@ async def score_assessment_by_category(answers: Dict[str, str],
                 mentor_blob = MentorBlobV2.model_validate(raw_blob).model_dump()
         if mentor_blob is None:
             mentor_blob = _safe_minimal_blob(derived.get('percent', 0.0), derived.get('by_topic', []))
+        # Health Score and Biblical Knowledge come from code, not the LLM, so every report agrees
+        apply_canonical_scores(mentor_blob, derived.get('percent', 0.0))
     except Exception as e:
         logger.error(f"Failed to build mentor_blob v2: {e}")
         mentor_blob = _safe_minimal_blob(0.0, [])

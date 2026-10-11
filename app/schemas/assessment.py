@@ -28,6 +28,9 @@ class AssessmentOut(BaseModel):
     scores: Optional[Dict]  # Keep as flexible Dict to handle the full AI scoring structure
     # Include v2 mentor report blob when available so frontend can render without extra calls
     mentor_report_v2: Optional[Dict[str, Any]] = None
+    # Headline Health Score (0-100) and band, the same numbers the report screens show
+    health_score: Optional[int] = None
+    health_band: Optional[str] = None
     created_at: datetime
     model_config = {'from_attributes': True}
 

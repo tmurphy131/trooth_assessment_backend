@@ -1020,7 +1020,14 @@ def get_submitted_by_apprentice(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    # Mentor authorization logic assumed to be in place already
+    # Only the apprentice, an active mentor of theirs, or an admin may read these answers
+    role = current_user.role.value if hasattr(current_user.role, 'value') else str(current_user.role)
+    if current_user.id != apprentice_id and role != "admin":
+        is_mentor = db.query(MentorApprentice).filter_by(
+            mentor_id=current_user.id, apprentice_id=apprentice_id, active=True
+        ).first()
+        if not is_mentor:
+            raise HTTPException(status_code=403, detail="Not authorized to view this apprentice's assessments")
 
     submissions = db.query(AssessmentDraft)\
         .options(selectinload(AssessmentDraft.answers_rel))\

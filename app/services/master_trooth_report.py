@@ -11,6 +11,7 @@ import os
 from typing import Any
 import re
 from app.core.settings import settings
+from app.services.report_summary import public_full_report, summarize_mentor_blob
 
 logger = logging.getLogger("app.master_report")
 
@@ -264,8 +265,9 @@ def build_report_context(assessment: Dict[str, Any] | None, scores: Dict, mentor
     except Exception as e:
         logger.warning(f"Failed to calculate trend: {e}")
 
-    # Include full_report_v1 from scores if available (for premium PDF)
-    full_report = scores.get('full_report_v1')
+    # Include full_report_v1 from scores if available (for premium PDF), aligned to the canonical scores
+    full_report = public_full_report(scores.get('full_report_v1'), mentor_blob)
+    summary = summarize_mentor_blob(mentor_blob)
 
     ctx = {
         'apprentice_name': apprentice_name or 'Apprentice',
@@ -278,6 +280,8 @@ def build_report_context(assessment: Dict[str, Any] | None, scores: Dict, mentor
         'summary_recommendation': scores.get('summary_recommendation', ''),
         'overall_mc_percent': overall_mc_percent,
         'knowledge_band': knowledge_band,
+        'health_score': summary['health_score'],
+        'health_band': summary['health_band'],
         'overall_level': scores.get('overall_score', 7),
         'overall_open_level': overall_open_level,
         'categories': categories,

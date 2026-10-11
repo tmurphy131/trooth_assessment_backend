@@ -12,6 +12,7 @@ from app.models.assessment import Assessment
 from app.models.assessment_template import AssessmentTemplate
 from app.models.user import User
 from app.models.email_send_event import EmailSendEvent
+from app.services.report_summary import summarize_mentor_blob
 from app.services.auth import get_current_user
 from app.services.ai_scoring_master import _extract_top3 as master_extract_top3
 from sqlalchemy.orm import joinedload
@@ -77,9 +78,13 @@ def featured_master_latest(db: Session = Depends(get_db), current_user: User = D
         else:
             top3 = []
     version = scores.get("version") or "master_v1"
+    blob_summary = summarize_mentor_blob(a.mentor_report_v2) if a.mentor_report_v2 else None
     return {
         "overall_score": overall_float,
         "overall_score_display": overall_display,
+        # Headline number, same as the report screens (None until AI scoring has run)
+        "health_score": blob_summary["health_score"] if blob_summary else None,
+        "health_band": blob_summary["health_band"] if blob_summary else None,
         "top3": top3,
         "completed_at": a.created_at,
         "version": version,
@@ -164,6 +169,10 @@ def progress_reports(limit: int = 20, cursor: Optional[str] = None, db: Session 
                 "overall_score": overall_display,
                 "top3": top3,
             }
+            if a.mentor_report_v2:  # the headline number, same as the report screens
+                blob_summary = summarize_mentor_blob(a.mentor_report_v2)
+                summary["health_score"] = blob_summary["health_score"]
+                summary["health_band"] = blob_summary["health_band"]
         elif cat == "spiritual_gifts":
             assessment_type = "spiritual_gifts"
             display_name = template_name or "Spiritual Gifts Assessment"
@@ -259,8 +268,9 @@ def get_apprentice_simplified_report(
     
     if is_v21:
         # v2.1 format
-        health_score = int(mentor_blob.get('health_score', 0))
-        health_band = mentor_blob.get('health_band', 'Unknown')
+        summary = summarize_mentor_blob(mentor_blob)
+        health_score = summary['health_score']
+        health_band = summary['health_band']
         strengths = mentor_blob.get('strengths', [])[:3]
         gaps = mentor_blob.get('gaps', [])[:3]
         priority_action = mentor_blob.get('priority_action', {})
@@ -269,16 +279,16 @@ def get_apprentice_simplified_report(
         conversation_starters = mentor_blob.get('conversation_starters', [])
         trend_note = mentor_blob.get('trend_note')
         
-        # Biblical knowledge from MC topics
-        mc_topics = mentor_blob.get('mc_topics', [])
-        mc_percent = mentor_blob.get('mc_percent', 0.0)
+        # Biblical knowledge lives under biblical_knowledge in v2.1 (same source as the mentor report)
+        mc_percent = summary['mc_percent']
         biblical_knowledge = {
             'percent': mc_percent,
-            'topics': mc_topics
+            'topics': [],
+            'weak_topics': summary['weak_topics'],
         }
         
         # Recommended resources
-        resources = mentor_blob.get('resources', [])
+        resources = mentor_blob.get('recommended_resources') or mentor_blob.get('resources', [])
     else:
         # Legacy v2.0 format or scores-only
         snapshot = mentor_blob.get('snapshot', {})

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from app.services.report_summary import public_full_report
 from app.db import get_db
 from app.models.mentor_apprentice import MentorApprentice
 from app.models.user import User
@@ -217,21 +218,17 @@ def get_my_full_report(
     if not draft.is_submitted:
         raise HTTPException(status_code=400, detail="Assessment not yet completed")
     
-    # Check if full report is cached - check BOTH draft.score AND Assessment.scores
+    # Check if full report is cached: the assessment's own copy first (the draft cache is keyed by
+    # template, so for an older assessment it can hold a newer assessment's report)
     scores = draft.score or {}
-    cached_full_report = scores.get("full_report_v1")
-    
-    # If not in draft, check Assessment.scores (where email/PDF endpoints store it)
+    cached_full_report = (assessment.scores or {}).get("full_report_v1") if assessment else None
     if not cached_full_report:
-        if assessment and assessment.scores:
-            cached_full_report = assessment.scores.get("full_report_v1")
-            if cached_full_report:
-                logger.info(f"Found cached full report in Assessment.scores for id {id}")
+        cached_full_report = scores.get("full_report_v1")
     
     if cached_full_report:
         logger.info(f"Returning cached full report for id {id}")
         return {
-            "report": cached_full_report,
+            "report": public_full_report(cached_full_report, assessment.mentor_report_v2 if assessment else None),
             "cached": True,
             "draft_id": draft.id,
             "generated_at": scores.get("full_report_generated_at")
@@ -328,7 +325,7 @@ def get_my_full_report(
         db.commit()
         
         return {
-            "report": full_report,
+            "report": public_full_report(full_report, assessment.mentor_report_v2 if assessment else None),
             "cached": False,
             "draft_id": draft.id,
             "generated_at": full_report.get("_meta", {}).get("generated_at")
