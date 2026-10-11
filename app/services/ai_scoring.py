@@ -429,7 +429,8 @@ def _load_full_report_prompt_text() -> str:
     return ""
 
 
-def generate_full_report(payload: dict, previous_assessments: List[dict] = None) -> dict:
+def generate_full_report(payload: dict, previous_assessments: List[dict] = None,
+                         computed_facts: Optional[dict] = None) -> dict:
     """Generate premium full report using LLMService (Gemini/OpenAI with fallback).
     
     This is the premium-tier enhanced report with:
@@ -443,6 +444,9 @@ def generate_full_report(payload: dict, previous_assessments: List[dict] = None)
     Args:
         payload: Assessment data payload (same format as standard report)
         previous_assessments: List of previous assessment summaries for trend analysis
+        computed_facts: ``scores['computed_facts']`` from the v3 scorer (Health Score, Biblical
+            Knowledge, per-topic results). When given, the report must use these numbers so it
+            agrees with the free report.
         
     Returns:
         Full report JSON (premium_v1 format)
@@ -466,6 +470,14 @@ def generate_full_report(payload: dict, previous_assessments: List[dict] = None)
         raise Exception("Full report prompt not found - premium feature unavailable")
     
     system_prompt = "You are a senior pastor-mentor generating a premium, comprehensive mentor report. Return STRICT JSON only."
+    if computed_facts:
+        enriched_payload['computed_facts'] = computed_facts
+        system_prompt += (
+            " The input's computed_facts were computed by the system and are ground truth: "
+            "executive_summary.health_score and health_band must equal computed_facts.health_score and "
+            "health_band, and the Biblical Knowledge percent must equal "
+            "computed_facts.biblical_knowledge_percent. " + NUMBERS_INSTRUCTION
+        )
     user_prompt = f"{prompt_text.strip()}\n\n{json.dumps(enriched_payload, ensure_ascii=False)}"
     
     # Use LLMService with higher token limit for premium report
@@ -597,8 +609,8 @@ def generate_full_report_for_assessment(assessment, apprentice_name: str = None,
             previous_assessments=None
         )
         
-        # Generate the full report
-        full_report = generate_full_report(payload)
+        # Generate the full report with the same numbers as the free report
+        full_report = generate_full_report(payload, computed_facts=(assessment.scores or {}).get('computed_facts'))
         
         logger.info(f"[full_report_for_assessment] Generated on-demand for assessment {assessment.id}")
         return full_report
@@ -1089,11 +1101,20 @@ def _v3_payload(facts, questions: list[dict]) -> dict:
     }
 
 
-def _generate_v3(payload: dict, attempts: int = 2) -> MentorReportV3:
+NUMBERS_INSTRUCTION = (
+    "Use only the numbers in computed_facts. Do not compute, estimate or invent any other number, "
+    "percentage, score or point change. If previous_health_score is null, do not describe change "
+    "over time."
+)
+
+
+def _generate_v3(payload: dict, attempts: int = 2, correction: Optional[str] = None) -> MentorReportV3:
     """One structured generation, retried once in-process if the output fails validation."""
     import time as _t
 
     system_prompt = _load_v3_prompt_text()
+    if correction:
+        system_prompt += f"\n\n## CORRECTION\n{correction}"
     # A Master assessment has ~28 open-ended answers; low reasoning keeps the output inside the
     # token limit and the call fast.
     config = LLMConfig(temperature=0.2, max_tokens=16000, response_schema=MentorReportV3,
@@ -1139,7 +1160,26 @@ def _question_feedback_v3(facts, report: Optional[MentorReportV3]) -> list[dict]
     return feedback
 
 
-def score_master_v3(answers: Dict[str, str], questions: List[dict], previous_assessments: List[dict] = None) -> Dict:
+def _checked_v3_report(facts, payload: dict, assessment_id: Optional[str]) -> MentorReportV3:
+    """Generate, then regenerate once if the narrative invents numbers; accept the second try either way."""
+    from app.services.scoring_facts import narrative_numbers_ok
+
+    report = _generate_v3(payload)
+    problems = narrative_numbers_ok(report.model_dump(), facts)
+    if not problems:
+        return report
+    logger.warning(f"[ai_scoring] mentor_report_v3 number check failed, regenerating: {problems[:5]}")
+    correction = (f"Your previous answer contained: {'; '.join(problems[:5])}. Remove these. "
+                  f"{NUMBERS_INSTRUCTION}")
+    retry = _generate_v3(payload, correction=correction)
+    retry_problems = narrative_numbers_ok(retry.model_dump(), facts)
+    if retry_problems:
+        logger.warning("report_number_mismatch assessment=%s problems=%s", assessment_id, retry_problems[:5])
+    return retry if len(retry_problems) <= len(problems) else report
+
+
+def score_master_v3(answers: Dict[str, str], questions: List[dict], previous_assessments: List[dict] = None,
+                    assessment_id: Optional[str] = None) -> Dict:
     """Score a Master assessment with at most one AI call.
 
     Returns the ``scores`` dict (keys the app reads, plus ``computed_facts`` and ``scoring_version``)
@@ -1150,7 +1190,7 @@ def score_master_v3(answers: Dict[str, str], questions: List[dict], previous_ass
     from app.services.report_summary import compute_health_score
 
     facts = scoring_facts.compute(answers, questions, previous_assessments)
-    report = _generate_v3(_v3_payload(facts, questions)) if facts.open_items else None
+    report = _checked_v3_report(facts, _v3_payload(facts, questions), assessment_id) if facts.open_items else None
 
     insights = [c.model_dump() for c in report.categories] if report else []
     facts.health_score = compute_health_score(facts.biblical_knowledge_percent, insights)

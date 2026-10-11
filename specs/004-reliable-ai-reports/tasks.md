@@ -173,9 +173,9 @@ description: "Task list for Reliable, Fast, Consistent AI Assessment Reports"
 
 **Independent Test**: quickstart §3.
 
-- [ ] T027 [P] [US3] `tests/test_scoring_pipeline.py`: `narrative_numbers_ok(report_text, facts)` flags percentages or "N-point" phrases not present in the facts, and change-over-time phrases ("improve", "increase", "decline", "up from", "down from") when `previous_health_score` is null; applied to a fixture v3 response
-- [ ] T028 [US3] Implement `narrative_numbers_ok` in `app/services/scoring_facts.py` and call it in `score_master_v3`: on violation, retry the generation once with an added corrective instruction, then accept and log `report_number_mismatch assessment=…` (don't fail the report)
-- [ ] T029 [US3] Pass the same `computed_facts` (now including the final `health_score` and `health_band`) into the Premium generation payload in `app/services/ai_scoring.generate_full_report` and `generate_full_report_for_assessment`, with the same no-invented-numbers instruction appended to the system prompt; keep `public_full_report` as the safety net
+- [X] T027 [P] [US3] `tests/test_scoring_pipeline.py`: `narrative_numbers_ok(report_text, facts)` flags percentages or "N-point" phrases not present in the facts, and change-over-time phrases ("improve", "increase", "decline", "up from", "down from") when `previous_health_score` is null; applied to a fixture v3 response
+- [X] T028 [US3] Implement `narrative_numbers_ok` in `app/services/scoring_facts.py` and call it in `score_master_v3`: on violation, retry the generation once with an added corrective instruction, then accept and log `report_number_mismatch assessment=…` (don't fail the report)
+- [X] T029 [US3] Pass the same `computed_facts` (now including the final `health_score` and `health_band`) into the Premium generation payload in `app/services/ai_scoring.generate_full_report` and `generate_full_report_for_assessment`, with the same no-invented-numbers instruction appended to the system prompt; keep `public_full_report` as the safety net
 
 ---
 

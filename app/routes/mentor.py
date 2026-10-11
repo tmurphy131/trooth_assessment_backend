@@ -620,7 +620,9 @@ def get_full_report(
     
     try:
         # Generate the full report
-        full_report = generate_full_report(payload, previous_assessments)
+        full_report = generate_full_report(
+            payload, previous_assessments,
+            computed_facts=(assessment.scores or {}).get("computed_facts") if assessment else None)
         
         # Cache the report in BOTH draft.score AND Assessment.scores
         # Email/PDF endpoints read from Assessment.scores

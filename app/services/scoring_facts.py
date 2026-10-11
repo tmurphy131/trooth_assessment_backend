@@ -5,6 +5,7 @@ open-ended answers and receives these facts so its narrative can't contradict th
 """
 from __future__ import annotations
 
+import re
 from dataclasses import asdict, dataclass, field
 from typing import Optional
 
@@ -140,3 +141,60 @@ def category_scores(facts: ComputedFacts, levels: dict[str, str]) -> dict[str, i
             value = mc.get(cat, open_.get(cat))
         out[cat] = int(round(value))
     return out
+
+
+# ---------------------------------------------------------------------------
+# Narrative check (US3): the AI may restate numbers from the facts but not invent them
+# ---------------------------------------------------------------------------
+_PERCENT = re.compile(r"(\d{1,3}(?:\.\d+)?)\s*(?:%|percent\b)", re.I)
+_POINTS = re.compile(r"\b(\d{1,3})[- ]points?\b", re.I)
+# Comparisons with an earlier assessment, not advice like "to improve your prayer life"
+_CHANGE = re.compile(
+    r"\b(?:up from|down from|improved from|increased from|decreased from|declined from|"
+    r"improvement (?:of|from)|increase (?:of|from)|decline (?:of|from)|drop (?:of|from)|"
+    r"(?:has|have|had) (?:improved|increased|declined|decreased|dropped)|"
+    r"since (?:your|the) (?:last|previous)|compared (?:to|with) (?:your|the) (?:last|previous))\b",
+    re.I,
+)
+
+
+def _texts(value) -> list[str]:
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, dict):
+        return [t for v in value.values() for t in _texts(v)]
+    if isinstance(value, (list, tuple)):
+        return [t for v in value for t in _texts(v)]
+    return []
+
+
+def _allowed_numbers(facts: ComputedFacts) -> set[float]:
+    values = [facts.biblical_knowledge_percent]
+    values += [row["percent"] for row in facts.mc_by_category + facts.mc_by_topic]
+    for score in (facts.previous_health_score, facts.health_score):
+        if score is not None:
+            values.append(float(score))
+    allowed = set()
+    for v in values:  # accept the value as given and its whole-number roundings
+        allowed.update({round(float(v), 1), float(int(v)), float(round(v))})
+    return allowed
+
+
+def narrative_numbers_ok(report, facts: ComputedFacts) -> list[str]:
+    """Problems with the numbers in an AI narrative; an empty list means it's consistent.
+
+    Flags percentages not in ``facts``, any "N-point" change (the AI isn't given deltas), and
+    change-over-time comparisons when there is no previous assessment.
+    """
+    allowed = _allowed_numbers(facts)
+    problems = []
+    for text in _texts(report):
+        for m in _PERCENT.finditer(text):
+            if round(float(m.group(1)), 1) not in allowed:
+                problems.append(f"invented percentage '{m.group(0)}'")
+        for m in _POINTS.finditer(text):
+            problems.append(f"invented change '{m.group(0)}'")
+        if facts.previous_health_score is None:
+            for m in _CHANGE.finditer(text):
+                problems.append(f"change over time without a previous assessment '{m.group(0)}'")
+    return problems

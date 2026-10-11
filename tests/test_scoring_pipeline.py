@@ -386,3 +386,54 @@ def test_pipeline_uses_v3_for_master_and_retries_invalid_output(make, db_session
     assert r.json() == {"result": "done"}
     a = _reload(db_session, a.id)
     assert a.scores["scoring_version"] == "master_v3" and a.mentor_report_v2["health_score"] == 73
+
+
+# ---------------------------------------------------------------------------
+# User Story 3: the narrative matches the numbers; Premium gets the same facts
+# ---------------------------------------------------------------------------
+
+def _facts(previous=None):
+    prev = [{"mentor_report_v2": {"health_score": previous}}] if previous is not None else []
+    return scoring_facts.compute(V3_ANSWERS, V3_QUESTIONS, prev)
+
+
+def test_narrative_check_flags_invented_numbers():
+    facts = _facts()  # Biblical Knowledge 66.7%; topics 100 / 0 / 100
+    ok = {"observation": "You scored 66.7% on Biblical Knowledge (about 67%) and 100% on the Pentateuch.",
+          "next_step": "Pray for five minutes each morning to improve your focus."}
+    assert scoring_facts.narrative_numbers_ok(ok, facts) == []
+    bad = {"observation": "An 11-point improvement from a 70% baseline.",
+           "items": ["Your prayer life has improved since your last assessment."]}
+    problems = scoring_facts.narrative_numbers_ok(bad, facts)
+    assert any("70%" in p for p in problems) and any("11-point" in p for p in problems)
+    assert any("has improved" in p for p in problems) and any("since your last" in p for p in problems)
+    # With a previous assessment, comparisons are allowed (numbers still must come from the facts)
+    assert scoring_facts.narrative_numbers_ok({"t": "Your prayer life has improved since 61%."}, _facts(61)) == []
+
+
+def test_v3_regenerates_once_when_numbers_are_invented(fake_llm, caplog):
+    bad = _v3_response()
+    bad["strengths"] = ["A 12-point jump from 70% last time"]
+    fake_llm.replies.extend([bad, _v3_response()])
+    result = ai_scoring.score_master_v3(V3_ANSWERS, V3_QUESTIONS, [], assessment_id="a1")
+    assert len(fake_llm.calls) == 2 and "## CORRECTION" in fake_llm.calls[1]["system"]
+    assert result["mentor_blob_v2"]["strengths"] == ["Consistent morning prayer"]
+
+    fake_llm.calls.clear()
+    fake_llm.replies.extend([bad, bad])
+    with caplog.at_level(logging.WARNING):
+        result = ai_scoring.score_master_v3(V3_ANSWERS, V3_QUESTIONS, [], assessment_id="a2")
+    assert len(fake_llm.calls) == 2 and result["scoring_version"] == "master_v3"  # accepted, not failed
+    assert "report_number_mismatch assessment=a2" in caplog.text
+
+
+def test_premium_generation_receives_computed_facts(monkeypatch, fake_llm):
+    full = {"executive_summary": {"health_score": 73}}
+    fake_llm.replies.append(full)
+    monkeypatch.setattr(ai_scoring, "_load_full_report_prompt_text", lambda: "PREMIUM PROMPT")
+    facts = {"health_score": 73, "health_band": "Maturing", "biblical_knowledge_percent": 66.7}
+    ai_scoring.generate_full_report({"assessment": {}}, None, computed_facts=facts)
+    call = fake_llm.calls[0]
+    assert '"computed_facts": {"health_score": 73' in call["user"]
+    assert "must equal computed_facts.health_score" in call["system"]
+    assert ai_scoring.NUMBERS_INSTRUCTION in call["system"]
