@@ -50,6 +50,9 @@ class LLMConfig:
     # Optional structured-output schema (e.g. a pydantic model). Gemini enforces it; OpenAI ignores it
     # and stays in JSON mode, so callers must still validate.
     response_schema: Optional[Any] = None
+    # Gemini 3.x reasoning effort: "minimal" | "low" | "medium" | "high". Reasoning tokens count
+    # against max_tokens, so long structured outputs should keep this low. OpenAI ignores it.
+    thinking_level: Optional[str] = None
 
 
 class LLMProvider(ABC):

@@ -1094,7 +1094,10 @@ def _generate_v3(payload: dict, attempts: int = 2) -> MentorReportV3:
     import time as _t
 
     system_prompt = _load_v3_prompt_text()
-    config = LLMConfig(temperature=0.2, max_tokens=8000, response_schema=MentorReportV3)
+    # A Master assessment has ~28 open-ended answers; low reasoning keeps the output inside the
+    # token limit and the call fast.
+    config = LLMConfig(temperature=0.2, max_tokens=16000, response_schema=MentorReportV3,
+                       thinking_level="low")
     last_error = None
     for attempt in range(1, attempts + 1):
         start = _t.time()

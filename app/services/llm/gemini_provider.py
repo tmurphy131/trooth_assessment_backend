@@ -110,6 +110,8 @@ class GeminiProvider(LLMProvider):
         if getattr(config, "response_schema", None) is not None:
             gen_config.response_mime_type = "application/json"
             gen_config.response_schema = config.response_schema
+        if getattr(config, "thinking_level", None):
+            gen_config.thinking_config = self._types.ThinkingConfig(thinking_level=config.thinking_level.upper())
         
         # Make the API call
         response = client.models.generate_content(

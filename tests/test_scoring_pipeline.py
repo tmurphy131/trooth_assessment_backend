@@ -337,6 +337,8 @@ def test_v3_scorer_makes_one_structured_call(fake_llm):
     assert len(fake_llm.calls) == 1
     call = fake_llm.calls[0]
     assert call["config"].response_schema is ai_scoring.MentorReportV3
+    # ~28 open-ended answers: reasoning tokens share the output limit, so keep them low
+    assert call["config"].thinking_level == "low" and call["config"].max_tokens >= 16000
     assert "Health Score is computed by the system" in call["system"]
     sent = __import__("json").loads(call["user"])
     assert "Who led Israel" not in call["user"]  # correct MC answers aren't sent
