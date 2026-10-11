@@ -428,16 +428,71 @@ def test_v3_regenerates_once_when_numbers_are_invented(fake_llm, caplog):
     assert "report_number_mismatch assessment=a2" in caplog.text
 
 
-def test_premium_generation_receives_computed_facts(monkeypatch, fake_llm):
-    full = {"executive_summary": {"health_score": 73}}
-    fake_llm.replies.append(full)
+def _premium_fixture(health=99, overall=50.0):
+    phase = {"goal": "g", "activities": ["a"], "success_metric": "m"}
+    session = {"theme": "t", "duration_minutes": 45, "key_points_to_cover": [{"point": "p", "talking_point": "tp"}],
+               "questions_to_ask": ["q"]}
+    return {
+        "executive_summary": {"health_score": health, "health_band": "Flourishing", "one_liner": "o",
+                              "trajectory": "steady", "trajectory_note": "n"},
+        "strengths_deep_dive": [{"area": "Prayer Life", "summary": "s", "evidence": ["e"],
+                                 "spiritual_maturity_indicator": "i", "how_to_leverage": "h",
+                                 "celebration_talking_point": "c"}],
+        "gaps_deep_dive": [{"area": "Evangelism", "summary": "s", "severity": "moderate", "root_cause_analysis": "r",
+                            "evidence": ["e"], "biblical_perspective": "b", "why_it_matters": "w",
+                            "growth_pathway": {"phase_1_weeks_1_4": phase, "phase_2_weeks_5_8": phase,
+                                               "phase_3_weeks_9_12": phase}}],
+        "biblical_knowledge_analysis": {
+            "overall_percent": overall, "mastery_level": "Intermediate",
+            "by_topic_breakdown": [{"topic": "Wisdom", "score_percent": 80, "level": "Strong", "key_gaps": []}],
+            "theological_health_check": {"core_doctrines_solid": ["Trinity"], "areas_needing_clarification": [],
+                                         "potential_concerns": []},
+            "recommended_bible_reading_plan": {"name": "n", "description": "d", "why_this_plan": "w",
+                                               "chapters_per_day": 3}},
+        "spiritual_formation_insights": [{"category": "Prayer Life", "current_level": "Maturing",
+                                          "detailed_observation": "d", "maturity_markers_present": ["c"],
+                                          "maturity_markers_missing": ["f"],
+                                          "custom_development_plan": {"immediate_30_days": "i", "quarter_goal": "q",
+                                                                      "year_vision": "y"},
+                                          "mentor_discussion_questions": ["q"]}],
+        "conversation_guide": {"session_1_opening": session, "session_2_growth_areas": session,
+                               "session_3_check_in": session},
+        "progress_tracking": {"milestones_to_track": [{"milestone": "m", "expected_by": "Week 2",
+                                                       "how_to_verify": "v"}],
+                              "suggested_reassessment": "3 months"},
+        "personalized_resources": [{"title": "Praying the Bible", "type": "book", "why_specifically_for_them": "w",
+                                    "how_to_use": "h"}],
+        "mentor_preparation_notes": {"handle_with_care": "h", "watch_for": "w", "cultural_considerations": "c",
+                                     "prayer_focus_for_this_apprentice": "p"},
+        "flags": {"red": [], "yellow": [], "green": [{"flag": "f", "detail": "d", "leverage_this": "l"}]},
+    }
+
+
+def test_premium_generation_uses_schema_and_computed_facts(monkeypatch, fake_llm):
+    fake_llm.replies.append(_premium_fixture(health=99, overall=50.0))
     monkeypatch.setattr(ai_scoring, "_load_full_report_prompt_text", lambda: "PREMIUM PROMPT")
-    facts = {"health_score": 73, "health_band": "Maturing", "biblical_knowledge_percent": 66.7}
-    ai_scoring.generate_full_report({"assessment": {}}, None, computed_facts=facts)
+    facts = {"health_score": 73, "health_band": "Maturing", "biblical_knowledge_percent": 66.7,
+             "mc_by_topic": [{"topic": "Wisdom", "correct": 0, "total": 1, "percent": 0.0}]}
+    report = ai_scoring.generate_full_report({"assessment": {}}, None, computed_facts=facts)
     call = fake_llm.calls[0]
+    assert call["config"].response_schema is ai_scoring.PremiumReportV1 and call["config"].thinking_level == "low"
+    assert "PREMIUM PROMPT" in call["system"] and "PREMIUM PROMPT" not in call["user"]  # cacheable instructions
     assert '"computed_facts": {"health_score": 73' in call["user"]
     assert "must equal computed_facts.health_score" in call["system"]
     assert ai_scoring.NUMBERS_INSTRUCTION in call["system"]
+    # Headline numbers come from code even if the model drifts
+    assert (report["executive_summary"]["health_score"], report["executive_summary"]["health_band"]) == (73, "Maturing")
+    bk = report["biblical_knowledge_analysis"]
+    assert bk["overall_percent"] == 66.7 and bk["by_topic_breakdown"][0]["score_percent"] == 0.0
+    assert report["report_version"] == "premium_v1" and report["generated_at"]
+    assert report["progress_tracking"]["previous_assessment_comparison"] is None
+
+
+def test_premium_output_failing_schema_raises_for_retry(monkeypatch, fake_llm):
+    fake_llm.replies.append({"executive_summary": {"health_score": 73}})  # e.g. the JSON-mode fallback
+    monkeypatch.setattr(ai_scoring, "_load_full_report_prompt_text", lambda: "PREMIUM PROMPT")
+    with pytest.raises(ValueError, match="schema validation"):
+        ai_scoring.generate_full_report({"assessment": {}}, None)
 
 
 # ---------------------------------------------------------------------------
