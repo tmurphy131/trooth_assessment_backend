@@ -99,6 +99,17 @@ class Settings:
         # Integrations the health check reports as "skipped" (never probed or alerted), comma-separated.
         # llm_fallback is skipped while the OpenAI fallback has no credit; set HEALTHCHECK_SKIP="" to re-enable.
         self.healthcheck_skip = {s.strip() for s in os.getenv("HEALTHCHECK_SKIP", "llm_fallback").split(",") if s.strip()}
+        # Durable assessment scoring (specs/004-reliable-ai-reports). Cloud Tasks queue per environment;
+        # local and test runs score inline in a thread instead.
+        self.scoring_queue_name = os.getenv(
+            "SCORING_QUEUE_NAME", "assessment-scoring-prod" if self.environment == "production" else "assessment-scoring-dev")
+        self.scoring_queue_location = os.getenv("SCORING_QUEUE_LOCATION", "us-east4")
+        self.scoring_queue_project = os.getenv("SCORING_QUEUE_PROJECT", "trooth-prod")
+        self.scoring_service_account = os.getenv(
+            "SCORING_SERVICE_ACCOUNT", "trooth-run-sa@trooth-prod.iam.gserviceaccount.com")
+        self.scoring_inline = os.getenv(
+            "SCORING_INLINE", "true" if self.environment in ("development", "test") else "false").lower() == "true"
+        self.scoring_retry_window_s = int(os.getenv("SCORING_RETRY_WINDOW_S", "3600"))
 
         # Printful API (for shop availability)
         self.printful_api_token = os.getenv("PRINTFUL_API_TOKEN", "")

@@ -27,6 +27,7 @@ from app.routes.templates import is_assessment_free
 from app.models.assessment import Assessment
 from app.models.notification import Notification
 from app.services.push_notification import notify_assessment_submitted
+from app.services import scoring_queue
 
 logger = logging.getLogger(__name__)
 
@@ -35,278 +36,6 @@ router = APIRouter()
 # --- Background processing helper -------------------------------------------------
 import asyncio
 from datetime import datetime, UTC
-
-async def _process_assessment_background(assessment_id: str):
-    """Compute AI scores and email mentor in the background.
-
-    Runs using a separate DB session to avoid tying up the request transaction.
-    Sends a failure alert email on any unhandled exception.
-    """
-    # Run the heavy work in a thread to avoid blocking the event loop (SQLAlchemy + OpenAI calls)
-    def _worker():
-        session = SessionLocal()
-        try:
-            # Import locally to avoid circulars
-            from app.models.assessment import Assessment as _Assessment
-            from app.models.user import User as _User
-            from app.models.mentor_apprentice import MentorApprentice as _MA
-            from app.models.assessment_template_question import AssessmentTemplateQuestion as _ATQ
-            from app.models.question import Question as _Question
-            from app.models.category import Category as _Category
-            from app.services.ai_scoring import score_assessment_by_category as _score_cat
-
-            assess = session.query(_Assessment).filter_by(id=assessment_id).first()
-            if not assess:
-                logger.error(f"Background worker: assessment {assessment_id} not found")
-                return
-
-            # Build questions list for AI from the template linkage
-            questions = []
-            if assess.template_id:
-                tqs = (
-                    session.query(_ATQ)
-                    .join(_Question, _ATQ.question_id == _Question.id)
-                    .filter(_ATQ.template_id == assess.template_id)
-                    .order_by(_ATQ.order)
-                    .all()
-                )
-                for tq in tqs:
-                    cat_name = None
-                    if getattr(tq.question, 'category_id', None):
-                        cat = session.query(_Category).filter_by(id=tq.question.category_id).first()
-                        cat_name = cat.name if cat else None
-                    # Build options metadata for MC
-                    opts = []
-                    try:
-                        for opt in (tq.question.options or []):
-                            opts.append({
-                                'id': str(opt.id) if hasattr(opt, 'id') and opt.id else None,
-                                'text': getattr(opt, 'option_text', None),
-                                'is_correct': bool(getattr(opt, 'is_correct', False)),
-                            })
-                    except Exception:
-                        pass
-                    qtype = None
-                    try:
-                        qtype = getattr(tq.question, 'question_type', None)
-                        qtype = qtype.value if hasattr(qtype, 'value') else qtype
-                    except Exception:
-                        qtype = None
-                    questions.append({
-                        'id': str(tq.question.id),
-                        'text': tq.question.text,
-                        'category': cat_name or 'General Assessment',
-                        'question_type': qtype,
-                        'options': opts,
-                    })
-
-            # Fall back: if no template questions, synthesize from answer keys
-            if not questions:
-                questions = [
-                    { 'id': k, 'text': f'Question {k}', 'category': 'General Assessment' }
-                    for k in (assess.answers or {}).keys()
-                ]
-
-            # PHASE 2: Fetch previous assessments for historical context
-            previous_assessments = []
-            try:
-                if assess.previous_assessment_id:
-                    prev = session.query(_Assessment).filter_by(id=assess.previous_assessment_id).first()
-                    if prev and prev.scores:
-                        previous_assessments.append({
-                            'id': prev.id,
-                            'created_at': str(prev.created_at) if prev.created_at else None,
-                            'scores': prev.scores,
-                        })
-                        logger.info(f"[historical] Added previous assessment {prev.id} for AI context")
-            except Exception as e:
-                logger.warning(f"[historical] Failed to fetch previous assessment: {e}")
-
-            # Run async scoring in this worker thread with historical context
-            loop = asyncio.new_event_loop()
-            try:
-                asyncio.set_event_loop(loop)
-                scoring = loop.run_until_complete(_score_cat(assess.answers or {}, questions, previous_assessments))
-            finally:
-                try:
-                    loop.close()
-                except Exception:
-                    pass
-
-            # Update assessment with scores and recommendation
-            assess.scores = scoring
-            # Persist mentor report v2 blob if present
-            try:
-                assess.mentor_report_v2 = scoring.get('mentor_blob_v2')
-            except Exception:
-                pass
-            try:
-                # Persist v2 mentor report blob if present
-                if isinstance(scoring, dict) and scoring.get('mentor_blob_v2'):
-                    assess.mentor_report_v2 = scoring.get('mentor_blob_v2')
-            except Exception:
-                pass
-            assess.recommendation = scoring.get('summary_recommendation')
-            assess.status = "done"
-            session.commit()
-            logger.info(f"Background worker: scores saved for assessment {assessment_id}")
-
-            # Email mentor notification
-            apprentice = session.query(_User).filter_by(id=assess.apprentice_id).first()
-            apprentice_name = getattr(apprentice, 'name', None) or 'Apprentice'
-            rels = session.query(_MA).filter_by(apprentice_id=assess.apprentice_id, active=True).all()
-            for rel in rels:
-                mentor = session.query(_User).filter_by(id=rel.mentor_id).first()
-                if mentor and mentor.email:
-                    # Check if mentor is premium to send enhanced report
-                    from app.services.auth import is_premium_user
-                    mentor_is_premium = is_premium_user(mentor)
-                    logger.info(f"Background worker: mentor premium status={mentor_is_premium}")
-                    
-                    # Prefer v2 mentor report email if mentor_report_v2 blob is present
-                    try:
-                        v2_blob = assess.mentor_report_v2 or (scoring.get('mentor_blob_v2') if isinstance(scoring, dict) else None)
-                    except Exception:
-                        v2_blob = None
-                    try:
-                        if v2_blob:
-                            # Build context and render v2 email (HTML + plain)
-                            from app.services.master_trooth_report import build_report_context
-                            from app.services.email import render_mentor_report_v2_email, render_premium_report_email, send_email as _send_email
-                            # Resolve template display name if available
-                            template_name = None
-                            try:
-                                from app.models.assessment_template import AssessmentTemplate as _Tpl
-                                if assess.template_id:
-                                    tpl = session.query(_Tpl).filter_by(id=assess.template_id).first()
-                                    template_name = getattr(tpl, 'name', None)
-                            except Exception:
-                                template_name = None
-                            assessment_ctx = {
-                                'apprentice': {'id': assess.apprentice_id, 'name': apprentice_name},
-                                'template_id': assess.template_id,
-                                'created_at': getattr(assess, 'created_at', None),
-                            }
-                            context = build_report_context(assessment_ctx, assess.scores or {}, v2_blob)
-                            
-                            # Premium users get enhanced email with full report
-                            if mentor_is_premium:
-                                try:
-                                    from app.services.ai_scoring import generate_full_report, _build_v2_prompt_input
-                                    from app.models.assessment_draft import AssessmentDraft as _Draft
-                                    
-                                    # Build proper payload for full report (need questions list)
-                                    payload, _ = _build_v2_prompt_input(
-                                        apprentice={'id': assess.apprentice_id, 'name': apprentice_name},
-                                        assessment_id=assess.id,
-                                        template_id=assess.template_id,
-                                        submitted_at=assess.created_at.isoformat() if assess.created_at else None,
-                                        answers=assess.answers or {},
-                                        questions=questions,  # Use questions built earlier in worker
-                                        previous_assessments=previous_assessments
-                                    )
-                                    full_report = generate_full_report(payload, previous_assessments)
-                                    
-                                    # CRITICAL: Save full_report to BOTH Assessment.scores AND Draft.score
-                                    # The email/PDF endpoints read from assess.scores
-                                    try:
-                                        # Save to Assessment.scores (PRIMARY - used by email/PDF endpoints)
-                                        assess_scores = dict(assess.scores or {})
-                                        assess_scores['full_report_v1'] = full_report
-                                        assess_scores['full_report_generated_at'] = datetime.now(UTC).isoformat()
-                                        assess.scores = assess_scores
-                                        session.commit()
-                                        logger.info(f"Background worker: saved full_report to Assessment {assess.id}")
-                                        
-                                        # Also cache in draft for backwards compatibility
-                                        draft = session.query(_Draft).filter(
-                                            _Draft.apprentice_id == assess.apprentice_id,
-                                            _Draft.template_id == assess.template_id,
-                                            _Draft.is_submitted == True
-                                        ).order_by(_Draft.updated_at.desc()).first()
-                                        if draft:
-                                            draft_scores = draft.score or {}
-                                            draft_scores['full_report_v1'] = full_report
-                                            draft_scores['full_report_generated_at'] = datetime.now(UTC).isoformat()
-                                            draft.score = draft_scores
-                                            session.commit()
-                                            logger.info(f"Background worker: also cached full report in draft {draft.id}")
-                                    except Exception as cache_err:
-                                        logger.warning(f"Background worker: failed to save full report: {cache_err}")
-                                    
-                                    html, plain = render_premium_report_email(context, full_report)
-                                    subject = f"✦ PREMIUM {template_name or 'Assessment'} Report — {apprentice_name} — {datetime.now(UTC).date()}"
-                                    logger.info(f"Background worker: sending premium email to {mentor.email}")
-                                except Exception as premium_err:
-                                    logger.warning(f"Background worker: failed to generate premium email, falling back to standard: {premium_err}")
-                                    html, plain = render_mentor_report_v2_email(context)
-                                    subject = f"{template_name or 'Assessment'} Report — {apprentice_name} — {datetime.now(UTC).date()}"
-                            else:
-                                html, plain = render_mentor_report_v2_email(context)
-                                subject = f"{template_name or 'Assessment'} Report — {apprentice_name} — {datetime.now(UTC).date()}"
-                            
-                            ok = _send_email(mentor.email, subject, html, plain)
-                            logger.info(f"Background worker: sent {'premium ' if mentor_is_premium else ''}v2 mentor report email ok={ok} to {mentor.email}")
-                        else:
-                            # Legacy email helper for environments without v2 blob
-                            # Prepare details from category scores for legacy email helper
-                            details = {}
-                            for cat, sc in (scoring.get('category_scores') or {}).items():
-                                details[cat] = {'score': sc, 'feedback': ''}
-                            from app.services.email import send_assessment_email as _legacy_send
-                            status = _legacy_send(
-                                to_email=mentor.email,
-                                apprentice_name=apprentice_name,
-                                assessment_title='Assessment Completed',
-                                score=scoring.get('overall_score'),
-                                feedback_summary=scoring.get('summary_recommendation'),
-                                details=details,
-                                mentor_name=mentor.name or 'Mentor',
-                            )
-                            logger.info(f"Background worker: mentor email (legacy) status={status} to {mentor.email}")
-                    except Exception as _e:
-                        logger.error(f"Background worker: failed to send mentor email: {_e}")
-                else:
-                    logger.warning(f"Background worker: mentor {rel.mentor_id} not found or email missing")
-            if not rels:
-                logger.info("Background worker: no active mentor relationships found; skipping mentor email")
-
-        except Exception as e:
-            logger.error(f"Background worker error for assessment {assessment_id}: {e}", exc_info=True)
-            # Send failure alert
-            try:
-                msg = (
-                    f"Assessment scoring failed.\n"
-                    f"assessment_id={assessment_id}\n"
-                    f"time={datetime.now(UTC).isoformat()}Z\n"
-                    f"error={e}"
-                )
-                send_notification_email(
-                    to_email="tay.murphy88@gmail.com",
-                    subject="[Alert] Assessment scoring failed",
-                    message=msg,
-                )
-            except Exception:
-                pass
-                try:
-                    # Mark assessment as error for polling UX
-                    session = SessionLocal()
-                    from app.models.assessment import Assessment as _Assessment
-                    a = session.query(_Assessment).filter_by(id=assessment_id).first()
-                    if a:
-                        a.status = "error"
-                        session.commit()
-                except Exception:
-                    pass
-        finally:
-            try:
-                session.close()
-            except Exception:
-                pass
-
-    # Execute in default executor
-    loop = asyncio.get_event_loop()
-    await loop.run_in_executor(None, _worker)
 
 @router.post("", response_model=AssessmentDraftOut)
 @router.post("/", response_model=AssessmentDraftOut)
@@ -916,6 +645,7 @@ async def submit_draft(
             scores=baseline_scores if baseline_scores else None,
             recommendation=baseline_scores.get('summary_recommendation') if baseline_scores else None,
             status="processing",  # Will be updated to "done" after AI enrichment
+            scoring_queued_at=datetime.now(UTC).replace(tzinfo=None),
             previous_assessment_id=previous_assessment.id if previous_assessment else None,
             category=_category,
         )
@@ -983,17 +713,12 @@ async def submit_draft(
             # Don't fail the submission just because notification failed
             db.rollback()
 
-        # Enqueue background processing AFTER commit
+        # Queue durable AI scoring AFTER commit (Cloud Tasks; inline in local/test). If enqueueing
+        # fails, the scoring sweep picks the assessment up (specs/004-reliable-ai-reports).
         try:
-            asyncio.create_task(_process_assessment_background(assessment.id))
+            scoring_queue.enqueue(assessment.id, "submit")
         except Exception as _e:
-            logger.error(f"Failed to enqueue background task for assessment {assessment.id}: {_e}")
-            # Send alert so we don't silently drop processing
-            send_notification_email(
-                to_email="tay.murphy88@gmail.com",
-                subject="[Alert] Failed to enqueue assessment processing",
-                message=f"Assessment {assessment.id} could not be enqueued: {_e}",
-            )
+            logger.error(f"Failed to enqueue scoring for assessment {assessment.id}: {_e}")
 
         # Prepare apprentice display name for response
         apprentice = db.query(User).filter_by(id=current_user.id).first()

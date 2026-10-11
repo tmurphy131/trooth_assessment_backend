@@ -19,7 +19,16 @@ class Assessment(Base):
     mentor_report_v2 = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=lambda: datetime.now(UTC))
     # Polling helpers
-    status = Column(String, default="processing")  # processing | done | error
+    status = Column(String, default="processing")  # processing | done | failed
+    # Durable scoring state (specs/004-reliable-ai-reports)
+    scoring_attempts = Column(Integer, nullable=False, default=0, server_default="0")
+    # Set on submit and every re-queue; the retry window and the sweep's stuck test are measured from it
+    scoring_queued_at = Column(DateTime, nullable=True)
+    scoring_lease_until = Column(DateTime, nullable=True)  # a worker holds the assessment until this time
+    scoring_completed_at = Column(DateTime, nullable=True)
+    failure_reason = Column(String(300), nullable=True)  # short, user-safe reason when status = failed
+    full_report_status = Column(String(16), nullable=True)  # null | generating | ready | failed
+    full_report_claimed_at = Column(DateTime, nullable=True)  # start of the current "generating" claim
     updated_at = Column(DateTime, default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC))
     # Historical context (Phase 2)
     previous_assessment_id = Column(String, ForeignKey("assessments.id"), nullable=True, index=True)
