@@ -12,6 +12,7 @@ import os
 import ssl
 import subprocess
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -47,6 +48,12 @@ def gcloud(*args, secret=False):
 _TOKEN = None
 
 
+class ApiError(SystemExit):
+    def __init__(self, method, url, code, body):
+        super().__init__(f"{method} {url} -> {code}: {body[:500]}")
+        self.code, self.body = code, body
+
+
 def api(method, url, body=None):
     global _TOKEN
     _TOKEN = _TOKEN or gcloud("auth", "print-access-token")
@@ -61,7 +68,7 @@ def api(method, url, body=None):
     except urllib.error.HTTPError as e:
         if e.code == 404 and method == "GET":
             return None
-        raise SystemExit(f"{method} {url} -> {e.code}: {e.read().decode()[:500]}")
+        raise ApiError(method, url, e.code, e.read().decode())
 
 
 def report(kind, name, action):
@@ -160,7 +167,17 @@ def ensure_policy(display_name, condition, channel, doc):
         api("PATCH", f"https://monitoring.googleapis.com/v3/{existing[0]['name']}?updateMask={mask}", body)
         report("policy", display_name, "updated")
     else:
-        api("POST", f"{MONITORING}/alertPolicies", body)
+        # A log metric created moments ago can take up to ~10 minutes to become usable in a policy.
+        for attempt in range(25):
+            try:
+                api("POST", f"{MONITORING}/alertPolicies", body)
+                break
+            except ApiError as e:
+                if e.code != 404 or "Cannot find metric" not in e.body or attempt == 24:
+                    raise
+                if attempt == 0:
+                    print(f"  waiting  for new metric to propagate before creating: {display_name}")
+                time.sleep(30)
         report("policy", display_name, "created")
 
 
