@@ -1,7 +1,8 @@
+import hmac
 import os
 from typing import Optional
 from firebase_admin import auth
-from fastapi import Request, HTTPException, status, Depends
+from fastapi import Request, HTTPException, status, Depends, Header
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from firebase_admin import auth as firebase_auth
 from app.db import get_db
@@ -383,3 +384,14 @@ def check_premium_access(user: User) -> dict:
             None
         )
     }
+
+def require_cron_secret(x_cron_secret: Optional[str] = Header(None)) -> bool:
+    """Allow only callers holding CRON_SECRET (Cloud Scheduler jobs and the owner's status page).
+
+    Fails closed: if CRON_SECRET is not configured, every request is refused, so a missing secret
+    can never fall back to a known default.
+    """
+    expected = os.getenv("CRON_SECRET", "")
+    if not expected or not x_cron_secret or not hmac.compare_digest(x_cron_secret, expected):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid or missing cron secret")
+    return True

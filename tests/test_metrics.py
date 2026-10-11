@@ -19,7 +19,14 @@ from app.services.metrics import (
 )
 
 
-client = TestClient(app)
+TEST_CRON_SECRET = "test-cron-secret"
+# Metrics endpoints require X-Cron-Secret; this client sends it.
+client = TestClient(app, headers={"X-Cron-Secret": TEST_CRON_SECRET})
+
+
+@pytest.fixture(autouse=True)
+def _cron_secret(monkeypatch):
+    monkeypatch.setenv("CRON_SECRET", TEST_CRON_SECRET)
 
 
 class TestMetricsEndpoints:
@@ -217,3 +224,35 @@ class TestSendReportEndpoint:
         data = response.json()
         
         assert data["status"] == "error"
+
+
+
+class TestMetricsAccess:
+    """Every metrics endpoint exposes user data or sends email, so it needs the cron secret."""
+
+    ENDPOINTS = [
+        ("get", "/metrics/dashboard"),
+        ("get", "/metrics/users?category=all"),
+        ("get", "/metrics/users?category=pairs"),
+        ("get", "/metrics/full"),
+        ("post", "/metrics/send-report?report_type=weekly&recipient=attacker@example.com"),
+    ]
+
+    @pytest.mark.parametrize("method,path", ENDPOINTS)
+    def test_rejected_without_secret(self, method, path):
+        anonymous = TestClient(app)
+        assert getattr(anonymous, method)(path).status_code == 403
+
+    @pytest.mark.parametrize("method,path", ENDPOINTS)
+    def test_rejected_with_wrong_secret(self, method, path):
+        wrong = TestClient(app, headers={"X-Cron-Secret": "guess"})
+        assert getattr(wrong, method)(path).status_code == 403
+
+    def test_rejected_when_secret_not_configured(self, monkeypatch):
+        monkeypatch.delenv("CRON_SECRET", raising=False)
+        assert client.get("/metrics/dashboard").status_code == 403
+        known_default = TestClient(app, headers={"X-Cron-Secret": "dev-cron-secret-change-in-prod"})
+        assert known_default.get("/metrics/users?category=all").status_code == 403
+
+    def test_allowed_with_secret(self):
+        assert client.get("/metrics/users?category=all").status_code == 200
