@@ -3,7 +3,7 @@ import os
 import json
 import re
 import logging
-from typing import Dict, List, Tuple, Optional, Any
+from typing import Dict, List, Literal, Tuple, Optional, Any
 import asyncio
 from statistics import mean
 from dataclasses import dataclass
@@ -1010,3 +1010,183 @@ def generate_baseline_score(answers: dict, questions: list) -> dict:
     }
 
 
+
+
+# ------------------------------
+# Master assessment v3 (specs/004-reliable-ai-reports, US2): one structured AI call on the
+# open-ended answers; multiple choice and every number are computed in code (scoring_facts).
+# ------------------------------
+
+SCORING_VERSION_V3 = "master_v3"
+_V3_PROMPT_FILE = "ai_prompt_master_assessment_v3.txt"
+
+
+class _CategoryV3(BaseModel):
+    category: str
+    level: Literal["Flourishing", "Maturing", "Stable", "Developing", "Beginning"]
+    observation: str
+    next_step: str
+
+
+class _OpenFeedbackV3(BaseModel):
+    question_id: str
+    feedback: str
+
+
+class _PriorityActionV3(BaseModel):
+    title: str
+    description: str
+    steps: list[str]
+    scripture: str
+
+
+class _FlagsV3(BaseModel):
+    red: list[str]
+    yellow: list[str]
+    green: list[str]
+
+
+class MentorReportV3(BaseModel):
+    """Structured AI output for the Master assessment. No numeric fields: numbers come from code."""
+    categories: list[_CategoryV3]
+    open_feedback: list[_OpenFeedbackV3]
+    strengths: list[str]
+    gaps: list[str]
+    priority_action: _PriorityActionV3
+    study_recommendation: str
+    flags: _FlagsV3
+    four_week_plan: _FourWeekPlan
+    conversation_starters: list[str]
+    recommended_resources: list[_ResourceV2]
+
+
+class ReportGenerationError(Exception):
+    """The AI call failed or returned unusable output; ``code`` maps to scoring_pipeline.FAILURE_REASONS."""
+
+    def __init__(self, message: str, code: str = "ai_unavailable"):
+        super().__init__(message)
+        self.code = code
+
+
+def _load_v3_prompt_text() -> str:
+    backend_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    with open(os.path.join(backend_root, _V3_PROMPT_FILE), "r", encoding="utf-8") as f:
+        return f.read()
+
+
+def _v3_payload(facts, questions: list[dict]) -> dict:
+    categories = []
+    for q in questions:
+        cat = q.get("category") or "General Assessment"
+        if cat not in categories:
+            categories.append(cat)
+    return {
+        "computed_facts": facts.for_ai(),
+        "missed_questions": [{k: r[k] for k in ("question", "correct_answer", "answer", "topic")}
+                             for r in facts.mc_results if not r["correct"]],
+        "open_ended": facts.open_items,
+        "categories": categories,
+    }
+
+
+def _generate_v3(payload: dict, attempts: int = 2) -> MentorReportV3:
+    """One structured generation, retried once in-process if the output fails validation."""
+    import time as _t
+
+    system_prompt = _load_v3_prompt_text()
+    config = LLMConfig(temperature=0.2, max_tokens=8000, response_schema=MentorReportV3)
+    last_error = None
+    for attempt in range(1, attempts + 1):
+        start = _t.time()
+        response = get_llm_service().generate(
+            system_prompt=system_prompt,
+            user_content=json.dumps(payload, ensure_ascii=False),
+            config=config,
+        )
+        if not response.success:
+            raise ReportGenerationError(f"LLM generation failed: {response.error}", code="ai_unavailable")
+        logger.info(
+            f"[ai_scoring] type='mentor_report_v3' provider='{response.provider}' model='{response.model}' "
+            f"latency_ms={int((_t.time() - start) * 1000)} tokens={response.total_tokens} "
+            f"cost_usd={response.estimated_cost_usd:.6f} attempt={attempt}"
+        )
+        content = response.content if isinstance(response.content, dict) and response.content else None
+        try:
+            if content is None:
+                content = _parse_json_lenient(response.raw_response or "")
+            return MentorReportV3.model_validate(content)
+        except (ValidationError, ValueError) as e:
+            last_error = e
+            logger.warning(f"[ai_scoring] mentor_report_v3 failed validation (attempt {attempt}): {str(e)[:300]}")
+    raise ReportGenerationError(f"invalid AI output: {last_error}", code="ai_invalid_output")
+
+
+def _question_feedback_v3(facts, report: Optional[MentorReportV3]) -> list[dict]:
+    feedback = []
+    for r in facts.mc_results:
+        explanation = "" if r["correct"] else (
+            f"The correct answer is {r['correct_answer']}." if r["correct_answer"] else "")
+        feedback.append({"question_id": r["question_id"], "question": r["question"], "answer": r["answer"],
+                         "correct": r["correct"], "explanation": explanation})
+    ai = {f.question_id: f.feedback for f in (report.open_feedback if report else [])}
+    for item in facts.open_items:
+        feedback.append({"question_id": item["question_id"], "question": item["question"],
+                         "answer": item["answer"], "correct": None,
+                         "explanation": ai.get(item["question_id"], "")})
+    return feedback
+
+
+def score_master_v3(answers: Dict[str, str], questions: List[dict], previous_assessments: List[dict] = None) -> Dict:
+    """Score a Master assessment with at most one AI call.
+
+    Returns the ``scores`` dict (keys the app reads, plus ``computed_facts`` and ``scoring_version``)
+    with ``mentor_blob_v2`` in the v2.1 shape. Raises ReportGenerationError when the AI is
+    unavailable or its output stays invalid, so the pipeline retries instead of saving a fallback.
+    """
+    from app.services import scoring_facts
+    from app.services.report_summary import compute_health_score
+
+    facts = scoring_facts.compute(answers, questions, previous_assessments)
+    report = _generate_v3(_v3_payload(facts, questions)) if facts.open_items else None
+
+    insights = [c.model_dump() for c in report.categories] if report else []
+    facts.health_score = compute_health_score(facts.biblical_knowledge_percent, insights)
+    facts.health_band = health_band(facts.health_score)
+
+    levels = {c["category"]: c["level"] for c in insights}
+    cat_scores = scoring_facts.category_scores(facts, levels)
+    weak = ", ".join(facts.weak_topics[:2])
+    study = (report.study_recommendation if report else "") or (
+        f"Study {weak} to strengthen your Biblical Knowledge." if weak else
+        "Keep a steady rhythm of Scripture reading to build on your Biblical Knowledge.")
+    recommendations = {}
+    for cat in cat_scores:
+        insight = next((i for i in insights if i["category"] == cat), None)
+        recommendations[cat] = insight["next_step"] if insight else study
+
+    blob = {
+        "health_score": facts.health_score,
+        "health_band": facts.health_band,
+        "strengths": (report.strengths if report else [])[:5],
+        "gaps": (report.gaps if report else [])[:5],
+        "priority_action": report.priority_action.model_dump() if report else None,
+        "biblical_knowledge": {"percent": facts.biblical_knowledge_percent,
+                               "weak_topics": facts.weak_topics, "study_recommendation": study},
+        "insights": insights,
+        "flags": report.flags.model_dump() if report else {"red": [], "yellow": [], "green": []},
+        "four_week_plan": report.four_week_plan.model_dump() if report else None,
+        "conversation_starters": (report.conversation_starters if report else [])[:5],
+        "recommended_resources": [r.model_dump() for r in report.recommended_resources][:5] if report else [],
+    }
+    summary = (f"{report.priority_action.title}. {report.priority_action.description}".strip()
+               if report else generate_summary_recommendation(cat_scores, recommendations))
+    return {
+        "overall_score": int(round(mean(cat_scores.values()))) if cat_scores else 0,
+        "category_scores": cat_scores,
+        "recommendations": recommendations,
+        "question_feedback": _question_feedback_v3(facts, report),
+        "summary_recommendation": summary,
+        "mentor_blob_v2": blob,
+        "computed_facts": facts.stored(),
+        "scoring_version": SCORING_VERSION_V3,
+    }
