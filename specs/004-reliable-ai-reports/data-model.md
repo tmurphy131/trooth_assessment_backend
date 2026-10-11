@@ -71,7 +71,8 @@ is told that the Health Score is computed by the system and must not be stated b
 | `open_feedback` | list of `{question_id, feedback}` |
 | `strengths` | list[str] (≤ 5) |
 | `gaps` | list[str] (≤ 5) |
-| `priority_action` | `{title, steps: list[str], scripture}` |
+| `priority_action` | `{title, description, steps: list[str], scripture}` |
+| `study_recommendation` | string (shown under Biblical Knowledge) |
 | `flags` | `{red: list[str], yellow: list[str], green: list[str]}` |
 | `four_week_plan` | `{rhythm: list[str], checkpoints: list[str]}` |
 | `conversation_starters` | list[str] |

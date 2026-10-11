@@ -132,17 +132,17 @@ description: "Task list for Reliable, Fast, Consistent AI Assessment Reports"
 
 ### Tests for User Story 2
 
-- [ ] T020 [P] [US2] `tests/test_scoring_pipeline.py`: `scoring_facts.compute(answers, questions, previous)` grades MC exactly from `is_correct`, gives per-category and per-topic percentages, Biblical Knowledge % and `weak_topics` (< 65%), and ignores unknown answer ids
-- [ ] T021 [P] [US2] `tests/test_scoring_pipeline.py`, v3 scorer with a fixture `MentorReportV3` response (LLM mocked, asserting exactly **one** `generate` call with `response_schema` set and **no MC question text** in the prompt):
+- [X] T020 [P] [US2] `tests/test_scoring_pipeline.py`: `scoring_facts.compute(answers, questions, previous)` grades MC exactly from `is_correct`, gives per-category and per-topic percentages, Biblical Knowledge % and `weak_topics` (< 65%), and ignores unknown answer ids
+- [X] T021 [P] [US2] `tests/test_scoring_pipeline.py`, v3 scorer with a fixture `MentorReportV3` response (LLM mocked, asserting exactly **one** `generate` call with `response_schema` set and **no MC question text** in the prompt):
   - `category_scores` combine MC × 10 and the level map 60/40;
   - `question_feedback` includes MC (code) and open-ended (AI) entries;
   - `mentor_report_v2` has v2.1 keys (`health_score`, `health_band`, `biblical_knowledge.percent`, `insights`);
   - `scores.scoring_version == "master_v3"`.
-- [ ] T022 [P] [US2] `tests/test_scoring_pipeline.py`: an assessment with no open-ended answers → no AI call, `done` with computed facts; an AI response failing schema validation → `ScoringRetryable`
+- [X] T022 [P] [US2] `tests/test_scoring_pipeline.py`: an assessment with no open-ended answers → no AI call, `done` with computed facts; an AI response failing schema validation → `ScoringRetryable`
 
 ### Implementation for User Story 2
 
-- [ ] T023 [P] [US2] Create `app/services/scoring_facts.py` returning `compute(...) -> ComputedFacts` with:
+- [X] T023 [P] [US2] Create `app/services/scoring_facts.py` returning `compute(...) -> ComputedFacts` with:
   - `health_score` placeholder (computed after levels);
   - `biblical_knowledge_percent` one decimal;
   - `mc_by_category`, `mc_by_topic`, `weak_topics` (topics < 65%);
@@ -150,18 +150,18 @@ description: "Task list for Reliable, Fast, Consistent AI Assessment Reports"
   - `open_ended_count`.
 
   Also add `category_scores(facts, levels)` using the level map (Flourishing 9.5, Maturing 8, Stable 6.5, Developing 5, Beginning 3), 60/40 MC/open when both exist.
-- [ ] T024 [P] [US2] Write prompt `ai_prompt_master_assessment_v3.txt` (repo root, next to v2):
+- [X] T024 [P] [US2] Write prompt `ai_prompt_master_assessment_v3.txt` (repo root, next to v2):
   - interpretation-only instructions;
   - input: open-ended Q&A, plus `computed_facts` without `health_score`;
   - output must match the schema, with no numbers except those in `computed_facts`;
   - "Health Score is computed by the system; do not state it";
   - "if previous_health_score is null, do not describe change over time".
-- [ ] T025 [US2] In `app/services/ai_scoring.py`, add the pydantic `MentorReportV3` (fields from data-model.md: `categories[{category, level ∈ {Flourishing, Maturing, Stable, Developing, Beginning}, observation, next_step}]`, `open_feedback[{question_id, feedback}]`, `strengths` (≤ 5), `gaps` (≤ 5), `priority_action{title, steps, scripture}`, `flags{red,yellow,green}`, `four_week_plan{rhythm,checkpoints}`, `conversation_starters`, `recommended_resources[{title,why,type}]`) and `score_master_v3(answers, questions, previous) -> dict`:
+- [X] T025 [US2] In `app/services/ai_scoring.py`, add the pydantic `MentorReportV3` (fields from data-model.md: `categories[{category, level ∈ {Flourishing, Maturing, Stable, Developing, Beginning}, observation, next_step}]`, `open_feedback[{question_id, feedback}]`, `strengths` (≤ 5), `gaps` (≤ 5), `priority_action{title, steps, scripture}`, `flags{red,yellow,green}`, `four_week_plan{rhythm,checkpoints}`, `conversation_starters`, `recommended_resources[{title,why,type}]`) and `score_master_v3(answers, questions, previous) -> dict`:
   - compute facts;
   - if open-ended answers exist, make **one** `get_llm_service().generate(system_prompt=<v3 prompt>, user_content=json(payload), config=LLMConfig(response_schema=MentorReportV3, temperature=0.2, max_tokens=8000))` and validate;
   - compute `category_scores`, `overall_score`, `question_feedback` and the health score via `report_summary.compute_health_score`;
   - map to `mentor_report_v2` (v2.1 shape) and the `scores` dict (keys kept per data-model.md, plus `computed_facts`, `scoring_version`).
-- [ ] T026 [US2] Switch `app/services/scoring_pipeline.py` to `score_master_v3` for Master assessments (category `master_trooth` or template `is_master_assessment`); other categories keep their current scorer
+- [X] T026 [US2] Switch `app/services/scoring_pipeline.py` to `score_master_v3` for Master assessments (category `master_trooth` or template `is_master_assessment`); other categories keep their current scorer
 
 **Checkpoint**: US2 tests pass; quickstart §2 meets 45 s / 90%.
 

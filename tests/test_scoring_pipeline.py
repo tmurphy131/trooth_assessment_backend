@@ -258,3 +258,129 @@ def test_submit_enqueues_scoring(db_session, wiring):
     assert wiring["enqueued"] == [(assessment_id, "submit")]
     row = _reload(db_session, assessment_id)
     assert row.status == "processing" and row.scoring_queued_at is not None
+
+
+# ---------------------------------------------------------------------------
+# User Story 2: computed facts and the single-call v3 scorer
+# ---------------------------------------------------------------------------
+from types import SimpleNamespace
+
+from app.services import ai_scoring, scoring_facts
+
+V3_QUESTIONS = [
+    {"id": "mc1", "text": "Who led Israel out of Egypt?", "category": "Bible Knowledge", "topic": "Pentateuch",
+     "question_type": "multiple_choice",
+     "options": [{"id": "o1", "text": "Moses", "is_correct": True}, {"id": "o2", "text": "David", "is_correct": False}]},
+    {"id": "mc2", "text": "Who wrote most of the Psalms?", "category": "Bible Knowledge", "topic": "Wisdom",
+     "question_type": "multiple_choice",
+     "options": [{"id": "o3", "text": "David", "is_correct": True}, {"id": "o4", "text": "Paul", "is_correct": False}]},
+    {"id": "mc3", "text": "Where was Jesus born?", "category": "Bible Knowledge", "topic": "Gospels",
+     "question_type": "multiple_choice",
+     "options": [{"id": "o5", "text": "Bethlehem", "is_correct": True}, {"id": "o6", "text": "Rome", "is_correct": False}]},
+    {"id": "open1", "text": "Describe your prayer life.", "category": "Prayer Life", "question_type": "open_ended"},
+]
+V3_ANSWERS = {"mc1": "o1", "mc2": "o4", "mc3": "Bethlehem", "open1": "I pray most mornings.", "ghost": "o1"}
+
+
+def _v3_response():
+    return {
+        "categories": [{"category": "Prayer Life", "level": "Maturing",
+                        "observation": "Prays most mornings.", "next_step": "Add intercession."}],
+        "open_feedback": [{"question_id": "open1", "feedback": "A steady rhythm."}],
+        "strengths": ["Consistent morning prayer"], "gaps": ["Psalms"],
+        "priority_action": {"title": "Pray for others", "description": "Widen your prayers.",
+                            "steps": ["List five names"], "scripture": "1 Tim 2:1 - pray for all people"},
+        "study_recommendation": "Read Psalms 1-20.",
+        "flags": {"red": [], "yellow": [], "green": ["Faithful"]},
+        "four_week_plan": {"rhythm": ["Week 1"], "checkpoints": ["Check 1"]},
+        "conversation_starters": ["What do you pray about?"],
+        "recommended_resources": [{"title": "Praying the Bible", "why": "Simple method", "type": "book"}],
+    }
+
+
+@pytest.fixture
+def fake_llm(monkeypatch):
+    calls, replies = [], []
+
+    class _Svc:
+        def generate(self, system_prompt, user_content, config=None):
+            calls.append({"system": system_prompt, "user": user_content, "config": config})
+            content = replies.pop(0) if replies else _v3_response()
+            return SimpleNamespace(success=True, content=content, raw_response="", error=None,
+                                   provider="gemini", model="m", total_tokens=1, estimated_cost_usd=0.0)
+
+    monkeypatch.setattr(ai_scoring, "get_llm_service", lambda: _Svc())
+    return SimpleNamespace(calls=calls, replies=replies)
+
+
+def test_compute_facts_grades_mc_in_code():
+    prev = [{"mentor_report_v2": {"health_score": 61, "health_band": "Stable", "biblical_knowledge": {"percent": 50}}}]
+    facts = scoring_facts.compute(V3_ANSWERS, V3_QUESTIONS, prev)
+    assert facts.biblical_knowledge_percent == 66.7  # mc1 by id, mc3 by legacy text; ghost id ignored
+    assert facts.mc_by_category == [{"category": "Bible Knowledge", "correct": 2, "total": 3, "percent": 66.7}]
+    assert {t["topic"]: t["percent"] for t in facts.mc_by_topic} == {"Pentateuch": 100.0, "Wisdom": 0.0, "Gospels": 100.0}
+    assert facts.weak_topics == ["Wisdom"]
+    assert facts.previous_health_score == 61
+    assert facts.open_ended_count == 1
+    assert "health_score" not in facts.for_ai() and "mc_results" not in facts.for_ai()
+
+
+def test_category_scores_combine_mc_and_level():
+    facts = scoring_facts.compute({"mc1": "o1", "mc2": "o3"}, [dict(q, category="Prayer Life") for q in V3_QUESTIONS[:2]])
+    # 100% MC -> 10, Maturing -> 8: 10*0.6 + 8*0.4 = 9.2
+    assert scoring_facts.category_scores(facts, {"Prayer Life": "Maturing", "Community": "Developing"}) == \
+        {"Prayer Life": 9, "Community": 5}
+
+
+def test_v3_scorer_makes_one_structured_call(fake_llm):
+    result = ai_scoring.score_master_v3(V3_ANSWERS, V3_QUESTIONS, [])
+    assert len(fake_llm.calls) == 1
+    call = fake_llm.calls[0]
+    assert call["config"].response_schema is ai_scoring.MentorReportV3
+    assert "Health Score is computed by the system" in call["system"]
+    sent = __import__("json").loads(call["user"])
+    assert "Who led Israel" not in call["user"]  # correct MC answers aren't sent
+    assert [q["question_id"] for q in sent["open_ended"]] == ["open1"]
+    assert "health_score" not in sent["computed_facts"]
+
+    assert result["scoring_version"] == "master_v3"
+    assert result["category_scores"] == {"Bible Knowledge": 7, "Prayer Life": 8}
+    blob = result["mentor_blob_v2"]
+    # round(66.7*0.6 + 82*0.4) = 73
+    assert (blob["health_score"], blob["health_band"]) == (73, "Maturing")
+    assert blob["biblical_knowledge"]["percent"] == 66.7 and blob["insights"][0]["level"] == "Maturing"
+    assert result["computed_facts"]["health_score"] == 73
+    fb = {f["question_id"]: f for f in result["question_feedback"]}
+    assert fb["mc2"]["correct"] is False and "David" in fb["mc2"]["explanation"]
+    assert fb["open1"]["correct"] is None and fb["open1"]["explanation"] == "A steady rhythm."
+    ai_scoring.MentorBlobV2.model_validate(blob)  # readers' v2.1 shape
+
+
+def test_v3_no_open_ended_skips_ai(fake_llm):
+    result = ai_scoring.score_master_v3({"mc1": "o1", "mc2": "o3"}, V3_QUESTIONS, [])
+    assert fake_llm.calls == []
+    assert result["mentor_blob_v2"]["health_score"] == 100 and result["mentor_blob_v2"]["insights"] == []
+
+
+def test_v3_invalid_output_retries_once_then_raises(fake_llm):
+    fake_llm.replies.extend([{"categories": "nope"}, _v3_response()])
+    assert ai_scoring.score_master_v3(V3_ANSWERS, V3_QUESTIONS, [])["scoring_version"] == "master_v3"
+    fake_llm.calls.clear()
+    fake_llm.replies.extend([{"categories": "nope"}, {"strengths": 3}])
+    with pytest.raises(ai_scoring.ReportGenerationError) as exc:
+        ai_scoring.score_master_v3(V3_ANSWERS, V3_QUESTIONS, [])
+    assert exc.value.code == "ai_invalid_output" and len(fake_llm.calls) == 2
+
+
+def test_pipeline_uses_v3_for_master_and_retries_invalid_output(make, db_session, monkeypatch, fake_llm):
+    a = make()
+    monkeypatch.setattr(scoring_pipeline, "_build_questions", lambda s, x: V3_QUESTIONS)
+    db_session.query(Assessment).filter_by(id=a.id).update({"answers": V3_ANSWERS})
+    db_session.commit()
+    fake_llm.replies.extend([{"bad": 1}, {"bad": 2}])
+    r = _score(a.id)
+    assert r.status_code == 503 and _reload(db_session, a.id).status == "processing"
+    r = _score(a.id, retry=1)
+    assert r.json() == {"result": "done"}
+    a = _reload(db_session, a.id)
+    assert a.scores["scoring_version"] == "master_v3" and a.mentor_report_v2["health_score"] == 73
