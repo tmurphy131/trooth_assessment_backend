@@ -217,13 +217,8 @@ def get_own_full_report(
     Works for any role (apprentice or mentor). Returns 403 if not premium,
     404 if not found or not owned by this user.
     """
-    from app.services.ai_scoring import generate_full_report, _build_v2_prompt_input
-    from app.models.assessment_template_question import AssessmentTemplateQuestion
-    from app.models.question import Question
-    from app.models.category import Category
+    from app.services.full_report import get_or_generate_full_report
     from app.models.assessment_draft import AssessmentDraft
-    from sqlalchemy.orm import joinedload
-    from datetime import datetime, UTC
 
     if not is_premium_user(current_user):
         raise HTTPException(status_code=403, detail="Premium subscription required for full reports")
@@ -257,101 +252,16 @@ def get_own_full_report(
     if not draft.is_submitted:
         raise HTTPException(status_code=400, detail="Assessment not yet completed")
 
-    # Return cached report if available
-    scores = draft.score or {}
-    # The assessment's own copy first; the draft cache is keyed by template, not assessment
-    cached = (assessment.scores or {}).get("full_report_v1") if assessment else None
-    if not cached:
-        cached = scores.get("full_report_v1")
-    blob = assessment.mentor_report_v2 if assessment else None
-    if cached:
-        return {"report": public_full_report(cached, blob), "cached": True, "draft_id": draft.id,
-                "generated_at": scores.get("full_report_generated_at")}
-
-    # Build questions list
-    template_questions = (
-        db.query(AssessmentTemplateQuestion)
-        .options(joinedload(AssessmentTemplateQuestion.question))
-        .filter_by(template_id=draft.template_id)
-        .order_by(AssessmentTemplateQuestion.order)
-        .all()
-    )
-    questions_list = []
-    for tq in template_questions:
-        q = tq.question
-        if not q:
-            continue
-        cat_name = "General"
-        if q.category_id:
-            cat = db.query(Category).filter_by(id=q.category_id).first()
-            if cat:
-                cat_name = cat.name
-        q_dict = {
-            "id": str(q.id),
-            "text": q.text,
-            "question_type": q.question_type.value if hasattr(q.question_type, "value") else str(q.question_type),
-            "category": cat_name,
-        }
-        if q.options:
-            q_dict["options"] = [
-                {"id": str(opt.id), "text": opt.option_text, "is_correct": opt.is_correct}
-                for opt in q.options
-            ]
-        questions_list.append(q_dict)
-
-    # Gather previous assessments for trend context
-    previous_drafts = (
-        db.query(AssessmentDraft)
-        .filter(
-            AssessmentDraft.apprentice_id == current_user.id,
-            AssessmentDraft.is_submitted == True,
-            AssessmentDraft.id != draft.id,
-        )
-        .order_by(AssessmentDraft.updated_at.desc())
-        .limit(5)
-        .all()
-    )
-    previous_assessments = [
-        {
-            "date": pd.updated_at.isoformat() if pd.updated_at else None,
-            "health_score": (pd.score or {}).get("mentor_blob_v2", {}).get("health_score"),
-            "strengths": (pd.score or {}).get("mentor_blob_v2", {}).get("strengths", []),
-            "gaps": (pd.score or {}).get("mentor_blob_v2", {}).get("gaps", []),
-        }
-        for pd in previous_drafts if pd.score
-    ]
-
-    user_info = {"id": str(current_user.id), "name": current_user.name or "User", "age": None, "church": None}
-    payload, _ = _build_v2_prompt_input(
-        apprentice=user_info,
-        assessment_id=draft.id,
-        template_id=str(draft.template_id),
-        submitted_at=draft.updated_at.isoformat() if draft.updated_at else None,
-        answers=draft.answers or {},
-        questions=questions_list,
-        previous_assessments=previous_assessments,
-    )
-
-    try:
-        full_report = generate_full_report(
-            payload, previous_assessments,
-            computed_facts=(assessment.scores or {}).get("computed_facts") if assessment else None)
-        # Cache in draft
-        scores["full_report_v1"] = full_report
-        scores["full_report_generated_at"] = datetime.now(UTC).isoformat()
-        draft.score = scores
-        # Cache in Assessment
-        if assessment:
-            a_scores = dict(assessment.scores or {})
-            a_scores["full_report_v1"] = full_report
-            a_scores["full_report_generated_at"] = datetime.now(UTC).isoformat()
-            assessment.scores = a_scores
-        db.commit()
-        return {"report": public_full_report(full_report, blob), "cached": False, "draft_id": draft.id,
-                "generated_at": full_report.get("_meta", {}).get("generated_at")}
-    except Exception as e:
-        logger.error(f"Failed to generate full report for {assessment_id}: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to generate full report: {e}")
+    if assessment is None:  # legacy draft-only submission: serve its stored copy, never generate
+        cached = (draft.score or {}).get("full_report_v1")
+        if not cached:
+            raise HTTPException(status_code=404, detail="Assessment not found")
+        return {"report": public_full_report(cached, None), "cached": True, "draft_id": draft.id,
+                "generated_at": (draft.score or {}).get("full_report_generated_at")}
+    # Stored copy, or generate once (concurrent callers wait); 503 instead of 500 on failure
+    result = get_or_generate_full_report(db, assessment)
+    result["draft_id"] = draft.id
+    return result
 
 
 @router.get("/{assessment_id}", response_model=assessment_schema.AssessmentOut)

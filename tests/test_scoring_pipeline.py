@@ -264,6 +264,7 @@ def test_submit_enqueues_scoring(db_session, wiring):
 # User Story 2: computed facts and the single-call v3 scorer
 # ---------------------------------------------------------------------------
 from types import SimpleNamespace
+from unittest.mock import ANY
 
 from app.services import ai_scoring, scoring_facts
 
@@ -437,3 +438,154 @@ def test_premium_generation_receives_computed_facts(monkeypatch, fake_llm):
     assert '"computed_facts": {"health_score": 73' in call["user"]
     assert "must equal computed_facts.health_score" in call["system"]
     assert ai_scoring.NUMBERS_INSTRUCTION in call["system"]
+
+
+# ---------------------------------------------------------------------------
+# User Story 4: Premium generated once in the scoring task; on-demand claimed once, never a 500
+# ---------------------------------------------------------------------------
+from app.core.settings import settings
+from app.services import full_report
+
+PREMIUM = {"executive_summary": {"health_score": 99, "health_band": "Flourishing", "summary": "s"},
+           "_meta": {"generated_at": "2026-10-11T00:00:00Z", "model": "m"}}
+
+
+@pytest.fixture
+def premium_gen(monkeypatch):
+    """Count Premium generations; queue exceptions to raise."""
+    state = SimpleNamespace(calls=0, errors=[], facts=[])
+
+    def gen(payload, previous=None, computed_facts=None):
+        state.calls += 1
+        state.facts.append(computed_facts)
+        if state.errors:
+            raise state.errors.pop(0)
+        return dict(PREMIUM)
+
+    monkeypatch.setattr(ai_scoring, "generate_full_report", gen)
+    monkeypatch.setattr(full_report, "_sleep", lambda s: None)
+    return state
+
+
+def _premium(db_session, a, on=True):
+    user = db_session.get(User, a.apprentice_id)
+    user.subscription_tier = "apprentice_premium" if on else "free"
+    db_session.commit()
+    return user
+
+
+def test_pipeline_generates_premium_before_the_mentor_email(make, db_session, monkeypatch, premium_gen, wiring):
+    a = make()
+    _premium(db_session, a)
+    monkeypatch.setattr(scoring_pipeline, "_run_scorer", lambda *a, **k: {**_real_result(), "computed_facts": {"health_score": 76}})
+    seen = []
+    monkeypatch.setattr(scoring_pipeline, "notify_mentors",
+                        lambda s, x, *r: seen.append((x.full_report_status, bool((x.scores or {}).get("full_report_v1")))))
+    assert _score(a.id).json() == {"result": "done"}
+    a = _reload(db_session, a.id)
+    assert a.full_report_status == "ready" and a.scores["full_report_v1"]["executive_summary"]["summary"] == "s"
+    assert premium_gen.calls == 1 and premium_gen.facts == [{"health_score": 76}]
+    assert seen == [("ready", True)]  # email went out once, after the Premium step
+
+
+def test_pipeline_premium_failure_keeps_report_done(make, db_session, monkeypatch, premium_gen, wiring):
+    a = make()
+    _premium(db_session, a)
+    monkeypatch.setattr(scoring_pipeline, "_run_scorer", lambda *a, **k: _real_result())
+    premium_gen.errors.extend([ValueError("Could not parse JSON")] * 3)
+    assert _score(a.id).json() == {"result": "done"}
+    a = _reload(db_session, a.id)
+    assert a.status == "done" and a.full_report_status == "failed" and premium_gen.calls == 3
+    assert wiring["emails"] == [a.id]  # the free email still goes out
+
+
+def test_pipeline_skips_premium_when_nobody_is_premium(make, db_session, monkeypatch, premium_gen):
+    a = make()
+    monkeypatch.setattr(scoring_pipeline, "_run_scorer", lambda *a, **k: _real_result())
+    assert _score(a.id).json() == {"result": "done"}
+    assert premium_gen.calls == 0 and _reload(db_session, a.id).full_report_status is None
+
+
+def _done_with_draft(make, db_session, status="done"):
+    a = make(status=status, blob=_real_result()["mentor_blob_v2"])
+    a.template_id = "master-template"
+    db_session.add(AssessmentDraft(id=str(uuid4()), apprentice_id=a.apprentice_id, template_id="master-template",
+                                   answers={}, is_submitted=True))
+    db_session.commit()
+    return a
+
+
+def _get_full(aid):
+    return client.get(f"/assessments/{aid}/my-full-report")
+
+
+def test_on_demand_generates_once_then_serves_stored(make, db_session, premium_gen):
+    a = _done_with_draft(make, db_session)
+    user = _premium(db_session, a)
+    app.dependency_overrides[get_current_user] = lambda: user
+    first = _get_full(a.id).json()
+    assert first["cached"] is False and first["report"]["executive_summary"]["health_score"] == 76  # canonical
+    assert "model" not in first["report"]["_meta"]
+    second = _get_full(a.id).json()
+    assert second["cached"] is True and premium_gen.calls == 1
+
+
+def test_on_demand_waits_for_a_live_claim_and_reclaims_a_stale_one(make, db_session, premium_gen, monkeypatch):
+    a = _done_with_draft(make, db_session)
+    user = _premium(db_session, a)
+    app.dependency_overrides[get_current_user] = lambda: user
+    db_session.query(Assessment).filter_by(id=a.id).update(
+        {"full_report_status": "generating", "full_report_claimed_at": _naive_now()})
+    db_session.commit()
+
+    # The other caller stores the report while we wait
+    def finish(_s):
+        db_session.query(Assessment).filter_by(id=a.id).update(
+            {"scores": {"full_report_v1": PREMIUM}, "full_report_status": "ready"})
+        db_session.commit()
+    monkeypatch.setattr(full_report, "_sleep", finish)
+    assert _get_full(a.id).json()["cached"] is True and premium_gen.calls == 0
+
+    # Still generating after the wait -> "generating", no report key
+    db_session.query(Assessment).filter_by(id=a.id).update(
+        {"scores": {}, "full_report_status": "generating", "full_report_claimed_at": _naive_now()})
+    db_session.commit()
+    monkeypatch.setattr(full_report, "_sleep", lambda s: None)
+    monkeypatch.setattr(full_report, "_clock", iter([0, 0, 1000, 1000]).__next__)
+    assert _get_full(a.id).json() == {"status": "generating", "cached": False, "draft_id": ANY}
+
+    # A claim older than 5 minutes is taken over
+    db_session.query(Assessment).filter_by(id=a.id).update(
+        {"full_report_claimed_at": _naive_now() - timedelta(minutes=6)})
+    db_session.commit()
+    monkeypatch.undo()
+    monkeypatch.setattr(ai_scoring, "generate_full_report", lambda *a, **k: dict(PREMIUM))
+    assert _get_full(a.id).json()["cached"] is False
+
+
+def test_on_demand_failure_is_503_on_all_endpoints_and_premium_gate_unchanged(make, db_session, premium_gen):
+    a = _done_with_draft(make, db_session)
+    user = _premium(db_session, a)
+    mentor = User(id=str(uuid4()), name="Marcus", email=f"m{uuid4().hex[:6]}@example.com", role="mentor",
+                  subscription_tier="mentor_premium")
+    db_session.add_all([mentor, MentorApprentice(mentor_id=mentor.id, apprentice_id=user.id, active=True)])
+    db_session.commit()
+    premium_gen.errors.extend([ValueError("Could not parse JSON from LLM response")] * 9)
+    paths = [(user.id, f"/assessments/{a.id}/my-full-report"), (user.id, f"/apprentice/my-assessments/{a.id}/full-report"),
+             (mentor.id, f"/mentor/submitted-drafts/{a.id}/full-report")]
+    for uid, path in paths:
+        app.dependency_overrides[get_current_user] = lambda uid=uid: db_session.get(User, uid)
+        r = client.get(path)
+        assert r.status_code == 503 and r.json()["detail"] == "Report is temporarily unavailable", path
+    assert premium_gen.calls == 9 and _reload(db_session, a.id).full_report_status == "failed"
+
+    _premium(db_session, a, on=False)
+    app.dependency_overrides[get_current_user] = lambda: db_session.get(User, a.apprentice_id)
+    assert _get_full(a.id).status_code == 403
+
+
+def test_on_demand_while_scoring_reports_generating(make, db_session, premium_gen):
+    a = _done_with_draft(make, db_session, status="processing")
+    user = _premium(db_session, a)
+    app.dependency_overrides[get_current_user] = lambda: user
+    assert _get_full(a.id).json()["status"] == "generating" and premium_gen.calls == 0
