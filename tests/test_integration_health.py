@@ -137,6 +137,48 @@ def test_llm_fallback_is_skipped_by_default():
     assert "llm_fallback" in Settings().healthcheck_skip
 
 
+class _FakeProvider:
+    PROVIDER_NAME = "gemini"
+
+    def __init__(self, error=None):
+        self.error, self.pinged = error, False
+
+    def ping(self):
+        self.pinged = True
+        if self.error:
+            raise self.error
+
+    def generate(self, *a, **k):
+        raise AssertionError("the health probe must not generate (costs tokens, logs [llm] errors)")
+
+
+def test_llm_probe_pings_without_generating(monkeypatch):
+    provider = _FakeProvider()
+    service = type("S", (), {"primary_provider": provider, "fallback_provider": None})()
+    monkeypatch.setattr("app.services.llm.get_llm_service", lambda *a, **k: service)
+    assert ih.probe_llm_primary().detail == "gemini" and provider.pinged
+    with pytest.raises(ih.NotConfigured):
+        ih.probe_llm_fallback()
+
+
+def test_llm_probe_failure_is_down(probes, monkeypatch):
+    provider = _FakeProvider(RuntimeError("404 Publisher model gemini-x was not found"))
+    service = type("S", (), {"primary_provider": provider, "fallback_provider": None})()
+    monkeypatch.setattr("app.services.llm.get_llm_service", lambda *a, **k: service)
+    probes(llm_primary=ih.probe_llm_primary)
+    primary = _run().integrations[1]
+    assert primary.status == "down" and "not found" in primary.error
+
+
+@pytest.mark.parametrize("code,status", [(200, "up"), (201, "up"), (500, "down")])
+def test_revenuecat_probe_accepts_created(probes, monkeypatch, code, status):
+    from app.core.settings import settings
+    monkeypatch.setattr(settings, "revenuecat_secret_api_key", "rc-test-key")
+    monkeypatch.setattr(ih.httpx, "get", lambda *a, **k: type("R", (), {"status_code": code})())
+    probes(revenuecat=ih.probe_revenuecat)
+    assert _run().integrations[6].status == status
+
+
 # ---------- GET /health/integrations ----------
 
 def test_integrations_endpoint_returns_contract_shape(probes):

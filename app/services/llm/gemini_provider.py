@@ -156,6 +156,13 @@ class GeminiProvider(LLMProvider):
         
         return raw_text, prompt_tokens, completion_tokens
     
+    def ping(self) -> None:
+        """Cheap liveness check: fetch the configured model's metadata (no tokens, no generation).
+
+        Raises if the credentials, region or model name are wrong, e.g. "publisher model not found".
+        """
+        self._get_client().models.get(model=self.model)
+
     def is_available(self) -> bool:
         """Check if Gemini/Vertex AI is properly configured."""
         try:

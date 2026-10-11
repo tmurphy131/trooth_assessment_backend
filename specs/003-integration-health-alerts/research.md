@@ -5,12 +5,12 @@
 | Integration | Probe | Why this call | Side effects |
 |---|---|---|---|
 | database | `SELECT 1` on a fresh session | proves connection + credentials | none |
-| llm_primary | `service.primary_provider.generate(...)` with `max_tokens=16`, `max_retries=1`, `timeout_seconds=8`, `json_mode=False` | the 2026-10-10 failure was a provider/model error only visible on a real generation; `is_available()` only checks configuration | ~cents/month |
-| llm_fallback | same on `service.fallback_provider` (if fallback enabled) | catches "credit_balance_exhausted" | ~cents/month |
+| llm_primary | `service.primary_provider.ping()`: Vertex `models.get(model)` | the 2026-10-10 failure ("Publisher model … not found") is exactly what this call returns; a generation was tried first but Gemini 3.5's reasoning tokens truncated a 16-token reply, and raising the cap would break the cost budget and write `[llm] … error` lines that trip the real-traffic alert | none (no tokens) |
+| llm_fallback | `fallback_provider.ping()`: OpenAI `models.retrieve(model)` (skipped by default via `HEALTHCHECK_SKIP`) | catches bad key/model; does **not** detect zero credit (needs a paid generation), which real-traffic alerts cover | none |
 | email | SendGrid `GET /v3/scopes` | read-only; fails on revoked/invalid key | none |
 | firebase_auth | `firebase_admin.get_app().credential.get_access_token()` | proves the service-account credential works | none |
 | firebase_messaging | `messaging.send(Message(topic="healthcheck", ...), dry_run=True)` | FCM validates the request and auth without delivering | none (dry run) |
-| revenuecat | `GET /v1/subscribers/{settings.revenuecat_healthcheck_app_user_id}` | read path used by subscription verification | RevenueCat creates an empty customer for an unknown id on first call; one fixed id (`healthcheck-probe`) means one inert record, reused |
+| revenuecat | `GET /v1/subscribers/{settings.revenuecat_healthcheck_app_user_id}`; 200 or 201 = up | read path used by subscription verification | RevenueCat creates an empty customer for an unknown id on first call (201); one fixed id (`healthcheck-probe`) means one inert record, reused |
 | shopify | existing `_get_access_token` + `{ shop { name } }` GraphQL | proves client-credentials grant + Admin API | none; `not_configured` when `shopify_admin.is_configured()` is false (dev) |
 
 - **Decision**: real minimal calls, each with its own timeout. **Rationale**: FR-002; the incident

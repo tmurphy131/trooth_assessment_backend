@@ -36,7 +36,7 @@ Cloud Scheduler, Cloud Logging and Cloud Monitoring in project `trooth-prod`
 per-probe timeout, all concurrent); typical < 5 s
 
 **Constraints**: no user-visible side effects (no delivered email/push, no purchases, no data
-writes); AI probes ≤ 16 output tokens with 1 attempt each so monthly cost stays well under $5
+writes); AI probes use a model-metadata `ping()` (no tokens) so monthly cost stays well under $5
 (SC-005); results never contain secrets
 
 **Scale/Scope**: 2 environments × 96 runs/day; 8 integrations; ~6 alert policies per env

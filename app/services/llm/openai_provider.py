@@ -83,6 +83,10 @@ class OpenAIProvider(LLMProvider):
         
         return raw_text, prompt_tokens, completion_tokens
     
+    def ping(self) -> None:
+        """Cheap liveness check: retrieve the configured model (no tokens; doesn't detect zero credit)."""
+        self._get_client().models.retrieve(self.model)
+
     def is_available(self) -> bool:
         """Check if OpenAI is properly configured."""
         if not self._api_key or self._api_key.startswith("your_"):

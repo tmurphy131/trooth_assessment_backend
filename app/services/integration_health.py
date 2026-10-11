@@ -69,17 +69,12 @@ def probe_database() -> ProbeOutcome:
 
 
 def _probe_llm(provider) -> ProbeOutcome:
-    from app.services.llm import LLMConfig
-
+    # Model-metadata lookup, not a generation: free, and it doesn't write "[llm] ... error" lines
+    # that would trip the real-traffic AI alert. It catches wrong credentials, region or model
+    # (the 2026-10-10 failure); quota/billing failures surface through real-traffic alerts.
     if provider is None:
         raise NotConfigured("fallback disabled")
-    response = provider.generate(
-        "Reply with OK.",
-        "OK",
-        LLMConfig(max_tokens=16, max_retries=1, timeout_seconds=HTTP_TIMEOUT_S, json_mode=False),
-    )
-    if not response.success:
-        raise RuntimeError(response.error or "generation failed")
+    provider.ping()
     return ProbeOutcome(detail=provider.PROVIDER_NAME)
 
 
@@ -138,7 +133,7 @@ def probe_revenuecat() -> ProbeOutcome:
     app_user_id = quote(settings.revenuecat_healthcheck_app_user_id, safe="")
     r = httpx.get(f"{API_BASE}/subscribers/{app_user_id}", headers={"Authorization": f"Bearer {key}"},
                   timeout=HTTP_TIMEOUT_S)
-    if r.status_code != 200:
+    if r.status_code not in (200, 201):  # 201 the first time RevenueCat creates the probe customer
         raise RuntimeError(f"RevenueCat subscribers returned {r.status_code}")
     return ProbeOutcome()
 
