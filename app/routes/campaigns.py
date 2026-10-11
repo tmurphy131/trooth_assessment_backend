@@ -17,6 +17,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.db import get_db
+from app.services.auth import require_cron_secret
 from app.models.assessment_draft import AssessmentDraft
 from app.models.assessment_template import AssessmentTemplate
 from app.models.email_send_event import EmailSendEvent
@@ -36,14 +37,6 @@ from app.services.push_notification import (
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-CRON_SECRET = os.getenv("CRON_SECRET", "dev-cron-secret-change-in-prod")
-
-
-def verify_cron_secret(x_cron_secret: Optional[str] = Header(None)):
-    if x_cron_secret != CRON_SECRET:
-        raise HTTPException(status_code=403, detail="Invalid cron secret")
-    return True
-
 
 # ---------------------------------------------------------------------------
 # Draft reminder campaign
@@ -52,7 +45,7 @@ def verify_cron_secret(x_cron_secret: Optional[str] = Header(None)):
 @router.post("/run-draft-reminders")
 def run_draft_reminders(
     db: Session = Depends(get_db),
-    _auth: bool = Depends(verify_cron_secret),
+    _auth: bool = Depends(require_cron_secret),
 ):
     """Send email + push reminders for stale assessment drafts (5/10/14 days).
 
@@ -134,7 +127,7 @@ def run_draft_reminders(
 @router.post("/run-inactive-reminders")
 def run_inactive_reminders(
     db: Session = Depends(get_db),
-    _auth: bool = Depends(verify_cron_secret),
+    _auth: bool = Depends(require_cron_secret),
 ):
     """Send re-engagement emails to inactive users (14/30/60 day windows).
 
@@ -250,7 +243,7 @@ def notify_new_template_to_all_apprentices(db: Session, template: AssessmentTemp
 def campaign_stats(
     days: int = 30,
     db: Session = Depends(get_db),
-    _auth: bool = Depends(verify_cron_secret),
+    _auth: bool = Depends(require_cron_secret),
 ):
     """Return campaign send counts grouped by type for the last N days."""
     cutoff = datetime.utcnow() - timedelta(days=days)

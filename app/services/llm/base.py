@@ -296,6 +296,10 @@ class LLMProvider(ABC):
             raise ValueError(f"Could not parse JSON from LLM response: {e}")
     
     @abstractmethod
+    def ping(self) -> None:
+        """Cheap liveness check used by the integrations health probe; providers override it."""
+        raise NotImplementedError(f"{self.PROVIDER_NAME} has no ping()")
+
     def is_available(self) -> bool:
         """Check if the provider is properly configured and available."""
         pass

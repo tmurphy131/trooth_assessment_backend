@@ -194,7 +194,7 @@ def test_trivia_expiry_endpoint_reports_expired_and_finished(client, db_session,
     stale.last_activity_at = datetime.now(UTC) - timedelta(days=8)
     db_session.commit()
 
-    r = client.post("/scheduled/trivia-expiry", headers={"X-Cron-Secret": scheduled_tasks.CRON_SECRET})
+    r = client.post("/scheduled/trivia-expiry", headers={"X-Cron-Secret": "test-cron-secret"})
     assert r.status_code == 200, r.text
     body = r.json()
     assert body["expired_count"] == 1 and body["expired_ids"] == [stale.id]

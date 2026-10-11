@@ -11,6 +11,9 @@ from app.db import get_db, check_database_health
 from app.services.llm import get_llm_service
 from app.services.email import get_sendgrid_client
 from app.core.settings import settings
+from app.schemas.health import IntegrationsReport
+from app.services.auth import require_cron_secret
+from app.services.integration_health import run_all
 
 logger = logging.getLogger("app.health")
 router = APIRouter()
@@ -25,7 +28,7 @@ async def health_check():
         "version": "1.0.0"
     }
 
-@router.get("/health/detailed")
+@router.get("/health/detailed", dependencies=[Depends(require_cron_secret)])
 async def detailed_health_check(db: Session = Depends(get_db)):
     """Detailed health check with service status."""
     start_time = time.time()
@@ -113,7 +116,7 @@ async def detailed_health_check(db: Session = Depends(get_db)):
     
     return health_status
 
-@router.get("/health/metrics")
+@router.get("/health/metrics", dependencies=[Depends(require_cron_secret)])
 async def get_metrics():
     """Application metrics endpoint."""
     return {
@@ -146,7 +149,7 @@ async def liveness_check():
     return {"status": "alive", "timestamp": time.time()}
 
 
-@router.get("/health/llm")
+@router.get("/health/llm", dependencies=[Depends(require_cron_secret)])
 async def llm_health_check(
     test_generation: bool = Query(False, description="Run a test generation (costs tokens)")
 ):
@@ -210,3 +213,12 @@ async def llm_health_check(
             "response_time_ms": round((time.time() - start_time) * 1000, 2)
         }
 
+
+@router.get("/integrations", response_model=IntegrationsReport, dependencies=[Depends(require_cron_secret)])
+async def integrations_health_check() -> IntegrationsReport:
+    """Live check of every external integration (scheduler, every 15 minutes).
+
+    Always 200; a broken integration is reported as "down" and logged as an
+    ``integration_down`` line that drives the email alert.
+    """
+    return await run_all()
