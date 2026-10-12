@@ -67,6 +67,10 @@ class User(Base):
     push_enabled = Column(Boolean, nullable=False, default=True, server_default="true")  # Push notification opt-in
     push_quiet_hours_start = Column(Integer, nullable=True)  # Quiet hours start (0-23 hour)
     push_quiet_hours_end = Column(Integer, nullable=True)    # Quiet hours end (0-23 hour)
+    # Engagement-email opt-out (specs/005-email-redesign)
+    email_opt_out = Column(Boolean, nullable=False, default=False, server_default="false")
+    email_pref_changed_at = Column(DateTime, nullable=True)
+    email_pref_source = Column(String(16), nullable=True)  # link | one_click | resubscribe
     timezone = Column(String(100), nullable=True)            # User timezone (e.g., "America/New_York")
     
     # Relationship to templates created by this user

@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% import "_macros.html" as m %}
 {% block title %}Welcome to T[root]H!{% endblock %}
 {% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">Your spiritual growth journey starts now. Take your first assessment today.</span>{% endblock %}
 {% block content %}
@@ -20,9 +21,7 @@
 <p>You've been connected with <strong>{{ mentor_name }}</strong> as your mentor. They're ready to support your journey!</p>
 {% endif %}
 
-<div class="btn-row">
-  <a href="{{ app_url }}" class="brand-btn">Take Your First Assessment →</a>
-</div>
+{{ m.button(app_url, "Take Your First Assessment →") }}
 
 <p class="muted" style="text-align:center;">Your first assessment takes about 10–15 minutes. There are no wrong answers — just honest ones.</p>
 {% endblock %}

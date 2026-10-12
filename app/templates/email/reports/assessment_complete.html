@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}{{ apprentice_name }} completed an assessment — T[root]H{% endblock %}
+{% block content %}
+<h2 style="color:#d4af37;font-size:22px;margin:0 0 14px;">{{ apprentice_name }} completed an assessment</h2>
+<p style="margin:0 0 18px;font-size:15px;color:#e6e6e6;">Hi {{ mentor_name or "there" }}, {{ apprentice_name }} just finished{% if assessment_title %} <strong style="color:#ffffff;">{{ assessment_title }}</strong>{% else %} a spiritual assessment{% endif %}.</p>
+{% if summary and summary.health_score is not none %}
+{% include "reports/_report_head.html" %}
+{% else %}
+{{ m.kv_row("Overall score", (overall_score ~ "/10") if overall_score is not none else none) }}
+{% if category_rows %}{% call m.section("By category") %}{% for name, score in category_rows %}{{ m.kv_row(name, score) }}{% endfor %}{% endcall %}{% endif %}
+{% if summary_recommendation %}<p style="margin:14px 0;font-size:15px;color:#e6e6e6;">{{ summary_recommendation }}</p>{% endif %}
+{% endif %}
+{% if extra_details %}{% call m.section("Details") %}{% for name, d in extra_details %}{{ m.kv_row(name, d) }}{% endfor %}{% endcall %}{% endif %}
+{{ m.button(app_url, "Open in app") }}
+{% endblock %}

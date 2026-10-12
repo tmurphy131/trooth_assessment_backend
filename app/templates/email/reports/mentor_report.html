@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}Mentor Report: {{ apprentice_name }} — T[root]H{% endblock %}
+{% block content %}
+<h2 style="color:#d4af37;font-size:22px;margin:0 0 6px;">{{ apprentice_name }}'s report</h2>
+<p style="margin:0 0 20px;font-size:14px;color:#a3a3a3;">{{ template_name or "Master T[root]H Assessment" }}{% if submitted_date %} · {{ submitted_date }}{% endif %}</p>
+{% include "reports/_report_head.html" %}
+{% if starters %}{% call m.section("Conversation starters") %}{{ m.bullet_list(starters, 2) }}{% endcall %}{% endif %}
+{{ m.button(app_url, "Open in app") }}
+<p style="margin:0;font-size:13px;color:#a3a3a3;text-align:center;">The full report, insights and plan are in the app.</p>
+{% endblock %}

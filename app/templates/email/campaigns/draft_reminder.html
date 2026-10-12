@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% import "_macros.html" as m %}
 {% block title %}Finish Your Assessment — T[root]H{% endblock %}
 {% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">You're {{ progress_percent }}% through your {{ assessment_name }} assessment — just a few minutes to finish!</span>{% endblock %}
 {% block content %}
@@ -20,12 +21,10 @@
 
 <p>{% if mentor_name and mentor_name != 'your mentor' %}<strong>{{ mentor_name }}</strong> is{% else %}Your mentor is{% endif %} ready to review your results and provide personalized guidance for your growth journey.</p>
 
-<div class="btn-row">
-  <a href="{{ resume_link }}" class="brand-btn">Resume Assessment →</a>
-</div>
+{{ m.button(resume_link, "Resume Assessment →") }}
 
 <p class="muted" style="text-align:center;">This should only take {{ remaining_minutes }} more minutes. Your spiritual growth journey is worth it!</p>
 
 <hr class="divider" />
-<p class="muted" style="text-align:center;">If you've already finished this assessment, you can ignore this reminder.<br>To stop receiving these reminders, <a href="{{ unsubscribe_link }}">unsubscribe here</a>.</p>
+<p class="muted" style="text-align:center;">If you've already finished this assessment, you can ignore this reminder.</p>
 {% endblock %}

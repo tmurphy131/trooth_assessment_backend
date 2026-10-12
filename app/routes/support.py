@@ -99,8 +99,9 @@ def _send_support_emails(data: SupportRequest, submitted_at: str, is_premium: bo
         sg = SendGridAPIClient(api_key)
         
         # 1. Send admin notification to all admin emails
-        admin_template = env.get_template('support_request_admin.html')
-        admin_html = admin_template.render(
+        from app.services import email_catalog
+
+        admin_email_body = email_catalog.render("support_request_admin", dict(
             name=data.name,
             email=data.email,
             topic=data.topic,
@@ -109,15 +110,17 @@ def _send_support_emails(data: SupportRequest, submitted_at: str, is_premium: bo
             device_info=data.device_info,
             source=data.source,
             submitted_at=submitted_at,
-            is_premium=is_premium
-        )
-        
+            is_premium=is_premium,
+        ))
+        admin_html = admin_email_body.html
+
         for admin_email in admin_emails:
             admin_mail = Mail(
                 from_email=from_email,
                 to_emails=admin_email,
                 subject=admin_subject,
-                html_content=admin_html
+                html_content=admin_html,
+                plain_text_content=admin_email_body.text,
             )
             # Set reply-to as the user's email for easy response
             admin_mail.reply_to = data.email
@@ -126,18 +129,18 @@ def _send_support_emails(data: SupportRequest, submitted_at: str, is_premium: bo
         logger.info(f"Support request admin notification sent to {len(admin_emails)} recipients for {data.email}")
         
         # 2. Send user confirmation
-        user_template = env.get_template('support_request_confirmation.html')
-        user_html = user_template.render(
+        user_email_body = email_catalog.render("support_request_confirmation", dict(
             name=data.name,
             topic=data.topic,
-            message=data.message
-        )
-        
+            message=data.message,
+        ))
+
         user_mail = Mail(
             from_email=from_email,
             to_emails=data.email,
             subject="We Received Your Support Request - T[root]H",
-            html_content=user_html
+            html_content=user_email_body.html,
+            plain_text_content=user_email_body.text,
         )
         
         sg.send(user_mail)

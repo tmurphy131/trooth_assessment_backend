@@ -58,8 +58,9 @@ def render_metrics_email(metrics: dict, report_type: str) -> tuple[str, str]:
     }
     
     try:
-        template = env.get_template('metrics_report.html')
-        html_content = template.render(**context)
+        from app.services import email_catalog
+
+        html_content = email_catalog.render("metrics_report", context).html
     except Exception as e:
         logger.error(f"Failed to render metrics email template: {e}")
         html_content = _fallback_html(metrics, report_type, report_date)

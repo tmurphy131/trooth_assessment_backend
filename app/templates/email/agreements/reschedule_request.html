@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% import "_macros.html" as m %}
 {% block title %}Meeting Reschedule Requested{% endblock %}
 {% block content %}
   <h2>Meeting Reschedule Requested</h2>
@@ -10,6 +11,6 @@
       {% for p in proposals %}<li>{{ p }}</li>{% endfor %}
     </ul>
   {% endif %}
-  {% if action_url %}<div class="btn-row"><a class="brand-btn" href="{{ action_url }}">View Agreement</a></div>{% endif %}
+  {% if action_url %}{{ m.button(action_url, "View Agreement") }}{% endif %}
   <p class="muted">Respond in the platform to confirm, decline, or propose an alternative.</p>
 {% endblock %}

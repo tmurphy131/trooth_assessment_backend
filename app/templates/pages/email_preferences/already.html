@@ -1,0 +1,10 @@
+{% extends "pages/email_preferences/_page.html" %}
+{% block title %}Already unsubscribed{% endblock %}
+{% block content %}
+<h1>You're already unsubscribed</h1>
+<p>You won't get reminder or announcement emails. Reports, invitations and account emails still arrive.</p>
+<form method="post" action="/email/resubscribe">
+  <input type="hidden" name="t" value="{{ token }}">
+  <button type="submit" class="secondary">Resubscribe</button>
+</form>
+{% endblock %}

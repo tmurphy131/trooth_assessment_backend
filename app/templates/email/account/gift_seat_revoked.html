@@ -1,0 +1,9 @@
+{% extends "_base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}Your Premium access has ended — T[root]H{% endblock %}
+{% block content %}
+<h2 style="color:#d4af37;font-size:20px;margin:0 0 14px;">Your gifted Premium access has ended</h2>
+<p style="margin:0 0 14px;font-size:15px;color:#e6e6e6;">Hi {{ apprentice_name or "there" }}, the Premium access <strong style="color:#ffffff;">{{ mentor_name }}</strong> gifted you has ended, and your account is back on the free plan.</p>
+<p style="margin:0 0 14px;font-size:15px;color:#e6e6e6;">You can keep using T[root]H Discipleship for free, or upgrade to Premium yourself in the app.</p>
+{{ m.button(app_url, "Open in app") }}
+{% endblock %}

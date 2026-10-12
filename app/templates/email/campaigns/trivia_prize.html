@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% import "_macros.html" as m %}
 {% block title %}You won! — T[root]H Trivia{% endblock %}
 {% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">You placed {{ place_name }} in the {{ competition_name }}. Your merch code is inside.</span>{% endblock %}
 {% block content %}
@@ -16,9 +17,7 @@
   <p class="muted" style="margin-top:12px;">One-time use. Add your merch to the cart and enter this code at checkout.{% if expires %}<br>Expires {{ expires }}.{% endif %}</p>
 </div>
 
-<div class="btn-row">
-  <a href="{{ shop_url }}" class="brand-btn">Shop Now →</a>
-</div>
+{{ m.button(shop_url, "Shop Now →") }}
 
 <p class="muted" style="text-align:center;">The code covers merch, not shipping. Keep this email. The code is also shown on the Trivia screen in the app.</p>
 {% endblock %}
