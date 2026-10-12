@@ -234,13 +234,13 @@ description: "Tasks: Email Redesign (consistent layout, report emails, working u
 - [X] T032 [P] Run `grep -rn "f\"\"\"" app/services/email.py app/services/metrics_reports.py app/services/master_trooth_report.py` and confirm no HTML email bodies are left as f-strings. *(Result: the only one left is `metrics_reports._fallback_html`, used only if the template fails to render.)* Confirm no template still extends a removed file.
 - [X] T033 Run `.venv/bin/python -m pytest -q`; all pass (SC-007: existing email tests unchanged and passing). Also check how account deletion in `app/routes/user.py` removes the user (spec Edge Case "A user who deletes their account"). Record whether the opt-out columns are deleted with the row; if deletion anonymizes instead, confirm no email address is kept next to the opt-out, and note the result in the PR. *(Result: `account_deletion.delete_user_account` hard-deletes the `users` row, so the opt-out columns go with it.)*
 - [X] T034 Run `scripts/email_preview.py` locally and review `index.html` at 375 px and 600 px widths. Fix any layout issues. Time `render_all()` over the catalog and record the per-email average in the PR (plan target: under 200 ms each). *(Result: 29 emails, 9–13 ms average, largest 12.5 KB. Checked at a true 375 px width in an iframe and at 600 px; the layout fits and wraps. The broken logo in local previews is the localhost `LOGO_URL` default; the prod logo URL returns `image/png`.)*
-- [ ] T035 Deploy to dev **after** creating `EMAIL_LINK_SECRET` (T018) and updating the deploy skills. Then run quickstart §3–§5:
+- [X] T035 Deploy to dev **after** creating `EMAIL_LINK_SECRET` (T018) and updating the deploy skills. Then run quickstart §3–§5: *(Done: dev revisions 00099–00102. The unsubscribe flow (confirm, one-click, already, resubscribe, invalid, legacy) was verified on a real dev account. Report parity 5/5 vs the app. `[TEST]` sends of all 29 emails to 3 owner inboxes, reviewed by the owner. Follow-ups #37–#39: white-and-gold Discipleship logo on a baked-in dark badge with a versioned filename, because Gmail caches images by URL. The owner accepted Gmail iOS showing the color-inverted, light view.)*
   - test sends to Gmail (web and iPhone), Apple Mail and Outlook, in light and dark mode;
   - unsubscribe by link and one-click, with the skip recorded and report emails unaffected;
   - 5-assessment report parity.
 
   Record the client × mode pass/fail table and the parity results in the PR.
-- [ ] T036 After merge: `/deploy-prod`, confirm `GET /settings/notifications` returns 200 on prod, and send one preview to the owner's inbox against the prod config (quickstart §6).
+- [X] T036 After merge: `/deploy-prod`, confirm `GET /settings/notifications` returns 200 on prod, and send one preview to the owner's inbox against the prod config (quickstart §6). *(Done: `/deploy-prod` revision trooth-backend-00221-z6v; `/settings/notifications` 200, invalid link 400, `email_logo_v2.png` 200, no `email_link_secret_missing` errors. One prod-config test email confirmed links use the prod host.)*
 
 ---
 

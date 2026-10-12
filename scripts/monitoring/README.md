@@ -24,7 +24,7 @@ delivery, and check the spam folder.
 | Cloud Scheduler job | `integrations-health-<env>` | calls `GET /health/integrations` every 15 minutes with `X-Cron-Secret` |
 | Log metric | `integration_down_<env>` | counts `integration_down` lines, labeled by integration |
 | Log metric | `llm_provider_error_<env>` | AI provider errors from real requests |
-| Log metric | `scoring_fallback_<env>` | assessments scored with the empty fallback report |
+| Log metric | `scoring_fallback_<env>` | AI scoring failed for an assessment: logged when it's marked `failed` after the retry window (`Failed to build mentor_blob (final)`), and on legacy-scorer retries. Since spec 004, nothing is marked done with fallback content. |
 | Log metric | `email_send_failed_<env>` | failed transactional email sends |
 | Uptime check | `[<env>] API /health` (+ `onlyblv.com website` for prod) | outside availability checks every minute |
 | Alert policy | `[<env>] Integration down` | any integration down at a scheduled check |

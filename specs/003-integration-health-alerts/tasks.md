@@ -135,7 +135,7 @@ description: "Task list for Integration Health Checks and Alerts"
 - [ ] T027 (Deferred: constitution amendments need their own PR per Governance) Update the constitution's "Technology Constraints & Known Debt" list in `.specify/memory/constitution.md` only if the `CRON_SECRET` default debt is fully removed (it should be after T022/T023); otherwise leave it
 - [x] T028 Run `.venv/bin/python -m pytest -q`; all pass
 - [x] T029 Deploy to dev (`/deploy-dev`), run `scripts/monitoring/setup.sh dev`, and walk [quickstart.md](quickstart.md) steps 2–5 including the kill-switch test; record results in the PR
-- [ ] T030 After merge: `/deploy-prod` from `main`, `scripts/monitoring/setup.sh prod`, quickstart step 6
+- [X] T030 After merge: `/deploy-prod` from `main`, `scripts/monitoring/setup.sh prod`, quickstart step 6 *(Done: part 2 deployed to prod; monitoring set up for prod; alert email received during dev verification.)*
 
 ---
 

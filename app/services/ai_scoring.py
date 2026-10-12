@@ -76,28 +76,6 @@ def _parse_json_lenient(content: str) -> dict:
     except Exception as e:
         raise json.JSONDecodeError(f"Could not parse JSON after lenient attempts: {e}", text, 0)
 
-def _retry(callable_fn, *, retries: int = 3, base_delay: float = 0.6, factor: float = 2.0, retry_on: Tuple[type, ...] = (Exception,)):
-    """Simple capped exponential backoff retry helper."""
-    import time
-    last = None
-    delay = base_delay
-    for attempt in range(retries):
-        try:
-            if attempt > 0:
-                logger.info(f"[ai] retry attempt {attempt+1}/{retries}")
-            return callable_fn()
-        except retry_on as e:  # pragma: no cover
-            last = e
-            # Check for common rate limit indicators
-            msg = str(e).lower()
-            if "rate limit" not in msg and "429" not in msg and "quota" not in msg and attempt == retries - 1:
-                break
-            time.sleep(delay)
-            delay *= factor
-    if last:
-        raise last
-
-
 # ------------------------------
 # Mentor report (v2) schema - matches ai_prompt_master_assessment_v2_optimized.txt
 # ------------------------------
@@ -156,15 +134,6 @@ class MentorBlobV2(BaseModel):
     four_week_plan: Optional[_FourWeekPlan] = None
     conversation_starters: list[str] = []
     recommended_resources: list[_ResourceV2] = []
-
-
-def _knowledge_band(percent: float) -> str:
-    p = float(percent or 0)
-    if p >= 90: return "Excellent"
-    if p >= 80: return "Good"
-    if p >= 70: return "Average"
-    if p >= 60: return "Needs Improvement"
-    return "Significant Study"
 
 
 def _health_band(score: int) -> str:
@@ -1138,16 +1107,6 @@ def score_assessment(answers: dict):
             loop.close()
         except Exception:
             pass
-
-async def score_assessment_with_questions(answers: dict, questions: list) -> tuple[float, str]:
-    """Enhanced scoring function that uses real questions."""
-    try:
-        result = await score_assessment_by_category(answers, questions)
-        return result['overall_score'], result['summary_recommendation']
-    except Exception as e:
-        logger.error(f"Enhanced scoring failed: {e}")
-        return 7.0, "Assessment completed. Continue growing in spiritual disciplines."
-
 
 def generate_baseline_score(answers: dict, questions: list) -> dict:
     """Generate instant baseline score without AI (for progressive enhancement pattern).
