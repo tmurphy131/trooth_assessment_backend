@@ -57,6 +57,7 @@ def render_email(template: str, context: Optional[dict[str, Any]] = None, *, pre
     env = get_email_template_env()
     ctx: dict[str, Any] = {
         "logo_url": settings.logo_url,
+        "email_logo_url": settings.email_logo_url,
         "app_url": settings.app_landing_url,
         "ios_app_store_url": settings.ios_app_store_url,
         "android_play_store_url": settings.android_play_store_url,

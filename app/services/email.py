@@ -45,6 +45,7 @@ def get_email_template_env():
         android_play_store_url=settings.android_play_store_url,
         app_url=settings.app_landing_url,
         logo_url=settings.logo_url,
+        email_logo_url=settings.email_logo_url,
     )
     return env
 
