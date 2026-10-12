@@ -55,9 +55,11 @@ class Settings:
             "ANDROID_PLAY_STORE_URL",
             "https://play.google.com/store/apps/details?id=com.trooth.flutterTroothAssessment",
         )
-        # White-and-gold wordmark for the emails' dark header strip (the main logo is black-and-gold)
+        # Email header logo: white-and-gold wordmark on a baked-in dark badge, so it stays legible
+        # even when Gmail's iOS app inverts email colors. Versioned filename: Gmail caches images by
+        # URL, so a changed logo needs a new name.
         self.email_logo_url = os.getenv(
-            "EMAIL_LOGO_URL", f"{self.backend_api_url.rstrip('/')}/assets/logo_light.png"
+            "EMAIL_LOGO_URL", f"{self.backend_api_url.rstrip('/')}/assets/email_logo_v2.png"
         )
         self.email_from_address = os.getenv(
             "EMAIL_FROM_ADDRESS", "no-reply@trooth-app.com"
