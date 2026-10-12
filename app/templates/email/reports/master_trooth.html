@@ -1,0 +1,21 @@
+{% extends "_base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}Master T[root]H Assessment report — T[root]H{% endblock %}
+{% block content %}
+<h2 style="color:#d4af37;font-size:22px;margin:0 0 6px;">{{ apprentice_name or "Your" }}{% if apprentice_name %}'s{% endif %} Master T[root]H report</h2>
+<p style="margin:0 0 20px;font-size:14px;color:#a3a3a3;">Master T[root]H Assessment</p>
+{% if summary and summary.health_score is not none %}
+{% include "reports/_report_head.html" %}
+{% else %}
+{{ m.kv_row("Overall", overall_score) }}
+{% endif %}
+{% if top3 %}
+{% call m.section("Strongest categories") %}
+<ul style="color:#e6e6e6;font-size:15px;line-height:1.6;margin:0 0 14px;padding-left:22px;">
+  {% for c in top3[:3] %}<li style="margin:6px 0;">{{ c.category }}{% if c.score is not none %} <span style="color:#a3a3a3;">({{ c.score }}/10)</span>{% endif %}</li>{% endfor %}
+</ul>
+{% endcall %}
+{% endif %}
+{% if summary_recommendation and not (priority_action and priority_action.title) %}<p style="margin:0 0 14px;font-size:15px;color:#e6e6e6;">{{ summary_recommendation }}</p>{% endif %}
+{{ m.button(app_url, "Open in app") }}
+{% endblock %}

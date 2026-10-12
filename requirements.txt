@@ -20,6 +20,8 @@ google-genai>=1.51.0  # Gemini/Vertex AI SDK
 
 # Email Templates
 jinja2>=3.1.2
+css-inline>=0.14  # inline email CSS so Gmail/Outlook keep the design (specs/005-email-redesign)
+html2text>=2024.2.26  # plain-text email parts generated from the same HTML
 
 # PDF Generation
 reportlab>=4.0.7

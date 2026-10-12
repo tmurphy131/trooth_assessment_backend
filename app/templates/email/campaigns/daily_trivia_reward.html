@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% import "_macros.html" as m %}
 {% block title %}{{ tier }}-day streak! — T[root]H Daily Trivia{% endblock %}
 {% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">You reached a {{ tier }}-day daily trivia streak. Your {{ percent }}% merch code is inside.</span>{% endblock %}
 {% block content %}
@@ -20,9 +21,7 @@
 <p class="muted" style="text-align:center;">This code replaces your earlier {{ replaced_percent }}% code, which no longer works.</p>
 {% endif %}
 
-<div class="btn-row">
-  <a href="{{ shop_url }}" class="brand-btn">Shop Now →</a>
-</div>
+{{ m.button(shop_url, "Shop Now →") }}
 
 <p class="muted" style="text-align:center;">Keep your streak going: the next milestone earns a bigger discount, and it replaces this code if you haven't used it. Your code is also shown on the daily trivia screen in the app.</p>
 {% endblock %}

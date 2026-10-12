@@ -6,7 +6,7 @@ from datetime import datetime, UTC
 from app.utils.datetime import utc_now
 
 from app.core.settings import settings
-from app.services.email import get_email_template_env, send_email
+from app.services.email import send_email
 
 logger = logging.getLogger("app.agreement_email")
 
@@ -48,18 +48,18 @@ def _logo_url(context: Dict[str, Any]) -> str:
 def render_agreement_email(event: AgreementEmailEvent, context: Dict[str, Any]) -> Tuple[str, str, str]:
     """Render HTML & plain text plus subject for an agreement lifecycle event."""
     subject = SUBJECTS[event]
-    env = get_email_template_env()
     # Use backend_api_url for agreement signing pages (these are backend HTML pages, not mobile app links)
     ctx = {**context, 'event': event.value, 'subject': subject, 'app_url': settings.backend_api_url, 'logo_url': _logo_url(context)}
 
     html = None
-    if env:
-        template_name = TEMPLATE_MAP.get(event)
-        try:
-            template = env.get_template(template_name)
-            html = template.render(**ctx)
-        except Exception as e:
-            logger.error(f"[agreement_email] Failed to render template {template_name}: {e}")
+    rendered = None
+    try:
+        from app.services import email_catalog
+
+        rendered = email_catalog.render(f"agreement_{event.value}", ctx)
+        html = rendered.html
+    except Exception as e:
+        logger.error(f"[agreement_email] Failed to render template {TEMPLATE_MAP.get(event)}: {e}")
 
     if not html:
         # Fallback minimal HTML
@@ -103,7 +103,9 @@ def render_agreement_email(event: AgreementEmailEvent, context: Dict[str, Any]) 
             html_lines.append(f"<p><a href='{action_url}'>Open Agreement</a></p>")
         html = "\n".join(html_lines)
 
-    # Plain text
+    if rendered is not None:
+        return html, rendered.text, subject
+    # Plain text for the fallback HTML
     plain_lines = [subject, f"Agreement ID: {context.get('agreement_id')}"]
     action_url = context.get('action_url')
     if action_url:

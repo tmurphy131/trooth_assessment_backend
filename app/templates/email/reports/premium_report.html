@@ -1,0 +1,34 @@
+{% extends "_base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}Premium report: {{ apprentice_name }} — T[root]H{% endblock %}
+{% block content %}
+<p style="margin:0 0 8px;"><span style="display:inline-block;background-color:#d4af37;color:#000000;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;">✦ PREMIUM</span></p>
+<h2 style="color:#d4af37;font-size:22px;margin:0 0 6px;">{{ apprentice_name }}'s report</h2>
+<p style="margin:0 0 20px;font-size:14px;color:#a3a3a3;">{{ template_name or "Master T[root]H Assessment" }}{% if submitted_date %} · {{ submitted_date }}{% endif %}</p>
+{% include "reports/_report_head.html" %}
+{% set es = full_report.executive_summary or {} %}
+{% if es.one_liner or es.trajectory_note %}
+{% call m.section("Executive summary") %}
+{% if es.one_liner %}<p style="margin:0 0 10px;font-size:15px;color:#ffffff;font-style:italic;">{{ es.one_liner }}</p>{% endif %}
+{% if es.trajectory_note %}<p style="margin:0 0 14px;font-size:14px;color:#e6e6e6;">{{ es.trajectory_note }}</p>{% endif %}
+{% endcall %}
+{% endif %}
+{% set gaps_dd = (full_report.gaps_deep_dive or [])[:3] %}
+{% if gaps_dd %}
+{% call m.section("12-week plan highlights") %}
+{% for g in gaps_dd %}
+{% set gp = g.growth_pathway or {} %}
+<p style="margin:0 0 6px;font-size:15px;font-weight:700;color:#ffffff;">{{ g.area }}</p>
+<ul style="color:#e6e6e6;font-size:14px;line-height:1.6;margin:0 0 14px;padding-left:22px;">
+  {% if gp.phase_1_weeks_1_4 and gp.phase_1_weeks_1_4.goal %}<li style="margin:4px 0;"><span style="color:#a3a3a3;">Weeks 1–4:</span> {{ gp.phase_1_weeks_1_4.goal }}</li>{% endif %}
+  {% if gp.phase_2_weeks_5_8 and gp.phase_2_weeks_5_8.goal %}<li style="margin:4px 0;"><span style="color:#a3a3a3;">Weeks 5–8:</span> {{ gp.phase_2_weeks_5_8.goal }}</li>{% endif %}
+  {% if gp.phase_3_weeks_9_12 and gp.phase_3_weeks_9_12.goal %}<li style="margin:4px 0;"><span style="color:#a3a3a3;">Weeks 9–12:</span> {{ gp.phase_3_weeks_9_12.goal }}</li>{% endif %}
+</ul>
+{% endfor %}
+{% endcall %}
+{% endif %}
+{% set s1 = (full_report.conversation_guide or {}).session_1_opening or {} %}
+{% if s1.questions_to_ask %}{% call m.section("First conversation") %}{{ m.bullet_list(s1.questions_to_ask, 2) }}{% endcall %}{% endif %}
+{{ m.button(app_url, "Open in app") }}
+<p style="margin:0;font-size:13px;color:#a3a3a3;text-align:center;">The full Premium report, conversation guide and resources are in the app.</p>
+{% endblock %}

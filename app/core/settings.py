@@ -44,6 +44,17 @@ class Settings:
         self.logo_url = os.getenv(
             "LOGO_URL", f"{self.backend_api_url.rstrip('/')}/assets/logo.png"
         )
+        # Emails (specs/005-email-redesign). EMAIL_LINK_SECRET signs unsubscribe links; no default:
+        # without it engagement emails go out without an unsubscribe link (logged as an error).
+        self.email_link_secret = os.getenv("EMAIL_LINK_SECRET", "")
+        self.email_link_ttl_days = int(os.getenv("EMAIL_LINK_TTL_DAYS", "400"))
+        self.support_email = os.getenv("SUPPORT_EMAIL", "admin@onlyblv.com")
+        # "Open in app" goes to a page with both store badges; the app ships on iOS and Android
+        self.app_landing_url = os.getenv("APP_LANDING_URL", "https://onlyblv.com/#apps")
+        self.android_play_store_url = os.getenv(
+            "ANDROID_PLAY_STORE_URL",
+            "https://play.google.com/store/apps/details?id=com.trooth.flutterTroothAssessment",
+        )
         self.email_from_address = os.getenv(
             "EMAIL_FROM_ADDRESS", "no-reply@trooth-app.com"
         )

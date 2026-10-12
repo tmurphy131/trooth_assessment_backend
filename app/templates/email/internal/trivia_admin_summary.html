@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}Trivia {{ competition_name }} winners{% endblock %}
+{% block content %}
+<h2 style="color:#d4af37;font-size:20px;margin:0 0 6px;">{{ competition_name }} has been finalized</h2>
+<p style="margin:0 0 18px;font-size:14px;color:#a3a3a3;">{{ competition_slug }}</p>
+{% if winners %}
+{% for w in winners %}
+<p style="margin:0 0 10px;font-size:15px;color:#e6e6e6;"><strong style="color:#ffffff;">{{ w.place }}</strong> — {{ w.name }} — {{ w.score }} pts<br><span style="color:#a3a3a3;font-size:13px;">Code {{ w.code }}{% if w.emailed_at %} · emailed {{ w.emailed_at }} UTC{% endif %}</span></p>
+{% endfor %}
+{% else %}
+<p style="margin:0;font-size:15px;color:#e6e6e6;">No eligible players scored during the competition window.</p>
+{% endif %}
+{% endblock %}

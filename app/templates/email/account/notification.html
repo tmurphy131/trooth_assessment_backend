@@ -1,0 +1,10 @@
+{% extends "_base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}{{ subject }}{% endblock %}
+{% block content %}
+<h2 style="color:#d4af37;font-size:20px;margin:0 0 16px;">{{ subject }}</h2>
+{% for para in message.split("\n\n") if para.strip() %}
+<p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:#e6e6e6;">{{ para.strip() | replace("\n", "<br>" | safe) }}</p>
+{% endfor %}
+{% if action_url %}{{ m.button(action_url, action_label or "Open") }}{% endif %}
+{% endblock %}

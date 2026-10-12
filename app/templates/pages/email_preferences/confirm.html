@@ -1,0 +1,11 @@
+{% extends "pages/email_preferences/_page.html" %}
+{% block title %}Unsubscribe{% endblock %}
+{% block content %}
+<h1>Stop reminder and announcement emails?</h1>
+<p>You'll stop getting assessment reminders, new-assessment announcements and check-in emails.</p>
+<p class="muted">You'll still get reports, invitations, agreements, rewards and account emails.</p>
+<form method="post" action="/email/unsubscribe">
+  <input type="hidden" name="t" value="{{ token }}">
+  <button type="submit">Unsubscribe</button>
+</form>
+{% endblock %}

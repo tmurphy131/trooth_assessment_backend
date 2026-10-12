@@ -3,7 +3,7 @@ import logging
 import json
 from typing import Dict, Optional, Tuple
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail, To, From, Subject, HtmlContent, PlainTextContent, Attachment, FileContent, FileName, FileType, Disposition
+from sendgrid.helpers.mail import Mail, To, From, Subject, HtmlContent, PlainTextContent, Attachment, FileContent, FileName, FileType, Disposition, Header
 from datetime import datetime
 from html import escape
 
@@ -37,144 +37,77 @@ def get_email_template_env():
     )
     # Add custom filters
     env.filters['strftime'] = strftime_filter
+    # Values the shared layout needs on every email, even when a caller renders a template directly
+    env.globals.update(
+        year=datetime.now().year,
+        support_email=settings.support_email,
+        ios_app_store_url=settings.ios_app_store_url,
+        android_play_store_url=settings.android_play_store_url,
+        app_url=settings.app_landing_url,
+        logo_url=settings.logo_url,
+    )
     return env
 
-def render_mentor_report_v2_email(context: dict) -> tuple[str, str]:
-    """Render the v2 mentor report email using the new template.
+def _report_context(context: dict) -> dict:
+    """Shared report-email context: canonical headline numbers (same as the app) plus the
+    priority action, strengths and growth areas from the mentor blob (specs/005-email-redesign)."""
+    from app.services.report_summary import summarize_mentor_blob
 
-    Returns (html, plain) and guarantees no raw open-ended answers are present
-    by relying only on the synthesized context built from mentor_blob.
-    """
-    env = get_email_template_env()
-    html_content = None
-    if env and JINJA2_AVAILABLE:
-        try:
-            template = env.get_template('mentor_report_email_template.html')
-            html_content = template.render(**context)
-        except Exception as e:
-            logger.error(f"Failed to render mentor_report_email_template.html: {e}")
-            html_content = None
-    if not html_content:
-        # Minimal fallback
-        html_content = f"<div><h1>T[root]H Mentor Report</h1><p>Apprentice: {context.get('apprentice_name')}</p><p>Overall: {context.get('overall_level')}</p></div>"
-    # Plain text
-    plain_lines = [
-        "T[root]H Mentor Report",
-        f"Apprentice: {context.get('apprentice_name')}",
-        f"Biblical Knowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})",
-        f"Overall Level: {context.get('overall_open_level')}",
-    ]
-    return html_content, "\n".join(plain_lines)
+    blob = context.get("mentor_blob_v2") or context.get("blob") or {}
+    summary = summarize_mentor_blob(blob) if blob else context.get("summary")
+    pa = blob.get("priority_action") or context.get("priority_action") or {}
+    return {
+        **context,
+        "summary": summary,
+        "priority_action": pa,
+        "strengths": blob.get("strengths") or context.get("top_strengths") or [],
+        "gaps": blob.get("gaps") or context.get("top_gaps") or [],
+        "app_url": settings.app_landing_url,
+    }
+
+
+def render_mentor_report_v2_email(context: dict) -> tuple[str, str]:
+    """Mentor report email: leads with the Health Score, band and Biblical Knowledge %, then the
+    priority action, strengths and growth areas. Returns (html, plain)."""
+    from app.services import email_catalog
+
+    ctx = _report_context(context)
+    rendered = email_catalog.render("mentor_report", ctx)
+    return rendered.html, rendered.text
+
 
 def render_premium_report_email(context: dict, full_report: dict) -> tuple[str, str]:
-    """Render the PREMIUM mentor report email using the enhanced template.
+    """Premium mentor report email: the standard head plus the executive summary and 12-week plan
+    highlights. The full report passes through public_full_report so its Health Score equals the
+    blob's (FR-015). Returns (html, plain)."""
+    from app.services import email_catalog
 
-    Premium reports include:
-    - Strengths & gaps deep dive with evidence
-    - Multi-session conversation guide
-    - Growth pathways with phased plans
-    - Biblical knowledge detailed analysis
-    
-    Args:
-        context: Standard report context (from build_report_context)
-        full_report: Premium full report data (from generate_full_report)
-    
-    Returns (html, plain) tuple.
-    """
-    env = get_email_template_env()
-    html_content = None
-    
-    # Merge full_report data into context for template rendering
-    premium_context = {**context}
-    
-    # Add executive summary (Health Score/band come from the canonical mentor blob)
-    full_report = public_full_report(full_report, context.get('mentor_blob_v2')) or {}
-    exec_summary = full_report.get('executive_summary', {})
-    premium_context['health_score'] = context.get('health_score', exec_summary.get('health_score', 0))
-    premium_context['health_band'] = context.get('health_band', exec_summary.get('health_band', 'Developing'))
-    premium_context['one_liner'] = exec_summary.get('one_liner', '')
-    premium_context['trajectory'] = exec_summary.get('trajectory', '')
-    premium_context['trajectory_note'] = exec_summary.get('trajectory_note', '')
-    
-    # Add deep dive sections
-    premium_context['strengths_deep_dive'] = full_report.get('strengths_deep_dive', [])
-    premium_context['gaps_deep_dive'] = full_report.get('gaps_deep_dive', [])
-    
-    # Add conversation guide
-    premium_context['conversation_guide'] = full_report.get('conversation_guide', {})
-    
-    # Add biblical knowledge analysis
-    premium_context['biblical_knowledge_analysis'] = full_report.get('biblical_knowledge_analysis', {})
-    
-    # Add recommended resources from full report
-    premium_context['recommended_resources'] = full_report.get('recommended_resources', context.get('recommended_resources', []))
-    
-    if env and JINJA2_AVAILABLE:
-        try:
-            template = env.get_template('mentor_report_premium_email_template.html')
-            html_content = template.render(**premium_context)
-        except Exception as e:
-            logger.error(f"Failed to render premium email template: {e}")
-            # Fallback to standard v2 email
-            html_content = None
-    
-    if not html_content:
-        # Fallback to standard v2 email if premium template fails
+    ctx = _report_context(context)
+    ctx["full_report"] = public_full_report(full_report, ctx.get("mentor_blob_v2") or ctx.get("blob")) or {}
+    try:
+        rendered = email_catalog.render("premium_report", ctx)
+    except Exception as e:  # never lose the report email over the Premium section
+        logger.error(f"Failed to render premium report email, sending the standard one: {e}")
         return render_mentor_report_v2_email(context)
-    
-    # Plain text version for premium
-    plain_lines = [
-        "✦ T[root]H PREMIUM Mentor Report ✦",
-        f"Apprentice: {premium_context.get('apprentice_name')}",
-        f"Health Score: {premium_context.get('health_score')} ({premium_context.get('health_band')})",
-        f"Biblical Knowledge: {premium_context.get('overall_mc_percent')}% ({premium_context.get('knowledge_band')})",
-        "",
-        "Executive Summary:",
-        premium_context.get('one_liner', 'Assessment complete.'),
-        "",
-        "Strengths:",
-    ]
-    for s in premium_context.get('top_strengths', [])[:3]:
-        plain_lines.append(f"  • {s}")
-    plain_lines.append("")
-    plain_lines.append("Growth Areas:")
-    for g in premium_context.get('top_gaps', [])[:3]:
-        plain_lines.append(f"  • {g}")
-    plain_lines.append("")
-    plain_lines.append("View the full interactive premium report in the T[root]H app.")
-    
-    return html_content, "\n".join(plain_lines)
+    return rendered.html, rendered.text
 
 
 def render_generic_assessment_email(title: str, apprentice_name: str | None, scores: dict) -> tuple[str, str]:
-    """Render a generic assessment report email using Jinja2 template.
+    """Generic assessment report email. Leads with the Health Score when the scores carry a mentor
+    blob; otherwise the overall and category scores. Returns (html, plain)."""
+    from app.services import email_catalog
 
-    Returns (html, plain).
-    """
-    env = get_email_template_env()
-    html_content = None
-    if env and JINJA2_AVAILABLE:
-        try:
-            template = env.get_template('generic_assessment_report.html')
-            html_content = template.render(title=title, apprentice_name=apprentice_name, scores=scores, app_url=settings.ios_app_store_url)
-        except Exception as e:
-            logger.error(f"Failed to render generic assessment template: {e}")
-            html_content = None
-    if not html_content:
-        # Fallback basic HTML
-        cats = scores.get('categories', [])
-        rows = "\n".join([f"- {c.get('name')}: {c.get('score')}" for c in cats])
-        html_content = f"<div><h1>{title or 'Assessment Report'}</h1><p>Apprentice: {apprentice_name or 'Apprentice'}</p><h2>Overall: {scores.get('overall_score', 0)}</h2><pre>{rows}</pre></div>"
-    # Plain text
-    plain_lines = [
-        (title or 'Assessment Report'),
-        f"Apprentice: {apprentice_name or 'Apprentice'}",
-        f"Overall: {scores.get('overall_score', 0)}",
-    ]
-    for c in scores.get('categories', []):
-        plain_lines.append(f"- {c.get('name')}: {c.get('score')}")
-    plain = "\n".join(plain_lines)
-    return html_content, plain
+    scores = scores or {}
+    cats = scores.get("category_scores") or {c.get("name"): c.get("score") for c in scores.get("categories", [])
+                                             if isinstance(c, dict)}
+    ctx = _report_context({"mentor_blob_v2": scores.get("mentor_blob_v2")})
+    ctx.update(title=title, apprentice_name=apprentice_name, overall_score=scores.get("overall_score"),
+               category_rows=list(cats.items()), summary_recommendation=scores.get("summary_recommendation"))
+    if not scores.get("mentor_blob_v2"):
+        ctx["summary"] = None
+    rendered = email_catalog.render("generic_assessment_report", ctx)
+    return rendered.html, rendered.text
+
 
 def get_sendgrid_client():
     """Get SendGrid client if configured and log diagnostics (without leaking key)."""
@@ -200,120 +133,52 @@ def get_sendgrid_client():
         logger.error(f"[email] Failed to instantiate SendGrid client: {e}")
         return None
 
-def render_assessment_completion_email(mentor_name: str, apprentice_name: str, 
-                                     scores: dict, recommendations: dict) -> Tuple[str, str]:
-    """Render rich HTML email for assessment completion."""
-    env = get_email_template_env()
-    
-    if env and JINJA2_AVAILABLE:
-        try:
-            template = env.get_template('assessment_complete.html')
-            html_content = template.render(
-                mentor_name=mentor_name,
-                apprentice_name=apprentice_name,
-                overall_score=scores.get('overall_score', 7.0),
-                category_scores=scores.get('category_scores', {}),
-                recommendations=recommendations,
-                app_url=settings.ios_app_store_url
-            )
-            
-            # Generate plain text version
-            plain_text = f"""
-Assessment Complete - T[root]H
+def render_assessment_completion_email(mentor_name: str, apprentice_name: str,
+                                       scores: dict, recommendations: dict, *,
+                                       assessment_title: str | None = None,
+                                       details: dict | None = None) -> Tuple[str, str]:
+    """Assessment-complete email to the mentor. Returns (html, plain)."""
+    from app.services import email_catalog
 
-Dear {mentor_name},
+    scores = scores or {}
+    recommendations = recommendations or {}
+    ctx = _report_context({"mentor_blob_v2": scores.get("mentor_blob_v2")})
+    if not scores.get("mentor_blob_v2"):
+        ctx["summary"] = None
+    ctx.update(
+        mentor_name=mentor_name, apprentice_name=apprentice_name, assessment_title=assessment_title,
+        overall_score=scores.get("overall_score"),
+        category_rows=list((scores.get("category_scores") or {}).items()),
+        summary_recommendation=recommendations.get("summary_recommendation"),
+        extra_details=[(k, f"{d.get('score', '-')} — {d.get('feedback', '')}".strip(" —"))
+                       for k, d in (details or {}).items() if isinstance(d, dict)],
+    )
+    rendered = email_catalog.render("assessment_complete", ctx)
+    return rendered.html, rendered.text
 
-{apprentice_name} has completed their spiritual assessment.
-
-Overall Score: {scores.get('overall_score', 7.0)}/10
-
-{recommendations.get('summary_recommendation', 'Continue growing in spiritual disciplines.')}
-
-View full results: {settings.ios_app_store_url}
-
-Best regards,
-T[root]H Discipleship Team
-            """.strip()
-            
-            return html_content, plain_text
-            
-        except Exception as e:
-            logger.error(f"Failed to render assessment email template: {e}")
-    
-    # Fallback to simple text
-    plain_text = f"""
-Assessment Complete
-
-Dear {mentor_name},
-
-{apprentice_name} has completed their spiritual assessment with an overall score of {scores.get('overall_score', 7.0)}/10.
-
-{recommendations.get('summary_recommendation', 'Continue growing in spiritual disciplines.')}
-
-View full results at: {settings.ios_app_store_url}
-
-Best regards,
-T[root]H Discipleship Team
-    """
-    return plain_text, plain_text
 
 def render_invitation_email(apprentice_name: str, mentor_name: str, token: str) -> Tuple[str, str]:
-    """Render rich HTML email for apprentice invitation."""
-    env = get_email_template_env()
-    
-    if env and JINJA2_AVAILABLE:
-        try:
-            template = env.get_template('invitation.html')
-            html_content = template.render(
-                apprentice_name=apprentice_name,
-                mentor_name=mentor_name,
-                token=token,
-                app_url=settings.backend_api_url
-            )
-            
-            # Generate plain text version
-            plain_text = f"""
-You're Invited to Begin Your Spiritual Journey - T[root]H
+    """Apprentice invitation email. The accept link is a backend page, not the app."""
+    from app.services import email_catalog
 
-Dear {apprentice_name},
+    accept_url = f"{settings.backend_api_url.rstrip('/')}/invitations/accept-invitation?token={token}"
+    rendered = email_catalog.render("invitation", {"apprentice_name": apprentice_name, "mentor_name": mentor_name,
+                                                   "token": token, "accept_url": accept_url})
+    return rendered.html, rendered.text
 
-{mentor_name} has invited you to begin a structured assessment and mentoring relationship through the T[root]H platform.
+def _add_headers(message: "Mail", headers: dict | None) -> None:
+    for name, value in (headers or {}).items():
+        message.add_header(Header(name, value))
 
-What is T[root]H Discipleship?
-T[root]H is a comprehensive spiritual assessment tool designed to help you and your mentor understand your current spiritual growth and identify areas for development.
-
-Accept your invitation here: {settings.backend_api_url}/invitations/accept-invitation?token={token}
-
-This invitation will expire in 7 days.
-
-Best regards,
-T[root]H Discipleship Team
-            """.strip()
-            
-            return html_content, plain_text
-            
-        except Exception as e:
-            logger.error(f"Failed to render invitation email template: {e}")
-    
-    # Fallback to simple text
-    plain_text = f"""
-Invitation to T[root]H Discipleship
-
-Dear {apprentice_name},
-
-{mentor_name} has invited you to join the T[root]H Discipleship platform.
-
-Accept your invitation: {settings.backend_api_url}/invitations/accept-invitation?token={token}
-
-Best regards,
-T[root]H Discipleship Team
-    """
-    return plain_text, plain_text
 
 def send_email(to_email: str, subject: str, html_content: str,
                plain_content: str, from_email: str = None,
-               attachments: list[dict] | None = None) -> bool:
+               attachments: list[dict] | None = None,
+               category: str = "transactional", headers: dict | None = None) -> bool:
     """Send email using SendGrid with deep diagnostic logging.
+
+    ``category`` is the email_catalog category (engagement / transactional / internal); ``headers``
+    carries extra MIME headers, e.g. List-Unsubscribe for engagement emails (specs/005-email-redesign).
 
     Logging levels:
     - INFO: success
@@ -359,6 +224,7 @@ def send_email(to_email: str, subject: str, html_content: str,
                 html_content=HtmlContent(html_content),
                 plain_text_content=PlainTextContent(plain_content)
             )
+            _add_headers(_, headers)
         except Exception:
             # Even if construction fails under strange environments, still report success for tests
             pass
@@ -377,6 +243,7 @@ def send_email(to_email: str, subject: str, html_content: str,
             html_content=HtmlContent(html_content),
             plain_text_content=PlainTextContent(plain_content)
         )
+        _add_headers(message, headers)
         # Attachments
         if attachments:
             for att in attachments:
@@ -420,8 +287,9 @@ def send_email(to_email: str, subject: str, html_content: str,
         logger.error(f"[email] Exception during send to={to_email}: {e}", exc_info=True)
         return False
 
-def _log_campaign_email(db, target_user_id: str, campaign_type: str, context: dict) -> None:
-    """Log a sent campaign email to EmailSendEvent for dedup and analytics."""
+def _log_campaign_email(db, target_user_id: str, campaign_type: str, context: dict,
+                        delivery_status: str = "sent") -> None:
+    """Log a campaign email (sent, or skipped_opt_out) to EmailSendEvent for dedup and analytics."""
     try:
         from app.models.email_send_event import EmailSendEvent
         event = EmailSendEvent(
@@ -430,7 +298,7 @@ def _log_campaign_email(db, target_user_id: str, campaign_type: str, context: di
             campaign_type=campaign_type,
             purpose="engagement",
             context=context,
-            delivery_status="sent",
+            delivery_status=delivery_status,
         )
         db.add(event)
         db.commit()
@@ -457,20 +325,38 @@ def _already_sent_campaign(db, target_user_id: str, campaign_type: str, context_
     return str(ctx.get(context_key)) == str(context_value)
 
 
+def _send_engagement(db, user, catalog_key: str, ctx: dict, subject: str, campaign_type: str,
+                     log_context: dict) -> bool:
+    """Send an engagement email with its unsubscribe link and headers, unless the user opted out.
+
+    A skipped send is recorded like a sent one (delivery_status='skipped_opt_out') so campaign
+    dedupe treats it as handled (specs/005-email-redesign).
+    """
+    from app.services import email_catalog
+
+    if getattr(user, "email_opt_out", False):
+        _log_campaign_email(db, user.id, campaign_type, log_context, delivery_status="skipped_opt_out")
+        logger.info("email_skipped_opt_out campaign=%s user=%s", campaign_type, user.id)
+        return False
+    try:
+        rendered = email_catalog.render(catalog_key, ctx, user_id=user.id)
+    except Exception as e:
+        logger.error(f"[email] Failed to render {catalog_key}: {e}")
+        return False
+    success = send_email(user.email, subject, rendered.html, rendered.text,
+                         category=email_catalog.ENGAGEMENT, headers=rendered.headers)
+    if success:
+        _log_campaign_email(db, user.id, campaign_type, log_context)
+    return success
+
+
 def send_draft_reminder_email(db, user, draft, mentor_name: str, days_since_start: int) -> bool:
     """Send a reminder email for an incomplete assessment draft."""
-    env = get_email_template_env()
-    if not env:
-        return False
-
     answers = draft.answers or {}
     answered_count = len(answers) if isinstance(answers, dict) else 0
     total_questions = len(draft.template.questions) if hasattr(draft, 'template') and draft.template else 0
     progress_percent = int((answered_count / total_questions) * 100) if total_questions else 0
     remaining_minutes = max(2, (total_questions - answered_count) // 3 + 1)
-    resume_link = f"{settings.backend_api_url.rstrip('/')}/r/draft/{draft.id}"
-    unsubscribe_link = f"{settings.backend_api_url}/settings/notifications"
-
     ctx = {
         "apprentice_name": user.name,
         "assessment_name": getattr(getattr(draft, 'template', None), 'name', 'your assessment'),
@@ -480,111 +366,35 @@ def send_draft_reminder_email(db, user, draft, mentor_name: str, days_since_star
         "total_questions": total_questions,
         "remaining_minutes": remaining_minutes,
         "mentor_name": mentor_name,
-        "resume_link": resume_link,
-        "unsubscribe_link": unsubscribe_link,
-        "logo_url": settings.logo_url,
+        "resume_link": f"{settings.backend_api_url.rstrip('/')}/r/draft/{draft.id}",
     }
-
-    try:
-        html_content = env.get_template("campaigns/draft_reminder.html").render(**ctx)
-    except Exception as e:
-        logger.error(f"[email] Failed to render draft_reminder template: {e}")
-        return False
-
-    plain_content = (
-        f"Hi {user.name},\n\n"
-        f"You started the {ctx['assessment_name']} assessment {days_since_start} days ago "
-        f"and you're {progress_percent}% through.\n\n"
-        f"Resume here: {resume_link}\n\n"
-        f"Your mentor {mentor_name} is waiting to provide guidance."
-    )
-
-    subject = f"You're {progress_percent}% Through Your Assessment!"
-    success = send_email(user.email, subject, html_content, plain_content)
-    if success:
-        _log_campaign_email(db, user.id, "draft_reminder", {
-            "draft_id": draft.id,
-            "days_since_start": days_since_start,
-            "progress_percent": progress_percent,
-        })
-    return success
+    return _send_engagement(db, user, "draft_reminder", ctx, f"You're {progress_percent}% Through Your Assessment!",
+                            "draft_reminder", {"draft_id": draft.id, "days_since_start": days_since_start,
+                                               "progress_percent": progress_percent})
 
 
 def send_welcome_email(db, user) -> bool:
     """Send role-appropriate welcome email on signup."""
-    env = get_email_template_env()
-    if not env:
-        return False
-
     from app.models.user import UserRole
     is_mentor = user.role == UserRole.mentor
-    template_name = "campaigns/welcome_mentor.html" if is_mentor else "campaigns/welcome_apprentice.html"
-
-    ctx = {
-        "name": user.name,
-        "app_url": settings.ios_app_store_url,
-        "mentor_name": None,
-        "logo_url": settings.logo_url,
-    }
-
-    try:
-        html_content = env.get_template(template_name).render(**ctx)
-    except Exception as e:
-        logger.error(f"[email] Failed to render welcome template: {e}")
-        return False
-
-    if is_mentor:
-        subject = "Welcome to T[root]H — Start Mentoring Today"
-        plain_content = (
-            f"Hi {user.name},\n\nWelcome to T[root]H! Invite your first apprentice to get started.\n\n"
-            f"Open the app: {settings.ios_app_store_url}"
-        )
-    else:
-        subject = "Welcome to T[root]H — Your Growth Journey Starts Now"
-        plain_content = (
-            f"Hi {user.name},\n\nWelcome to T[root]H! Take your first assessment to begin.\n\n"
-            f"Open the app: {settings.ios_app_store_url}"
-        )
-
-    success = send_email(user.email, subject, html_content, plain_content)
-    if success:
-        _log_campaign_email(db, user.id, "welcome", {"role": user.role.value})
-    return success
+    subject = ("Welcome to T[root]H — Start Mentoring Today" if is_mentor
+               else "Welcome to T[root]H — Your Growth Journey Starts Now")
+    return _send_engagement(db, user, "welcome_mentor" if is_mentor else "welcome_apprentice",
+                            {"name": user.name, "mentor_name": None}, subject, "welcome",
+                            {"role": user.role.value})
 
 
 def send_new_template_email(db, user, template) -> bool:
     """Notify an apprentice that a new assessment template is available."""
-    env = get_email_template_env()
-    if not env:
-        return False
-
     ctx = {
         "name": user.name,
         "template_name": template.name,
         "description": getattr(template, 'description', None),
         "category": getattr(getattr(template, 'category', None), 'name', None),
         "estimated_minutes": getattr(template, 'estimated_minutes', None),
-        "app_url": settings.ios_app_store_url,
-        "unsubscribe_link": f"{settings.backend_api_url}/settings/notifications",
-        "logo_url": settings.logo_url,
     }
-
-    try:
-        html_content = env.get_template("campaigns/new_template.html").render(**ctx)
-    except Exception as e:
-        logger.error(f"[email] Failed to render new_template template: {e}")
-        return False
-
-    plain_content = (
-        f"Hi {user.name},\n\nA new assessment is available: {template.name}.\n\n"
-        f"Start it here: {settings.ios_app_store_url}"
-    )
-    subject = f"New Assessment Available: {template.name}"
-
-    success = send_email(user.email, subject, html_content, plain_content)
-    if success:
-        _log_campaign_email(db, user.id, "new_template", {"template_id": template.id})
-    return success
+    return _send_engagement(db, user, "new_template", ctx, f"New Assessment Available: {template.name}",
+                            "new_template", {"template_id": template.id})
 
 
 _PLACE_NAMES = {1: "1st", 2: "2nd", 3: "3rd"}
@@ -678,30 +488,24 @@ def send_daily_trivia_reward_email(db, user, reward, replaced_percent=None) -> b
 
 
 def send_trivia_competition_admin_summary(competition) -> bool:
-    """Send the admin a plain summary of a finalized competition's winners and codes."""
+    """Send the admin a summary of a finalized competition's winners and codes."""
+    from app.services import email_catalog
+
     recipients = settings.trivia_competition_admin_emails
     if not recipients:
         return False
-
-    lines = [f"{competition.name} ({competition.slug}) has been finalized.", ""]
-    if not competition.winners:
-        lines.append("No eligible players scored during the competition window.")
-    for w in competition.winners:
-        lines.append(
-            f"{_PLACE_NAMES.get(w.place, w.place)} — {w.display_name} — {w.score:,} pts — "
-            f"code {w.discount_code} — emailed {w.emailed_at:%Y-%m-%d %H:%M} UTC"
-            if w.emailed_at else
-            f"{_PLACE_NAMES.get(w.place, w.place)} — {w.display_name} — {w.score:,} pts — code {w.discount_code}"
-        )
-    plain = "\n".join(lines)
-    html = "<pre style=\"font-family:monospace\">" + escape(plain) + "</pre>"
+    winners = [{
+        "place": _PLACE_NAMES.get(w.place, w.place), "name": w.display_name, "score": f"{w.score:,}",
+        "code": w.discount_code, "emailed_at": f"{w.emailed_at:%Y-%m-%d %H:%M}" if w.emailed_at else None,
+    } for w in competition.winners]
+    rendered = email_catalog.render("trivia_admin_summary", {"competition_name": competition.name,
+                                                              "competition_slug": competition.slug,
+                                                              "winners": winners})
     subject = f"[T[root]H] Trivia {competition.name} winners"
-
     ok = True
     for to in recipients:
-        ok = send_email(to, subject, html, plain) and ok
+        ok = send_email(to, subject, rendered.html, rendered.text, category="internal") and ok
     return ok
-
 
 def send_inactive_reengagement_email(db, user, days_inactive: int,
                                       assessment_count: int = 0,
@@ -709,13 +513,8 @@ def send_inactive_reengagement_email(db, user, days_inactive: int,
                                       new_templates_count: int = 0,
                                       apprentice_names: list = None) -> bool:
     """Send re-engagement email to inactive users (apprentices and mentors)."""
-    env = get_email_template_env()
-    if not env:
-        return False
-
     from app.models.user import UserRole
     is_mentor = user.role == UserRole.mentor
-
     ctx = {
         "name": user.name,
         "is_mentor": is_mentor,
@@ -724,43 +523,15 @@ def send_inactive_reengagement_email(db, user, days_inactive: int,
         "last_assessment_name": last_assessment_name,
         "new_templates_count": new_templates_count,
         "apprentice_names": apprentice_names or [],
-        "app_url": settings.ios_app_store_url,
-        "unsubscribe_link": f"{settings.backend_api_url}/settings/notifications",
-        "logo_url": settings.logo_url,
     }
-
-    try:
-        html_content = env.get_template("campaigns/inactive_reengagement.html").render(**ctx)
-    except Exception as e:
-        logger.error(f"[email] Failed to render inactive_reengagement template: {e}")
-        return False
-
     if is_mentor:
         subject = "Your Apprentices May Need Your Guidance"
-        plain_content = (
-            f"Hi {user.name},\n\nIt's been {days_inactive} days since your last visit. "
-            f"Your apprentices are waiting for your guidance.\n\nOpen the app: {settings.ios_app_store_url}"
-        )
     elif assessment_count == 0:
         subject = "Still Thinking About Your Spiritual Growth?"
-        plain_content = (
-            f"Hi {user.name},\n\nYou joined T[root]H {days_inactive} days ago. "
-            f"Take your first assessment when you're ready!\n\nOpen the app: {settings.ios_app_store_url}"
-        )
     else:
         subject = "Time for a Spiritual Check-In?"
-        plain_content = (
-            f"Hi {user.name},\n\nIt's been {days_inactive} days since your last visit. "
-            f"Continue your growth journey!\n\nOpen the app: {settings.ios_app_store_url}"
-        )
-
-    success = send_email(user.email, subject, html_content, plain_content)
-    if success:
-        _log_campaign_email(db, user.id, "inactive_reengagement", {
-            "days_inactive": days_inactive,
-            "is_mentor": is_mentor,
-        })
-    return success
+    return _send_engagement(db, user, "inactive_reengagement", ctx, subject, "inactive_reengagement",
+                            {"days_inactive": days_inactive, "is_mentor": is_mentor})
 
 
 def send_assessment_email(
@@ -799,18 +570,9 @@ def send_assessment_email(
             scores["category_scores"] = cat_scores
     recommendations = {"summary_recommendation": feedback_summary or "Continue growing in spiritual disciplines."}
     html_content, plain_content = render_assessment_completion_email(
-        mentor_name, apprentice_name, scores, recommendations
+        mentor_name, apprentice_name, scores, recommendations,
+        assessment_title=assessment_title, details=details,
     )
-    extra = []
-    if assessment_title:
-        extra.append(f"<p><strong>Assessment:</strong> {assessment_title}</p>")
-    if details:
-        extra.append("<ul>" + "".join([
-            f"<li><strong>{k}</strong>: {d.get('score','-')} - {d.get('feedback','')}" for k, d in details.items()
-            if isinstance(d, dict)
-        ]) + "</ul>")
-    if extra:
-        html_content = html_content.replace("</div>", "".join(extra) + "</div>") if "</div>" in html_content else html_content + "".join(extra)
     subject = assessment_title or f"Assessment Complete: {apprentice_name}"
 
     # In test environment, call SendGrid client directly so patched client.send() is exercised
@@ -863,30 +625,14 @@ def send_invitation_email(to_email: str, apprentice_name: str, token: str,
 
     return send_email(to_email, subject, html_content, plain_content)
 
-def send_notification_email(to_email: str, subject: str, message: str, 
+def send_notification_email(to_email: str, subject: str, message: str,
                            action_url: str = None) -> bool:
-    """Send a general notification email."""
-    html_content = f"""
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #007bff;">T[root]H Discipleship</h2>
-        <p>{message}</p>
-        {f'<p><a href="{action_url}" style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;">Take Action</a></p>' if action_url else ''}
-        <p style="color: #666; font-size: 14px;">Best regards,<br>T[root]H Discipleship Team</p>
-    </div>
-    """
-    
-    plain_content = f"""
-T[root]H Discipleship
+    """Send a general notification email (message text is escaped; blank lines become paragraphs)."""
+    from app.services import email_catalog
 
-{message}
-
-{f'Take action: {action_url}' if action_url else ''}
-
-Best regards,
-T[root]H Discipleship Team
-    """
-    
-    return send_email(to_email, subject, html_content, plain_content)
+    rendered = email_catalog.render("notification", {"subject": subject, "message": message or "",
+                                                     "action_url": action_url, "action_label": "Take action"})
+    return send_email(to_email, subject, rendered.html, rendered.text)
 
 
 def send_gift_seat_email(
@@ -896,123 +642,15 @@ def send_gift_seat_email(
     redemption_code: str,
     auto_activated: bool = False,
 ) -> bool:
-    """Send email notification when mentor gifts premium access to apprentice.
-    
-    Args:
-        to_email: Apprentice's email address
-        apprentice_name: Apprentice's display name
-        mentor_name: Mentor's display name
-        redemption_code: The redemption code (as fallback if not auto-activated)
-        auto_activated: Whether premium was automatically activated
-    
-    Returns: True if sent successfully
-    """
-    if auto_activated:
-        subject = f"🎁 {mentor_name} gifted you Premium access!"
-        status_message = """
-            <p style="background: linear-gradient(135deg, #d4af37 0%, #f5e6a3 50%, #d4af37 100%); 
-                      color: #1a1a1a; padding: 16px; border-radius: 8px; text-align: center; 
-                      font-weight: bold; font-size: 18px;">
-                ✨ Your Premium access is now ACTIVE! ✨
-            </p>
-            <p style="color: #ccc;">
-                Open the T[root]H Discipleship app to enjoy your new premium features.
-            </p>
-        """
-    else:
-        subject = f"🎁 {mentor_name} wants to gift you Premium access!"
-        status_message = f"""
-            <p style="color: #ccc;">
-                To activate your premium access, open the T[root]H Discipleship app and enter this code:
-            </p>
-            <div style="background: #2a2a2a; border: 2px solid #d4af37; border-radius: 8px; 
-                        padding: 20px; text-align: center; margin: 20px 0;">
-                <span style="font-family: monospace; font-size: 28px; color: #d4af37; 
-                             letter-spacing: 4px; font-weight: bold;">
-                    {redemption_code}
-                </span>
-            </div>
-        """
-    
-    html_content = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body style="margin: 0; padding: 0; background-color: #0a0a0a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-        <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-            <!-- Header -->
-            <div style="text-align: center; margin-bottom: 32px;">
-                <h1 style="color: #d4af37; font-size: 24px; margin: 0;">T[root]H Discipleship</h1>
-            </div>
-            
-            <!-- Main Content -->
-            <div style="background: #1a1a1a; border-radius: 12px; padding: 32px; border: 1px solid #333;">
-                <div style="text-align: center; margin-bottom: 24px;">
-                    <span style="font-size: 48px;">🎁</span>
-                </div>
-                
-                <h2 style="color: #fff; text-align: center; margin: 0 0 16px 0; font-size: 22px;">
-                    You've received a gift!
-                </h2>
-                
-                <p style="color: #ccc; text-align: center; font-size: 16px; line-height: 1.6;">
-                    Hi {apprentice_name or 'there'},<br><br>
-                    <strong style="color: #d4af37;">{mentor_name}</strong> has gifted you 
-                    <strong style="color: #d4af37;">Premium access</strong> to T[root]H Discipleship!
-                </p>
-                
-                {status_message}
-                
-                <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #333;">
-                    <h3 style="color: #d4af37; margin: 0 0 12px 0; font-size: 16px;">Premium Benefits:</h3>
-                    <ul style="color: #ccc; margin: 0; padding-left: 20px; line-height: 1.8;">
-                        <li>Full AI-powered assessment reports</li>
-                        <li>Unlimited assessment history</li>
-                        <li>Spiritual gifts detailed analysis</li>
-                        <li>Priority support</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Footer -->
-            <div style="text-align: center; margin-top: 32px; color: #666; font-size: 12px;">
-                <p>This premium access was gifted by your mentor and will remain active as long as they maintain the gift.</p>
-                <p style="margin-top: 16px;">
-                    Questions? Contact us at admin@onlyblv.com
-                </p>
-            </div>
-        </div>
-    </body>
-    </html>
-    """
-    
-    plain_content = f"""
-T[root]H Discipleship - You've received a gift!
+    """Email an apprentice that their mentor gifted them Premium (code shown if not auto-activated)."""
+    from app.services import email_catalog
 
-Hi {apprentice_name or 'there'},
-
-{mentor_name} has gifted you Premium access to T[root]H Discipleship!
-
-{'Your Premium access is now ACTIVE! Open the app to enjoy your new features.' if auto_activated else f'To activate, open the app and enter this code: {redemption_code}'}
-
-Premium Benefits:
-- Full AI-powered assessment reports
-- Unlimited assessment history
-- Spiritual gifts detailed analysis
-- Priority support
-
-This premium access was gifted by your mentor and will remain active as long as they maintain the gift.
-
-Questions? Contact us at admin@onlyblv.com
-
-Best regards,
-T[root]H Discipleship Team
-    """
-    
-    return send_email(to_email, subject, html_content, plain_content)
+    subject = (f"🎁 {mentor_name} gifted you Premium access!" if auto_activated
+               else f"🎁 {mentor_name} wants to gift you Premium access!")
+    rendered = email_catalog.render("gift_seat", {"apprentice_name": apprentice_name, "mentor_name": mentor_name,
+                                                  "redemption_code": redemption_code,
+                                                  "auto_activated": auto_activated})
+    return send_email(to_email, subject, rendered.html, rendered.text)
 
 
 def send_gift_seat_revoked_email(
@@ -1020,82 +658,12 @@ def send_gift_seat_revoked_email(
     apprentice_name: str,
     mentor_name: str,
 ) -> bool:
-    """Send email notification when mentor revokes gift seat from apprentice.
-    
-    Args:
-        to_email: Apprentice's email address
-        apprentice_name: Apprentice's display name
-        mentor_name: Mentor's display name
-    
-    Returns: True if sent successfully
-    """
-    subject = "Your T[root]H Premium access has ended"
-    
-    html_content = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body style="margin: 0; padding: 0; background-color: #0a0a0a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-        <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-            <!-- Header -->
-            <div style="text-align: center; margin-bottom: 32px;">
-                <h1 style="color: #d4af37; font-size: 24px; margin: 0;">T[root]H Discipleship</h1>
-            </div>
-            
-            <!-- Main Content -->
-            <div style="background: #1a1a1a; border-radius: 12px; padding: 32px; border: 1px solid #333;">
-                <h2 style="color: #fff; text-align: center; margin: 0 0 16px 0; font-size: 20px;">
-                    Premium Access Update
-                </h2>
-                
-                <p style="color: #ccc; text-align: center; font-size: 16px; line-height: 1.6;">
-                    Hi {apprentice_name or 'there'},<br><br>
-                    Your gifted Premium access from <strong style="color: #d4af37;">{mentor_name}</strong> 
-                    has ended. Your account has been switched back to the free tier.
-                </p>
-                
-                <p style="color: #ccc; text-align: center; margin-top: 24px;">
-                    You can still use T[root]H Discipleship with free features, or upgrade to 
-                    Premium yourself to continue enjoying full access.
-                </p>
-                
-                <div style="text-align: center; margin-top: 24px;">
-                    <p style="color: #666; font-size: 14px;">
-                        Open the app to explore upgrade options.
-                    </p>
-                </div>
-            </div>
-            
-            <!-- Footer -->
-            <div style="text-align: center; margin-top: 32px; color: #666; font-size: 12px;">
-                <p>Questions? Contact us at admin@onlyblv.com</p>
-            </div>
-        </div>
-    </body>
-    </html>
-    """
-    
-    plain_content = f"""
-T[root]H Discipleship - Premium Access Update
+    """Email an apprentice that their gifted Premium access has ended."""
+    from app.services import email_catalog
 
-Hi {apprentice_name or 'there'},
-
-Your gifted Premium access from {mentor_name} has ended. Your account has been switched back to the free tier.
-
-You can still use T[root]H Discipleship with free features, or upgrade to Premium yourself to continue enjoying full access.
-
-Open the app to explore upgrade options.
-
-Questions? Contact us at admin@onlyblv.com
-
-Best regards,
-T[root]H Discipleship Team
-    """
-    
-    return send_email(to_email, subject, html_content, plain_content)
+    rendered = email_catalog.render("gift_seat_revoked", {"apprentice_name": apprentice_name,
+                                                          "mentor_name": mentor_name})
+    return send_email(to_email, "Your T[root]H Premium access has ended", rendered.html, rendered.text)
 
 
 def render_spiritual_gifts_report_email(apprentice_name: str | None, version: int, scores: dict, definitions: dict, app_url: str) -> tuple[str, str]:
@@ -1104,7 +672,6 @@ def render_spiritual_gifts_report_email(apprentice_name: str | None, version: in
     Falls back to legacy generate_html output if Jinja2 or template missing.
     definitions: mapping slug -> {display_name, full_definition, short_summary}
     """
-    env = get_email_template_env()
     top_trunc = scores.get('top_gifts_truncated', []) or []
     all_scores = scores.get('all_scores', []) or []
 
@@ -1134,106 +701,25 @@ def render_spiritual_gifts_report_email(apprentice_name: str | None, version: in
             'full_definition': (d.get('full_definition') or '').strip(),
         })
 
-    if env and JINJA2_AVAILABLE:
-        try:
-            tpl = env.get_template('spiritual_gifts_report.html')
-            html = tpl.render(
-                apprentice_name=apprentice_name,
-                version=version,
-                top_gifts=enriched_top,
-                all_scores=all_scores,
-                definitions=defs_list,
-                app_url=app_url,
-            )
-            plain_lines = [
-                f"Spiritual Gifts Report (v{version})",
-                f"Apprentice: {apprentice_name or 'Apprentice'}",
-                "",
-                "Top Gifts:",
-            ]
-            for g in enriched_top:
-                line = f"- {g['gift']}: {g['score']}"
-                if g.get('summary'):
-                    line += f" — {g['summary'][:160]}"  # truncate long summary
-                plain_lines.append(line)
-            plain_lines.append("")
-            plain_lines.append("All Gifts:")
-            for g in all_scores:
-                plain_lines.append(f"- {g.get('gift')}: {g.get('score')}")
-            plain_lines.append("")
-            plain_lines.append(f"View full report: {app_url}")
-            plain = "\n".join(plain_lines)
-            return html, plain
-        except Exception as e:  # pragma: no cover
-            logger.error(f"Failed to render spiritual gifts email template: {e}")
+    from app.services import email_catalog
 
-    # Fallback: simple HTML if template not available
-    try:
-        from app.services.spiritual_gifts_report import generate_html as _legacy_html
-        html = _legacy_html(apprentice_name, version, scores, definitions)
-    except Exception:
-        html = f"<h1>Spiritual Gifts Report (v{version})</h1>"
-    plain = "Spiritual Gifts Report\nTop Gifts:\n" + "\n".join([
-        f"- {g.get('gift')}: {g.get('score')}" for g in top_trunc
-    ])
-    return html, plain
+    rendered = email_catalog.render("spiritual_gifts_report", {
+        "apprentice_name": apprentice_name, "version": version, "top_gifts": enriched_top,
+        "all_scores": all_scores, "definitions": defs_list, "app_url": settings.app_landing_url,
+    })
+    return rendered.html, rendered.text
 
 def render_master_trooth_email(apprentice_name: str | None, scores: dict, app_url: str) -> tuple[str, str]:
-    """Render Master Trooth report (HTML + plain text).
+    """Master T[root]H report email. Leads with the canonical Health Score when the scores carry
+    the mentor blob (they do for v2 assessments). Returns (html, plain)."""
+    from app.services import email_catalog
 
-    scores should include: version (e.g., 'master_v1'), overall_score (int),
-    category_scores (dict), top3 (list of {category, score}), summary_recommendation (str).
-    """
-    env = get_email_template_env()
-    version = scores.get('version', 'master_v1')
-    overall = scores.get('overall_score', 7)
-    cat_scores = scores.get('category_scores') or {}
-    top3 = scores.get('top3') or []
-    summary = scores.get('summary_recommendation')
-
-    if env and JINJA2_AVAILABLE:
-        try:
-            tpl = env.get_template('master_trooth_report.html')
-            html = tpl.render(
-                apprentice_name=apprentice_name,
-                version=version,
-                overall_score=overall,
-                category_scores=cat_scores,
-                top3=top3,
-                summary_recommendation=summary,
-                app_url=app_url,
-            )
-            # Plain text fallback
-            lines = [
-                "Master Trooth Assessment Report",
-                f"Apprentice: {apprentice_name or 'Apprentice'}",
-                f"Version: {version}",
-                f"Overall: {overall}",
-                "",
-            ]
-            if top3:
-                lines.append("Top Categories:")
-                for c in top3:
-                    lines.append(f"- {c.get('category')}: {c.get('score')}")
-            if cat_scores:
-                lines.append("")
-                lines.append("All Categories:")
-                for name, sc in cat_scores.items():
-                    lines.append(f"- {name}: {sc}")
-            if app_url:
-                lines.append("")
-                lines.append(f"View full report: {app_url}")
-            return html, "\n".join(lines)
-        except Exception as e:  # pragma: no cover
-            logger.error(f"Failed to render master trooth email: {e}")
-
-    # Very simple HTML fallback
-    html = f"""
-    <h1>Master Trooth Assessment Report</h1>
-    <p>Apprentice: {apprentice_name or 'Apprentice'}</p>
-    <p>Version: {version}</p>
-    <p>Overall: {overall}</p>
-    <p><a href='{app_url}'>Open in app</a></p>
-    """
-    plain = f"Master Trooth Assessment Report\nOverall: {overall}\nView: {app_url}"
-    return html, plain
+    scores = scores or {}
+    ctx = _report_context({"mentor_blob_v2": scores.get("mentor_blob_v2")})
+    if not scores.get("mentor_blob_v2"):
+        ctx["summary"] = None
+    ctx.update(apprentice_name=apprentice_name, version=scores.get("version", "master_v1"),
+               overall_score=scores.get("overall_score"), top3=scores.get("top3") or [],
+               summary_recommendation=scores.get("summary_recommendation"))
+    rendered = email_catalog.render("master_trooth_report", ctx)
+    return rendered.html, rendered.text

@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% import "_macros.html" as m %}
 {% block title %}Reschedule Response{% endblock %}
 {% block content %}
   <h2>Reschedule Response</h2>
@@ -6,6 +7,6 @@
   {% if decision %}<p><strong>Decision:</strong> {{ decision|capitalize }}</p>{% endif %}
   {% if selected_time %}<p><strong>Selected Time:</strong> {{ selected_time }}</p>{% endif %}
   {% if note %}<p><strong>Note:</strong> {{ note }}</p>{% endif %}
-  {% if action_url %}<div class="btn-row"><a class="brand-btn" href="{{ action_url }}">Open Agreement</a></div>{% endif %}
+  {% if action_url %}{{ m.button(action_url, "Open Agreement") }}{% endif %}
   <p class="muted">Check the platform for updated meeting details.</p>
 {% endblock %}

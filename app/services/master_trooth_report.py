@@ -9,7 +9,6 @@ from datetime import datetime
 import logging
 import os
 from typing import Any
-import re
 from app.core.settings import settings
 from app.services.report_summary import public_full_report, summarize_mentor_blob
 
@@ -306,123 +305,13 @@ def build_report_context(assessment: Dict[str, Any] | None, scores: Dict, mentor
     return ctx
 
 
-def _load_email_template_text() -> str | None:
-    """Load mentor_report_email_template.html from common locations.
-
-    This template uses a simple placeholder syntax with {var} and {#each list}...{/each}.
-    """
-    backend_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
-    candidates = [
-        os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '../templates/email')), 'mentor_report_email_template.html'),
-        os.path.join(backend_root, 'mentor_report_email_template.html'),
-    ]
-    for p in candidates:
-        try:
-            if os.path.exists(p):
-                with open(p, 'r', encoding='utf-8') as f:
-                    return f.read()
-        except Exception:
-            continue
-    return None
-
-
-def _render_template_simple(tpl: str, context: Dict[str, Any]) -> str:
-    """Very small, non-Jinja renderer for the provided email template.
-
-    Supports:
-    - {var} variable replacement from context
-    - {#each list} ... {/each} loops, where inside the block {this} refers to the item
-      and {key} pulls from dict item keys. Nested {#each} is supported for one level.
-    """
-    def replace_vars(s: str, scope: dict) -> str:
-        def _sub(m: re.Match):
-            key = m.group(1)
-            return str(scope.get(key, context.get(key, '')))
-        return re.sub(r"\{([a-zA-Z0-9_\.]+)\}", _sub, s)
-
-    # Handle {#each path} blocks
-    def render_block(text: str, scope: dict) -> str:
-        pattern = re.compile(r"\{#each\s+([a-zA-Z0-9_\.]+)\}(.*?)\{/each\}", re.DOTALL)
-        while True:
-            m = pattern.search(text)
-            if not m:
-                break
-            path, block = m.group(1), m.group(2)
-            # Resolve list from scope or root context
-            parts = path.split('.')
-            arr = scope
-            for p in parts:
-                arr = arr.get(p) if isinstance(arr, dict) else None
-                if arr is None:
-                    break
-            if arr is None:
-                arr = context
-                for p in parts:
-                    arr = arr.get(p) if isinstance(arr, dict) else None
-                    if arr is None:
-                        break
-            rendered = ''
-            if isinstance(arr, list):
-                for item in arr:
-                    if isinstance(item, dict):
-                        local = {**scope, **item, 'this': item}
-                    else:
-                        local = {**scope, 'this': item}
-                    seg = replace_vars(block, local)
-                    # Recurse to support nested each
-                    seg = render_block(seg, local)
-                    rendered += seg
-            text = text[:m.start()] + rendered + text[m.end():]
-        return replace_vars(text, scope)
-
-    return render_block(tpl, {})
-
-
 def render_email_v2(context: Dict[str, Any]) -> str:
-    """Render the mentor report email using Jinja2 template."""
-    try:
-        from jinja2 import Environment, FileSystemLoader
-    except ImportError:
-        logger.error("Jinja2 not available for email rendering")
-        return f"<div><h1>T[root]H Mentor Report</h1><p>Apprentice: {context.get('apprentice_name')}</p></div>"
-    
-    # Load template from email templates directory
-    email_dir = os.path.join(os.path.dirname(__file__), '../templates/email')
-    backend_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
-    
-    env = Environment(loader=FileSystemLoader([os.path.abspath(email_dir), backend_root]))
-    
-    # Add custom filters
-    from datetime import datetime
-    def strftime_filter(value, format_string='%Y'):
-        """Custom strftime filter for Jinja2."""
-        if value == 'now':
-            return datetime.now().strftime(format_string)
-        elif isinstance(value, datetime):
-            return value.strftime(format_string)
-        elif isinstance(value, str):
-            try:
-                dt = datetime.fromisoformat(value.replace('Z', '+00:00'))
-                return dt.strftime(format_string)
-            except Exception:
-                return value
-        return str(value)
-    
-    env.filters['strftime'] = strftime_filter
-    
-    try:
-        template = env.get_template('mentor_report_email_template.html')
-        return template.render(**context)
-    except Exception as e:
-        logger.error(f"Failed to render Jinja2 email template: {e}")
-        # Fallback minimal HTML
-        return f"""<div style="font-family: sans-serif; padding: 20px;">
-            <h1>T[root]H Mentor Report</h1>
-            <p><strong>Apprentice:</strong> {context.get('apprentice_name', 'Unknown')}</p>
-            <p><strong>Biblical Knowledge:</strong> {context.get('overall_mc_percent', 0)}% ({context.get('knowledge_band', 'N/A')})</p>
-            <p><strong>Overall Score:</strong> {context.get('overall_score', 'N/A')}</p>
-        </div>"""
+    """Mentor report email HTML (also served by the HTML preview route). Uses the shared report
+    email so the preview, the email and the app show the same numbers (specs/005-email-redesign)."""
+    from app.services.email import render_mentor_report_v2_email
 
+    html, _ = render_mentor_report_v2_email(context)
+    return html
 
 def render_markdown_print_v2(context: Dict[str, Any]) -> str:
     try:

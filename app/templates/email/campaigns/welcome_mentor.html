@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% import "_macros.html" as m %}
 {% block title %}Welcome to T[root]H — Mentor{% endblock %}
 {% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">Start making a difference — invite your first apprentice today.</span>{% endblock %}
 {% block content %}
@@ -18,9 +19,7 @@
 
 <p>The best place to start is by inviting your first apprentice so they can take an assessment and you can see the full mentorship flow in action.</p>
 
-<div class="btn-row">
-  <a href="{{ app_url }}" class="brand-btn">Invite Your First Apprentice →</a>
-</div>
+{{ m.button(app_url, "Invite Your First Apprentice →") }}
 
 <p class="muted" style="text-align:center;">Questions? Reply to this email and we'll be happy to help you get started.</p>
 {% endblock %}

@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}T[root]H {{ report_type }} metrics — {{ period_label }}{% endblock %}
+{% block content %}
+<h2 style="color:#d4af37;font-size:22px;margin:0 0 4px;">{{ report_type }} metrics</h2>
+<p style="margin:0 0 20px;font-size:14px;color:#a3a3a3;">{{ period_label }} · generated {{ generated_at }}</p>
+{% macro block(title, rows) -%}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#222222" style="background-color:#222222;border-radius:10px;margin:0 0 14px;">
+  <tr><td bgcolor="#222222" style="background-color:#222222;padding:14px 18px;">
+    <p style="margin:0 0 8px;font-size:14px;font-weight:700;color:#e8c547;">{{ title }}</p>
+    {% for label, value in rows %}{{ m.kv_row(label, value) }}{% endfor %}
+  </td></tr>
+</table>
+{%- endmacro %}
+{{ block("Users", [("Total", users.total_users), ("Mentors", users.mentors), ("Apprentices", users.apprentices),
+                   ("New this period", users.new_users_in_period), ("New mentors", users.new_mentors_in_period),
+                   ("New apprentices", users.new_apprentices_in_period)]) }}
+{{ block("Assessments", [("Completed (all time)", assessments.total_completed), ("Completed this period", assessments.completed_in_period),
+                         ("Started this period", assessments.started_in_period), ("Active drafts", assessments.active_drafts),
+                         ("Completion rate", (assessments.completion_rate ~ "%") if assessments.completion_rate is not none else none)]) }}
+{% if assessments.errors and assessments.errors > 0 %}<p style="margin:0 0 14px;font-size:14px;color:#f87171;">⚠ {{ assessments.errors }} scoring errors this period</p>{% endif %}
+{{ block("Mentorship", [("Active relationships", mentorship.active_relationships), ("Mentors with apprentices", mentorship.mentors_with_apprentices),
+                        ("Avg apprentices per mentor", mentorship.avg_apprentices_per_mentor),
+                        ("Mentor utilization", (mentorship.mentor_utilization_percent ~ "%") if mentorship.mentor_utilization_percent is not none else none)]) }}
+{{ block("Invitations", [("Total", invitations.total_invitations), ("Accepted", invitations.accepted), ("Pending", invitations.pending),
+                         ("Expired", invitations.expired), ("Acceptance rate", (invitations.acceptance_rate ~ "%") if invitations.acceptance_rate is not none else none)]) }}
+{{ block("Agreements", [("Fully signed", agreements.fully_signed), ("Awaiting apprentice", agreements.awaiting_apprentice),
+                        ("Awaiting parent", agreements.awaiting_parent), ("Completion rate", (agreements.completion_rate ~ "%") if agreements.completion_rate is not none else none)]) }}
+{{ block("Mentor activity", [("Active mentors", mentor_activity.active_mentors), ("Notes this period", mentor_activity.notes_in_period),
+                             ("Notes (all time)", mentor_activity.total_notes)]) }}
+{% endblock %}

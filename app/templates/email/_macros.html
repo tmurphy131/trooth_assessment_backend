@@ -1,0 +1,55 @@
+{# Shared email building blocks (specs/005-email-redesign). Import with:
+   {% import "_macros.html" as m %} #}
+
+{# Gold button that works in Outlook for Windows (VML) and everywhere else (padded link). #}
+{% macro button(url, label) -%}
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:26px auto;">
+  <tr>
+    <td align="center" bgcolor="#d4af37" style="background-color:#d4af37;border-radius:6px;">
+      <!--[if mso]>
+      <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="{{ url }}" style="height:48px;v-text-anchor:middle;width:240px;" arcsize="12%" stroke="f" fillcolor="#d4af37">
+        <center style="color:#000000;font-family:Arial,sans-serif;font-size:15px;font-weight:bold;">{{ label }}</center>
+      </v:roundrect>
+      <![endif]-->
+      <!--[if !mso]><!-- -->
+      <a href="{{ url }}" style="display:inline-block;background-color:#d4af37;color:#000000;font-size:15px;font-weight:700;line-height:20px;text-decoration:none;padding:14px 28px;border-radius:6px;">{{ label }}</a>
+      <!--<![endif]-->
+    </td>
+  </tr>
+</table>
+{%- endmacro %}
+
+{% macro section(title) -%}
+<h3 style="color:#e8c547;font-size:17px;font-weight:700;margin:26px 0 10px;">{{ title }}</h3>
+{{ caller() }}
+{%- endmacro %}
+
+{% macro bullet_list(items, max=3) -%}
+{% if items %}
+<ul style="color:#e6e6e6;font-size:15px;line-height:1.6;margin:0 0 14px;padding-left:22px;">
+  {% for item in items[:max] %}<li style="margin:6px 0;">{{ item }}</li>{% endfor %}
+</ul>
+{% endif %}
+{%- endmacro %}
+
+{# Headline numbers: the same values the app shows (report_summary.summarize_mentor_blob). #}
+{% macro report_headline(summary) -%}
+{% if summary and summary.health_score is not none %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#222222" style="background-color:#222222;border:1px solid #d4af37;border-radius:10px;margin:0 0 22px;">
+  <tr>
+    <td bgcolor="#222222" style="background-color:#222222;padding:18px 22px;">
+      <p style="margin:0 0 4px;font-size:13px;color:#a3a3a3;">Health Score</p>
+      <p style="margin:0;font-size:40px;line-height:1.1;font-weight:800;color:#d4af37;">{{ summary.health_score }}</p>
+      {% if summary.health_band %}<p style="margin:8px 0 0;"><span style="display:inline-block;background-color:#d4af37;color:#000000;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;">{{ summary.health_band }}</span></p>{% endif %}
+      {% if summary.mc_percent %}<p style="margin:12px 0 0;font-size:14px;color:#e6e6e6;">Biblical Knowledge: <strong style="color:#ffffff;">{{ '%.1f' % summary.mc_percent }}%</strong></p>{% endif %}
+    </td>
+  </tr>
+</table>
+{% endif %}
+{%- endmacro %}
+
+{% macro kv_row(label, value) -%}
+{% if value is not none and value != '' %}
+<p style="margin:0 0 8px;font-size:14px;color:#e6e6e6;"><span style="color:#a3a3a3;">{{ label }}:</span> <strong style="color:#ffffff;">{{ value }}</strong></p>
+{% endif %}
+{%- endmacro %}

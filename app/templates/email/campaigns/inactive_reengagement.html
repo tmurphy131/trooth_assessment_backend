@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% import "_macros.html" as m %}
 {% block title %}We Miss You — T[root]H{% endblock %}
 {% block preheader %}<span style="display:none;max-height:0;overflow:hidden;">{% if is_mentor %}Your apprentices may need your guidance.{% else %}Your spiritual growth journey is waiting for you.{% endif %}</span>{% endblock %}
 {% block content %}
@@ -14,9 +15,7 @@
       <li>Assign a new assessment to prompt deeper reflection</li>
     </ul>
   </div>
-  <div class="btn-row">
-    <a href="{{ app_url }}" class="brand-btn">View Your Apprentices →</a>
-  </div>
+  {{ m.button(app_url, "View Your Apprentices →") }}
 {% elif assessment_count == 0 %}
   <h2>Still Thinking About Your Growth?</h2>
   <p>Hi {{ name }},</p>
@@ -24,9 +23,7 @@
   <div class="highlight-box">
     <p style="margin:0;">Your first assessment takes about <strong>10–15 minutes</strong> and gives your mentor a clear starting point to guide your spiritual growth.</p>
   </div>
-  <div class="btn-row">
-    <a href="{{ app_url }}" class="brand-btn">Take Your First Assessment →</a>
-  </div>
+  {{ m.button(app_url, "Take Your First Assessment →") }}
 {% else %}
   <h2>Time for a Spiritual Check-In?</h2>
   <p>Hi {{ name }},</p>
@@ -39,10 +36,7 @@
     {% endif %}
   </div>
   {% endif %}
-  <div class="btn-row">
-    <a href="{{ app_url }}" class="brand-btn">Continue Your Growth Journey →</a>
-  </div>
+  {{ m.button(app_url, "Continue Your Growth Journey →") }}
 {% endif %}
 
-<p class="muted" style="text-align:center;margin-top:16px;">To stop receiving these emails, <a href="{{ unsubscribe_link }}">unsubscribe here</a>.</p>
 {% endblock %}
