@@ -216,24 +216,28 @@ description: "Task list for Reliable, Fast, Consistent AI Assessment Reports"
 
 **Goal**: an updated app shows preparing and delayed states (implemented in `trooth_assessment`).
 
-- [ ] T035 [US5] Create the frontend spec in `/Users/tmoney/Developer/trooth_assessment/specs/` via `/speckit-specify` in that repo, linking `specs/004-reliable-ai-reports/contracts/scoring-api.md`:
+- [X] T035 [US5] Create the frontend spec in `/Users/tmoney/Developer/trooth_assessment/specs/` via `/speckit-specify` in that repo, linking `specs/004-reliable-ai-reports/contracts/scoring-api.md`: *(Done: frontend spec `trooth_assessment/specs/003-report-status-states/`, shipped in app PR #24.)*
   - apprentice and mentor report screens show "Preparing your report…" while `status=processing` (auto-poll);
   - they show "Taking longer than usual — we're on it" when `failed`;
   - when the Premium report returns `status: generating`, poll and show a loading state. Today released apps mark the user premium and show an empty Premium section without polling.
-- [ ] T036 [US5] Confirm backward compatibility with the current store app on dev (quickstart §8) and record the result in the PR
+- [X] T036 [US5] Confirm backward compatibility with the current store app on dev (quickstart §8) and record the result in the PR *(Done: released-app behavior recorded on backend PR #33. No crashes; `failed` shows the placeholder, a generating Premium report shows an empty section, and the 20 s client timeout vs the 90 s server wait can hide Premium until the screen is reopened. Fixed in app 2.3.0.)*
 
 ---
 
 ## Phase 8: Polish & Cross-Cutting
 
-- [ ] T037 Keep `score_assessment_by_category` in `app/services/ai_scoring.py`: it's still used by `ai_scoring_master.score_master_assessment` (the unused legacy `POST /assessments/master-trooth/submit`) and by `tests/test_master_v2_reporting.py`. Remove only helpers that `grep` shows nothing references, and note the legacy route in the PR.
-- [ ] T038 [P] Update `scripts/monitoring/setup.py` docs/README if alert text changes (the `scoring_failed` line already matches "Scoring fallback" via the "Failed to build mentor_blob (final)" log); no new policy expected
-- [ ] T039 Run `.venv/bin/python -m pytest -q`; all pass
-- [ ] T040 `/deploy-dev` (migrate job runs the new migration), `scripts/scoring/setup_queue.sh dev`, then quickstart §2–8, recording in the PR:
+- [X] T037 Keep `score_assessment_by_category` in `app/services/ai_scoring.py`: it's still used by `ai_scoring_master.score_master_assessment` (the unused legacy `POST /assessments/master-trooth/submit`) and by `tests/test_master_v2_reporting.py`. Remove only helpers that `grep` shows nothing references, and note the legacy route in the PR. *(Done: removed the unused `_retry`, `_knowledge_band` and `score_assessment_with_questions`. `score_assessment_by_category` kept for the legacy master route and its tests.)*
+- [X] T038 [P] Update `scripts/monitoring/setup.py` docs/README if alert text changes (the `scoring_failed` line already matches "Scoring fallback" via the "Failed to build mentor_blob (final)" log); no new policy expected *(Done: the alert filter still matches `Failed to build mentor_blob (final)`; the README description was updated.)*
+- [X] T039 Run `.venv/bin/python -m pytest -q`; all pass *(Done: 353 passed, 2 skipped.)*
+- [X] T040 `/deploy-dev` (migrate job runs the new migration), `scripts/scoring/setup_queue.sh dev`, then quickstart §2–8, recording in the PR: *(Done, results:*
+  - *dev timing: 10/10 under 45 s, median 24 s (PR #30);*
+  - *cost per free report: old scorer about $0.092 (about 7.5 category calls at $0.0093 plus $0.0221 for the report call) vs v3 **$0.044** (16 calls, $0.040–0.046), about 52% lower, so SC-007 is met;*
+  - *Premium: $0.088 per call (14) vs $0.074 per call before, but the old calls often needed a second attempt because of malformed JSON, while the schema version succeeds first time;*
+  - *SQL on dev: SC-002 = 0, SC-003 = 0 (32 v3 done, 0 failed).)*
   - timings;
   - **AI tokens and cost per assessment** for the 10 runs (from the `[ai_scoring] … tokens= cost=` log lines) against pre-change runs (SC-007);
   - the SC-002 / SC-003 SQL checks from quickstart §10.
-- [ ] T041 After merge: `/deploy-prod`, `scripts/scoring/setup_queue.sh prod`, quickstart §9 including a prod backfill for the 2026-10-10 window if empty reports exist
+- [X] T041 After merge: `/deploy-prod`, `scripts/scoring/setup_queue.sh prod`, quickstart §9 including a prod backfill for the 2026-10-10 window if empty reports exist *(Done: `setup_queue.sh prod` and `/deploy-prod` (revision trooth-backend-00221). Prod SQL: SC-002 = 0, SC-003 = 0, 2 real submissions since deploy both scored by v3, 0 failed. The 2026-10-10 backfill was **declined by the owner** (no re-queue).)*
 
 ---
 
