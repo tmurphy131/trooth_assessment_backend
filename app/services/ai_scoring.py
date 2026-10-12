@@ -429,6 +429,204 @@ def _load_full_report_prompt_text() -> str:
     return ""
 
 
+
+# ------------------------------
+# Premium full report schema (premium_v1) - mirrors ai_prompt_full_report_premium.txt. Sent to Gemini
+# as a response schema so the long report comes back as valid JSON instead of free-form text.
+# ------------------------------
+
+class _PremiumExecutiveSummary(BaseModel):
+    health_score: int
+    health_band: str
+    one_liner: str
+    trajectory: str
+    trajectory_note: str
+
+
+class _PremiumStrength(BaseModel):
+    area: str
+    summary: str
+    evidence: list[str]
+    spiritual_maturity_indicator: str
+    how_to_leverage: str
+    celebration_talking_point: str
+
+
+class _PremiumPhase(BaseModel):
+    goal: str
+    activities: list[str]
+    success_metric: str
+
+
+class _PremiumGrowthPathway(BaseModel):
+    phase_1_weeks_1_4: _PremiumPhase
+    phase_2_weeks_5_8: _PremiumPhase
+    phase_3_weeks_9_12: _PremiumPhase
+
+
+class _PremiumGap(BaseModel):
+    area: str
+    summary: str
+    severity: str
+    root_cause_analysis: str
+    evidence: list[str]
+    biblical_perspective: str
+    why_it_matters: str
+    growth_pathway: _PremiumGrowthPathway
+
+
+class _PremiumTopic(BaseModel):
+    topic: str
+    score_percent: float
+    level: str
+    key_gaps: list[str]
+    affirmation: Optional[str] = None
+    study_prescription: Optional[str] = None
+
+
+class _PremiumTheologyCheck(BaseModel):
+    core_doctrines_solid: list[str]
+    areas_needing_clarification: list[str]
+    potential_concerns: list[str]
+
+
+class _PremiumReadingPlan(BaseModel):
+    name: str
+    description: str
+    why_this_plan: str
+    chapters_per_day: int
+
+
+class _PremiumBiblicalKnowledge(BaseModel):
+    overall_percent: float
+    mastery_level: str
+    by_topic_breakdown: list[_PremiumTopic]
+    theological_health_check: _PremiumTheologyCheck
+    recommended_bible_reading_plan: _PremiumReadingPlan
+
+
+class _PremiumDevelopmentPlan(BaseModel):
+    immediate_30_days: str
+    quarter_goal: str
+    year_vision: str
+
+
+class _PremiumFormationInsight(BaseModel):
+    category: str
+    current_level: str
+    detailed_observation: str
+    maturity_markers_present: list[str]
+    maturity_markers_missing: list[str]
+    custom_development_plan: _PremiumDevelopmentPlan
+    mentor_discussion_questions: list[str]
+
+
+class _PremiumKeyPoint(BaseModel):
+    point: str
+    talking_point: str
+
+
+class _PremiumSession(BaseModel):
+    theme: str
+    duration_minutes: int
+    opening_question: Optional[str] = None
+    key_points_to_cover: list[_PremiumKeyPoint]
+    questions_to_ask: list[str]
+    close_with: Optional[str] = None
+
+
+class _PremiumConversationGuide(BaseModel):
+    session_1_opening: _PremiumSession
+    session_2_growth_areas: _PremiumSession
+    session_3_check_in: _PremiumSession
+
+
+class _PremiumComparison(BaseModel):
+    score_change: str
+    trend: str
+    areas_improved: list[str]
+    areas_declined: list[str]
+    areas_unchanged: list[str]
+
+
+class _PremiumMilestone(BaseModel):
+    milestone: str
+    expected_by: str
+    how_to_verify: str
+
+
+class _PremiumProgress(BaseModel):
+    previous_assessment_comparison: Optional[_PremiumComparison] = None  # only with a previous assessment
+    milestones_to_track: list[_PremiumMilestone]
+    suggested_reassessment: str
+
+
+class _PremiumResource(BaseModel):
+    title: str
+    author: Optional[str] = None
+    type: str
+    why_specifically_for_them: str
+    how_to_use: str
+    conversation_starter_from_book: Optional[str] = None
+
+
+class _PremiumMentorNotes(BaseModel):
+    handle_with_care: str
+    watch_for: str
+    cultural_considerations: str
+    prayer_focus_for_this_apprentice: str
+
+
+class _PremiumYellowFlag(BaseModel):
+    flag: str
+    detail: str
+    urgency: str
+    mentor_action: str
+
+
+class _PremiumGreenFlag(BaseModel):
+    flag: str
+    detail: str
+    leverage_this: str
+
+
+class _PremiumFlags(BaseModel):
+    red: list[_PremiumYellowFlag]
+    yellow: list[_PremiumYellowFlag]
+    green: list[_PremiumGreenFlag]
+
+
+class PremiumReportV1(BaseModel):
+    executive_summary: _PremiumExecutiveSummary
+    strengths_deep_dive: list[_PremiumStrength]
+    gaps_deep_dive: list[_PremiumGap]
+    biblical_knowledge_analysis: _PremiumBiblicalKnowledge
+    spiritual_formation_insights: list[_PremiumFormationInsight]
+    conversation_guide: _PremiumConversationGuide
+    progress_tracking: _PremiumProgress
+    personalized_resources: list[_PremiumResource]
+    mentor_preparation_notes: _PremiumMentorNotes
+    flags: _PremiumFlags
+
+
+def _apply_premium_facts(report: dict, computed_facts: Optional[dict]) -> dict:
+    """Overwrite the report's headline numbers with the computed ones so it can't disagree with the free report."""
+    if not computed_facts:
+        return report
+    summary = report.get("executive_summary") or {}
+    if computed_facts.get("health_score") is not None:
+        summary["health_score"] = computed_facts["health_score"]
+        summary["health_band"] = computed_facts.get("health_band") or health_band(computed_facts["health_score"])
+    bk = report.get("biblical_knowledge_analysis") or {}
+    if computed_facts.get("biblical_knowledge_percent") is not None:
+        bk["overall_percent"] = computed_facts["biblical_knowledge_percent"]
+    by_topic = {t.get("topic"): t.get("percent") for t in computed_facts.get("mc_by_topic") or []}
+    for row in bk.get("by_topic_breakdown") or []:
+        if row.get("topic") in by_topic:
+            row["score_percent"] = by_topic[row["topic"]]
+    return report
+
+
 def generate_full_report(payload: dict, previous_assessments: List[dict] = None,
                          computed_facts: Optional[dict] = None) -> dict:
     """Generate premium full report using LLMService (Gemini/OpenAI with fallback).
@@ -469,7 +667,9 @@ def generate_full_report(payload: dict, previous_assessments: List[dict] = None,
     if not prompt_text:
         raise Exception("Full report prompt not found - premium feature unavailable")
     
-    system_prompt = "You are a senior pastor-mentor generating a premium, comprehensive mentor report. Return STRICT JSON only."
+    # Static instructions go in the system prompt (cacheable); the response schema enforces the shape
+    system_prompt = ("You are a senior pastor-mentor generating a premium, comprehensive mentor report.\n\n"
+                     + prompt_text.strip())
     if computed_facts:
         enriched_payload['computed_facts'] = computed_facts
         system_prompt += (
@@ -478,18 +678,18 @@ def generate_full_report(payload: dict, previous_assessments: List[dict] = None,
             "health_band, and the Biblical Knowledge percent must equal "
             "computed_facts.biblical_knowledge_percent. " + NUMBERS_INSTRUCTION
         )
-    user_prompt = f"{prompt_text.strip()}\n\n{json.dumps(enriched_payload, ensure_ascii=False)}"
     
     # Use LLMService with higher token limit for premium report
     llm_service = get_llm_service()
     config = LLMConfig(
         temperature=0.3,  # Slightly higher for more nuanced analysis
-        max_tokens=16000,  # Higher limit for comprehensive report (Gemini supports up to 8192 default, but can go higher)
-        json_mode=True
+        max_tokens=24000,  # the report is ~12k output tokens; low reasoning keeps it inside the limit
+        response_schema=PremiumReportV1,
+        thinking_level="low",
     )
     
     response = llm_service.generate(
-        user_content=user_prompt,
+        user_content=json.dumps(enriched_payload, ensure_ascii=False),
         system_prompt=system_prompt,
         config=config
     )
@@ -514,7 +714,15 @@ def generate_full_report(payload: dict, previous_assessments: List[dict] = None,
         result = _parse_json_lenient(response.raw_response)
     else:
         raise Exception("LLM returned empty response")
-    
+    # Gemini enforces the schema; this catches the OpenAI fallback (JSON mode only) and normalizes shape
+    try:
+        result = PremiumReportV1.model_validate(result).model_dump()
+    except ValidationError as e:
+        raise ValueError(f"full report failed schema validation: {str(e)[:300]}") from e
+    result = _apply_premium_facts(result, computed_facts)
+    result['report_version'] = 'premium_v1'
+    result['generated_at'] = datetime.now(UTC).isoformat()
+
     # Add metadata
     result['_meta'] = {
         'generated_at': datetime.now(UTC).isoformat() + 'Z',
