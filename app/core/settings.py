@@ -55,6 +55,10 @@ class Settings:
             "ANDROID_PLAY_STORE_URL",
             "https://play.google.com/store/apps/details?id=com.trooth.flutterTroothAssessment",
         )
+        # White-and-gold wordmark for the emails' dark header strip (the main logo is black-and-gold)
+        self.email_logo_url = os.getenv(
+            "EMAIL_LOGO_URL", f"{self.backend_api_url.rstrip('/')}/assets/logo_light.png"
+        )
         self.email_from_address = os.getenv(
             "EMAIL_FROM_ADDRESS", "no-reply@trooth-app.com"
         )
