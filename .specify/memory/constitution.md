@@ -1,3 +1,15 @@
+<!--
+Sync Impact Report
+- Version: 1.0.0 → 1.0.1 (PATCH: known-debt list update, no principle changed)
+- Modified: "Technology Constraints & Known Debt". Removed the `CRON_SECRET` default from the
+  grandfathered list: settings no longer defines it and `require_cron_secret` fails closed when
+  it is unset (specs/003-integration-health-alerts T022/T023). The Shopify storefront token
+  default remains listed.
+- Principles added/removed: none
+- Templates (.specify/templates/overrides/*): no change needed
+- CONTRIBUTING.md / CLAUDE.md: no change needed (they don't reference this item)
+- Frontend constitution: no change needed (Principle X untouched)
+-->
 # T[root]H Discipleship API Constitution
 
 ## Core Principles
@@ -124,7 +136,7 @@ path when the team is ready.
   Firebase Admin, SendGrid, Vertex Gemini / OpenAI via `app/services/llm/`, Cloud Run.
 - Principles apply to new or touched code. Known existing violations are grandfathered;
   touching the code SHOULD fix them, and no change may increase them:
-  - `CRON_SECRET` and Shopify storefront token defaults in `app/core/settings.py` (IV)
+  - Shopify storefront token default in `app/core/settings.py` (IV)
   - ~25 `print(` calls in `app/` (V)
   - 4 migrations with empty `downgrade()` (III)
   - ~55% of handlers without `response_model`; much business logic in routes (VI, VII)
@@ -158,4 +170,4 @@ See [CONTRIBUTING.md](../../CONTRIBUTING.md) for the day-to-day details.
   review. Any deviation MUST be recorded in the plan's Complexity Tracking table with a
   justification, or the PR is not merged.
 
-**Version**: 1.0.0 | **Ratified**: 2026-10-04 | **Last Amended**: 2026-10-04
+**Version**: 1.0.1 | **Ratified**: 2026-10-04 | **Last Amended**: 2026-10-12
