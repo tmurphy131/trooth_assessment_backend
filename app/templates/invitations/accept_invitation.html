@@ -133,25 +133,32 @@
       width: 20px;
       height: 20px;
     }
-    .token-box {
+    .code-box {
       background: var(--surface2);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 8px;
-      padding: 12px;
+      padding: 16px 12px;
       margin-top: 20px;
     }
-    .token-label {
+    .code-label {
       font-size: 11px;
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
-    .token-value {
+    .code-value {
       font-family: monospace;
-      font-size: 12px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
       color: var(--gold-light);
-      word-break: break-all;
+      user-select: all;
+    }
+    .code-hint {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
     }
     .error-card {
       background: rgba(255, 59, 48, 0.1);
@@ -218,9 +225,10 @@
         </a>
       </div>
 
-      <div class="token-box">
-        <div class="token-label">Invitation Token</div>
-        <div class="token-value">{{ token }}</div>
+      <div class="code-box">
+        <div class="code-label">Invite code</div>
+        <div class="code-value">{{ code }}</div>
+        <div class="code-hint">Open the T[root]H app and enter this code to join your mentor.</div>
       </div>
     </div>
     {% endif %}

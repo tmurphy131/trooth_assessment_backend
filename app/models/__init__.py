@@ -1,6 +1,7 @@
 from .user import User
 from .mentor_apprentice import MentorApprentice
 from .apprentice_invitation import ApprenticeInvitation
+from .invite_code_attempt import InviteCodeAttempt
 from .assessment_draft import AssessmentDraft
 from .assessment_template import AssessmentTemplate
 from .assessment_template_question import AssessmentTemplateQuestion

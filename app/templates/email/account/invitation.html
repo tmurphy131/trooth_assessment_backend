@@ -17,6 +17,13 @@
         <li><strong style="color:#d4af37;">Mentoring Support:</strong> Ongoing guidance from {{ mentor_name }}</li>
         <li><strong style="color:#d4af37;">Progress Tracking:</strong> Monitor growth over time</li>
     </ul>
+    {% if code %}
+    <div class="highlight-box" style="text-align:center;">
+        <p style="margin:0 0 8px;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#d4af37;">Your invite code</p>
+        <p style="margin:0 0 10px;font-family:'Courier New',Courier,monospace;font-size:28px;font-weight:bold;letter-spacing:4px;">{{ code }}</p>
+        <p style="margin:0;">Open the T[root]H app and enter this code to join {{ mentor_name }}.</p>
+    </div>
+    {% endif %}
     {{ m.button(accept_url, "Accept invitation") }}
     <p class="muted">This invitation expires in 7 days.</p>
 {% endblock %}
