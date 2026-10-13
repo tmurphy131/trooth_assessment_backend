@@ -15,6 +15,8 @@ app/
   schemas/             # Pydantic models
   models/              # SQLAlchemy models (sync sessions via app/db.py get_db)
   services/            # Business logic & integrations; services/llm/ = provider factory
+  services/pdf/        # Branded PDF kit (palette, Poppins, header band, components); all report PDFs use it
+  data/                # Static content shipped with the app (e.g. spiritual gift guidance)
   templates/email/     # Jinja email templates
 alembic/versions/      # Migrations — new ones named YYYYMMDD_description.py
 tests/                 # pytest; conftest.py = SQLite in-memory + auth overrides, sets ENV=test

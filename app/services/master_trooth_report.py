@@ -10,80 +10,34 @@ import logging
 import os
 from typing import Any
 from app.core.settings import settings
+from app.services import pdf as kit
+from app.services.pdf import theme as t
 from app.services.report_summary import public_full_report, summarize_mentor_blob
 
 logger = logging.getLogger("app.master_report")
 
-try:  # Optional dependency path
-    from reportlab.lib.pagesizes import letter
-    from reportlab.pdfgen import canvas  # type: ignore
-    from reportlab.lib import colors  # type: ignore
-    _HAS_REPORTLAB = True
-except Exception:  # pragma: no cover
-    _HAS_REPORTLAB = False
-
-
 def generate_pdf(apprentice_name: Optional[str], scores: Dict) -> bytes:
-    version = scores.get('version', 'master_v1')
-    overall = scores.get('overall_score', 7)
-    cat_scores = scores.get('category_scores') or {}
-    top3 = scores.get('top3') or []
+    """Master assessment PDF when there is no mentor-report data: the branded generic summary."""
+    from app.services.generic_assessment_report import generate_pdf as generic_pdf
 
-    if _HAS_REPORTLAB:
-        import io
-        buf = io.BytesIO()
-        c = canvas.Canvas(buf, pagesize=letter)
-        width, height = letter
-        c.setFont('Helvetica-Bold', 16)
-        c.drawString(40, height-60, "Master T[root]H Discipleship Report")
-        c.setFont('Helvetica', 11)
-        c.drawString(40, height-80, f"Apprentice: {apprentice_name or 'Apprentice'}")
-        c.drawString(40, height-96, f"Version: {version}")
-        c.drawString(40, height-112, f"Overall Score: {overall}")
-        y = height-140
-        c.drawString(40, y, "Top Categories:")
-        y -= 18
-        for item in top3:
-            c.drawString(50, y, f"- {item.get('category')}: {item.get('score')}")
-            y -= 16
-        y -= 10
-        c.drawString(40, y, "All Categories:")
-        y -= 18
-        for name, sc in cat_scores.items():
-            c.drawString(50, y, f"- {name}: {sc}")
-            y -= 16
-        c.showPage()
-        c.save()
-        buf.seek(0)
-        return buf.read()
-
-    # Fallback
-    text = [
-        "MASTER REPORT",
-        f"Apprentice: {apprentice_name or 'Apprentice'}",
-        f"Version: {version}",
-        f"Overall: {overall}",
-        "Top:",
-    ] + [f"- {i.get('category')}: {i.get('score')}" for i in top3] + [
-        "",
-        "All Categories:",
-    ] + [f"- {k}: {v}" for k, v in cat_scores.items()]
-    return ("\n".join(text)).encode()
+    return generic_pdf("Master T[root]H Assessment", apprentice_name, scores or {})
 
 
 def generate_html(apprentice_name: Optional[str], scores: Dict) -> str:
-    version = scores.get('version', 'master_v1')
-    overall = scores.get('overall_score', 7)
+    from html import escape
+
+    version = escape(str(scores.get('version', 'master_v1')))
+    overall = escape(str(scores.get('overall_score', 7)))
     cat_scores = scores.get('category_scores') or {}
     top3 = scores.get('top3') or []
     lines = []
     lines.append("<h1>Master T[root]H Discipleship Report</h1>")
-    lines.append(f"<p>Apprentice: {apprentice_name or 'Apprentice'}</p>")
+    lines.append(f"<p>Apprentice: {escape(apprentice_name or 'Apprentice')}</p>")
     lines.append(f"<p>Version: {version} • Overall: {overall}</p>")
     lines.append("<h3>Top Categories</h3>")
-    lines.append("<ul>" + "".join([f"<li>{i.get('category')}: {i.get('score')}</li>" for i in top3]) + "</ul>")
+    lines.append("<ul>" + "".join([f"<li>{escape(str(i.get('category')))}: {escape(str(i.get('score')))}</li>" for i in top3]) + "</ul>")
     lines.append("<h3>All Categories</h3>")
-    lines.append("<ul>" + "".join([f"<li>{k}: {v}</li>" for k, v in cat_scores.items()]) + "</ul>")
+    lines.append("<ul>" + "".join([f"<li>{escape(str(k))}: {escape(str(v))}</li>" for k, v in cat_scores.items()]) + "</ul>")
     return "\n".join(lines)
 
 
@@ -331,755 +285,400 @@ def render_markdown_print_v2(context: Dict[str, Any]) -> str:
         return f"# T[root]H Mentor Report\n\nApprentice: {context.get('apprentice_name')}\n"
 
 
+def _num(value, default=0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _text(value) -> str:
+    return "" if value is None else str(value).strip()
+
+
+def _items(value, limit: int | None = None) -> list:
+    """List of non-empty strings from a list (dict items use their first text-like field)."""
+    out = []
+    for v in value or []:
+        if isinstance(v, dict):
+            v = v.get("point") or v.get("title") or v.get("text") or v.get("area") or ""
+        v = _text(v)
+        if v:
+            out.append(v)
+    return out[:limit] if limit else out
+
+
+def _premium_sections(full_report: Dict[str, Any]) -> list:
+    """Premium analysis (executive summary through spiritual formation), same data as before 008."""
+    story: list = []
+    story += kit.section_heading("Premium detailed analysis")
+
+    exec_summary = full_report.get("executive_summary") or {}
+    if exec_summary:
+        story.append(kit.subheading("Executive summary"))
+        if exec_summary.get("one_liner"):
+            story.append(kit.para(exec_summary["one_liner"], "lead"))
+        if exec_summary.get("trajectory_note"):
+            story.append(kit.para(exec_summary["trajectory_note"]))
+        story.append(kit.gap(6))
+
+    strengths_deep = full_report.get("strengths_deep_dive") or []
+    if strengths_deep:
+        for i, s in enumerate(strengths_deep[:3]):
+            block = ([kit.subheading("Strengths deep dive")] if i == 0 else []) + [kit.para(s.get("area"), "row")]
+            if s.get("summary"):
+                block.append(kit.para(s["summary"]))
+            if s.get("how_to_leverage"):
+                block.append(kit.label_value("How to leverage", s["how_to_leverage"]))
+            story += [kit.KeepTogether(block), kit.gap(6)]
+
+    gaps_deep = full_report.get("gaps_deep_dive") or []
+    if gaps_deep:
+        for i, g in enumerate(gaps_deep[:3]):
+            block = ([kit.subheading("Growth areas deep dive")] if i == 0 else []) + [kit.para(g.get("area"), "row")]
+            if g.get("summary"):
+                block.append(kit.para(g["summary"]))
+            if g.get("biblical_perspective"):
+                block.append(kit.callout("Biblical perspective", g["biblical_perspective"]))
+            goal = ((g.get("growth_pathway") or {}).get("phase_1_weeks_1_4") or {}).get("goal")
+            if goal:
+                block += [kit.gap(4), kit.label_value("Weeks 1-4 goal", goal)]
+            story += [kit.KeepTogether(block), kit.gap(8)]
+
+    conv_guide = full_report.get("conversation_guide") or {}
+    if conv_guide:
+        guide_heading = [kit.subheading("Mentor conversation guide")]
+        sessions = [
+            ("session_1_opening", "Session 1: Opening"),
+            ("session_2_growth_areas", "Session 2: Growth areas"),
+            ("session_3_check_in", "Session 3: Check-in"),
+        ]
+        has_ai_sessions = False
+        for key, title in sessions:
+            session = conv_guide.get(key) or {}
+            if not session:
+                continue
+            has_ai_sessions = True
+            header = title
+            if session.get("theme"):
+                header += f" - {_text(session['theme'])}"
+            if session.get("duration_minutes"):
+                header += f" ({_text(session['duration_minutes'])} min)"
+            block = guide_heading + [kit.para(header, "row"), kit.gap(2)]
+            guide_heading = []
+            points = []
+            for kp in (session.get("key_points_to_cover") or [])[:3]:
+                point = kp.get("point", "") if isinstance(kp, dict) else _text(kp)
+                talking = kp.get("talking_point", "") if isinstance(kp, dict) else ""
+                if point:
+                    points.append(f"<b>{kit.safe(point)}</b>" + (f"<br/>“{kit.safe(talking)}”" if talking else ""))
+            if points:
+                block.append(kit.bullets(points, markup=True))
+            questions = _items(session.get("questions_to_ask"), 3)
+            if questions:
+                block.append(kit.callout("Questions to ask", questions))
+            story += [kit.KeepTogether(block), kit.gap(8)]
+        if not has_ai_sessions:
+            story += guide_heading
+            opening = _items(conv_guide.get("opening_questions"), 3)
+            if opening:
+                story += [kit.para("Opening questions", "row"), kit.bullets(opening)]
+            for i, sess in enumerate((conv_guide.get("sessions") or [])[:3], 1):
+                if sess.get("focus"):
+                    story.append(kit.label_value(f"Session {i}", sess["focus"]))
+                    if sess.get("goal"):
+                        story.append(kit.para(f"Goal: {_text(sess['goal'])}", "small"))
+            story.append(kit.gap(6))
+
+    bk = full_report.get("biblical_knowledge_analysis") or {}
+    if bk:
+        story.append(kit.subheading("Biblical knowledge analysis"))
+        overall_percent = bk.get("overall_percent")
+        mastery = _text(bk.get("mastery_level"))
+        if overall_percent or mastery:
+            parts = [f"{_text(overall_percent)}%" if overall_percent else "", mastery]
+            story.append(kit.para(" - ".join(p for p in parts if p), "row"))
+        if bk.get("summary"):
+            story.append(kit.para(bk["summary"]))
+        topics = (bk.get("by_topic_breakdown") or bk.get("topics") or [])[:6]
+        if topics:
+            rows = []
+            for topic in topics:
+                pct = _num(topic.get("score_percent") or topic.get("percent") or topic.get("score"))
+                note_parts = [_text(topic.get("level"))]
+                if topic.get("affirmation"):
+                    note_parts.append(f"Strength: {_text(topic['affirmation'])}")
+                if topic.get("key_gaps"):
+                    note_parts.append("Gaps: " + ", ".join(_items(topic["key_gaps"], 3)))
+                if topic.get("study_prescription"):
+                    note_parts.append(f"Study: {_text(topic['study_prescription'])}")
+                rows.append({
+                    "label": topic.get("topic") or topic.get("name"),
+                    "value": pct,
+                    "value_label": f"{int(pct)}%",
+                    "note": "  ·  ".join(p for p in note_parts if p),
+                    "fill": t.status_color(pct / 100.0),
+                })
+            story += [kit.gap(4), kit.score_table(rows, 100, suffix="%")]
+        theological = bk.get("theological_health_check") or {}
+        if theological:
+            lines = []
+            if theological.get("core_doctrines_solid"):
+                lines.append(f"<b>Solid:</b> {kit.safe(', '.join(_items(theological['core_doctrines_solid'])))}")
+            if theological.get("areas_needing_clarification"):
+                lines.append(f"<b>Needs clarification:</b> {kit.safe(', '.join(_items(theological['areas_needing_clarification'])))}")
+            if theological.get("potential_concerns"):
+                lines.append(f"<b>Concerns:</b> {kit.safe(', '.join(_items(theological['potential_concerns'])))}")
+            if lines:
+                story += [kit.gap(6), kit.para("Theological health check", "row"), kit.bullets(lines, markup=True)]
+        plan = bk.get("recommended_bible_reading_plan") or {}
+        if plan:
+            body = [f"<b>{kit.safe(plan.get('name') or 'Bible reading plan')}</b>"]
+            if plan.get("description"):
+                body.append(kit.safe(plan["description"]))
+            if plan.get("why_this_plan"):
+                body.append(f"Why: {kit.safe(plan['why_this_plan'])}")
+            story += [kit.gap(6), kit.callout("Recommended reading plan", body, markup=True)]
+        story.append(kit.gap(8))
+
+    sf = full_report.get("spiritual_formation_insights") or []
+    if sf:
+        for i, insight in enumerate(sf[:5]):
+            area = _text(insight.get("area") or insight.get("category"))
+            level = _text(insight.get("current_level") or insight.get("level"))
+            observation = insight.get("detailed_observation") or insight.get("summary") or insight.get("observation") or insight.get("insight")
+            block = ([kit.subheading("Spiritual formation insights")] if i == 0 else []) + [_level_heading(area, level)]
+            if observation:
+                block.append(kit.para(observation))
+            markers = []
+            if insight.get("maturity_markers_present"):
+                markers.append(f"<b>Present:</b> {kit.safe(', '.join(_items(insight['maturity_markers_present'], 4)))}")
+            if insight.get("maturity_markers_missing"):
+                markers.append(f"<b>Missing:</b> {kit.safe(', '.join(_items(insight['maturity_markers_missing'], 4)))}")
+            if markers:
+                block.append(kit.bullets(markers, markup=True))
+            plan = insight.get("custom_development_plan") or {}
+            plan_lines = [
+                f"<b>{label}:</b> {kit.safe(plan[key])}"
+                for key, label in (("immediate_30_days", "30 days"), ("quarter_goal", "Quarter"), ("year_vision", "Year"))
+                if plan.get(key)
+            ]
+            if plan_lines:
+                block.append(kit.callout("Development plan", plan_lines, markup=True))
+            questions = _items(insight.get("mentor_discussion_questions"), 3)
+            if questions:
+                block += [kit.gap(4), kit.para("Questions to ask", "label"), kit.bullets(questions)]
+            else:
+                recs = _items(insight.get("recommendations") or insight.get("mentor_moves"), 2)
+                if recs:
+                    block.append(kit.bullets(recs))
+            story += [kit.KeepTogether(block), kit.gap(10)]
+    return story
+
+
+def _level_heading(title: str, level: str):
+    """'Title  Level' with the level in its muted status color."""
+    markup = kit.safe(title)
+    if level:
+        markup += f"  <font color='{t.hex_of(t.status_color(level))}' size='9.5'>{kit.safe(level)}</font>"
+    return kit.subheading(markup, markup=True)
+
+
+def build_mentor_story(context: Dict[str, Any]) -> list:
+    """Mentor / Master report sections with the same data as before 008 (priority action moved up, as in the emails)."""
+    story: list = []
+
+    # Headline: matches the report emails and the app (canonical summary, specs/005)
+    health_score = context.get("health_score")
+    band = _text(context.get("health_band") or context.get("knowledge_band"))
+    mc_percent = _num(context.get("overall_mc_percent"))
+    if health_score is not None:
+        sub = band
+        if mc_percent:
+            sub = f"{band}  ·  Biblical Knowledge {mc_percent:.0f}%" if band else f"Biblical Knowledge {mc_percent:.0f}%"
+        story.append(kit.stat_card(_text(health_score), "Health Score", sub))
+    else:
+        story.append(kit.stat_card(f"{mc_percent:.0f}%", "Biblical Knowledge", band))
+    trend = _text(context.get("trend_note"))
+    if trend:
+        story += [kit.gap(4), kit.para(trend, "small")]
+    story.append(kit.gap(12))
+
+    strengths = _items(context.get("top_strengths"), 3)
+    gaps = _items(context.get("top_gaps"), 3)
+    if strengths or gaps:
+        story += [kit.two_col_cards("Top strengths", strengths, "Growth areas", gaps), kit.gap(4)]
+
+    # Priority action is the first thing a mentor acts on
+    pa = context.get("priority_action") or {}
+    if pa and (pa.get("title") or pa.get("description")):
+        body = []
+        if pa.get("title"):
+            body.append(f"<b>{kit.safe(pa['title'])}</b>")
+        steps = _items(pa.get("steps"), 3)
+        if pa.get("description") and _text(pa["description"]) not in steps:
+            body.append(kit.safe(pa["description"]))
+        body += [f"\u2022 {kit.safe(s)}" for s in steps]
+        if pa.get("scripture"):
+            body.append(f"<font color='{t.hex_of(t.GOLD_DEEP)}'>{kit.safe(pa['scripture'])}</font>")
+        story += kit.section_heading("Priority action this week")
+        story.append(kit.callout(None, body, markup=True))
+
+    categories = context.get("categories") or []
+    if categories:
+        story += kit.section_heading("Category scores")
+        story.append(kit.score_table([
+            {
+                "label": c.get("name"),
+                "value": c.get("score", 0),
+                "note": c.get("level") if c.get("level") not in (None, "", "-") else None,
+                "fill": t.status_color(_num(c.get("score")) / 10.0),
+            }
+            for c in categories
+        ], 10))
+
+    topics = context.get("knowledge_topics") or []
+    scored = [tp for tp in topics if _num(tp.get("total"))]
+    to_study = [_text(tp.get("topic")) for tp in topics if not _num(tp.get("total")) and tp.get("topic")]
+    if scored or to_study:
+        story += kit.section_heading("Biblical knowledge breakdown")
+    if scored:
+        rows = []
+        for topic in scored:
+            pct = _num(topic.get("percent"))
+            status = "Strong" if pct >= 70 else "Developing" if pct >= 40 else "Needs focus"
+            note = _text(topic.get("note"))
+            rows.append({
+                "label": topic.get("topic"),
+                "value": pct,
+                "value_label": f"{pct:.0f}%",
+                "note": f"{status}  ·  {note}" if note and note != status else status,
+                "fill": t.status_color(pct / 100.0),
+            })
+        story.append(kit.score_table(rows, 100, suffix="%"))
+    if to_study:
+        # v2.1 reports list weak topics without per-topic scores
+        story += [kit.gap(4), kit.callout("Topics to study", ", ".join(to_study))]
+
+    insights = context.get("open_insights") or []
+    if insights:
+        story += kit.section_heading("Spiritual life insights")
+        for insight in insights[:5]:
+            block = [_level_heading(_text(insight.get("category")), _text(insight.get("level")) if insight.get("level") != "-" else "")]
+            evidence = insight.get("evidence") or insight.get("discernment")
+            if evidence:
+                block.append(kit.para(evidence))
+            moves = _items(insight.get("mentor_moves"), 3)
+            if moves:
+                block += [kit.para("MENTOR ACTIONS", "label"), kit.gap(2), kit.bullets(moves)]
+            if insight.get("scripture_anchor"):
+                block.append(kit.para(insight["scripture_anchor"], "small"))
+            story += [kit.KeepTogether(block), kit.gap(8)]
+
+    full_report = context.get("full_report") or (context.get("mentor_blob_v2") or {}).get("full_report_v1")
+    if full_report and isinstance(full_report, dict):
+        story += _premium_sections(full_report)
+
+    starters = _items(context.get("starters"), 4)
+    if starters:
+        story += kit.section_heading("Conversation starters")
+        story.append(kit.bullets(starters))
+
+    four_week = context.get("four_week") or {}
+    rhythm = _items(four_week.get("rhythm"), 4)
+    checkpoints = _items(four_week.get("checkpoints"), 4)
+    if rhythm or checkpoints:
+        story += kit.section_heading("Four-week plan")
+        story.append(kit.two_col_cards("Weekly rhythm", rhythm, "Checkpoints", checkpoints))
+
+    resources = context.get("resources") or []
+    if resources:
+        story += kit.section_heading("Recommended resources")
+        for res in resources[:5]:
+            if isinstance(res, dict):
+                title = _text(res.get("title"))
+                if res.get("type"):
+                    title += f" ({_text(res['type'])})"
+                block = [kit.para(title, "row")]
+                why = res.get("why") or res.get("why_specifically_for_them")
+                if why:
+                    block.append(kit.para(why))
+                if res.get("how_to_use"):
+                    block.append(kit.label_value("How to use", res["how_to_use"]))
+                story += [kit.KeepTogether(block), kit.gap(6)]
+            else:
+                story.append(kit.bullets([res]))
+
+    if full_report and isinstance(full_report, dict):
+        progress = full_report.get("progress_tracking") or {}
+        if progress:
+            story += kit.section_heading("Progress tracking")
+            prev = progress.get("previous_assessment_comparison") or {}
+            change, trend_word = _text(prev.get("score_change")), _text(prev.get("trend"))
+            if change or trend_word:
+                story.append(kit.label_value("Score change", " ".join(p for p in [change, f"({trend_word})" if trend_word else ""] if p)))
+            improved = _items(prev.get("areas_improved"), 3)
+            if improved:
+                story += [kit.para("Areas improved", "row"), kit.bullets(improved)]
+            milestones = []
+            for m in (progress.get("milestones_to_track") or [])[:4]:
+                text = _text(m.get("milestone")) if isinstance(m, dict) else _text(m)
+                if text:
+                    by = _text(m.get("expected_by")) if isinstance(m, dict) else ""
+                    milestones.append(f"{text} (by {by})" if by else text)
+            if milestones:
+                story += [kit.para("Milestones to track", "row"), kit.bullets(milestones)]
+            if progress.get("suggested_reassessment"):
+                story.append(kit.label_value("Suggested reassessment", progress["suggested_reassessment"]))
+
+        notes = full_report.get("mentor_preparation_notes") or {}
+        if notes:
+            story += kit.section_heading("Mentor preparation notes")
+            for key, label in (("handle_with_care", "Handle with care"), ("watch_for", "Watch for"), ("cultural_considerations", "Cultural considerations")):
+                if notes.get(key):
+                    story.append(kit.label_value(label, notes[key]))
+            if notes.get("prayer_focus_for_this_apprentice"):
+                story += [kit.gap(4), kit.callout("Prayer focus", notes["prayer_focus_for_this_apprentice"])]
+
+        personalized = full_report.get("personalized_resources") or []
+        if personalized:
+            story += kit.section_heading("Personalized resources")
+            for res in personalized[:4]:
+                title = _text(res.get("title"))
+                if res.get("author"):
+                    title += f" by {_text(res['author'])}"
+                if res.get("type"):
+                    title += f" ({_text(res['type'])})"
+                block = [kit.para(title, "row")]
+                if res.get("why_specifically_for_them"):
+                    block.append(kit.para(res["why_specifically_for_them"]))
+                if res.get("how_to_use"):
+                    block.append(kit.label_value("How to use", res["how_to_use"]))
+                if res.get("conversation_starter_from_book"):
+                    block.append(kit.label_value("Discussion", res["conversation_starter_from_book"]))
+                story += [kit.KeepTogether(block), kit.gap(8)]
+    return story
+
+
 def render_pdf_v2(context: Dict[str, Any]) -> bytes:
-    """Generate a beautifully styled PDF report with colors and proper formatting.
-    
+    """Branded Mentor Report PDF (specs/008-pdf-redesign). Always returns a valid PDF.
+
     Includes full premium report content if available in context.
     """
-    if not _HAS_REPORTLAB:
-        md_text = render_markdown_print_v2(context)
-        return md_text.encode('utf-8')
-    
-    try:
-        import io
-        from reportlab.platypus import (
-            SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, 
-            ListFlowable, ListItem, HRFlowable, KeepTogether, PageBreak
-        )
-        from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-        from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
-        from reportlab.lib.units import inch
-        from reportlab.lib.colors import HexColor
-        
-        # Define brand colors
-        GOLD = HexColor('#D4AF37')
-        DARK_GOLD = HexColor('#B8960C')
-        BLACK = HexColor('#1A1A1A')
-        DARK_GREY = HexColor('#333333')
-        GREY = HexColor('#666666')
-        LIGHT_GREY = HexColor('#E5E5E5')
-        GREEN = HexColor('#28A745')
-        BLUE = HexColor('#007BFF')
-        ORANGE = HexColor('#FD7E14')
-        RED = HexColor('#DC3545')
-        PURPLE = HexColor('#6F42C1')
-        
-        buf = io.BytesIO()
-        doc = SimpleDocTemplate(
-            buf,
-            pagesize=letter,
-            leftMargin=50,
-            rightMargin=50,
-            topMargin=50,
-            bottomMargin=50,
-        )
-        
-        styles = getSampleStyleSheet()
-        
-        # Custom styles
-        title_style = ParagraphStyle(
-            'TitleCustom',
-            parent=styles['Title'],
-            fontName='Helvetica-Bold',
-            fontSize=24,
-            leading=28,
-            textColor=BLACK,
-            alignment=TA_CENTER,
-            spaceAfter=4,
-        )
-        
-        subtitle_style = ParagraphStyle(
-            'SubtitleCustom',
-            parent=styles['Normal'],
-            fontName='Helvetica',
-            fontSize=12,
-            leading=14,
-            textColor=GREY,
-            alignment=TA_CENTER,
-            spaceAfter=20,
-        )
-        
-        section_header = ParagraphStyle(
-            'SectionHeader',
-            parent=styles['Heading1'],
-            fontName='Helvetica-Bold',
-            fontSize=16,
-            leading=20,
-            textColor=GOLD,
-            spaceBefore=16,
-            spaceAfter=8,
-            borderPadding=(0, 0, 4, 0),
-        )
-        
-        subsection_header = ParagraphStyle(
-            'SubsectionHeader',
-            parent=styles['Heading2'],
-            fontName='Helvetica-Bold',
-            fontSize=13,
-            leading=16,
-            textColor=DARK_GREY,
-            spaceBefore=12,
-            spaceAfter=6,
-        )
-        
-        body_style = ParagraphStyle(
-            'BodyCustom',
-            parent=styles['Normal'],
-            fontName='Helvetica',
-            fontSize=10,
-            leading=14,
-            textColor=DARK_GREY,
-            spaceAfter=6,
-        )
-        
-        label_style = ParagraphStyle(
-            'LabelStyle',
-            parent=styles['Normal'],
-            fontName='Helvetica-Bold',
-            fontSize=10,
-            leading=12,
-            textColor=GREY,
-        )
-        
-        value_style = ParagraphStyle(
-            'ValueStyle',
-            parent=styles['Normal'],
-            fontName='Helvetica',
-            fontSize=10,
-            leading=12,
-            textColor=DARK_GREY,
-        )
-        
-        score_large = ParagraphStyle(
-            'ScoreLarge',
-            parent=styles['Normal'],
-            fontName='Helvetica-Bold',
-            fontSize=36,
-            leading=40,
-            textColor=GOLD,
-            alignment=TA_CENTER,
-        )
-        
-        story = []
-        
-        # ===== HEADER =====
-        story.append(Paragraph("T[root]H Mentor Report", title_style))
-        apprentice_name = context.get('apprentice_name', 'Apprentice')
-        submitted_date = context.get('submitted_date', '')
-        if submitted_date:
-            try:
-                from datetime import datetime
-                if isinstance(submitted_date, str):
-                    dt = datetime.fromisoformat(submitted_date.replace('Z', '+00:00'))
-                    submitted_date = dt.strftime('%B %d, %Y')
-                elif isinstance(submitted_date, datetime):
-                    submitted_date = submitted_date.strftime('%B %d, %Y')
-            except:
-                pass
-        story.append(Paragraph(f"{apprentice_name} • {submitted_date}", subtitle_style))
-        
-        # Gold divider line
-        story.append(HRFlowable(width="100%", thickness=2, color=GOLD, spaceAfter=16))
-        
-        # ===== HEALTH SCORE BOX =====
-        health_score = context.get('overall_score', 0)
-        health_band = context.get('knowledge_band', 'Developing')
-        mc_percent = context.get('overall_mc_percent', 0)
-        
-        # Determine band color
-        band_color = GREEN if health_band.lower() in ['excellent', 'flourishing'] else \
-                     BLUE if health_band.lower() in ['good', 'maturing'] else \
-                     ORANGE if health_band.lower() in ['developing', 'growing'] else \
-                     RED
-        
-        score_table_data = [
-            [Paragraph(f"<font color='#{GOLD.hexval()[2:]}'>{mc_percent}%</font>", score_large),
-             Paragraph(f"<b>Biblical Knowledge</b><br/><font color='#{band_color.hexval()[2:]}'>{health_band}</font>", body_style)],
-        ]
-        score_table = Table(score_table_data, colWidths=[1.5*inch, 4*inch])
-        score_table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, -1), LIGHT_GREY),
-            ('ALIGN', (0, 0), (0, 0), 'CENTER'),
-            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            ('PADDING', (0, 0), (-1, -1), 12),
-            ('ROUNDEDCORNERS', [8, 8, 8, 8]),
-        ]))
-        story.append(score_table)
-        story.append(Spacer(1, 16))
-        
-        # ===== STRENGTHS & GAPS =====
-        top_strengths = context.get('top_strengths', [])
-        top_gaps = context.get('top_gaps', [])
-        
-        if top_strengths or top_gaps:
-            sg_data = [[
-                Paragraph(f"<font color='#{GREEN.hexval()[2:]}'><b>✓ Top Strengths</b></font>", body_style),
-                Paragraph(f"<font color='#{ORANGE.hexval()[2:]}'><b>↑ Growth Areas</b></font>", body_style)
-            ]]
-            strengths_text = "<br/>".join([f"• {s}" for s in top_strengths[:3]]) if top_strengths else "—"
-            gaps_text = "<br/>".join([f"• {g}" for g in top_gaps[:3]]) if top_gaps else "—"
-            sg_data.append([
-                Paragraph(strengths_text, body_style),
-                Paragraph(gaps_text, body_style)
-            ])
-            sg_table = Table(sg_data, colWidths=[2.75*inch, 2.75*inch])
-            sg_table.setStyle(TableStyle([
-                ('BACKGROUND', (0, 0), (0, -1), HexColor('#E8F5E9')),
-                ('BACKGROUND', (1, 0), (1, -1), HexColor('#FFF3E0')),
-                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-                ('PADDING', (0, 0), (-1, -1), 10),
-                ('LINEBELOW', (0, 0), (-1, 0), 1, LIGHT_GREY),
-            ]))
-            story.append(sg_table)
-            story.append(Spacer(1, 16))
-        
-        # ===== CATEGORY SCORES =====
-        categories = context.get('categories', [])
-        if categories:
-            story.append(Paragraph("Category Scores", section_header))
-            
-            cat_data = [["Category", "Score", "Level"]]
-            for cat in categories:
-                score = cat.get('score', 0)
-                level = cat.get('level', '-')
-                score_color = GREEN if score >= 7 else BLUE if score >= 5 else ORANGE if score >= 3 else RED
-                cat_data.append([
-                    Paragraph(cat.get('name', ''), body_style),
-                    Paragraph(f"<font color='#{score_color.hexval()[2:]}'><b>{score}/10</b></font>", body_style),
-                    Paragraph(level, body_style)
-                ])
-            
-            cat_table = Table(cat_data, colWidths=[3*inch, 1.2*inch, 1.3*inch])
-            cat_table.setStyle(TableStyle([
-                ('BACKGROUND', (0, 0), (-1, 0), DARK_GREY),
-                ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
-                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-                ('FONTSIZE', (0, 0), (-1, 0), 10),
-                ('ALIGN', (1, 0), (1, -1), 'CENTER'),
-                ('ALIGN', (2, 0), (2, -1), 'CENTER'),
-                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                ('PADDING', (0, 0), (-1, -1), 8),
-                ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, LIGHT_GREY]),
-                ('LINEBELOW', (0, 0), (-1, -1), 0.5, LIGHT_GREY),
-            ]))
-            story.append(cat_table)
-            story.append(Spacer(1, 16))
-        
-        # ===== BIBLICAL KNOWLEDGE BREAKDOWN =====
-        knowledge_topics = context.get('knowledge_topics', [])
-        if knowledge_topics:
-            story.append(Paragraph("Biblical Knowledge Breakdown", section_header))
-            
-            kn_data = [["Topic", "Score", "Status"]]
-            for topic in knowledge_topics:
-                percent = topic.get('percent', 0)
-                score_color = GREEN if percent >= 70 else ORANGE if percent >= 40 else RED
-                status = "Strong" if percent >= 70 else "Developing" if percent >= 40 else "Needs Focus"
-                kn_data.append([
-                    Paragraph(topic.get('topic', ''), body_style),
-                    Paragraph(f"<font color='#{score_color.hexval()[2:]}'><b>{percent}%</b></font>", body_style),
-                    Paragraph(status, body_style)
-                ])
-            
-            kn_table = Table(kn_data, colWidths=[3*inch, 1.2*inch, 1.3*inch])
-            kn_table.setStyle(TableStyle([
-                ('BACKGROUND', (0, 0), (-1, 0), DARK_GREY),
-                ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
-                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-                ('ALIGN', (1, 0), (1, -1), 'CENTER'),
-                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                ('PADDING', (0, 0), (-1, -1), 8),
-                ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, LIGHT_GREY]),
-            ]))
-            story.append(kn_table)
-            story.append(Spacer(1, 16))
-        
-        # ===== OPEN-ENDED INSIGHTS =====
-        open_insights = context.get('open_insights', [])
-        if open_insights:
-            story.append(Paragraph("Spiritual Life Insights", section_header))
-            
-            for insight in open_insights[:5]:  # Limit to top 5
-                category = insight.get('category', '')
-                level = insight.get('level', '-')
-                level_color = GREEN if level.lower() in ['mature', 'flourishing', 'excellent'] else \
-                              BLUE if level.lower() in ['developing', 'growing', 'good'] else \
-                              ORANGE
-                
-                insight_box = []
-                insight_box.append(Paragraph(
-                    f"<font color='#{DARK_GREY.hexval()[2:]}'><b>{category}</b></font> — "
-                    f"<font color='#{level_color.hexval()[2:]}'>{level}</font>",
-                    subsection_header
-                ))
-                
-                evidence = insight.get('evidence', '') or insight.get('discernment', '')
-                if evidence:
-                    insight_box.append(Paragraph(evidence, body_style))
-                
-                mentor_moves = insight.get('mentor_moves', [])
-                if mentor_moves:
-                    moves_text = "<br/>".join([f"• {m}" for m in mentor_moves[:3]])
-                    insight_box.append(Paragraph(f"<b>Mentor Actions:</b><br/>{moves_text}", body_style))
-                
-                story.append(KeepTogether(insight_box))
-                story.append(Spacer(1, 8))
-        
-        # ===== FULL PREMIUM REPORT (if available) =====
-        full_report = context.get('full_report') or context.get('mentor_blob_v2', {}).get('full_report_v1')
-        if full_report and isinstance(full_report, dict):
-            story.append(PageBreak())
-            story.append(Paragraph("✦ Premium Detailed Analysis", section_header))
-            story.append(HRFlowable(width="100%", thickness=1, color=GOLD, spaceAfter=12))
-            
-            # Executive Summary
-            exec_summary = full_report.get('executive_summary', {})
-            if exec_summary:
-                story.append(Paragraph("Executive Summary", subsection_header))
-                one_liner = exec_summary.get('one_liner', '')
-                if one_liner:
-                    story.append(Paragraph(f"<i>{one_liner}</i>", body_style))
-                trajectory_note = exec_summary.get('trajectory_note', '')
-                if trajectory_note:
-                    story.append(Paragraph(trajectory_note, body_style))
-                story.append(Spacer(1, 12))
-            
-            # Strengths Deep Dive
-            strengths_deep = full_report.get('strengths_deep_dive', [])
-            if strengths_deep:
-                story.append(Paragraph(f"<font color='#{GREEN.hexval()[2:]}'>Strengths Deep Dive</font>", subsection_header))
-                for s in strengths_deep[:3]:
-                    area = s.get('area', '')
-                    summary = s.get('summary', '')
-                    leverage = s.get('how_to_leverage', '')
-                    content = f"<b>{area}</b><br/>{summary}"
-                    if leverage:
-                        content += f"<br/><i>How to leverage: {leverage}</i>"
-                    story.append(Paragraph(content, body_style))
-                    story.append(Spacer(1, 6))
-            
-            # Gaps Deep Dive
-            gaps_deep = full_report.get('gaps_deep_dive', [])
-            if gaps_deep:
-                story.append(Paragraph(f"<font color='#{ORANGE.hexval()[2:]}'>Growth Areas Deep Dive</font>", subsection_header))
-                for g in gaps_deep[:3]:
-                    area = g.get('area', '')
-                    summary = g.get('summary', '')
-                    biblical = g.get('biblical_perspective', '')
-                    content = f"<b>{area}</b><br/>{summary}"
-                    if biblical:
-                        content += f"<br/><font color='#{BLUE.hexval()[2:]}'><i>📖 {biblical}</i></font>"
-                    story.append(Paragraph(content, body_style))
-                    
-                    # Growth pathway
-                    pathway = g.get('growth_pathway', {})
-                    if pathway:
-                        phase1 = pathway.get('phase_1_weeks_1_4', {})
-                        if phase1:
-                            goal = phase1.get('goal', '')
-                            if goal:
-                                story.append(Paragraph(f"<b>Weeks 1-4 Goal:</b> {goal}", body_style))
-                    story.append(Spacer(1, 8))
-            
-            # Conversation Guide
-            conv_guide = full_report.get('conversation_guide', {})
-            if conv_guide:
-                story.append(Paragraph(f"<font color='#{PURPLE.hexval()[2:]}'>Mentor Conversation Guide</font>", subsection_header))
-                
-                # AI format sessions (session_1_opening, session_2_growth_areas, session_3_check_in)
-                session_keys = [
-                    ('session_1_opening', 'Session 1: Opening'),
-                    ('session_2_growth_areas', 'Session 2: Growth Areas'),
-                    ('session_3_check_in', 'Session 3: Check-In')
-                ]
-                has_ai_sessions = False
-                for key, title in session_keys:
-                    session = conv_guide.get(key, {})
-                    if session:
-                        has_ai_sessions = True
-                        theme = session.get('theme', '')
-                        duration = session.get('duration_minutes', '')
-                        header = f"<b>{title}</b>"
-                        if theme:
-                            header += f" — {theme}"
-                        if duration:
-                            header += f" <font color='#{GREY.hexval()[2:]}'>({duration} min)</font>"
-                        story.append(Paragraph(header, body_style))
-                        
-                        # Key points
-                        key_points = session.get('key_points_to_cover', [])
-                        if key_points:
-                            for kp in key_points[:3]:
-                                point = kp.get('point', '') if isinstance(kp, dict) else str(kp)
-                                talking = kp.get('talking_point', '') if isinstance(kp, dict) else ''
-                                if point:
-                                    story.append(Paragraph(f"  • <b>{point}</b>", body_style))
-                                    if talking:
-                                        story.append(Paragraph(f"    <i>\"{talking}\"</i>", body_style))
-                        
-                        # Questions
-                        questions = session.get('questions_to_ask', [])
-                        if questions:
-                            q_text = "<br/>".join([f"  ? {q}" for q in questions[:3]])
-                            story.append(Paragraph(q_text, body_style))
-                        
-                        story.append(Spacer(1, 6))
-                
-                # Legacy format fallback
-                if not has_ai_sessions:
-                    opening_q = conv_guide.get('opening_questions', [])
-                    if opening_q:
-                        q_text = "<br/>".join([f"• {q}" for q in opening_q[:3]])
-                        story.append(Paragraph(f"<b>Opening Questions:</b><br/>{q_text}", body_style))
-                    
-                    sessions = conv_guide.get('sessions', [])
-                    if sessions:
-                        for i, sess in enumerate(sessions[:3], 1):
-                            focus = sess.get('focus', '')
-                            goal = sess.get('goal', '')
-                            if focus:
-                                story.append(Paragraph(f"<b>Session {i}:</b> {focus}", body_style))
-                                if goal:
-                                    story.append(Paragraph(f"<i>Goal: {goal}</i>", body_style))
-                story.append(Spacer(1, 8))
-            
-            # Biblical Knowledge Analysis
-            bk_analysis = full_report.get('biblical_knowledge_analysis', {})
-            if bk_analysis:
-                story.append(Paragraph(f"<font color='#{BLUE.hexval()[2:]}'>Biblical Knowledge Analysis</font>", subsection_header))
-                
-                # Overall score and mastery level
-                overall_percent = bk_analysis.get('overall_percent')
-                mastery_level = bk_analysis.get('mastery_level', '')
-                if overall_percent or mastery_level:
-                    score_text = ""
-                    if overall_percent:
-                        score_color = GREEN if overall_percent >= 70 else ORANGE if overall_percent >= 50 else RED
-                        score_text = f"<font color='#{score_color.hexval()[2:]}'><b>{overall_percent}%</b></font>"
-                    if mastery_level:
-                        score_text += f" — {mastery_level}"
-                    story.append(Paragraph(score_text, body_style))
-                    story.append(Spacer(1, 6))
-                
-                # Summary (legacy format)
-                bk_summary = bk_analysis.get('summary', '')
-                if bk_summary:
-                    story.append(Paragraph(bk_summary, body_style))
-                
-                # Topic breakdown (AI format: by_topic_breakdown or legacy: topics)
-                bk_topics = bk_analysis.get('by_topic_breakdown', []) or bk_analysis.get('topics', [])
-                if bk_topics:
-                    story.append(Paragraph("<b>Topic Performance:</b>", body_style))
-                    for topic in bk_topics[:6]:
-                        topic_name = topic.get('topic', '') or topic.get('name', '')
-                        # Support both AI format (score_percent) and legacy (percent, score)
-                        percent = topic.get('score_percent') or topic.get('percent') or topic.get('score', 0)
-                        level = topic.get('level', '')
-                        affirmation = topic.get('affirmation', '')
-                        key_gaps = topic.get('key_gaps', [])
-                        study_prescription = topic.get('study_prescription', '')
-                        
-                        score_color = GREEN if percent >= 70 else ORANGE if percent >= 50 else RED
-                        level_text = f" ({level})" if level else ""
-                        story.append(Paragraph(
-                            f"  • <b>{topic_name}</b>: <font color='#{score_color.hexval()[2:]}'>{percent}%</font>{level_text}",
-                            body_style
-                        ))
-                        if affirmation:
-                            story.append(Paragraph(f"    <font color='#{GREEN.hexval()[2:]}'>✓ {affirmation}</font>", body_style))
-                        if key_gaps:
-                            gaps_text = ", ".join(key_gaps[:3])
-                            story.append(Paragraph(f"    <font color='#{RED.hexval()[2:]}'>Gaps: {gaps_text}</font>", body_style))
-                        if study_prescription:
-                            story.append(Paragraph(f"    <font color='#{BLUE.hexval()[2:]}'>📚 {study_prescription}</font>", body_style))
-                
-                # Theological health check
-                theological = bk_analysis.get('theological_health_check', {})
-                if theological:
-                    story.append(Spacer(1, 6))
-                    story.append(Paragraph("<b>Theological Health Check:</b>", body_style))
-                    solid = theological.get('core_doctrines_solid', [])
-                    if solid:
-                        story.append(Paragraph(
-                            f"  <font color='#{GREEN.hexval()[2:]}'>✓ Solid: {', '.join(solid)}</font>",
-                            body_style
-                        ))
-                    needing = theological.get('areas_needing_clarification', [])
-                    if needing:
-                        story.append(Paragraph(
-                            f"  <font color='#{ORANGE.hexval()[2:]}'>⚠ Needs clarification: {', '.join(needing)}</font>",
-                            body_style
-                        ))
-                    concerns = theological.get('potential_concerns', [])
-                    if concerns:
-                        story.append(Paragraph(
-                            f"  <font color='#{RED.hexval()[2:]}'>⚠ Concerns: {', '.join(concerns)}</font>",
-                            body_style
-                        ))
-                
-                # Bible reading plan
-                reading_plan = bk_analysis.get('recommended_bible_reading_plan', {})
-                if reading_plan:
-                    story.append(Spacer(1, 6))
-                    plan_name = reading_plan.get('name', 'Bible Reading Plan')
-                    plan_desc = reading_plan.get('description', '')
-                    plan_why = reading_plan.get('why_this_plan', '')
-                    story.append(Paragraph(
-                        f"<b>📖 Recommended: {plan_name}</b>",
-                        body_style
-                    ))
-                    if plan_desc:
-                        story.append(Paragraph(plan_desc, body_style))
-                    if plan_why:
-                        story.append(Paragraph(f"<i>Why: {plan_why}</i>", body_style))
-                
-                story.append(Spacer(1, 8))
-            
-            # Spiritual Formation Insights
-            sf_insights = full_report.get('spiritual_formation_insights', [])
-            if sf_insights:
-                story.append(Paragraph(f"<font color='#{PURPLE.hexval()[2:]}'>Spiritual Formation Insights</font>", subsection_header))
-                for insight in sf_insights[:5]:
-                    area = insight.get('area', '') or insight.get('category', '')
-                    # Support both AI format (current_level, detailed_observation) and legacy (level, summary/insight)
-                    level = insight.get('current_level', '') or insight.get('level', '')
-                    observation = insight.get('detailed_observation', '') or insight.get('summary', '') or insight.get('observation', '') or insight.get('insight', '')
-                    
-                    level_color = GREEN if level.lower() in ['mature', 'flourishing', 'maturing'] else \
-                                  BLUE if level.lower() in ['stable', 'good'] else \
-                                  ORANGE if level.lower() in ['developing', 'growing'] else \
-                                  RED
-                    content = f"<b>{area}</b>"
-                    if level:
-                        content += f" — <font color='#{level_color.hexval()[2:]}'>{level}</font>"
-                    story.append(Paragraph(content, body_style))
-                    
-                    if observation:
-                        story.append(Paragraph(observation, body_style))
-                    
-                    # Maturity markers (AI format)
-                    markers_present = insight.get('maturity_markers_present', [])
-                    markers_missing = insight.get('maturity_markers_missing', [])
-                    if markers_present or markers_missing:
-                        markers_content = ""
-                        if markers_present:
-                            markers_content += f"<font color='#{GREEN.hexval()[2:]}'>✓ Present: {', '.join(markers_present[:4])}</font>"
-                        if markers_missing:
-                            if markers_content:
-                                markers_content += "<br/>"
-                            markers_content += f"<font color='#{ORANGE.hexval()[2:]}'>○ Missing: {', '.join(markers_missing[:4])}</font>"
-                        story.append(Paragraph(markers_content, body_style))
-                    
-                    # Custom development plan (AI format)
-                    custom_plan = insight.get('custom_development_plan', {})
-                    if custom_plan:
-                        plan_text = "<b>Development Plan:</b><br/>"
-                        if custom_plan.get('immediate_30_days'):
-                            plan_text += f"  📅 30 days: {custom_plan['immediate_30_days']}<br/>"
-                        if custom_plan.get('quarter_goal'):
-                            plan_text += f"  📅 Quarter: {custom_plan['quarter_goal']}<br/>"
-                        if custom_plan.get('year_vision'):
-                            plan_text += f"  📅 Year: {custom_plan['year_vision']}"
-                        story.append(Paragraph(plan_text, body_style))
-                    
-                    # Mentor discussion questions (AI format)
-                    mentor_questions = insight.get('mentor_discussion_questions', [])
-                    if mentor_questions:
-                        q_text = "<b>Questions to Ask:</b><br/>" + "<br/>".join([f"  ❓ {q}" for q in mentor_questions[:3]])
-                        story.append(Paragraph(q_text, body_style))
-                    
-                    # Legacy recommendations/mentor_moves
-                    recs = insight.get('recommendations', []) or insight.get('mentor_moves', [])
-                    if recs and not mentor_questions:  # Only show if no mentor_questions
-                        recs_text = "<br/>".join([f"  • {r}" for r in recs[:2]])
-                        story.append(Paragraph(f"<i>{recs_text}</i>", body_style))
-                    
-                    story.append(Spacer(1, 8))
-                story.append(Spacer(1, 8))
-        
-        # ===== PRIORITY ACTION =====
-        priority_action = context.get('priority_action')
-        if priority_action:
-            story.append(Paragraph("🎯 Priority Action This Week", section_header))
-            pa_title = priority_action.get('title', '')
-            pa_desc = priority_action.get('description', '')
-            pa_scripture = priority_action.get('scripture', '')
-            
-            if pa_title:
-                story.append(Paragraph(f"<b>{pa_title}</b>", body_style))
-            if pa_desc:
-                story.append(Paragraph(pa_desc, body_style))
-            if pa_scripture:
-                story.append(Paragraph(f"<font color='#{BLUE.hexval()[2:]}'><i>📖 {pa_scripture}</i></font>", body_style))
-            story.append(Spacer(1, 12))
-        
-        # ===== CONVERSATION STARTERS =====
-        starters = context.get('starters', [])
-        if starters:
-            story.append(Paragraph("💬 Conversation Starters", section_header))
-            for s in starters[:4]:
-                story.append(Paragraph(f"• {s}", body_style))
-            story.append(Spacer(1, 12))
-        
-        # ===== FOUR WEEK PLAN =====
-        four_week = context.get('four_week', {})
-        rhythm = four_week.get('rhythm', [])
-        checkpoints = four_week.get('checkpoints', [])
-        if rhythm or checkpoints:
-            story.append(Paragraph("📅 Four-Week Plan", section_header))
-            if rhythm:
-                story.append(Paragraph("<b>Weekly Rhythm:</b>", body_style))
-                for r in rhythm[:4]:
-                    story.append(Paragraph(f"• {r}", body_style))
-            if checkpoints:
-                story.append(Paragraph("<b>Checkpoints:</b>", body_style))
-                for cp in checkpoints[:4]:
-                    story.append(Paragraph(f"• {cp}", body_style))
-            story.append(Spacer(1, 12))
-        
-        # ===== RESOURCES =====
-        resources = context.get('resources', [])
-        if resources:
-            story.append(Paragraph("📚 Recommended Resources", section_header))
-            for res in resources[:5]:
-                if isinstance(res, dict):
-                    title = res.get('title', '')
-                    why = res.get('why', '') or res.get('why_specifically_for_them', '')
-                    res_type = res.get('type', '')
-                    how_to_use = res.get('how_to_use', '')
-                    content = f"<b>{title}</b>"
-                    if res_type:
-                        content += f" ({res_type})"
-                    if why:
-                        content += f"<br/>{why}"
-                    if how_to_use:
-                        content += f"<br/><i>How to use: {how_to_use}</i>"
-                    story.append(Paragraph(content, body_style))
-                    story.append(Spacer(1, 6))
-                else:
-                    story.append(Paragraph(f"• {res}", body_style))
-            story.append(Spacer(1, 12))
-        
-        # ===== PREMIUM: PROGRESS TRACKING =====
-        if full_report and isinstance(full_report, dict):
-            progress_tracking = full_report.get('progress_tracking', {})
-            if progress_tracking:
-                story.append(Paragraph(f"<font color='#{BLUE.hexval()[2:]}'>📈 Progress Tracking</font>", section_header))
-                
-                # Previous assessment comparison
-                prev_comparison = progress_tracking.get('previous_assessment_comparison', {})
-                if prev_comparison:
-                    score_change = prev_comparison.get('score_change', '')
-                    trend = prev_comparison.get('trend', '')
-                    if score_change or trend:
-                        trend_color = GREEN if 'improv' in trend.lower() or '+' in str(score_change) else ORANGE
-                        story.append(Paragraph(
-                            f"<b>Score Change:</b> <font color='#{trend_color.hexval()[2:]}'>{score_change}</font> ({trend})",
-                            body_style
-                        ))
-                    areas_improved = prev_comparison.get('areas_improved', [])
-                    if areas_improved:
-                        story.append(Paragraph("<b>Areas Improved:</b>", body_style))
-                        for area in areas_improved[:3]:
-                            story.append(Paragraph(f"  ✓ {area}", body_style))
-                
-                # Milestones
-                milestones = progress_tracking.get('milestones_to_track', [])
-                if milestones:
-                    story.append(Paragraph("<b>Milestones to Track:</b>", body_style))
-                    for m in milestones[:4]:
-                        milestone_text = m.get('milestone', '')
-                        expected = m.get('expected_by', '')
-                        if milestone_text:
-                            content = f"  • {milestone_text}"
-                            if expected:
-                                content += f" <i>(by {expected})</i>"
-                            story.append(Paragraph(content, body_style))
-                
-                reassess = progress_tracking.get('suggested_reassessment', '')
-                if reassess:
-                    story.append(Paragraph(f"<b>Suggested Reassessment:</b> {reassess}", body_style))
-                story.append(Spacer(1, 12))
-            
-            # ===== PREMIUM: MENTOR PREPARATION NOTES =====
-            mentor_notes = full_report.get('mentor_preparation_notes', {})
-            if mentor_notes:
-                story.append(Paragraph(f"<font color='#{PURPLE.hexval()[2:]}'>📝 Mentor Preparation Notes</font>", section_header))
-                
-                handle_care = mentor_notes.get('handle_with_care', '')
-                if handle_care:
-                    story.append(Paragraph(f"<b>Handle with Care:</b> {handle_care}", body_style))
-                
-                watch_for = mentor_notes.get('watch_for', '')
-                if watch_for:
-                    story.append(Paragraph(f"<b>Watch For:</b> {watch_for}", body_style))
-                
-                cultural = mentor_notes.get('cultural_considerations', '')
-                if cultural:
-                    story.append(Paragraph(f"<b>Cultural Considerations:</b> {cultural}", body_style))
-                
-                prayer_focus = mentor_notes.get('prayer_focus_for_this_apprentice', '')
-                if prayer_focus:
-                    story.append(Paragraph(
-                        f"<font color='#{BLUE.hexval()[2:]}'><b>🙏 Prayer Focus:</b> <i>{prayer_focus}</i></font>",
-                        body_style
-                    ))
-                story.append(Spacer(1, 12))
-            
-            # ===== PREMIUM: PERSONALIZED RESOURCES =====
-            personalized_resources = full_report.get('personalized_resources', [])
-            if personalized_resources:
-                story.append(Paragraph(f"<font color='#{GOLD.hexval()[2:]}'>✦ Personalized Resources</font>", section_header))
-                for res in personalized_resources[:4]:
-                    title = res.get('title', '')
-                    author = res.get('author', '')
-                    res_type = res.get('type', '')
-                    why = res.get('why_specifically_for_them', '')
-                    how_to_use = res.get('how_to_use', '')
-                    convo_starter = res.get('conversation_starter_from_book', '')
-                    
-                    content = f"<b>{title}</b>"
-                    if author:
-                        content += f" by {author}"
-                    if res_type:
-                        content += f" ({res_type})"
-                    story.append(Paragraph(content, body_style))
-                    
-                    if why:
-                        story.append(Paragraph(f"<i>Why for you: {why}</i>", body_style))
-                    if how_to_use:
-                        story.append(Paragraph(f"<b>How to use:</b> {how_to_use}", body_style))
-                    if convo_starter:
-                        story.append(Paragraph(
-                            f"<font color='#{PURPLE.hexval()[2:]}'><b>Discussion:</b> {convo_starter}</font>",
-                            body_style
-                        ))
-                    story.append(Spacer(1, 8))
-                story.append(Spacer(1, 12))
-        
-        # ===== FOOTER =====
-        story.append(Spacer(1, 20))
-        story.append(HRFlowable(width="100%", thickness=1, color=GOLD))
-        footer_style = ParagraphStyle(
-            'Footer',
-            parent=styles['Normal'],
-            fontName='Helvetica',
-            fontSize=8,
-            leading=10,
-            textColor=GREY,
-            alignment=TA_CENTER,
-        )
-        story.append(Paragraph(
-            "Generated by T[root]H Discipleship • www.troothapp.com",
-            footer_style
-        ))
-        
-        doc.build(story)
-        buf.seek(0)
-        return buf.read()
-        
-    except Exception as e:
-        logger.error(f"Failed to render styled PDF: {e}", exc_info=True)
-        # Fallback to simple text
-        md_text = render_markdown_print_v2(context)
-        return md_text.encode('utf-8')
+    name = _text(context.get("apprentice_name")) or "Apprentice"
+    mc = _num(context.get("overall_mc_percent"))
+    fallback = [
+        f"Health Score: {_text(context.get('health_score'))} ({_text(context.get('health_band'))})",
+        f"Biblical Knowledge: {mc:.0f}% ({_text(context.get('knowledge_band'))})",
+        "Top strengths: " + ", ".join(_items(context.get("top_strengths"), 3)),
+        "Growth areas: " + ", ".join(_items(context.get("top_gaps"), 3)),
+        "Open the T[root]H app for the full report.",
+    ]
+    return kit.build_pdf(
+        "Mentor Report",
+        name,
+        kit.format_date(context.get("submitted_date")) or f"Generated {kit.format_date(datetime.now())}",
+        lambda: build_mentor_story(context),
+        fallback_lines=fallback,
+        context_id="mentor_report_v2",
+    )

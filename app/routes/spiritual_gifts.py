@@ -421,7 +421,7 @@ def email_spiritual_gifts_report(body: EmailReportRequest, db: Session = Depends
     pdf_data = b""
     html_report = ""
     if body.include_pdf:
-        pdf_data = generate_pdf(getattr(current_user, 'name', None), template_version, scores, defs_map)
+        pdf_data = generate_pdf(getattr(current_user, 'name', None), template_version, scores, defs_map, assessment_date=assessment.created_at)
     if body.include_html:
         # Still produce full HTML report for optional attachment or reuse if needed
         html_report = generate_html(getattr(current_user, 'name', None), template_version, scores, defs_map)
@@ -510,16 +510,16 @@ def mentor_admin_email_spiritual_gifts_report(apprentice_id: str, body: EmailRep
         "short_summary": r.short_summary,
     } for r in defs_rows}
 
+    # Fetch apprentice user for display name
+    apprentice_user = db.query(User).filter(User.id == apprentice_id).first()
+    apprentice_name = (apprentice_user.name if apprentice_user else None) or 'Apprentice'
+
     pdf_data = b""
     html_report = ""
     if body.include_pdf:
-        pdf_data = generate_pdf(None, template_version, scores, defs_map)
+        pdf_data = generate_pdf(apprentice_name, template_version, scores, defs_map, assessment_date=assessment.created_at)
     if body.include_html:
-        html_report = generate_html(None, template_version, scores, defs_map)
-
-    # Fetch apprentice user for display name
-    apprentice_user = db.query(User).filter(User.id == apprentice_id).first()
-    apprentice_name = apprentice_user.name if apprentice_user else 'Apprentice'
+        html_report = generate_html(apprentice_name, template_version, scores, defs_map)
     today = datetime.now(UTC).strftime('%Y-%m-%d')
     subject = f"Spiritual Gifts Report — {apprentice_name} — {today}"
     inline_html, plain_fallback = render_spiritual_gifts_report_email(

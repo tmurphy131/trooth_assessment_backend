@@ -110,3 +110,27 @@ def test_email_report_success(client, apprentice_headers, generic_template_id):
     body = er.json()
     assert body.get("sent") is True
     assert body.get("assessment_id")
+
+
+def test_email_report_pdf_uses_mentor_layout_when_v2_data_exists(client, apprentice_headers, generic_template_id, db_session, monkeypatch):
+    """specs/008 FR-021/FR-022: v2 data -> mentor report PDF; otherwise the branded generic summary."""
+    from app.models.assessment import Assessment
+    from app.routes import generic_assessments as routes
+
+    r = client.post(f"/templates/{generic_template_id}/submit", json={"answers": {"q1": 5, "q2": 3, "q3": 4}}, headers=apprentice_headers)
+    assert r.status_code == 200, r.text
+
+    calls = []
+    monkeypatch.setattr(routes, "render_pdf_v2", lambda ctx: calls.append("v2") or b"%PDF-v2")
+    monkeypatch.setattr(routes, "gen_pdf", lambda *a, **kw: calls.append("generic") or b"%PDF-generic")
+
+    a = db_session.query(Assessment).filter(Assessment.template_id == generic_template_id).first()
+    a.mentor_report_v2 = None
+    db_session.commit()
+    body = {"to_email": "apprentice@example.com", "include_pdf": True}
+    assert client.post(f"/templates/{generic_template_id}/email-report", json=body, headers=apprentice_headers).status_code == 200
+
+    a.mentor_report_v2 = {"health_score": 70, "health_band": "Growing", "strengths": ["Prayer"], "gaps": ["Rest"]}
+    db_session.commit()
+    assert client.post(f"/templates/{generic_template_id}/email-report", json=body, headers=apprentice_headers).status_code == 200
+    assert calls == ["generic", "v2"]

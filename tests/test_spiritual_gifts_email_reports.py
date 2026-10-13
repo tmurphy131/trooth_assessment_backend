@@ -132,3 +132,40 @@ def test_public_template_metadata(client, apprentice_ctx):
         assert "version" in meta
     else:
         assert r.status_code == 404
+
+
+def test_mentor_email_report_pdf_names_apprentice(client, mentor_user, apprentice_user, mentor_apprentice_link, monkeypatch):
+    """specs/008 FR-016: the mentor-sent PDF is rendered with the apprentice's name and assessment date."""
+    from app.routes import spiritual_gifts as routes
+    from app.services.auth import get_current_user
+
+    class _A:
+        id = apprentice_user.id
+        role = apprentice_user.role
+        email = apprentice_user.email
+        name = apprentice_user.name
+    client.app.dependency_overrides[get_current_user] = lambda: _A()
+    _submit_gifts(client, {"Authorization": f"Bearer mock-{apprentice_user.id}"})
+
+    class _M:
+        id = mentor_user.id
+        role = mentor_user.role
+        email = mentor_user.email
+        name = mentor_user.name
+    client.app.dependency_overrides[get_current_user] = lambda: _M()
+
+    captured = {}
+    real = routes.generate_pdf
+
+    def capture(name, version, scores, defs, **kw):
+        captured.update(name=name, **kw)
+        return real(name, version, scores, defs, **kw)
+
+    monkeypatch.setattr(routes, "generate_pdf", capture)
+    r = client.post(f"/assessments/spiritual-gifts/{apprentice_user.id}/email-report",
+                    json={"to_email": "mentor_dest@example.com", "include_pdf": True},
+                    headers={"Authorization": f"Bearer mock-{mentor_user.id}"})
+    assert r.status_code == 200, r.text
+    assert captured["name"] == (apprentice_user.name or "Apprentice")
+    assert captured["name"] != mentor_user.name
+    assert captured.get("assessment_date") is not None
