@@ -157,7 +157,7 @@ description: "Task list for linking agreements and gift seats to apprentice acco
 - [X] T016 [P] Grep `app/services/mentorship.py`, `app/routes/agreements.py` (changed functions only), `app/routes/subscriptions.py` (`redeem_gift_code` and the three changed sites) and `app/services/invitations.py` for log calls containing `email`. New code must log IDs only (Principle V).
 - [X] T017 Run `ENV=test .venv/bin/python -m pytest -q` on the pinned stack. Results must match the T001 baseline plus the new tests.
 - [ ] T018 Run [quickstart.md §2](quickstart.md) on dev after `/deploy-dev`. **Requires the user**: deploy, and app accounts with different emails.
-- [ ] T019 Create the matching frontend spec in `trooth_assessment/specs/` with `/speckit-specify` there:
+- [X] T019 Create the matching frontend spec in `trooth_assessment/specs/` with `/speckit-specify` there:
   - the mentor agreement screen picks a connected apprentice and sends `apprentice_id`, with email entry kept for apprentices not connected yet;
   - an apprentice "Redeem gift code" screen using `POST /apprentice/redeem-code`.
 
