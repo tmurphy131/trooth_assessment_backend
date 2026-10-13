@@ -28,6 +28,7 @@ from app.models.mentor_apprentice import MentorApprentice
 from app.services.auth import (
     get_current_user,
     require_mentor,
+    require_apprentice,
     require_admin,
     is_premium_user,
     is_mentor_premium,
@@ -36,6 +37,7 @@ from app.services.auth import (
 )
 from app.core.settings import settings
 from app.services import revenuecat
+from app.services.mentorship import has_active_connection
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/subscriptions", tags=["Subscriptions"])
@@ -473,10 +475,7 @@ def confirm_seat_purchase(
                 
                 # Verify this apprentice is linked to the mentor
                 if apprentice:
-                    is_linked = db.query(MentorApprentice).filter(
-                        MentorApprentice.mentor_id == user.id,
-                        MentorApprentice.apprentice_id == data.apprentice_id
-                    ).first()
+                    is_linked = has_active_connection(db, user.id, data.apprentice_id)
                     if not is_linked:
                         logger.warning(f"Mentor {user.id} tried to gift existing seat to unlinked apprentice {data.apprentice_id}")
                         apprentice = None
@@ -605,10 +604,7 @@ def confirm_seat_purchase(
         
         # Verify this apprentice is linked to the mentor
         if apprentice:
-            is_linked = db.query(MentorApprentice).filter(
-                MentorApprentice.mentor_id == user.id,
-                MentorApprentice.apprentice_id == data.apprentice_id
-            ).first()
+            is_linked = has_active_connection(db, user.id, data.apprentice_id)
             if not is_linked:
                 logger.warning(f"Mentor {user.id} tried to gift seat to unlinked apprentice {data.apprentice_id}")
                 apprentice = None  # Don't allow gifting to unlinked apprentices
@@ -799,10 +795,7 @@ def assign_gift_seat(
         
         # Verify linked to mentor
         if apprentice:
-            is_linked = db.query(MentorApprentice).filter(
-                MentorApprentice.mentor_id == user.id,
-                MentorApprentice.apprentice_id == data.apprentice_id
-            ).first()
+            is_linked = has_active_connection(db, user.id, data.apprentice_id)
             if not is_linked:
                 raise HTTPException(status_code=403, detail="This apprentice is not linked to you")
     
@@ -916,7 +909,7 @@ apprentice_router = APIRouter(prefix="/apprentice", tags=["Apprentice Subscripti
 @apprentice_router.post("/redeem-code", response_model=RedeemCodeResponse)
 def redeem_gift_code(
     request: RedeemCodeRequest,
-    user: User = Depends(get_current_user),
+    user: User = Depends(require_apprentice),
     db: Session = Depends(get_db),
 ):
     """
@@ -986,7 +979,7 @@ def redeem_gift_code(
     
     db.commit()
     
-    logger.info(f"User {user.email} redeemed gift code from mentor {mentor.email if mentor else 'unknown'}")
+    logger.info("Gift code redeemed: user_id=%s seat_id=%s mentor_id=%s", user.id, seat.id, seat.mentor_id)
     
     return RedeemCodeResponse(
         success=True,

@@ -11,6 +11,7 @@ from app.models.invite_code_attempt import InviteCodeAttempt
 from app.models.mentor_apprentice import MentorApprentice
 from app.models.user import User
 from app.services.invite_codes import generate_invite_code, normalize_invite_code
+from app.services.mentorship import attach_pending_agreements
 
 logger = logging.getLogger(__name__)
 
@@ -52,6 +53,10 @@ def accept_invitation(db: Session, invitation: ApprenticeInvitation, apprentice:
     if updated == 0:
         db.rollback()
         raise HTTPException(status_code=400, detail=ALREADY_ACCEPTED_DETAIL)
+
+    # Agreements this mentor sent to the invited address now belong to the apprentice,
+    # whatever email their account uses (specs/007-connected-apprentice-linking).
+    attach_pending_agreements(db, invitation.mentor_id, invitation.apprentice_email, apprentice.id)
 
     # Pairing with this mentor never touches the apprentice's other mentor relationships.
     existing = db.query(MentorApprentice).filter_by(
