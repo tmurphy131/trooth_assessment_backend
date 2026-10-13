@@ -1,5 +1,8 @@
 # Core FastAPI dependencies
-fastapi>=0.104.0
+# Pinned to what the deployed image runs. Starlette 1.x requires TemplateResponse(request, name, ctx);
+# unpinned builds silently jumped from 0.47 to 1.8 and broke the HTML pages. Upgrade both together, on purpose.
+fastapi==0.143.0
+starlette==1.8.0
 uvicorn[standard]>=0.24.0
 pydantic[email]>=2.5.0
 

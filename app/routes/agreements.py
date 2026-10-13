@@ -811,6 +811,7 @@ def respond_reschedule(agreement_id: str, body: RescheduleResponse, db: Session 
 @router.get("/public/signed-success", response_class=HTMLResponse, include_in_schema=False)
 def public_signed_success(request: Request):
     return jinja_templates.TemplateResponse(
+        request,
         "agreements/signed_success.html",
         {"request": request, "title": "Agreement Signed", "logo_url": settings.logo_url, "app_store_url": settings.ios_app_store_url},
     )
@@ -818,6 +819,7 @@ def public_signed_success(request: Request):
 @router.get("/public/parent-signed-success", response_class=HTMLResponse, include_in_schema=False)
 def public_parent_signed_success(request: Request):
     return jinja_templates.TemplateResponse(
+        request,
         "agreements/parent_signed_success.html",
         {"request": request, "title": "Parent Signature Received", "logo_url": settings.logo_url, "app_store_url": settings.ios_app_store_url},
     )
@@ -1010,6 +1012,7 @@ def sign_html(token_type: str, token: str, request: Request, db: Session = Depen
         # Use public paths with an extra segment to avoid collision with dynamic routes like /{agreement_id}
         success_path = "/agreements/public/parent-signed-success" if token_type == 'parent' else "/agreements/public/signed-success"
         return jinja_templates.TemplateResponse(
+            request,
             "agreements/sign.html",
             {
                 "request": request,
@@ -1026,6 +1029,7 @@ def sign_html(token_type: str, token: str, request: Request, db: Session = Depen
 @router.get("/signed-success", response_class=HTMLResponse, include_in_schema=False)
 def signed_success(request: Request):
     return jinja_templates.TemplateResponse(
+        request,
         "agreements/signed_success.html",
         {"request": request, "title": "Agreement Signed", "logo_url": settings.logo_url, "app_store_url": settings.ios_app_store_url},
     )
@@ -1033,6 +1037,7 @@ def signed_success(request: Request):
 @router.get("/parent-signed-success", response_class=HTMLResponse, include_in_schema=False)
 def parent_signed_success(request: Request):
     return jinja_templates.TemplateResponse(
+        request,
         "agreements/parent_signed_success.html",
         {"request": request, "title": "Parent Signature Received", "logo_url": settings.logo_url, "app_store_url": settings.ios_app_store_url},
     )

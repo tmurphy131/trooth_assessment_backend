@@ -44,6 +44,7 @@ def accept_invitation_page(
     
     if not invitation:
         return templates.TemplateResponse(
+            request,
             "invitations/accept_invitation.html",
             {
                 "request": request,
@@ -61,6 +62,7 @@ def accept_invitation_page(
     
     if expires_at_naive < now_naive:
         return templates.TemplateResponse(
+            request,
             "invitations/accept_invitation.html",
             {
                 "request": request,
@@ -74,6 +76,7 @@ def accept_invitation_page(
     
     if invitation.accepted:
         return templates.TemplateResponse(
+            request,
             "invitations/accept_invitation.html",
             {
                 "request": request,
@@ -90,6 +93,7 @@ def accept_invitation_page(
     mentor_name = mentor.name if mentor and mentor.name else (mentor.email if mentor else "Your Mentor")
     
     return templates.TemplateResponse(
+        request,
         "invitations/accept_invitation.html",
         {
             "request": request,
