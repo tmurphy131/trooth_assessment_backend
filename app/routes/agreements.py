@@ -37,6 +37,7 @@ MAX_RESENDS_PER_HOUR = 3
 RESEND_WINDOW_SECONDS = 3600
 from app.core.settings import settings
 from app.services.markdown_renderer import render_markdown
+from app.services.mentorship import has_active_connection
 from app.services.auth import get_current_user, require_mentor, require_mentor_or_admin, require_admin, require_apprentice
 
 router = APIRouter(prefix="/agreements", tags=["Agreements"])
@@ -164,8 +165,20 @@ def create_agreement(payload: AgreementCreate, db: Session = Depends(get_db), me
     if not tpl.is_active:
         raise HTTPException(status_code=400, detail="Template version inactive")
 
-    # Lowercase email to match Firebase storage
-    apprentice_email = payload.apprentice_email.lower().strip()
+    apprentice_id = None
+    apprentice_name = payload.apprentice_name
+    if payload.apprentice_id:
+        # Picked from the mentor's apprentices: tie to the account, whatever its email.
+        apprentice = db.query(User).filter_by(id=payload.apprentice_id).first()
+        role_val = (apprentice.role.value if hasattr(apprentice.role, 'value') else str(apprentice.role)) if apprentice else None
+        if role_val != UserRole.apprentice.value or not has_active_connection(db, mentor.id, apprentice.id):
+            raise HTTPException(status_code=403, detail="This apprentice is not connected to you")
+        apprentice_id = apprentice.id
+        apprentice_email = apprentice.email.lower().strip()
+        apprentice_name = apprentice_name or apprentice.name
+    else:
+        # Lowercase email to match Firebase storage
+        apprentice_email = payload.apprentice_email.lower().strip()
     
     # Pre-render draft so mentor can preview before submit
     fields_dict = payload.fields.model_dump()
@@ -177,13 +190,14 @@ def create_agreement(payload: AgreementCreate, db: Session = Depends(get_db), me
         fields_dict,
         mentor_name=mentor.name or mentor.email,
         apprentice_email=apprentice_email,
-    apprentice_name=payload.apprentice_name,
+    apprentice_name=apprentice_name,
     )
     agreement = Agreement(
         template_version=tpl.version,
         mentor_id=mentor.id,
+        apprentice_id=apprentice_id,
         apprentice_email=apprentice_email,
-        apprentice_name=payload.apprentice_name,
+        apprentice_name=apprentice_name,
         status='draft',
         apprentice_is_minor=payload.apprentice_is_minor,
         parent_required=payload.parent_required,
@@ -196,7 +210,7 @@ def create_agreement(payload: AgreementCreate, db: Session = Depends(get_db), me
     db.refresh(agreement)
     # Attach transient names for client rendering (not persisted columns)
     agreement.__dict__["mentor_name"] = mentor.name or mentor.email
-    agreement.__dict__["apprentice_name"] = payload.apprentice_name or payload.apprentice_email.split('@')[0]
+    agreement.__dict__["apprentice_name"] = apprentice_name or apprentice_email.split('@')[0]
     return agreement
 
 @router.post("/{agreement_id}/submit", response_model=AgreementOut)
@@ -321,7 +335,13 @@ def apprentice_sign(agreement_id: str, body: AgreementSign, request: Request, db
             header_email = "apprentice@example.com"
             header_uid = "apprentice-1"
     effective_email = header_email or user.email
-    if effective_email != ag.apprentice_email:
+    # Tied to an account: only that account signs. Not tied yet: today's email match
+    # (specs/007-connected-apprentice-linking).
+    if ag.apprentice_id is not None:
+        allowed = ag.apprentice_id == (header_uid or user.id)
+    else:
+        allowed = effective_email == ag.apprentice_email
+    if not allowed:
         raise HTTPException(status_code=403, detail="Not authorized to sign")
     if ag.apprentice_signed_at:
         raise HTTPException(status_code=409, detail="Already signed")

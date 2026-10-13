@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, EmailStr, field_validator
+from pydantic import BaseModel, Field, EmailStr, field_validator, model_validator
 from typing import Optional, Dict, Any, List
 from datetime import datetime
 
@@ -41,7 +41,10 @@ class AgreementFieldValues(BaseModel):
 
 class AgreementCreate(BaseModel):
     template_version: int
-    apprentice_email: EmailStr
+    # A connected apprentice's account (preferred), or an email for someone not connected yet
+    # (specs/007-connected-apprentice-linking). At least one is required.
+    apprentice_id: Optional[str] = None
+    apprentice_email: Optional[EmailStr] = None
     apprentice_name: Optional[str] = None
     apprentice_is_minor: bool = False
     parent_required: bool = False
@@ -56,6 +59,12 @@ class AgreementCreate(BaseModel):
         if values.get('parent_required') and not v:
             raise ValueError('parent_email required when parent_required is true')
         return v
+
+    @model_validator(mode="after")
+    def apprentice_id_or_email(self):
+        if not self.apprentice_id and not self.apprentice_email:
+            raise ValueError('apprentice_id or apprentice_email is required')
+        return self
 
 class AgreementOut(BaseModel):
     id: str
