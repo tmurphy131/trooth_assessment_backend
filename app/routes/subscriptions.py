@@ -9,6 +9,7 @@ Handles:
 """
 
 from datetime import datetime, timezone, timedelta
+from app.utils.datetime import ensure_aware_utc
 from typing import Optional
 import secrets
 import logging
@@ -945,7 +946,8 @@ def redeem_gift_code(
         )
     
     # Check if seat has expired
-    if seat.expires_at and seat.expires_at < datetime.now(timezone.utc):
+    # expires_at comes back naive from PostgreSQL (TIMESTAMP WITHOUT TIME ZONE); treat it as UTC.
+    if seat.expires_at and ensure_aware_utc(seat.expires_at) < datetime.now(timezone.utc):
         return RedeemCodeResponse(
             success=False,
             message="This code has expired."
