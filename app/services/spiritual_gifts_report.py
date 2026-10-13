@@ -1,270 +1,240 @@
-"""Spiritual Gifts PDF / email report generation utilities.
+"""Spiritual Gifts PDF / HTML report generation (specs/008-pdf-redesign).
 
-If ReportLab (or similar) is unavailable, falls back to a very basic PDF-like bytes payload
-constructed manually (not standards-compliant for complex layout but adequate as placeholder).
-
-Design allows swapping in a real engine later.
+The PDF is built on the shared branded kit in ``app.services.pdf``. Sections follow
+``specs/008-pdf-redesign/contracts/pdf-reports.md``.
 """
 from __future__ import annotations
-from typing import List, Dict, Optional
-from datetime import datetime, UTC
+
+import html as _html
 import logging
+from datetime import datetime, UTC
+from typing import Dict, List, Optional
 
-logger = logging.getLogger("app.gifts_report")
+from app.data.spiritual_gift_guidance import GIFT_GUIDANCE
+from app.services import pdf as kit
+from app.services.pdf import theme as t
+from app.services.spiritual_gifts_scoring import canonical_slug, display_to_slug
 
-try:  # Optional dependency path
-    from reportlab.lib.pagesizes import letter
-    from reportlab.pdfgen import canvas  # type: ignore
-    from reportlab.lib import colors  # type: ignore
-    from reportlab.lib.utils import ImageReader  # type: ignore
-    from reportlab.pdfbase import pdfmetrics  # type: ignore
-    from reportlab.pdfbase.ttfonts import TTFont  # type: ignore
-    from reportlab.platypus import Table, TableStyle  # type: ignore
-    _HAS_REPORTLAB = True
-except Exception:  # pragma: no cover
-    _HAS_REPORTLAB = False
+logger = logging.getLogger(__name__)
 
-
-def _compose_sections(apprentice_name: Optional[str], version: int, scores: Dict, summaries: Optional[Dict[str,str]] = None) -> Dict[str,str]:
-    top_trunc = scores.get("top_gifts_truncated", [])
-    top_expanded = scores.get("top_gifts_expanded", [])
-    all_scores = scores.get("all_scores", [])
-    lines = []
-    header_name = apprentice_name or "Apprentice"
-    lines.append(f"Spiritual Gifts Assessment Report (v{version})")
-    lines.append(f"Apprentice: {header_name}")
-    # Use timezone-aware UTC timestamp with Z suffix
-    lines.append(f"Generated: {datetime.now(UTC).isoformat().replace('+00:00','Z')}")
-    lines.append("")
-    lines.append("Top Gifts (Truncated):")
-    for g in top_trunc:
-        summ = ''
-        if summaries and g['gift'] in summaries:
-            summ = f" — {summaries[g['gift']]}".strip()
-        lines.append(f"  - {g['gift']}: {g['score']}{summ}")
-    lines.append("")
-    lines.append("Top Gifts (Expanded Ties):")
-    for g in top_expanded:
-        lines.append(f"  - {g['gift']}: {g['score']}")
-    lines.append("")
-    lines.append("All Gifts (Ordered):")
-    for g in all_scores:
-        lines.append(f"  - {g['gift']}: {g['score']}")
-    body_text = "\n".join(lines)
-    return {"text": body_text}
+MAX_SCORE = 12
+MAX_DEEP_DIVES = 6
+BANDS = [
+    ("strongest", "Strongest", "9-12"),
+    ("developing", "Developing", "5-8"),
+    ("less_evident", "Less evident", "0-4"),
+]
 
 
-def generate_pdf(apprentice_name: Optional[str], version: int, scores: Dict, definitions: Dict[str, Dict]) -> bytes:
-    # Build map of display_name -> short summary for quick lookup
-    summaries = {d.get('display_name'): d.get('short_summary') for d in definitions.values() if d.get('short_summary')}
-    sections = _compose_sections(apprentice_name, version, scores, summaries)
-    # Add definitions for all gifts (full definitions requested)
-    defs_lines = ["", "Definitions:"]
-    # definitions: slug keyed; we may not have slug-case matching display gift names; attempt name match fallback
-    for slug, d in definitions.items():
-        defs_lines.append(f"-- {d.get('display_name') or slug} --")
-        defs_lines.append(d.get('full_definition','').strip())
-        defs_lines.append("")
-    full_text = sections["text"] + "\n" + "\n".join(defs_lines)
+def _band(score: int) -> str:
+    return "strongest" if score >= 9 else "developing" if score >= 5 else "less_evident"
 
-    if _HAS_REPORTLAB:
-        import io, os, textwrap
 
-        def register_fonts():
-            # Attempt to register a nicer font if a TTF exists in assets/fonts; fallback to built-ins silently.
-            fonts_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'assets', 'fonts')
-            candidates = [
-                ('OpenSans-Regular.ttf', 'OpenSans'),
-                ('Roboto-Regular.ttf', 'Roboto'),
-            ]
-            for filename, name in candidates:
-                path = os.path.join(fonts_dir, filename)
-                if os.path.exists(path):
-                    try:
-                        pdfmetrics.registerFont(TTFont(name, path))
-                        return name
-                    except Exception:  # pragma: no cover
-                        continue
-            return None
+def _definitions_by_slug(definitions: Dict[str, Dict]) -> Dict[str, Dict]:
+    """Definitions are keyed by DB slug (e.g. 'pastor_shepherd'); normalize to MAP slugs."""
+    out: Dict[str, Dict] = {}
+    for key, d in (definitions or {}).items():
+        slug = display_to_slug(key) or display_to_slug(d.get("display_name") or "") or canonical_slug(key)
+        out[slug] = d
+    return out
 
-        primary_font = register_fonts() or 'Helvetica'
-        buf = io.BytesIO()
-        c = canvas.Canvas(buf, pagesize=letter)
-        width, height = letter
 
-        # --- Header with logo & title bar ---
-        logo_path_candidates = [
-            os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'assets', 'logo.png'),
-            os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'assets', 'logoSmall.png'),
-            os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'assets', 'logoBnG.png'),
-        ]
-        logo_reader = None
-        for lp in logo_path_candidates:
-            if os.path.exists(lp):
-                try:
-                    logo_reader = ImageReader(lp)
-                    break
-                except Exception:  # pragma: no cover
-                    pass
+def _prepare_gifts(scores: Dict, definitions: Dict[str, Dict]) -> Dict:
+    """Ranked rows plus the deep-dive selection (research R8, R10)."""
+    defs = _definitions_by_slug(definitions)
+    all_scores = scores.get("all_scores") or []
+    truncated = scores.get("top_gifts_truncated") or all_scores[:3]
+    expanded = scores.get("top_gifts_expanded") or truncated
+    top_names = {g.get("gift") for g in truncated}
+    expanded_names = {g.get("gift") for g in expanded}
 
-        accent_color = colors.HexColor('#2F4B7C')  # Chosen deep blue
-        light_accent = colors.HexColor('#D9E2F1')
+    rows: List[Dict] = []
+    for i, g in enumerate(all_scores, start=1):
+        name = g.get("gift") or ""
+        slug = display_to_slug(name) or canonical_slug(name)
+        d = defs.get(slug, {})
+        try:
+            score = int(g.get("score") or 0)
+        except (TypeError, ValueError):
+            score = 0
+        rows.append({
+            "slug": slug,
+            "gift": name,
+            "score": score,
+            "rank": i,
+            "band": _band(score),
+            "is_top": name in top_names,
+            "is_tied_third": name in expanded_names and name not in top_names,
+            "summary": (d.get("short_summary") or "").strip(),
+            "definition": (d.get("full_definition") or d.get("short_summary") or "").strip(),
+            "guidance": GIFT_GUIDANCE.get(slug),
+        })
 
-        def draw_header(page_title: str):
-            c.setFillColor(accent_color)
-            c.rect(0, height - 60, width, 60, fill=1, stroke=0)
-            if logo_reader:
-                try:
-                    c.drawImage(logo_reader, 40, height - 55, width=50, height=50, preserveAspectRatio=True, mask='auto')
-                except Exception:  # pragma: no cover
-                    pass
-            c.setFillColor(colors.white)
-            c.setFont(primary_font, 18)
-            c.drawString(110 if logo_reader else 40, height - 30, page_title)
-            c.setFillColor(colors.black)
+    by_name = {r["gift"]: r for r in rows}
+    dive_rows = [by_name[g.get("gift")] for g in expanded if g.get("gift") in by_name]
+    if not dive_rows:
+        dive_rows = rows[:3]
+    return {
+        "rows": rows,
+        "top": [r for r in rows if r["is_top"]][:3] or rows[:3],
+        "tied_third": [r for r in rows if r["is_tied_third"]],
+        "deep_dive": dive_rows[:MAX_DEEP_DIVES],
+        "also_tied": dive_rows[MAX_DEEP_DIVES:],
+    }
 
-        def draw_footer(page_num: int):
-            c.setFont(primary_font, 8)
-            c.setFillColor(colors.grey)
-            c.drawRightString(width - 40, 30, f"Page {page_num}")
-            c.setFillColor(colors.black)
 
-        page_num = 1
-        draw_header("Spiritual Gifts Assessment Report")
-        y = height - 80
+def _top_card(r: Dict, width: float) -> list:
+    content = [
+        kit.para(f"#{r['rank']}", "dark_label"),
+        kit.gap(2),
+        kit.para(r["gift"], "dark_title"),
+        kit.gap(6),
+        kit.ScoreBar(r["score"], MAX_SCORE, width=width - 24, height=5, track=t.RULE_DARK),
+        kit.gap(4),
+        kit.para(f"{r['score']}/{MAX_SCORE}", "dark_gold"),
+    ]
+    if r["summary"]:
+        content += [kit.gap(4), kit.para(r["summary"], "dark_body")]
+    return content
 
-        def new_page():
-            nonlocal page_num, y
-            draw_footer(page_num)
-            c.showPage()
-            page_num += 1
-            draw_header("Spiritual Gifts Assessment Report (cont.)")
-            y = height - 80
 
-        def write_wrapped(text: str, font_size=11, leading=14, max_width=90):
-            nonlocal y
-            c.setFont(primary_font, font_size)
-            wrapper = textwrap.TextWrapper(width=max_width)
-            for para in text.split('\n'):
-                if not para.strip():
-                    y -= leading
-                    if y < 60:
-                        new_page()
-                    continue
-                for line in wrapper.wrap(para):
-                    if y < 60:
-                        new_page()
-                    c.drawString(40, y, line)
-                    y -= leading
-            y -= 4
-            if y < 60:
-                new_page()
+def _deep_dive(r: Dict) -> list:
+    g = r["guidance"] or {}
+    label = "Tied for 3rd" if r["is_tied_third"] else f"#{r['rank']}"
+    block = [kit.subheading(f"{label}  ·  {r['gift']}  ·  {r['score']}/{MAX_SCORE}")]
+    if r["definition"]:
+        block.append(kit.para(r["definition"]))
+    if g.get("scriptures"):
+        block += [kit.gap(2), kit.callout("In Scripture", "  ·  ".join(g["scriptures"])), kit.gap(6)]
+    if g.get("ways_to_serve"):
+        block += [kit.para("WAYS TO USE THIS GIFT", "label"), kit.gap(3), kit.bullets(g["ways_to_serve"])]
+    if g.get("reflection"):
+        block += [kit.gap(4), kit.callout("Reflect", g["reflection"])]
+    return [kit.KeepTogether(block), kit.gap(14)]
 
-        # Metadata block
-        meta_lines = [
-            f"Apprentice: {apprentice_name or 'Apprentice'}",
-            f"Generated: {datetime.now(UTC).isoformat().replace('+00:00','Z')}",
-            f"Version: {version}",
-        ]
-        c.setFillColor(light_accent)
-        c.rect(30, y - 10, width - 60, (len(meta_lines) * 14) + 16, fill=1, stroke=0)
-        c.setFillColor(colors.black)
-        c.setFont(primary_font, 11)
-        my = y + (len(meta_lines) * 14) + 4
-        for ml in meta_lines:
-            my -= 14
-            c.drawString(40, my, ml)
-        y -= (len(meta_lines) * 14) + 36
 
-        # Scores Table
-        all_scores = scores.get('all_scores', [])
-        table_data = [["Gift", "Score"]] + [[g['gift'], str(g['score'])] for g in all_scores]
-        table = Table(table_data, colWidths=[width * 0.6, width * 0.25])
-        table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), accent_color),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
-            ('FONTNAME', (0, 0), (-1, 0), primary_font),
-            ('FONTSIZE', (0, 0), (-1, 0), 12),
-            ('ALIGN', (1, 1), (-1, -1), 'CENTER'),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.whitesmoke, colors.HexColor('#F3F6FA')]),
-            ('GRID', (0,0), (-1,-1), 0.25, colors.grey),
-            ('LEFTPADDING', (0,0), (-1,-1), 6),
-            ('RIGHTPADDING', (0,0), (-1,-1), 6),
-        ]))
-        tw, th = table.wrapOn(c, width - 80, y - 60)
-        if y - th < 60:
-            new_page()
-        table.drawOn(c, 40, y - th)
-        y -= th + 30
+def build_gifts_story(apprentice_name: Optional[str], scores: Dict, definitions: Dict[str, Dict]) -> list:
+    prep = _prepare_gifts(scores, definitions)
+    rows, top = prep["rows"], prep["top"]
+    story: list = []
 
-        # Top Gifts sections with summaries
-        top_trunc = scores.get('top_gifts_truncated', [])
-        summaries = {d.get('display_name'): d.get('short_summary') for d in definitions.values() if d.get('short_summary')}
-        if top_trunc:
-            c.setFont(primary_font, 14)
-            if y < 100:
-                new_page()
-            c.drawString(40, y, 'Top Gifts (Truncated)')
-            y -= 20
-            for g in top_trunc:
-                line = f"{g['gift']} – {g['score']}"
-                c.setFont(primary_font, 12)
-                if y < 70:
-                    new_page()
-                c.drawString(50, y, line)
-                y -= 16
-                summ = summaries.get(g['gift'])
-                if summ:
-                    write_wrapped(summ, font_size=10, leading=12, max_width=85)
+    story.append(kit.para(
+        "Spiritual gifts are abilities the Holy Spirit gives every believer to build up the church "
+        "and serve others (1 Corinthians 12:4-7; 1 Peter 4:10). Each gift below is scored from 0 to 12 "
+        "based on your answers: the higher the score, the more strongly that gift showed up. Scores "
+        "describe where you are today, so use them as a starting point for conversation and service.",
+        "lead",
+    ))
 
-        # Definitions
-        c.setFont(primary_font, 14)
-        if y < 100:
-            new_page()
-        c.drawString(40, y, 'Definitions')
-        y -= 24
-        for slug, d in definitions.items():
-            name = d.get('display_name') or slug
-            full_def = (d.get('full_definition','') or '').strip()
-            c.setFont(primary_font, 12)
-            if y < 70:
-                new_page()
-            c.setFillColor(accent_color)
-            c.drawString(40, y, name)
-            c.setFillColor(colors.black)
-            y -= 16
-            if full_def:
-                write_wrapped(full_def, font_size=10, leading=12, max_width=90)
+    # Your top gifts
+    story += kit.section_heading("Your top gifts", space_before=8)
+    if top:
+        card_w = (t.CONTENT_WIDTH - 8 * (len(top) - 1)) / len(top)
+        story.append(kit.cards_row([_top_card(r, card_w) for r in top]))
+        if prep["tied_third"]:
+            names = ", ".join(r["gift"] for r in prep["tied_third"])
+            story += [kit.gap(6), kit.para(f"Tied for 3rd ({prep['tied_third'][0]['score']}/{MAX_SCORE}): {names}", "small")]
+    else:
+        story.append(kit.para("No scores were recorded for this assessment."))
 
-        draw_footer(page_num)
-        c.save()
-        buf.seek(0)
-        return buf.read()
-    # Fallback minimal PDF header (very naive) - NOT a fully valid PDF for complex viewers but works for simple tests / storage.
-    pseudo = f"PSEUDO-PDF\n{full_text}".encode()
-    return pseudo
+    # Deep dives
+    if prep["deep_dive"]:
+        story += kit.section_heading("Your gifts in depth")
+        for r in prep["deep_dive"]:
+            story += _deep_dive(r)
+        if prep["also_tied"]:
+            story.append(kit.para("Also tied: " + ", ".join(r["gift"] for r in prep["also_tied"]), "small"))
+
+    # All gifts ranked, grouped by band
+    if rows:
+        story += kit.section_heading("All gifts ranked")
+        for key, title, rng in BANDS:
+            band_rows = [r for r in rows if r["band"] == key]
+            if not band_rows:
+                continue
+            story.append(kit.KeepTogether([
+                kit.subheading(f"{title}  <font color='{t.hex_of(t.MUTED)}' size='8.5'>{rng}</font>", markup=True),
+                kit.score_table([
+                    {
+                        "rank": r["rank"],
+                        "label": r["gift"],
+                        "note": r["summary"],
+                        "value": r["score"],
+                        "highlight": r["is_top"] or r["is_tied_third"],
+                    }
+                    for r in band_rows[:1]
+                ], MAX_SCORE, show_rank=True),
+            ]))
+            if len(band_rows) > 1:
+                story.append(kit.score_table([
+                    {
+                        "rank": r["rank"],
+                        "label": r["gift"],
+                        "note": r["summary"],
+                        "value": r["score"],
+                        "highlight": r["is_top"] or r["is_tied_third"],
+                    }
+                    for r in band_rows[1:]
+                ], MAX_SCORE, show_rank=True))
+            story.append(kit.gap(10))
+
+    # Next steps
+    if top:
+        first = top[0]
+        first_way = ((first["guidance"] or {}).get("ways_to_serve") or [None])[0]
+        steps = [f"Talk with your mentor about your {first['gift']} gift and where it could serve right now."]
+        if first_way:
+            steps.append(f"Try this in the next two weeks: {first_way}")
+        steps.append("Ask people who know you well whether they see these gifts in you. Gifts are confirmed in community.")
+        steps.append("Retake the assessment in 6 to 12 months to see how your gifts are growing.")
+        story += kit.section_heading("Next steps")
+        story.append(kit.bullets(steps))
+        story += [kit.gap(10), kit.callout(None, "Romans 12:6  ·  We have different gifts, according to the grace given to us. Use yours.")]
+    return story
+
+
+def generate_pdf(
+    apprentice_name: Optional[str],
+    version: int,
+    scores: Dict,
+    definitions: Dict[str, Dict],
+    *,
+    assessment_date=None,
+) -> bytes:
+    """Branded Spiritual Gifts PDF. ``version`` is accepted for compatibility but not printed."""
+    name = (apprentice_name or "").strip() or "Apprentice"
+    date_label = kit.format_date(assessment_date) or f"Generated {kit.format_date(datetime.now(UTC))}"
+    top = (scores.get("top_gifts_truncated") or (scores.get("all_scores") or [])[:3])
+    fallback = ["Your top gifts:"] + [f"{i}. {g.get('gift')} - {g.get('score')}/{MAX_SCORE}" for i, g in enumerate(top, 1)]
+    return kit.build_pdf(
+        "Spiritual Gifts Report",
+        name,
+        date_label,
+        lambda: build_gifts_story(name, scores, definitions),
+        fallback_lines=fallback,
+        context_id="spiritual_gifts",
+    )
 
 
 def generate_html(apprentice_name: Optional[str], version: int, scores: Dict, definitions: Dict[str, Dict]) -> str:
-    def esc(s: str) -> str:
-        return (s or '').replace('<','&lt;').replace('>','&gt;')
-    top_trunc = scores.get("top_gifts_truncated", [])
-    top_expanded = scores.get("top_gifts_expanded", [])
-    all_scores = scores.get("all_scores", [])
-    head = f"<h1>Spiritual Gifts Assessment Report (v{version})</h1>"
-    meta = f"<p>Apprentice: {esc(apprentice_name or 'Apprentice')}</p><p>Generated: {esc(datetime.now(UTC).isoformat().replace('+00:00','Z'))}</p>"
-    # Summaries map
-    summaries = {d.get('display_name'): d.get('short_summary') for d in definitions.values() if d.get('short_summary')}
-    def ul(items, include_summary=False):
-        lis = []
-        for i in items:
-            summ = ''
-            if include_summary and i['gift'] in summaries:
-                summ = f" — {esc(summaries[i['gift']])}"
-            lis.append(f"<li><strong>{esc(i['gift'])}</strong>: {i['score']}{summ}</li>")
-        return '<ul>' + ''.join(lis) + '</ul>'
-    defs_html = '<h2>Definitions</h2>' + ''.join([
-        f"<h3>{esc(d.get('display_name') or slug)}</h3><p>{esc(d.get('full_definition',''))}</p>" for slug, d in definitions.items()
-    ])
-    html = f"<div style='font-family:Arial,sans-serif;'>{head}{meta}<h2>Top Gifts (Truncated)</h2>{ul(top_trunc, include_summary=True)}<h2>Top Gifts (Expanded)</h2>{ul(top_expanded)}<h2>All Gifts</h2>{ul(all_scores)}{defs_html}</div>"
-    return html
+    esc = _html.escape
+    prep = _prepare_gifts(scores, definitions)
+    name = esc(apprentice_name or "Apprentice")
+    date = esc(kit.format_date(datetime.now(UTC)) or "")
+
+    def li(r: Dict) -> str:
+        summ = f" - {esc(r['summary'])}" if r["summary"] else ""
+        return f"<li><strong>{esc(r['gift'])}</strong>: {r['score']}/{MAX_SCORE}{summ}</li>"
+
+    top_html = "".join(li(r) for r in prep["top"])
+    tied = ""
+    if prep["tied_third"]:
+        tied = "<p>Tied for 3rd: " + esc(", ".join(r["gift"] for r in prep["tied_third"])) + "</p>"
+    all_html = "".join(li(r) for r in prep["rows"])
+    return (
+        "<div style='font-family:Arial,sans-serif;'>"
+        f"<h1>Spiritual Gifts Report</h1><p>{name} &middot; {date}</p>"
+        f"<h2>Top gifts</h2><ul>{top_html}</ul>{tied}"
+        f"<h2>All gifts ranked</h2><ul>{all_html}</ul>"
+        "</div>"
+    )

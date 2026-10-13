@@ -4,6 +4,7 @@ Single source of truth: imports MAP (gift_slug -> codes) and QUESTION_ITEMS
 from ``app.core.spiritual_gifts_map`` to avoid drift. Scores are computed
 purely from submitted answer dict keyed by question_code (Q01..Q72).
 """
+import re
 from typing import Dict, List, Tuple
 from app.core.spiritual_gifts_map import MAP as CORE_MAP, QUESTION_ITEMS
 
@@ -91,3 +92,22 @@ def score_spiritual_gifts(answers: Dict[str,int]) -> Dict:
     if errors:
         raise ValueError("; ".join(errors))
     return score_answers(answers)
+
+
+_DISPLAY_TO_SLUG: Dict[str, str] = {disp: slug for slug, disp in _slug_display.items()}
+
+
+def canonical_slug(value: str) -> str:
+    """Normalize a gift name or slug variant: 'Pastor / Shepherd', 'pastor_shepherd' -> 'pastor-shepherd'."""
+    s = re.sub(r"[\s/&_\-]+", "-", (value or "").strip().lower())
+    return s.replace("-and-", "-").strip("-")
+
+
+def display_to_slug(name: str) -> str | None:
+    """Map a scoring display name (or slug variant) to its canonical MAP slug, or None."""
+    if not name:
+        return None
+    if name in _DISPLAY_TO_SLUG:
+        return _DISPLAY_TO_SLUG[name]
+    slug = canonical_slug(name)
+    return slug if slug in CORE_MAP else None

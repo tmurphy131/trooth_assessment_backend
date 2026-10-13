@@ -13,6 +13,7 @@ from app.models.mentor_apprentice import MentorApprentice
 from app.services.auth import get_current_user
 from app.services.ai_scoring_generic import score_generic_assessment
 from app.services.generic_assessment_report import generate_html as gen_html, generate_pdf as gen_pdf
+from app.services.master_trooth_report import build_report_context, render_pdf_v2
 from app.services.email import send_email, render_generic_assessment_email
 from app.services.audit import log_assessment_submit, log_assessment_view, log_email_send
 from app.models.email_send_event import EmailSendEvent
@@ -179,6 +180,24 @@ def _enforce_email_rate_limit(db: Session, user_id: str) -> None:
         raise HTTPException(status_code=429, detail={"error": "RATE_LIMIT", "retry_after_seconds": EMAIL_WINDOW_SECONDS})
 
 
+def _report_pdf(tpl, a, apprentice_name, scores_data, full_report=None) -> bytes:
+    """Mentor report layout when the assessment has mentor-report data, else the branded summary (spec 008)."""
+    if a.mentor_report_v2:
+        context = build_report_context(
+            {
+                'apprentice': {'id': a.apprentice_id, 'name': apprentice_name or 'Apprentice'},
+                'template_id': a.template_id,
+                'created_at': getattr(a, 'created_at', None),
+            },
+            scores_data,
+            a.mentor_report_v2 or {},
+        )
+        if full_report:
+            context['full_report'] = full_report
+        return render_pdf_v2(context)
+    return gen_pdf(tpl.name or "Assessment Report", apprentice_name, scores_data, assessment_date=getattr(a, 'created_at', None))
+
+
 @router.post("/templates/{template_id}/email-report")
 def email_generic(template_id: str, body: dict, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     if current_user.role != UserRole.apprentice:
@@ -258,7 +277,7 @@ def email_generic(template_id: str, body: dict, db: Session = Depends(get_db), c
     
     attachments = None
     if include_pdf:
-        pdf = gen_pdf(tpl.name or "Assessment Report", apprentice_name, scores_data)
+        pdf = _report_pdf(tpl, a, apprentice_name, scores_data, cached_full_report if user_is_premium else None)
         safe_name = (apprentice_name or 'Apprentice').lower().replace(' ', '_')
         today = datetime.now(UTC).strftime('%Y%m%d')
         attachments = [{
@@ -424,7 +443,7 @@ def mentor_email_generic(
     
     attachments = None
     if include_pdf:
-        pdf = gen_pdf(tpl.name or "Assessment Report", apprentice_name, scores_data)
+        pdf = _report_pdf(tpl, a, apprentice_name, scores_data, cached_full_report if user_is_premium else None)
         safe_name = (apprentice_name or apprentice_id).lower().replace(' ', '_')
         today = datetime.now(UTC).strftime('%Y%m%d')
         attachments = [{
