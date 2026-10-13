@@ -158,13 +158,17 @@ def render_assessment_completion_email(mentor_name: str, apprentice_name: str,
     return rendered.html, rendered.text
 
 
-def render_invitation_email(apprentice_name: str, mentor_name: str, token: str) -> Tuple[str, str]:
-    """Apprentice invitation email. The accept link is a backend page, not the app."""
+def render_invitation_email(apprentice_name: str, mentor_name: str, token: str,
+                            code: str | None = None) -> Tuple[str, str]:
+    """Apprentice invitation email. The accept link is a backend page, not the app.
+
+    `code` is the display-form invite code (XXXX-XXXX); the code block is left out when it's None.
+    """
     from app.services import email_catalog
 
     accept_url = f"{settings.backend_api_url.rstrip('/')}/invitations/accept-invitation?token={token}"
     rendered = email_catalog.render("invitation", {"apprentice_name": apprentice_name, "mentor_name": mentor_name,
-                                                   "token": token, "accept_url": accept_url})
+                                                   "token": token, "accept_url": accept_url, "code": code})
     return rendered.html, rendered.text
 
 def _add_headers(message: "Mail", headers: dict | None) -> None:
@@ -599,10 +603,10 @@ def send_assessment_email(
     return 202 if ok else 500
 
 def send_invitation_email(to_email: str, apprentice_name: str, token: str, 
-                         mentor_name: str = "Your Mentor") -> bool:
+                         mentor_name: str = "Your Mentor", code: str | None = None) -> bool:
     """Send apprentice invitation email with rich formatting."""
     html_content, plain_content = render_invitation_email(
-        apprentice_name, mentor_name, token
+        apprentice_name, mentor_name, token, code
     )
     
     subject = f"You're Invited to Begin Your Spiritual Journey with {mentor_name}"

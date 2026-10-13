@@ -20,6 +20,7 @@ from app.models.mentor_apprentice import MentorApprentice
 from app.models.mentor_resource import MentorResource
 from app.models.mentor_note import MentorNote
 from app.models.apprentice_invitation import ApprenticeInvitation
+from app.models.invite_code_attempt import InviteCodeAttempt
 from app.models.notification import Notification
 from app.models.assessment_score_history import AssessmentScoreHistory
 from app.models.email_send_event import EmailSendEvent
@@ -300,6 +301,10 @@ def delete_apprentice_account(db: Session, user_id: str, user_email: str = None)
             count = _safe_delete(db, ApprenticeInvitation, ApprenticeInvitation.apprentice_email == user_email, "apprentice_invitations")
             deleted_counts["apprentice_invitations"] = count
         
+        # 8b. Delete invite-code redemption attempts
+        count = _safe_delete(db, InviteCodeAttempt, InviteCodeAttempt.user_id == user_id, "invite_code_attempts")
+        deleted_counts["invite_code_attempts"] = count
+        
         # 9. Delete mentor resources shared with this apprentice
         count = _safe_delete(db, MentorResource, MentorResource.apprentice_id == user_id, "mentor_resources")
         deleted_counts["mentor_resources"] = count
@@ -381,6 +386,10 @@ def delete_mentor_account(db: Session, user_id: str) -> dict:
         # 5. Delete apprentice invitations
         count = _safe_delete(db, ApprenticeInvitation, ApprenticeInvitation.mentor_id == user_id, "apprentice_invitations")
         deleted_counts["apprentice_invitations"] = count
+        
+        # 5b. Delete invite-code redemption attempts (only apprentices can redeem; kept for completeness)
+        count = _safe_delete(db, InviteCodeAttempt, InviteCodeAttempt.user_id == user_id, "invite_code_attempts")
+        deleted_counts["invite_code_attempts"] = count
         
         # 6. Delete mentor-apprentice relationships
         count = _safe_delete(db, MentorApprentice, MentorApprentice.mentor_id == user_id, "mentor_apprentice")

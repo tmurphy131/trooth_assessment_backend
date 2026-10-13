@@ -218,7 +218,7 @@ _ENTRIES = [
     EmailType("invitation", "account/invitation.html", TRANSACTIONAL,
               lambda c: f"{c.get('mentor_name', 'Your mentor')} invited you to T[root]H Discipleship.",
               "You're getting this because a mentor invited you to T[root]H Discipleship.",
-              lambda: {"apprentice_name": "Jordan", "mentor_name": "Marcus Lee", "token": "inv_abc123",
+              lambda: {"apprentice_name": "Jordan", "mentor_name": "Marcus Lee", "token": "inv_abc123", "code": "K7QM-3XPR",
                        "accept_url": "https://trooth-discipleship-api.onlyblv.com/invitations/accept-invitation?token=inv_abc123"}),
     EmailType("support_request_confirmation", "account/support_request_confirmation.html", TRANSACTIONAL,
               "We got your message and will reply soon.",

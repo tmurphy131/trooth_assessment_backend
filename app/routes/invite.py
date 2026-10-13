@@ -3,20 +3,26 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from datetime import datetime, UTC
+import logging
 import uuid
 import os
 
 from app.db import get_db
 from app.models.user import User
-from app.models.mentor_apprentice import MentorApprentice
 from app.models.apprentice_invitation import ApprenticeInvitation
-from app.schemas.invite import InviteCreate, InviteAccept, InviteOut
+from app.schemas.invite import (
+    InviteCreate, InviteAccept, InviteAcceptOut, InviteCreatedOut, InviteOut, InviteRedeem, InviteRedeemOut,
+)
 from app.services.email import send_invitation_email
-from app.exceptions import NotFoundException
+from app.exceptions import ForbiddenException, NotFoundException
 from app.exceptions import ValidationException
-from app.services.auth import require_mentor, get_current_user
+from app.services.auth import require_mentor, require_apprentice, get_current_user
+from app.services.invitations import accept_invitation, create_code_for, redeem_code
+from app.services.invite_codes import format_invite_code
 from app.core.settings import settings
 
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -101,7 +107,7 @@ def accept_invitation_page(
             "apprentice_name": invitation.apprentice_name or "Friend",
             "apprentice_email": invitation.apprentice_email,
             "mentor_name": mentor_name,
-            "token": token,
+            "code": format_invite_code(invitation.code),
             "logo_url": logo_url,
             "ios_app_store_url": ios_app_store_url,
             "play_store_url": play_store_url,
@@ -109,7 +115,7 @@ def accept_invitation_page(
     )
 
 
-@router.post("/invite-apprentice")
+@router.post("/invite-apprentice", response_model=InviteCreatedOut)
 def invite_apprentice(
     invite: InviteCreate, 
     current_user: User = Depends(require_mentor),
@@ -137,10 +143,12 @@ def invite_apprentice(
         mentor_id=mentor_id,
         apprentice_email=apprentice_email,
         apprentice_name=invite.apprentice_name,
-        token=token
+        token=token,
+        code=create_code_for(db),
     )
     db.add(invitation)
     db.commit()
+    code = format_invite_code(invitation.code)
 
     # Send invitation email
     try:
@@ -148,16 +156,23 @@ def invite_apprentice(
             to_email=apprentice_email, 
             apprentice_name=invite.apprentice_name, 
             token=token,
-            mentor_name=current_user.name or current_user.email or "Your Mentor"
+            mentor_name=current_user.name or current_user.email or "Your Mentor",
+            code=code,
         )
         if not email_sent:
             # Log the failure but don't fail the invitation creation
-            print(f"Warning: Failed to send invitation email to {invite.apprentice_email}")
+            logger.warning("Invitation email not sent for invitation_id=%s", invitation.id)
     except Exception as e:
-        # Log the failure but don't fail the invitation creation
-        print(f"Error sending invitation email: {e}")
+        # Log the failure but don't fail the invitation creation. Type only: the
+        # message can contain the recipient's email address.
+        logger.error("Error sending invitation email for invitation_id=%s: %s", invitation.id, type(e).__name__)
     
-    return {"message": "Invitation sent"}
+    return InviteCreatedOut(
+        message="Invitation sent",
+        id=invitation.id,
+        code=code,
+        expires_at=invitation.expires_at,
+    )
 
 @router.get("/pending-invites", response_model=list[InviteOut])
 def get_pending_invites(
@@ -224,46 +239,51 @@ def validate_invitation_token(token: str, db: Session = Depends(get_db)):
     }
 
 
-@router.post("/accept-invite")
-def accept_invite(data: InviteAccept, db: Session = Depends(get_db)):
+@router.post("/accept-invite", response_model=InviteAcceptOut)
+def accept_invite(
+    data: InviteAccept,
+    current_user: User = Depends(require_apprentice),
+    db: Session = Depends(get_db)
+):
+    # The apprentice is always the signed-in user; a body apprentice_id is only checked.
+    if data.apprentice_id is not None and data.apprentice_id != current_user.id:
+        raise ForbiddenException("You can only accept invitations for yourself")
+
     invitation = db.query(ApprenticeInvitation).filter_by(token=data.token).first()
     if not invitation:
         raise HTTPException(status_code=400, detail="Invitation is invalid or expired")
-    
-    # Ensure both datetimes are naive for comparison
-    now_naive = datetime.now(UTC).replace(tzinfo=None)
-    expires_at_naive = invitation.expires_at.replace(tzinfo=None) if invitation.expires_at.tzinfo else invitation.expires_at
-    
-    if expires_at_naive < now_naive:
-        raise ValidationException("This invitation has expired.")
 
-    if invitation.accepted:
-        raise HTTPException(status_code=400, detail="Invitation has already been accepted")
-
-    # Check if apprentice user exists
-    apprentice = db.query(User).filter_by(id=data.apprentice_id, role="apprentice").first()
-    if not apprentice:
-        raise NotFoundException("Apprentice not found")
-
-    invitation.accepted = True
-
-    # Check if this exact (apprentice, mentor) pair already exists
-    existing_relationship = db.query(MentorApprentice).filter_by(
-        apprentice_id=data.apprentice_id,
-        mentor_id=invitation.mentor_id
-    ).first()
-
-    if existing_relationship:
-        # Reactivate a previously terminated relationship with this same mentor
-        existing_relationship.active = True
-        db.commit()
-        return {"message": "Invitation accepted, relationship reactivated"}
-
-    # New mentor pairing — create a row without touching any other mentor relationships
-    db.add(MentorApprentice(mentor_id=invitation.mentor_id, apprentice_id=data.apprentice_id))
+    relationship = accept_invitation(db, invitation, current_user)
     db.commit()
 
-    return {"message": "Invitation accepted, relationship created"}
+    # Released apps know only these two messages.
+    if relationship == "created":
+        return {"message": "Invitation accepted, relationship created"}
+    return {"message": "Invitation accepted, relationship reactivated"}
+
+
+_RELATIONSHIP_MESSAGES = {
+    "created": "Invitation accepted, relationship created",
+    "reactivated": "Invitation accepted, relationship reactivated",
+    "already_active": "Invitation accepted, relationship already active",
+}
+
+
+@router.post("/redeem", response_model=InviteRedeemOut)
+def redeem_invite_code(
+    data: InviteRedeem,
+    current_user: User = Depends(require_apprentice),
+    db: Session = Depends(get_db)
+):
+    """Join a mentor by entering an invite code, whatever email the account uses."""
+    invitation, relationship = redeem_code(db, data.code, current_user)
+    mentor = db.query(User).filter_by(id=invitation.mentor_id).first()
+    return InviteRedeemOut(
+        message=_RELATIONSHIP_MESSAGES[relationship],
+        mentor_id=invitation.mentor_id,
+        mentor_name=mentor.name if mentor else None,
+        relationship=relationship,
+    )
 
 
 @router.get("/apprentice-invites", response_model=list[InviteOut])
@@ -297,6 +317,7 @@ def get_apprentice_invites(
             "apprentice_name": invitation.apprentice_name,
             "apprentice_email": invitation.apprentice_email,
             "token": invitation.token,
+            "code": invitation.code,  # InviteOut formats it for display
             "expires_at": invitation.expires_at,
             "accepted": invitation.accepted
         })

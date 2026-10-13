@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, DateTime, Boolean, ForeignKey
 from datetime import datetime, timedelta, UTC
 from app.db import Base
+from app.services.invite_codes import generate_invite_code
 import uuid
 
 class ApprenticeInvitation(Base):
@@ -11,6 +12,8 @@ class ApprenticeInvitation(Base):
     apprentice_email = Column(String, nullable=False)
     apprentice_name = Column(String, nullable=False)
     token = Column(String, unique=True, nullable=False)
+    # Short code apprentices type in the app; canonical form: uppercase, no dash (specs/006-invite-codes)
+    code = Column(String(8), nullable=False, unique=True, index=True, default=generate_invite_code)
     # Store as naive datetime (PostgreSQL TIMESTAMP WITHOUT TIME ZONE)
     expires_at = Column(DateTime, default=lambda: (datetime.now(UTC) + timedelta(days=7)).replace(tzinfo=None))
     accepted = Column(Boolean, default=False)
