@@ -13,7 +13,7 @@ def test_overall_rounding_and_question_ids():
         {"id": "Q1", "text": "Q1?", "category": "A"},
         {"id": "Q2", "text": "Q2?", "category": "B"},
     ]
-    result = asyncio.get_event_loop().run_until_complete(_score_with(answers, questions))
+    result = asyncio.run(_score_with(answers, questions))
     cats = result.get("category_scores", {})
     # overall should equal round(mean(category_scores))
     if cats:
@@ -72,7 +72,7 @@ def test_llm_invalid_json_fallback(monkeypatch):
 
     answers = {"Q1": "Yes"}
     questions = [{"id": "Q1", "text": "Q1?", "category": "A", "question_type": "multiple_choice", "options": [{"text": "Yes", "is_correct": True}]}]
-    result = asyncio.get_event_loop().run_until_complete(_score_with(answers, questions))
+    result = asyncio.run(_score_with(answers, questions))
     blob = result.get("mentor_blob_v2") or {}
     # v2.1 format has health_score/health_band instead of snapshot
     assert blob.get("health_score") is not None or blob.get("snapshot") is not None
