@@ -138,7 +138,7 @@ An apprentice or mentor emails the report for any other assessment. The attached
 **Compatibility**
 
 - **FR-023**: Endpoints, request bodies, response bodies, attachment file names and authorization rules MUST stay unchanged.
-- **FR-024**: The HTML report (sent when `include_html` is requested) MUST use the same gift ordering and summary matching as the PDF.
+- **FR-024**: ~~The HTML report (sent when `include_html` is requested) MUST use the same gift ordering and summary matching as the PDF.~~ *Superseded (follow-up fix): the separate HTML reports were never delivered (built and discarded, or never called), so they were removed. `include_html` is still accepted and ignored. The email body, which is the branded HTML report from spec 005, now uses the same slug-based gift summary matching as the PDF.*
 
 ### Key Entities
 

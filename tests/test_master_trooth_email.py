@@ -97,3 +97,37 @@ def test_mentor_email_report_denied_without_link(client, mentor_user, apprentice
     body = {"to_email": "dest@example.com"}
     r = client.post(f"/assessments/master-trooth/{apprentice_user.id}/email-report", json=body, headers={"Authorization": f"Bearer mock-{mentor_user.id}"})
     assert r.status_code == 403
+
+
+def test_mentor_email_pdf_names_apprentice_and_date(client, mentor_user, apprentice_user, mentor_apprentice_link, db_session, monkeypatch):
+    """Without mentor-report data the master PDF is the generic summary, with the apprentice's name and date."""
+    from app.models.assessment import Assessment
+    from app.routes import master_trooth as routes
+    from app.services.auth import get_current_user
+
+    class _A:
+        id = apprentice_user.id
+        role = apprentice_user.role
+        email = apprentice_user.email
+        name = apprentice_user.name
+    client.app.dependency_overrides[get_current_user] = lambda: _A()
+    assess_id = _submit_master(client, {"Authorization": f"Bearer mock-{apprentice_user.id}"})
+    a = db_session.query(Assessment).filter(Assessment.id == assess_id).first()
+    a.mentor_report_v2 = None
+    db_session.commit()
+
+    class _M:
+        id = mentor_user.id
+        role = mentor_user.role
+        email = mentor_user.email
+        name = mentor_user.name
+    client.app.dependency_overrides[get_current_user] = lambda: _M()
+
+    captured = {}
+    monkeypatch.setattr(routes, "generate_pdf", lambda name, scores, **kw: captured.update(name=name, **kw) or b"%PDF-")
+    r = client.post(f"/assessments/master-trooth/{apprentice_user.id}/email-report",
+                    json={"to_email": "mentor_dest@example.com", "include_pdf": True},
+                    headers={"Authorization": f"Bearer mock-{mentor_user.id}"})
+    assert r.status_code == 200, r.text
+    assert captured["name"] and captured["name"] != mentor_user.name
+    assert captured.get("assessment_date") is not None

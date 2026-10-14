@@ -26,7 +26,7 @@ from app.services.audit import (
     log_template_publish,
     log_email_send,
 )
-from app.services.spiritual_gifts_report import generate_pdf, generate_html
+from app.services.spiritual_gifts_report import generate_pdf
 from app.services.email import send_email, render_spiritual_gifts_report_email  # added render
 from app.models.email_send_event import EmailSendEvent
 import os
@@ -261,7 +261,7 @@ class EmailReportRequest(BaseModel):
     to_email: str
     assessment_id: Optional[str] = Field(None, description="If omitted, latest assessment is used")
     include_pdf: bool = True
-    include_html: bool = False
+    include_html: bool = Field(False, description="Deprecated and ignored: the email body is already the full HTML report")
 
 class EmailReportResponse(BaseModel):
     sent: bool
@@ -419,12 +419,8 @@ def email_spiritual_gifts_report(body: EmailReportRequest, db: Session = Depends
         "short_summary": r.short_summary,
     } for r in defs_rows}
     pdf_data = b""
-    html_report = ""
     if body.include_pdf:
         pdf_data = generate_pdf(getattr(current_user, 'name', None), template_version, scores, defs_map, assessment_date=assessment.created_at)
-    if body.include_html:
-        # Still produce full HTML report for optional attachment or reuse if needed
-        html_report = generate_html(getattr(current_user, 'name', None), template_version, scores, defs_map)
     # Build email content
     today = datetime.now(UTC).strftime('%Y-%m-%d')
     subj_name = getattr(current_user, 'name', 'Apprentice')
@@ -436,7 +432,6 @@ def email_spiritual_gifts_report(body: EmailReportRequest, db: Session = Depends
         defs_map,
         settings.app_url,
     )
-    # If include_html flag present, prefer attachment style using previously built html_report
     attachments = None
     if body.include_pdf and pdf_data:
         safe_name = subj_name.lower().replace(' ', '_')
@@ -515,11 +510,8 @@ def mentor_admin_email_spiritual_gifts_report(apprentice_id: str, body: EmailRep
     apprentice_name = (apprentice_user.name if apprentice_user else None) or 'Apprentice'
 
     pdf_data = b""
-    html_report = ""
     if body.include_pdf:
         pdf_data = generate_pdf(apprentice_name, template_version, scores, defs_map, assessment_date=assessment.created_at)
-    if body.include_html:
-        html_report = generate_html(apprentice_name, template_version, scores, defs_map)
     today = datetime.now(UTC).strftime('%Y-%m-%d')
     subject = f"Spiritual Gifts Report — {apprentice_name} — {today}"
     inline_html, plain_fallback = render_spiritual_gifts_report_email(

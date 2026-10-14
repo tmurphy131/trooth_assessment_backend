@@ -251,3 +251,22 @@ def test_master_legacy_generate_pdf_is_branded_pdf():
     from app.services.master_trooth_report import generate_pdf
 
     assert_pdf(generate_pdf("Jordan", {"overall_score": 7, "category_scores": {"Prayer": 8}}))
+
+
+def test_gifts_email_body_matches_slashed_gift_names():
+    """The email body had the same name-matching bug as the PDF (Pastor/Shepherd lost its summary)."""
+    from app.services.email import render_spiritual_gifts_report_email
+
+    scores = {
+        "top_gifts_truncated": [{"gift": "Pastor/Shepherd", "score": 12}, {"gift": "Music/Worship", "score": 11}],
+        "all_scores": [{"gift": "Pastor/Shepherd", "score": 12}, {"gift": "Music/Worship", "score": 11}],
+    }
+    html, _ = render_spiritual_gifts_report_email("Jordan", 1, scores, _definitions(), "https://example.com")
+    assert "Care for and nurture spiritual growth of others." in html
+    assert "Lead others into authentic, God-focused worship." in html
+
+
+def test_master_generate_pdf_accepts_assessment_date():
+    from app.services.master_trooth_report import generate_pdf
+
+    assert_pdf(generate_pdf("Jordan", {"overall_score": 7, "category_scores": {"Prayer": 8}}, assessment_date="2026-10-01T12:00:00Z"))

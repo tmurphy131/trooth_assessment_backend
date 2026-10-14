@@ -672,25 +672,23 @@ def send_gift_seat_revoked_email(
 
 
 def render_spiritual_gifts_report_email(apprentice_name: str | None, version: int, scores: dict, definitions: dict, app_url: str) -> tuple[str, str]:
-    """Render enhanced Spiritual Gifts report email (HTML + plain text).
+    """Render the Spiritual Gifts report email (HTML + plain text).
 
-    Falls back to legacy generate_html output if Jinja2 or template missing.
     definitions: mapping slug -> {display_name, full_definition, short_summary}
     """
+    from app.services.spiritual_gifts_scoring import canonical_slug, display_to_slug
+
     top_trunc = scores.get('top_gifts_truncated', []) or []
     all_scores = scores.get('all_scores', []) or []
 
-    # Build enriched top gifts with summaries
+    # Match by slug: definitions use 'pastor_shepherd' / 'Pastor / Shepherd' while scores say
+    # 'Pastor/Shepherd' (specs/008 FR-014).
+    defs_by_slug = {(display_to_slug(k) or canonical_slug(k)): d for k, d in definitions.items()}
     enriched_top = []
     for g in top_trunc[:6]:  # cap for email layout
-        summ = None
-        # find definition whose display_name matches gift string (case-insensitive)
         gift_name = g.get('gift')
-        if gift_name:
-            for d in definitions.values():
-                if (d.get('display_name') or '').lower() == gift_name.lower():
-                    summ = d.get('short_summary') or d.get('full_definition', '').split('\n')[0][:220]
-                    break
+        d = defs_by_slug.get(display_to_slug(gift_name or '') or canonical_slug(gift_name or ''), {})
+        summ = d.get('short_summary') or (d.get('full_definition') or '').split('\n')[0][:220] or None
         enriched_top.append({
             'gift': gift_name,
             'score': g.get('score'),
