@@ -1,4 +1,5 @@
 import hmac
+import logging
 import os
 from typing import Optional
 from firebase_admin import auth
@@ -7,6 +8,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from firebase_admin import auth as firebase_auth
 from app.db import get_db
 from app.models.user import User, UserRole, SubscriptionTier
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from datetime import UTC, datetime, timedelta
 from app.utils.datetime import utc_now, to_naive_utc
@@ -15,7 +17,45 @@ from app.core.settings import settings
 
 security = HTTPBearer(auto_error=False)  # auto_error=False allows optional auth
 
+logger = logging.getLogger(__name__)
+
 _ACTIVITY_COOLDOWN = timedelta(minutes=15)
+
+
+def find_account_for_token(db: Session, decoded: dict) -> tuple[Optional[User], str]:
+    """Find the account for a verified Firebase token (specs/009-critical-auth-holes).
+
+    Identity comes only from the token. Returns (user, outcome):
+      - "by_uid": account found by the token uid
+      - "relinked": legacy account found by the token email and re-linked to this uid; only
+        when the token's email is verified
+      - "unverified_email": an account has the token's email but the email isn't verified
+      - "relink_blocked": re-link refused by the database (the account has linked data)
+      - "none": no account
+    """
+    uid = decoded.get("uid")
+    user = db.query(User).filter(User.id == uid).first() if uid else None
+    if user:
+        return user, "by_uid"
+
+    email = decoded.get("email")
+    if not email:
+        return None, "none"
+    user = db.query(User).filter(User.email == email).first()
+    if not user:
+        return None, "none"
+    if decoded.get("email_verified") is not True:
+        logger.warning("account re-link refused uid=%s outcome=unverified_email", uid)
+        return None, "unverified_email"
+    try:
+        user.id = uid
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        logger.warning("account re-link refused uid=%s outcome=relink_blocked", uid)
+        return None, "relink_blocked"
+    logger.info("account re-linked uid=%s outcome=relinked", uid)
+    return user, "relinked"
 
 
 def _track_user_activity(user: User, db: Session) -> None:
@@ -105,19 +145,9 @@ def get_current_user(
             detail="Invalid or expired Firebase token",
         )
 
-    # First try to find user by Firebase UID
-    user = db.query(User).filter(User.id == user_id).first()
-    
-    # If not found by UID, try to find by email (for existing users)
-    if not user:
-        user = db.query(User).filter(User.email == email).first()
-        if user:
-            # Update the user's ID to match Firebase UID
-            user.id = user_id
-            db.commit()
-            _track_user_activity(user, db)
-            return user
-    
+    # By UID, else a legacy re-link by verified email only (specs/009 FR-007)
+    user, _outcome = find_account_for_token(db, decoded_token)
+
     # If still not found, do NOT auto-create - require explicit POST /users/ call
     # This prevents race conditions where user gets created with wrong role
     if not user:

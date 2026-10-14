@@ -452,73 +452,8 @@ def apprentice_sign(agreement_id: str, body: AgreementSign, request: Request, db
     
     return ag
 
-@router.post("/{agreement_id}/sign/parent", response_model=AgreementOut)
-def parent_sign(agreement_id: str, body: AgreementSign, db: Session = Depends(get_db)):
-    ag = db.query(Agreement).filter_by(id=agreement_id).first()
-    if not ag:
-        raise HTTPException(status_code=404, detail="Not found")
-    if ag.status != 'awaiting_parent':
-        raise HTTPException(status_code=409, detail="Invalid state for parent signing")
-    if not ag.parent_required:
-        raise HTTPException(status_code=409, detail="Parent signature not required")
-    if ag.parent_signed_at:
-        raise HTTPException(status_code=409, detail="Already signed")
-
-    ag.parent_signature_name = body.typed_name
-    ag.parent_signed_at = utc_now()
-    ag.status = 'fully_signed'
-    ag.activated_at = utc_now()
-    _activate_relationship(db, ag)
-
-    db.commit()
-    db.refresh(ag)
-    
-    # ──────────────────────────────────────────────────────────────────
-    # NOTIFY MENTOR: Parent signed - agreement is now fully active
-    # ──────────────────────────────────────────────────────────────────
-    try:
-        apprentice_name = ag.apprentice_name or ag.apprentice_email.split('@')[0]
-        notif = Notification(
-            user_id=ag.mentor_id,
-            message=f"Parent/guardian has signed the mentorship agreement for {apprentice_name} — Agreement is now active!",
-            link=f"/agreements/{ag.id}",
-            is_read=False
-        )
-        db.add(notif)
-        db.commit()
-    except Exception as e:
-        logger.warning(f"Failed to create mentor notification for parent signing: {e}")
-    
-    # Notify mentor/apprentice (email)
-    try:
-        send_agreement_email(
-            AgreementEmailEvent.FULLY_SIGNED,
-            to_email=ag.apprentice_email,
-            context={
-                'agreement_id': ag.id,
-                'apprentice_email': ag.apprentice_email,
-                'mentor_email': ag.mentor_id,
-            }
-        )
-    except Exception:
-        pass
-    
-    # ──────────────────────────────────────────────────────────────────
-    # PUSH NOTIFICATION to mentor (parent signed)
-    # ──────────────────────────────────────────────────────────────────
-    try:
-        apprentice_name = ag.apprentice_name or ag.apprentice_email.split('@')[0]
-        notify_agreement_signed(
-            db=db,
-            user_id=ag.mentor_id,
-            signer_name=f"{apprentice_name}'s parent/guardian",
-            agreement_status=ag.status
-        )
-        logger.info(f"Push notification sent to mentor {ag.mentor_id} for parent signing on agreement {ag.id}")
-    except Exception as e:
-        logger.warning(f"Failed to send push notification for parent signing: {e}")
-    
-    return ag
+# The id-based parent signature route was removed (specs/009): parents sign only through the
+# emailed one-time link, POST /agreements/public/{token}/sign.
 
 @router.post("/{agreement_id}/revoke", response_model=AgreementOut)
 def revoke_agreement(agreement_id: str, db: Session = Depends(get_db), mentor: User = Depends(require_mentor_or_admin)):

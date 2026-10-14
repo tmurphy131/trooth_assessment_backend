@@ -5,36 +5,24 @@ import logging
 from app.schemas.user import UserCreate, UserOut
 from app.models import user as user_model
 from app.db import get_db
-from app.services.auth import verify_token, require_roles, get_current_user
+from app.services.auth import verify_token, require_roles, get_current_user, find_account_for_token
 from app.services.account_deletion import get_account_deletion_summary, delete_user_account
 from firebase_admin import auth, firestore
-from app.models.mentor_apprentice import MentorApprentice
-from app.models.user import User
-from app.exceptions import NotFoundException
+from app.models.user import User, UserRole
 from app.schemas.daily_trivia import TimezoneIn, TimezoneOut
 from app.services.daily_trivia import is_valid_timezone
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 
 class DeleteAccountRequest(BaseModel):
     """Request body for account deletion - requires explicit confirmation"""
     confirmation_text: str  # Must be "DELETE" to proceed
 
-@router.post("/assign-apprentice")
-def assign_apprentice(mentor_id: str, apprentice_id: str, db: Session = Depends(get_db)):
-    mentor = db.query(User).filter_by(id=mentor_id, role="mentor").first()
-    if not mentor:
-        raise NotFoundException("Mentor not found")
+# Generic on purpose: never confirms that an account exists for an email (specs/009 FR-013).
+SIGNUP_CONFLICT_DETAIL = "We couldn't finish setting up your account. Verify your email address, then try again."
 
-    apprentice = db.query(User).filter_by(id=apprentice_id, role="apprentice").first()
-    if not apprentice:
-        raise NotFoundException("Apprentice not found")
-
-    relationship = MentorApprentice(mentor_id=mentor_id, apprentice_id=apprentice_id)
-    db.add(relationship)
-    db.commit()
-    return {"message": "Apprentice assigned successfully"}
 
 @router.post("/", response_model=UserOut)
 def create_user(
@@ -43,43 +31,44 @@ def create_user(
     db: Session = Depends(get_db),
     decoded_token=Depends(verify_token),
 ):
-    # Get Firebase UID from the verified token (NOT from request body)
+    """Register the signed-in person (specs/009-critical-auth-holes).
+
+    Identity (uid, email) comes only from the verified token; the body's uid/email are ignored.
+    An existing account is returned as-is apart from its display name: its role and id never
+    change here, and nobody can register as admin.
+    """
     firebase_uid = decoded_token.get("uid")
     if not firebase_uid:
         raise HTTPException(status_code=400, detail="Could not extract user ID from Firebase token")
-    
-    # Check if user already exists by email OR by Firebase UID
-    existing_user = db.query(User).filter(
-        (User.email == user.email) | (User.id == firebase_uid)
-    ).first()
+    token_email = decoded_token.get("email")
+    if not token_email:
+        logger.warning("signup refused uid=%s outcome=no_email", firebase_uid)
+        raise HTTPException(status_code=400, detail="Your sign-in has no email address")
+
+    existing_user, outcome = find_account_for_token(db, decoded_token)
+    if outcome in ("unverified_email", "relink_blocked"):
+        raise HTTPException(status_code=409, detail=SIGNUP_CONFLICT_DETAIL)
     if existing_user:
-        # Update existing user to ensure consistency
-        needs_update = False
-        if existing_user.id != firebase_uid:
-            existing_user.id = firebase_uid
-            needs_update = True
-        # Also update role if it was incorrectly set (e.g., by old auto-create code)
-        if existing_user.role != user.role:
-            existing_user.role = user.role
-            needs_update = True
-        if existing_user.name != user.name:
+        if user.name and existing_user.name != user.name:
             existing_user.name = user.name
-            needs_update = True
-        if needs_update:
             db.commit()
             db.refresh(existing_user)
-            # Update Firebase custom claims with correct role
-            try:
-                auth.set_custom_user_claims(firebase_uid, {"role": existing_user.role.value})
-            except Exception:
-                pass  # Non-critical, claims will be set eventually
+        try:
+            # Keep claims in step with the stored role (never the requested one)
+            auth.set_custom_user_claims(firebase_uid, {"role": existing_user.role.value})
+        except Exception:
+            pass  # Non-critical, claims will be set eventually
         return existing_user
+
+    if user.role.value == UserRole.admin.value:
+        logger.warning("signup refused uid=%s outcome=admin_requested", firebase_uid)
+        raise HTTPException(status_code=403, detail="This role can't be chosen at sign-up")
 
     # Create user with Firebase UID as the primary key
     db_user = user_model.User(
         id=firebase_uid,  # Use Firebase UID, not auto-generated UUID
         name=user.name,
-        email=user.email,
+        email=token_email,
         role=user.role,
     )
     db.add(db_user)
