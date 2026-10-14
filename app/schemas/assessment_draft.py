@@ -4,7 +4,7 @@ from typing import Optional, Dict, List
 class QuestionOptionItem(BaseModel):
     id: str
     text: str
-    is_correct: bool
+    is_correct: Optional[bool] = None  # only for mentors/admins; never sent to apprentices
     order: int
     model_config = {'from_attributes': True}
 
@@ -17,15 +17,18 @@ class QuestionItem(BaseModel):
     model_config = {'from_attributes': True}
 
     @classmethod
-    def from_question(cls, question):
-        """Create QuestionItem from Question model instance."""
+    def from_question(cls, question, include_answers: bool = False):
+        """Create QuestionItem from Question model instance.
+
+        Correct answers are left out unless include_answers (mentor/admin review).
+        """
         options = []
         if question.options:
             options = [
                 QuestionOptionItem(
                     id=str(opt.id),
                     text=opt.option_text,
-                    is_correct=opt.is_correct,
+                    is_correct=opt.is_correct if include_answers else None,
                     order=opt.order
                 )
                 for opt in sorted(question.options, key=lambda x: x.order)

@@ -29,7 +29,8 @@ async def test_create_assessment_draft_with_questions(test_db: Session, mock_app
     category = Category(id=str(uuid.uuid4()), name=f"Spiritual Growth {uuid.uuid4().hex[:5]}")
     question1 = Question(id=str(uuid.uuid4()), text="What is faith?", category_id=category.id)
     question2 = Question(id=str(uuid.uuid4()), text="How often do you pray?", category_id=category.id)
-    template = AssessmentTemplate(id=str(uuid.uuid4()), name="Test Template")
+    # Drafts need a published template the user may take (free here); see assessment_draft._ensure_template_access
+    template = AssessmentTemplate(id=str(uuid.uuid4()), name="Test Template", is_published=True, key="master_trooth_v2")
     template.category = category
 
     test_db.add_all([mentor, apprentice, category, question1, question2, template])

@@ -28,7 +28,7 @@ def get_mentor_report_v2(
 
     # Check permissions
     is_apprentice = (user_id == a.apprentice_id)
-    mentor_rel = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id, apprentice_id=a.apprentice_id).first()
+    mentor_rel = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id, apprentice_id=a.apprentice_id, active=True).first()
     if not (is_apprentice or mentor_rel):
         raise HTTPException(status_code=403, detail="Not allowed")
 
@@ -61,7 +61,7 @@ def get_mentor_report_v2_pdf(
     if not a:
         raise HTTPException(status_code=404, detail="Assessment not found")
     is_apprentice = (user_id == a.apprentice_id)
-    mentor_rel = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id, apprentice_id=a.apprentice_id).first()
+    mentor_rel = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id, apprentice_id=a.apprentice_id, active=True).first()
     if not (is_apprentice or mentor_rel):
         raise HTTPException(status_code=403, detail="Not allowed")
 
@@ -146,7 +146,7 @@ def email_report_by_assessment(
     if not a:
         raise HTTPException(status_code=404, detail="Assessment not found")
     is_apprentice = (user_id == a.apprentice_id)
-    mentor_rel = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id, apprentice_id=a.apprentice_id).first()
+    mentor_rel = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id, apprentice_id=a.apprentice_id, active=True).first()
     if not (is_apprentice or mentor_rel):
         raise HTTPException(status_code=403, detail="Not allowed")
     

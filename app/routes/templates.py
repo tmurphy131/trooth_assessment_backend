@@ -74,7 +74,8 @@ def get_published_templates(
         # For apprentices: Get the master assessment + templates from assigned mentors
         # plus globally-published templates (created_by is NULL) to allow org-wide/admin templates.
         mentor_relationships = db.query(MentorApprentice).filter(
-            MentorApprentice.apprentice_id == current_user.id
+            MentorApprentice.apprentice_id == current_user.id,
+            MentorApprentice.active == True,  # noqa: E712 - ended mentorships don't share templates
         ).all()
 
         mentor_ids = [rel.mentor_id for rel in mentor_relationships] if mentor_relationships else []

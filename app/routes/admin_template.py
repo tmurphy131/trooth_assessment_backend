@@ -12,6 +12,7 @@ from app.schemas.assessment_template import (
     AddQuestionToTemplate, FullTemplateView, TemplateWithFullQuestions
 )
 from uuid import uuid4
+from app.schemas.question import QuestionOut
 from app.schemas.user import UserOut
 
 router = APIRouter(prefix="/templates", tags=["Admin Templates"])
@@ -215,6 +216,11 @@ def list_templates(
         (AssessmentTemplate.created_by == current_user.id) | (AssessmentTemplate.is_master_assessment == True)  # noqa: E712
     ).all()
 
+def _without_answers(q: QuestionOut) -> QuestionOut:
+    # False (not null): released apps read is_correct as a non-null bool on this screen.
+    return q.model_copy(update={"options": [o.model_copy(update={"is_correct": False}) for o in q.options]})
+
+
 @router.get("/{template_id}", response_model=TemplateWithFullQuestions)
 def get_template(
     template_id: str,
@@ -246,6 +252,11 @@ def get_template(
         question = db.query(Question).filter_by(id=link.question_id).first()
         if question:
             questions.append(question)
+
+    # Correct answers only for the template's owner or an admin, never for the shared Master
+    # template viewed by other mentors.
+    if current_user.role != UserRole.admin and template.created_by != current_user.id:
+        questions = [_without_answers(QuestionOut.model_validate(q)) for q in questions]
 
     return TemplateWithFullQuestions(
         id=template.id,

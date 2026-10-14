@@ -172,7 +172,7 @@ def get_apprentice_draft(
 ):
     # Check if this apprentice belongs to the current mentor
     mapping = db.query(MentorApprentice).filter_by(
-        mentor_id=current_user.id, apprentice_id=apprentice_id
+        mentor_id=current_user.id, apprentice_id=apprentice_id, active=True
     ).first()
     if not mapping:
         raise ForbiddenException("Not authorized to view this apprentice")
@@ -227,7 +227,7 @@ def get_submitted_assessments_for_apprentice(
     # Verify mentor-apprentice relationship
     mapping = db.query(MentorApprentice).filter_by(
         mentor_id=current_user.id,
-        apprentice_id=apprentice_id
+        apprentice_id=apprentice_id, active=True
     ).first()
     if not mapping:
         raise ForbiddenException("Not authorized to view this apprentice")
@@ -284,7 +284,7 @@ def get_assessment_detail(
     # Check mentor-apprentice relationship
     mapping = db.query(MentorApprentice).filter_by(
         mentor_id=current_user.id,
-        apprentice_id=assessment.apprentice_id
+        apprentice_id=assessment.apprentice_id, active=True
     ).first()
     if not mapping:
         raise ForbiddenException("Not authorized to view this assessment")
@@ -440,7 +440,7 @@ def get_single_submitted_draft(
     # Make sure this mentor is linked to the apprentice
     mapping = db.query(MentorApprentice).filter_by(
         mentor_id=current_user.id,
-        apprentice_id=draft.apprentice_id
+        apprentice_id=draft.apprentice_id, active=True
     ).first()
 
     if not mapping:
@@ -527,7 +527,7 @@ def get_full_report(
     # Verify mentor access
     mapping = db.query(MentorApprentice).filter_by(
         mentor_id=current_user.id,
-        apprentice_id=draft.apprentice_id
+        apprentice_id=draft.apprentice_id, active=True
     ).first()
     
     if not mapping:
@@ -628,7 +628,7 @@ def get_apprentice_profile(
     # Check mentorship relationship
     link = db.query(MentorApprentice).filter_by(
         mentor_id=current_user.id,
-        apprentice_id=apprentice_id
+        apprentice_id=apprentice_id, active=True
     ).first()
 
     if not link:

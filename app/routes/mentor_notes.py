@@ -24,7 +24,7 @@ def create_mentor_note(
 
     mapping = db.query(MentorApprentice).filter_by(
         mentor_id=current_user.id,
-        apprentice_id=assessment.apprentice_id
+        apprentice_id=assessment.apprentice_id, active=True
     ).first()
     if not mapping:
         raise HTTPException(status_code=403, detail="Not authorized to comment on this assessment")
@@ -56,7 +56,7 @@ def list_mentor_notes_for_assessment(
 
     mapping = db.query(MentorApprentice).filter_by(
         mentor_id=current_user.id,
-        apprentice_id=assessment.apprentice_id
+        apprentice_id=assessment.apprentice_id, active=True
     ).first()
     if not mapping:
         raise HTTPException(status_code=403, detail="Not authorized")
