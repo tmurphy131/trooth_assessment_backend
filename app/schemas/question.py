@@ -14,7 +14,7 @@ class QuestionOptionCreate(BaseModel):
 class QuestionOptionOut(BaseModel):
     id: str
     option_text: str
-    is_correct: bool
+    is_correct: Optional[bool] = None  # omitted (None) unless the caller may see answers
     order: int
     model_config = {'from_attributes': True}
 

@@ -9,6 +9,7 @@ from app.services.auth import verify_token, require_roles, get_current_user, fin
 from app.services.account_deletion import get_account_deletion_summary, delete_user_account
 from firebase_admin import auth, firestore
 from app.models.user import User, UserRole
+from app.services.mentorship import has_active_connection
 from app.schemas.daily_trivia import TimezoneIn, TimezoneOut
 from app.services.daily_trivia import is_valid_timezone
 
@@ -100,17 +101,26 @@ def create_user(
 
     return db_user
 
-@router.get("/{user_id}", response_model=UserOut)
-def get_user_by_id(user_id: str, db: Session = Depends(get_db), decoded_token=Depends(verify_token)):
-    user = db.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    return user
-
+# Declared before /{user_id} so "/users/me" isn't captured as a user id.
 @router.get("/me", response_model=UserOut)
 def get_me(current_user: User = Depends(get_current_user)):
     # get_current_user handles token verification & user retrieval
     return current_user
+
+@router.get("/{user_id}", response_model=UserOut)
+def get_user_by_id(user_id: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    """A profile is visible to its owner, an admin, or an actively linked mentor/apprentice."""
+    allowed = (
+        current_user.id == user_id
+        or current_user.role == UserRole.admin
+        or has_active_connection(db, current_user.id, user_id)
+        or has_active_connection(db, user_id, current_user.id)
+    )
+    user = db.query(User).filter(User.id == user_id).first() if allowed else None
+    if not user:
+        # Same response whether the user is missing or not visible (no account probing)
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
 
 @router.put("/me/timezone", response_model=TimezoneOut)
 def set_my_timezone(

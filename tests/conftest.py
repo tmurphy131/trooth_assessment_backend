@@ -182,3 +182,39 @@ def cron_secret_env(monkeypatch):
     """require_cron_secret fails closed without CRON_SECRET; give every test a known value."""
     monkeypatch.setenv("CRON_SECRET", TEST_CRON_SECRET)
     return TEST_CRON_SECRET
+
+
+# --- No live LLM calls (autouse) ---
+class _NoLLMService:
+    """Looks like an unconfigured LLM service, so scoring uses its deterministic mock path."""
+    primary_provider = None
+    fallback_provider = None
+
+    def is_available(self):
+        return False
+
+    def generate(self, *args, **kwargs):
+        raise RuntimeError("Live LLM call attempted in tests")
+
+
+@pytest.fixture(autouse=True)
+def no_live_llm(monkeypatch):
+    """Tests must never call Gemini/OpenAI (Principle VIII). Local .env keys and gcloud ADC would
+    otherwise make real, billed calls. Tests that need LLM behavior patch get_llm_service themselves."""
+    import app.routes.health as health_routes
+    import app.services.ai_scoring as ai_scoring
+    import app.services.llm as llm_pkg
+    import app.services.llm.factory as llm_factory
+    from app.services.llm.gemini_provider import GeminiProvider
+    from app.services.llm.openai_provider import OpenAIProvider
+
+    stub = _NoLLMService()
+    for mod in (llm_pkg, llm_factory, ai_scoring, health_routes):
+        monkeypatch.setattr(mod, "get_llm_service", lambda *a, **k: stub, raising=False)
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+
+    def _blocked(self, *args, **kwargs):
+        raise RuntimeError("Live LLM call attempted in tests")
+
+    monkeypatch.setattr(GeminiProvider, "_call_api", _blocked)
+    monkeypatch.setattr(OpenAIProvider, "_call_api", _blocked)

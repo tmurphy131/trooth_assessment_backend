@@ -64,8 +64,11 @@ def create_assessment(
 
         return db_assessment
 
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    except HTTPException:
+        raise  # keep deliberate 403/404s instead of turning them into 500s
+    except Exception:
+        logger.exception("assessment route failed")
+        raise HTTPException(status_code=500, detail="Something went wrong. Please try again.")
 
 
 @router.get("/list", response_model=List[assessment_schema.AssessmentOut])
@@ -78,7 +81,7 @@ def list_assessments(
         user_id = decoded_token["uid"]
         
         # Check if user is a mentor or apprentice
-        mentor_relationships = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id).all()
+        mentor_relationships = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id, active=True).all()
         apprentice_relationship = db.query(mentor_model.MentorApprentice).filter_by(apprentice_id=user_id, active=True).first()
         
         if mentor_relationships:
@@ -124,8 +127,11 @@ def list_assessments(
         
         return result
         
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    except HTTPException:
+        raise  # keep deliberate 403/404s instead of turning them into 500s
+    except Exception:
+        logger.exception("assessment route failed")
+        raise HTTPException(status_code=500, detail="Something went wrong. Please try again.")
 
 
 @router.get("/{assessment_id}/status")
@@ -141,7 +147,7 @@ def check_assessment_status(
         if not a:
             raise NotFoundException("Assessment not found.")
         # authorization: user is apprentice or mentor of apprentice
-        mentor_rel = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id, apprentice_id=a.apprentice_id).first()
+        mentor_rel = db.query(mentor_model.MentorApprentice).filter_by(mentor_id=user_id, apprentice_id=a.apprentice_id, active=True).first()
         is_apprentice = (user_id == a.apprentice_id)
         if not (mentor_rel or is_apprentice):
             raise ForbiddenException("Not allowed.")
@@ -163,8 +169,11 @@ def check_assessment_status(
         return body
     except HTTPException:
         raise  # 403/404 keep their status codes
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    except HTTPException:
+        raise  # keep deliberate 403/404s instead of turning them into 500s
+    except Exception:
+        logger.exception("assessment route failed")
+        raise HTTPException(status_code=500, detail="Something went wrong. Please try again.")
 
 
 @router.get("/self", response_model=list[assessment_schema.AssessmentOut])
@@ -281,7 +290,7 @@ def get_assessment(
         
         # Check access permissions
         mentor_relationship = db.query(mentor_model.MentorApprentice).filter_by(
-            mentor_id=user_id, apprentice_id=assessment.apprentice_id
+            mentor_id=user_id, apprentice_id=assessment.apprentice_id, active=True
         ).first()
 
         # User must be either a mentor linked to this apprentice or the apprentice themselves
@@ -312,5 +321,8 @@ def get_assessment(
         
         return assessment_out
         
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    except HTTPException:
+        raise  # keep deliberate 403/404s instead of turning them into 500s
+    except Exception:
+        logger.exception("assessment route failed")
+        raise HTTPException(status_code=500, detail="Something went wrong. Please try again.")
