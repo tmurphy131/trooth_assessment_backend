@@ -5,7 +5,6 @@ The PDF is built on the shared branded kit in ``app.services.pdf``. Sections fol
 """
 from __future__ import annotations
 
-import html as _html
 import logging
 from datetime import datetime, UTC
 from typing import Dict, List, Optional
@@ -213,28 +212,4 @@ def generate_pdf(
         lambda: build_gifts_story(name, scores, definitions),
         fallback_lines=fallback,
         context_id="spiritual_gifts",
-    )
-
-
-def generate_html(apprentice_name: Optional[str], version: int, scores: Dict, definitions: Dict[str, Dict]) -> str:
-    esc = _html.escape
-    prep = _prepare_gifts(scores, definitions)
-    name = esc(apprentice_name or "Apprentice")
-    date = esc(kit.format_date(datetime.now(UTC)) or "")
-
-    def li(r: Dict) -> str:
-        summ = f" - {esc(r['summary'])}" if r["summary"] else ""
-        return f"<li><strong>{esc(r['gift'])}</strong>: {r['score']}/{MAX_SCORE}{summ}</li>"
-
-    top_html = "".join(li(r) for r in prep["top"])
-    tied = ""
-    if prep["tied_third"]:
-        tied = "<p>Tied for 3rd: " + esc(", ".join(r["gift"] for r in prep["tied_third"])) + "</p>"
-    all_html = "".join(li(r) for r in prep["rows"])
-    return (
-        "<div style='font-family:Arial,sans-serif;'>"
-        f"<h1>Spiritual Gifts Report</h1><p>{name} &middot; {date}</p>"
-        f"<h2>Top gifts</h2><ul>{top_html}</ul>{tied}"
-        f"<h2>All gifts ranked</h2><ul>{all_html}</ul>"
-        "</div>"
     )

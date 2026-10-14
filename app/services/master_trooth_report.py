@@ -16,29 +16,11 @@ from app.services.report_summary import public_full_report, summarize_mentor_blo
 
 logger = logging.getLogger("app.master_report")
 
-def generate_pdf(apprentice_name: Optional[str], scores: Dict) -> bytes:
+def generate_pdf(apprentice_name: Optional[str], scores: Dict, *, assessment_date=None) -> bytes:
     """Master assessment PDF when there is no mentor-report data: the branded generic summary."""
     from app.services.generic_assessment_report import generate_pdf as generic_pdf
 
-    return generic_pdf("Master T[root]H Assessment", apprentice_name, scores or {})
-
-
-def generate_html(apprentice_name: Optional[str], scores: Dict) -> str:
-    from html import escape
-
-    version = escape(str(scores.get('version', 'master_v1')))
-    overall = escape(str(scores.get('overall_score', 7)))
-    cat_scores = scores.get('category_scores') or {}
-    top3 = scores.get('top3') or []
-    lines = []
-    lines.append("<h1>Master T[root]H Discipleship Report</h1>")
-    lines.append(f"<p>Apprentice: {escape(apprentice_name or 'Apprentice')}</p>")
-    lines.append(f"<p>Version: {version} • Overall: {overall}</p>")
-    lines.append("<h3>Top Categories</h3>")
-    lines.append("<ul>" + "".join([f"<li>{escape(str(i.get('category')))}: {escape(str(i.get('score')))}</li>" for i in top3]) + "</ul>")
-    lines.append("<h3>All Categories</h3>")
-    lines.append("<ul>" + "".join([f"<li>{escape(str(k))}: {escape(str(v))}</li>" for k, v in cat_scores.items()]) + "</ul>")
-    return "\n".join(lines)
+    return generic_pdf("Master T[root]H Assessment", apprentice_name, scores or {}, assessment_date=assessment_date)
 
 
 # ------------------------- v2 report rendering -------------------------

@@ -12,7 +12,7 @@ from app.models.assessment_template import AssessmentTemplate
 from app.models.mentor_apprentice import MentorApprentice
 from app.services.auth import get_current_user
 from app.services.ai_scoring_generic import score_generic_assessment
-from app.services.generic_assessment_report import generate_html as gen_html, generate_pdf as gen_pdf
+from app.services.generic_assessment_report import generate_pdf as gen_pdf
 from app.services.master_trooth_report import build_report_context, render_pdf_v2
 from app.services.email import send_email, render_generic_assessment_email
 from app.services.audit import log_assessment_submit, log_assessment_view, log_email_send

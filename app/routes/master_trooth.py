@@ -12,7 +12,7 @@ from app.models.mentor_apprentice import MentorApprentice
 from app.services.auth import get_current_user
 from app.services.ai_scoring_master import score_master_assessment
 from app.services.email import send_email, render_master_trooth_email
-from app.services.master_trooth_report import generate_pdf, generate_html, build_report_context, render_email_v2, render_pdf_v2
+from app.services.master_trooth_report import generate_pdf, build_report_context, render_email_v2, render_pdf_v2
 from app.core.settings import settings
 from app.services.audit import log_assessment_submit, log_assessment_view, log_email_send
 from app.models.email_send_event import EmailSendEvent
@@ -290,7 +290,7 @@ def email_master(body: dict, db: Session = Depends(get_db), current_user: User =
                 context['full_report'] = cached_full_report
             pdf = render_pdf_v2(context)
         else:
-            pdf = generate_pdf(apprentice_name, a.scores or {})
+            pdf = generate_pdf(apprentice_name, a.scores or {}, assessment_date=a.created_at)
         safe_name = (apprentice_name or 'Apprentice').lower().replace(' ', '_')
         today = datetime.now(UTC).strftime('%Y%m%d')
         attachments = [{
@@ -405,13 +405,13 @@ def mentor_email_master(apprentice_id: str, body: dict, db: Session = Depends(ge
             html = render_email_v2(context)
             plain = f"T[root]H Mentor Report\nApprentice: {context.get('apprentice_name')}\nKnowledge: {context.get('overall_mc_percent')}% ({context.get('knowledge_band')})\nView: {settings.app_url}"
     else:
-        html, plain = render_master_trooth_email(None, a.scores or {}, settings.app_url)
+        html, plain = render_master_trooth_email(apprentice_display, a.scores or {}, settings.app_url)
     attachments = None
     if include_pdf:
         if a.mentor_report_v2:
             pdf = render_pdf_v2(context)
         else:
-            pdf = generate_pdf(None, a.scores or {})
+            pdf = generate_pdf(apprentice_display, a.scores or {}, assessment_date=a.created_at)
         today = datetime.now(UTC).strftime('%Y%m%d')
         attachments = [{
             "filename": f"master_report_{apprentice_id}_{today}.pdf",

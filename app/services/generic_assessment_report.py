@@ -5,7 +5,6 @@ report PDF (``master_trooth_report.render_pdf_v2``).
 """
 from __future__ import annotations
 
-import html as _html
 import logging
 from datetime import datetime, UTC
 from typing import Dict, List, Optional
@@ -62,20 +61,6 @@ def build_generic_story(title: str, scores: Dict) -> list:
 
     story += [kit.gap(14), kit.para("Open the T[root]H app for your full report and next steps.", "small")]
     return story
-
-
-def generate_html(title: str, apprentice_name: Optional[str], scores: Dict) -> str:
-    esc = _html.escape
-    scores = scores or {}
-    rows = "".join(f"<tr><td>{esc(str(c.get('name')))}</td><td>{esc(str(c.get('score')))}</td></tr>" for c in _categories(scores))
-    return (
-        f"<div style='font-family:Arial,sans-serif'>"
-        f"<h1>{esc(title or 'Assessment Report')}</h1>"
-        f"<p>Apprentice: {esc(apprentice_name or 'Apprentice')}</p>"
-        f"<h2>Overall: {esc(str(scores.get('overall_score', 0)))}</h2>"
-        f"<table border='1' cellspacing='0' cellpadding='6'><thead><tr><th>Category</th><th>Score</th></tr></thead><tbody>{rows}</tbody></table>"
-        f"</div>"
-    )
 
 
 def generate_pdf(title: str, apprentice_name: Optional[str], scores: Dict, *, assessment_date=None) -> bytes:
