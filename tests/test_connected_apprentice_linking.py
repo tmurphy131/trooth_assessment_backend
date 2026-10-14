@@ -439,3 +439,57 @@ def test_apprentice_redeems_gift_code_without_emails_in_logs(client, db_session,
     assert _seat(db_session, seat.id).is_redeemed is True
     assert apprentice.email not in caplog.text
     assert mentor_user.email not in caplog.text
+
+
+# ---- Revoking agreements must not end an unrelated mentorship ----
+
+@pytest.fixture
+def agreement_emails(monkeypatch):
+    sent = []
+    import app.routes.agreements as agreements_routes
+    monkeypatch.setattr(agreements_routes, "send_agreement_email", lambda event, to_email, context=None: sent.append((event, to_email)))
+    return sent
+
+
+def test_revoking_a_draft_deletes_it_and_keeps_the_mentorship(client, db_session, act_as, make_user, connect, make_agreement, agreement_emails):
+    mentor, apprentice = make_user("mentor"), make_user("apprentice")
+    connect(mentor, apprentice)
+    ag = make_agreement(mentor, apprentice.email, apprentice_id=apprentice.id, status="draft")
+    act_as(mentor)
+
+    r = client.post(f"/agreements/{ag.id}/revoke")
+    assert r.status_code == 200, r.text
+    assert r.json()["deleted"] is True and r.json()["status"] == "revoked"
+    assert _fresh(db_session, Agreement, ag.id) is None
+    rel = db_session.query(MentorApprentice).filter_by(mentor_id=mentor.id, apprentice_id=apprentice.id).one()
+    assert rel.active is True
+    assert agreement_emails == []  # the apprentice never saw the draft
+
+
+@pytest.mark.parametrize("status", ["awaiting_apprentice", "awaiting_parent"])
+def test_revoking_an_unsigned_agreement_keeps_an_existing_mentorship(client, db_session, act_as, make_user, connect, make_agreement, agreement_emails, status):
+    mentor, apprentice = make_user("mentor"), make_user("apprentice")
+    connect(mentor, apprentice)
+    ag = make_agreement(mentor, apprentice.email, apprentice_id=apprentice.id, status=status)
+    act_as(mentor)
+
+    r = client.post(f"/agreements/{ag.id}/revoke")
+    assert r.status_code == 200, r.text
+    assert r.json()["status"] == "revoked" and r.json()["deleted"] is False
+    assert _fresh(db_session, Agreement, ag.id).status == "revoked"
+    rel = db_session.query(MentorApprentice).filter_by(mentor_id=mentor.id, apprentice_id=apprentice.id).one()
+    assert rel.active is True
+
+
+def test_revoking_a_signed_agreement_still_ends_the_mentorship(client, db_session, act_as, make_user, connect, make_agreement, agreement_emails):
+    mentor, apprentice = make_user("mentor"), make_user("apprentice")
+    connect(mentor, apprentice)
+    ag = make_agreement(mentor, apprentice.email, apprentice_id=apprentice.id, status="fully_signed")
+    act_as(mentor)
+
+    r = client.post(f"/agreements/{ag.id}/revoke")
+    assert r.status_code == 200, r.text
+    rel = db_session.query(MentorApprentice).filter_by(mentor_id=mentor.id, apprentice_id=apprentice.id).one()
+    db_session.refresh(rel)
+    assert rel.active is False
+    assert len(agreement_emails) == 2  # apprentice and mentor are told

@@ -87,6 +87,8 @@ class AgreementOut(BaseModel):
     created_at: datetime
     activated_at: Optional[datetime]
     mentor_name: Optional[str] = None
+    # True when revoking a draft deleted it instead (never sent, so nothing to revoke).
+    deleted: bool = False
 
     model_config = {
         'from_attributes': True

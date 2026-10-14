@@ -530,11 +530,22 @@ def revoke_agreement(agreement_id: str, db: Session = Depends(get_db), mentor: U
     if ag.status in ('revoked','expired'):
         raise HTTPException(status_code=409, detail="Already inactive")
 
+    # A draft was never sent: delete it. The apprentice never saw it, so no emails, and an
+    # existing mentorship (apprentice picked from connected apprentices) is left alone.
+    if ag.status == 'draft':
+        out = AgreementOut.model_validate(ag).model_copy(update={"status": "revoked", "deleted": True})
+        db.query(AgreementToken).filter_by(agreement_id=ag.id).delete()
+        db.delete(ag)
+        db.commit()
+        return out
+
+    was_active = ag.status == 'fully_signed'
     ag.status = 'revoked'
     ag.revoked_at = utc_now()
     ag.revoked_by = mentor.id
-    # deactivate relationship if exists
-    if ag.apprentice_id:
+    # Only a signed (active) agreement ends the mentorship. Revoking one still awaiting
+    # signatures must not end a mentorship that existed before it.
+    if was_active and ag.apprentice_id:
         rel = db.query(MentorApprentice).filter_by(mentor_id=ag.mentor_id, apprentice_id=ag.apprentice_id).first()
         if rel and rel.active:
             rel.active = False
