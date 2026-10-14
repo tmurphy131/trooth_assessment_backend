@@ -318,6 +318,52 @@ def get_agreement(agreement_id: str, db: Session = Depends(get_db), user: User =
     return ag
 
 # Signing
+def _notify_mentor_of_signature(db: Session, ag: Agreement, signer: str) -> None:
+    """Tell the mentor someone signed: in-app notification, push, and an email once fully signed.
+
+    `signer` is 'apprentice' or 'parent'. Shared by the in-app and emailed-link signing routes so
+    both notify the same way. Best-effort: failures are logged and never fail the signing.
+    """
+    apprentice_name = ag.apprentice_name or (ag.apprentice_email or "").split('@')[0] or "Your apprentice"
+    who = f"{apprentice_name}'s parent/guardian" if signer == 'parent' else apprentice_name
+    if ag.status == 'fully_signed':
+        message = f"{who} has signed the mentorship agreement — Agreement is now active!"
+    elif ag.status == 'awaiting_parent':
+        message = f"{who} has signed the mentorship agreement — Awaiting parent signature"
+    else:
+        message = None
+    if message:
+        try:
+            db.add(Notification(user_id=ag.mentor_id, message=message, link=f"/agreements/{ag.id}", is_read=False))
+            db.commit()
+        except Exception as e:
+            db.rollback()
+            logger.warning(f"Failed to create mentor notification for agreement {ag.id}: {type(e).__name__}")
+
+    if ag.status == 'fully_signed':
+        try:
+            mentor_user = db.query(User).filter_by(id=ag.mentor_id).first()
+            mentor_email = mentor_user.email if mentor_user and mentor_user.email else None
+            send_agreement_email(
+                AgreementEmailEvent.FULLY_SIGNED,
+                to_email=mentor_email or ag.apprentice_email,
+                context={
+                    'agreement_id': ag.id,
+                    'apprentice_email': ag.apprentice_email,
+                    'mentor_email': mentor_email,
+                    'mentor_name': mentor_user.name if mentor_user else None,
+                }
+            )
+        except Exception:
+            pass
+
+    try:
+        notify_agreement_signed(db=db, user_id=ag.mentor_id, signer_name=who, agreement_status=ag.status)
+        logger.info(f"Push notification sent to mentor {ag.mentor_id} for agreement {ag.id} ({signer})")
+    except Exception as e:
+        logger.warning(f"Failed to send push notification for agreement {ag.id}: {type(e).__name__}")
+
+
 @router.post("/{agreement_id}/sign/apprentice", response_model=AgreementOut)
 def apprentice_sign(agreement_id: str, body: AgreementSign, request: Request, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
     ag = db.query(Agreement).filter_by(id=agreement_id).first()
@@ -387,69 +433,7 @@ def apprentice_sign(agreement_id: str, body: AgreementSign, request: Request, db
     db.commit()
     db.refresh(ag)
     
-    # ──────────────────────────────────────────────────────────────────
-    # NOTIFY MENTOR: Apprentice signed the mentorship agreement
-    # ──────────────────────────────────────────────────────────────────
-    try:
-        apprentice_name = ag.apprentice_name or ag.apprentice_email.split('@')[0]
-        if ag.status == 'fully_signed':
-            # Agreement is complete - notify mentor
-            notif = Notification(
-                user_id=ag.mentor_id,
-                message=f"{apprentice_name} has signed the mentorship agreement — Agreement is now active!",
-                link=f"/agreements/{ag.id}",
-                is_read=False
-            )
-            db.add(notif)
-            db.commit()
-        elif ag.status == 'awaiting_parent':
-            # Apprentice signed but awaiting parent - notify mentor of progress
-            notif = Notification(
-                user_id=ag.mentor_id,
-                message=f"{apprentice_name} has signed the mentorship agreement — Awaiting parent signature",
-                link=f"/agreements/{ag.id}",
-                is_read=False
-            )
-            db.add(notif)
-            db.commit()
-    except Exception as e:
-        # Log but don't fail the signing
-        import logging
-        logging.getLogger(__name__).warning(f"Failed to create mentor notification for agreement signing: {e}")
-    
-    # Notify mentor if fully signed (email)
-    if ag.status == 'fully_signed':
-        try:
-            mentor_user = db.query(User).filter_by(id=ag.mentor_id).first()
-            mentor_email = mentor_user.email if mentor_user and mentor_user.email else None
-            send_agreement_email(
-                AgreementEmailEvent.FULLY_SIGNED,
-                to_email=mentor_email or ag.apprentice_email,
-                context={
-                    'agreement_id': ag.id,
-                    'apprentice_email': ag.apprentice_email,
-                    'mentor_email': mentor_email,
-                    'mentor_name': mentor_user.name if mentor_user else None,
-                }
-            )
-        except Exception:
-            pass
-    
-    # ──────────────────────────────────────────────────────────────────
-    # PUSH NOTIFICATION to mentor
-    # ──────────────────────────────────────────────────────────────────
-    try:
-        apprentice_name = ag.apprentice_name or ag.apprentice_email.split('@')[0]
-        notify_agreement_signed(
-            db=db,
-            user_id=ag.mentor_id,
-            signer_name=apprentice_name,
-            agreement_status=ag.status
-        )
-        logger.info(f"Push notification sent to mentor {ag.mentor_id} for agreement {ag.id}")
-    except Exception as e:
-        logger.warning(f"Failed to send push notification for agreement signing: {e}")
-    
+    _notify_mentor_of_signature(db, ag, 'apprentice')
     return ag
 
 # The id-based parent signature route was removed (specs/009): parents sign only through the
@@ -880,6 +864,8 @@ def public_sign(token: str, body: AgreementSign, db: Session = Depends(get_db)):
     at.used_at = utc_now()
     db.commit()
     db.refresh(ag)
+    # Emailed-link signing notifies the mentor exactly like in-app signing
+    _notify_mentor_of_signature(db, ag, at.token_type)
     return ag
 
 @router.get("/{agreement_id}/integrity")

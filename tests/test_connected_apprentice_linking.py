@@ -493,3 +493,53 @@ def test_revoking_a_signed_agreement_still_ends_the_mentorship(client, db_sessio
     db_session.refresh(rel)
     assert rel.active is False
     assert len(agreement_emails) == 2  # apprentice and mentor are told
+
+
+# ---- Emailed-link signing notifies the mentor like in-app signing ----
+
+@pytest.fixture
+def pushes(monkeypatch):
+    sent = []
+    import app.routes.agreements as agreements_routes
+    monkeypatch.setattr(agreements_routes, "notify_agreement_signed",
+                        lambda db, user_id, signer_name, agreement_status: sent.append((user_id, signer_name, agreement_status)))
+    return sent
+
+
+def _token(db_session, ag, token_type):
+    from app.models.agreement import AgreementToken
+    t = AgreementToken(token=str(uuid.uuid4()), agreement_id=ag.id, token_type=token_type,
+                       expires_at=datetime.now(UTC) + timedelta(days=7))
+    db_session.add(t)
+    db_session.commit()
+    return t.token
+
+
+def test_parent_signing_by_link_notifies_the_mentor(client, db_session, make_user, make_agreement, agreement_emails, pushes):
+    from app.models.notification import Notification
+
+    mentor, apprentice = make_user("mentor"), make_user("apprentice", name="Sam Minor")
+    ag = make_agreement(mentor, apprentice.email, apprentice_id=apprentice.id, status="awaiting_parent",
+                        apprentice_name="Sam Minor", parent_required=True, parent_email="parent@example.com",
+                        apprentice_signed_at=datetime.now(UTC))
+    r = client.post(f"/agreements/public/{_token(db_session, ag, 'parent')}/sign", json={"typed_name": "Pat Parent"})
+    assert r.status_code == 200 and r.json()["status"] == "fully_signed", r.text
+
+    notes = db_session.query(Notification).filter_by(user_id=mentor.id).all()
+    assert len(notes) == 1 and "parent/guardian" in notes[0].message and "now active" in notes[0].message
+    assert any(to == mentor.email for _, to in agreement_emails)  # "fully signed" email to the mentor
+    assert pushes == [(mentor.id, "Sam Minor's parent/guardian", "fully_signed")]
+
+
+def test_apprentice_signing_by_link_notifies_the_mentor(client, db_session, make_user, make_agreement, agreement_emails, pushes):
+    from app.models.notification import Notification
+
+    mentor, apprentice = make_user("mentor"), make_user("apprentice", name="Alex")
+    ag = make_agreement(mentor, apprentice.email, apprentice_id=apprentice.id, status="awaiting_apprentice",
+                        apprentice_name="Alex", parent_required=False)
+    r = client.post(f"/agreements/public/{_token(db_session, ag, 'apprentice')}/sign", json={"typed_name": "Alex"})
+    assert r.status_code == 200 and r.json()["status"] == "fully_signed", r.text
+
+    assert db_session.query(Notification).filter_by(user_id=mentor.id).count() == 1
+    assert any(to == mentor.email for _, to in agreement_emails)
+    assert pushes == [(mentor.id, "Alex", "fully_signed")]
