@@ -84,18 +84,10 @@ def get_mentor_report_v2_pdf(
     if user_is_premium:
         cached_full_report = scores.get('full_report_v1')
         if not cached_full_report:
-            try:
-                from app.services.ai_scoring import generate_full_report_for_assessment
-                cached_full_report = generate_full_report_for_assessment(a, apprentice_name, db)
-                if cached_full_report:
-                    updated_scores = dict(scores)
-                    updated_scores['full_report_v1'] = cached_full_report
-                    a.scores = updated_scores
-                    scores = updated_scores
-                    db.commit()
-                    _logger.info("[export-pdf] on-demand full_report generated and cached")
-            except Exception as e:
-                _logger.warning(f"On-demand full report generation failed: {e}")
+            # Don't make the request wait ~30 s: send the standard report now and
+            # generate Premium in the background for next time.
+            from app.services import full_report as _full_report
+            _full_report.queue_premium(a)
     
     assessment_ctx = {
         'apprentice': {'id': a.apprentice_id, 'name': apprentice_name},
@@ -185,19 +177,10 @@ def email_report_by_assessment(
         
         # If no cached report, generate on-demand for premium users
         if not cached_full_report:
-            try:
-                from app.services.ai_scoring import generate_full_report_for_assessment
-                cached_full_report = generate_full_report_for_assessment(a, apprentice_name, db)
-                _logger.info(f"[email-report] on-demand full_report generated: {cached_full_report is not None}")
-                # Cache it for future use
-                if cached_full_report:
-                    updated_scores = dict(scores)
-                    updated_scores['full_report_v1'] = cached_full_report
-                    a.scores = updated_scores
-                    scores = updated_scores  # Update local reference for context building
-                    db.commit()
-            except Exception as e:
-                _logger.warning(f"On-demand full report generation failed: {e}")
+            # Don't make the request wait ~30 s: send the standard report now and
+            # generate Premium in the background for next time.
+            from app.services import full_report as _full_report
+            _full_report.queue_premium(a)
     
     # Build context AFTER potentially updating scores with full_report
     context = build_report_context(assessment_ctx, scores, mentor_blob)

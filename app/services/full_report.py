@@ -125,6 +125,22 @@ def generate_and_store(session, assess: Assessment, questions: Optional[list] = 
     return report
 
 
+def queue_premium(assess: Assessment) -> None:
+    """Have the scoring task generate the Premium report later, instead of making a request wait.
+
+    Used by email/PDF routes: they send the standard report now, and the next one includes Premium.
+    The task runs through Cloud Tasks (survives Cloud Run CPU throttling), and generation is still
+    single-flight via claim(). Best-effort: a queue failure is only logged.
+    """
+    if stored_report(assess) or assess.full_report_status == "generating":
+        return
+    try:
+        from app.services import scoring_queue
+        scoring_queue.enqueue(assess.id, "premium-requested", unique=True)
+    except Exception as e:
+        logger.warning("could not queue premium report for %s: %s", assess.id, type(e).__name__)
+
+
 def _response(assess: Assessment, report: dict, cached: bool) -> dict:
     return {"report": public_full_report(report, assess.mentor_report_v2), "cached": cached,
             "generated_at": (assess.scores or {}).get("full_report_generated_at")}
