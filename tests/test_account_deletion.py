@@ -150,3 +150,32 @@ def test_close_account_admin_fails(client, admin_headers):
     )
     assert response.status_code == 403
     assert "admin" in response.json()["detail"].lower()
+
+
+@pytest.mark.parametrize("env,deletes_identity", [("production", True), ("dev", False), ("development", False)])
+def test_close_account_only_deletes_firebase_identity_in_production(
+    client, apprentice_headers, monkeypatch, env, deletes_identity
+):
+    """Firebase Auth and Firestore are shared across environments; only prod deletes them."""
+    import json
+    from unittest.mock import MagicMock
+    from app.core.settings import settings
+    from app.routes import user as user_routes
+
+    monkeypatch.setattr(settings, "environment", env)
+    delete_user = MagicMock()
+    firestore_client = MagicMock()
+    monkeypatch.setattr(user_routes.auth, "delete_user", delete_user)
+    monkeypatch.setattr(user_routes.firestore, "client", firestore_client)
+
+    response = client.request(
+        "DELETE",
+        "/users/me/close-account",
+        content=json.dumps({"confirmation_text": "DELETE"}),
+        headers={**apprentice_headers, "Content-Type": "application/json"}
+    )
+    assert response.status_code == 200
+    assert delete_user.called is deletes_identity
+    assert firestore_client.called is deletes_identity
+    assert response.json()["firebase_auth_deleted"] is deletes_identity
+    assert response.json()["firestore_deleted"] is deletes_identity

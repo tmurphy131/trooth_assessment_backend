@@ -12,6 +12,7 @@ from app.models.user import User, UserRole
 from app.services.mentorship import has_active_connection
 from app.schemas.daily_trivia import TimezoneIn, TimezoneOut
 from app.services.daily_trivia import is_valid_timezone
+from app.core.settings import settings
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -194,33 +195,42 @@ def close_account(
         # Perform the database deletion
         result = delete_user_account(db, current_user)
         
-        # Delete the Firebase Authentication user
+        # Firebase Auth and Firestore are shared by every environment, so only
+        # production may delete them. Elsewhere, deleting would also remove the
+        # person's sign-in for production.
         firebase_auth_deleted = False
         firebase_auth_error = None
-        try:
-            auth.delete_user(user_id)
-            firebase_auth_deleted = True
-            logging.info(f"Successfully deleted Firebase Auth user {user_id}")
-        except auth.UserNotFoundError:
-            # User doesn't exist in Firebase Auth - this is fine
-            firebase_auth_deleted = True
-            logging.info(f"Firebase Auth user {user_id} already does not exist")
-        except Exception as firebase_error:
-            firebase_auth_error = str(firebase_error)
-            logging.warning(f"Could not delete Firebase Auth user {user_id}: {firebase_error}")
-        
-        # Delete the Firestore user document (contains role, onboarded flag, etc.)
         firestore_deleted = False
         firestore_error = None
-        try:
-            db_firestore = firestore.client()
-            # Delete from 'users' collection
-            db_firestore.collection('users').document(user_id).delete()
-            firestore_deleted = True
-            logging.info(f"Successfully deleted Firestore user document {user_id}")
-        except Exception as firestore_err:
-            firestore_error = str(firestore_err)
-            logging.warning(f"Could not delete Firestore user document {user_id}: {firestore_err}")
+        if settings.environment == "production":
+            # Delete the Firebase Authentication user
+            try:
+                auth.delete_user(user_id)
+                firebase_auth_deleted = True
+                logging.info(f"Successfully deleted Firebase Auth user {user_id}")
+            except auth.UserNotFoundError:
+                # User doesn't exist in Firebase Auth - this is fine
+                firebase_auth_deleted = True
+                logging.info(f"Firebase Auth user {user_id} already does not exist")
+            except Exception as firebase_error:
+                firebase_auth_error = str(firebase_error)
+                logging.warning(f"Could not delete Firebase Auth user {user_id}: {firebase_error}")
+        
+            # Delete the Firestore user document (contains role, onboarded flag, etc.)
+            try:
+                db_firestore = firestore.client()
+                # Delete from 'users' collection
+                db_firestore.collection('users').document(user_id).delete()
+                firestore_deleted = True
+                logging.info(f"Successfully deleted Firestore user document {user_id}")
+            except Exception as firestore_err:
+                firestore_error = str(firestore_err)
+                logging.warning(f"Could not delete Firestore user document {user_id}: {firestore_err}")
+        else:
+            logging.info(
+                f"Kept Firebase Auth user and Firestore document {user_id}: "
+                f"they are shared with production (ENV={settings.environment})"
+            )
         
         return {
             "success": True,
