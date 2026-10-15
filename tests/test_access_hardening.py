@@ -105,9 +105,15 @@ def test_master_template_view_hides_answers_from_other_mentors(client, db_sessio
     # False rather than omitted: released apps read this field as a non-null bool
     assert all(o.get("is_correct") is False for o in _options(r.json()["questions"]))
 
+    # Owning the template isn't enough: answers follow the question's creator (spec 010)
     owner = make_user("mentor")
     own = _template(db_session, mc_question, created_by=owner.id)
     act_as(owner)
+    opts = _options(client.get(f"/admin/templates/{own.id}").json()["questions"])
+    assert all(o["is_correct"] is False for o in opts)
+
+    mc_question.created_by = owner.id
+    db_session.commit()
     opts = _options(client.get(f"/admin/templates/{own.id}").json()["questions"])
     assert {o["option_text"]: o["is_correct"] for o in opts} == {"6": True, "7": False}
 
@@ -179,7 +185,8 @@ def test_new_draft_requires_premium_for_locked_template(client, db_session, act_
 
 # ---------- shared questions can only be changed by admins ----------
 
-def test_question_edit_and_delete_are_admin_only(client, act_as, make_user, mc_question):
+def test_shared_question_edit_and_delete_are_admin_only(client, act_as, make_user, mc_question):
+    # mc_question has no creator, so it's shared: only admins may change it (spec 010)
     act_as(make_user("mentor"))
     assert client.put(f"/question/questions/{mc_question.id}", json={"text": "Changed"}).status_code == 403
     assert client.delete(f"/question/questions/{mc_question.id}").status_code == 403

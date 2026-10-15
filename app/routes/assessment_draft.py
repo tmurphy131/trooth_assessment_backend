@@ -50,12 +50,6 @@ def _ensure_template_access(db: Session, template_id: str, user) -> AssessmentTe
     return template
 
 
-def _sees_answers(user) -> bool:
-    """Correct answers go to mentors/admins (submission review), never to apprentices."""
-    role = user.role.value if hasattr(user.role, "value") else str(user.role)
-    return role in (UserRole.mentor.value, UserRole.admin.value)
-
-
 @router.post("", response_model=AssessmentDraftOut)
 @router.post("/", response_model=AssessmentDraftOut)
 def save_draft(
@@ -159,7 +153,7 @@ def save_draft(
             .order_by(AssessmentTemplateQuestion.order)
             .all()
         )
-    questions_out = [QuestionItem.from_question(q, include_answers=_sees_answers(current_user)) for q in questions]
+    questions_out = [QuestionItem.from_question(q, include_answers=False) for q in questions]
 
     # Manually construct the response since AssessmentDraft doesn't have questions field
     draft_response = AssessmentDraftOut(
@@ -200,7 +194,7 @@ def get_draft(db: Session = Depends(get_db), current_user: User = Depends(get_cu
         .order_by(AssessmentTemplateQuestion.order)
         .all()
     )
-    questions_out = [QuestionItem.from_question(q, include_answers=_sees_answers(current_user)) for q in questions]
+    questions_out = [QuestionItem.from_question(q, include_answers=False) for q in questions]
 
     # Manually construct the response
     return AssessmentDraftOut(
@@ -282,7 +276,7 @@ def list_drafts(
                 .all()
             )
             print(f"DEBUG: Found {len(questions)} questions for template {draft.template_id}")
-            questions_out = [QuestionItem.from_question(q, include_answers=_sees_answers(current_user)) for q in questions]
+            questions_out = [QuestionItem.from_question(q, include_answers=False) for q in questions]
 
             # Manually construct the response
             draft_response = AssessmentDraftOut(
@@ -335,7 +329,7 @@ def list_completed_assessments(
                 .all()
             )
             print(f"DEBUG: Found {len(questions)} questions for template {draft.template_id}")
-            questions_out = [QuestionItem.from_question(q, include_answers=_sees_answers(current_user)) for q in questions]
+            questions_out = [QuestionItem.from_question(q, include_answers=False) for q in questions]
 
             # Manually construct the response
             draft_response = AssessmentDraftOut(
@@ -383,7 +377,7 @@ def get_draft_by_id(
         .order_by(AssessmentTemplateQuestion.order)
         .all()
     )
-    questions_out = [QuestionItem.from_question(q, include_answers=_sees_answers(current_user)) for q in questions]
+    questions_out = [QuestionItem.from_question(q, include_answers=False) for q in questions]
 
     # Manually construct the response
     return AssessmentDraftOut(
@@ -429,7 +423,7 @@ def update_draft(
         .order_by(AssessmentTemplateQuestion.order)
         .all()
     )
-    questions_out = [QuestionItem.from_question(q, include_answers=_sees_answers(current_user)) for q in questions]
+    questions_out = [QuestionItem.from_question(q, include_answers=False) for q in questions]
 
     # Manually construct the response
     return AssessmentDraftOut(
@@ -479,7 +473,7 @@ def update_draft_by_id(
         .order_by(AssessmentTemplateQuestion.order)
         .all()
     )
-    questions_out = [QuestionItem.from_question(q, include_answers=_sees_answers(current_user)) for q in questions]
+    questions_out = [QuestionItem.from_question(q, include_answers=False) for q in questions]
 
     # Manually construct the response
     return AssessmentDraftOut(
@@ -791,7 +785,7 @@ def get_submitted_by_apprentice(
                 .order_by(AssessmentTemplateQuestion.order)
                 .all()
             )
-            questions_out = [QuestionItem.from_question(q, include_answers=_sees_answers(current_user)) for q in questions]
+            questions_out = [QuestionItem.from_question(q, include_answers=current_user.id != apprentice_id) for q in questions]
 
             # Manually construct the response
             draft_response = AssessmentDraftOut(
@@ -835,7 +829,7 @@ def start_draft(
             .order_by(AssessmentTemplateQuestion.order)
             .all()
         )
-        questions_out = [QuestionItem.from_question(q, include_answers=_sees_answers(current_user)) for q in questions]
+        questions_out = [QuestionItem.from_question(q, include_answers=False) for q in questions]
 
         # Return existing draft as AssessmentDraftOut
         return AssessmentDraftOut(
@@ -906,7 +900,7 @@ def start_draft(
         .order_by(AssessmentTemplateQuestion.order)
         .all()
     )
-    questions_out = [QuestionItem.from_question(q, include_answers=_sees_answers(current_user)) for q in questions]
+    questions_out = [QuestionItem.from_question(q, include_answers=False) for q in questions]
 
     # Return new draft as AssessmentDraftOut
     return AssessmentDraftOut(

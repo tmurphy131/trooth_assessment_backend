@@ -12,7 +12,7 @@ from app.schemas.assessment_template import (
     AddQuestionToTemplate, FullTemplateView, TemplateWithFullQuestions
 )
 from uuid import uuid4
-from app.schemas.question import QuestionOut
+from app.services.question_access import question_out
 from app.schemas.user import UserOut
 
 router = APIRouter(prefix="/templates", tags=["Admin Templates"])
@@ -137,8 +137,12 @@ def add_question_to_template(
         raise HTTPException(status_code=403, detail="You can only edit your own templates")
     
     # Confirm question exists
-    if not db.query(Question).filter_by(id=item.question_id).first():
+    question = db.query(Question).filter_by(id=item.question_id).first()
+    if not question:
         raise HTTPException(status_code=404, detail="Question not found")
+    # Mentors add only questions they wrote; shared questions reach templates via clone (spec 010)
+    if current_user.role == UserRole.mentor and question.created_by != current_user.id:
+        raise HTTPException(status_code=403, detail="You can only add questions you created.")
     
     # Check for duplicate
     existing = db.query(AssessmentTemplateQuestion).filter_by(
@@ -216,11 +220,6 @@ def list_templates(
         (AssessmentTemplate.created_by == current_user.id) | (AssessmentTemplate.is_master_assessment == True)  # noqa: E712
     ).all()
 
-def _without_answers(q: QuestionOut) -> QuestionOut:
-    # False (not null): released apps read is_correct as a non-null bool on this screen.
-    return q.model_copy(update={"options": [o.model_copy(update={"is_correct": False}) for o in q.options]})
-
-
 @router.get("/{template_id}", response_model=TemplateWithFullQuestions)
 def get_template(
     template_id: str,
@@ -253,10 +252,9 @@ def get_template(
         if question:
             questions.append(question)
 
-    # Correct answers only for the template's owner or an admin, never for the shared Master
-    # template viewed by other mentors.
-    if current_user.role != UserRole.admin and template.created_by != current_user.id:
-        questions = [_without_answers(QuestionOut.model_validate(q)) for q in questions]
+    # Answers follow each question's creator, not the template owner (spec 010). Hidden answers
+    # are False, not null: released apps read is_correct as a non-null bool on this screen.
+    questions = [question_out(q, current_user, as_false=True) for q in questions]
 
     return TemplateWithFullQuestions(
         id=template.id,

@@ -37,6 +37,7 @@ class QuestionOut(BaseModel):
     text: str
     question_type: QuestionType
     category_id: Optional[str] = None
+    created_by: Optional[str] = None  # mentor who wrote it; None = shared (specs/010)
     options: List[QuestionOptionOut] = []
     model_config = {'from_attributes': True}
 

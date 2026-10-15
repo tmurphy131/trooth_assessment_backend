@@ -17,6 +17,8 @@ class Question(Base):
     text = Column(Text, nullable=False)
     question_type = Column(Enum(QuestionType), nullable=False, default=QuestionType.open_ended)
     category_id = Column(ForeignKey("categories.id"))
+    # Mentor who wrote it; NULL = shared/admin/seeded (specs/010-question-ownership)
+    created_by = Column(String, ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True)
     
     # Relationship to question options
     options = relationship("QuestionOption", back_populates="question", cascade="all, delete-orphan")
