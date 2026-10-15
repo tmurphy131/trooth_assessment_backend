@@ -28,6 +28,7 @@ from app.models.mentor_profile import MentorProfile
 from app.models.prayer_entry import PrayerEntry
 from app.models.agreement import AgreementTemplate
 from app.models.assessment_template import AssessmentTemplate
+from app.models.question import Question
 from app.models.subscription_event import SubscriptionEvent
 from app.models.mentor_premium_seat import MentorPremiumSeat, generate_redemption_code
 from app.models.trivia import (
@@ -168,6 +169,8 @@ def _clear_shared_user_references(db: Session, user_id: str, deleted_counts: dic
                  {"author_user_id": None}, "agreement_templates")
     _safe_update(db, AssessmentTemplate, AssessmentTemplate.created_by == user_id,
                  {"created_by": None}, "assessment_templates")
+    # Their custom questions become shared (admin-managed); templates using them keep working (spec 010)
+    _safe_update(db, Question, Question.created_by == user_id, {"created_by": None}, "questions")
 
 
 def get_account_deletion_summary(db: Session, user: User) -> dict:
