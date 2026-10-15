@@ -365,7 +365,7 @@ def create_gift_seat(
     db.commit()
     db.refresh(seat)
     
-    logger.info(f"Mentor {user.email} created manual gift seat {seat.id}")
+    logger.info(f"Mentor {user.id} created manual gift seat {seat.id}")
     
     return CreateSeatResponse(
         seat_id=seat.id,
@@ -491,7 +491,7 @@ def confirm_seat_purchase(
             if apprentice:
                 # Check if apprentice already has premium
                 if apprentice.subscription_tier not in [None, SubscriptionTier.free]:
-                    logger.info(f"Apprentice {apprentice.email} already has {apprentice.subscription_tier} - seat will remain unassigned")
+                    logger.info(f"Apprentice {apprentice.id} already has {apprentice.subscription_tier} - seat will remain unassigned")
                     apprentice = None  # Clear so seat stays unassigned
                 else:
                     # Also check if apprentice already has an active gift seat from this mentor (excluding current seat)
@@ -502,7 +502,7 @@ def confirm_seat_purchase(
                         MentorPremiumSeat.id != existing_seat.id
                     ).first()
                     if other_active_seat:
-                        logger.info(f"Apprentice {apprentice.email} already has active gift seat {other_active_seat.id} - seat will remain unassigned")
+                        logger.info(f"Apprentice {apprentice.id} already has active gift seat {other_active_seat.id} - seat will remain unassigned")
                         apprentice = None
             
             if apprentice:
@@ -539,7 +539,7 @@ def confirm_seat_purchase(
                         auto_activated=True,
                     )
                 except Exception as e:
-                    logger.warning(f"Failed to send gift seat email to {apprentice.email}: {e}")
+                    logger.warning(f"Failed to send gift seat email to {apprentice.id}: {e}")
         
         return CreateSeatResponse(
             seat_id=existing_seat.id,
@@ -621,7 +621,7 @@ def confirm_seat_purchase(
         # Check if apprentice already has premium
         if apprentice.subscription_tier not in [None, SubscriptionTier.free]:
             # Don't auto-assign to someone who already has premium
-            logger.info(f"Apprentice {apprentice.email} already has {apprentice.subscription_tier} - seat will remain unassigned")
+            logger.info(f"Apprentice {apprentice.id} already has {apprentice.subscription_tier} - seat will remain unassigned")
             apprentice = None  # Clear so seat stays unassigned
         else:
             # Also check if apprentice already has an active gift seat from this mentor
@@ -631,7 +631,7 @@ def confirm_seat_purchase(
                 MentorPremiumSeat.is_active == True
             ).first()
             if existing_seat:
-                logger.info(f"Apprentice {apprentice.email} already has active gift seat {existing_seat.id} from this mentor - seat will remain unassigned")
+                logger.info(f"Apprentice {apprentice.id} already has active gift seat {existing_seat.id} from this mentor - seat will remain unassigned")
                 apprentice = None
     
     if apprentice:
@@ -663,7 +663,7 @@ def confirm_seat_purchase(
                 auto_activated=True,
             )
         except Exception as e:
-            logger.warning(f"Failed to send gift seat email to {apprentice.email}: {e}")
+            logger.warning(f"Failed to send gift seat email to {apprentice.id}: {e}")
     elif data.apprentice_email:
         # Apprentice doesn't exist yet - save email for later redemption
         seat.apprentice_email = data.apprentice_email.lower()
@@ -724,7 +724,7 @@ def revoke_gift_seat(
                 db, apprentice.id, EventTypes.ADMIN_REVOKED,
                 {"reason": "Mentor revoked gift seat", "mentor_id": user.id}
             )
-            logger.info(f"Revoked premium from {apprentice.email} (seat {seat_id})")
+            logger.info(f"Revoked premium from {apprentice.id} (seat {seat_id})")
             
             # Send email notification to apprentice about revocation
             try:
@@ -735,7 +735,7 @@ def revoke_gift_seat(
                     mentor_name=user.name or user.email,
                 )
             except Exception as e:
-                logger.warning(f"Failed to send gift seat revoked email to {apprentice.email}: {e}")
+                logger.warning(f"Failed to send gift seat revoked email to {apprentice.id}: {e}")
     
     # Reset seat for reuse
     seat.apprentice_id = None
@@ -858,7 +858,7 @@ def assign_gift_seat(
             auto_activated=True,
         )
     except Exception as e:
-        logger.warning(f"Failed to send gift seat email to {apprentice.email}: {e}")
+        logger.warning(f"Failed to send gift seat email to {apprentice.id}: {e}")
     
     return {
         "message": f"Gift seat assigned to {apprentice.name or apprentice.email}",
@@ -1059,12 +1059,15 @@ async def revenuecat_webhook(
     
     Security: Verifies webhook using RevenueCat's authorization header.
     """
-    # Verify webhook authenticity
-    if settings.revenuecat_webhook_secret:
-        expected = f"Bearer {settings.revenuecat_webhook_secret}"
-        if authorization != expected:
-            logger.warning("Invalid RevenueCat webhook authorization")
-            raise HTTPException(status_code=401, detail="Invalid webhook authorization")
+    # Verify webhook authenticity. Fails closed: with no secret configured every call is refused,
+    # so a missing secret can't silently accept unauthenticated subscription changes.
+    secret = settings.revenuecat_webhook_secret
+    if not secret:
+        logger.error("RevenueCat webhook refused: REVENUECAT_WEBHOOK_SECRET is not configured")
+        raise HTTPException(status_code=503, detail="Webhook not configured")
+    if not authorization or not hmac.compare_digest(authorization, f"Bearer {secret}"):
+        logger.warning("Invalid RevenueCat webhook authorization")
+        raise HTTPException(status_code=401, detail="Invalid webhook authorization")
     
     try:
         payload = await request.json()
@@ -1094,7 +1097,7 @@ async def revenuecat_webhook(
     if app_user_id and not user.revenuecat_customer_id:
         user.revenuecat_customer_id = app_user_id
         db.commit()  # Commit immediately so this persists even if we return early from gift seat handler
-        logger.info(f"Set revenuecat_customer_id for user {user.email}: {app_user_id}")
+        logger.info(f"Set revenuecat_customer_id for user {user.id}: {app_user_id}")
     
     # Check if this is a gift seat subscription
     is_gift_seat = "gift_seat" in product_id.lower()
@@ -1153,7 +1156,7 @@ async def revenuecat_webhook(
             db, user.id, EventTypes.BILLING_ISSUE,
             {"product_id": product_id}
         )
-        logger.warning(f"Billing issue for user {user.email}")
+        logger.warning(f"Billing issue for user {user.id}")
         
     elif event_type == "PRODUCT_CHANGE":
         # User upgraded/downgraded - update all subscription fields
@@ -1221,7 +1224,7 @@ def admin_grant_premium(
     
     db.commit()
     
-    logger.info(f"Admin {admin.email} granted {tier} to {user.email} for {months or 'lifetime'} months")
+    logger.info(f"Admin {admin.id} granted {tier} to {user.id} for {months or 'lifetime'} months")
     
     return {
         "message": f"Granted {tier} to {user.email}",
@@ -1253,7 +1256,7 @@ def admin_revoke_premium(
     
     db.commit()
     
-    logger.info(f"Admin {admin.email} revoked premium from {user.email}")
+    logger.info(f"Admin {admin.id} revoked premium from {user.id}")
     
     return {"message": f"Revoked premium from {user.email}"}
 
@@ -1399,7 +1402,7 @@ def deactivate_mentor_gift_seats(db: Session, mentor_id: str):
                     db, apprentice.id, EventTypes.EXPIRATION,
                     {"reason": "Mentor subscription expired", "mentor_id": mentor_id}
                 )
-                logger.info(f"Deactivated gifted premium for {apprentice.email} due to mentor expiration")
+                logger.info(f"Deactivated gifted premium for {apprentice.id} due to mentor expiration")
                 
                 # Send email notification to apprentice
                 try:
@@ -1411,9 +1414,9 @@ def deactivate_mentor_gift_seats(db: Session, mentor_id: str):
                         apprentice_name=apprentice.name,
                         mentor_name=mentor_name,
                     )
-                    logger.info(f"Sent gift seat expired email to {apprentice.email}")
+                    logger.info(f"Sent gift seat expired email to {apprentice.id}")
                 except Exception as e:
-                    logger.warning(f"Failed to send gift seat expired email to {apprentice.email}: {e}")
+                    logger.warning(f"Failed to send gift seat expired email to {apprentice.id}: {e}")
 
 
 def handle_gift_seat_webhook(
@@ -1462,7 +1465,7 @@ def handle_gift_seat_webhook(
             db, mentor.id, EventTypes.GIFT_SEAT_CREATED,
             {"seat_id": seat.id, "subscription_id": subscription_id, "product_id": product_id}
         )
-        logger.info(f"Created gift seat {seat.id} for mentor {mentor.email} via subscription {subscription_id}")
+        logger.info(f"Created gift seat {seat.id} for mentor {mentor.id} via subscription {subscription_id}")
         
         return {"status": "seat_created", "seat_id": seat.id}
     
@@ -1518,7 +1521,7 @@ def handle_gift_seat_webhook(
                     db, apprentice.id, EventTypes.EXPIRATION,
                     {"reason": "Gift seat subscription expired", "seat_id": seat.id}
                 )
-                logger.info(f"Revoked gifted premium from {apprentice.email} due to seat subscription expiration")
+                logger.info(f"Revoked gifted premium from {apprentice.id} due to seat subscription expiration")
                 
                 # Send email notification to apprentice about gift expiration
                 try:
@@ -1528,9 +1531,9 @@ def handle_gift_seat_webhook(
                         apprentice_name=apprentice.name,
                         mentor_name=mentor.name or mentor.email,
                     )
-                    logger.info(f"Sent gift seat expired email to {apprentice.email}")
+                    logger.info(f"Sent gift seat expired email to {apprentice.id}")
                 except Exception as e:
-                    logger.warning(f"Failed to send gift seat expired email to {apprentice.email}: {e}")
+                    logger.warning(f"Failed to send gift seat expired email to {apprentice.id}: {e}")
         
         log_subscription_event(
             db, mentor.id, EventTypes.GIFT_SEAT_EXPIRED,

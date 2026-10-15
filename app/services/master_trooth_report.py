@@ -249,24 +249,6 @@ def render_email_v2(context: Dict[str, Any]) -> str:
     html, _ = render_mentor_report_v2_email(context)
     return html
 
-def render_markdown_print_v2(context: Dict[str, Any]) -> str:
-    try:
-        from jinja2 import Environment, FileSystemLoader
-    except Exception:
-        # very small fallback
-        return f"# T[root]H Mentor Report\n\nApprentice: {context.get('apprentice_name')}\n"
-    # Search both app/templates/print and backend root where v2 print template may live
-    print_dir = os.path.join(os.path.dirname(__file__), '../templates/print')
-    backend_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
-    env = Environment(loader=FileSystemLoader([os.path.abspath(print_dir), backend_root]))
-    try:
-        template = env.get_template('mentor_report_print_template.md')
-        return template.render(**context)
-    except Exception as e:
-        logger.error(f"Failed to render mentor_report_print_template.md: {e}")
-        return f"# T[root]H Mentor Report\n\nApprentice: {context.get('apprentice_name')}\n"
-
-
 def _num(value, default=0.0) -> float:
     try:
         return float(value)

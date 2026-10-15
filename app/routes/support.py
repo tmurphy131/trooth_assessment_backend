@@ -14,6 +14,7 @@ from app.db import get_db
 from app.services.auth import get_current_user_optional, is_premium_user
 from app.models.user import User
 from app.core.settings import settings
+from app.utils.privacy import mask_email
 
 logger = logging.getLogger("app.support")
 
@@ -126,7 +127,7 @@ def _send_support_emails(data: SupportRequest, submitted_at: str, is_premium: bo
             admin_mail.reply_to = data.email
             
             sg.send(admin_mail)
-        logger.info(f"Support request admin notification sent to {len(admin_emails)} recipients for {data.email}")
+        logger.info(f"Support request admin notification sent to {len(admin_emails)} recipients for {mask_email(data.email)}")
         
         # 2. Send user confirmation
         user_email_body = email_catalog.render("support_request_confirmation", dict(
@@ -144,7 +145,7 @@ def _send_support_emails(data: SupportRequest, submitted_at: str, is_premium: bo
         )
         
         sg.send(user_mail)
-        logger.info(f"Support request confirmation sent to {data.email}")
+        logger.info(f"Support request confirmation sent to {mask_email(data.email)}")
         
         return True
         
@@ -198,7 +199,7 @@ async def submit_support_request(
     
     # 4. Log the request
     submitted_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-    logger.info(f"Support request from {data.email} ({data.source}): {data.topic}")
+    logger.info(f"Support request from {mask_email(data.email)} ({data.source}): {data.topic}")
     
     # 5. Check if user is premium (for priority support tagging)
     user_is_premium = False
@@ -210,7 +211,7 @@ async def submit_support_request(
     
     if not email_sent:
         # Log but don't fail - we don't want to lose the user's message
-        logger.error(f"Failed to send support emails for request from {data.email}")
+        logger.error(f"Failed to send support emails for request from {mask_email(data.email)}")
     
     return {
         "success": True,

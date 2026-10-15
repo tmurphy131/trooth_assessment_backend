@@ -16,6 +16,7 @@ except ImportError:
 
 from app.core.settings import settings
 from app.services.report_summary import public_full_report
+from app.utils.privacy import mask_email
 
 logger = logging.getLogger("app.email")
 
@@ -283,13 +284,13 @@ def send_email(to_email: str, subject: str, html_content: str,
         logger.debug(f"[email] Response status={getattr(response,'status_code',None)} headers={getattr(response,'headers',{})} body_snippet={body_snippet}")
 
         if getattr(response, 'status_code', None) in (200, 202):
-            logger.info(f"[email] Sent to={to_email} status={getattr(response,'status_code',None)}")
+            logger.info(f"[email] Sent to={mask_email(to_email)} status={getattr(response,'status_code',None)}")
             return True
 
-        logger.error(f"[email] Failed send to={to_email} status={getattr(response,'status_code',None)} body_snippet={body_snippet}")
+        logger.error(f"[email] Failed send to={mask_email(to_email)} status={getattr(response,'status_code',None)} body_snippet={body_snippet}")
         return False
     except Exception as e:  # pragma: no cover
-        logger.error(f"[email] Exception during send to={to_email}: {e}", exc_info=True)
+        logger.error(f"[email] Exception during send to={mask_email(to_email)}: {e}", exc_info=True)
         return False
 
 def _log_campaign_email(db, target_user_id: str, campaign_type: str, context: dict,

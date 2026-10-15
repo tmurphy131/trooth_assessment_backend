@@ -573,9 +573,10 @@ def test_no_reminder_if_answered_disabled_or_no_device(client, db_session, bank,
     assert {disabled.id, no_device.id}.isdisjoint({p[0] for p in pushes["reminder"]})
 
 
-def test_reminder_sent_once_per_date(client, db_session, bank, pushes):
+def test_reminder_sent_once_per_date(client, db_session, bank, pushes, clock):
     _user(db_session, "Nyc", tz="America/New_York", device=True)
     now = datetime(2026, 11, 5, 14, 0, tzinfo=UTC)
+    clock.now = now  # the cron endpoint below uses the service clock; pin it to the same moment
     daily_svc.run_hourly(db_session, now)
     r = client.post("/scheduled/daily-trivia", headers=CRON)
     assert r.status_code == 200
