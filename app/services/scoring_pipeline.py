@@ -174,6 +174,8 @@ def score_assessment(assessment_id: str, attempt_info: Optional[dict] = None) ->
         if not assess:
             return "missing"
         if assess.status == "done":
+            # Already scored: fill in a missing Premium report (idempotent; see full_report.queue_premium)
+            generate_premium(session, assess, None, None)
             return "already_done"
         if not _claim_lease(session, assessment_id):
             session.refresh(assess)

@@ -236,19 +236,10 @@ def email_generic(template_id: str, body: dict, db: Session = Depends(get_db), c
     if user_is_premium and a.mentor_report_v2:
         # If no cached report, generate on-demand for premium users
         if not cached_full_report:
-            try:
-                from app.services.ai_scoring import generate_full_report_for_assessment
-                cached_full_report = generate_full_report_for_assessment(a, apprentice_name, db)
-                # Cache it for future use
-                if cached_full_report:
-                    updated_scores = dict(scores_data)
-                    updated_scores['full_report_v1'] = cached_full_report
-                    a.scores = updated_scores
-                    db.commit()
-                    scores_data = a.scores  # Update reference
-            except Exception as e:
-                import logging
-                logging.getLogger(__name__).warning(f"On-demand full report generation failed: {e}")
+            # Don't make the request wait ~30 s: send the standard report now and
+            # generate Premium in the background for next time.
+            from app.services import full_report as _full_report
+            _full_report.queue_premium(a)
         
         if cached_full_report:
             try:
@@ -402,19 +393,10 @@ def mentor_email_generic(
     if user_is_premium and a.mentor_report_v2:
         # If no cached report, generate on-demand for premium users
         if not cached_full_report:
-            try:
-                from app.services.ai_scoring import generate_full_report_for_assessment
-                cached_full_report = generate_full_report_for_assessment(a, apprentice_name or 'Apprentice', db)
-                # Cache it for future use
-                if cached_full_report:
-                    updated_scores = dict(scores_data)
-                    updated_scores['full_report_v1'] = cached_full_report
-                    a.scores = updated_scores
-                    db.commit()
-                    scores_data = a.scores  # Update reference
-            except Exception as e:
-                import logging
-                logging.getLogger(__name__).warning(f"On-demand full report generation failed: {e}")
+            # Don't make the request wait ~30 s: send the standard report now and
+            # generate Premium in the background for next time.
+            from app.services import full_report as _full_report
+            _full_report.queue_premium(a)
         
         if cached_full_report:
             try:
