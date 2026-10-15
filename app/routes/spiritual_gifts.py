@@ -567,3 +567,51 @@ def public_spiritual_gifts_template_metadata(db: Session = Depends(get_db)):
         "published_at": tpl.created_at,
         "name": tpl.name,
     }
+
+
+# ---- Gift definitions (also served at the path released apps call) ----
+
+# The app's built-in list spells one slug differently; send its spelling in `slug`
+_APP_SLUGS = {"tongues-interpretation": "tongues-and-interpretation"}
+
+
+def _gift_definitions(db: Session) -> list[dict]:
+    """Latest English definitions, each with the scripture references shown in the gifts report."""
+    from app.data.spiritual_gift_guidance import GIFT_GUIDANCE
+    from app.services.spiritual_gifts_scoring import canonical_slug, display_to_slug
+
+    latest = (db.query(func.max(SpiritualGiftDefinition.version))
+              .filter(SpiritualGiftDefinition.locale == "en").scalar())
+    if latest is None:
+        return []
+    rows = (db.query(SpiritualGiftDefinition)
+            .filter(SpiritualGiftDefinition.version == latest, SpiritualGiftDefinition.locale == "en")
+            .order_by(SpiritualGiftDefinition.display_name).all())
+    out = []
+    for r in rows:
+        slug = display_to_slug(r.gift_slug) or canonical_slug(r.gift_slug)
+        guidance = GIFT_GUIDANCE.get(slug) or {}
+        out.append({
+            "gift_slug": slug,
+            "slug": _APP_SLUGS.get(slug, slug),
+            "display_name": r.display_name,
+            "short_summary": r.short_summary,
+            "description": r.full_definition,
+            "scripture_refs": " · ".join(guidance.get("scriptures", [])),
+            "version": r.version,
+        })
+    return out
+
+
+@router.get("/definitions", summary="Spiritual gift definitions with scripture references")
+def list_gift_definitions(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    return _gift_definitions(db)
+
+
+# Released apps call /spiritual-gifts/definitions (no /assessments prefix); serve them too.
+definitions_alias_router = APIRouter(tags=["spiritual-gifts"])
+
+
+@definitions_alias_router.get("/spiritual-gifts/definitions", include_in_schema=False)
+def list_gift_definitions_alias(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    return _gift_definitions(db)
